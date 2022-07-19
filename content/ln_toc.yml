@@ -1,0 +1,30 @@
+format: jb-book
+root: intro_ln
+parts:
+- caption: 'Course Specfic Introductions'
+  numbered: false
+  chapters:
+  - file: COURSE1
+  - file: COURSE2
+- caption: 'Viewing Lecture Notes'
+  numbered: false
+  chapters:
+  - file: lnhowto
+  - file: howto
+- caption: 'Part 1'
+  numbered: true
+  chapters:
+  - file: part1/L01
+  - file: part1/L02
+- caption: 'Part 2'
+  numbered: true
+  chapters:
+  - file: part2/L01
+  - file: part2/L02
+- caption: 'Part 3'
+  numbered: true
+  chapters:
+  - file: part3/L03
+  - file: part3/L04
+  
+

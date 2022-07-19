@@ -1,0 +1,22 @@
+format: jb-book
+root: intro_lm
+parts:
+- caption: 'Getting Started'
+  numbered: false
+  chapters:
+  - file: gettingstarted_lm
+- caption: 'Part 1'
+  numbered: true
+  chapters:
+  - file: part1/Discussion1
+  - file: part1/Discussion2
+- caption: 'Part 2'
+  numbered: true
+  chapters:
+  - file: part2/Discussion1
+  - file: part2/Discussion2
+- caption: 'Part 3'
+  numbered: true
+  chapters:
+  - file: part3/Discussion1
+  - file: part3/Discussion2
