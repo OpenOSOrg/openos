@@ -1,6 +1,6 @@
 # imports to make python code easier and constent
-from IPython.core.display import display, HTML, Markdown, TextDisplayObject, Javascript
-from IPython.display import IFrame, Image
+from IPython.core.display import HTML, Markdown, TextDisplayObject, Javascript
+from IPython.display import display, IFrame, Image
 import ipywidgets as widgets
 from ipywidgets import interact, fixed, Layout
 import os, requests, pty, re, subprocess, struct, sys, fcntl, termios, select
@@ -10,7 +10,8 @@ import matplotlib.pyplot as plt
 from matplotlib import animation
 import numpy as np
 import pandas as pd
-
+import time
+import array
 
 matplotlib.rcParams['animation.html'] = 'jshtml'
 
@@ -607,12 +608,307 @@ ansi_escape_8bit = re.compile(br'''
     )
 ''', re.VERBOSE)
 
+TtyOpenSessions = []
+
+def closeTtySession(session):
+    global TtyOpenSessions
+    subprocess.Popen.kill(session['process'])
+    os.close(session['master'])
+    session['open'] = False;
+    TtyOpenSessions.remove(session)
+
+def closeAllOpenTtySessions():
+    for s in TtyOpenSessions:
+        closeTtySession(s)
+        
+def openTtySession(cmd, cwd, rows, cols):
+    global TtySessions
+    session = dict()
+    master, slave = pty.openpty()
+    session['master']=master
+    session['slave']=slave
+    
+    # not sure this is really necessary ... I am guessing that Popen takes care of this
+    # ioctl(slave, I_PUSH, "ptem")
+    # ioctl(slave, I_PUSH, "ldterm")
+    # terminal size stuff from 
+    # https://github.com/terminal-labs/cli-passthrough/blob/master/cli_passthrough/_passthrough.py  
+    size = struct.pack("HHHH", rows, cols, 0, 0)
+    fcntl.ioctl(master, termios.TIOCSWINSZ, size)
+    
+    #   nttysettings = termios.tcgetattr(master)
+    #   nttysettings[3] &= ~termios.ECHO
+    #   termios.tcsetattr(master, termios.TCSANOW, nttysettings)    
+    p=subprocess.Popen(cmd, cwd=cwd, stdin=slave, stdout=slave, stderr=slave, start_new_session=True)
+    session['process']=p
+    session['output']=b''
+    session['open']=True
+    TtyOpenSessions.append(session)
+    return session
+
+def renderTtySessionOutput(output, height='100%', width='', outputlayout={'border': '1px solid black'}, encoding=sys.getdefaultencoding(), decodeerrors='replace', **kwargs):
+    if isinstance(output, dict):
+        text=output['output']
+    else:
+        text=output
+    if height:
+        outputlayout['height']=height
+        outputlayout['overflow_y']='scroll'
+
+    if width:
+        outputlayout['width']=width
+        outputlayout['overflow_x']='auto'
+    
+    text=text.decode(encoding,decodeerrors) 
+    out=widgets.Output(layout=outputlayout)
+    with out:
+        print(text,end='')
+    return out
+
+def bashSessionSendEOF(session):
+    master = session['master']
+    os.write(master, b'\x04')
+    
+def bashSessionRawWrite(data, session,  
+                        batchsize=1, 
+                        interbatchdelayms=140, 
+                        sendEOF=True, 
+                        stoponprompt=True, 
+                        ignoreoutput=False, 
+                        tmout=0.5):
+    # for ioctl call
+    buf_ = array.array('i', [0]) 
+    master = session['master']
+    slave = session['slave']
+    p = session['process']
+   
+    delaysec = interbatchdelayms / 1000
+    
+    if isinstance(data, str):
+        data = data.encode('utf-8')
+    n = len(data)  
+
+    if batchsize <1:
+        batchsize = n
+        
+    # print("n:", n, "batchsize: ", batchsize)
+    s = 0
+    e = 0
+    output = b''
+    
+    writeset = [master]
+    
+    while True:
+        #print("n: ", n, " s: ", s, " e: ", e)
+        read_fds,write_fds,error_fds = select.select([master],writeset,[master],tmout)  
+        # process errors
+        if len(error_fds):
+            # print("errors found")
+            break;
+            
+        # write data aslong as there is data to write   
+        if e<=n and len(write_fds): 
+            s = e
+            e = s + batchsize
+            if (e>n):
+                e = n
+            # print("write: start: ", s, " end: ", e, " data: ", data[s:e])
+            os.write(master,  data[s:e])
+            if (e<n):
+                # pause before next batch
+                time.sleep(delaysec)
+            else:
+                # all done writing stop looking for write availability
+                writeset=[]
+                if sendEOF:
+                    time.sleep(delaysec)
+                    # print("EOF: zero lenght write")
+                    #os.write(master, b'')
+                    bashSessionSendEOF(session)
+                e = n + 1   
+                    
+        # read data if there is any to read, if we find a prompt assume we are done
+        if len(read_fds):
+            if fcntl.ioctl(master, termios.FIONREAD, buf_, 1) == -1:
+                break
+            # print("num bytes available for read:", buf_[0])
+            rdata = os.read(master, buf_[0])
+            
+            # print("read:", rdata)
+            if len(rdata)>0:
+                output += rdata
+                rn = len(output)
+                if stoponprompt and rn>2 and output[rn-2] == 36 and output[rn-1] == 32:
+                    # print("prompt received")
+                    break
+                    
+        if len(error_fds) == 0 and len(write_fds) == 0 and len(read_fds) == 0:
+            # print("time out")
+            break
+            
+        if not p.returncode == None:
+            break            
+      
+    if not ignoreoutput:
+        #print(output)
+        session['output'] = session['output'] + output
+        
+    # output = b'$ ' + output
+    return output,session
+    
 #def cleanTermBytes(bytes):    
 #    return  ansi_escape_8bit.sub(b'', bytes)
+def bashSessionCmds(cmds, cwd=os.getcwd(), bufsize=4096, wait=True, rows=20, cols=80, session=None, close=True, ignoreoutput=False,  **kwargs):
+    if not session:
+        session = openTtySession(['bash', '-l', '-i'], cwd, rows, cols) 
+        new_session = True
+        initdone = 0
+    else:
+        # print("old session")
+        if not session['open']:
+            print("ERROR: session not open")
+            return None, None
+        new_session=False
+        initdone = 2
+        
+    master = session['master']
+    slave = session['slave']
+    p = session['process']
+    
+    if not isinstance(cmds,list):
+        if isinstance(cmds, str):
+            cmds = cmds.encode('utf-8')
+        cmds = cmds.split(b'\n')
+        
+    output = b''
+    numcmds = len(cmds)
+    # print("numcmds:", numcmds)
+    i = 0
+    
+    if not new_session:
+        #print(cmds[i] + b'\n')
+        os.write(master, cmds[i] + b'\n')
+        i=i+1 
+        
+    while True:
+        read_fds,_,error_fds = select.select([master],[],[master])  
+        if len(error_fds):
+            kill = True;
+            break;
+        if len(read_fds):
+            data = os.read(master, bufsize)
+            # print("data: ", data)
+            if len(data)>0:
+                output += data
+                n = len(output)
+                # print("output:", output, "n:", n, "output[n-2]:", output[n-2]," output[n-1]:", output[n-1])
+                if n>2 and output[n-2] == 36 and output[n-1] == 32:
+                    # print("prompt received")
+                    if i == numcmds and initdone == 2:
+                        break
+                    else:
+                        if new_session:
+                            if initdone == 0:
+                                #print("Initializing Session")
+                                os.write(master,b' bind "set enable-bracketed-paste off"\n')
+                                initdone=1
+                            else:
+                                #print("Session Initialized")
+                                session['init'] = output
+                                session['output'] = b'$ '
+                                output = b''
+                                initdone = 2
+                                new_session = False
+                                if numcmds > 0:
+                                    #print(cmds[i] + b'\n')
+                                    os.write(master, cmds[i] + b'\n')
+                                    i=i+1
+                                else:
+                                    break
+                        else:
+                            #print(cmds[i] + b'\n')
+                            os.write(master, cmds[i] + b'\n')
+                            i=i+1
+        if not p.returncode == None:
+            kill = True
+            break
+        
+    if close:
+        closeTtySession(session)
+    
+    if not ignoreoutput:
+        #print(output)
+        session['output'] = session['output'] + output
+    output = b'$ ' + output
+    return output,session
 
+
+def bashSessionClose(session):
+    closeTtySession(session)
+
+def bashSessionOpen(cwd=os.getenv('HOME'), **kwargs):
+    _, session = bashSessionCmds(cmds=[], close=False, cwd=cwd, **kwargs)
+    return session
+    
+def bashCmds(cmds, cwd=os.getenv('HOME'), **kwargs):
+    output, session = bashSessionCmds(cmds=cmds, cwd=cwd, **kwargs)
+    return renderTtySessionOutput(output, **kwargs)
+
+class BashSession:
+    # create session  
+    def __init__(self, **kwargs):
+        self.session = bashSessionOpen(**kwargs)
+        # turn off tab completion
+        self.runNoOutput("bind 'set disable-completion on'", ignoreoutput=True)
+        # clear all bash history so that our history examples are clean
+        self.runNoOutput(" history -c\n history -w", ignoreoutput=True)
+        
+    # Deleting (Calling destructor)
+    def __del__(self):
+        bashSessionClose(self.session)
+        
+    def run(self, cmds, **kwargs):
+        text, self.session = bashSessionCmds(cmds, session=self.session, close=False, **kwargs)
+        return renderTtySessionOutput(text, **kwargs)
+
+    def runNoOutput(self, cmds, **kwargs):
+        _, self.session = bashSessionCmds(cmds, session=self.session, close=False, **kwargs)
+    
+    def runAllOutput(self, cmds, **kwargs):
+        self.runNoOutput(cmds, **kwargs)
+        return self.output(**kwargs)
+    
+    def rawWrite(self, data, **kwargs):
+        text, self.session = bashSessionRawWrite(data, session=self.session, **kwargs)
+        return renderTtySessionOutput(text, **kwargs)
+    
+    def rawWriteNoOutput(self, data, **kwargs):
+        _, self.session = bashSessionRawWrite(data, session=self.session, **kwargs)
+    
+    def rawWriteAllOutput(self, data, **kwargs):
+        self.rawWriteNoOutput(data, **kwargs)
+        return self.output(**kwargs)
+    
+    def sendEOF(self):
+        bashSessionSendEOF(self.session)
+            
+    def output(self, **kwargs):
+        return renderTtySessionOutput(self.session, **kwargs)
+
+  
+        
+    def getPid(self):
+        return self.session['process'].pid
+    
+    
+# FIXME: JA Given the new Session code above this needs to be re thought out and cleaned up or removed
 def runTermCmd(cmd, cwd=os.getcwd(), bufsize=4096, wait=True, tmout=1.0, rows=20, cols=80):
     master, slave = pty.openpty()
 
+    # not sure this is really necessary ... I am guessing that Popen takes care of this
+    # ioctl(slave, I_PUSH, "ptem")
+    # ioctl(slave, I_PUSH, "ldterm")
+    
     # terminal size stuff from 
     # https://github.com/terminal-labs/cli-passthrough/blob/master/cli_passthrough/_passthrough.py  
     size = struct.pack("HHHH", rows, cols, 0, 0)

@@ -10,7 +10,7 @@ parts:
   chapters:
   - file: part2/ch1
   - file: part2/ch2
-- caption: 'Part 3'
+- caption: 'Notes for getting started'
   numbered: true
   chapters:
   - file: part3/ch1
