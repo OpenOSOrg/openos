@@ -26,6 +26,8 @@ bashCmds('''[[ -d mydir ]] && rm -rf mydir
 [[ -a mydate ]] && rm mydate
 [[ -a mynewdir ]] && rm -rf mynewdir
 [[ -a anotherfile ]] && rm anotherfile
+
+
 [[ -a mybin ]] && rm -rf  mybin''')
 
 closeAllOpenTtySessions()
