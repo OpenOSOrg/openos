@@ -1,14 +1,7 @@
 <!-- #region -->
-Book Title 
+Operating Systems in the open 
 =====================================
 
-In this book we will teach something fun
-- fun thing one
-- fun thing 2
-
-The material is broken down in to three parts: 
-1. Part 1 
-2. Part 2
-3. Part 3
+After cumulative century or so developing and researching operating systems, Orran Krieger and Larry Woodman started teaching them in the senior level OS course at Boston University.  Trying to figure out how to do this right.  
 
 <!-- #endregion -->
