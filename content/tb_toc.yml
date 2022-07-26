@@ -15,3 +15,7 @@ parts:
   chapters:
   - file: part3/ch1
   - file: part3/ch2
+- caption: 'Course Specific Material'
+  numbered: false
+  chapters:
+  - file: BUCS210_intro

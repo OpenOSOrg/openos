@@ -5,15 +5,15 @@
 
 #######################################################################################
 # Book settings
-title                       : MyBook  # The title of the book. Will be placed in the left navbar.
-author                      : Author  # The author of the book
-copyright                   : "XXXX"  # Copyright year to be placed in the footer
+title                       : Operating Systems  # The title of the book. Will be placed in the left navbar.
+author                      : Orran Krieger and Larry Woodman  # The author of the book
+copyright                   : "2022"  # Copyright year to be placed in the footer
 logo                        : logo.png  # A path to the book logo
 only_build_toc_files        : true
 
 # url should be the published url for the book
 repository:
-  url: https://github.com/jappavoo/coursecontenttemplate
+  url: https://github.com/okrieg/openos
   path_to_book: content
   branch: main
 
@@ -24,7 +24,7 @@ html:
   comments:
     hypothesis: true
 #    utterances:
-#      repo: "jappavoo/UndertheCovers"
+#      repo: "okrieg/openos"
       
 launch_buttons:
   # open textbook pages in lab to provide desktop env
