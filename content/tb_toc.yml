@@ -1,21 +1,10 @@
 format: jb-book
 root: intro_tb
-parts:
-- caption: 'Part 1'
-  numbered: true
-  chapters:
-  - file: part1/ch1
-- caption: 'Part 2'
-  numbered: true
-  chapters:
-  - file: part2/ch1
-  - file: part2/ch2
-- caption: 'Notes for getting started'
-  numbered: true
-  chapters:
+chapters: 
+  - file: intro/intro
+    sections:
+    - file: intro/history
+    - file: intro/structure
   - file: part3/ch1
   - file: part3/ch2
-- caption: 'Course Specific Material'
-  numbered: false
-  chapters:
-  - file: BUCS210_intro
+  - file: BUECE440_intro
