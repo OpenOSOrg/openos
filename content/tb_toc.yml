@@ -1,10 +1,19 @@
 format: jb-book
 root: intro_tb
 chapters: 
-  - file: intro/intro
+  - title: Intro
+    file: intro/intro
     sections:
+    - file: intro/purpose
     - file: intro/history
     - file: intro/structure
-  - file: part3/ch1
-  - file: part3/ch2
+      sections:
+      - title: Common
+        file: intro/common
+      - title: Other
+        file: intro/other      
+  - title: Contributing
+    file: part3/ch1
+    sections:
+    - file: part3/ch2
   - file: BUECE440_intro
