@@ -7,13 +7,19 @@ chapters:
     - file: intro/purpose
     - file: intro/history
     - file: intro/structure
+# example of subsections
       sections:
       - title: Common
         file: intro/common
       - title: Other
-        file: intro/other      
+        file: intro/other
+    - file: intro/services
+# sectionon operating system services
+#    - title: OS Services
+#       file: intro/services
+#  - title: Scheduling
+#    file: scheduling/sched
   - title: Contributing
     file: part3/ch1
-    sections:
-    - file: part3/ch2
-  - file: BUECE440_intro
+  - file: part3/ch2
+#  - file: BUECE440_intro
