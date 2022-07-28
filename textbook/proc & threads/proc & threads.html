@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Other OS structures &#8212; Introduction to Operating Systems</title>
+    <title>Processes and Threads &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Operating System Services" href="services.html" />
-    <link rel="prev" title="Monolithic operating system" href="common.html" />
+    <link rel="next" title="Processor Scheduling" href="../scheduling/scheduling.html" />
+    <link rel="prev" title="Operating System Services" href="../intro/services.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -117,57 +117,57 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="intro.html">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/intro.html">
    Intro
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="purpose.html">
+    <a class="reference internal" href="../intro/purpose.html">
      Purpose of operating systems
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="history.html">
+    <a class="reference internal" href="../intro/history.html">
      History of operating Systems
     </a>
    </li>
-   <li class="toctree-l2 current active has-children">
-    <a class="reference internal" href="structure.html">
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../intro/structure.html">
      OS structure
     </a>
-    <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
     <label for="toctree-checkbox-2">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="current">
+    <ul>
      <li class="toctree-l3">
-      <a class="reference internal" href="common.html">
+      <a class="reference internal" href="../intro/common.html">
        Common
       </a>
      </li>
-     <li class="toctree-l3 current active">
-      <a class="current reference internal" href="#">
+     <li class="toctree-l3">
+      <a class="reference internal" href="../intro/other.html">
        Other
       </a>
      </li>
     </ul>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="services.html">
+    <a class="reference internal" href="../intro/services.html">
      Operating System Services
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../proc%20%26%20threads/proc%20%26%20threads.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Processes and Threads
   </a>
  </li>
@@ -245,7 +245,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https://github.com/okrieg/openos&urlpath=lab/tree/openos/content/intro/other.ipynb&branch=main"
+        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https://github.com/okrieg/openos&urlpath=lab/tree/openos/content/proc & threads/proc & threads.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -305,7 +305,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fintro/other.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fproc & threads/proc & threads.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -322,7 +322,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/edit/main/content/intro/other.ipynb"
+        <a href="https://github.com/okrieg/openos/edit/main/content/proc & threads/proc & threads.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -350,7 +350,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/intro/other.ipynb"
+        <a href="../_sources/proc & threads/proc & threads.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -387,70 +387,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#micro-kernel">
-   Micro-kernel
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unikernel-library-os">
-   Unikernel/Library OS
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Other OS structures</h1>
+                <h1>Processes and Threads</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#micro-kernel">
-   Micro-kernel
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unikernel-library-os">
-   Unikernel/Library OS
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -458,15 +411,9 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="other-os-structures">
-<h1>Other OS structures<a class="headerlink" href="#other-os-structures" title="Permalink to this headline">#</a></h1>
-<p>There are a variety of other structures, especially in the research community</p>
-<section id="micro-kernel">
-<h2>Micro-kernel<a class="headerlink" href="#micro-kernel" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="unikernel-library-os">
-<h2>Unikernel/Library OS<a class="headerlink" href="#unikernel-library-os" title="Permalink to this headline">#</a></h2>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="processes-and-threads">
+<h1>Processes and Threads<a class="headerlink" href="#processes-and-threads" title="Permalink to this headline">#</a></h1>
+<p>This section will describe what is associated with processes and threads, the system calls to create them, and the associated</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -482,7 +429,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./intro"
+            path: "./proc & threads"
         },
         predefinedOutput: true
     }
@@ -496,17 +443,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="common.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../intro/services.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Monolithic operating system</p>
+            <p class="prev-next-title">Operating System Services</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="services.html" title="next page">
+    <a class='right-next' id="next-link" href="../scheduling/scheduling.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Operating System Services</p>
+        <p class="prev-next-title">Processor Scheduling</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
