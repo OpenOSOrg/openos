@@ -3,23 +3,32 @@ root: intro_tb
 chapters: 
   - title: Intro
     file: intro/intro
-    sections:
-    - file: intro/purpose
-    - file: intro/history
-    - file: intro/structure
+# eventually we might want to pull out some of the content into sub-files/sectio
+#    sections:
+#    - file: intro/purpose
+#    - file: intro/history
+#    - file: intro/structure
 # example of subsections
-      sections:
-      - title: Common
-        file: intro/common
-      - title: Other
-        file: intro/other
-    - file: intro/services
+#      sections:
+#      - title: Common
+#        file: intro/common
+#      - title: Other
+#        file: intro/other
+#    - file: intro/services
   - title: Processes and Threads
     file: proc_threads/proc_threads
   - title: Scheduling
     file: scheduling/scheduling
-  - title: Foo
-    file: Foo/Foo
+  - title: Synchronization and Deadlock
+    file: sync/sync
+  - title: Memory Management
+    file: mm/mm
+  - title: File Systems
+    file: fs/fs
+  - title: Security
+    file: sec/sec
+  - title: Virtualization & Cloud
+    file: virt/virt
 # sectionon operating system services
 #    - title: OS Services
 #       file: intro/services
