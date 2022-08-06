@@ -14,6 +14,12 @@ chapters:
       - title: Other
         file: intro/other
     - file: intro/services
+  - title: Processes and Threads
+    file: proc_threads/proc_threads
+  - title: Scheduling
+    file: scheduling/scheduling
+  - title: Foo
+    file: Foo/Foo
 # sectionon operating system services
 #    - title: OS Services
 #       file: intro/services
@@ -21,5 +27,6 @@ chapters:
 #    file: scheduling/sched
   - title: Contributing
     file: part3/ch1
-  - file: part3/ch2
+    sections:
+    - file: part3/ch2
 #  - file: BUECE440_intro
