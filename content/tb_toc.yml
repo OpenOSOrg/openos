@@ -1,6 +1,8 @@
 format: jb-book
 root: intro_tb
 chapters: 
+  - title: Preface
+    file: intro/pref
   - title: Intro
     file: intro/intro
 # eventually we might want to pull out some of the content into sub-files/sectio
