@@ -1,5 +1,3 @@
-# Operating Systems in the open
-
 1st Edition by [Orran Krieger](https://okrieg.github.io), Larry Woodman (RH), and a large community of contributors. 
 
 This text was originally developed for the Boston University course [EC 440 Operating Systems][EC440].
