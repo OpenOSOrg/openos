@@ -1,4 +1,4 @@
-1st Edition by [Orran Krieger](https://okrieg.github.io), Larry Woodman (RH), and a large community of contributors. 
+0.1st Edition Edited by [Orran Krieger](https://okrieg.github.io) with a  [community](https://github.com/okrieg/openos/graphs/contributors) of contributors. 
 
 This text was originally developed for the Boston University course [EC 440 Operating Systems][EC440].
 
@@ -8,8 +8,4 @@ You can [view this text online][ghpages] or [view the source][source].
 [ghpages]: https://okrieg.github.io/openos/textbook/intro_tb.html
 [source]: https://github.com/okrieg/openos
 
-FIXME: The contents of this book are licensed for free consumption under the following license:
-[Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)](https://creativecommons.org/licenses/by-nc-nd/4.0/).
-
-```{tableofcontents}
-```
+While we should probably figure out a good license to use, anyone is free to do anything they want with this book.  For a discussion of our philosophy, see the [preface](cont:pref:phil). 
