@@ -701,12 +701,13 @@ title="Print to PDF"
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="nb">cd</span> /opt/app-root/src
 </span><span class="linenos">2</span>git clone https://github.com/jappavoo/juphub-utils.git
-<span class="hll"><span class="linenos">3</span>./juphub-utils/setup.sh
-</span></pre></div>
+<span class="linenos">3</span>./juphub-utils/setup.sh
+</pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>To see more examples of how we put in</p>
+<aside class="sidebar">
+<p class="sidebar-title">For more info:</p>
+<p>To see how to put in code-blocks … look <a class="reference external" href="https://jupyterbook.org/en/stable/content/layout.html#sidebars-within-content">here</a></p>
+</aside>
 <ul class="simple">
 <li><p>shutdown the server, and restart it</p></li>
 <li><p>after that, every time you want to work, type <code class="docutils literal notranslate"><span class="pre">dowork</span></code>  which will create a folder named <code class="docutils literal notranslate"><span class="pre">Work</span></code> in the home directory, linked to the  persistent storage <code class="docutils literal notranslate"><span class="pre">/opt/app-root/src</span></code>. This will allow both jupyterhub and jupyterlabs to see and edit the files in there. Things in the home directory normally get deleted, but since the files you’ll be editing are actually in <code class="docutils literal notranslate"><span class="pre">/opt/app-root/src</span></code>, it’ll be saved.</p></li>
@@ -720,7 +721,6 @@ title="Print to PDF"
 </ul>
 </li>
 </ul>
-</div>
 </section>
 <section id="authoring-workflow">
 <h3>Authoring workflow<a class="headerlink" href="#authoring-workflow" title="Permalink to this headline">#</a></h3>
@@ -871,6 +871,10 @@ A caption for figure
 <li><p>CH4: file systems</p></li>
 <li><p>CH5: networking</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Think moving parallelism and synchronization after core OS services makes sense, since we can introduce multi-core HW…</p>
+</div>
 </section>
 <section id="part-3-parallelism-synchronization">
 <h3>Part 3: Parallelism &amp; Synchronization<a class="headerlink" href="#part-3-parallelism-synchronization" title="Permalink to this headline">#</a></h3>
