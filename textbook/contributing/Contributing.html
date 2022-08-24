@@ -466,6 +466,11 @@ title="Print to PDF"
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#coverting-google-slide-presentation">
+       Coverting google slide presentation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#running-one">
        Running one
       </a>
@@ -605,6 +610,11 @@ title="Print to PDF"
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#developing-one">
        Developing one
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#coverting-google-slide-presentation">
+       Coverting google slide presentation
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
@@ -877,6 +887,27 @@ A caption for figure
 <li><p>you can find an example with templates for slides in the “content/contributing” directory under L01-example notebook.</p></li>
 <li><p>you should create a symbolic link to the lecture note css file (content/css/ln.css) with the name of your slide (e.g., L01-example), and commit it to the repo</p></li>
 <li><p>to determin which cells are slides, versus notes, versus subslides… edit the tags</p></li>
+</ul>
+</section>
+<section id="coverting-google-slide-presentation">
+<h4>Coverting google slide presentation<a class="headerlink" href="#coverting-google-slide-presentation" title="Permalink to this headline">#</a></h4>
+<ul class="simple">
+<li><p>download google slidedeck as a powerpoint</p></li>
+<li><p>open powerpoint in keynote</p></li>
+<li><p>export to images,</p>
+<ul>
+<li><p>set to do an image for each stage of animations</p></li>
+<li><p>make sure png and transpartent backgrounds</p></li>
+<li><p>upload to book directory “content/from-google-slides”</p>
+<ul>
+<li><p>create new subdirectory (e.g., MM01)</p></li>
+<li><p>upload all images generated into that directory</p></li>
+<li><p>in directory, e.g., mm, type <code class="docutils literal notranslate"><span class="pre">{code}</span> <span class="pre">../python/mkln</span> <span class="pre">MM-L1</span> <span class="pre">../from-google-slides/MM01</span> </code></p></li>
+<li><p>you should now have a rise presentation titled MM-L1, where each image is a seperate slide</p></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </section>
 <section id="running-one">
