@@ -414,8 +414,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#every-time-you-want-to-do-work-after-the-first-time-start-here">
-     Every time you want to do work after the first time start here
+    <a class="reference internal nav-link" href="#every-time">
+     Every time
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -561,8 +561,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#every-time-you-want-to-do-work-after-the-first-time-start-here">
-     Every time you want to do work after the first time start here
+    <a class="reference internal nav-link" href="#every-time">
+     Every time
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -765,21 +765,24 @@ title="Print to PDF"
 </aside>
 <ul class="simple">
 <li><p>shutdown the server, and restart it</p></li>
-</ul>
-</section>
-<section id="every-time-you-want-to-do-work-after-the-first-time-start-here">
-<h3>Every time you want to do work after the first time start here<a class="headerlink" href="#every-time-you-want-to-do-work-after-the-first-time-start-here" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>after that, every time you want to work, type <code class="docutils literal notranslate"><span class="pre">dowork</span></code>  which will create a folder named <code class="docutils literal notranslate"><span class="pre">Work</span></code> in the home directory, linked to the  persistent storage <code class="docutils literal notranslate"><span class="pre">/opt/app-root/src</span></code>. This will allow both jupyterhub and jupyterlabs to see and edit the files in there. Things in the home directory normally get deleted, but since the files you’ll be editing are actually in <code class="docutils literal notranslate"><span class="pre">/opt/app-root/src</span></code>, it’ll be saved.</p></li>
-</ul>
-<p>Alternatively, of course, you can also run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/okrieg/openos</span></code> or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">&lt;your</span> <span class="pre">fork</span> <span class="pre">of</span> <span class="pre">openOS&gt;</span></code> to load the notebooks of an existing textbook, so they can be edited.</p>
-<ul class="simple">
-<li><p>Suggest create a new ssh key for each environment, i.e. run ssh-keygen on container and then add to your profile on github (as below) clicking on your profile, and then adding to your ssh keys id_rsa.pub</p>
+<li><p>Suggest create a new ssh key for each environment, i.e. run ssh-keygen on container and then add to your profile on github clicking on your profile, and then adding to your ssh keys id_rsa.pub</p>
 <ul>
 <li><p>go to ssh and GPG keys</p></li>
 <li><p>add ssh key - add new sssh key</p></li>
 </ul>
 </li>
+</ul>
+</section>
+<section id="every-time">
+<h3>Every time<a class="headerlink" href="#every-time" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>type <code class="docutils literal notranslate"><span class="pre">dowork</span></code>  which will create a folder named <code class="docutils literal notranslate"><span class="pre">Work</span></code> in the home directory, linked to the  persistent storage <code class="docutils literal notranslate"><span class="pre">/opt/app-root/src</span></code></p>
+<ul>
+<li><p>we have set things up so that the home directory is ephemeral, so students will commit things to github frequently</p></li>
+</ul>
+</li>
+<li><p>to set up full lab environment in container type “rejup” to add back all the jupyter lab tabs and browser</p></li>
+<li><p>run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/okrieg/openos</span></code> or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">&lt;your</span> <span class="pre">fork</span> <span class="pre">of</span> <span class="pre">openOS&gt;</span></code> to load the notebooks of an existing textbook, so they can be edited.</p></li>
 </ul>
 </section>
 <section id="authoring-workflow">
