@@ -414,6 +414,11 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#every-time-you-want-to-do-work-after-the-first-time-start-here">
+     Every time you want to do work after the first time start here
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#authoring-workflow">
      Authoring workflow
     </a>
@@ -451,9 +456,21 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#starting-a-new-presentation-with-rise">
-     Starting a new presentation with RISE.
+    <a class="reference internal nav-link" href="#rise-presentations">
+     RISE presentations.
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#developing-one">
+       Developing one
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#running-one">
+       Running one
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#useful-tricks-and-stuff-we-should-try">
@@ -539,6 +556,11 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#every-time-you-want-to-do-work-after-the-first-time-start-here">
+     Every time you want to do work after the first time start here
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#authoring-workflow">
      Authoring workflow
     </a>
@@ -576,9 +598,21 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#starting-a-new-presentation-with-rise">
-     Starting a new presentation with RISE.
+    <a class="reference internal nav-link" href="#rise-presentations">
+     RISE presentations.
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#developing-one">
+       Developing one
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#running-one">
+       Running one
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#useful-tricks-and-stuff-we-should-try">
@@ -710,6 +744,11 @@ title="Print to PDF"
 </aside>
 <ul class="simple">
 <li><p>shutdown the server, and restart it</p></li>
+</ul>
+</section>
+<section id="every-time-you-want-to-do-work-after-the-first-time-start-here">
+<h3>Every time you want to do work after the first time start here<a class="headerlink" href="#every-time-you-want-to-do-work-after-the-first-time-start-here" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
 <li><p>after that, every time you want to work, type <code class="docutils literal notranslate"><span class="pre">dowork</span></code>  which will create a folder named <code class="docutils literal notranslate"><span class="pre">Work</span></code> in the home directory, linked to the  persistent storage <code class="docutils literal notranslate"><span class="pre">/opt/app-root/src</span></code>. This will allow both jupyterhub and jupyterlabs to see and edit the files in there. Things in the home directory normally get deleted, but since the files you’ll be editing are actually in <code class="docutils literal notranslate"><span class="pre">/opt/app-root/src</span></code>, it’ll be saved.</p></li>
 </ul>
 <p>Alternatively, of course, you can also run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/okrieg/openos</span></code> or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">&lt;your</span> <span class="pre">fork</span> <span class="pre">of</span> <span class="pre">openOS&gt;</span></code> to load the notebooks of an existing textbook, so they can be edited.</p>
@@ -819,20 +858,22 @@ A caption for figure
 </li>
 </ul>
 </section>
-<section id="starting-a-new-presentation-with-rise">
-<h3>Starting a new presentation with RISE.<a class="headerlink" href="#starting-a-new-presentation-with-rise" title="Permalink to this headline">#</a></h3>
+<section id="rise-presentations">
+<h3>RISE presentations.<a class="headerlink" href="#rise-presentations" title="Permalink to this headline">#</a></h3>
+<section id="developing-one">
+<h4>Developing one<a class="headerlink" href="#developing-one" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
-<li><p>create a new ipython notebook, or open an existing, you should see an icon that looks like a presentation, on the top right next to a icon for debugging and… Click it, and any ipython notebook you’re looking at will be displayed as a powerpoint-style slideshow.</p></li>
-<li><p>or you can go to View and click “Render as Reveal slideshow”.  You can then edit tags to indicate how various cells are interpreted. You can see the slide types from <a class="reference external" href="https://rise.readthedocs.io/en/stable/usage.html">https://rise.readthedocs.io/en/stable/usage.html</a> :</p>
-<ul>
-<li><p>slide: this cell is the beginning of a new slide</p></li>
-<li><p>subslide: this cell is the beginning of a new subslide; that is to say, a new slide, but that reveal.js will display below the previous one instead of on the right;</p></li>
-<li><p>fragment: this is to split the contents of one slide into pieces; a cell marked as a fragment will create a break inside the slide; it will not show up right away, you will need to press Space one more time to see it.</p></li>
-<li><p>skip: this cell is ignored altogether in reveal mode, it will not appear either in the main view, nor in the speaker view.</p></li>
-<li><p>notes: similarly, this cell is marked to be discarded from the main view, but is meant to appear in the speaker view.</p></li>
+<li><p>you can find an example with templates for slides in the “content/contributing” directory under L01-example notebook.</p></li>
+<li><p>you should create a symbolic link to the lecture note css file (content/css/ln.css) with the name of your slide (e.g., L01-example), and commit it to the repo</p></li>
+<li><p>to determin which cells are slides, versus notes, versus subslides… edit the tags</p></li>
 </ul>
-</li>
+</section>
+<section id="running-one">
+<h4>Running one<a class="headerlink" href="#running-one" title="Permalink to this headline">#</a></h4>
+<ul class="simple">
+<li><p>press lower case “t”, in screen show for speaker notes; my experience is that only works if you start the note before going to full screen on the slide</p></li>
 </ul>
+</section>
 </section>
 <section id="useful-tricks-and-stuff-we-should-try">
 <h3>Useful tricks and stuff we should try<a class="headerlink" href="#useful-tricks-and-stuff-we-should-try" title="Permalink to this headline">#</a></h3>
@@ -905,6 +946,10 @@ A caption for figure
 <section id="todo-on-ostextbook">
 <span id="cont-contr-todo"></span><h2>Todo on ostextbook:<a class="headerlink" href="#todo-on-ostextbook" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
+<li><p>add example with markdown cell under figure</p></li>
+<li><p>switch to Jonathan’s container and fix directions to use that</p></li>
+<li><p>upload all slides into the image, and test creation of slides</p></li>
+<li><p>commit and publish</p></li>
 <li><p>integrate google doc, examples from previous versions, and zackary’s notes - in progressm</p></li>
 <li><p>go through Jnathan’s first three chapters</p>
 <ol class="simple">
