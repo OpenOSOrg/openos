@@ -394,13 +394,38 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-of-memory-management">
-   Task of Memory Management
+  <a class="reference internal nav-link" href="#overview-of-mm">
+   Overview of MM
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#physical-mode">
-   Physical Mode
+  <a class="reference internal nav-link" href="#memory-reclaiming-algorithms">
+   Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-structures">
+   Data structures
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-faults">
+   Page Faults
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-tables-in-more-detail">
+   Page tables in more detail
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paging-dynamics">
+   Paging Dynamics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#memory-management-in-the-real-world">
+   Memory management in the real world
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -428,13 +453,38 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-of-memory-management">
-   Task of Memory Management
+  <a class="reference internal nav-link" href="#overview-of-mm">
+   Overview of MM
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#physical-mode">
-   Physical Mode
+  <a class="reference internal nav-link" href="#memory-reclaiming-algorithms">
+   Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-structures">
+   Data structures
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-faults">
+   Page Faults
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-tables-in-more-detail">
+   Page tables in more detail
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paging-dynamics">
+   Paging Dynamics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#memory-management-in-the-real-world">
+   Memory management in the real world
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -453,12 +503,163 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="memory-management">
-<h1>Memory Management<a class="headerlink" href="#memory-management" title="Permalink to this headline">#</a></h1>
-<section id="task-of-memory-management">
-<h2>Task of Memory Management<a class="headerlink" href="#task-of-memory-management" title="Permalink to this headline">#</a></h2>
+<span id="cont-mm"></span><h1>Memory Management<a class="headerlink" href="#memory-management" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Introduction: Fundamental jobs of the memory manager:</p>
+<ul>
+<li><p>Abstracting a useful memory model.</p></li>
+<li><p>Managing the physical memory on the system.</p></li>
+<li><p>Providing and managing a private virtual address space for each user.</p></li>
+</ul>
+</li>
+</ul>
+<p>The memory manager is responsible for 1.) Managing all of the RAM or physical memory on the whole system, 2.) Creating and managing virtual memory for each process and 3.) transitioning the processor(s) between physical memory mode and virtual memory mode as the kernel runs.</p>
+<section id="overview-of-mm">
+<span id="cont-mm-overview"></span><h2>Overview of MM<a class="headerlink" href="#overview-of-mm" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Simple physical memory management.</p>
+<ul>
+<li><p>Sharing one physical address space.</p></li>
+<li><p>Relocating programs.</p></li>
+</ul>
+</li>
+<li><p>Virtual memory management: talk about all the advanges</p>
+<ul>
+<li><p>Segmentation.</p>
+<ul>
+<li><p>Single segments per address space</p></li>
+<li><p>Multiple segments per address space.</p></li>
+<li><p>Swapping.</p></li>
+<li><p>Compaction.</p></li>
+</ul>
+</li>
+<li><p>Paging: - now it could be unlimited…</p>
+<ul>
+<li><p>Virtual pages and page frames.</p></li>
+<li><p>Virtual address spaces larger than RAM.</p></li>
+<li><p>Page tables brief (more later)</p></li>
+</ul>
+</li>
+<li><p>Quick overview of what memory manager needs to do</p>
+<ul>
+<li><p>compaction</p></li>
+<li><p>bringing things in, demand paging
+swapping, paging</p></li>
+<li><p>deciding what to kick out - reclamation</p></li>
+<li><p>anonymous memory</p></li>
+<li><p>file backed and caching storage</p></li>
+<li><p>example: look at elf, parts of the program…</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </section>
-<section id="physical-mode">
-<h2>Physical Mode<a class="headerlink" href="#physical-mode" title="Permalink to this headline">#</a></h2>
+<section id="memory-reclaiming-algorithms">
+<span id="cont-mm-reclaim"></span><h2>Memory reclaiming algorithms.<a class="headerlink" href="#memory-reclaiming-algorithms" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Global page reclaiming</p>
+<ul>
+<li><p>FIFO, LRU, NRU…</p></li>
+</ul>
+</li>
+<li><p>Local page reclaiming</p>
+<ul>
+<li><p>Reclaiming within a specific address space</p></li>
+</ul>
+</li>
+<li><p>Working set page reclaiming</p></li>
+</ul>
+</section>
+<section id="data-structures">
+<span id="cont-mm-ds"></span><h2>Data structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">#</a></h2>
+<p>We need to keep track of … what is free, what is used…</p>
+<ul class="simple">
+<li><p>Free lists</p>
+<ul>
+<li><p>coalescing free memory.</p></li>
+</ul>
+</li>
+<li><p>In-use page lists</p>
+<ul>
+<li><p>active and inactive lists for reclaiming.</p></li>
+<li><p>Buffer Cache</p>
+<ul>
+<li><p>Using RAM to cache file system data &amp; metadata</p>
+<ul>
+<li><p>Global page hash</p></li>
+<li><p>Per file page hash</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="page-faults">
+<h2>Page Faults<a class="headerlink" href="#page-faults" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>File backed page faults</p></li>
+<li><p>Anonymous page faults</p></li>
+<li><p>Copy On Write page faults</p></li>
+</ul>
+</section>
+<section id="page-tables-in-more-detail">
+<h2>Page tables in more detail<a class="headerlink" href="#page-tables-in-more-detail" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Translations</p>
+<ul>
+<li><p>Page Table entries</p></li>
+<li><p>Page tables</p>
+<ul>
+<li><p>Multiple level page tables</p></li>
+<li><p>Page table entries</p></li>
+<li><p>Inverted page tables</p></li>
+<li><p>Variable page sizes</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>TLB - Transpation Lookaside Buffers and entries</p>
+<ul>
+<li><p>Global TLB entries</p></li>
+<li><p>Local TLB entries</p></li>
+<li><p>Tagging TLB entries</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="paging-dynamics">
+<h2>Paging Dynamics<a class="headerlink" href="#paging-dynamics" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Boot-time</p></li>
+<li><p>Consuming physical memory</p>
+<ul>
+<li><p>Kernel page wiring</p></li>
+<li><p>Page faults</p></li>
+<li><p>Buffer Cache</p></li>
+</ul>
+</li>
+<li><p>Freeing physical memory</p>
+<ul>
+<li><p>Process exiting</p></li>
+<li><p>un-mapping</p></li>
+<li><p>Page reclaiming</p>
+<ul>
+<li><p>Paging</p></li>
+<li><p>Swapping</p></li>
+<li><p>Page cache purging</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>System shutdown</p></li>
+</ul>
+</section>
+<section id="memory-management-in-the-real-world">
+<h2>Memory management in the real world<a class="headerlink" href="#memory-management-in-the-real-world" title="Permalink to this headline">#</a></h2>
+<p>Linux specific memory management - examples from a real system</p>
 </section>
 <section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">#</a></h2>
