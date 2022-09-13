@@ -414,8 +414,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#page-tables-in-more-detail">
-   Page tables in more detail
+  <a class="reference internal nav-link" href="#memory-management-hardware">
+   Memory management hardware
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -473,8 +473,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#page-tables-in-more-detail">
-   Page tables in more detail
+  <a class="reference internal nav-link" href="#memory-management-hardware">
+   Memory management hardware
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -512,8 +512,14 @@ title="Print to PDF"
 <li><p>Providing and managing a private virtual address space for each user.</p></li>
 </ul>
 </li>
+<li><p>The memory manager is responsible for:</p>
+<ul>
+<li><p>1.) Managing all of the RAM or physical memory on the whole system.</p></li>
+<li><p>2.) Creating and managing virtual memory for each process.</p></li>
+<li><p>3.) Transitioning the processor(s) between physical memory mode and virtual memory mode as the kernel boots and initializes.</p></li>
 </ul>
-<p>The memory manager is responsible for 1.) Managing all of the RAM or physical memory on the whole system, 2.) Creating and managing virtual memory for each process and 3.) transitioning the processor(s) between physical memory mode and virtual memory mode as the kernel runs.</p>
+</li>
+</ul>
 <section id="overview-of-mm">
 <span id="cont-mm-overview"></span><h2>Overview of MM<a class="headerlink" href="#overview-of-mm" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
@@ -598,15 +604,15 @@ swapping, paging</p></li>
 </ul>
 </section>
 <section id="page-faults">
-<h2>Page Faults<a class="headerlink" href="#page-faults" title="Permalink to this headline">#</a></h2>
+<span id="cont-mm-pf"></span><h2>Page Faults<a class="headerlink" href="#page-faults" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>File backed page faults</p></li>
 <li><p>Anonymous page faults</p></li>
 <li><p>Copy On Write page faults</p></li>
 </ul>
 </section>
-<section id="page-tables-in-more-detail">
-<h2>Page tables in more detail<a class="headerlink" href="#page-tables-in-more-detail" title="Permalink to this headline">#</a></h2>
+<section id="memory-management-hardware">
+<span id="cont-mm-hw"></span><h2>Memory management hardware<a class="headerlink" href="#memory-management-hardware" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Translations</p>
 <ul>
@@ -631,7 +637,7 @@ swapping, paging</p></li>
 </ul>
 </section>
 <section id="paging-dynamics">
-<h2>Paging Dynamics<a class="headerlink" href="#paging-dynamics" title="Permalink to this headline">#</a></h2>
+<span id="cont-mm-dynamics"></span><h2>Paging Dynamics<a class="headerlink" href="#paging-dynamics" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Boot-time</p></li>
 <li><p>Consuming physical memory</p>
@@ -658,8 +664,22 @@ swapping, paging</p></li>
 </ul>
 </section>
 <section id="memory-management-in-the-real-world">
-<h2>Memory management in the real world<a class="headerlink" href="#memory-management-in-the-real-world" title="Permalink to this headline">#</a></h2>
+<span id="cont-mm-linux"></span><h2>Memory management in the real world<a class="headerlink" href="#memory-management-in-the-real-world" title="Permalink to this headline">#</a></h2>
 <p>Linux specific memory management - examples from a real system</p>
+<p>Memory Management Introduction</p>
+<p>The memory management subsystem has 3 basic responsibilities;</p>
+<ol class="simple">
+<li><p>Providing an abstraction so that every user appears to have total and unique access to all of the memory on the system.</p></li>
+<li><p>Managing all of the physical memory on the system.</p></li>
+<li><p>Providing and managing a unique private virtual address space for every process currently running on the system.</p></li>
+</ol>
+<p>Very basic systems do not abstract memory at all.  Instead, programs are loaded directly into physical memory
+and all the addresses presented to those programs are physical addresses.  This means that programs running in
+a physical memory model must be relocatable because its not known what address they will be loaded and run at.
+Being relocatable means that all addresses are either relative or they can be fixed up whenever the program is loaded and/or
+moved to a different physical address.</p>
+<p>No memory abstraction also implies that there is no protection between multiple programs loaded into memory at the same time.
+If a program takes a wild branch or writes to a random address it will corrupt other programs or even the entire system.</p>
 </section>
 <section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">#</a></h2>
@@ -715,7 +735,7 @@ swapping, paging</p></li>
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Orran Krieger and Larry Woodman<br/>
+    By Angela Demke Brown, Orran Krieger & Larry Woodman<br/>
   
       &copy; Copyright 2022.<br/>
 </p>
