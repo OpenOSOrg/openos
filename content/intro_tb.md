@@ -1,4 +1,4 @@
-0.1st Edition Edited by [Orran Krieger](https://okrieg.github.io) with a  [community](https://github.com/okrieg/openos/graphs/contributors) of contributors. 
+0.1st Edition Edited by Angela Demke Brown, [Orran Krieger](https://okrieg.github.io) and Larry Woodman with a  [community](https://github.com/okrieg/openos/graphs/contributors) of contributors. 
 
 This text was originally developed for the Boston University course [EC 440 Operating Systems][EC440].
 

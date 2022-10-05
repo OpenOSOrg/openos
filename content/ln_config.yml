@@ -5,15 +5,15 @@
 
 #######################################################################################
 # Book settings
-title                       : MyBook Lecture Notes  # The title of the book. Will be placed in the left navbar.
-author                      : Jonathan Appavoo  # The author of the book
-copyright                   : "XXXX"  # Copyright year to be placed in the footer
+title                       : Introduction to Operating Systems  # The title of the book. Will be placed in the left navbar.
+author                      : Orran Krieger and Larry Woodman  # The author of the book
+copyright                   : "2022"  # Copyright year to be placed in the footer
 logo                        : logo.png  # A path to the book logo
 only_build_toc_files        : true
 
 repository:
-  url: https://github.com/jappavoo/UndertheCovers
-  path_to_book: underthecovers
+  url: https://github.com/okrieg/openos
+  path_to_book: content
   branch: main
 
 html:
@@ -26,7 +26,7 @@ html:
 
 launch_buttons:
   # open lecture presentations in classic interface to ensure RISE compatibility
-  notebook_interface: "classic"
+  notebook_interface: "jupyterlab"
   binderhub_url: "" # trying to remove binder
   # launch on the public RedHat Operate First Service
   jupyterhub_url: "https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud"

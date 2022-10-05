@@ -1,4 +1,4 @@
-Lab Manual
+Lab Manual: OpenOS
 ==============================================
 
 This the lab manual for the associated textbook of the same name.  
