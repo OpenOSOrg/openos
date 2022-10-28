@@ -1,50 +1,39 @@
 format: jb-book
-root: intro_tb
-chapters: 
-  - title: Preface
-    file: intro/pref
-  - title: Contributing
-    file: contributing/Contributing
-  - title: Intro
-    file: intro/intro
-# eventually we might want to pull out some of the content into sub-files/sectio
-#    sections:
-#    - file: intro/purpose
-#    - file: intro/history
-#    - file: intro/structure
-# example of subsections
-#      sections:
-#      - title: Common
-#        file: intro/common
-#      - title: Other
-#        file: intro/other
-#    - file: intro/services
-  - title: Processes and Threads
-    file: proc_threads/proc_threads
-  - title: Scheduling
-    file: scheduling/scheduling
-  - title: Synchronization and Deadlock
-    file: sync/sync
-  - title: Memory Management
-    file: mm/mm
-  - title: File Systems
-    file: fs/fs
-  - title: Security
-    file: sec/sec
-  - title: Virtualization & Cloud
-    file: virt/virt
-# sectionon operating system services
-#    - title: OS Services
-#       file: intro/services
-#  - title: Scheduling
-#    file: scheduling/sched
-#
-#  some examples... and contributing, add back later
-#
-#   - title: Contributing
-#    file: part3/ch1
-#    sections:
-#    - file: part3/ch2
-#  - file: BUECE440_intro
-  - title: Bibliography
-    file: misc/bib
+root: intro/pref
+parts:
+- caption: 'Getting started'
+  numbered: True
+  chapters:
+  - file: intro/intro
+  - file: intro/purpose
+  - file: intro/structure
+  - file: intro/services
+  - file: intro/tools
+- caption: 'Scheduling'
+  numbered: True
+  chapters:
+  - file: scheduling/scheduling
+- caption: 'Memory Management'
+  numbered: True
+  chapters:
+  - file: mm/mm
+- caption: 'File Systems'
+  numbered: True
+  chapters:
+  - file: fs/fs
+- caption: 'Concurrency'
+  numbered: True
+  chapters:
+  - file: sync/sync
+- caption: 'Other Topics'
+  numbered: True
+  chapters:
+  - file: sec/sec
+  - file: virt/virt
+  - file: intro/other
+- caption: 'Appendices'
+  numbered: True
+  chapters:
+  - file: contributing/Contributing
+  - file: misc/bib
+
