@@ -53,8 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Contributing" href="../contributing/Contributing.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="../intro_tb.html" />
+    <link rel="next" title="1. Introduction" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -108,66 +107,128 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../intro_tb.html">
-                    <no title>
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Preface
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../contributing/Contributing.html">
-   Contributing
-  </a>
- </li>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   Intro
+   1. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../proc_threads/proc_threads.html">
-   Processes and Threads
+  <a class="reference internal" href="purpose.html">
+   2. Purpose of operating systems
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="structure.html">
+   4. OS structure
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="services.html">
+   5. Operating System Services
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tools.html">
+   6. Tools
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Scheduling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   Scheduling
+   7. Processor Scheduling
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/sync.html">
-   Synchronization and Deadlock
-  </a>
- </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Memory Management
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/mm.html">
-   Memory Management
+   8. Memory Management
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/fs.html">
-   File Systems
+   9. File Systems
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sync.html">
+   10. Synchronization and Deadlock
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   Security
+   11. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   Virtualization &amp; Cloud
+   12. Virtualization and Cloud computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="other.html">
+   13. Other OS structures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   14. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   Bibliography
+   15. Bibliography
   </a>
  </li>
 </ul>
@@ -461,6 +522,7 @@ title="Print to PDF"
 <li><p>Lecture slides</p></li>
 </ol>
 <p>The textbook can be largely read statically; and you can even download a PDF.  However, we strongly recommend using it online going back and forth between different materials via the provided links.  We provide a companion container (an OS concept we discuss <span class="xref myst">XXX</span> which we strongly recommend you keep open alongside the material and use to run exercises.  The lab materials are intended to execute in the container.  Moreover, the container has the curated set of tools that we expect you to use for the course, and provides the same environment as the assignments; you are likely to run into problems if you work on the assignments outside of the container environment and don’t expect TAs to help you if you do that.</p>
+<p>Please see the github <a class="reference external" href="https://github.com/okrieg/openos/graphs/contributors">community</a> page for the list of contributors.  This text was originally developed for the Boston University course <a class="reference external" href="https://docs.google.com/document/d/e/2PACX-1vRIAR-uB62ZAr9LdDP-8RylOhQ76W2fL79TU5TJbgrwUraK72gN5VfJde3B8x8gV3ukcP2lwuWC8TOm/pub">EC 440 Operating Systems</a>. You can <a class="reference external" href="https://okrieg.github.io/openos/textbook/intro_tb.html">view this text online</a> or <a class="reference external" href="https://github.com/okrieg/openos">view the source</a>.</p>
 <section id="our-motivation">
 <span id="cont-pref-mot"></span><h2>Our motivation<a class="headerlink" href="#our-motivation" title="Permalink to this headline">#</a></h2>
 <p>Our motivation to write this book is three fold.  First, our students pay way too much money for textbooks. At one point, students could buy used textbooks, although even then publishers would constantly churn editions to get students to buy new versions. Increasingly, textbooks contain interactive materials, that force students to buy the most recent edition; again its about the money.  Free online books (FOB) provide us the opportunity to address this cost issue, while also enabling frequent revisions and extensive linking between different materials.  The motivation for FOB  for operating systems is described in the excellent <a class="reference external" href="http://from-a-to-remzi.blogspot.com/2014/01/the-case-for-free-online-books-fobs.html">blog</a> by Remzi Arpaci-Dusseau.  Moreover, the  excellent operating system FOB titled “<a class="reference external" href="https://pages.cs.wisc.edu/~remzi/OSTEP/">Operating Systems: Three Easy Pieces</a>” <span id="id1">[<a class="reference internal" href="../misc/bib.html#id2" title="Remzi H Arpaci-Dusseau and Andrea C Arpaci-Dusseau. Operating systems: Three easy pieces. Arpaci-Dusseau Books LLC Boston, 2018. URL: https://pages.cs.wisc.edu/~remzi/OSTEP/.">ADAD18</a>]</span>, is enormously better than our effort today.   So why are we developing another FOB?  That leads to our next two reasons.</p>
@@ -487,6 +549,20 @@ title="Print to PDF"
 <span id="cont-pref-how"></span><h2>How to read it<a class="headerlink" href="#how-to-read-it" title="Permalink to this headline">#</a></h2>
 <p>For detailed instructions on how to read this book, please refer <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/howto.html#how-to-read-this-book">here</a> for directions for the systems book.  Discuss three parts of book.</p>
 </section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -516,17 +592,10 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../intro_tb.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">&lt;no title&gt;</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="../contributing/Contributing.html" title="next page">
+    <a class='right-next' id="next-link" href="intro.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Contributing</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Introduction</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

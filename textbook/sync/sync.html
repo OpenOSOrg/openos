@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Synchronization and Deadlock &#8212; Introduction to Operating Systems</title>
+    <title>10. Synchronization and Deadlock &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,8 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Memory Management" href="../mm/mm.html" />
-    <link rel="prev" title="Processor Scheduling" href="../scheduling/scheduling.html" />
+    <link rel="next" title="11. Security" href="../sec/sec.html" />
+    <link rel="prev" title="9. File Systems" href="../fs/fs.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -109,65 +109,127 @@ const thebe_selector_output = ".output, .cell_output"
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../intro_tb.html">
-                    <no title>
+                <a class="reference internal" href="../intro/pref.html">
+                    Preface
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro/pref.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../contributing/Contributing.html">
-   Contributing
-  </a>
- </li>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/intro.html">
-   Intro
+   1. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../proc_threads/proc_threads.html">
-   Processes and Threads
+  <a class="reference internal" href="../intro/purpose.html">
+   2. Purpose of operating systems
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/structure.html">
+   4. OS structure
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/services.html">
+   5. Operating System Services
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/tools.html">
+   6. Tools
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Scheduling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   Scheduling
+   7. Processor Scheduling
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Synchronization and Deadlock
-  </a>
- </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Memory Management
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/mm.html">
-   Memory Management
+   8. Memory Management
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/fs.html">
-   File Systems
+   9. File Systems
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   10. Synchronization and Deadlock
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   Security
+   11. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   Virtualization &amp; Cloud
+   12. Virtualization and Cloud computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/other.html">
+   13. Other OS structures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   14. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   Bibliography
+   15. Bibliography
   </a>
  </li>
 </ul>
@@ -396,8 +458,26 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="synchronization-and-deadlock">
-<h1>Synchronization and Deadlock<a class="headerlink" href="#synchronization-and-deadlock" title="Permalink to this headline">#</a></h1>
-<p>We are talking here about scheduling the processor not the damn memory, disk, …</p>
+<h1><span class="section-number">10. </span>Synchronization and Deadlock<a class="headerlink" href="#synchronization-and-deadlock" title="Permalink to this headline">#</a></h1>
+<ol class="simple">
+<li><p>interprocess communication and need to share</p>
+<ul class="simple">
+<li><p>system calls to enable: shared memory region, shmat, (reference back pipes)</p></li>
+<li><p>short statement we have parallel hardware, lots of cores…</p></li>
+<li><p>leads to threads from the perspective of we want work on same data…</p></li>
+</ul>
+</li>
+<li><p>locking</p></li>
+<li><p>deadlock</p></li>
+<li><p>challenge modern hardware</p>
+<ul class="simple">
+<li><p>NUMA, caches…</p></li>
+<li><p>sequential consistency, processor consistency… C++11 memory model (possible part 4)</p></li>
+<li><p>scalability, lock granularity</p></li>
+</ul>
+</li>
+<li><p>locking in linux</p></li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">
@@ -427,17 +507,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../scheduling/scheduling.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../fs/fs.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Processor Scheduling</p>
+            <p class="prev-next-title"><span class="section-number">9. </span>File Systems</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../mm/mm.html" title="next page">
+    <a class='right-next' id="next-link" href="../sec/sec.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Memory Management</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Security</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
