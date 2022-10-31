@@ -28,7 +28,7 @@ parts:
 - caption: 'Other Topics'
   numbered: True
   chapters:
-  - file: misc/OtherIntro
+  - file: misc/OtherInro
   - file: sec/sec
   - file: virt/virt
   - file: intro/other
