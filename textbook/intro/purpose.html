@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. OS structure" href="structure.html" />
+    <link rel="next" title="3. OS structure" href="structure.html" />
     <link rel="prev" title="1. Introduction to getting started" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -132,17 +132,17 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="structure.html">
-   4. OS structure
+   3. OS structure
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="services.html">
-   5. Operating System Services
+   4. Operating System Services
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tools.html">
-   6. Tools
+   5. Tools
   </a>
  </li>
 </ul>
@@ -154,7 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   7. Processor Scheduling
+   6. Processor Scheduling
   </a>
  </li>
 </ul>
@@ -166,7 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/mm.html">
-   8. Memory Management
+   7. Memory Management
   </a>
  </li>
 </ul>
@@ -178,7 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/fs.html">
-   9. Introduction to File Systems
+   8. Introduction to File Systems
   </a>
  </li>
 </ul>
@@ -190,7 +190,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   10. Intro Concurrency Synchronization and Deadlock
+   9. Intro Concurrency Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   10. Cooperating Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locking.html">
+   11. Synchronization Primitives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/deadlock.html">
+   12. Deadlocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   13. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   14. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -201,18 +226,23 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../misc/OtherInro.html">
+   15. Overview of other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   11. Security
+   16. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   12. Virtualization and Cloud computing
+   17. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="other.html">
-   13. Other OS structures
+   18. Other OS structures
   </a>
  </li>
 </ul>
@@ -224,12 +254,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   14. Contributing
+   19. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   15. Bibliography
+   20. Bibliography
   </a>
  </li>
 </ul>
@@ -291,7 +321,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/intro/purpose.ipynb&branch=main"
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/intro/purpose.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -455,14 +485,19 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   2. Purpose of operating systems
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mapping-applications-to-hardware">
+   2.1. Mapping applications to hardware
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-fundamental-platform">
+   2.2. The fundamental platform
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#why-do-we-care">
-   3. Why do we care
+   2.3. Why do we care
   </a>
  </li>
 </ul>
@@ -484,14 +519,19 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   2. Purpose of operating systems
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mapping-applications-to-hardware">
+   2.1. Mapping applications to hardware
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-fundamental-platform">
+   2.2. The fundamental platform
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#why-do-we-care">
-   3. Why do we care
+   2.3. Why do we care
   </a>
  </li>
 </ul>
@@ -504,14 +544,40 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="purpose-of-operating-systems">
-<span id="cont-gs-purpose"></span><h1><span class="section-number">2. </span>Purpose of operating systems<a class="headerlink" href="#purpose-of-operating-systems" title="Permalink to this headline">#</a></h1>
-<p>At fundamental level we have applications and hardware, and the task of the OS is to translate between them.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  - structure of simple computer, with processor, memory, storage and communication devices
-  - forward reference to concurrency
-  - discuss core abstractions of each and fundamental properties slow/fast
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> -i ../python/common.py
 </pre></div>
 </div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="purpose-of-operating-systems">
+<span id="cont-gs-purpose"></span><h1><span class="section-number">2. </span>Purpose of operating systems<a class="headerlink" href="#purpose-of-operating-systems" title="Permalink to this headline">#</a></h1>
+<p>The purpose of an operating system is to provide everything needed to enable applications to run on computers.  We <a class="reference internal" href="#cont-gs-purpose-hw"><span class="std std-ref">first</span></a> present a simple model of hardware and why the OS is needed, then discuss how this has resulted in operating systems becoming the <a class="reference internal" href="#cont-gs-purpose-platform"><span class="std std-ref">fundamental platform</span></a> that all computing depends on, and finally discuss why, as operating system researchers and developers, feel like the <a class="reference internal" href="#cont-gs-purpose-care"><span class="std std-ref">fun has just started</span></a>. Our hope is that at the end of this chapter you will not only realize why it is so important for all computer scientists and engineers to have a fundamental understanding of operating systems, but to also to realize why so many people are excited to work on and contribute to operating systems.  Consider that today’s dominant operating systems are open source, and rely on 1000s of contributors from all over the world, many who volunteer their time.</p>
+<section id="mapping-applications-to-hardware">
+<span id="cont-gs-purpose-hw"></span><h2><span class="section-number">2.1. </span>Mapping applications to hardware<a class="headerlink" href="#mapping-applications-to-hardware" title="Permalink to this headline">#</a></h2>
+<p>A simple model of a computer is depicted in <a class="reference internal" href="#simplecomputer-fig"><span class="std std-numref">Fig. 2.1</span></a>. The smart part that executes instructions is called the Central Processing Unit (CPU) or processor.  The Memory, also referred to as Random Access Memory (RAM), holds the instructions and data that running applications require.  While there are many kinds of I/O devices, for now we only consider two, namely: 1) storage devices, and 2) communication devices.</p>
+<p>It is normally directly connected to the CPU</p>
+<figure class="align-right" id="simplecomputer-fig">
+<a class="reference internal image-reference" href="../_images/SLS_TheMachine.png"><img alt="../_images/SLS_TheMachine.png" src="../_images/SLS_TheMachine.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">A simple model of a computer</span><a class="headerlink" href="#simplecomputer-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-left" id="mappingint-fig">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-01.drawio.png"><img alt="../_images/purpose-OS-source-01.drawio.png" src="../_images/purpose-OS-source-01.drawio.png" style="width: 20%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Mapping ugly interfaces of hardware to the needs of applications.</span><a class="headerlink" href="#mappingint-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>structure of simple computer <a class="reference internal" href="#simplecomputer-fig"><span class="std std-numref">Fig. 2.1</span></a>, <a class="reference internal" href="#mappingint-fig"><span class="std std-numref">Fig. 2.2</span></a> with processor, memory, storage and communication devices</p></li>
+<li><p>forward reference to concurrency</p></li>
+<li><p>discuss core abstractions of each and fundamental properties slow/fast</p></li>
+</ul>
+</section>
+<section id="the-fundamental-platform">
+<span id="cont-gs-purpose-platform"></span><h2><span class="section-number">2.2. </span>The fundamental platform<a class="headerlink" href="#the-fundamental-platform" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>translate physical abstractions to virtual/clean ones</p></li>
 <li><p>allow many applications to share resources</p></li>
@@ -524,13 +590,14 @@ title="Print to PDF"
 <li><p>summarize tasks of the operating system</p></li>
 </ul>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="why-do-we-care">
-<h1><span class="section-number">3. </span>Why do we care<a class="headerlink" href="#why-do-we-care" title="Permalink to this headline">#</a></h1>
+<section id="why-do-we-care">
+<span id="cont-gs-purpose-care"></span><h2><span class="section-number">2.3. </span>Why do we care<a class="headerlink" href="#why-do-we-care" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>core platform everything else relies on, toughest code to write</p></li>
 <li><p>means that everything relies on it</p></li>
 <li><p>is the fun over… talk about future/changes</p></li>
 </ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -570,7 +637,7 @@ title="Print to PDF"
     <a class='right-next' id="next-link" href="structure.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>OS structure</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>OS structure</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>6. Tools &#8212; Introduction to Operating Systems</title>
+    <title>5. Tools &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,8 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7. Processor Scheduling" href="../scheduling/scheduling.html" />
-    <link rel="prev" title="5. Operating System Services" href="services.html" />
+    <link rel="next" title="6. Processor Scheduling" href="../scheduling/scheduling.html" />
+    <link rel="prev" title="4. Operating System Services" href="services.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -132,17 +132,17 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="structure.html">
-   4. OS structure
+   3. OS structure
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="services.html">
-   5. Operating System Services
+   4. Operating System Services
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   6. Tools
+   5. Tools
   </a>
  </li>
 </ul>
@@ -154,7 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   7. Processor Scheduling
+   6. Processor Scheduling
   </a>
  </li>
 </ul>
@@ -166,7 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/mm.html">
-   8. Memory Management
+   7. Memory Management
   </a>
  </li>
 </ul>
@@ -178,7 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/fs.html">
-   9. Introduction to File Systems
+   8. Introduction to File Systems
   </a>
  </li>
 </ul>
@@ -190,7 +190,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   10. Intro Concurrency Synchronization and Deadlock
+   9. Intro Concurrency Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   10. Cooperating Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locking.html">
+   11. Synchronization Primitives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/deadlock.html">
+   12. Deadlocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   13. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   14. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -201,18 +226,23 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../misc/OtherInro.html">
+   15. Overview of other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   11. Security
+   16. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   12. Virtualization and Cloud computing
+   17. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="other.html">
-   13. Other OS structures
+   18. Other OS structures
   </a>
  </li>
 </ul>
@@ -224,12 +254,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   14. Contributing
+   19. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   15. Bibliography
+   20. Bibliography
   </a>
  </li>
 </ul>
@@ -291,7 +321,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/intro/tools.ipynb&branch=main"
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/intro/tools.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -457,7 +487,7 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#shell">
-   6.1. Shell
+   5.1. Shell
   </a>
  </li>
 </ul>
@@ -481,7 +511,7 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#shell">
-   6.1. Shell
+   5.1. Shell
   </a>
  </li>
 </ul>
@@ -495,7 +525,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="tools">
-<span id="cont-gs-tools"></span><h1><span class="section-number">6. </span>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">#</a></h1>
+<span id="cont-gs-tools"></span><h1><span class="section-number">5. </span>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">#</a></h1>
 <ol class="simple">
 <li><p>things you need to know: short cheat sheet description with</p>
 <ul class="simple">
@@ -508,7 +538,7 @@ title="Print to PDF"
 </li>
 </ol>
 <section id="shell">
-<h2><span class="section-number">6.1. </span>Shell<a class="headerlink" href="#shell" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.1. </span>Shell<a class="headerlink" href="#shell" title="Permalink to this headline">#</a></h2>
 <p>This is a place where we can steal snippets from <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/intro.html#operating-systems-and-unix">here</a> but we want a short repeat in this book. Say for more detail on terminals and shells.. refer to corresponding sections of jonathan’s book.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/shellintro.html#commands-as-files-within-the-path-list">discussion paths, and type…</a> up front, the command to ls everything here and finding all the programs in path is very cool.</p></li>
@@ -547,13 +577,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">5. </span>Operating System Services</p>
+            <p class="prev-next-title"><span class="section-number">4. </span>Operating System Services</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../scheduling/scheduling.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Processor Scheduling</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Processor Scheduling</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>14. Contributing &#8212; Introduction to Operating Systems</title>
+    <title>19. Contributing &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,8 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="15. Bibliography" href="../misc/bib.html" />
-    <link rel="prev" title="13. Other OS structures" href="../intro/other.html" />
+    <link rel="next" title="20. Bibliography" href="../misc/bib.html" />
+    <link rel="prev" title="18. Other OS structures" href="../intro/other.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -132,17 +132,17 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/structure.html">
-   4. OS structure
+   3. OS structure
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/services.html">
-   5. Operating System Services
+   4. Operating System Services
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/tools.html">
-   6. Tools
+   5. Tools
   </a>
  </li>
 </ul>
@@ -154,7 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   7. Processor Scheduling
+   6. Processor Scheduling
   </a>
  </li>
 </ul>
@@ -166,7 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/mm.html">
-   8. Memory Management
+   7. Memory Management
   </a>
  </li>
 </ul>
@@ -178,7 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/fs.html">
-   9. Introduction to File Systems
+   8. Introduction to File Systems
   </a>
  </li>
 </ul>
@@ -190,7 +190,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   10. Intro Concurrency Synchronization and Deadlock
+   9. Intro Concurrency Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   10. Cooperating Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locking.html">
+   11. Synchronization Primitives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/deadlock.html">
+   12. Deadlocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   13. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   14. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -201,18 +226,23 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../misc/OtherInro.html">
+   15. Overview of other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   11. Security
+   16. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   12. Virtualization and Cloud computing
+   17. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   13. Other OS structures
+   18. Other OS structures
   </a>
  </li>
 </ul>
@@ -224,12 +254,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   14. Contributing
+   19. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   15. Bibliography
+   20. Bibliography
   </a>
  </li>
 </ul>
@@ -291,7 +321,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/contributing/Contributing.ipynb&branch=main"
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/contributing/Contributing.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -457,98 +487,98 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#resources-to-look-at">
-   14.1. Resources to look at
+   19.1. Resources to look at
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#design-choices">
-   14.2. Design choices
+   19.2. Design choices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#authoring-tutorial-getting-started">
-   14.3. Authoring tutorial - getting started
+   19.3. Authoring tutorial - getting started
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#setting-up-your-environment-a-simple-tutorial">
-     14.3.1. Setting up your environment; a simple tutorial
+     19.3.1. Setting up your environment; a simple tutorial
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#every-time">
-     14.3.2. Every time
+     19.3.2. Every time
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#authoring-workflow">
-     14.3.3. Authoring workflow
+     19.3.3. Authoring workflow
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#submitting-changes">
-     14.3.4. Submitting changes
+     19.3.4. Submitting changes
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#accepting-changes">
-     14.3.5. Accepting changes
+     19.3.5. Accepting changes
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#authoring-content">
-   14.4. Authoring content
+   19.4. Authoring content
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#using-jupyterlab">
-     14.4.1. Using jupyterlab
+     19.4.1. Using jupyterlab
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#adding-figures">
-     14.4.2. Adding figures
+     19.4.2. Adding figures
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#tags">
-     14.4.3. TAGS
+     19.4.3. TAGS
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#rise-presentations">
-     14.4.4. RISE presentations.
+     19.4.4. RISE presentations.
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#developing-one">
-       14.4.4.1. Developing one
+       19.4.4.1. Developing one
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#coverting-google-slide-presentation">
-       14.4.4.2. Coverting google slide presentation
+       19.4.4.2. Coverting google slide presentation
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#running-one">
-       14.4.4.3. Running one
+       19.4.4.3. Running one
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#useful-tricks-and-stuff-we-should-try">
-     14.4.5. Useful tricks and stuff we should try
+     19.4.5. Useful tricks and stuff we should try
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
-   14.5. References
+   19.5. References
   </a>
  </li>
 </ul>
@@ -572,98 +602,98 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#resources-to-look-at">
-   14.1. Resources to look at
+   19.1. Resources to look at
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#design-choices">
-   14.2. Design choices
+   19.2. Design choices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#authoring-tutorial-getting-started">
-   14.3. Authoring tutorial - getting started
+   19.3. Authoring tutorial - getting started
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#setting-up-your-environment-a-simple-tutorial">
-     14.3.1. Setting up your environment; a simple tutorial
+     19.3.1. Setting up your environment; a simple tutorial
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#every-time">
-     14.3.2. Every time
+     19.3.2. Every time
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#authoring-workflow">
-     14.3.3. Authoring workflow
+     19.3.3. Authoring workflow
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#submitting-changes">
-     14.3.4. Submitting changes
+     19.3.4. Submitting changes
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#accepting-changes">
-     14.3.5. Accepting changes
+     19.3.5. Accepting changes
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#authoring-content">
-   14.4. Authoring content
+   19.4. Authoring content
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#using-jupyterlab">
-     14.4.1. Using jupyterlab
+     19.4.1. Using jupyterlab
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#adding-figures">
-     14.4.2. Adding figures
+     19.4.2. Adding figures
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#tags">
-     14.4.3. TAGS
+     19.4.3. TAGS
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#rise-presentations">
-     14.4.4. RISE presentations.
+     19.4.4. RISE presentations.
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#developing-one">
-       14.4.4.1. Developing one
+       19.4.4.1. Developing one
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#coverting-google-slide-presentation">
-       14.4.4.2. Coverting google slide presentation
+       19.4.4.2. Coverting google slide presentation
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#running-one">
-       14.4.4.3. Running one
+       19.4.4.3. Running one
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#useful-tricks-and-stuff-we-should-try">
-     14.4.5. Useful tricks and stuff we should try
+     19.4.5. Useful tricks and stuff we should try
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
-   14.5. References
+   19.5. References
   </a>
  </li>
 </ul>
@@ -677,7 +707,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="contributing">
-<span id="cont-contr"></span><h1><span class="section-number">14. </span>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">#</a></h1>
+<span id="cont-contr"></span><h1><span class="section-number">19. </span>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">#</a></h1>
 <aside class="sidebar">
 <p class="sidebar-title">fast links/info:</p>
 <ul class="simple">
@@ -707,7 +737,7 @@ title="Print to PDF"
 </div>
 <p>At the end of this section we have links to various <a class="reference internal" href="#cont-contr-ref"><span class="std std-ref">reference</span></a> materials, for example, sections of Jonathan’s textbook that we plan to steal materials from.</p>
 <section id="resources-to-look-at">
-<span id="cont-contr-links"></span><h2><span class="section-number">14.1. </span>Resources to look at<a class="headerlink" href="#resources-to-look-at" title="Permalink to this headline">#</a></h2>
+<span id="cont-contr-links"></span><h2><span class="section-number">19.1. </span>Resources to look at<a class="headerlink" href="#resources-to-look-at" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://jupyterbook.org/en/stable/intro.html">jupyterbook: </a>: look here for basic instructions on authoring; we are basically using jupyterbook in a prescriptive fashion for the static content.</p>
 <ul>
@@ -722,7 +752,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="design-choices">
-<span id="cont-contr-design"></span><h2><span class="section-number">14.2. </span>Design choices<a class="headerlink" href="#design-choices" title="Permalink to this headline">#</a></h2>
+<span id="cont-contr-design"></span><h2><span class="section-number">19.2. </span>Design choices<a class="headerlink" href="#design-choices" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>All real content is in the “content” directory</p>
 <ul>
@@ -740,17 +770,17 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="authoring-tutorial-getting-started">
-<span id="cont-contr-tutorial"></span><h2><span class="section-number">14.3. </span>Authoring tutorial - getting started<a class="headerlink" href="#authoring-tutorial-getting-started" title="Permalink to this headline">#</a></h2>
+<span id="cont-contr-tutorial"></span><h2><span class="section-number">19.3. </span>Authoring tutorial - getting started<a class="headerlink" href="#authoring-tutorial-getting-started" title="Permalink to this headline">#</a></h2>
 <p>Here is tutorial to getting started that describes how to set up your authoring environment assuming you are a collaborator of the authors.</p>
 <section id="setting-up-your-environment-a-simple-tutorial">
-<h3><span class="section-number">14.3.1. </span>Setting up your environment; a simple tutorial<a class="headerlink" href="#setting-up-your-environment-a-simple-tutorial" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.3.1. </span>Setting up your environment; a simple tutorial<a class="headerlink" href="#setting-up-your-environment-a-simple-tutorial" title="Permalink to this headline">#</a></h3>
 <p>Connect to development environment <a class="reference external" href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/lab">here</a> or to public operate first <a class="reference external" href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/lab">here</a>
 * you need to be a member of the following github <a class="reference external" href="https://github.com/organizations/OPEFFORT-DEV/settings/profile">organization</a> for authorization; send github id to <a class="reference external" href="mailto:okrieg&#37;&#52;&#48;bu&#46;edu">okrieg<span>&#64;</span>bu<span>&#46;</span>edu</a> and ask to join the group.  Orran can help you debug problems (you likely are not authorized) by connecting to <a class="reference external" href="https://rhods-dashboard-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/notebookImages">dashboard</a> to <a class="reference external" href="https://console-openshift-console.apps.buaws-dev.idu6.p1.openshiftapps.com/k8s/ns/rhods-notebooks/pods">open shift console</a> for debugging issues with container run time… (or for operate first <a class="reference external" href="https://console-openshift-console.apps.smaug.na.operate-first.cloud/topology/ns/opf-jupyterhub?view=graph&amp;%5B%E2%80%A6%5D-4fe3-a08a-4dd796af34ea&amp;searchQuery=app">here</a>)</p>
-<p>The container you should be using now is the one from Jonathan’s book, as shown in <a class="reference internal" href="#contrib-fig-contsec"><span class="std std-ref">Container to select.</span></a></p>
+<p>The container you should be using now is the one from Jonathan’s book, as shown in <a class="reference internal" href="#contrib-fig-contsec"><span class="std std-numref">Fig. 19.1</span></a></p>
 <figure class="align-default" id="contrib-fig-contsec">
 <a class="reference internal image-reference" href="../_images/container-selection.png"><img alt="../_images/container-selection.png" src="../_images/container-selection.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 14.1 </span><span class="caption-text">Container to select.</span><a class="headerlink" href="#contrib-fig-contsec" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 19.1 </span><span class="caption-text">Container to select.</span><a class="headerlink" href="#contrib-fig-contsec" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The book you should be using right now is the OPE one, it contains a full lab environment.  When you first start it, you won’t see any content. While there is a persistent volume mounted by the container, we hide it to encourage students to use github and commit their changes there frequently or else lose progress. For authoring material, given how long it takes to generate the textbook, it is likely you will want to do your work in the persistent volume that a new server automatically mounts.  To do that, the first time you start the server:</p>
@@ -783,7 +813,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="every-time">
-<h3><span class="section-number">14.3.2. </span>Every time<a class="headerlink" href="#every-time" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.3.2. </span>Every time<a class="headerlink" href="#every-time" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>type <code class="docutils literal notranslate"><span class="pre">dowork</span></code>  which will create a folder named <code class="docutils literal notranslate"><span class="pre">Work</span></code> in the home directory, linked to the  persistent storage <code class="docutils literal notranslate"><span class="pre">/opt/app-root/src</span></code></p>
 <ul>
@@ -795,7 +825,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="authoring-workflow">
-<h3><span class="section-number">14.3.3. </span>Authoring workflow<a class="headerlink" href="#authoring-workflow" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.3.3. </span>Authoring workflow<a class="headerlink" href="#authoring-workflow" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Fork the operating system textbook from <a class="reference external" href="https://github.com/okrieg/openos">here</a></p></li>
 <li><p>Clone your fork on your container and you are ready to generate content</p></li>
@@ -815,13 +845,13 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="submitting-changes">
-<h3><span class="section-number">14.3.4. </span>Submitting changes<a class="headerlink" href="#submitting-changes" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.3.4. </span>Submitting changes<a class="headerlink" href="#submitting-changes" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>you should on your fork create a <a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork">pull request to original branch</a> of main repo</p></li>
 </ul>
 </section>
 <section id="accepting-changes">
-<h3><span class="section-number">14.3.5. </span>Accepting changes<a class="headerlink" href="#accepting-changes" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.3.5. </span>Accepting changes<a class="headerlink" href="#accepting-changes" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Go to github, look for pull requests, I like to use the git commands directly, describe ehre</p></li>
 </ul>
@@ -840,9 +870,9 @@ title="Print to PDF"
 </section>
 </section>
 <section id="authoring-content">
-<span id="cont-contr-authoring"></span><h2><span class="section-number">14.4. </span>Authoring content<a class="headerlink" href="#authoring-content" title="Permalink to this headline">#</a></h2>
+<span id="cont-contr-authoring"></span><h2><span class="section-number">19.4. </span>Authoring content<a class="headerlink" href="#authoring-content" title="Permalink to this headline">#</a></h2>
 <section id="using-jupyterlab">
-<h3><span class="section-number">14.4.1. </span>Using jupyterlab<a class="headerlink" href="#using-jupyterlab" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.4.1. </span>Using jupyterlab<a class="headerlink" href="#using-jupyterlab" title="Permalink to this headline">#</a></h3>
 <p>Will put various hints here on what we find works, although for the most part like any editor, you will gradually experience what works best for you.</p>
 <ul class="simple">
 <li><p>there seems to be just one file browser, I tend to open multiple links to the textbook:</p>
@@ -856,32 +886,32 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="adding-figures">
-<h3><span class="section-number">14.4.2. </span>Adding figures<a class="headerlink" href="#adding-figures" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.4.2. </span>Adding figures<a class="headerlink" href="#adding-figures" title="Permalink to this headline">#</a></h3>
 <p>Use <a class="reference external" href="http://draw.io">draw.io</a> for open source software, I download the desktop version from <a class="reference external" href="https://www.diagrams.net/%7D">here</a> since it seems more reliable.  You can just download the image to your desktop, edit it there, and upload it again. You can Please use png as the source type of the file, rather than the default drawio; in this case it will create a XXX.drawio.png file, where the diagram is embedded in the png, so you can both dispay it, and edit it. This means you can not only continue to edit the file directly, but can also include exactly the same file in a figure.</p>
 <p>Tricks I have found in using this:</p>
 <ol class="simple">
 <li><p>with the desktop version you can directly copy images browser see this <a class="reference external" href="https://www.youtube.com/watch?v=pYROq5Aphoc">vidio</a></p></li>
 <li><p>I tend to use layers, for animation, then upload it and generate multiple png files form the same image</p></li>
-<li><p>You very much want to export the picture as high-resolution, by using a large zoom, see Figure <a class="reference internal" href="#contrib-fig-dioex2"><span class="std std-ref">Export drawio figure as png.</span></a></p></li>
+<li><p>You very much want to export the picture as high-resolution, by using a large zoom, see Figure <a class="reference internal" href="#contrib-fig-dioex2"><span class="std std-numref">Fig. 19.4</span></a></p></li>
 </ol>
 <figure class="align-default" id="contrib-fig-dioex3">
 <a class="reference internal image-reference" href="../_images/draw-io-control-resolution.png"><img alt="../_images/draw-io-control-resolution.png" src="../_images/draw-io-control-resolution.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 14.2 </span><span class="caption-text">Making images high resolution.</span><a class="headerlink" href="#contrib-fig-dioex3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 19.2 </span><span class="caption-text">Making images high resolution.</span><a class="headerlink" href="#contrib-fig-dioex3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>If you use the drawio embedded in the notebook environment, to generate a png rather than using the file export from the figure, use the command palette from jupyter “view” menue as shown in figures
-<a class="reference internal" href="#contrib-fig-dioex1"><span class="std std-ref">Activate Command Palette to export drawio figure as png.</span></a> and <a class="reference internal" href="#contrib-fig-dioex2"><span class="std std-ref">Export drawio figure as png.</span></a>.</p>
+<a class="reference internal" href="#contrib-fig-dioex1"><span class="std std-numref">Fig. 19.3</span></a> and <a class="reference internal" href="#contrib-fig-dioex2"><span class="std std-numref">Fig. 19.4</span></a>.</p>
 <figure class="align-default" id="contrib-fig-dioex1">
 <a class="reference internal image-reference" href="../_images/drawio-export-1.png"><img alt="../_images/drawio-export-1.png" src="../_images/drawio-export-1.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 14.3 </span><span class="caption-text">Activate Command Palette to export drawio figure as png.</span><a class="headerlink" href="#contrib-fig-dioex1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 19.3 </span><span class="caption-text">Activate Command Palette to export drawio figure as png.</span><a class="headerlink" href="#contrib-fig-dioex1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="contrib-fig-dioex2">
 <a class="reference internal image-reference" href="../_images/drawio-export-2.png"><img alt="../_images/drawio-export-2.png" src="../_images/drawio-export-2.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 14.4 </span><span class="caption-text">Export drawio figure as png.</span><a class="headerlink" href="#contrib-fig-dioex2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 19.4 </span><span class="caption-text">Export drawio figure as png.</span><a class="headerlink" href="#contrib-fig-dioex2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Note, this is strongly discouraged, since I don’t see any way to fix the resolution so that the images don’t suck.  I end up exporting from <a class="reference external" href="http://draw.io">draw.io</a> at 500% to get pictures to look reasonable.</p>
@@ -902,13 +932,13 @@ A caption for figure
 <figure class="align-right" id="contrib-fig-examp">
 <a class="reference internal image-reference" href="../_images/osstructure-1.dio.png"><img alt="../_images/osstructure-1.dio.png" src="../_images/osstructure-1.dio.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 14.5 </span><span class="caption-text">A caption for figure</span><a class="headerlink" href="#contrib-fig-examp" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 19.5 </span><span class="caption-text">A caption for figure</span><a class="headerlink" href="#contrib-fig-examp" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For more on figures look at this <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html#images-and-figures">reference</a>.</p>
 </section>
 <section id="tags">
-<h3><span class="section-number">14.4.3. </span>TAGS<a class="headerlink" href="#tags" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.4.3. </span>TAGS<a class="headerlink" href="#tags" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>you can add <a class="reference external" href="https://jupyterbook.org/en/stable/content/metadata.html#jupyter-cell-tags%7D">tags</a> to cells, e.g., to make a slide a note, or to make a cell display in the margin.  Tags I am using so far are:</p>
 <ul>
@@ -918,9 +948,9 @@ A caption for figure
 </ul>
 </section>
 <section id="rise-presentations">
-<h3><span class="section-number">14.4.4. </span>RISE presentations.<a class="headerlink" href="#rise-presentations" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.4.4. </span>RISE presentations.<a class="headerlink" href="#rise-presentations" title="Permalink to this headline">#</a></h3>
 <section id="developing-one">
-<h4><span class="section-number">14.4.4.1. </span>Developing one<a class="headerlink" href="#developing-one" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">19.4.4.1. </span>Developing one<a class="headerlink" href="#developing-one" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>you can find an example with templates for slides in the “content/contributing” directory under L01-example notebook.</p></li>
 <li><p>you should create a symbolic link to the lecture note css file (content/css/ln.css) with the name of your slide (e.g., L01-example), and commit it to the repo</p></li>
@@ -928,7 +958,7 @@ A caption for figure
 </ul>
 </section>
 <section id="coverting-google-slide-presentation">
-<h4><span class="section-number">14.4.4.2. </span>Coverting google slide presentation<a class="headerlink" href="#coverting-google-slide-presentation" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">19.4.4.2. </span>Coverting google slide presentation<a class="headerlink" href="#coverting-google-slide-presentation" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>download google slidedeck as a powerpoint</p></li>
 <li><p>open powerpoint in keynote</p></li>
@@ -949,14 +979,14 @@ A caption for figure
 </ul>
 </section>
 <section id="running-one">
-<h4><span class="section-number">14.4.4.3. </span>Running one<a class="headerlink" href="#running-one" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">19.4.4.3. </span>Running one<a class="headerlink" href="#running-one" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>press lower case “t”, in screen show for speaker notes; my experience is that only works if you start the note before going to full screen on the slide</p></li>
 </ul>
 </section>
 </section>
 <section id="useful-tricks-and-stuff-we-should-try">
-<h3><span class="section-number">14.4.5. </span>Useful tricks and stuff we should try<a class="headerlink" href="#useful-tricks-and-stuff-we-should-try" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.4.5. </span>Useful tricks and stuff we should try<a class="headerlink" href="#useful-tricks-and-stuff-we-should-try" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>as add-on to google doc, can convert google doc to markdown using <a class="reference external" href="https://workspace.google.com/marketplace/app/docs_to_markdown/700168918607">docs to markdown</a></p></li>
 <li><p>worth downloading google slides and then converting to markdown to get a start on slides and figures we want to include</p></li>
@@ -964,7 +994,7 @@ A caption for figure
 </section>
 </section>
 <section id="references">
-<span id="cont-contr-ref"></span><h2><span class="section-number">14.5. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<span id="cont-contr-ref"></span><h2><span class="section-number">19.5. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <p>Stuff to steal from look at, pasting here</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/shellintro.html#standard-output-and-redirection">examples of proc file system</a></p></li>
@@ -1031,13 +1061,13 @@ $ file /usr/bin/date
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">13. </span>Other OS structures</p>
+            <p class="prev-next-title"><span class="section-number">18. </span>Other OS structures</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../misc/bib.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Bibliography</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>Bibliography</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
