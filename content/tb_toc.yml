@@ -25,6 +25,11 @@ parts:
   numbered: True
   chapters:
   - file: sync/sync
+  - file: sync/sharing
+  - file: sync/locking
+  - file: sync/deadlock
+  - file: sync/hardware_challenges
+  - file: sync/linux_locking
 - caption: 'Other Topics'
   numbered: True
   chapters:
