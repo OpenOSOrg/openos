@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="11. Synchronization Primitives" href="locking.html" />
@@ -505,7 +507,14 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="cooperating-processes">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> -i ../python/common.py
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="cooperating-processes">
 <span id="cont-sync-sharing"></span><h1><span class="section-number">10. </span>Cooperating Processes<a class="headerlink" href="#cooperating-processes" title="Permalink to this headline">#</a></h1>
 <p>The process abstraction is designed to give the illusion that a program executes on its own
 private, isolated (virtual) machine. The OS scheduling mechanism hides the fact that the
@@ -524,7 +533,55 @@ cooperate if they are completely isolated from each other?</p>
 <li><p>Logical concurrency - structure service with multiple processes, each handles a particular task, OS scheduler ensures all tasks make progress. e.g., bank server with input handling process, withdrawal handling process, deposit handling process.</p></li>
 <li><p>Parallel execution - use multiple physical compute cores to complete a task faster, e.g., sorting very large set of values, each process sorts a portion of the input, then merge the results together.</p></li>
 </ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">true_fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;No Selection&#39;</span><span class="p">:</span>
+        <span class="n">outstr</span> <span class="o">=</span> <span class="s2">&quot;No answer is selected.&quot;</span>
+    <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;True&#39;</span><span class="p">:</span>
+        <span class="n">outstr</span> <span class="o">=</span> <span class="s2">&quot;That&#39;s correct!&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">outstr</span> <span class="o">=</span> <span class="s2">&quot;Sorry, that is not the expected response.&quot;</span>
+    <span class="k">return</span> <span class="n">outstr</span>
+
+<span class="k">def</span> <span class="nf">false_fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;No Selection&#39;</span><span class="p">:</span>
+        <span class="n">outstr</span> <span class="o">=</span> <span class="s2">&quot;No answer is selected.&quot;</span>
+    <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;False&#39;</span><span class="p">:</span>
+        <span class="n">outstr</span> <span class="o">=</span> <span class="s2">&quot;That&#39;s correct!&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">outstr</span> <span class="o">=</span> <span class="s2">&quot;Sorry, that is not the expected response.&quot;</span>
+    <span class="k">return</span> <span class="n">outstr</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;No Selection&#39;</span><span class="p">,</span> <span class="s1">&#39;True&#39;</span><span class="p">,</span> <span class="s1">&#39;False&#39;</span><span class="p">],</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Your Answer&#39;</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="s1">&#39;No Selection&#39;</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Question</strong> The sky is blue.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">interact</span><span class="p">(</span><span class="n">true_fn</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">w</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "5322ace83d8f41cd991b37b31c8a5b28", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
 </section>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"29d7bf9831414b0bb586c736ea3d592c": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "392ae37532f346788f3b17a2e78e2e8a": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SelectModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SelectModel", "_options_labels": ["No Selection", "True", "False"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "SelectView", "description": "Your Answer", "description_tooltip": null, "disabled": false, "index": 0, "layout": "IPY_MODEL_29d7bf9831414b0bb586c736ea3d592c", "rows": 5, "style": "IPY_MODEL_ea18d59e836b40c29efa516da1adbea5"}}, "5322ace83d8f41cd991b37b31c8a5b28": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_392ae37532f346788f3b17a2e78e2e8a", "IPY_MODEL_f6a52007a68a40e1a08e6cf1da1cff8f"], "layout": "IPY_MODEL_9111c77e3dcf42158912c9cd08e9cd4c"}}, "82355fd05a40425a9dc5ae75734c4f9e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9111c77e3dcf42158912c9cd08e9cd4c": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ea18d59e836b40c29efa516da1adbea5": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "f6a52007a68a40e1a08e6cf1da1cff8f": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_82355fd05a40425a9dc5ae75734c4f9e", "msg_id": "", "outputs": [{"data": {"text/plain": "'No answer is selected.'"}, "metadata": {}, "output_type": "display_data"}]}}}, "version_major": 2, "version_minor": 0}
+</script>
+
 
     <script type="text/x-thebe-config">
     {

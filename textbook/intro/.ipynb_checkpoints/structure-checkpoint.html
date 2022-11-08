@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>11. Synchronization Primitives &#8212; Introduction to Operating Systems</title>
+    <title>3. OS structure &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -51,12 +51,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="12. Deadlocks" href="deadlock.html" />
-    <link rel="prev" title="10. Cooperating Processes" href="sharing.html" />
+    <link rel="next" title="4. Operating System Services" href="services.html" />
+    <link rel="prev" title="2. Purpose of operating systems" href="purpose.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,7 +109,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../intro/pref.html">
+                <a class="reference internal" href="pref.html">
                     Preface
                 </a>
             </li>
@@ -121,29 +119,29 @@ const thebe_selector_output = ".output, .cell_output"
   Getting started
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../intro/intro.html">
+  <a class="reference internal" href="intro.html">
    1. Introduction to getting started
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../intro/purpose.html">
+  <a class="reference internal" href="purpose.html">
    2. Purpose of operating systems
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro/structure.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    3. OS structure
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../intro/services.html">
+  <a class="reference internal" href="services.html">
    4. Operating System Services
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../intro/tools.html">
+  <a class="reference internal" href="tools.html">
    5. Tools
   </a>
  </li>
@@ -189,35 +187,10 @@ const thebe_selector_output = ".output, .cell_output"
   Concurrency
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="sync.html">
+  <a class="reference internal" href="../sync/sync.html">
    9. Intro Concurrency Synchronization and Deadlock
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="sharing.html">
-   10. Cooperating Processes
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   11. Synchronization Primitives
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="deadlock.html">
-   12. Deadlocks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="hardware_challenges.html">
-   13. Challenges of Modern Hardware
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="linux_locking.html">
-   14. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -229,22 +202,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   15. Overview of other topics
+   10. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   16. Security
+   11. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   17. Virtualization and Cloud computing
+   12. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../intro/other.html">
-   18. Other OS structures
+  <a class="reference internal" href="other.html">
+   13. Other OS structures
   </a>
  </li>
 </ul>
@@ -256,12 +229,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   19. Contributing
+   14. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   20. Bibliography
+   15. Bibliography
   </a>
  </li>
 </ul>
@@ -323,25 +296,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/sync/locking.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/sync/locking.ipynb&branch=main"
+        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/intro/structure.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -401,7 +356,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fsync/locking.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fintro/structure.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -418,7 +373,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/edit/main/content/sync/locking.ipynb"
+        <a href="https://github.com/okrieg/openos/edit/main/content/intro/structure.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -446,7 +401,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/sync/locking.ipynb"
+        <a href="../_sources/intro/structure.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -483,23 +438,84 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monolithic-os-structure">
+   3.1. Monolithic OS structure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unix-and-linux">
+   3.2. Unix and Linux
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#everything-is-a-file">
+     3.2.1. Everything is a file
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Synchronization Primitives</h1>
+                <h1>OS structure</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monolithic-os-structure">
+   3.1. Monolithic OS structure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unix-and-linux">
+   3.2. Unix and Linux
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#everything-is-a-file">
+     3.2.1. Everything is a file
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -507,26 +523,45 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="synchronization-primitives">
-<span id="cont-sync-locking"></span><h1><span class="section-number">11. </span>Synchronization Primitives<a class="headerlink" href="#synchronization-primitives" title="Permalink to this headline">#</a></h1>
-<p>Introduce various solutions to the critical section problem here.</p>
-<ol class="simple">
-<li><p>Locks (Mutex)</p>
-<ol class="simple">
-<li><p>Software solutions (Dekker, Peterson)</p></li>
-<li><p>Spinlocks + hardware atomic instructions (TAS, CAS, LL/SC)</p></li>
-<li><p>Sleep locks</p></li>
-</ol>
-</li>
-<li><p>Semaphores</p></li>
-<li><p>Monitors</p></li>
-</ol>
-<p>Classic synchronization problems solved in various ways.</p>
-<ol class="simple">
-<li><p>Bank account withdraw / deposit</p></li>
-<li><p>Bounded buffer problem (producer / consumer)</p></li>
-<li><p>Readers / Writers</p></li>
-</ol>
+  <section class="tex2jax_ignore mathjax_ignore" id="os-structure">
+<span id="cont-gs-structure"></span><h1><span class="section-number">3. </span>OS structure<a class="headerlink" href="#os-structure" title="Permalink to this headline">#</a></h1>
+<section id="monolithic-os-structure">
+<h2><span class="section-number">3.1. </span>Monolithic OS structure<a class="headerlink" href="#monolithic-os-structure" title="Permalink to this headline">#</a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  - system calls 
+  - interrupts
+  - forward reference to other OS structures
+</pre></div>
+</div>
+<p>As shown in figure <a class="reference internal" href="#struc-fig"><span class="std std-ref">Tradition operating systems monolithic, at the bottom, the kernel is trusted code…</span></a>, most operating systems today have …</p>
+<figure class="align-default" id="struc-fig">
+<a class="reference internal image-reference" href="../_images/osstructure-1.dio.png"><img alt="../_images/osstructure-1.dio.png" src="../_images/osstructure-1.dio.png" style="height: 150px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Tradition operating systems monolithic, at the bottom, the kernel is trusted code…</span><a class="headerlink" href="#struc-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="unix-and-linux">
+<h2><span class="section-number">3.2. </span>Unix and Linux<a class="headerlink" href="#unix-and-linux" title="Permalink to this headline">#</a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   - general principles of Unix and why we are using: Refer and steal some content from [here](https://jappavoo.github.io/UndertheCovers/textbook/unix/intro.html#operating-systems-and-unix)
+   - everything is a file
+   - discuss processes, libraries, dynamically loaded modules
+   - importance open source 
+</pre></div>
+</div>
+<section id="everything-is-a-file">
+<h3><span class="section-number">3.2.1. </span>Everything is a file<a class="headerlink" href="#everything-is-a-file" title="Permalink to this headline">#</a></h3>
+<p>use some of these</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ls -l /proc/$$/fd/{0..2}
+lrwx------. 1 jovyan root 64 Aug  7 02:10 /proc/6121/fd/0 -&gt; /dev/pts/2
+lrwx------. 1 jovyan root 64 Aug  7 02:10 /proc/6121/fd/1 -&gt; /dev/pts/2
+lrwx------. 1 jovyan root 64 Aug  7 02:10 /proc/6121/fd/2 -&gt; /dev/pts/2
+
+file /dev/pts/2
+/dev/pts/2: character special (136/2)
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -542,7 +577,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./sync"
+            path: "./intro"
         },
         predefinedOutput: true
     }
@@ -556,17 +591,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="sharing.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="purpose.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">10. </span>Cooperating Processes</p>
+            <p class="prev-next-title"><span class="section-number">2. </span>Purpose of operating systems</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="deadlock.html" title="next page">
+    <a class='right-next' id="next-link" href="services.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">12. </span>Deadlocks</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Operating System Services</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

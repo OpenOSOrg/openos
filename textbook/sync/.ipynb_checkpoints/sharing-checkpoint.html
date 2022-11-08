@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>11. Synchronization Primitives &#8212; Introduction to Operating Systems</title>
+    <title>10. Cooperating Processes &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -51,12 +51,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="12. Deadlocks" href="deadlock.html" />
-    <link rel="prev" title="10. Cooperating Processes" href="sharing.html" />
+    <link rel="next" title="11. Synchronization Primitives" href="locking.html" />
+    <link rel="prev" title="9. Intro Concurrency Synchronization and Deadlock" href="sync.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -195,13 +193,13 @@ const thebe_selector_output = ".output, .cell_output"
    9. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="sharing.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    10. Cooperating Processes
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="locking.html">
    11. Synchronization Primitives
   </a>
  </li>
@@ -323,25 +321,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/sync/locking.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/sync/locking.ipynb&branch=main"
+        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/sync/sharing.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -401,7 +381,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fsync/locking.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fsync/sharing.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -418,7 +398,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/edit/main/content/sync/locking.ipynb"
+        <a href="https://github.com/okrieg/openos/edit/main/content/sync/sharing.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -446,7 +426,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/sync/locking.ipynb"
+        <a href="../_sources/sync/sharing.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -495,7 +475,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Synchronization Primitives</h1>
+                <h1>Cooperating Processes</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -507,26 +487,28 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="synchronization-primitives">
-<span id="cont-sync-locking"></span><h1><span class="section-number">11. </span>Synchronization Primitives<a class="headerlink" href="#synchronization-primitives" title="Permalink to this headline">#</a></h1>
-<p>Introduce various solutions to the critical section problem here.</p>
-<ol class="simple">
-<li><p>Locks (Mutex)</p>
-<ol class="simple">
-<li><p>Software solutions (Dekker, Peterson)</p></li>
-<li><p>Spinlocks + hardware atomic instructions (TAS, CAS, LL/SC)</p></li>
-<li><p>Sleep locks</p></li>
-</ol>
-</li>
-<li><p>Semaphores</p></li>
-<li><p>Monitors</p></li>
-</ol>
-<p>Classic synchronization problems solved in various ways.</p>
-<ol class="simple">
-<li><p>Bank account withdraw / deposit</p></li>
-<li><p>Bounded buffer problem (producer / consumer)</p></li>
-<li><p>Readers / Writers</p></li>
-</ol>
+  <section class="tex2jax_ignore mathjax_ignore" id="cooperating-processes">
+<span id="cont-sync-sharing"></span><h1><span class="section-number">10. </span>Cooperating Processes<a class="headerlink" href="#cooperating-processes" title="Permalink to this headline">#</a></h1>
+<p>The process abstraction is designed to give the illusion that a program executes on its own
+private, isolated (virtual) machine. The OS scheduling mechanism hides the fact that the
+physical CPU is, in fact, shared by multiple processes. From the perspective of any given
+process, it appears as though its instructions execute one after the other, in the order
+that they appear in the program, on a dedicated CPU, without interruption or interference
+by the execution of other processes. The process also has sole access to a virtual address
+space, where it can store and operate on its data – there is no concern about access to
+the process’s memory from other processes, or that the process may inadvertently access
+memory that does not belong to it.</p>
+<p>But what if multiple processes need to work together to solve a problem? How can they
+cooperate if they are completely isolated from each other?</p>
+<p>Why use multiple processes to solve a problem?
+1. Unix command pipelines - each program is designed to do one thing well, output
+from one becomes the input to the next.
+1. Logical concurrency - structure service with multiple processes, each handles a
+particular task, OS scheduler ensures all tasks make progress. e.g., bank server with
+input handling process, withdrawal handling process, deposit handling process.
+1. Parallel execution - use multiple physical compute cores to complete a task faster,
+e.g., sorting very large set of values, each process sorts a portion of the input,
+then merge the results together.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -556,17 +538,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="sharing.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="sync.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">10. </span>Cooperating Processes</p>
+            <p class="prev-next-title"><span class="section-number">9. </span>Intro Concurrency Synchronization and Deadlock</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="deadlock.html" title="next page">
+    <a class='right-next' id="next-link" href="locking.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">12. </span>Deadlocks</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Synchronization Primitives</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
