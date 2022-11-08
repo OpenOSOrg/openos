@@ -15,11 +15,6 @@ only_build_toc_files        : true
 bibtex_bibfiles:
   - references.bib
 
-# url should be the published url for the book
-repository:
-  url: https://github.com/okrieg/openos
-  path_to_book: content
-  branch: main
 
 html:
   use_repository_button: true
@@ -30,15 +25,24 @@ html:
 #    utterances:
 #      repo: "okrieg/openos"
       
+#######################################################################################
+# Launch button settings
 launch_buttons:
   # open textbook pages in lab to provide desktop env
-  notebook_interface: "jupyterlab"
-  binderhub_url: "" # trying to remove binder
+  binderhub_url             : https://mybinder.org  # The URL of the BinderHub (e.g., https://mybinder.org)
+  notebook_interface        : jupyterlab  # The interface interactive links will activate ["classic", "jupyterlab"]
+  # binderhub_url: "" # trying to remove binder
   # launch on the public RedHat Operate First Service
   jupyterhub_url: "https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud"
   # launch on the private BU service -- use this for BU courses -- students must be authorized  
   # jupyterhub_url: "https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com"
-  
+
+repository:
+  url                       : https://github.com/okrieg/openos  # The URL to your book's repository
+  path_to_book              : "content"  # A path to your book's folder, relative to the repository root.
+  branch                    : "main"  # Which branch of the repository should be used when creating links
+###############################
+
 parse:
   # see https://jupyterbook.org/customize/config.html
   # don't forget to list any other extensions you want enabled,
