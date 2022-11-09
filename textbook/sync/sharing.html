@@ -505,13 +505,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jupyterquiz</span> <span class="kn">import</span> <span class="n">display_quiz</span>
-<span class="o">%</span><span class="k">run</span> -i ../python/common.py
-</pre></div>
-</div>
-</div>
+  <div class="cell tag_remove-input docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="cooperating-processes">
 <span id="cont-sync-sharing"></span><h1><span class="section-number">10. </span>Cooperating Processes<a class="headerlink" href="#cooperating-processes" title="Permalink to this headline">#</a></h1>
@@ -532,14 +526,9 @@ cooperate if they are completely isolated from each other?</p>
 <li><p>Logical concurrency - structure service with multiple processes, each handles a particular task, OS scheduler ensures all tasks make progress. e.g., bank server with input handling process, withdrawal handling process, deposit handling process.</p></li>
 <li><p>Parallel execution - use multiple physical compute cores to complete a task faster, e.g., sorting very large set of values, each process sorts a portion of the input, then merge the results together.</p></li>
 </ol>
-<div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_quiz</span><span class="p">(</span><span class="s2">&quot;../questions/sync.json&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="iQFHsWMoUPKa" data-shufflequestions="False"
+<div class="output text_html"><div id="ljyBIUKmrxIb" data-shufflequestions="False"
                data-shuffleanswers="True"
                data-preserveresponses="false"
                data-numquestions="1000000"> <style>:root {
@@ -701,7 +690,7 @@ cooperate if they are completely isolated from each other?</p>
     100% {
         background-color: var(--correct-green);
     }
-}</style></div><script type="application/javascript">var questionsiQFHsWMoUPKa=[
+}</style></div><script type="application/javascript">var questionsljyBIUKmrxIb=[
     {
         "question": "Processes may need to communicate with other processes to: (select all that apply)",
         "type": "many_choice",
@@ -1479,7 +1468,7 @@ if (typeof version == 'undefined') {
 }
 
         {
-        show_questions(questionsiQFHsWMoUPKa,  iQFHsWMoUPKa);
+        show_questions(questionsljyBIUKmrxIb,  ljyBIUKmrxIb);
         }
         </script></div>
 </div>
