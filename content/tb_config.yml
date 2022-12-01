@@ -30,12 +30,15 @@ html:
 launch_buttons:
   # open textbook pages in lab to provide desktop env
   binderhub_url             : https://mybinder.org  # The URL of the BinderHub (e.g., https://mybinder.org)
+# results in following url: https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/contributing/Contributing.ipynb  
   notebook_interface        : jupyterlab  # The interface interactive links will activate ["classic", "jupyterlab"]
   # binderhub_url: "" # trying to remove binder
   # launch on the public RedHat Operate First Service
-  jupyterhub_url: "https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud"
+  # jupyterhub_url: "https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud"
+# results in following URL: https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/contributing/Contributing.ipynb&branch=main
   # launch on the private BU service -- use this for BU courses -- students must be authorized  
-  # jupyterhub_url: "https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com"
+  jupyterhub_url: "https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com"
+# results in the following URK: https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/intro/pref.ipynb&branch=main
 
 repository:
   url                       : https://github.com/okrieg/openos  # The URL to your book's repository
