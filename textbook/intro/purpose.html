@@ -521,13 +521,13 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#share-hardware">
-     2.2.2. Share Hardware
+    <a class="reference internal nav-link" href="#enabling-diverse-hardware">
+     2.2.2. Enabling diverse hardware
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#enabling-diverse-hardware">
-     2.2.3. Enabling diverse hardware
+    <a class="reference internal nav-link" href="#sharing-the-hardware">
+     2.2.3. Sharing the hardware
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -536,30 +536,30 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#protecting-external-attacks">
-     2.2.5. Protecting external attacks
+    <a class="reference internal nav-link" href="#protecting-from-external-attacks">
+     2.2.5. Protecting from external attacks
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mutliplexing-hardware">
-     2.2.6. Mutliplexing Hardware
+    <a class="reference internal nav-link" href="#management">
+     2.2.6. Management
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     2.2.7. Mutliplexing Hardware
+    <a class="reference internal nav-link" href="#supporting-devices">
+     2.2.7. Supporting devices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#putting-it-together">
+     2.2.8. Putting it together
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#abstracting-the-hw-providing-interfaces-that-applications-can-use">
-   2.3. abstracting the HW - providing interfaces that applications can use
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#why-do-we-care">
-   2.4. Why do we care
+   2.3. Why do we care
   </a>
  </li>
 </ul>
@@ -597,13 +597,13 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#share-hardware">
-     2.2.2. Share Hardware
+    <a class="reference internal nav-link" href="#enabling-diverse-hardware">
+     2.2.2. Enabling diverse hardware
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#enabling-diverse-hardware">
-     2.2.3. Enabling diverse hardware
+    <a class="reference internal nav-link" href="#sharing-the-hardware">
+     2.2.3. Sharing the hardware
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -612,30 +612,30 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#protecting-external-attacks">
-     2.2.5. Protecting external attacks
+    <a class="reference internal nav-link" href="#protecting-from-external-attacks">
+     2.2.5. Protecting from external attacks
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mutliplexing-hardware">
-     2.2.6. Mutliplexing Hardware
+    <a class="reference internal nav-link" href="#management">
+     2.2.6. Management
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     2.2.7. Mutliplexing Hardware
+    <a class="reference internal nav-link" href="#supporting-devices">
+     2.2.7. Supporting devices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#putting-it-together">
+     2.2.8. Putting it together
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#abstracting-the-hw-providing-interfaces-that-applications-can-use">
-   2.3. abstracting the HW - providing interfaces that applications can use
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#why-do-we-care">
-   2.4. Why do we care
+   2.3. Why do we care
   </a>
  </li>
 </ul>
@@ -702,10 +702,6 @@ title="Print to PDF"
 <li><p>File system: An abstraction of storage providing structure for organizing non-volatile data, for example, a hierarchical directory structure containing files.</p></li>
 <li><p>Virtual memory: An abstraction of the memory that a process can access.</p></li>
 </ul>
-<div class="admonition-process-versus-program admonition">
-<p class="admonition-title">Process versus Program</p>
-<p>It is important to understand the difference between programs and processes.  When a user want to run an application, or <strong>program</strong>, the operating system creates a new process and loads the program instructions from storage into memory for the process executes.  There can be multiple processes executing the same program that running at the same time.  For example, while I am writing this book, when I type “ps -e” to tell me all the processes currently running, (see margin) I find that I have multiple “bash” shells running at the same time, a large number of “python” programs, and of course the “ps” program itself. We will talk more later about what the other parts of this command means.</p>
-</div>
 <div class="cell tag_hide-input tag_margin docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bash</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;ps -e&quot;</span><span class="p">)</span>
@@ -714,101 +710,101 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "79aa2102d9184d26800b548abdf23315", "version_major": 2, "version_minor": 0}
+{"model_id": "51cd9ea64145460e943d1f261284fe47", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
-<figure class="align-right" id="multipleapps-fig">
-<a class="reference internal image-reference" href="../_images/purpose-OS-source-04.drawio.png"><img alt="../_images/purpose-OS-source-04.drawio.png" src="../_images/purpose-OS-source-04.drawio.png" style="width: 3in;" /></a>
+<div class="admonition-process-versus-program admonition">
+<p class="admonition-title">Process versus Program</p>
+<p>It is important to understand the difference between programs and processes.  When a user want to run an application, or <strong>program</strong>, the operating system creates a new process and loads the program instructions from storage into memory for the process executes.  There can be multiple processes executing the same program that running at the same time.  For example, while I am writing this book, when I type “ps -e” to tell me all the processes currently running, (see margin) I find that I have multiple “bash” shells running at the same time, a large number of “python” programs, and of course the “ps” program itself. We will talk more later about what the other parts of this command means.</p>
+</div>
+<figure class="align-right" id="hw-fig">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-06.drawio.png"><img alt="../_images/purpose-OS-source-06.drawio.png" src="../_images/purpose-OS-source-06.drawio.png" style="width: 2in;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Supporting many applications</span><a class="headerlink" href="#multipleapps-fig" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Different kinds of computers</span><a class="headerlink" href="#hw-fig" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-</section>
-<section id="share-hardware">
-<span id="cont-gs-purpose-platform-multi"></span><h3><span class="section-number">2.2.2. </span>Share Hardware<a class="headerlink" href="#share-hardware" title="Permalink to this headline">#</a></h3>
-<p>Modern operating systems enable many (thousands) of applications to run at the same time (<a class="reference internal" href="#multipleapps-fig"><span class="std std-numref">Fig. 2.4</span></a>).  The operating system needs to ensure that applications can’t break each other.   For example, the operating system tries to ensure that a broken or malicious application (really process running the application program) can’t modify the memory of keep other processes from using their fair share of resources.  This is especially the case because different applications may have very different requirements for example, your editor needs to be responsive to you typing characters, while if you compile a program, the compiler tries to use as much processing and disk as possible.  The operating system should ensure that the compiler doesn’t destroy the interactivity of your editor.</p>
 </section>
 <section id="enabling-diverse-hardware">
-<span id="cont-gs-purpose-platform-hwdiv"></span><h3><span class="section-number">2.2.3. </span>Enabling diverse hardware<a class="headerlink" href="#enabling-diverse-hardware" title="Permalink to this headline">#</a></h3>
-<p>Operating systems often run on diverse hardware, with computers that range from embedded ARM processors on your watch, to massive High Performance Computing systems (<a class="reference internal" href="#hw-fig"><span class="std std-numref">Fig. 2.5</span></a>).</p>
-<figure class="margin align-default" id="hw-fig">
-<a class="reference internal image-reference" href="../_images/purpose-OS-source-06.drawio.png"><img alt="../_images/purpose-OS-source-06.drawio.png" src="../_images/purpose-OS-source-06.drawio.png" style="width: 50%;" /></a>
+<span id="cont-gs-purpose-platform-hwdiv"></span><h3><span class="section-number">2.2.2. </span>Enabling diverse hardware<a class="headerlink" href="#enabling-diverse-hardware" title="Permalink to this headline">#</a></h3>
+<p>Operating systems must support diverse hardware, with computers that range from embedded ARM processors on your watch, to massive High Performance Computing systems (<a class="reference internal" href="#hw-fig"><span class="std std-numref">Fig. 2.4</span></a>).  The reason it possible to introduce new hardware is that the operating system enables the same virtual abstractions described above across these different systems.  That enables, for example, Netflix runs to on my mac, ipad, and tesla.  The operating system provides a common set of abstractions so that application programmers don’t have to re-written everything when moving from one system to another.  Similarly, the reason it is possible to introduce new processors (e.g., ARM, Intel, Power), and new computers (e.g., servers, laptops, cell phones) is that operating systems hides most of the underlying differences from the application developer.</p>
+<p>While the OS enables applications to be easily ported from one hardware platform to another, the OS is also responsible for meeting the fundamental requirements of the systems it supports.  Today, the same fundamental Linux OS runs on Cell phones, massive High Performance Computing systems, and drones delivering amazon packages.  In a cell phone, the OS needs to ensure that everything works in a tiny amount of memory, with limited energy use while HPC systems today can have 4TBytes of memory that needs to be efficiently managed.  In a drone, one probably wants to make sure that a non-critical program can’t impact the hard real time programs controlling the propellers.</p>
+</section>
+<section id="sharing-the-hardware">
+<span id="cont-gs-purpose-platform-multi"></span><h3><span class="section-number">2.2.3. </span>Sharing the hardware<a class="headerlink" href="#sharing-the-hardware" title="Permalink to this headline">#</a></h3>
+<figure class="align-right" id="multipleapps-fig">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-04.drawio.png"><img alt="../_images/purpose-OS-source-04.drawio.png" src="../_images/purpose-OS-source-04.drawio.png" style="width: 4in;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Different kinds of computers</span><a class="headerlink" href="#hw-fig" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Concurrent processes/applications.</span><a class="headerlink" href="#multipleapps-fig" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The thing that makes it possible to introduce new hardware is that the operating system enables a common set of abstractions across these different systems.  That is the reason why, for example, Netflix runs on my mac, ipad, and tesla.  The operating system provides a common set of abstractions so that application programmers don’t have to re-write everything when moving from one system to another.  The reason it is possible to introduce new processors (e.g., ARM, Intel, Power), and new computers (e.g., servers, laptops, cell phones) is that operating systems hide most of the complexity from the application developer.</p>
+<p>Modern operating systems enable many (thousands) of processes running different programs/applications to run at the same time (<a class="reference internal" href="#multipleapps-fig"><span class="std std-numref">Fig. 2.5</span></a>).  The operating system needs to ensure that processes can’t break each other.   For example, the operating system must guarantee that a bug in an application,  or even an application written by a malicious programmer, can’t modify the memory or keep other processes from using their fair share of the different resources of the computer.  This is especially challenging because different applications may have very different requirements.  Your editor needs to be responsive to you typing characters, while, if you compile a program, the compiler tries to use as much processing and disk as possible.  The operating system should ensure that requirements of the different applications are met; e.g., the compiler doesn’t destroy the interactivity of your editor.</p>
+<figure class="align-right" id="sec-fig">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-05.drawio.png"><img alt="../_images/purpose-OS-source-05.drawio.png" src="../_images/purpose-OS-source-05.drawio.png" style="width: 4in;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">Multiple users</span><a class="headerlink" href="#sec-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="supporting-many-users">
 <span id="cont-gs-purpose-platform-security"></span><h3><span class="section-number">2.2.4. </span>Supporting many users<a class="headerlink" href="#supporting-many-users" title="Permalink to this headline">#</a></h3>
-<figure class="margin align-default" id="sec-fig">
-<a class="reference internal image-reference" href="../_images/purpose-OS-source-05.drawio.png"><img alt="../_images/purpose-OS-source-05.drawio.png" src="../_images/purpose-OS-source-05.drawio.png" style="width: 100%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">From different users</span><a class="headerlink" href="#sec-fig" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="protecting-external-attacks">
-<span id="cont-gs-purpose-platform-sec-outside"></span><h3><span class="section-number">2.2.5. </span>Protecting external attacks<a class="headerlink" href="#protecting-external-attacks" title="Permalink to this headline">#</a></h3>
-<figure class="margin align-default" id="secoutside-fig">
-<a class="reference internal image-reference" href="../_images/purpose-OS-source-07.drawio.png"><img alt="../_images/purpose-OS-source-07.drawio.png" src="../_images/purpose-OS-source-07.drawio.png" style="width: 100%;" /></a>
+<p>Normally, operating systems are designed to support different users running processes at the same time.  The OS must make sure that one user can’t run processes that read or even change the files of another user.  Moreover, the OS may need to make sure that each user gets their fair share of the computer; for example, ensuring that a student can’t launch 1000 processes after they are done an assignment to keep her classmates from successfully submitting theirs.</p>
+<p>This protection is part of the security policies and mechanisms of the operating system.  Attacks can violate the confidentiality (one can see another user’s information) integrity (one can change state), or availability (one can deny the ability to run).  While we have put enormous work into designing secure systems, the complexity of modern systems give operating system researchers strong job security.</p>
+<figure class="align-right" id="secoutside-fig">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-07.drawio.png"><img alt="../_images/purpose-OS-source-07.drawio.png" src="../_images/purpose-OS-source-07.drawio.png" style="width: 4in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 2.7 </span><span class="caption-text">Protecting users from outside world.</span><a class="headerlink" href="#secoutside-fig" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
-<section id="mutliplexing-hardware">
-<span id="id1"></span><h3><span class="section-number">2.2.6. </span>Mutliplexing Hardware<a class="headerlink" href="#mutliplexing-hardware" title="Permalink to this headline">#</a></h3>
-<figure class="margin align-default" id="id2">
-<a class="reference internal image-reference" href="../_images/purpose-OS-source-08.drawio.png"><img alt="../_images/purpose-OS-source-08.drawio.png" src="../_images/purpose-OS-source-08.drawio.png" style="width: 100%;" /></a>
+<section id="protecting-from-external-attacks">
+<span id="cont-gs-purpose-platform-sec-outside"></span><h3><span class="section-number">2.2.5. </span>Protecting from external attacks<a class="headerlink" href="#protecting-from-external-attacks" title="Permalink to this headline">#</a></h3>
+<p>The best way to keep users from attacking each other is to make sure that they can’t run on the same computer.  In fact, in the good old days, we used to make sure that computers where disconnected from each other, and, for example, professors had their accounts on computers that students had no access to.  However, we do all our work today connected to the network, and we log into our machines remotely.  In fact, right now I am typing this sentence on a laptop that is connected to a network; every key stroke I type is being sent over a network to a cloud service running containers reserved by me on a computer in a datacenter 100 miles away from my laptop.  The Operating system implements firewalls and security policies that make sure that only I can change this book.  Having said that, there are always bugs, and the OS is responsible for logging all the information needed so that we can later on figure out who hacked the system, and what changes they made.</p>
+<figure class="align-right" id="mgment-fig">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-08.drawio.png"><img alt="../_images/purpose-OS-source-08.drawio.png" src="../_images/purpose-OS-source-08.drawio.png" style="width: 4in;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.8 </span><span class="caption-text">Protecting users from outside world.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<figure class="margin align-default" id="id3">
-<a class="reference internal image-reference" href="../_images/purpose-OS-source-12.drawio.png"><img alt="../_images/purpose-OS-source-12.drawio.png" src="../_images/purpose-OS-source-12.drawio.png" style="width: 100%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 2.9 </span><span class="caption-text">Supporting devices</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.8 </span><span class="caption-text">Enabling management.</span><a class="headerlink" href="#mgment-fig" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
-<section id="id4">
-<span id="id5"></span><h3><span class="section-number">2.2.7. </span>Mutliplexing Hardware<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
-<p>Talk about how support many kinds of hardware, PPC, intel, different disks, different storage… application doesn’t need to change.</p>
+<section id="management">
+<span id="cont-gs-purpose-platform-mgmt"></span><h3><span class="section-number">2.2.6. </span>Management<a class="headerlink" href="#management" title="Permalink to this headline">#</a></h3>
+<p>There is a huge diversity of systems, from person computers, to embedded devices, to cloud data centers, and HPC environments.  If a human being was responsible for manually configuring, upgrading, patching these systems (which used to be the case), we wouldn’t have enough people in the world.</p>
+<p>The tools and capabilities provided in the OS give he mechanism for administrators to automate these activities at massive scale.</p>
 <ul class="simple">
-<li></li>
-<li><p>mutiplexing hardware - sharing</p>
-<ul>
-<li><p>allow many applications to share resources</p></li>
-<li><p>supporting requires, e.g., real time…</p></li>
-</ul>
-</li>
-<li><p>security:</p>
-<ul>
-<li><p>protect users from each other</p></li>
-<li><p>protect against attacks</p></li>
-</ul>
-</li>
-<li><p>enable control/configuration</p>
-<ul>
 <li><p>tuning</p></li>
 <li><p>customization</p></li>
 <li><p>specialization</p></li>
 </ul>
-</li>
-<li><p>enable devices - not common abstracion</p></li>
-<li><p>summarize tasks of the operating system</p></li>
-</ul>
+<figure class="align-right" id="devs-fig">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-12.drawio.png"><img alt="../_images/purpose-OS-source-12.drawio.png" src="../_images/purpose-OS-source-12.drawio.png" style="width: 4in;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.9 </span><span class="caption-text">Supporting devices</span><a class="headerlink" href="#devs-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
+<section id="supporting-devices">
+<span id="id1"></span><h3><span class="section-number">2.2.7. </span>Supporting devices<a class="headerlink" href="#supporting-devices" title="Permalink to this headline">#</a></h3>
+<p>Last, but certainly not least, the OS not only manages directly the hardware of a computer, but also a massive number of peripheral devices, from disks, monitors, keyboards, network connections to cameras.   Often, when you come up with some new device, you have to figure out some way to plumb it through the operating system so that applications will be able to take advantage of it.  As we will discuss, the *<strong>device drivers</strong> are the vast majority of software in today’s operating system.</p>
 </section>
-<section id="abstracting-the-hw-providing-interfaces-that-applications-can-use">
-<span id="cont-gs-purpose-care"></span><h2><span class="section-number">2.3. </span>abstracting the HW - providing interfaces that applications can use<a class="headerlink" href="#abstracting-the-hw-providing-interfaces-that-applications-can-use" title="Permalink to this headline">#</a></h2>
+<section id="putting-it-together">
+<span id="id2"></span><h3><span class="section-number">2.2.8. </span>Putting it together<a class="headerlink" href="#putting-it-together" title="Permalink to this headline">#</a></h3>
+<p>So, to summarize, the operating system is responsible for:</p>
 <ul class="simple">
-<li><p>support many different types of computers</p></li>
+<li><p>Creating the fundamental abstractions</p></li>
+<li><p>Managing and multiplexing the hardware</p></li>
+<li><p>Enabling:</p>
+<ul>
+<li><p>Applicatoins to be run on a wide set of computers</p></li>
+<li><p>using a wide range of devices</p></li>
+<li><p>across a wide range of use cases from phones to the cloud</p></li>
 </ul>
+</li>
+<li><p>all while enforcing security.</p></li>
+</ul>
+</section>
 </section>
 <section id="why-do-we-care">
-<h2><span class="section-number">2.4. </span>Why do we care<a class="headerlink" href="#why-do-we-care" title="Permalink to this headline">#</a></h2>
+<span id="cont-gs-purpose-care"></span><h2><span class="section-number">2.3. </span>Why do we care<a class="headerlink" href="#why-do-we-care" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>core platform everything else relies on, toughest code to write</p></li>
 <li><p>means that everything relies on it</p></li>
@@ -819,7 +815,7 @@ title="Print to PDF"
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"79aa2102d9184d26800b548abdf23315": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_e91d1e833d784f7e87a581967149068b", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ps -e\r\n    PID TTY          TIME CMD\r\n      1 ?        00:00:00 tini\r\n      7 ?        00:00:26 jupyterhub-sing\r\n     71 pts/1    00:00:00 bash\r\n    116 ?        00:00:00 ssh-agent\r\n   3612 ?        00:00:00 python\r\n   3650 ?        00:00:03 python\r\n   7834 pts/20   00:00:00 bash\r\n   7852 pts/1    00:00:00 make\r\n   7853 pts/1    00:00:00 make\r\n   7859 pts/1    00:00:01 jupyter-book\r\n   7864 ?        00:00:01 python\r\n   7887 pts/21   00:00:00 bash\r\n   7902 pts/21   00:00:00 ps\r\n$ "}]}}, "e91d1e833d784f7e87a581967149068b": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+{"state": {"51cd9ea64145460e943d1f261284fe47": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_f9fc7f6522d541fba1eded1bd28f6080", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ps -e\r\n    PID TTY          TIME CMD\r\n      1 ?        00:00:00 tini\r\n      7 ?        00:00:22 jupyterhub-sing\r\n     71 pts/1    00:00:00 bash\r\n    116 ?        00:00:00 ssh-agent\r\n   3612 ?        00:00:00 python\r\n   3650 ?        00:00:02 python\r\n   7383 pts/12   00:00:00 bash\r\n   7401 pts/1    00:00:00 make\r\n   7402 pts/1    00:00:00 make\r\n   7408 pts/1    00:00:01 jupyter-book\r\n   7413 ?        00:00:01 python\r\n   7436 pts/13   00:00:00 bash\r\n   7451 pts/13   00:00:00 ps\r\n$ "}]}}, "f9fc7f6522d541fba1eded1bd28f6080": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 
