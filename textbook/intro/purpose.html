@@ -51,10 +51,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. OS structure" href="structure.html" />
-    <link rel="prev" title="1. Introduction to getting started" href="intro.html" />
+    <link rel="prev" title="1. Introduction" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -122,7 +124,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   1. Introduction to getting started
+   1. Introduction
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -339,7 +341,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/intro/purpose.ipynb&branch=main"
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/intro/purpose.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -504,18 +506,60 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mapping-applications-to-hardware">
-   2.1. Mapping applications to hardware
+  <a class="reference internal nav-link" href="#a-simple-model-of-hardware">
+   2.1. A simple model of hardware
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-fundamental-platform">
    2.2. The fundamental platform
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#abstracting-hardware">
+     2.2.1. Abstracting Hardware
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#share-hardware">
+     2.2.2. Share Hardware
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#enabling-diverse-hardware">
+     2.2.3. Enabling diverse hardware
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#supporting-many-users">
+     2.2.4. Supporting many users
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#protecting-external-attacks">
+     2.2.5. Protecting external attacks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mutliplexing-hardware">
+     2.2.6. Mutliplexing Hardware
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     2.2.7. Mutliplexing Hardware
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#abstracting-the-hw-providing-interfaces-that-applications-can-use">
+   2.3. abstracting the HW - providing interfaces that applications can use
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#why-do-we-care">
-   2.3. Why do we care
+   2.4. Why do we care
   </a>
  </li>
 </ul>
@@ -538,18 +582,60 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mapping-applications-to-hardware">
-   2.1. Mapping applications to hardware
+  <a class="reference internal nav-link" href="#a-simple-model-of-hardware">
+   2.1. A simple model of hardware
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-fundamental-platform">
    2.2. The fundamental platform
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#abstracting-hardware">
+     2.2.1. Abstracting Hardware
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#share-hardware">
+     2.2.2. Share Hardware
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#enabling-diverse-hardware">
+     2.2.3. Enabling diverse hardware
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#supporting-many-users">
+     2.2.4. Supporting many users
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#protecting-external-attacks">
+     2.2.5. Protecting external attacks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mutliplexing-hardware">
+     2.2.6. Mutliplexing Hardware
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     2.2.7. Mutliplexing Hardware
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#abstracting-the-hw-providing-interfaces-that-applications-can-use">
+   2.3. abstracting the HW - providing interfaces that applications can use
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#why-do-we-care">
-   2.3. Why do we care
+   2.4. Why do we care
   </a>
  </li>
 </ul>
@@ -562,54 +648,167 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> -i ../python/common.py
-</pre></div>
-</div>
-</div>
-</div>
-<section class="tex2jax_ignore mathjax_ignore" id="purpose-of-operating-systems">
+  <section class="tex2jax_ignore mathjax_ignore" id="purpose-of-operating-systems">
 <span id="cont-gs-purpose"></span><h1><span class="section-number">2. </span>Purpose of operating systems<a class="headerlink" href="#purpose-of-operating-systems" title="Permalink to this headline">#</a></h1>
-<p>The purpose of an operating system is to provide everything needed to enable applications to run on computers.  We <a class="reference internal" href="#cont-gs-purpose-hw"><span class="std std-ref">first</span></a> present a simple model of hardware and why the OS is needed, then discuss how this has resulted in operating systems becoming the <a class="reference internal" href="#cont-gs-purpose-platform"><span class="std std-ref">fundamental platform</span></a> that all computing depends on, and finally discuss why, as operating system researchers and developers, feel like the <a class="reference internal" href="#cont-gs-purpose-care"><span class="std std-ref">fun has just started</span></a>. Our hope is that at the end of this chapter you will not only realize why it is so important for all computer scientists and engineers to have a fundamental understanding of operating systems, but to also to realize why so many people are excited to work on and contribute to operating systems.  Consider that today’s dominant operating systems are open source, and rely on 1000s of contributors from all over the world, many who volunteer their time.</p>
-<section id="mapping-applications-to-hardware">
-<span id="cont-gs-purpose-hw"></span><h2><span class="section-number">2.1. </span>Mapping applications to hardware<a class="headerlink" href="#mapping-applications-to-hardware" title="Permalink to this headline">#</a></h2>
-<p>A simple model of a computer is depicted in <a class="reference internal" href="#simplecomputer-fig"><span class="std std-numref">Fig. 2.1</span></a>. The smart part that executes instructions is called the Central Processing Unit (CPU) or processor.  The Memory, also referred to as Random Access Memory (RAM), holds the instructions and data that running applications require.  While there are many kinds of I/O devices, for now we only consider two, namely: 1) storage devices, and 2) communication devices.</p>
-<p>It is normally directly connected to the CPU</p>
-<figure class="align-right" id="simplecomputer-fig">
-<a class="reference internal image-reference" href="../_images/SLS_TheMachine.png"><img alt="../_images/SLS_TheMachine.png" src="../_images/SLS_TheMachine.png" style="width: 50%;" /></a>
+<p>The purpose of an operating system is to provide everything needed to enable applications to run on computers.  We <a class="reference internal" href="#cont-gs-purpose-hw"><span class="std std-ref">first</span></a> present a simple model of hardware and why the OS is needed, then discuss how this has resulted in operating systems becoming the <a class="reference internal" href="#cont-gs-purpose-platform"><span class="std std-ref">fundamental platform</span></a> that all computing depends on, and finally discuss why we, as operating system researchers and developers, feel like the <a class="reference internal" href="#cont-gs-purpose-care"><span class="std std-ref">fun has just started</span></a>. Our hope is that at the end of this chapter you will not only realize why it is so important for all computer scientists and engineers to have a fundamental understanding of operating systems, but to also to realize why so many people are excited to work on and contribute to operating systems.  Consider that today’s dominant operating systems are open source, and rely on 1000s of contributors from all over the world, many who volunteer their time.</p>
+<section id="a-simple-model-of-hardware">
+<span id="cont-gs-purpose-hw"></span><h2><span class="section-number">2.1. </span>A simple model of hardware<a class="headerlink" href="#a-simple-model-of-hardware" title="Permalink to this headline">#</a></h2>
+<p>The fundamental job of the operating system is to enable applications to run on a computer.  To understand why this is complicated, consider the very simple model of a computer depicted in <a class="reference internal" href="#simplecomputer-fig"><span class="std std-numref">Fig. 2.1</span></a>.  We briefly describe each of the key components of this computer, and what you need to know for now.</p>
+<figure class="align-default" id="simplecomputer-fig">
+<a class="reference internal image-reference" href="../_images/hardware.png"><img alt="../_images/hardware.png" src="../_images/hardware.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">A simple model of a computer</span><a class="headerlink" href="#simplecomputer-fig" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<figure class="align-left" id="mappingint-fig">
-<a class="reference internal image-reference" href="../_images/purpose-OS-source-01.drawio.png"><img alt="../_images/purpose-OS-source-01.drawio.png" src="../_images/purpose-OS-source-01.drawio.png" style="width: 20%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Mapping ugly interfaces of hardware to the needs of applications.</span><a class="headerlink" href="#mappingint-fig" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">A simple model of a computer.  The CPU is connected to high speed memory, and through a lower speed bus to a network controller and disk controller that are in turn connected to a network (ethernet in this case) and a disk.</span><a class="headerlink" href="#simplecomputer-fig" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>structure of simple computer <a class="reference internal" href="#simplecomputer-fig"><span class="std std-numref">Fig. 2.1</span></a>, <a class="reference internal" href="#mappingint-fig"><span class="std std-numref">Fig. 2.2</span></a> with processor, memory, storage and communication devices</p></li>
-<li><p>forward reference to concurrency</p></li>
-<li><p>discuss core abstractions of each and fundamental properties slow/fast</p></li>
+<li><p><strong>Central Processing Unit (CPU)</strong>:  The smart part that executes instructions is called the Central Processing Unit (CPU) or <strong>processor</strong>.  In our simple model, these instructions operate by modifying the contents of various processor registers, and loading new register contents from memory, and storing registers into memory.</p></li>
+<li><p><strong>Memory:</strong> Also referred to as <strong>Random Access Memory (RAM)</strong>, holds the instructions and data that running applications require.  It is physically connected to the CPU via direct wiring.  Random access here refers to the fact that the processor can directly load or store any memory location (addressed as an 8-bit byte) in the same amount of time.   Memory today is normally volatile, where the contents are lost when the computer is powered off.</p></li>
+<li><p><strong>I/O bus:</strong> If the computer wasn’t connected to anything, you couldn’t do much with it.  All computers have some form of Input/Output (or I/O) bus that connects them to different devices.  While there are many kinds of I/O devices, for now we will ignore everything but: 1) storage, and 2) networks.   The processor normally talks to an I/O device by, typically, loading and storing registers on a controller specific to the device, and that controller in turn communicates with the corresponding device(s) and transfers data between the device and memory.</p></li>
+<li><p><strong>Storage:</strong> Since the memory is typically volatile, computers have to have some form of storage that are non-volatile.  This may include hard drives, SSDs, optimical drives, usb sticks, etc.  Most storage devices are accessed at a block granularity (e.g., 512 or 4096 bytes), and where entire blocks are transferred between storage and memory. Most storage devices are not <strong>Random Access</strong>, for example, technologies like a hard disk drive require the disk head to physically move to the location on the disk before reading or writing the data.  When the processor wants to read or write a block of disk, it tells the storage controller the block of disk to transfer to or from memory, and the storage controller notifies the processor when the operation is complete.</p></li>
+<li><p><strong>Networking:</strong> To talk to the outside world computers are normally connected to some network, typically today ethernet, where information is transferred between memory and the network in some form of packet as shown in <a class="reference internal" href="#ethernet-packet"><span class="std std-numref">Fig. 2.2</span></a>.  When the processor wants to send a message over the network, it is prepared in memory, and then tells the network controller to send it.  When new packets arrive over the network, the controller copies them into memory, and then tells the processor (in some fashion) that a new packet is available to be processed.</p></li>
 </ul>
+<figure class="align-default" id="ethernet-packet">
+<a class="reference internal image-reference" href="../_images/ethernet-frame.png"><img alt="../_images/ethernet-frame.png" src="../_images/ethernet-frame.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">A ethernet packet is organized into a frame, that includes the address of the sender, the destination of the packet, the length, and the data or payload and a 32-bit hash (the CRC) of the rest of the contents that can be used to check of the packet has been corrupted in transit.</span><a class="headerlink" href="#ethernet-packet" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note this model is highly abstracted and very simple.  As we will learn later in the course:</p>
+<ul class="simple">
+<li><p>modern processors can execute hundreds of instructions in parallel, and modern computers can be composed of many processors,</p></li>
+<li><p>memory today is organized in Non-Uniform Memory Access (NUMA) where some memory is closer to some processors; so its not really random access</p></li>
+<li><p>memory is today very slow compared to the processor, and normally there are multiple layers of <strong>cache</strong> so that the CPU doesn’t have to wait for the slow memory every time it needs to fetch an instruction to execute.</p></li>
+<li><p>etc…</p></li>
+</ul>
+</div>
 </section>
 <section id="the-fundamental-platform">
 <span id="cont-gs-purpose-platform"></span><h2><span class="section-number">2.2. </span>The fundamental platform<a class="headerlink" href="#the-fundamental-platform" title="Permalink to this headline">#</a></h2>
+<p>What makes operating systems so interesting is that they are the fundamental platform on which all other software is written. We briefly discuss each of their core tasks; basically this is a summary of the entire course in one simple section.</p>
+<figure class="margin align-default" id="mappingint-fig">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-03.drawio.png"><img alt="../_images/purpose-OS-source-03.drawio.png" src="../_images/purpose-OS-source-03.drawio.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Providing interfaces that applications can use on top of the complicated interfaces of today’s hardware.</span><a class="headerlink" href="#mappingint-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="abstracting-hardware">
+<span id="cont-gs-purpose-platform-abs"></span><h3><span class="section-number">2.2.1. </span>Abstracting Hardware<a class="headerlink" href="#abstracting-hardware" title="Permalink to this headline">#</a></h3>
+<p>If applications needed to understand all the complicated hardware described <a class="reference internal" href="#cont-gs-purpose-hw"><span class="std std-ref">above</span></a>, many fewer applications would  be written.  Consider, for example storage, the abstraction provided by the hardware are blocks.  Applications that persist data want abstractions of directories and files.</p>
+<p>As shown in <a class="reference internal" href="#mappingint-fig"><span class="std std-numref">Fig. 2.3</span></a>, the most important job of the operating system is to enable a set of higher level abstractions, often called “virtual abstractions” on top of the low-level primitive “physical abstractions” provided by the hardware.  That is, the operating system  translates physical abstractions to virtual/clean ones that applications can be written to.  Key abstractions we will discuss include:</p>
 <ul class="simple">
-<li><p>translate physical abstractions to virtual/clean ones</p></li>
+<li><p>Process: An abstraction of a CPU or processor, where every time a <strong>program</strong> is started it executes as a separate process.</p></li>
+<li><p>File system: An abstraction of storage providing structure for organizing non-volatile data, for example, a hierarchical directory structure containing files.</p></li>
+<li><p>Virtual memory: An abstraction of the memory that a process can access.</p></li>
+</ul>
+<div class="admonition-process-versus-program admonition">
+<p class="admonition-title">Process versus Program</p>
+<p>It is important to understand the difference between programs and processes.  When a user want to run an application, or <strong>program</strong>, the operating system creates a new process and loads the program instructions from storage into memory for the process executes.  There can be multiple processes executing the same program that running at the same time.  For example, while I am writing this book, when I type “ps -e” to tell me all the processes currently running, (see margin) I find that I have multiple “bash” shells running at the same time, a large number of “python” programs, and of course the “ps” program itself. We will talk more later about what the other parts of this command means.</p>
+</div>
+<div class="cell tag_hide-input tag_margin docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bash</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;ps -e&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "79aa2102d9184d26800b548abdf23315", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<figure class="align-right" id="multipleapps-fig">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-04.drawio.png"><img alt="../_images/purpose-OS-source-04.drawio.png" src="../_images/purpose-OS-source-04.drawio.png" style="width: 3in;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Supporting many applications</span><a class="headerlink" href="#multipleapps-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="share-hardware">
+<span id="cont-gs-purpose-platform-multi"></span><h3><span class="section-number">2.2.2. </span>Share Hardware<a class="headerlink" href="#share-hardware" title="Permalink to this headline">#</a></h3>
+<p>Modern operating systems enable many (thousands) of applications to run at the same time (<a class="reference internal" href="#multipleapps-fig"><span class="std std-numref">Fig. 2.4</span></a>).  The operating system needs to ensure that applications can’t break each other.   For example, the operating system tries to ensure that a broken or malicious application (really process running the application program) can’t modify the memory of keep other processes from using their fair share of resources.  This is especially the case because different applications may have very different requirements for example, your editor needs to be responsive to you typing characters, while if you compile a program, the compiler tries to use as much processing and disk as possible.  The operating system should ensure that the compiler doesn’t destroy the interactivity of your editor.</p>
+</section>
+<section id="enabling-diverse-hardware">
+<span id="cont-gs-purpose-platform-hwdiv"></span><h3><span class="section-number">2.2.3. </span>Enabling diverse hardware<a class="headerlink" href="#enabling-diverse-hardware" title="Permalink to this headline">#</a></h3>
+<p>Operating systems often run on diverse hardware, with computers that range from embedded ARM processors on your watch, to massive High Performance Computing systems (<a class="reference internal" href="#hw-fig"><span class="std std-numref">Fig. 2.5</span></a>).</p>
+<figure class="margin align-default" id="hw-fig">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-06.drawio.png"><img alt="../_images/purpose-OS-source-06.drawio.png" src="../_images/purpose-OS-source-06.drawio.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Different kinds of computers</span><a class="headerlink" href="#hw-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The thing that makes it possible to introduce new hardware is that the operating system enables a common set of abstractions across these different systems.  That is the reason why, for example, Netflix runs on my mac, ipad, and tesla.  The operating system provides a common set of abstractions so that application programmers don’t have to re-write everything when moving from one system to another.  The reason it is possible to introduce new processors (e.g., ARM, Intel, Power), and new computers (e.g., servers, laptops, cell phones) is that operating systems hide most of the complexity from the application developer.</p>
+</section>
+<section id="supporting-many-users">
+<span id="cont-gs-purpose-platform-security"></span><h3><span class="section-number">2.2.4. </span>Supporting many users<a class="headerlink" href="#supporting-many-users" title="Permalink to this headline">#</a></h3>
+<figure class="margin align-default" id="sec-fig">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-05.drawio.png"><img alt="../_images/purpose-OS-source-05.drawio.png" src="../_images/purpose-OS-source-05.drawio.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">From different users</span><a class="headerlink" href="#sec-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="protecting-external-attacks">
+<span id="cont-gs-purpose-platform-sec-outside"></span><h3><span class="section-number">2.2.5. </span>Protecting external attacks<a class="headerlink" href="#protecting-external-attacks" title="Permalink to this headline">#</a></h3>
+<figure class="margin align-default" id="secoutside-fig">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-07.drawio.png"><img alt="../_images/purpose-OS-source-07.drawio.png" src="../_images/purpose-OS-source-07.drawio.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.7 </span><span class="caption-text">Protecting users from outside world.</span><a class="headerlink" href="#secoutside-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="mutliplexing-hardware">
+<span id="id1"></span><h3><span class="section-number">2.2.6. </span>Mutliplexing Hardware<a class="headerlink" href="#mutliplexing-hardware" title="Permalink to this headline">#</a></h3>
+<figure class="margin align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-08.drawio.png"><img alt="../_images/purpose-OS-source-08.drawio.png" src="../_images/purpose-OS-source-08.drawio.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.8 </span><span class="caption-text">Protecting users from outside world.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="margin align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-12.drawio.png"><img alt="../_images/purpose-OS-source-12.drawio.png" src="../_images/purpose-OS-source-12.drawio.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.9 </span><span class="caption-text">Supporting devices</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id4">
+<span id="id5"></span><h3><span class="section-number">2.2.7. </span>Mutliplexing Hardware<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>Talk about how support many kinds of hardware, PPC, intel, different disks, different storage… application doesn’t need to change.</p>
+<ul class="simple">
+<li></li>
+<li><p>mutiplexing hardware - sharing</p>
+<ul>
 <li><p>allow many applications to share resources</p></li>
-<li><p>space and time multiplexing</p></li>
+<li><p>supporting requires, e.g., real time…</p></li>
+</ul>
+</li>
+<li><p>security:</p>
+<ul>
 <li><p>protect users from each other</p></li>
-<li><p>support many different types of computers</p></li>
 <li><p>protect against attacks</p></li>
-<li><p>enable control/configuration</p></li>
-<li><p>enable devices</p></li>
+</ul>
+</li>
+<li><p>enable control/configuration</p>
+<ul>
+<li><p>tuning</p></li>
+<li><p>customization</p></li>
+<li><p>specialization</p></li>
+</ul>
+</li>
+<li><p>enable devices - not common abstracion</p></li>
 <li><p>summarize tasks of the operating system</p></li>
 </ul>
 </section>
+</section>
+<section id="abstracting-the-hw-providing-interfaces-that-applications-can-use">
+<span id="cont-gs-purpose-care"></span><h2><span class="section-number">2.3. </span>abstracting the HW - providing interfaces that applications can use<a class="headerlink" href="#abstracting-the-hw-providing-interfaces-that-applications-can-use" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>support many different types of computers</p></li>
+</ul>
+</section>
 <section id="why-do-we-care">
-<span id="cont-gs-purpose-care"></span><h2><span class="section-number">2.3. </span>Why do we care<a class="headerlink" href="#why-do-we-care" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.4. </span>Why do we care<a class="headerlink" href="#why-do-we-care" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>core platform everything else relies on, toughest code to write</p></li>
 <li><p>means that everything relies on it</p></li>
@@ -617,6 +816,12 @@ title="Print to PDF"
 </ul>
 </section>
 </section>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"79aa2102d9184d26800b548abdf23315": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_e91d1e833d784f7e87a581967149068b", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ps -e\r\n    PID TTY          TIME CMD\r\n      1 ?        00:00:00 tini\r\n      7 ?        00:00:26 jupyterhub-sing\r\n     71 pts/1    00:00:00 bash\r\n    116 ?        00:00:00 ssh-agent\r\n   3612 ?        00:00:00 python\r\n   3650 ?        00:00:03 python\r\n   7834 pts/20   00:00:00 bash\r\n   7852 pts/1    00:00:00 make\r\n   7853 pts/1    00:00:00 make\r\n   7859 pts/1    00:00:01 jupyter-book\r\n   7864 ?        00:00:01 python\r\n   7887 pts/21   00:00:00 bash\r\n   7902 pts/21   00:00:00 ps\r\n$ "}]}}, "e91d1e833d784f7e87a581967149068b": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+</script>
+
 
     <script type="text/x-thebe-config">
     {
@@ -649,7 +854,7 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">1. </span>Introduction to getting started</p>
+            <p class="prev-next-title"><span class="section-number">1. </span>Introduction</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="structure.html" title="next page">

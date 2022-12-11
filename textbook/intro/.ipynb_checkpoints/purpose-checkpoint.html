@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Preface &#8212; Introduction to Operating Systems</title>
+    <title>2. Purpose of operating systems &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,7 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Introduction to getting started" href="intro.html" />
+    <link rel="next" title="3. OS structure" href="structure.html" />
+    <link rel="prev" title="1. Introduction to getting started" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -107,8 +108,8 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="pref.html">
                     Preface
                 </a>
             </li>
@@ -118,14 +119,14 @@ const thebe_selector_output = ".output, .cell_output"
   Getting started
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
    1. Introduction to getting started
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="purpose.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    2. Purpose of operating systems
   </a>
  </li>
@@ -192,6 +193,31 @@ const thebe_selector_output = ".output, .cell_output"
    9. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   10. Cooperating Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locking.html">
+   11. Synchronization Primitives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/deadlock.html">
+   12. Deadlocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   13. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   14. Locking in the Linux Kernel
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -201,22 +227,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   10. Overview of other topics
+   15. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   11. Security
+   16. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   12. Virtualization and Cloud computing
+   17. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="other.html">
-   13. Other OS structures
+   18. Other OS structures
   </a>
  </li>
 </ul>
@@ -228,12 +254,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   14. Contributing
+   19. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   15. Bibliography
+   20. Bibliography
   </a>
  </li>
 </ul>
@@ -295,7 +321,25 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/intro/pref.ipynb&branch=main"
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/intro/purpose.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/intro/purpose.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -355,7 +399,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fintro/pref.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fintro/purpose.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -372,7 +416,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/edit/main/content/intro/pref.ipynb"
+        <a href="https://github.com/okrieg/openos/edit/main/content/intro/purpose.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -400,7 +444,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/intro/pref.ipynb"
+        <a href="../_sources/intro/purpose.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -460,18 +504,18 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#our-motivation">
-   Our motivation
+  <a class="reference internal nav-link" href="#a-simple-model-of-hardware">
+   2.1. A simple model of hardware
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#philosophy">
-   Philosophy
+  <a class="reference internal nav-link" href="#the-fundamental-platform">
+   2.2. The fundamental platform
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-to-read-it">
-   How to read it
+  <a class="reference internal nav-link" href="#why-do-we-care">
+   2.3. Why do we care
   </a>
  </li>
 </ul>
@@ -483,7 +527,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Preface</h1>
+                <h1>Purpose of operating systems</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -494,18 +538,18 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#our-motivation">
-   Our motivation
+  <a class="reference internal nav-link" href="#a-simple-model-of-hardware">
+   2.1. A simple model of hardware
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#philosophy">
-   Philosophy
+  <a class="reference internal nav-link" href="#the-fundamental-platform">
+   2.2. The fundamental platform
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-to-read-it">
-   How to read it
+  <a class="reference internal nav-link" href="#why-do-we-care">
+   2.3. Why do we care
   </a>
  </li>
 </ul>
@@ -518,57 +562,92 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="preface">
-<span id="cont-pref"></span><h1>Preface<a class="headerlink" href="#preface" title="Permalink to this headline">#</a></h1>
-<p>In late 2021 Jonathan Appavoo started discussing with us his vision of creating open source interactive educational materials. You can see an early talk on this <a class="reference external" href="https://research.redhat.com/events/steps-toward-open-source-education/">here</a>. Somehow, we found ourselves committing to writing an operating system textbook, and here we are.   You will find in the repository three kinds of information:</p>
-<ol class="simple">
-<li><p>This textbook which will largely be static content.</p></li>
-<li><p>Lab materials which will include significant amounts of interactive content.</p></li>
-<li><p>Lecture slides</p></li>
-</ol>
-<p>The textbook can be largely read statically; and you can even download a PDF.  However, we strongly recommend using it online going back and forth between different materials via the provided links.  We provide a companion container (an OS concept we discuss <span class="xref myst">XXX</span> which we strongly recommend you keep open alongside the material and use to run exercises.  The lab materials are intended to execute in the container.  Moreover, the container has the curated set of tools that we expect you to use for the course, and provides the same environment as the assignments; you are likely to run into problems if you work on the assignments outside of the container environment and don’t expect TAs to help you if you do that.</p>
-<p>Please see the github <a class="reference external" href="https://github.com/okrieg/openos/graphs/contributors">community</a> page for the list of contributors.  This text was originally developed for the Boston University course <a class="reference external" href="https://docs.google.com/document/d/e/2PACX-1vRIAR-uB62ZAr9LdDP-8RylOhQ76W2fL79TU5TJbgrwUraK72gN5VfJde3B8x8gV3ukcP2lwuWC8TOm/pub">EC 440 Operating Systems</a>. You can <a class="reference external" href="https://okrieg.github.io/openos/textbook/intro_tb.html">view this text online</a> or <a class="reference external" href="https://github.com/okrieg/openos">view the source</a>.</p>
-<section id="our-motivation">
-<span id="cont-pref-mot"></span><h2>Our motivation<a class="headerlink" href="#our-motivation" title="Permalink to this headline">#</a></h2>
-<p>Our motivation to write this book is three fold.  First, our students pay way too much money for textbooks. At one point, students could buy used textbooks, although even then publishers would constantly churn editions to get students to buy new versions. Increasingly, textbooks contain interactive materials, that force students to buy the most recent edition; again its about the money.  Free online books (FOB) provide us the opportunity to address this cost issue, while also enabling frequent revisions and extensive linking between different materials.  The motivation for FOB  for operating systems is described in the excellent <a class="reference external" href="http://from-a-to-remzi.blogspot.com/2014/01/the-case-for-free-online-books-fobs.html">blog</a> by Remzi Arpaci-Dusseau.  Moreover, the  excellent operating system FOB titled “<a class="reference external" href="https://pages.cs.wisc.edu/~remzi/OSTEP/">Operating Systems: Three Easy Pieces</a>” <span id="id1">[<a class="reference internal" href="../misc/bib.html#id2" title="Remzi H Arpaci-Dusseau and Andrea C Arpaci-Dusseau. Operating systems: Three easy pieces. Arpaci-Dusseau Books LLC Boston, 2018. URL: https://pages.cs.wisc.edu/~remzi/OSTEP/.">ADAD18</a>]</span>, is enormously better than our effort today.   So why are we developing another FOB?  That leads to our next two reasons.</p>
-<p>Second, we have found students think in many different ways and repetition  at multiple different levels of detail is incredibly important to understand operating systems.  The Three Easy pieces FOB does a great job of interlinking materials, enabling students to approach the material in multiple ways.  However, with jupyter book and containers we can go much further; enabling dynamic content that is deeply connected to the book.  Our own experience as OS developers and researchers is that we don’t understand anything until we have played with code; we how that the model we are developing based on Jonathans OPE will enable us to give students more of that experience.  In fact, as Jonathan articulates so well in the talk referenced above, students today have grown up with so many levels of software complexity obscuring the systems they are using that this interactive experience is critical to enable systems to be approached.</p>
-<p>Third, as operating system researchers and developers that have experienced the entire growth of open source; we believe that it can be an enormously powerful tool for educational materials.  While we respect Remzi’s perspective from <span id="id2">[<a class="reference internal" href="../misc/bib.html#id2" title="Remzi H Arpaci-Dusseau and Andrea C Arpaci-Dusseau. Operating systems: Three easy pieces. Arpaci-Dusseau Books LLC Boston, 2018. URL: https://pages.cs.wisc.edu/~remzi/OSTEP/.">ADAD18</a>]</span> that “a book should have a single voice”, at the same time our own frustration of teaching from materials developed by others is that we want others to be able to modify any part of our content to teach operating systems in a way that reflects their background, their community of students, and their own biases.  Feel free to fork our book at make it your own.  We do hope that people will be motivated to offer their changes back to us; and they can do so using the same mechanisms used by community projects like Linux.  Textbooks get out of date soon after they are written; and this is especially the case in operating systems which are one of the most rapidly evolving technical areas.  We believe that only an open source community will be able to create educational materials that evolve as fast as the topics they cover.  Hopefully, we can do a good job and create standards and a community such that the material has a coherent single voice; if not, perhaps someone that is better at it will fork our book and create such a community.</p>
-</section>
-<section id="philosophy">
-<span id="cont-pref-phil"></span><h2>Philosophy<a class="headerlink" href="#philosophy" title="Permalink to this headline">#</a></h2>
-<p>This book is not intended to teach you how to program.  It assumes you have mastered programming skills including data structures, algorithms,  the C programming language, make, git, debuggers, test driven development, how loaders work, shell scripting and other tools.  It is also not intended to teach you computer architecture; you should know what an interrupt is, multiprocessors, caches, page tables, …</p>
-<p>However, long experience teaching the course has demonstrated that our expectation on background is seldom met.  While students have taken programming courses in the past that covered much of the background; it is covered it as a academic material; when writing the fairly simple code for many courses you could get away without properly writing tests, using a debugger, or even writing a proper makefile.  Moreover, often students have been able to get away with using some GUI that tries to hide what is going on from you.</p>
-<p>We have found that students only really understand operating system concepts if they have the experience of writing code that illustrates the concepts and are directly using the low-level programming tools that real system developers use.  This code is complicated, don’t even try to get by without understanding these materials.</p>
-<p>The book <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/intro_tb.html#under-the-covers-the-secret-life-of-software">Under the Covers: The Secret Life of Software</a> is a companion book, and in a perfect world would be used for a system’s course that is a prerequisite for an operating systems course based on this book.  Given that that is not always the case, we will cover some of the same material briefly and refer to the corresponding part of his material for more detail. This includes:</p>
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> -i ../python/common.py
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="purpose-of-operating-systems">
+<span id="cont-gs-purpose"></span><h1><span class="section-number">2. </span>Purpose of operating systems<a class="headerlink" href="#purpose-of-operating-systems" title="Permalink to this headline">#</a></h1>
+<p>The purpose of an operating system is to provide everything needed to enable applications to run on computers.  We <a class="reference internal" href="#cont-gs-purpose-hw"><span class="std std-ref">first</span></a> present a simple model of hardware and why the OS is needed, then discuss how this has resulted in operating systems becoming the <a class="reference internal" href="#cont-gs-purpose-platform"><span class="std std-ref">fundamental platform</span></a> that all computing depends on, and finally discuss why, as operating system researchers and developers, feel like the <a class="reference internal" href="#cont-gs-purpose-care"><span class="std std-ref">fun has just started</span></a>. Our hope is that at the end of this chapter you will not only realize why it is so important for all computer scientists and engineers to have a fundamental understanding of operating systems, but to also to realize why so many people are excited to work on and contribute to operating systems.  Consider that today’s dominant operating systems are open source, and rely on 1000s of contributors from all over the world, many who volunteer their time.</p>
+<section id="a-simple-model-of-hardware">
+<span id="cont-gs-purpose-hw"></span><h2><span class="section-number">2.1. </span>A simple model of hardware<a class="headerlink" href="#a-simple-model-of-hardware" title="Permalink to this headline">#</a></h2>
+<p>The fundamental job of the operating system is to enable applications to run on a computer.  To understand why this is complicated, consider the very simple model of a computer depicted in <a class="reference internal" href="#simplecomputer-fig"><span class="std std-numref">Fig. 2.1</span></a>.  We briefly describe each of the key components of this computer, and what you need to know for now.</p>
+<figure class="align-default" id="simplecomputer-fig">
+<a class="reference internal image-reference" href="../_images/hardware.png"><img alt="../_images/hardware.png" src="../_images/hardware.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">A simple model of a computer.  The CPU is connected to high speed memory, and through a lower speed bus to a network controller and disk controller that are in turn connected to a network (ethernet in this case) and a disk.</span><a class="headerlink" href="#simplecomputer-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <ul class="simple">
-<li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/shellintro.html#the-shell-part-i-having-an-ascii-conversation-with-the-os">details on how the shell works, scripting… </a></p></li>
-<li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/make.html#make">make</a></p></li>
-<li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/gitintro.html#intro-to-git">revision control and git</a></p></li>
-<li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/assembly/intro.html#introduction-assembly-programming">assembly language programming</a></p></li>
-<li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/assembly/Debuggers.html#machine-debuggers-open-process-surgery">debugging and gdb</a></p></li>
-<li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/C/intro.html#introduction">the c programming language</a></p></li>
+<li><p><strong>Central Processing Unit (CPU)</strong>:  The smart part that executes instructions is called the Central Processing Unit (CPU) or <strong>processor</strong>.<br />
+For now, you can think about the CPU executing one instruction at a time, but as we will talk about later, modern processors can execute hundreds of instructions in parallel and modern computers can be composed of multiple CPUs.</p></li>
+<li><p><strong>Memory:</strong> Also referred to as <strong>Random Access Memory (RAM)</strong>, holds the instructions and data that running applications require.  It is physically connected to the CPU via direct wiring.  Memory today is normally volatile, where the contents are lost when the computer is powered off.  Random access here refers to the fact that the processor can directly read or write any memory location irrespective of the local of the data in the memory; in contrast to technologies (e.g., hard drives) where the time required varies significantly based on the location of the data.</p></li>
 </ul>
-<p>Our focus in this book is on operating systems; not on how to be a systems programer.  To succeed in this course, we strongly advice covering the above material in more depth than we can as a small part of this course.</p>
+<aside class="sidebar">
+<p class="sidebar-title">Note:</p>
+<p>For now you can think of memory as fast, but in reality today it is very slow compared to the processor, and normally there are multiple layers of <strong>cache</strong> so that the CPU doesn’t have to wait for the slow memory every time it needs to fetch an instruction to execute.</p>
+</aside>
+<ul class="simple">
+<li><p><strong>I/O bus:</strong> If the computer wasn’t connected to anything, you couldn’t do much with it.  All computers have some form of Input/Output (or I/O) bus that connects them to different devices.</p></li>
+<li><p><strong>Storage:</strong> Since the memory is typically volatile, computers have to have some form of storage that are non-volatile.  This may include hard drives, SSDs, optimical drives, usb sticks, etc.  In</p></li>
+<li><p><strong>Networking:</strong> To talk to the outside world</p></li>
+</ul>
+<p>While there are many kinds of I/O devices, for now we only consider two, namely: 1) storage devices, and 2) network devices.</p>
+<figure class="align-default" id="mappingint-fig">
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-01.drawio.png"><img alt="../_images/purpose-OS-source-01.drawio.png" src="../_images/purpose-OS-source-01.drawio.png" style="width: 20%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Mapping ugly interfaces of hardware to the needs of applications.</span><a class="headerlink" href="#mappingint-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>structure of simple computer <a class="reference internal" href="#simplecomputer-fig"><span class="std std-numref">Fig. 2.1</span></a>, <a class="reference internal" href="#mappingint-fig"><span class="std std-numref">Fig. 2.2</span></a> with processor, memory, storage and communication devices</p></li>
+<li><p>forward reference to concurrency</p></li>
+<li><p>discuss core abstractions of each and fundamental properties slow/fast</p></li>
+</ul>
 </section>
-<section id="how-to-read-it">
-<span id="cont-pref-how"></span><h2>How to read it<a class="headerlink" href="#how-to-read-it" title="Permalink to this headline">#</a></h2>
-<p>For detailed instructions on how to read this book, please refer <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/howto.html#how-to-read-this-book">here</a> for directions for the systems book.</p>
-<p>The book is divided into multiple parts.  The first part, <a class="reference internal" href="intro.html#cont-gs-intro"><span class="std std-ref">Getting Started</span></a>, gives an overview of the entire book and the tools operating system developers like you will need to know.  The next three parts describe three of the core services of operating systems, namely <a class="reference internal" href="../scheduling/scheduling.html#cont-scheduling"><span class="std std-ref">Scheduling</span></a>, <a class="reference internal" href="../mm/mm.html#cont-mm-intro"><span class="std std-ref">Memory Management</span></a>, and <a class="reference internal" href="../fs/fs.html#cont-fs-intro"><span class="std std-ref">file systems</span></a>.  The next part, <a class="reference internal" href="../sync/sync.html#cont-conc-intro"><span class="std std-ref">concurrency</span></a>, introduces some of the most complicated aspects of operating systems to deal with the parallelism of todays platforms, namely threads, synchronization, and deadlock. The <a class="reference internal" href="../misc/OtherInro.html#cont-other-intro"><span class="std std-ref">final</span></a> part of this book discusses a number of key topics such as security, virtualization, a bit on the history of operating systems and alternative OS structures.</p>
+<section id="the-fundamental-platform">
+<span id="cont-gs-purpose-platform"></span><h2><span class="section-number">2.2. </span>The fundamental platform<a class="headerlink" href="#the-fundamental-platform" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>abstracting the HW - providing interfaces that applications can use</p>
+<ul>
+<li><p>translate physical abstractions to virtual/clean ones</p></li>
+<li><p>support many different types of computers</p></li>
+</ul>
+</li>
+<li><p>mutiplexing hardware - sharing</p>
+<ul>
+<li><p>allow many applications to share resources</p></li>
+<li><p>supporting requires, e.g., real time…</p></li>
+</ul>
+</li>
+<li><p>security:</p>
+<ul>
+<li><p>protect users from each other</p></li>
+<li><p>protect against attacks</p></li>
+</ul>
+</li>
+<li><p>enable control/configuration</p>
+<ul>
+<li><p>tuning</p></li>
+<li><p>customization</p></li>
+<li><p>specialization</p></li>
+</ul>
+</li>
+<li><p>enable devices - not common abstracion</p></li>
+<li><p>summarize tasks of the operating system</p></li>
+</ul>
 </section>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
+<section id="why-do-we-care">
+<span id="cont-gs-purpose-care"></span><h2><span class="section-number">2.3. </span>Why do we care<a class="headerlink" href="#why-do-we-care" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>core platform everything else relies on, toughest code to write</p></li>
+<li><p>means that everything relies on it</p></li>
+<li><p>is the fun over… talk about future/changes</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -598,10 +677,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="intro.html" title="next page">
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">1. </span>Introduction to getting started</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="structure.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Introduction to getting started</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>OS structure</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
