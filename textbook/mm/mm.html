@@ -509,6 +509,23 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#overview-of-mm">
    7.1. Overview of MM
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-physical-memory-management">
+     7.1.1. Simple physical memory management.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sharing-one-physical-address-space">
+     7.1.2. Sharing one physical address space.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relocating-programs">
+     7.1.3. Relocating programs.
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#memory-reclaiming-algorithms">
@@ -568,6 +585,23 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#overview-of-mm">
    7.1. Overview of MM
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-physical-memory-management">
+     7.1.1. Simple physical memory management.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sharing-one-physical-address-space">
+     7.1.2. Sharing one physical address space.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relocating-programs">
+     7.1.3. Relocating programs.
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#memory-reclaiming-algorithms">
@@ -634,14 +668,18 @@ title="Print to PDF"
 </ul>
 <section id="overview-of-mm">
 <span id="cont-mm-overview"></span><h2><span class="section-number">7.1. </span>Overview of MM<a class="headerlink" href="#overview-of-mm" title="Permalink to this headline">#</a></h2>
+<section id="simple-physical-memory-management">
+<h3><span class="section-number">7.1.1. </span>Simple physical memory management.<a class="headerlink" href="#simple-physical-memory-management" title="Permalink to this headline">#</a></h3>
+<p>The simplest memory management model is to just use and share the physical address space without any translation. This implies processes sharing that physical address space are randomly scattered around in it.  Each process also must deal with different addresses and there is no protection between those processes.  While this is very primitive, physical memory management is still used in simple embedded systems.</p>
+</section>
+<section id="sharing-one-physical-address-space">
+<h3><span class="section-number">7.1.2. </span>Sharing one physical address space.<a class="headerlink" href="#sharing-one-physical-address-space" title="Permalink to this headline">#</a></h3>
+<p>Early in the development of computer hardware and operating systems physical memory management was used.  Users were typically limited to trusted colleges and few users shared the computer at the same time.  Over time the quantity of memory expanded allowing more users to run programs on the computer at the same time.  In addition to a lack of protection sharing a single physical address space requires every program to deal with different physical addresses since its not know exactly where they will be loaded and run.  Each time a program is run its likely to loaded and run at a different address.  Dealing with this imposes a significant burden on basic programming.  To eliminate this burden operating system designers developed a relocation technique that corrected all the physical addresses when a program was loaded as a specific address.</p>
+</section>
+<section id="relocating-programs">
+<h3><span class="section-number">7.1.3. </span>Relocating programs.<a class="headerlink" href="#relocating-programs" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
-<li><p>Simple physical memory management.</p>
-<ul>
-<li><p>Sharing one physical address space.</p></li>
-<li><p>Relocating programs.</p></li>
-</ul>
-</li>
-<li><p>Virtual memory management: talk about all the advanges</p>
+<li><p>Virtual memory management: talk about all the advances</p>
 <ul>
 <li><p>Segmentation.</p>
 <ul>
@@ -672,6 +710,7 @@ swapping, paging</p></li>
 </ul>
 </li>
 </ul>
+</section>
 </section>
 <section id="memory-reclaiming-algorithms">
 <span id="cont-mm-reclaim"></span><h2><span class="section-number">7.2. </span>Memory reclaiming algorithms.<a class="headerlink" href="#memory-reclaiming-algorithms" title="Permalink to this headline">#</a></h2>
