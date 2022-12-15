@@ -17,6 +17,13 @@ parts:
   numbered: True
   chapters:
   - file: mm/mm
+  - file: mm/Overview
+  - file: mm/reclamation
+  - file: mm/datastruc
+  - file: mm/pagefaults
+  - file: mm/mmhw
+  - file: mm/mmdyn
+  - file: mm/realworld
 - caption: 'File Systems'
   numbered: True
   chapters:
