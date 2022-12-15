@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>8. Introduction to File Systems &#8212; Introduction to Operating Systems</title>
+    <title>15. Introduction to File Systems &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="9. Intro Concurrency Synchronization and Deadlock" href="../sync/sync.html" />
-    <link rel="prev" title="7. Memory Management" href="../mm/mm.html" />
+    <link rel="next" title="16. Intro Concurrency Synchronization and Deadlock" href="../sync/sync.html" />
+    <link rel="prev" title="14. Memory management in the real world" href="../mm/realworld.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -171,6 +171,41 @@ const thebe_selector_output = ".output, .cell_output"
    7. Memory Management
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/Overview.html">
+   8. Overview of MM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/reclamation.html">
+   9. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/datastruc.html">
+   10. Data structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/pagefaults.html">
+   11. Page Faults
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mmhw.html">
+   12. Memory management hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mmdyn.html">
+   13. Paging Dynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/realworld.html">
+   14. Memory management in the real world
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -180,7 +215,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   8. Introduction to File Systems
+   15. Introduction to File Systems
   </a>
  </li>
 </ul>
@@ -192,32 +227,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   9. Intro Concurrency Synchronization and Deadlock
+   16. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   10. Cooperating Processes
+   17. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   11. Synchronization Primitives
+   18. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   12. Deadlocks
+   19. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   13. Challenges of Modern Hardware
+   20. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   14. Locking in the Linux Kernel
+   21. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -229,22 +264,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   15. Overview of other topics
+   22. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   16. Security
+   23. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   17. Virtualization and Cloud computing
+   24. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   18. Other OS structures
+   25. Other OS structures
   </a>
  </li>
 </ul>
@@ -256,12 +291,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   19. Contributing
+   26. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   20. Bibliography
+   27. Bibliography
   </a>
  </li>
 </ul>
@@ -508,7 +543,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-file-systems">
-<span id="cont-fs-intro"></span><h1><span class="section-number">8. </span>Introduction to File Systems<a class="headerlink" href="#introduction-to-file-systems" title="Permalink to this headline">#</a></h1>
+<span id="cont-fs-intro"></span><h1><span class="section-number">15. </span>Introduction to File Systems<a class="headerlink" href="#introduction-to-file-systems" title="Permalink to this headline">#</a></h1>
 <p>We are talking here about scheduling the processor not the damn memory, disk, …</p>
 </section>
 
@@ -539,17 +574,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../mm/mm.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../mm/realworld.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">7. </span>Memory Management</p>
+            <p class="prev-next-title"><span class="section-number">14. </span>Memory management in the real world</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../sync/sync.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>Intro Concurrency Synchronization and Deadlock</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Intro Concurrency Synchronization and Deadlock</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

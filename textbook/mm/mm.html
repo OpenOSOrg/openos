@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="8. Introduction to File Systems" href="../fs/fs.html" />
+    <link rel="next" title="8. Overview of MM" href="Overview.html" />
     <link rel="prev" title="6. Processor Scheduling" href="../scheduling/scheduling.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -171,6 +171,41 @@ const thebe_selector_output = ".output, .cell_output"
    7. Memory Management
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Overview.html">
+   8. Overview of MM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reclamation.html">
+   9. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="datastruc.html">
+   10. Data structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pagefaults.html">
+   11. Page Faults
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mmhw.html">
+   12. Memory management hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mmdyn.html">
+   13. Paging Dynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="realworld.html">
+   14. Memory management in the real world
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -180,7 +215,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/fs.html">
-   8. Introduction to File Systems
+   15. Introduction to File Systems
   </a>
  </li>
 </ul>
@@ -192,32 +227,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   9. Intro Concurrency Synchronization and Deadlock
+   16. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   10. Cooperating Processes
+   17. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   11. Synchronization Primitives
+   18. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   12. Deadlocks
+   19. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   13. Challenges of Modern Hardware
+   20. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   14. Locking in the Linux Kernel
+   21. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -229,22 +264,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   15. Overview of other topics
+   22. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   16. Security
+   23. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   17. Virtualization and Cloud computing
+   24. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   18. Other OS structures
+   25. Other OS structures
   </a>
  </li>
 </ul>
@@ -256,12 +291,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   19. Contributing
+   26. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   20. Bibliography
+   27. Bibliography
   </a>
  </li>
 </ul>
@@ -506,60 +541,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview-of-mm">
-   7.1. Overview of MM
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#simple-physical-memory-management">
-     7.1.1. Simple physical memory management.
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sharing-one-physical-address-space">
-     7.1.2. Sharing one physical address space.
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#relocating-programs">
-     7.1.3. Relocating programs.
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#memory-reclaiming-algorithms">
-   7.2. Memory reclaiming algorithms.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-structures">
-   7.3. Data structures
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#page-faults">
-   7.4. Page Faults
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#memory-management-hardware">
-   7.5. Memory management hardware
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#paging-dynamics">
-   7.6. Paging Dynamics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#memory-management-in-the-real-world">
-   7.7. Memory management in the real world
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#notes">
-   7.8. Notes
+   7.1. Notes
   </a>
  </li>
 </ul>
@@ -582,60 +565,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview-of-mm">
-   7.1. Overview of MM
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#simple-physical-memory-management">
-     7.1.1. Simple physical memory management.
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sharing-one-physical-address-space">
-     7.1.2. Sharing one physical address space.
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#relocating-programs">
-     7.1.3. Relocating programs.
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#memory-reclaiming-algorithms">
-   7.2. Memory reclaiming algorithms.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-structures">
-   7.3. Data structures
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#page-faults">
-   7.4. Page Faults
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#memory-management-hardware">
-   7.5. Memory management hardware
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#paging-dynamics">
-   7.6. Paging Dynamics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#memory-management-in-the-real-world">
-   7.7. Memory management in the real world
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#notes">
-   7.8. Notes
+   7.1. Notes
   </a>
  </li>
 </ul>
@@ -655,7 +586,8 @@ title="Print to PDF"
 <ul>
 <li><p>Abstracting a useful memory model.</p></li>
 <li><p>Managing the physical memory on the system.</p></li>
-<li><p>Providing and managing a private virtual address space for each user.</p></li>
+<li><p>Providing and managing a private virtual address space for each user.
+give an overview of the chapters in this section.</p></li>
 </ul>
 </li>
 <li><p>The memory manager is responsible for:</p>
@@ -666,158 +598,7 @@ title="Print to PDF"
 </ul>
 </li>
 </ul>
-<section id="overview-of-mm">
-<span id="cont-mm-overview"></span><h2><span class="section-number">7.1. </span>Overview of MM<a class="headerlink" href="#overview-of-mm" title="Permalink to this headline">#</a></h2>
-<section id="simple-physical-memory-management">
-<h3><span class="section-number">7.1.1. </span>Simple physical memory management.<a class="headerlink" href="#simple-physical-memory-management" title="Permalink to this headline">#</a></h3>
-<p>The simplest memory management model is to just use and share the physical address space without any translation. This implies processes sharing that physical address space are randomly scattered around in it.  Each process also must deal with different addresses and there is no protection between those processes.  While this is very primitive, physical memory management is still used in simple embedded systems.</p>
-</section>
-<section id="sharing-one-physical-address-space">
-<h3><span class="section-number">7.1.2. </span>Sharing one physical address space.<a class="headerlink" href="#sharing-one-physical-address-space" title="Permalink to this headline">#</a></h3>
-<p>Early in the development of computer hardware and operating systems physical memory management was used.  Users were typically limited to trusted colleges and few users shared the computer at the same time.  Over time the quantity of memory expanded allowing more users to run programs on the computer at the same time.  In addition to a lack of protection sharing a single physical address space requires every program to deal with different physical addresses since its not know exactly where they will be loaded and run.  Each time a program is run its likely to loaded and run at a different address.  Dealing with this imposes a significant burden on basic programming.  To eliminate this burden operating system designers developed a relocation technique that corrected all the physical addresses when a program was loaded as a specific address.</p>
-</section>
-<section id="relocating-programs">
-<h3><span class="section-number">7.1.3. </span>Relocating programs.<a class="headerlink" href="#relocating-programs" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>Virtual memory management: talk about all the advances</p>
-<ul>
-<li><p>Segmentation.</p>
-<ul>
-<li><p>Single segments per address space</p></li>
-<li><p>Multiple segments per address space.</p></li>
-<li><p>Swapping.</p></li>
-<li><p>Compaction.</p></li>
-</ul>
-</li>
-<li><p>Paging: - now it could be unlimited…</p>
-<ul>
-<li><p>Virtual pages and page frames.</p></li>
-<li><p>Virtual address spaces larger than RAM.</p></li>
-<li><p>Page tables brief (more later)</p></li>
-</ul>
-</li>
-<li><p>Quick overview of what memory manager needs to do</p>
-<ul>
-<li><p>compaction</p></li>
-<li><p>bringing things in, demand paging
-swapping, paging</p></li>
-<li><p>deciding what to kick out - reclamation</p></li>
-<li><p>anonymous memory</p></li>
-<li><p>file backed and caching storage</p></li>
-<li><p>example: look at elf, parts of the program…</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</section>
-</section>
-<section id="memory-reclaiming-algorithms">
-<span id="cont-mm-reclaim"></span><h2><span class="section-number">7.2. </span>Memory reclaiming algorithms.<a class="headerlink" href="#memory-reclaiming-algorithms" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Global page reclaiming</p>
-<ul>
-<li><p>FIFO, LRU, NRU…</p></li>
-</ul>
-</li>
-<li><p>Local page reclaiming</p>
-<ul>
-<li><p>Reclaiming within a specific address space</p></li>
-</ul>
-</li>
-<li><p>Working set page reclaiming</p></li>
-</ul>
-</section>
-<section id="data-structures">
-<span id="cont-mm-ds"></span><h2><span class="section-number">7.3. </span>Data structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">#</a></h2>
-<p>We need to keep track of … what is free, what is used…</p>
-<ul class="simple">
-<li><p>Free lists</p>
-<ul>
-<li><p>coalescing free memory.</p></li>
-</ul>
-</li>
-<li><p>In-use page lists</p>
-<ul>
-<li><p>active and inactive lists for reclaiming.</p></li>
-<li><p>Buffer Cache</p>
-<ul>
-<li><p>Using RAM to cache file system data &amp; metadata</p>
-<ul>
-<li><p>Global page hash</p></li>
-<li><p>Per file page hash</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="page-faults">
-<span id="cont-mm-pf"></span><h2><span class="section-number">7.4. </span>Page Faults<a class="headerlink" href="#page-faults" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>File backed page faults</p></li>
-<li><p>Anonymous page faults</p></li>
-<li><p>Copy On Write page faults</p></li>
-</ul>
-</section>
-<section id="memory-management-hardware">
-<span id="cont-mm-hw"></span><h2><span class="section-number">7.5. </span>Memory management hardware<a class="headerlink" href="#memory-management-hardware" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Translations</p>
-<ul>
-<li><p>Page Table entries</p></li>
-<li><p>Page tables</p>
-<ul>
-<li><p>Multiple level page tables</p></li>
-<li><p>Page table entries</p></li>
-<li><p>Inverted page tables</p></li>
-<li><p>Variable page sizes</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>TLB - Transpation Lookaside Buffers and entries</p>
-<ul>
-<li><p>Global TLB entries</p></li>
-<li><p>Local TLB entries</p></li>
-<li><p>Tagging TLB entries</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="paging-dynamics">
-<span id="cont-mm-dynamics"></span><h2><span class="section-number">7.6. </span>Paging Dynamics<a class="headerlink" href="#paging-dynamics" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Boot-time</p></li>
-<li><p>Consuming physical memory</p>
-<ul>
-<li><p>Kernel page wiring</p></li>
-<li><p>Page faults</p></li>
-<li><p>Buffer Cache</p></li>
-</ul>
-</li>
-<li><p>Freeing physical memory</p>
-<ul>
-<li><p>Process exiting</p></li>
-<li><p>un-mapping</p></li>
-<li><p>Page reclaiming</p>
-<ul>
-<li><p>Paging</p></li>
-<li><p>Swapping</p></li>
-<li><p>Page cache purging</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>System shutdown</p></li>
-</ul>
-</section>
-<section id="memory-management-in-the-real-world">
-<span id="cont-mm-linux"></span><h2><span class="section-number">7.7. </span>Memory management in the real world<a class="headerlink" href="#memory-management-in-the-real-world" title="Permalink to this headline">#</a></h2>
-<p>Linux specific memory management - examples from a real system</p>
-<p>Memory Management Introduction</p>
+<p>Stole below from elsewhere</p>
 <p>The memory management subsystem has 3 basic responsibilities;</p>
 <ol class="simple">
 <li><p>Providing an abstraction so that every user appears to have total and unique access to all of the memory on the system.</p></li>
@@ -831,9 +612,8 @@ Being relocatable means that all addresses are either relative or they can be fi
 moved to a different physical address.</p>
 <p>No memory abstraction also implies that there is no protection between multiple programs loaded into memory at the same time.
 If a program takes a wild branch or writes to a random address it will corrupt other programs or even the entire system.</p>
-</section>
 <section id="notes">
-<h2><span class="section-number">7.8. </span>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">7.1. </span>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">#</a></h2>
 <p>Refer <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/shellintro.html#arithmetic-expansion">here</a> for doing binary math in shell</p>
 </section>
 </section>
@@ -872,10 +652,10 @@ If a program takes a wild branch or writes to a random address it will corrupt o
             <p class="prev-next-title"><span class="section-number">6. </span>Processor Scheduling</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../fs/fs.html" title="next page">
+    <a class='right-next' id="next-link" href="Overview.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Introduction to File Systems</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Overview of MM</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
