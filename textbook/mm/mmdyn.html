@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>13. Paging Dynamics &#8212; Introduction to Operating Systems</title>
+    <title>14. Paging Dynamics &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="14. Memory management in the real world" href="realworld.html" />
-    <link rel="prev" title="12. Memory management hardware" href="mmhw.html" />
+    <link rel="next" title="15. Memory management in the real world" href="realworld.html" />
+    <link rel="prev" title="13. Memory management hardware" href="mmhw.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -173,37 +173,37 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Overview.html">
-   8. Overview of MM
+   8. The purpose of Memory Management
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="reclamation.html">
-   9. Memory reclaiming algorithms.
+   10. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="datastruc.html">
-   10. Data structures
+   11. Data structures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pagefaults.html">
-   11. Page Faults
+   12. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mmhw.html">
-   12. Memory management hardware
+   13. Memory management hardware
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   13. Paging Dynamics
+   14. Paging Dynamics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="realworld.html">
-   14. Memory management in the real world
+   15. Memory management in the real world
   </a>
  </li>
 </ul>
@@ -215,7 +215,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/fs.html">
-   15. Introduction to File Systems
+   16. Introduction to File Systems
   </a>
  </li>
 </ul>
@@ -227,32 +227,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   16. Intro Concurrency Synchronization and Deadlock
+   17. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   17. Cooperating Processes
+   18. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   18. Synchronization Primitives
+   19. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   19. Deadlocks
+   20. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   20. Challenges of Modern Hardware
+   21. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   21. Locking in the Linux Kernel
+   22. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -264,22 +264,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   22. Overview of other topics
+   23. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   23. Security
+   24. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   24. Virtualization and Cloud computing
+   25. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   25. Other OS structures
+   26. Other OS structures
   </a>
  </li>
 </ul>
@@ -291,12 +291,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   26. Contributing
+   27. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   27. Bibliography
+   28. Bibliography
   </a>
  </li>
 </ul>
@@ -543,7 +543,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="paging-dynamics">
-<span id="cont-mm-dynamics"></span><h1><span class="section-number">13. </span>Paging Dynamics<a class="headerlink" href="#paging-dynamics" title="Permalink to this headline">#</a></h1>
+<span id="cont-mm-dynamics"></span><h1><span class="section-number">14. </span>Paging Dynamics<a class="headerlink" href="#paging-dynamics" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
 <li><p>Boot-time</p></li>
 <li><p>Consuming physical memory</p>
@@ -601,13 +601,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">12. </span>Memory management hardware</p>
+            <p class="prev-next-title"><span class="section-number">13. </span>Memory management hardware</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="realworld.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>Memory management in the real world</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Memory management in the real world</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

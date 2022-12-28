@@ -173,37 +173,37 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/Overview.html">
-   8. Overview of MM
+   8. The purpose of Memory Management
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   9. Memory reclaiming algorithms.
+   10. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/datastruc.html">
-   10. Data structures
+   11. Data structures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   11. Page Faults
+   12. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/mmhw.html">
-   12. Memory management hardware
+   13. Memory management hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/mmdyn.html">
-   13. Paging Dynamics
+   14. Paging Dynamics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   14. Memory management in the real world
+   15. Memory management in the real world
   </a>
  </li>
 </ul>
@@ -215,7 +215,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/fs.html">
-   15. Introduction to File Systems
+   16. Introduction to File Systems
   </a>
  </li>
 </ul>
@@ -227,32 +227,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   16. Intro Concurrency Synchronization and Deadlock
+   17. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   17. Cooperating Processes
+   18. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   18. Synchronization Primitives
+   19. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   19. Deadlocks
+   20. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   20. Challenges of Modern Hardware
+   21. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   21. Locking in the Linux Kernel
+   22. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -264,22 +264,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   22. Overview of other topics
+   23. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   23. Security
+   24. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   24. Virtualization and Cloud computing
+   25. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="other.html">
-   25. Other OS structures
+   26. Other OS structures
   </a>
  </li>
 </ul>
@@ -291,12 +291,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   26. Contributing
+   27. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   27. Bibliography
+   28. Bibliography
   </a>
  </li>
 </ul>
@@ -597,6 +597,11 @@ title="Print to PDF"
    2.3. Why do we care
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#is-the-fun-over">
+   2.4. Is the fun over?
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -673,6 +678,11 @@ title="Print to PDF"
    2.3. Why do we care
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#is-the-fun-over">
+   2.4. Is the fun over?
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -730,12 +740,13 @@ title="Print to PDF"
 </figure>
 <section id="abstracting-hardware">
 <span id="cont-gs-purpose-platform-abs"></span><h3><span class="section-number">2.2.1. </span>Abstracting Hardware<a class="headerlink" href="#abstracting-hardware" title="Permalink to this headline">#</a></h3>
-<p>If applications needed to understand all the complicated hardware described <a class="reference internal" href="#cont-gs-purpose-hw"><span class="std std-ref">above</span></a>, many fewer applications would  be written.  Consider, for example storage, the abstraction provided by the hardware are blocks.  Applications that persist data want abstractions of directories and files.</p>
-<p>As shown in <a class="reference internal" href="#mappingint-fig"><span class="std std-numref">Fig. 2.3</span></a>, the most important job of the operating system is to enable a set of higher level abstractions, often called “virtual abstractions” on top of the low-level primitive “physical abstractions” provided by the hardware.  That is, the operating system  translates physical abstractions to virtual/clean ones that applications can be written to.  Key abstractions we will discuss include:</p>
+<p>If applications needed to understand all the complicated hardware described <a class="reference internal" href="#cont-gs-purpose-hw"><span class="std std-ref">above</span></a>, many fewer applications would  be written.  Consider, for example, storage; the abstraction provided by the hardware are disks blocks while applications that persist data want to work with higher level abstractions like directories and files.</p>
+<p>As shown in <a class="reference internal" href="#mappingint-fig"><span class="std std-numref">Fig. 2.3</span></a>, the most important job of the operating system is to enable a set of higher level abstractions, often called <strong>“virtual abstractions”</strong> on top of the low-level primitive “physical abstractions” provided by the hardware.  That is, the operating system  translates physical abstractions to virtual/clean ones that applications can be written to.  Key virtual abstractions we will discuss include:</p>
 <ul class="simple">
-<li><p>Process: An abstraction of a CPU or processor, where every time a <strong>program</strong> is started it executes as a separate process.</p></li>
-<li><p>File system: An abstraction of storage providing structure for organizing non-volatile data, for example, a hierarchical directory structure containing files.</p></li>
-<li><p>Virtual memory: An abstraction of the memory that a process can access.</p></li>
+<li><p><strong>Process:</strong> An abstraction of a CPU or processor, where every time a <strong>program</strong> is started it executes as a separate process.</p></li>
+<li><p><strong>File system:</strong> An abstraction of storage providing structure for organizing non-volatile data, for example, a hierarchical directory structure containing files.</p></li>
+<li><p><strong>Virtual memory:</strong> An abstraction of the memory that a process can access.</p></li>
+<li><p><strong>Sockets:</strong> A abstraction that enables different processes, potentially running on different computers, to communicate.</p></li>
 </ul>
 <div class="cell tag_hide-input tag_margin docutils container">
 <div class="cell_input docutils container">
@@ -745,14 +756,14 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "51cd9ea64145460e943d1f261284fe47", "version_major": 2, "version_minor": 0}
+{"model_id": "754c04cf57394e8cab44663ae20b6750", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <div class="admonition-process-versus-program admonition">
 <p class="admonition-title">Process versus Program</p>
-<p>It is important to understand the difference between programs and processes.  When a user want to run an application, or <strong>program</strong>, the operating system creates a new process and loads the program instructions from storage into memory for the process executes.  There can be multiple processes executing the same program that running at the same time.  For example, while I am writing this book, when I type “ps -e” to tell me all the processes currently running, (see margin) I find that I have multiple “bash” shells running at the same time, a large number of “python” programs, and of course the “ps” program itself. We will talk more later about what the other parts of this command means.</p>
+<p>It is important to understand the difference between programs and processes.  When a user want to run an application, or <strong>program</strong>, the operating system creates a new process and loads the program instructions from storage into memory for the process executes.  There can be multiple processes executing the same program that running at the same time.  For example, while I am writing this book, when I type “ps -e” to tell me all the processes currently running, (see margin) I find that I have multiple “bash” shells running at the same time, a large number of “python” programs, and of course the “ps” program itself. We will describe this unix command more later.</p>
 </div>
-<figure class="align-right" id="hw-fig">
+<figure class="margin align-default" id="hw-fig">
 <a class="reference internal image-reference" href="../_images/purpose-OS-source-06.drawio.png"><img alt="../_images/purpose-OS-source-06.drawio.png" src="../_images/purpose-OS-source-06.drawio.png" style="width: 2in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Different kinds of computers</span><a class="headerlink" href="#hw-fig" title="Permalink to this image">#</a></p>
@@ -761,39 +772,45 @@ title="Print to PDF"
 </section>
 <section id="enabling-diverse-hardware">
 <span id="cont-gs-purpose-platform-hwdiv"></span><h3><span class="section-number">2.2.2. </span>Enabling diverse hardware<a class="headerlink" href="#enabling-diverse-hardware" title="Permalink to this headline">#</a></h3>
-<p>Operating systems must support diverse hardware, with computers that range from embedded ARM processors on your watch, to massive High Performance Computing systems (<a class="reference internal" href="#hw-fig"><span class="std std-numref">Fig. 2.4</span></a>).  The reason it possible to introduce new hardware is that the operating system enables the same virtual abstractions described above across these different systems.  That enables, for example, Netflix runs to on my mac, ipad, and tesla.  The operating system provides a common set of abstractions so that application programmers don’t have to re-written everything when moving from one system to another.  Similarly, the reason it is possible to introduce new processors (e.g., ARM, Intel, Power), and new computers (e.g., servers, laptops, cell phones) is that operating systems hides most of the underlying differences from the application developer.</p>
-<p>While the OS enables applications to be easily ported from one hardware platform to another, the OS is also responsible for meeting the fundamental requirements of the systems it supports.  Today, the same fundamental Linux OS runs on Cell phones, massive High Performance Computing systems, and drones delivering amazon packages.  In a cell phone, the OS needs to ensure that everything works in a tiny amount of memory, with limited energy use while HPC systems today can have 4TBytes of memory that needs to be efficiently managed.  In a drone, one probably wants to make sure that a non-critical program can’t impact the hard real time programs controlling the propellers.</p>
+<p>Operating systems must support diverse computer systems (<a class="reference internal" href="#hw-fig"><span class="std std-numref">Fig. 2.4</span></a>), for example, ranging from tiny embedded systems in a smart fridge to massive high performance computing systems that occupy large portions of a data center. Systems differ in the processors (e.g. x86, Power, ARM, RISC6), the devices, and the scale of resources like processors and memory.  For example, a <a class="reference external" href="https://www.pcmag.com/news/pine64s-30-linux-smartwatch-launches">smart cell phone</a> may have 64 kilobytes of memory and a set of new servers just obtained by the Mass Open Cloud have  four terabytes of memory, where a terabyte is  1,073,741,824 kilobytes.</p>
+<p>Operating systems provide the same (or similar) <a class="reference internal" href="#cont-gs-purpose-platform-abs"><span class="std std-ref">virtual abstractions</span></a> across these very different systems, enabling much of the differences between these different systems to be hidden from most applications.  This makes it easy to write libraries and applications (e.g., Netflix) that can run on systems as diverse as a PCs, phones, ipads, and smart cars.  This, in turn, makes it possible for hardware designers to innovate, introducing new computers and even processors, while knowing that many applications will be able to use their systems.</p>
+<p>In fact, today, the same open source Linux OS runs on Cell phones, massive High Performance Computing systems, and drones delivering amazon packages.  As we will discuss, the open source nature of the system enables companies that want to innovate to make changes to the operating system to support their hardware.</p>
+<p>While the OS enables applications to be easily ported from one hardware platform to another, the OS is also responsible for meeting the fundamental requirements of the systems it supports.  In a cell phone, the OS needs to ensure that everything works in a tiny amount of memory, with limited energy use, while the OS for a server may use terabytes of memory to cache storage and allow many programs to be resident simultaneously.  In a drone, one probably wants to make sure that a non-critical program can’t impact the hard real time programs controlling the propellers.</p>
 </section>
 <section id="sharing-the-hardware">
 <span id="cont-gs-purpose-platform-multi"></span><h3><span class="section-number">2.2.3. </span>Sharing the hardware<a class="headerlink" href="#sharing-the-hardware" title="Permalink to this headline">#</a></h3>
 <figure class="align-right" id="multipleapps-fig">
-<a class="reference internal image-reference" href="../_images/purpose-OS-source-04.drawio.png"><img alt="../_images/purpose-OS-source-04.drawio.png" src="../_images/purpose-OS-source-04.drawio.png" style="width: 4in;" /></a>
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-04.drawio.png"><img alt="../_images/purpose-OS-source-04.drawio.png" src="../_images/purpose-OS-source-04.drawio.png" style="width: 3in;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Concurrent processes/applications.</span><a class="headerlink" href="#multipleapps-fig" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Multiple processes.</span><a class="headerlink" href="#multipleapps-fig" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Modern operating systems enable many (thousands) of processes running different programs/applications to run at the same time (<a class="reference internal" href="#multipleapps-fig"><span class="std std-numref">Fig. 2.5</span></a>).  The operating system needs to ensure that processes can’t break each other.   For example, the operating system must guarantee that a bug in an application,  or even an application written by a malicious programmer, can’t modify the memory or keep other processes from using their fair share of the different resources of the computer.  This is especially challenging because different applications may have very different requirements.  Your editor needs to be responsive to you typing characters, while, if you compile a program, the compiler tries to use as much processing and disk as possible.  The operating system should ensure that requirements of the different applications are met; e.g., the compiler doesn’t destroy the interactivity of your editor.</p>
+<p>Modern operating systems enable many (thousands) of processes running different programs/applications to run at the same time (<a class="reference internal" href="#multipleapps-fig"><span class="std std-numref">Fig. 2.5</span></a>).   The operating system needs to ensure that processes can’t break each other.   For example, the operating system must guarantee that a bug in an application,  or even an application written by a malicious programmer, can’t modify the memory of other processes.</p>
+<p>The OS should also ensure that each process gets its fair share of the different resources of the computer consistent with their requirements.  To understand what we mean by different requirements, consider two programs; an editor needs to be responsive to you typing characters, while, a compiler tries to use as much processing and disk as possible to get its work done quickly.  The OS should ensure that the compiler gets to use most of the resources of the computer while reserving the limited resources that the editor requires and prioritizing the editor whenever you type a character.  It has to do that without typically knowing what the requirements of the application are.</p>
+<p>To share the resources of the computer, the operating system space and/or time multiplexes the resources.  An example of space multiplexing is having different disk blocks part of different files.  An example of time multiplexing is changing which process is running on a processor.  Normally, both are used, for example, at a given time giving different memory to different processes, while changing the memory used by the processes as their needs change.</p>
+</section>
+<section id="supporting-many-users">
+<span id="cont-gs-purpose-platform-security"></span><h3><span class="section-number">2.2.4. </span>Supporting many users<a class="headerlink" href="#supporting-many-users" title="Permalink to this headline">#</a></h3>
 <figure class="align-right" id="sec-fig">
-<a class="reference internal image-reference" href="../_images/purpose-OS-source-05.drawio.png"><img alt="../_images/purpose-OS-source-05.drawio.png" src="../_images/purpose-OS-source-05.drawio.png" style="width: 4in;" /></a>
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-05.drawio.png"><img alt="../_images/purpose-OS-source-05.drawio.png" src="../_images/purpose-OS-source-05.drawio.png" style="width: 3in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">Multiple users</span><a class="headerlink" href="#sec-fig" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-</section>
-<section id="supporting-many-users">
-<span id="cont-gs-purpose-platform-security"></span><h3><span class="section-number">2.2.4. </span>Supporting many users<a class="headerlink" href="#supporting-many-users" title="Permalink to this headline">#</a></h3>
 <p>Normally, operating systems are designed to support different users running processes at the same time.  The OS must make sure that one user can’t run processes that read or even change the files of another user.  Moreover, the OS may need to make sure that each user gets their fair share of the computer; for example, ensuring that a student can’t launch 1000 processes after they are done an assignment to keep her classmates from successfully submitting theirs.</p>
-<p>This protection is part of the security policies and mechanisms of the operating system.  Attacks can violate the confidentiality (one can see another user’s information) integrity (one can change state), or availability (one can deny the ability to run).  While we have put enormous work into designing secure systems, the complexity of modern systems give operating system researchers strong job security.</p>
+<p>This protection is part of the security policies and mechanisms of the operating system.  Attacks may try to violate the confidentiality (one can see another user’s information) integrity (one can change state of another user), or availability (one can deny other users the ability to run their programs).  While OS developers have put enormous work into designing secure systems, the complexity of modern systems give operating system researchers strong job security.</p>
+</section>
+<section id="protecting-from-external-attacks">
+<span id="cont-gs-purpose-platform-sec-outside"></span><h3><span class="section-number">2.2.5. </span>Protecting from external attacks<a class="headerlink" href="#protecting-from-external-attacks" title="Permalink to this headline">#</a></h3>
+<p>The best way to keep users from attacking each other is to make sure that they can’t run on the same computer.  In fact, in the good old days, we used to make sure that computers where disconnected from each other. For example, professors had their accounts on computers that students had no access to.</p>
 <figure class="align-right" id="secoutside-fig">
-<a class="reference internal image-reference" href="../_images/purpose-OS-source-07.drawio.png"><img alt="../_images/purpose-OS-source-07.drawio.png" src="../_images/purpose-OS-source-07.drawio.png" style="width: 4in;" /></a>
+<a class="reference internal image-reference" href="../_images/purpose-OS-source-07.drawio.png"><img alt="../_images/purpose-OS-source-07.drawio.png" src="../_images/purpose-OS-source-07.drawio.png" style="width: 3.5in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 2.7 </span><span class="caption-text">Protecting users from outside world.</span><a class="headerlink" href="#secoutside-fig" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-</section>
-<section id="protecting-from-external-attacks">
-<span id="cont-gs-purpose-platform-sec-outside"></span><h3><span class="section-number">2.2.5. </span>Protecting from external attacks<a class="headerlink" href="#protecting-from-external-attacks" title="Permalink to this headline">#</a></h3>
-<p>The best way to keep users from attacking each other is to make sure that they can’t run on the same computer.  In fact, in the good old days, we used to make sure that computers where disconnected from each other, and, for example, professors had their accounts on computers that students had no access to.  However, we do all our work today connected to the network, and we log into our machines remotely.  In fact, right now I am typing this sentence on a laptop that is connected to a network; every key stroke I type is being sent over a network to a cloud service running containers reserved by me on a computer in a datacenter 100 miles away from my laptop.  The Operating system implements firewalls and security policies that make sure that only I can change this book.  Having said that, there are always bugs, and the OS is responsible for logging all the information needed so that we can later on figure out who hacked the system, and what changes they made.</p>
+<p>Today we do all our work today connected to the network, and we log into our machines remotely.  In fact, right now I am typing this sentence on a laptop that is connected to a network; every key stroke I type is being sent over a network to a cloud service running containers reserved by me on a computer in a datacenter 100 miles away from my laptop.  The Operating system implements firewalls and security policies that make sure that only I can change this book.</p>
+<p>While we work hard to protect computers from external attacks, new attacks are always being developed, there are always bugs in the operating system, and humans often expose passwords or make mistakes that make computers they work on open to attacks.  The OS is responsible for logging all the information needed so that we can later on figure out who hacked the system, and what changes they made.</p>
 <figure class="align-right" id="mgment-fig">
 <a class="reference internal image-reference" href="../_images/purpose-OS-source-08.drawio.png"><img alt="../_images/purpose-OS-source-08.drawio.png" src="../_images/purpose-OS-source-08.drawio.png" style="width: 4in;" /></a>
 <figcaption>
@@ -819,38 +836,53 @@ title="Print to PDF"
 </section>
 <section id="supporting-devices">
 <span id="id1"></span><h3><span class="section-number">2.2.7. </span>Supporting devices<a class="headerlink" href="#supporting-devices" title="Permalink to this headline">#</a></h3>
-<p>Last, but certainly not least, the OS not only manages directly the hardware of a computer, but also a massive number of peripheral devices, from disks, monitors, keyboards, network connections to cameras.   Often, when you come up with some new device, you have to figure out some way to plumb it through the operating system so that applications will be able to take advantage of it.  As we will discuss, the *<strong>device drivers</strong> are the vast majority of software in today’s operating system.</p>
+<p>Last, but certainly not least, the OS not only manages directly the hardware of a computer, but also a massive number of peripheral devices, from disks, monitors, keyboards, network connections to cameras.  Often when a new device is developed, the developers need to provide  some way to plumb it through the operating system so that applications will be able to take advantage of it.  As we will discuss, *<strong>device drivers</strong> are the vast majority of software in today’s operating system.</p>
 </section>
 <section id="putting-it-together">
 <span id="id2"></span><h3><span class="section-number">2.2.8. </span>Putting it together<a class="headerlink" href="#putting-it-together" title="Permalink to this headline">#</a></h3>
 <p>So, to summarize, the operating system is responsible for:</p>
 <ul class="simple">
-<li><p>Creating the fundamental abstractions</p></li>
-<li><p>Managing and multiplexing the hardware</p></li>
-<li><p>Enabling:</p>
-<ul>
-<li><p>Applicatoins to be run on a wide set of computers</p></li>
-<li><p>using a wide range of devices</p></li>
-<li><p>across a wide range of use cases from phones to the cloud</p></li>
+<li><p>Creating the fundamental <strong>virtual</strong> abstractions that applications are written to use on top of the primitive abstractions provided by hardware.</p></li>
+<li><p>Supporting a wide range of computers, applications and devices across a huge range of use cases from embedded devices to the cloud.</p></li>
+<li><p>Managing and multiplexing the hardware resources to meet application needs.</p></li>
+<li><p>Protecting processes/users from both internal and external attacks.</p></li>
 </ul>
-</li>
-<li><p>all while enforcing security.</p></li>
-</ul>
+<p>In other words, operating systems are the fundamental platforms that all other software and hardware relies on.  If you want to develop applications, you need to understand the OS abstractions, and good performance often relies on understand something about the policies and implementation of the OS you are using.  If you want to develop new hardware, you need to understand how to expose that hardware through the OS to the applications you want to use it.</p>
 </section>
 </section>
 <section id="why-do-we-care">
 <span id="cont-gs-purpose-care"></span><h2><span class="section-number">2.3. </span>Why do we care<a class="headerlink" href="#why-do-we-care" title="Permalink to this headline">#</a></h2>
+<p>In all fields, if you control the platform that others need to use, you have an enormous advantage.  For example, if you control the exchange that others use for trading stocks, <a class="reference external" href="https://www.investopedia.com/what-went-wrong-with-ftx-6828447">cryptocurrency</a> or goods (e.g., <a class="reference external" href="https://www.amazon.com">Amazon</a> and <a class="reference external" href="https://www.etsy.com">etsy</a>) you are in a position to (properly or not) gain something from every use of the platform, and you have a special responsibility to all the users.   As the fundamental platform in computing, we see that operating systems have played a huge role.  For example:</p>
+<ol class="simple">
+<li><p>Operating systems have been the focus and responsible for the success of some of the worlds largest companies, e.g. Microsoft, VMware, Red Hat.</p></li>
+<li><p>Operating system people play a key role in every major technology company.</p></li>
+<li><p>Every major change in technology requires innovation or at least changes at the operating system level.</p></li>
+<li><p>Operating system researchers, and their venues (e.g., SOSP, OSDI, Eurosys, Usenix) are responsible for the major distributed system innovations.</p></li>
+<li><p>The world of open source, that has impacted all elements of society, started with operating systems.</p></li>
+</ol>
+<p>Fundamentally, if you care about computing, you better care about operating systems and have some idea on how they work.</p>
+</section>
+<section id="is-the-fun-over">
+<span id="cont-gs-purpose-fun"></span><h2><span class="section-number">2.4. </span>Is the fun over?<a class="headerlink" href="#is-the-fun-over" title="Permalink to this headline">#</a></h2>
+<p>We have been working on operating systems for as long as we have had computers.  In many fields, innovation happens rapidly for a while, and then the excitement moves to another area.  With operating systems, not only do they continue to be a major area of innovation, but we expect that the need for innovation in operating systems, and even development of new ones, will continue and accelerate.</p>
+<p>Fundamentally, OS innovation is needed for any major change in application requirements, hardware capabilities, or new use cases.  Consider some of the major changes that are happening now:</p>
 <ul class="simple">
-<li><p>core platform everything else relies on, toughest code to write</p></li>
-<li><p>means that everything relies on it</p></li>
-<li><p>is the fun over… talk about future/changes</p></li>
+<li><p>The rise of cloud computing is resulting in new models of OS for services and functions that require “logical” computers to be instantiated in seconds, and demand strong guarantees on tail latency (i.e., most requests finish in some guaranteed time.</p></li>
+<li><p>Fundamental change in security requirements; provider/tenant</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Dennard_scaling">Denard scaling</a> is over; but network and storage keep getting faster…</p></li>
+<li><p><a class="reference external" href="https://www.equinix.com/resources/analyst-reports/gartner-distributed-enterprise-predictions-2022?ls=Advertising%20-%20Web&amp;lsd=22q1_enterprise_digital-infrastructure--not-applicable_/resources/analyst-reports/gartner-distributed-enterprise-predictions-2022_dm_obility_paid-search_google_us-en_AMER_digital-edge_demand-gen&amp;utm_campaign=us-en_google_paid-search_digital-edge_dm&amp;utm_source=google&amp;utm_medium=paid-search&amp;utm_content=digital-infrastructure--not-applicable_gartner-distributed-enterprise-predictions-2022&amp;gclid=CjwKCAiAzKqdBhAnEiwAePEjkjhC-gGejQAFyu-KiGw3oeqhkMvU9hfJkoBx5hH9hdT_rArJOehavxoC8nYQAvD_BwE">Edge computing</a> &amp; <a class="reference external" href="https://www.sciencedirect.com/topics/computer-science/cloudlet">Cloudlets</a> driven by the emergence of high bandwidth low latency <a class="reference external" href="https://www.qualcomm.com/5g/what-is-5g">5G</a> will drive a whole new model of compute.</p></li>
+<li><p>First generation of persistent memory three years ago</p></li>
+<li><p>Rise of smart NICs</p></li>
+<li><p>100 GB networks spanning the world..</p></li>
+<li><p>Rise of AI…</p></li>
 </ul>
+<p>Unfortunately, for some reason many engineers and computer scientists are intimidated to work at the operating system level, and many think of the OS as underlying plumbing with the fun stuff around it.  We hope that this chapter has motivated you to understand why operating systems are not only historically interesting, but will continue to be a major area of innovation, and that this this course will start you on the path to mastering this exciting and important topic.</p>
 </section>
 </section>
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"51cd9ea64145460e943d1f261284fe47": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_f9fc7f6522d541fba1eded1bd28f6080", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ps -e\r\n    PID TTY          TIME CMD\r\n      1 ?        00:00:00 tini\r\n      7 ?        00:00:22 jupyterhub-sing\r\n     71 pts/1    00:00:00 bash\r\n    116 ?        00:00:00 ssh-agent\r\n   3612 ?        00:00:00 python\r\n   3650 ?        00:00:02 python\r\n   7383 pts/12   00:00:00 bash\r\n   7401 pts/1    00:00:00 make\r\n   7402 pts/1    00:00:00 make\r\n   7408 pts/1    00:00:01 jupyter-book\r\n   7413 ?        00:00:01 python\r\n   7436 pts/13   00:00:00 bash\r\n   7451 pts/13   00:00:00 ps\r\n$ "}]}}, "f9fc7f6522d541fba1eded1bd28f6080": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+{"state": {"5defb13d0f6b49afa56c6bcb0a694101": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "754c04cf57394e8cab44663ae20b6750": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_5defb13d0f6b49afa56c6bcb0a694101", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ps -e\r\n    PID TTY          TIME CMD\r\n      1 ?        00:00:00 tini\r\n      7 ?        00:00:37 jupyterhub-sing\r\n     63 pts/0    00:00:00 bash\r\n    660 pts/0    00:00:00 dowork\r\n    663 ?        00:00:00 ssh-agent\r\n    667 pts/0    00:00:00 watchmem\r\n    670 pts/0    00:00:19 watch\r\n   1221 pts/1    00:00:00 bash\r\n   3512 ?        00:00:01 python\r\n   4140 ?        00:00:01 python\r\n  58042 pts/1    00:00:00 make\r\n  58043 pts/1    00:00:00 make\r\n  58049 pts/1    00:00:01 jupyter-book\r\n  58059 ?        00:00:01 python\r\n  58087 pts/2    00:00:00 bash\r\n  58102 pts/2    00:00:00 ps\r\n$ "}]}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 
