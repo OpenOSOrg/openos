@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>26. Other OS structures &#8212; Introduction to Operating Systems</title>
+    <title>29. Other OS structures &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="27. Contributing" href="../contributing/Contributing.html" />
-    <link rel="prev" title="25. Virtualization and Cloud computing" href="../virt/virt.html" />
+    <link rel="next" title="30. Contributing" href="../contributing/Contributing.html" />
+    <link rel="prev" title="28. Virtualization and Cloud computing" href="../virt/virt.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -214,8 +214,23 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../fs/fs.html">
-   16. Introduction to File Systems
+  <a class="reference internal" href="../fs/intro.html">
+   16. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/interface.html">
+   17. Interface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
+   18. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/kernelimp.html">
+   19. Kernel implementation
   </a>
  </li>
 </ul>
@@ -227,32 +242,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   17. Intro Concurrency Synchronization and Deadlock
+   20. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   18. Cooperating Processes
+   21. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   19. Synchronization Primitives
+   22. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   20. Deadlocks
+   23. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   21. Challenges of Modern Hardware
+   24. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   22. Locking in the Linux Kernel
+   25. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -264,22 +279,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   23. Overview of other topics
+   26. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   24. Security
+   27. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   25. Virtualization and Cloud computing
+   28. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   26. Other OS structures
+   29. Other OS structures
   </a>
  </li>
 </ul>
@@ -291,12 +306,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   27. Contributing
+   30. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   28. Bibliography
+   31. Bibliography
   </a>
  </li>
 </ul>
@@ -542,12 +557,12 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#micro-kernel">
-   26.1. Micro-kernel
+   29.1. Micro-kernel
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#unikernel-library-os">
-   26.2. Unikernel/Library OS
+   29.2. Unikernel/Library OS
   </a>
  </li>
 </ul>
@@ -571,12 +586,12 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#micro-kernel">
-   26.1. Micro-kernel
+   29.1. Micro-kernel
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#unikernel-library-os">
-   26.2. Unikernel/Library OS
+   29.2. Unikernel/Library OS
   </a>
  </li>
 </ul>
@@ -590,13 +605,13 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="other-os-structures">
-<h1><span class="section-number">26. </span>Other OS structures<a class="headerlink" href="#other-os-structures" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">29. </span>Other OS structures<a class="headerlink" href="#other-os-structures" title="Permalink to this headline">#</a></h1>
 <p>There are a variety of other structures, especially in the research community</p>
 <section id="micro-kernel">
-<h2><span class="section-number">26.1. </span>Micro-kernel<a class="headerlink" href="#micro-kernel" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">29.1. </span>Micro-kernel<a class="headerlink" href="#micro-kernel" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="unikernel-library-os">
-<h2><span class="section-number">26.2. </span>Unikernel/Library OS<a class="headerlink" href="#unikernel-library-os" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">29.2. </span>Unikernel/Library OS<a class="headerlink" href="#unikernel-library-os" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
@@ -631,13 +646,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">25. </span>Virtualization and Cloud computing</p>
+            <p class="prev-next-title"><span class="section-number">28. </span>Virtualization and Cloud computing</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../contributing/Contributing.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">27. </span>Contributing</p>
+        <p class="prev-next-title"><span class="section-number">30. </span>Contributing</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

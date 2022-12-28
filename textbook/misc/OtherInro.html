@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>23. Overview of other topics &#8212; Introduction to Operating Systems</title>
+    <title>26. Overview of other topics &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="24. Security" href="../sec/sec.html" />
-    <link rel="prev" title="22. Locking in the Linux Kernel" href="../sync/linux_locking.html" />
+    <link rel="next" title="27. Security" href="../sec/sec.html" />
+    <link rel="prev" title="25. Locking in the Linux Kernel" href="../sync/linux_locking.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -214,8 +214,23 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../fs/fs.html">
-   16. Introduction to File Systems
+  <a class="reference internal" href="../fs/intro.html">
+   16. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/interface.html">
+   17. Interface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
+   18. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/kernelimp.html">
+   19. Kernel implementation
   </a>
  </li>
 </ul>
@@ -227,32 +242,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   17. Intro Concurrency Synchronization and Deadlock
+   20. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   18. Cooperating Processes
+   21. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   19. Synchronization Primitives
+   22. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   20. Deadlocks
+   23. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   21. Challenges of Modern Hardware
+   24. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   22. Locking in the Linux Kernel
+   25. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -264,22 +279,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   23. Overview of other topics
+   26. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   24. Security
+   27. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   25. Virtualization and Cloud computing
+   28. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   26. Other OS structures
+   29. Other OS structures
   </a>
  </li>
 </ul>
@@ -291,12 +306,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   27. Contributing
+   30. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bib.html">
-   28. Bibliography
+   31. Bibliography
   </a>
  </li>
 </ul>
@@ -543,7 +558,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="overview-of-other-topics">
-<span id="cont-other-intro"></span><h1><span class="section-number">23. </span>Overview of other topics<a class="headerlink" href="#overview-of-other-topics" title="Permalink to this headline">#</a></h1>
+<span id="cont-other-intro"></span><h1><span class="section-number">26. </span>Overview of other topics<a class="headerlink" href="#overview-of-other-topics" title="Permalink to this headline">#</a></h1>
 <p>This part of the book discusses various topics that we want to at least introduce to the student.</p>
 </section>
 
@@ -578,13 +593,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">22. </span>Locking in the Linux Kernel</p>
+            <p class="prev-next-title"><span class="section-number">25. </span>Locking in the Linux Kernel</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../sec/sec.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">24. </span>Security</p>
+        <p class="prev-next-title"><span class="section-number">27. </span>Security</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -1,0 +1,923 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>19. Kernel implementation &#8212; Introduction to Operating Systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="20. Intro Concurrency Synchronization and Deadlock" href="../sync/sync.html" />
+    <link rel="prev" title="18. File System Layout" href="disklayout.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/pref.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/purpose.html">
+   2. Purpose of operating systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/structure.html">
+   3. OS structure
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/services.html">
+   4. Operating System Services
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/tools.html">
+   5. Tools
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Scheduling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/scheduling.html">
+   6. Processor Scheduling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Memory Management
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mm.html">
+   7. Memory Management
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/Overview.html">
+   8. The purpose of Memory Management
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/reclamation.html">
+   10. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/datastruc.html">
+   11. Data structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/pagefaults.html">
+   12. Page Faults
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mmhw.html">
+   13. Memory management hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mmdyn.html">
+   14. Paging Dynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/realworld.html">
+   15. Memory management in the real world
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   16. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interface.html">
+   17. Interface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="disklayout.html">
+   18. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   19. Kernel implementation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sync.html">
+   20. Intro Concurrency Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   21. Cooperating Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locking.html">
+   22. Synchronization Primitives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/deadlock.html">
+   23. Deadlocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   24. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   25. Locking in the Linux Kernel
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/OtherInro.html">
+   26. Overview of other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sec/sec.html">
+   27. Security
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../virt/virt.html">
+   28. Virtualization and Cloud computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/other.html">
+   29. Other OS structures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   30. Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/bib.html">
+   31. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/fs/kernelimp.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/fs/kernelimp.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/okrieg/openos"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Ffs/kernelimp.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/edit/main/content/fs/kernelimp.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/fs/kernelimp.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#caching">
+   19.1. Caching
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vfs">
+   19.2. VFS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#network-file-systems">
+   19.3. Network File Systems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#answers-to-review-questions">
+     19.3.1. Answers to Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Kernel implementation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#caching">
+   19.1. Caching
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vfs">
+   19.2. VFS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#network-file-systems">
+   19.3. Network File Systems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#answers-to-review-questions">
+     19.3.1. Answers to Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="kernel-implementation">
+<span id="cont-fs-kernel"></span><h1><span class="section-number">19. </span>Kernel implementation<a class="headerlink" href="#kernel-implementation" title="Permalink to this headline">#</a></h1>
+<p>When applications access files they identify them by file and directory
+names, or by file descriptors (handles), and reads and writes may be
+performed in arbitrary lengths and alignments. These requests need to be
+translated into operations on the on-disk file system, where data is
+identified by its block number and all reads and writes must be in units
+of disk blocks.</p>
+<p>The primary parts of this task are:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Path translation - given a list of path components (e.g. &quot;usr&quot;, &quot;local&quot;,
+&quot;bin&quot;, &quot;program&quot;) perform the directory lookups necessary to find the
+file or directory named by that list.
+
+Read and write - translate operations on arbitrary offsets within a file
+to reads, writes, and allocations of complete disk blocks.
+</pre></div>
+</div>
+<p>Path translation is a straightforward tree search - starting at the root
+directory, search for an entry for the first path component, find the
+location for that file or directory, and repeat until the last component
+of the list has been found, or an error has occurred. (not counting
+permissions, there are two possible errors here—either an entry of the
+path was not found, or a non-final component was found but was a file
+rather than a directory)</p>
+<p>Reading requires finding the blocks which must be read, reading them in,
+and copying the requested data (which may not be all the data in the
+blocks, if the request does not start or end on a block boundary) to the
+appropriate locations in the user buffer.</p>
+<p>Writing is similar, with added complications: if a write starts in the
+middle of a block, that block must be read in, modified, and then
+written back so that existing data is not lost, and if a write extends
+beyond the end of the file new blocks must be allocated and added to the
+file.</p>
+<p>As an example, to handle the system calls</p>
+<p>the kernel has to perform the following steps:</p>
+<ol class="simple">
+<li><p>Split the string <code class="docutils literal notranslate"><span class="pre">/home/pjd/file.txt</span></code> into parts - <code class="docutils literal notranslate"><span class="pre">home</span></code>, <code class="docutils literal notranslate"><span class="pre">pjd</span></code>,
+<code class="docutils literal notranslate"><span class="pre">file.txt</span></code></p></li>
+<li><p>Read the root directory inode to find the location of the root directory
+data block. (let’s assume it’s a small directory, with one block)</p></li>
+</ol>
+<figure class="align-default" id="vfs-step12">
+<a class="reference internal image-reference" href="../_images/files-vfs-step12.png"><img alt="../_images/files-vfs-step12.png" src="../_images/files-vfs-step12.png" style="width: 80%;" /></a>
+</figure>
+<ol class="simple">
+<li><p>Read the root directory data block, search for <code class="docutils literal notranslate"><span class="pre">&quot;home&quot;</span></code>, and find the
+corresponding inode number</p></li>
+<li><p>Read the inode for the directory <code class="docutils literal notranslate"><span class="pre">&quot;home&quot;</span></code> to get the data block pointer
+<img alt="image" src="../_images/files-vfs-step34.png" />{width=”90%”}</p></li>
+<li><p>Read the <code class="docutils literal notranslate"><span class="pre">&quot;home&quot;</span></code> directory data block, search for <code class="docutils literal notranslate"><span class="pre">&quot;pjd&quot;</span></code> to get the
+inode number</p></li>
+<li><p>Read the <code class="docutils literal notranslate"><span class="pre">&quot;pjd&quot;</span></code> directory inode, get the data block pointer
+<img alt="image" src="../_images/files-vfs-step56.png" />{width=”90%”}</p></li>
+<li><p>Read the <code class="docutils literal notranslate"><span class="pre">&quot;pjd&quot;</span></code> directory block, and find the entry for <code class="docutils literal notranslate"><span class="pre">file.txt</span></code></p></li>
+<li><p>Read the <code class="docutils literal notranslate"><span class="pre">&quot;file.txt&quot;</span></code> inode and get the first data block pointer</p></li>
+<li><p>Read the data block into the user buffer
+<img alt="image" src="../_images/files-vfs-step789.png" />{width=”90%”}</p></li>
+</ol>
+<p>Most of this work (steps 2 through 7) is path translation, or the
+process of traversing the directory tree to find the file itself. In
+doing this, the OS must handle the following possibilities:</p>
+<ol class="simple">
+<li><p>The next entry in the path may not exist - the user may have typed
+<code class="docutils literal notranslate"><span class="pre">/hme/pjd/file.txt</span></code> or <code class="docutils literal notranslate"><span class="pre">/home/pjd/ffile.txt</span></code></p></li>
+<li><p>An intermediate entry in the path may be a file, rather than a
+directory - for instance <code class="docutils literal notranslate"><span class="pre">/home/pjd/file.txt/file.txt</span></code></p></li>
+<li><p>The user may not have permissions to access one of the entries in the
+path. On the CCIS systems, for instance, if a user other than pjd tries
+to access <code class="docutils literal notranslate"><span class="pre">/home/pjd/classes/file.txt</span></code>, the OS will notice that
+<code class="docutils literal notranslate"><span class="pre">/home/pjd/classes</span></code> is protected so that only user <code class="docutils literal notranslate"><span class="pre">pjd</span></code> may access it.</p></li>
+</ol>
+<section id="caching">
+<h2><span class="section-number">19.1. </span>Caching<a class="headerlink" href="#caching" title="Permalink to this headline">#</a></h2>
+<p>Disk accesses are slow, and multiple disk accesses are even slower. If
+every file operation required multiple disk accesses, your computer
+would run very slowly. Instead much of the information from the disk is
+cached in memory in various ways so that it can be used multiple times
+without going back to disk. Some of these ways are:</p>
+<p><strong>File descriptors:</strong> When an application opens a file the OS must
+translate the path to find the file’s inode; the inode number and
+information from that inode can then be saved in a data structure
+associated with that open file (a <em>file descriptor</em> in Unix, or <em>file
+handle</em> in Windows), and freed when the file descriptor is closed.</p>
+<p><strong>Translation caching:</strong> An OS will typically maintain an in-memory
+translation cache (the dentry cache in Linux, holding individual
+directory entries) which holds frequently-used translations, such as
+root directory entries.</p>
+<p>The directory entry cache differs from e.g. a CPU cache in that it holds
+both normal entries (e.g. directory+name to inode) and negative entries,
+indicating that directory+name does not exist<a class="footnote-reference brackets" href="#id2" id="id1">15</a>. If no entry is found
+the directory is searched, and the results added to the dentry cache.</p>
+<p><strong>Block caching:</strong> To accelerate reads of frequently-accessed blocks,
+rather than directly reading from the disk the OS can maintain a <em>block
+cache</em>. Before going to disk the OS checks to see whether a copy of the
+disk block is already present; if so the data can be copied directly,
+and if not it is read from disk and inserted into the cache before being
+returned. When data is modified it can be written to this cache and
+written back later to the disk.</p>
+<p>Among other things, this allows small reads (smaller than a disk block)
+and small writes to be more efficient. The first small read will cause
+the block to be read into cache, while following reads from the same
+block will come from cache. Small writes will modify the same block in
+cache, and if a block is not flushed immediately to disk, it can be
+modified multiple times while only resulting in a single write.</p>
+<p>Modern OSes like Linux use a combined buffer cache, where virtual memory
+pages and the file system cache come from the same pool. It’s a bit
+complicated, and is not covered in this class.</p>
+</section>
+<section id="vfs">
+<h2><span class="section-number">19.2. </span>VFS<a class="headerlink" href="#vfs" title="Permalink to this headline">#</a></h2>
+<p>In order to support multiple file systems such as Ext3, CD-ROMs, and
+others at the same time, Linux and other Unix variants use an interface
+called VFS, or the Virtual File System interface. (Windows uses a much
+different interface with the same purpose) The core of the OS does not
+know how to interpret individual file systems; instead it knows how to
+make requests across the VFS interface. Each file system registers an
+interface with VFS, and the methods in this interface implement the file
+system by talking to e.g. a disk or a network server.</p>
+<p>VFS objects all exist in memory; any association between these
+structures and data on disk is the responsibility of the file system
+code. The important objects and methods in this interface are:</p>
+<p><code class="docutils literal notranslate"><span class="pre">superblock</span></code>. Not to be confused with the superblock on disk, this
+object corresponds to a mounted file system; in particular, the system
+<em>mount table</em> holds pointers to superblock structures. The important
+field in the superblock object is a pointer to the root directory
+<code class="docutils literal notranslate"><span class="pre">inode</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">inode</span></code> - this corresponds to a file or directory. Its methods allow
+attributes (owner, timestamp, etc.) to be modified; in addition if the
+object corresponds to a directory, other methods allow creating,
+deleting, and renaming entries, as well as looking up a string to return
+a directory entry.</p>
+<p><code class="docutils literal notranslate"><span class="pre">dentry</span></code> - an object corresponding to a directory entry, as described
+earlier. It holds a name and a pointer to the corresponding
+<code class="docutils literal notranslate"><span class="pre">inode</span> </code>object, and no interesting methods.</p>
+<p><code class="docutils literal notranslate"><span class="pre">file</span></code> - this corresponds to an open file. When it is created there is
+no associated “real” file; its open method is called with a <code class="docutils literal notranslate"><span class="pre">dentry</span></code>
+pointing to the file to open.</p>
+<p>To open a file the OS will start with the root directory inode (from the
+superblock object) and call <code class="docutils literal notranslate"><span class="pre">lookup</span></code>, getting back a <code class="docutils literal notranslate"><span class="pre">dentry</span></code> with a
+pointer to the next directory, etc. When the dentry for the file is
+found, the OS will create a file object and pass the dentry to the file
+object’s open method.</p>
+<p><strong>FUSE</strong> (File system in User Space) is a file system type in Linux
+which does not actually implement a file system itself, but instead
+forwards VFS requests to a user-space process, and then takes the
+responses from that process and passes them back to the kernel. This is
+seen in <a class="reference external" href="#fig:fs:fuse">[fig:fs:fuse]</a>{reference-type=”autoref”
+reference=”fig:fs:fuse”}, where a read call from the application results
+in kernel requests through VFS to FUSE, which are forwarded to a
+user-space file system process.</p>
+<p>You will use FUSE to implement a file system in Homework 4, storing the
+file system in an image file accessed by the file system process.</p>
+<p>Like VFS, the FUSE interface consists of a series of methods which you
+must implement, and if you implement them correctly and return
+consistent results, the kernel (and applications running on top of it)
+will see a file system. Unlike VFS, FUSE includes various levels of
+user-friendly support; we will use it in a mode where all objects are
+identified by human-readable path strings, rather than dentries and
+inodes.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">getattr</span></code> - return attributes (size, owner, etc.) of a file or
+directory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readdir</span></code> - list a directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mkdir</span></code>, <code class="docutils literal notranslate"><span class="pre">rmdir</span></code>, <code class="docutils literal notranslate"><span class="pre">create</span></code>, <code class="docutils literal notranslate"><span class="pre">unlink</span></code> - create and remove directories and
+files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">write</span></code> - note that these identify the offset in the file, as
+the kernel (not the file system) handles file positions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rename</span></code> - change a name in a directory entry</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">truncate</span></code> - shorten a file</p></li>
+<li><p>… and others, most of which are optional.</p></li>
+</ul>
+</section>
+<section id="network-file-systems">
+<h2><span class="section-number">19.3. </span>Network File Systems<a class="headerlink" href="#network-file-systems" title="Permalink to this headline">#</a></h2>
+<p>The file systems discussed so far are local file systems, where data is
+stored on local disk and is only directly accessible from the computer
+attached to that disk. Network file systems are used when we want to
+access to data from multiple machines - for instance, if you log in to a
+machine in the CCIS lab in room 102, your home directory will be the
+same on every machine, and is in fact stored on a NetApp file server in
+a machine room upstairs.</p>
+<p>The two network file systems in most common use today are Unix NFS
+(Network File System) and Windows SMB (also known as CIFS). Each
+protocol provides operations somewhat similar to those in VFS (quite
+similar in the case of NFS, as the original VFS was designed for it),
+allowing the kernel to traverse and list directories, create and delete
+files, and read and write arbitrary offsets within a file.</p>
+<p>The primary differences between the NFS (up through v3 - v4 is more
+complicated) and SMB are:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>State - NFS is designed to be stateless for reliability. Once you have
+obtained a file&#39;s unique ID (from the directory entry) you can just read
+from or write to a location in it, without opening the file. Operations
+are idempotent, which means they can be repeated multiple times without
+error. (e.g. writing page P to offset x can be repeated, while appending
+page P to the end of the file can&#39;t.) In contrast SMB is
+connection-oriented, and requires files and directories to be opened
+before they can be operated on. NFS tolerates server crashes and
+restarts more gracefully, but does not have some of the
+connection-related features in SMB such as authentication, described
+below.
+
+Identity - NFS acts like a local file system, trusting the client to
+authenticate users and pass numeric user IDs to the server. SMB handles
+authentication on the server side - each connection to the server begins
+with a handshake that authenticates to the server with a specific
+username, and all operations within that connection are done as that
+user.
+</pre></div>
+</div>
+<section id="answers-to-review-questions">
+<h3><span class="section-number">19.3.1. </span>Answers to Review Questions<a class="headerlink" href="#answers-to-review-questions" title="Permalink to this headline">#</a></h3>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>in filesys:1,filesys:2,filesys:3,filesys:4
+</pre></div>
+</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">15</a></span></dt>
+<dd><p>To be a bit formal about it, a CPU cache maps a <em>dense</em> address
+space, where every key has a value, while the translation cache maps
+a <em>sparse</em> address space.</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./fs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="disklayout.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">18. </span>File System Layout</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../sync/sync.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>Intro Concurrency Synchronization and Deadlock</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Angela Demke Brown, Orran Krieger & Larry Woodman<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,1507 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>18. File System Layout &#8212; Introduction to Operating Systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="19. Kernel implementation" href="kernelimp.html" />
+    <link rel="prev" title="17. Interface" href="interface.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/pref.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/purpose.html">
+   2. Purpose of operating systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/structure.html">
+   3. OS structure
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/services.html">
+   4. Operating System Services
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/tools.html">
+   5. Tools
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Scheduling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/scheduling.html">
+   6. Processor Scheduling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Memory Management
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mm.html">
+   7. Memory Management
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/Overview.html">
+   8. The purpose of Memory Management
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/reclamation.html">
+   10. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/datastruc.html">
+   11. Data structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/pagefaults.html">
+   12. Page Faults
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mmhw.html">
+   13. Memory management hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mmdyn.html">
+   14. Paging Dynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/realworld.html">
+   15. Memory management in the real world
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   16. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interface.html">
+   17. Interface
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   18. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="kernelimp.html">
+   19. Kernel implementation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sync.html">
+   20. Intro Concurrency Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   21. Cooperating Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locking.html">
+   22. Synchronization Primitives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/deadlock.html">
+   23. Deadlocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   24. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   25. Locking in the Linux Kernel
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/OtherInro.html">
+   26. Overview of other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sec/sec.html">
+   27. Security
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../virt/virt.html">
+   28. Virtualization and Cloud computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/other.html">
+   29. Other OS structures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   30. Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/bib.html">
+   31. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/fs/disklayout.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/fs/disklayout.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/okrieg/openos"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Ffs/disklayout.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/edit/main/content/fs/disklayout.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/fs/disklayout.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cd-rom-file-system">
+   18.1. CD-ROM File System
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#review-questions">
+     18.1.1. Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ms-dos-file-system">
+   18.2. MS-DOS file system
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     18.2.1. Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unix-file-systems-e-g-ext2">
+   18.3. Unix file systems (e.g. ext2)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#superblock">
+   18.4. Superblock
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extents-ntfs-and-ext4">
+   18.5. Extents, NTFS, and Ext4
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#smarter-directories">
+   18.6. Smarter Directories
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-b-tree">
+   18.7. The B-tree
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#consistency-and-journaling">
+   18.8. Consistency and Journaling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#journaling">
+   18.9. Journaling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#log-structured-file-systems">
+   18.10. Log-Structured File Systems
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>File System Layout</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cd-rom-file-system">
+   18.1. CD-ROM File System
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#review-questions">
+     18.1.1. Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ms-dos-file-system">
+   18.2. MS-DOS file system
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     18.2.1. Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unix-file-systems-e-g-ext2">
+   18.3. Unix file systems (e.g. ext2)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#superblock">
+   18.4. Superblock
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extents-ntfs-and-ext4">
+   18.5. Extents, NTFS, and Ext4
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#smarter-directories">
+   18.6. Smarter Directories
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-b-tree">
+   18.7. The B-tree
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#consistency-and-journaling">
+   18.8. Consistency and Journaling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#journaling">
+   18.9. Journaling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#log-structured-file-systems">
+   18.10. Log-Structured File Systems
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="file-system-layout">
+<span id="cont-fs-layout"></span><h1><span class="section-number">18. </span>File System Layout<a class="headerlink" href="#file-system-layout" title="Permalink to this headline">#</a></h1>
+<p>To store a file system on a real disk, the high-level objects
+(directories, files, symbolic links) must be translated into fixed-sized
+blocks identified by logical block addresses.</p>
+<p>Note that instead of 512-byte sectors, file systems traditionally use
+<em>disk blocks</em>, which are some small power-of-two multiple of the sector
+size, typically 1KB, 2KB, or 4KB. Reading and writing is performed in
+units of complete blocks, and addresses are stored as disk block numbers
+rather than LBAs, and are then multiplied by the appropriate value
+before being passed to the disk. Since modern disk drives have an
+internal sector size of 4 KB (despite pretending to support 512-byte
+sectors) and the virtual memory page size is 4 KB on most systems today,
+that has become a very common file system block size.</p>
+<p>Designing on-disk data structures is complicated by the fact that for
+various reasons (virtual memory, disk controller restrictions, etc.) the
+data in a file needs to be stored in full disk blocks — e.g. bytes 0
+through 4095 of a file should be stored in a single 4096-byte block.
+(This is unlike in-memory structures, where odd-sized allocations
+usually aren’t a problem.)</p>
+<p>In this section we examine a number of different file systems; we can
+categorize them by the different solutions their designers have come up
+with for the following three problems:</p>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>How to find objects (files, directories): file identification.
+
+How to find the data within a file: file organization.
+
+How to allocate free space for creating new files.
+</pre></div>
+</div>
+<section id="cd-rom-file-system">
+<h2><span class="section-number">18.1. </span>CD-ROM File System<a class="headerlink" href="#cd-rom-file-system" title="Permalink to this headline">#</a></h2>
+<p>In <a class="reference external" href="#fig:filesys:iso9660">[fig:filesys:iso9660]</a>{reference-type=”autoref”
+reference=”fig:filesys:iso9660”} we see an example of an extremely
+simple file system, similar to early versions of the ISO-9660 file
+system for CD-ROM disks. Objects on disk are either files or
+directories, each composed of one or more 2048-byte[^7] <em>blocks</em>; all
+pointers in the file system are in terms of <em>block numbers</em>, with blocks
+numbered from block 0 at the beginning of the disk.</p>
+<p><img alt="image" src="../_images/filesys-cdrom.png" />{height=”19\baselineskip”}</p>
+<p>There are no links—each object has exactly one name—and the type of
+an object is indicated in its directory entry. (The only exception is
+the root directory, which has no name; however it is always found at the
+beginning of the disk) Finally, all objects are <em>contiguous</em>, allowing
+them to be identified by a starting block number and a length.</p>
+<p>This organization is both compact and fairly efficient. As in almost all
+file systems, an object is located by using linear search to find each
+path component in the corresponding directory. Once a file is located,
+access to any position is straightforward and can be calculated from the
+starting block address of the file, as all files are contiguous.</p>
+<p>Contiguous organization works fine for a read-only file system, where
+all files (and their sizes) are available when the file system is
+created. It works poorly for writable file systems, however, as space
+would quickly fragment making it impossible to create large files. (Also
+the CDROM file system has no method for tracking free space, so
+allocation would be very inefficient.)</p>
+<p>In the simple CD-ROM file system, what were the solutions to the three
+design problems?</p>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>File identification: files are identified by their starting block number
+
+File organization: blocks in a file are contiguous, so an offset in the
+file can be found by adding to the starting block number.
+
+Free space allocation: since it&#39;s a read-only file system, there is no
+free space to worry about.
+</pre></div>
+</div>
+<section id="review-questions">
+<h3><span class="section-number">18.1.1. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="ms-dos-file-system">
+<h2><span class="section-number">18.2. </span>MS-DOS file system<a class="headerlink" href="#ms-dos-file-system" title="Permalink to this headline">#</a></h2>
+<p><img alt="image" src="../_images/filesys-linked.png" />{height=”13\baselineskip”}</p>
+<p>The next file system we consider is the MS-DOS (or FAT, File Allocation
+Table) file system. Here blocks within a file are organized in a linked
+list; however implementation of this list is somewhat restricted by the
+requirement that all access to the disk be done in multiples of a fixed
+block size.[^8] Instead these pointers are kept in a separate array,
+with an entry corresponding to each disk block, in what is called the
+File Allocation Table.</p>
+<p>Entries in this table can indicate (a) the number of the next block in
+the file or directory, (b) that the block is the last one in a file or
+directory, or (c) the block is free. The FAT is thus used for free space
+management as well as file organization; when a block is needed the
+table may be searched for a free entry which can then be allocated.</p>
+<p>Again, what were the solutions to the three design problems?</p>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>File identification - Files and directories are identified by their
+starting block number
+
+File organization - blocks within a file are linked by pointers in the
+FAT
+
+Free space allocation - free blocks are marked in the FAT, and linear
+search is used to find free space
+</pre></div>
+</div>
+<p>Directories are similar to the CD-ROM file system - each entry has a
+name, the object type (file or directory), its length, and the starting
+address of the file contents. Note that although the last block of a
+file can be identified by a flag in the FAT, the length field is not
+redundant as it is still needed to know how much of the last block is
+valid. (E.g. a 5-byte file will require an entire block, but will only
+use 5 bytes in that block.) Sequential access to a file incurs overhead
+to fetch file allocation table entries, although since these are
+frequently used they may be cached; random access to a file, however,
+requires walking the linked list to find the corresponding entry, which
+can be slow even when cached in memory. (Consider random I/O within a
+1 GB virtual disk image with 4 KB blocks—the linked list will be 256K
+long, and on average each I/O will require searching halfway through the
+list[^9]).</p>
+<p>Directories in the MS-DOS file system are similar to those in ISO-9660.
+Each directory entry is a fixed size and has a field indicating whether
+it is valid; to delete a file, this field is set to invalid and the
+blocks in that file are marked as free in the file allocation table.
+Only a single name per file is supported, and all file metadata (e.g.
+timestamps, permissions) is stored in the directory entry along with the
+size and first block number.</p>
+<p>Like most file systems, linear search is used to locate a file in a
+directory. This is usually reasonably efficient (it’s used by most Unix
+file systems, too) but works poorly for very large directories. (That’s
+why your browser cache has filenames that look like
+<code class="docutils literal notranslate"><span class="pre">ab/xy/abxy123x.dat</span></code>, instead of putting all its files in the same
+directory.)</p>
+<div class="highlight-gbar notranslate"><div class="highlight"><pre><span></span>A note for the reader - the original MS-DOS file system only supported
+8-byte upper-case names with 3-byte extensions, with (seemingly) no way
+to get around this restriction, since the size of a directory entry is
+fixed. A crazy mechanism was devised that is still used today: multiple
+directory entries are used for each file, with the extra entries filled
+with up to 13 2-character Unicode filename characters in not only the
+filename field, but also the space that would have otherwise been used
+for timestamp, size, starting block number, etc., and marked in a way
+that would be ignored by older versions of MS-DOS.
+</pre></div>
+</div>
+<section id="id1">
+<h3><span class="section-number">18.2.1. </span>Review Questions<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="unix-file-systems-e-g-ext2">
+<h2><span class="section-number">18.3. </span>Unix file systems (e.g. ext2)<a class="headerlink" href="#unix-file-systems-e-g-ext2" title="Permalink to this headline">#</a></h2>
+<p>File systems derived from the original Unix file system (e.g. Linux ext2
+and ext3) use a per-file structure called an inode (“indirect node”)
+designed with three goals in mind:</p>
+<div class="highlight-gsidebar notranslate"><div class="highlight"><pre><span></span>**Why not use e.g. a balanced binary tree?** The in-memory tree
+structures from your algorithms class aren&#39;t appropriate for a file
+system, for several reasons: (a) the minimum allocation unit is a disk
+block, typically 4 KB, (b) disk seeks are really expensive, and (c) we
+want to avoid re-arranging existing data on disk as the file grows, so
+that we don&#39;t lose it if the system crashes mid-operation.
+</pre></div>
+</div>
+<p>(a) low overhead for small files, in terms of both disk seeks and
+allocated blocks[^10], (b) ability to represent sufficiently large files
+without excessive storage space or performance overhead, and (c) crash
+resiliency—crashing while the file is growing should not endanger
+existing data.</p>
+<p>To do this, the inode uses an asymmetric tree, or actually a series of
+trees of increasing height with the root of each tree stored in the
+inode. As seen in
+<a class="reference external" href="#fig:filesys:inode">[fig:filesys:inode]</a>{reference-type=”autoref”
+reference=”fig:filesys:inode”} the inode contains N <em>direct</em> block
+pointers (12 in ext2/ext3), so that files of N blocks or less need no
+indirect blocks. A single <em>indirect pointer</em> specifies an <em>indirect
+block</em>, holding pointers to blocks <span class="math notranslate nohighlight">\(N, N+1, ... N+N_1-1\)</span> where <span class="math notranslate nohighlight">\(N_1\)</span> is
+the number of block numbers that fit in a file system block (1024 for
+ext2 with a 4 KB blocksize). If necessary, the <em>double-indirect pointer</em>
+specifies a block holding pointers to <span class="math notranslate nohighlight">\(N_1\)</span> indirect blocks, which in
+turn hold pointers to blocks <span class="math notranslate nohighlight">\(N+N_1 ... N+N_1+N_1^2-1\)</span>—i.e. an
+<span class="math notranslate nohighlight">\(N_1\)</span>-ary tree of height 2; a triple indirect block in turn points to a
+tree of height 3. For ext2 with 4-byte block numbers, if we use 4K
+blocks this gives a maximum file size of <span class="math notranslate nohighlight">\((4096/4)^3\)</span> 4 KiB[^11] blocks,
+or 4.004 TiB. This organization allows random access within a file with
+overhead <span class="math notranslate nohighlight">\(O(logN)\)</span> where <span class="math notranslate nohighlight">\(N\)</span> is the file size, which is vastly better
+than the <span class="math notranslate nohighlight">\(O(N)\)</span> overhead of the MS-DOS File Access Table system.</p>
+<p>In addition to the block pointers, the inode holds file <em>metadata</em> such
+as the owner, permissions, size, and timestamps. The separation of name
+(i.e. directory entry) and object (the inode and the blocks it points
+to) also allows files to have multiple names, which for historical
+reasons are called <em>hard links</em>. For the longest time hard links were a
+little-used capability of Unix-style file systems; however Apple Time
+Machine for the HFS+ file system makes good use of them to create
+multiple backup snapshots which share identical files to save space.</p>
+<p>Since files can have multiple names, the inode also contains a reference
+count; as each name is deleted (via the <code class="docutils literal notranslate"><span class="pre">unlink</span></code> system call) the count
+is decremented, and when the count goes to zero the file is deleted.
+This also allows a file to have <em>zero</em> names—when a file is opened the
+reference count (in memory, not on disk) is incremented, and decremented
+when it is closed, so if you unlink a file which is in use, it is not
+actually deleted until the last open file descriptor is closed[^12].</p>
+<p><img alt="Inode-type file organization as found in many Unix file systems (e.g.Linux ext2, ext3). Note that the degree of branching is far lower thanin real file systems, and the triple-indirect pointer ismissing." src="../_images/filesys-inode.png" />{#fig:filesys:inode width=”80%”}</p>
+<p><strong>Ext2 space allocation</strong>: The original Unix file system used a free
+list to store a list of unused blocks; blocks were allocated from the
+head of this list for new files, and returned to the head when freed. As
+files were created and deleted this list became randomized, so that
+blocks allocated for a file were rarely sequential and disk seeks were
+needed for nearly every block read from or written to disk. This wasn’t
+a significant problem, because early Unix systems ran on machines with
+fast disks and excruciatingly slow CPUs. As computers got faster and
+users started noticing that the file system was horribly slow, the Fast
+File System (FFS) from Berkeley Unix replaced the free list with a more
+efficient mechanism, the <em>allocation bitmap</em>.</p>
+<p>Ext2 is essentially a copy of FFS, and uses this bitmap mechanism. It
+keeeps a boolean array with one bit for each disk block; if the block is
+allocated the corresponding bit is set to ‘1’, and cleared to ‘0’ if it
+is freed. To allocate a block you read a portion of this bitmap into
+memory and scan for a ‘0’ bit, changing it to ‘1’ and writing it back.
+When you extend a file you begin the search at the bit corresponding to
+the last block in the file; in this way if a sequential block is
+available it will be allocated. This method results in files being
+allocated in a mostly sequential fashion, reducing disk seeks and
+greatly improving performance. (An additional bitmap is used for
+allocating inodes; in this case we don’t care about sequential
+allocation, but it’s a compact representation, and we can re-use some of
+the code written for block allocation.)</p>
+<p><em>Block groups</em>, as shown in
+<a class="reference external" href="#fig:fs:ext2layout">[fig:fs:ext2layout]</a>{reference-type=”autoref”
+reference=”fig:fs:ext2layout”}, are an additional optimization from FFS.
+Each block group is a miniature file system, with block and inode
+bitmaps, inodes, and data blocks. The file system tries to keep the
+inode and data blocks of a file in the same block group, as well as a
+directory and its contents. In this way common operations (e.g. open and
+read a file, or ‘ls -l’) will typically access blocks within a single
+block group, avoiding long disk seeks.</p>
+<p><img alt="Ext2 on-disklayout" src="../_images/filesys-blockgroups.png" />{#fig:fs:ext2layout width=”90%”}</p>
+<p><strong>Long file names:</strong> Ext2 supports long file names using the mechanism
+used in FFS. Rather than treating the directory as an array of
+fixed-sized structures, it is instead organized as a sequence of
+length/value-encoded entries, with free space treated as just another
+type of entry. Directory search is performed using linear search.</p>
+<p>Ext2 solutions to the three design problems?</p>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>File identification - files and directories are identified by inode
+number, and the location of the fixed-sized inode can be calculated from
+inode number and the inode table location.
+
+File organization - blocks within a file are located via pointers from
+the inode
+
+Free space allocation - free blocks are tracked in a free-space bitmap,
+and block groups are used to keep blocks from the same file near to each
+other, their inode, and their directory.
+</pre></div>
+</div>
+<p>Note the difference here between the data structure (a bitmap) and
+strategies used such as trying to allocate the block immediately after
+the previous one written. The MS-DOS file system organizes its free list
+in an array, as well, and most of the allocation techniques introduced
+in the Berkeley Unix file system could be used with it. In practice,
+however, the MS-DOS file system was typically implemented with simple
+allocation strategies that resulted in significant file system
+fragmentation.</p>
+<p>An additional anti-fragmentation strategy used by many modern operating
+systems is the enforcement of a maximum utilization, typically 90% or
+95%, as when a file system is almost full, it is likely that any free
+space will be found in small fragments scattered throughout the disk. By
+limiting utilization to e.g. 90%—i.e. one block out of ten is
+free—we significantly increase the chance of finding multiple
+contiguous blocks when writing to a file, while greatly decreasing the
+fraction of the bitmap we may need to search to find a free block.</p>
+</section>
+<section id="superblock">
+<h2><span class="section-number">18.4. </span>Superblock<a class="headerlink" href="#superblock" title="Permalink to this headline">#</a></h2>
+<p>Before a disk can be used in most systems it needs to be <em>initialized</em>
+or <em>formatted</em>—the basic file system structures need to be put in
+place, describing a file system with a single directory and no files. A
+key structure written in this process is the <em>superblock</em>, written at a
+well-known location on the disk. (This is often block 1, allowing block
+0 to be used by the boot loader.) The superblock specifies various file
+system parameters, such as:</p>
+<div class="highlight-compactitem notranslate"><div class="highlight"><pre><span></span>Block size - most file systems can be formatted with different block
+sizes, and the OS needs to know this size before it can interpret any
+pointers given in terms of disk blocks. Historically larger blocks were
+used for performance and to allow larger file systems, and smaller
+blocks for space efficiency. In recent years disk drives have
+transitioned to using an internal block size of 4KB, while keeping the
+traditional 512-byte sector addressing, so any file system should use a
+block size of at least 4KB.
+
+Version - including a version number allows backwards compatibility as a
+file system evolves. That way you can upgrade your OS, for instance,
+without reformatting your disk.
+
+Other parameters - in the MS-DOS file system the OS needs to know how
+large the FAT table is, so that it doesn&#39;t accidently go off the end and
+start looking at the first data block. In ext2 you need to know the
+sizes of the block groups, as well as the bitmap sizes, how many inodes
+are in each group, etc.
+
+Dirty flag - when a file system is mounted, this flag is set; as part of
+a clean shutdown the flag is cleared again. If the system crashes
+without clearing the flag, at the next boot this indicates that
+additional error checks are needed before mounting the file system.
+</pre></div>
+</div>
+</section>
+<section id="extents-ntfs-and-ext4">
+<h2><span class="section-number">18.5. </span>Extents, NTFS, and Ext4<a class="headerlink" href="#extents-ntfs-and-ext4" title="Permalink to this headline">#</a></h2>
+<p>The ext2 and MS-DOS file systems use separate pointers to every data
+block in a file, located in inodes and indirect blocks in the case of
+ext2, and in the file allocation table in MS-DOS. But the values stored
+in these pointers are often very predictable, because the file system
+attempts to allocate blocks sequentially to avoid disk seeks—if the
+first block in a file is block 100, it’s highly likely that the second
+will be 101, the third 102, etc.</p>
+<p>We can take advantage of this to greatly compress the information needed
+to identify the blocks in a file - rather than having separate pointers
+to blocks 100,101,…120 we just need to identify the starting block
+(100) and the length (21 blocks). This is shown in
+<a class="reference external" href="#fig:filesys:extent">[fig:filesys:extent]</a>{reference-type=”autoref”
+reference=”fig:filesys:extent”}, where five data blocks are identified
+by inodes or indirect block pointers; to the right, the same five data
+blocks are identified by a single extent. Why would we want to compress
+the information needed to organize the blocks in a file? Mostly for
+performance—although the code is more complicated, it will require
+fewer disk seeks to read from disk.</p>
+<p>This organization is the basis of <em>extent-based</em> file systems, where
+blocks in a file are identified via one or more <em>extents</em>, or
+(start,length) pairs. The inode (or equivalent) can contain space for a
+small number of extents; if the file grows too big, then you add the
+equivalent of indirect blocks - extents pointing to blocks holding more
+extents. Both Microsoft NTFS and Linux ext4 use this sort of extent
+structure.</p>
+<p><img alt="File structure---pointers vs.extents" src="../_images/files-pointers.png" />{#fig:filesys:extent width=”30%”}</p>
+<hr class="docutils" />
+<p><img alt="File structure---pointers vs.extents" src="../_images/files-extent.png" />{#fig:filesys:extent width=”30%”}</p>
+<p><strong>NTFS</strong>: Each NTFS file system has a Master File Table (MFT), which is
+somewhat like the inode table in ext2—each file or directory has an
+entry in this table which holds things like permissions, timestamps, and
+block information. (The superblock contains a pointer to the start of
+the MFT; the first entry in the MFT describes the MFT itself, so that it
+can grow as needed.) Each entry in the MFT is structured as a set of
+attributes, with a $Data attribute specifying the file contents. This
+attribute can be of two types: internal, where the attribute holds file
+data directly (for very small files), or external, in which case the
+$Data attribute holds a list of <em>extents</em>, or contiguous regions
+identified by a starting block and length.</p>
+<p>If the number of extents grows too large to fit into the MFT entry, an
+$ATTRIBUTE_LIST field is added, holding a list of extents describing
+the blocks holding the list of extents describing the file. This can
+continue for one more level, which is enough to support files up to
+16TB. Note that the amount of space taken by the $Data attribute
+depends not only on the size of the file, but its fragmentation; a very
+large file created on an empty file system might consist of only a few
+extents, while a modest-sized file created slowly (e.g. a log file) on a
+full file system might be composed of hundreds of extents.</p>
+<p>Free space is handled similarly, as a list of extents sorted by starting
+block number; this allows the free space list to be easily compacted
+when storage is freed. (i.e. just by checking to see if it can be
+combined with its neighbors on either side) This organization makes it
+easy to minimize file fragmentation, reducing the number of disk seeks
+required to read a file or directory. It has the disadvantage that
+random file access is somewhat more complex, and appears to require
+reading the entire extent list to find which extent an offset may be
+found in. (A more complex organization could in fact reduce this
+overhead; however in practice it does not seem significant, as unless
+highly fragmented the extent lists tend to be fairly short and easily
+cached.)</p>
+<p>NTFS solutions to the three design problems?</p>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>file identification - Master File Table entry
+
+file organization - (possibly multi-level) extent list
+
+free space management - sorted extent list.
+</pre></div>
+</div>
+<p><strong>Ext4</strong>: Ext4 supports extent-based file organization with minimal
+change to the inode structure in ext2/ext3: an extent tree is used, with
+each node explicitly marked as an interior or leaf node, as shown in
+<a class="reference external" href="#fig:filesys:ext4">[fig:filesys:ext4]</a>{reference-type=”autoref”
+reference=”fig:filesys:ext4”}. The inode holds a four-entry extent tree
+node, allowing small files to be accessed without additional lookup
+steps, while for moderate-sized files only a single level of the tree (a
+“leaf node” in the figure) is needed.</p>
+<p><img alt="Ext4 on-disk structure" src="../_images/files-ext4.png" />{#fig:filesys:ext4
+width=”70%”}</p>
+</section>
+<section id="smarter-directories">
+<h2><span class="section-number">18.6. </span>Smarter Directories<a class="headerlink" href="#smarter-directories" title="Permalink to this headline">#</a></h2>
+<p>In the CD-ROM, MS-DOS, and ext2 file systems, a directory is just an
+array of directory entries, in unsorted order. To find a file, you
+search through the directory linearly; to delete a file, you mark its
+entry as unused; finally, to create a new entry, you find any entry
+that’s free. (It’s a bit more complicated for file systems like ext2
+which have variable-length directory entries, but not much.)</p>
+<p>From your data structures class you should realize that linear search
+isn’t an optimal data structure for searching, but it’s simple, robust,
+and fast enough for small directories, where the primary cost is
+retrieving a block of data from the disk. As an example, one of my Linux
+machines has 94944 directories that use a single 4KB block, another 957
+that use 2 to 5 blocks, and only 125 larger than 5 blocks. In other
+words, for the 99% of the directories that fit within a single 4 KB
+block, a more complex algorithm would not reduce the amount of data read
+from disk, and the difference between <span class="math notranslate nohighlight">\(O(N)\)</span> and <span class="math notranslate nohighlight">\(O(logN)\)</span> algorithms
+when searching a single block is negligible.</p>
+<p>However the largest directories are actually quite big: the largest on
+this machine, for example, has 13,748 entries; another system I measured
+had a database directory containing about 64,000 files with long file
+names, or roughly 4000 blocks (16 MB) of directory data. Since
+directories tend to grow slowly, these blocks were probably allocated a
+few at a time, resulting in hundreds or thousands of disk seeks to read
+the entire directory into memory. At 15 ms per seek, this could require
+10-30 seconds or more, and once the data was cached in memory, linear
+search in a 16 MB array will probably take a millisecond or two.</p>
+<p>To allow directories with tens of thousands of files or more, modern
+file systems tend to use more advanced data structures for their
+directories. NTFS (and Linux Btrfs) use B-trees, a form of a balanced
+tree. Other file systems, like Sun ZFS, use hash tables for their
+directories, while ext4 uses a hybrid hash/tree structure. If you’re
+really interested, you can look these up in Google.</p>
+<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/files-btree.pdf){height=&quot;25\\baselineskip&quot;}
+</pre></div>
+</div>
+</section>
+<section id="the-b-tree">
+<h2><span class="section-number">18.7. </span>The B-tree<a class="headerlink" href="#the-b-tree" title="Permalink to this headline">#</a></h2>
+<p>The B-tree is one of those widely-used data structures that you never
+see in your data structures course. It’s not a file system— the B-tree
+is a disk-optimized search structure, optimized for the case where
+accessing a block of information is much more expensive (e.g. requiring
+a disk seek) than searching through that block after it has been
+accessed. It has been used for file systems, databases, and similar
+purposes since the 1970s, along with various extensions (e.g.
+B<span class="math notranslate nohighlight">\(^+\)</span>-trees) which are not described here.</p>
+<p>B-tries are balanced trees made up of large blocks, with a high
+branching factor, in order to reduce the number of block accesses needed
+for an operation. Interior and leaf nodes are identical; each contains a
+sorted list of key/value pairs, and (in non-leaf nodes) pointers between
+pairs of keys, pointing to subtrees holding keys which are between those
+two values. The tree grows from the bottom up: if a block overflows, you
+split it, dividing the contents between two blocks, and add a pointer to
+the new block in the correct position in the parent; if the parent
+overflows it is split, and so on. If the root node splits, a new root is
+allocated with pointers to the two pieces.</p>
+<p>If the branching factor of a B-tree is m, then each block (except for
+the root) holds between m/2 and m entries. In the example shown in
+<a class="reference external" href="#fig:btree">[fig:btree]</a>{reference-type=”autoref”
+reference=”fig:btree”}, m=2; in a real system each node would contain
+many more entries.</p>
+<p>In <a class="reference external" href="#fig:btree">[fig:btree]</a>{reference-type=”autoref”
+reference=”fig:btree”} we see seven values being added to the tree,
+which grows “from the bottom up”:</p>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>The first value goes in the root
+
+Since the root isn&#39;t full, the second value goes here too
+
+Now it&#39;s full - split the block. Since the block doesn&#39;t have a parent
+(it&#39;s the root) we add one, which becomes the new root
+
+&#39;4&#39; fits into one of the leaf nodes where there&#39;s room
+
+&#39;5&#39; doesn&#39;t fit, so we split the node. There&#39;s room in the parent to
+hold another pointer
+
+&#39;6&#39; fits in the leaf node
+
+&#39;7&#39; doesn&#39;t, so we split the leaf node, but that causes the parent node
+to overflow, so we split it, and have to add a new parent node which
+becomes the new root.
+</pre></div>
+</div>
+</section>
+<section id="consistency-and-journaling">
+<h2><span class="section-number">18.8. </span>Consistency and Journaling<a class="headerlink" href="#consistency-and-journaling" title="Permalink to this headline">#</a></h2>
+<p>Unlike in-memory structures, data structures on disk must survive system
+crashes, whether due to hardware reasons (e.g. power failure) or
+software failures. This is a different problem than the consistency
+issues we dealt with for in-memory structures, where data corruption
+could only occur due to the action of other threads, and could be
+prevented by the proper use of mutexes and similar mechanisms.
+Unfortunately there is no mutex which will prevent a system from
+crashing before the mutex is unlocked, or file system designers would
+use it liberally. The problem is compounded by the fact that operating
+systems typically cache reads and writes to increase performance, so
+that writes to the disk may occur in a much different order than that in
+which they were issued by the file system code.</p>
+<p>In its simplest form the problem is that file system operations often
+involve writing to multiple disk blocks—for example, moving a file
+from one directory to another requires writing to blocks in the source
+and destination directories, while creating a file writes to the block
+and inode allocation bitmaps, the new inode, the directory block, and
+the file data block or blocks[^13]. If some but not all of</p>
+<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/files-corruption.pdf){height=&quot;8\\baselineskip&quot;}
+</pre></div>
+</div>
+<p>these writes occur before a crash, the file system may become
+<em>inconsistent</em>—i.e. in a state not achievable through any legal
+sequence of file system operations, where some operations may return
+improper data or cause data loss.</p>
+<p>For a particularly vicious example, consider deleting the file <code class="docutils literal notranslate"><span class="pre">/a/b</span></code> as
+shown in
+<a class="reference external" href="#fig:delete:vicious">[fig:delete:vicious]</a>{reference-type=”autoref”
+reference=”fig:delete:vicious”}, which requires the following actions:</p>
+<div class="highlight-enumerate* notranslate"><div class="highlight"><pre><span></span>Clear the directory entry for /a/b. This is done by marking the entry as
+unused and writing its block back to the directory.
+
+Free the file data block, by clearing the corresponding entry in the
+block allocation bitmap
+</pre></div>
+</div>
+<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/files-failure-case1.pdf){height=&quot;8\\baselineskip&quot;}
+</pre></div>
+</div>
+<p>This results in two disk blocks being modified and written back to disk;
+if the blocks are cached and written back at a later point in time they
+may be written to disk in any order. (this doesn’t matter for running
+programs, as when they access the file system the OS will check cached
+data before going to disk)</p>
+<p>If the system crashes (e.g. due to a power failure) after one of these
+blocks has been written to disk, but not the other, two case are
+possible:</p>
+<div class="highlight-enumerate* notranslate"><div class="highlight"><pre><span></span>The directory block is written, but not the bitmap. The file is no
+longer accessible, but the block is still marked as in use. This is a
+disk space leak (like a memory leak), resulting in a small loss of disk
+space but no serious problems.
+
+The bitmap block is written, but not the directory. Applications are
+still able to find the file, open it, and write to it, but the block is
+also available to be allocated to a new file or directory. This is much
+more serious.
+</pre></div>
+</div>
+<p>If the same block is now re-allocated for a new file (<code class="docutils literal notranslate"><span class="pre">/a/c</span></code> in this
+case) we now have two files sharing the same data block, which is
+obviously a problem. If an application writes to <code class="docutils literal notranslate"><span class="pre">/a/b</span></code> it will also
+overwrite any data in <code class="docutils literal notranslate"><span class="pre">/a/c</span></code>, and vice versa. If <code class="docutils literal notranslate"><span class="pre">/a/c</span></code> is a directory
+rather than a file things are even worse - a write to <code class="docutils literal notranslate"><span class="pre">/a/b</span></code> will wipe
+out directory entries, causing files pointed to by those entries to be
+lost. (The files themselves won’t be erased, but</p>
+<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/files-failure-case2.pdf){height=&quot;8\\baselineskip&quot;}
+</pre></div>
+</div>
+<p>without directory entries pointing to them there won’t be any way for a
+program to access them.)</p>
+<p>This can be prevented by writing blocks in a specific order—for
+instance in this case the directory entry could always be cleared before
+the block is marked as free, so that in the worst case a crash might
+cause a few data blocks to become unusable. Unfortunately this is very
+slow, as these writes must be done synchronously, waiting for each write
+to complete before issuing the next one.</p>
+<p><strong>Fsck / chkdsk</strong>: One way to prevent this is to run a disk checking
+routine every time the system boots after a crash. The dirty flag in the
+file system superblock was described in the section above; when a
+machine boots, if the file system is marked dirty, (<code class="docutils literal notranslate"><span class="pre">fsck</span></code>, or <code class="docutils literal notranslate"><span class="pre">chkdsk</span></code>
+in Windows) is run to repair any problems.</p>
+<p>In particular, the Unix file system checker performs the following
+checks and corrections:</p>
+<div class="highlight-enumerate* notranslate"><div class="highlight"><pre><span></span>Blocks and sizes. Each allocated inode is checked to see that (a) the
+number of blocks reachable through direct and indirect pointers is
+consistent with the file size in the inode, (b) all block pointers are
+within the valid range for the volume, and (c) no blocks are referenced
+by more than one inode.
+
+Pathnames. The directory tree is traversed from the root, and each entry
+is checked to make sure that it points to a valid inode of the same type
+(directory / file / device) as indicated in the entry.
+
+Connectivity. Verifies that all directory inodes are reachable from the
+root.
+
+Reference counts. Each inode holds a count of how many directory entries
+(hard links) are pointing to it. This step validates that count against
+the count determined by traversing the directory tree, and fixes it if
+necessary.
+
+&quot;Cylinder Groups&quot; The block and inode bitmaps are checked for
+consistency. In particular, are all blocks and inodes reachable from the
+root marked in use, and all unreachable ones marked free?
+
+&quot;Salvage Cylinder Groups&quot; Free inode and block bitmaps are updated to
+fix any discrepancies.
+</pre></div>
+</div>
+<p>This is a lot of work, and involves a huge number of disk seeks. On a
+large volume it can take hours to run. Note that full recovery may
+involve a lot of manual work; for instance, if fsck finds any files
+without matching directory entries, it puts them into a <code class="docutils literal notranslate"><span class="pre">lost+found</span></code>
+directory with numeric names, leaving a human (i.e. you) to figure out
+what they are and where they belong.</p>
+<p>Checking disks at startup worked fine when disks were small, but as they
+got larger (and seek times didn’t get faster) it started taking longer
+and longer to check a file system after a crash. Uninterruptible power
+supplies help, but not completely, since many crashes are due to
+software faults in the operating system. The corruption problem you saw
+was due to inconsistency in the on-disk file system state. In this
+example, the free space bitmap did not agree with the directory entry
+and inode. If the file system can ensure that the on-disk data is always
+in a consistent state, then it should be possible to prevent losing any
+data except that being written at the exact moment of the crash.</p>
+<p>Performing disk operations synchronously (and carefully ordering them in
+the code) will prevent inconsistency, but as described above imposes
+excessive performance costs. Instead a newer generation of file systems,
+termed <em>journaling</em> file systems, has incorporated mechanisms which add
+additional information which can be used for recovery, allowing caching
+and efficient use of the disk, while maintaining a consistent on-disk
+state.</p>
+<p><img alt="Synchronous disk writes for ext2consistency." src="fs/figures/files-syncwrite" />{#fig:syncwrites width=”100%”}</p>
+</section>
+<section id="journaling">
+<h2><span class="section-number">18.9. </span>Journaling<a class="headerlink" href="#journaling" title="Permalink to this headline">#</a></h2>
+<p>Most modern file systems (NTFS, ext3, ext4, and various others) use
+<em>journaling</em>, a variant of the database technique of <em>write-ahead
+logging</em>. The idea is to keep a log which records the changes that are
+going to be made to the file system, <em>before those changes are made</em>.
+After an entry is written to the log, the changes can be written back in
+any order; after they are all written, the section of log recording
+those changes can be freed.</p>
+<p>When recovering from a crash, the OS goes through the log and checks
+that all the changes recorded there have been performed on the file
+system itself[^14]. Some thought should convince you that if a log entry
+is written, then the modification is guaranteed to happen, either before
+or after a crash; if the log entry isn’t written completely then the
+modification never happened. (There are several ways to detect a
+half-written log entry, including using an explicit end marker or a
+checksum; we’ll just assume that it’s possible.)</p>
+<div class="highlight-center notranslate"><div class="highlight"><pre><span></span>![image](figures/files-corruption2.pdf){width=&quot;45%&quot;}\
+Step 1: record action in log
+
+------------------------------------------------------------------------
+
+Step 2: write blocks in any order
+</pre></div>
+</div>
+<p>** Ext3 Journaling **: The ext3 file system uses physical block logging:
+each log entry contains a header identifying the disk blocks which are
+modified (in the example you saw earlier, the bitmap and the directory
+entry) and a copy of the disk blocks themselves. After a crash the log
+is replayed by writing each block from the log to the location where it
+belongs. If a block is written multiple times in the log, it will get
+overwritten multiple times during replay, and after the last over-write
+it will have the correct value.</p>
+<p>To avoid synchronous journal writes for every file operation, ext3 uses
+<em>batch commit</em>: journal writes are deferred, and multiple writes are
+combined into a single transaction. The log entries for the entire batch
+are written to the log in a single sequential write, called a
+<em>checkpoint</em>. In the event of a crash, any modifications since the last
+checkpoint will be lost, but since checkpoints are performed at least
+every few seconds, this typically isn’t a problem. (If your program
+needs a guarantee that data is written to a file <em>right now</em>, you need
+to use the <code class="docutils literal notranslate"><span class="pre">fsync</span></code> system call to flush data to disk.)</p>
+<p>Ext3 supports three different journaling modes:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>* Journaled *: In this mode, all changes (to file data, directories,
+inodes and bitmaps) are written to the log before any modifications are
+made to the main file system.
+
+*Ordered*: Here, data blocks are flushed to the main file system before
+a journal entry for any metadata changes (directories, free space
+bitmaps, inodes) is written to the log, after which the metadata changes
+may be made in the file system. This provides the same consistency
+guarantees as journaled mode, but is usually faster.
+
+*Writeback*: In this mode, metadata changes are always written to the
+log before being applied to the main file system, but data may be
+written at any time. It is faster than the other two modes, and will
+prevent the file system itself from becoming corrupted, but data within
+a file may be lost.
+</pre></div>
+</div>
+</section>
+<section id="log-structured-file-systems">
+<h2><span class="section-number">18.10. </span>Log-Structured File Systems<a class="headerlink" href="#log-structured-file-systems" title="Permalink to this headline">#</a></h2>
+<p>Log-structured file systems (like LFS in NetBSD, or NetApp WAFL) are an
+extreme version of a journaled file system: the journal is the entire
+file system. Data is never over-written; instead a form of copy-on-write
+is used: modified data is written sequentially to new locations in the
+log. This gives very high write speeds because all writes (even random
+ones) are written sequentially to the disk.</p>
+<p><a class="reference external" href="#fig:fs:lfs">[fig:fs:lfs]</a>{reference-type=”autoref”
+reference=”fig:fs:lfs”} compares LFS to ext2, showing a simple file
+system with two directories (dir1, dir2) and two files (/dir1/file1,
+/dir2/file2). In ext2 the root directory inode is found in a fixed
+location, and its data blocks do not move after being allocated; in LFS
+both inode and data blocks move around—as they are modified, the new
+blocks get written to the head of the log rather than overwriting the
+old ones. The result can be seen graphically in the figure—in the LFS
+image, pointers only point to the left, pointing to data that is older
+than the block holding a pointer.</p>
+<p><img alt="Ext2 vs Log-structured file systemlayout" src="../_images/files-lfs.png" />{#fig:fs:lfs}</p>
+<p>Unlike ext2 there is no fixed location to find the root directory; this
+is solved by periodically storing its location in a small checkpoint
+record in a fixed location in the superblock. (This checkpoint is not
+shown in the figure, and would be the only arrow pointing to the right.)</p>
+<p>When a data block is re-written, a new block with a new address is used.
+This means that the inode (or indirect block) pointing to the data block
+must be modified, which means that its address changes.</p>
+<p>LFS uses a table mapping inodes to locations on disk, which is updated
+with the new inode address to complete the process; this table is itself
+stored as a file. (The astute reader may wonder why this update doesn’t
+in fact trigger another update to the inode file, leading to an infinite
+loop. This is solved by buffering blocks in memory before they are
+written, so that multiple changes can be made.)</p>
+<p><img alt="image" src="../_images/files-wafl1.png" />{width=”20%”}
+<img alt="image" src="../_images/files-wafl2.png" />{width=”30%”}</p>
+<hr class="docutils" />
+<p>In WAFL these changes percolate all the way up through directory
+entries, directory inodes, etc., to the root of the file system,
+potentially causing a large number of writes for a small modification.
+(although they’ll still be fairly fast since it’s a single sequential
+write) To avoid this overhead, WAFL buffers a large number of changes
+before writing to disk; thus although any single write will modify the
+root directory, only a single modified copy of the root directory has to
+be written in each batch.</p>
+<p>In <a class="reference external" href="#fig:fs:wafl">[fig:fs:wafl]</a>{reference-type=”autoref”
+reference=”fig:fs:wafl”} a WAFL directory tree is shown before and after
+modifying /dir1/file2, with the out-of-date blocks shown in grey. If we
+keep a pointer to the old root node, then you can access a copy of the
+file system as it was at that point in time. When the disk fills up
+these out-of-date blocks are collected by a garbage collection process,
+and made available for new writes.</p>
+<p>One of the advantages of a log-structured file system is the ability to
+easily keep snapshots of file system state—a pointer to an old version
+of the inode table or root directory will give you access to a copy of
+the file system at the point in time corresponding to that version.
+(e.g. look in your .snapshot directory on <code class="docutils literal notranslate"><span class="pre">login.ccs.neu.edu</span></code> - this
+data is stored on a NetApp filer using WAFL and its snapshot
+functionality.)</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./fs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="interface.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">17. </span>Interface</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="kernelimp.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Kernel implementation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Angela Demke Brown, Orran Krieger & Larry Woodman<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
