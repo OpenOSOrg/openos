@@ -27,7 +27,10 @@ parts:
 - caption: 'File Systems'
   numbered: True
   chapters:
-  - file: fs/fs
+  - file: fs/intro
+  - file: fs/interface
+  - file: fs/disklayout
+  - file: fs/kernelimp
 - caption: 'Concurrency'
   numbered: True
   chapters:
