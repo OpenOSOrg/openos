@@ -9,6 +9,7 @@ parts:
   - file: intro/structure
   - file: intro/services
   - file: intro/tools
+  - file: intro/peter-other
 - caption: 'Scheduling'
   numbered: True
   chapters:
@@ -24,6 +25,7 @@ parts:
   - file: mm/mmhw
   - file: mm/mmdyn
   - file: mm/realworld
+  - file: mm/peter-mm
 - caption: 'File Systems'
   numbered: True
   chapters:
@@ -40,6 +42,7 @@ parts:
   - file: sync/deadlock
   - file: sync/hardware_challenges
   - file: sync/linux_locking
+  - file: peter-syncro
 - caption: 'Other Topics'
   numbered: True
   chapters:
@@ -47,6 +50,7 @@ parts:
   - file: sec/sec
   - file: virt/virt
   - file: intro/other
+  - file: devices/block-dev
 - caption: 'Appendices'
   numbered: True
   chapters:
