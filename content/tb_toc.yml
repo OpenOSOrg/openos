@@ -17,14 +17,20 @@ parts:
 - caption: 'Memory Management'
   numbered: True
   chapters:
+  - file: mm/intro
+  - file: mm/physmem
+  - file: mm/virt-seg
+  - file: mm/virt-paging
+  - file: mm/reclamation
+  - file: mm/page-size
+  - file: mm/buffer-cache
+  - file: mm/page-fault-handling
+  - file: mm/pagefaults
+  - file: mm/misc
+  - file: mm/realworld
+  - file: mm/concl
   - file: mm/mm
   - file: mm/Overview
-  - file: mm/reclamation
-  - file: mm/datastruc
-  - file: mm/pagefaults
-  - file: mm/mmhw
-  - file: mm/mmdyn
-  - file: mm/realworld
   - file: mm/peter-mm
 - caption: 'File Systems'
   numbered: True
