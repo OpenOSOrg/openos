@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>37. # I/O, Drivers, and DMA {#chap:blockdevs} &#8212; Introduction to Operating Systems</title>
+    <title>37. I/O, Drivers, and DMA {#chap:blockdevs} &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -316,7 +316,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   37. # I/O, Drivers, and DMA {#chap:blockdevs}
+   37. I/O, Drivers, and DMA {#chap:blockdevs}
   </a>
  </li>
 </ul>
@@ -830,7 +830,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1># I/O, Drivers, and DMA {#chap:blockdevs}</h1>
+                <h1>I/O, Drivers, and DMA {#chap:blockdevs}</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -1095,7 +1095,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="i-o-drivers-and-dma-chap-blockdevs">
-<h1><span class="section-number">37. </span># I/O, Drivers, and DMA {#chap:blockdevs}<a class="headerlink" href="#i-o-drivers-and-dma-chap-blockdevs" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">37. </span>I/O, Drivers, and DMA {#chap:blockdevs}<a class="headerlink" href="#i-o-drivers-and-dma-chap-blockdevs" title="Permalink to this headline">#</a></h1>
 <p>This chapter covers (a) the memory and I/O bus architecture of modern
 computers, (b) programmed I/O and direct-memory access, (c) disk drive
 components and how they influence performance, and (d) logical block
@@ -1117,7 +1117,7 @@ memory access (DMA), and device drivers in interacting with them. In
 addition, you will examine one device, the hard disk drive and its
 corresponding controller, which is the source and destination of most
 I/O on typical systems.</p>
-<p><img alt="Standard Intel PC Architecture" src="devices/figures/iobus-fig1.pdf" />{#fig:iobus:1
+<p><img alt="Standard Intel PC Architecture" src="../_images/iobus-fig1.png" />{#fig:iobus:1
 width=”60%”}</p>
 </section>
 <section id="pc-architecture-and-buses">
@@ -1202,7 +1202,7 @@ interrupt. The interrupt handler then finishes the request. In the
 illustrated example, the interrupt handler (step 5) reads data that has
 become available, and then (step 6) wakes the waiting process, which
 returns from the I/O call (step 7) and continues.</p>
-<p><img alt="image" src="devices/figures/iobus-irq" />{width=”50%”}\</p>
+<p><img alt="image" src="../_images/iobus-irq.png" />{width=”50%”}\</p>
 <hr class="docutils" />
 <p>(a) polled</p>
 <hr class="docutils" />
@@ -1226,8 +1226,8 @@ ethernet controller) In such a system, reading data from a device in
 4-byte words would result in a throughput of 5 words every microsecond,
 or 20MB/s — far slower than a modern network adapter or disk
 controller.</p>
-<p><img alt="DMA access for high-speed datatransfer" src="devices/figures/iobus-latency" />{#fig:iobus:dma width=”90%”}</p>
-<p><img alt="DMA access for high-speed datatransfer" src="devices/figures/iobus-dma" />{#fig:iobus:dma width=”\textwidth”}</p>
+<p><img alt="DMA access for high-speed datatransfer" src="../_images/iobus-latency.png" />{#fig:iobus:dma width=”90%”}</p>
+<p><img alt="DMA access for high-speed datatransfer" src="../_images/iobus-dma.png" />{#fig:iobus:dma width=”\textwidth”}</p>
 <section id="review-questions">
 <h4><span class="section-number">37.2.3.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h4>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
@@ -1290,7 +1290,7 @@ and finally the CPU tried to read it back?
 simple devices which do not allow multiple outstanding requests.) The
 interrupt handler can then determine which operations have completed,
 free their DMA descriptors, and notify any waiting processes.</p>
-<p><img alt="List of typical DMAdescriptors" src="devices/figures/iobus-desc.pdf" />{#fig:iobus:desc width=”85%”}</p>
+<p><img alt="List of typical DMAdescriptors" src="../_images/iobus-desc.png" />{#fig:iobus:desc width=”85%”}</p>
 </section>
 <section id="device-driver-architecture">
 <h3><span class="section-number">37.2.6. </span>Device Driver Architecture<a class="headerlink" href="#device-driver-architecture" title="Permalink to this headline">#</a></h3>
@@ -1298,7 +1298,7 @@ free their DMA descriptors, and notify any waiting processes.</p>
 reference=”fig:iobus:driver”} illustrates the I/O process for a typical
 device from user-space application request through the driver, hardware
 I/O operation, interrupt, and finally back to user space.</p>
-<p><img alt="Driver Architecture" src="devices/figures/iobus-driver.eps" />{#fig:iobus:driver
+<p><img alt="Driver Architecture" src="../_images/iobus-driver.png" />{#fig:iobus:driver
 width=”80%”}</p>
 <p>In more detail:</p>
 <div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>The user process executes a `read` system call, which in turn invokes
@@ -1353,9 +1353,7 @@ the following:</p>
   15,000 RPM   250             4
 </pre></div>
 </div>
-<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/disk-pic.pdf){height=&quot;10\\baselineskip&quot;}
-</pre></div>
-</div>
+<p><img alt="image" src="../_images/disk-pic.png" />{height=”10\baselineskip”}</p>
 <p><strong>Head and actuator arm:</strong> these take between 1 and 10 ms to move from
 one track to another on consumer disk drives, depending on the distance
 between tracks, and between 1 and 4 ms on high-end enterprise drives.
@@ -1386,7 +1384,7 @@ Reading or writing until the last bit has passed under the head.
 (*transfer time*)
 </pre></div>
 </div>
-<p><img alt="Hard disk latency" src="devices/figures/disk-latency.eps" />{#fig:disk:latency
+<p><img alt="Hard disk latency" src="../_images/disk-latency.png" />{#fig:disk:latency
 width=”90%”}</p>
 </section>
 <section id="geometric-disk-addressing">
@@ -1757,7 +1755,7 @@ else:
    A0 = A + S
 </pre></div>
 </div>
-<p><img alt="Partition layout andformula" src="devices/figures/raid-partition.eps" />{#fig:raid:partition
+<p><img alt="Partition layout andformula" src="../_images/raid-partition.png" />{#fig:raid:partition
 width=”\textwidth”}</p>
 <section id="id7">
 <h4><span class="section-number">37.4.1.1. </span>Review questions<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h4>
@@ -1777,8 +1775,8 @@ systems on multiple disks and use the mount command to join them into a
 single file system hierarchy, as shown in
 <a class="reference external" href="#fig:raid:mountpoints">[fig:raid:mountpoints]</a>{reference-type=”autoref”
 reference=”fig:raid:mountpoints”}.</p>
-<p><img alt="image" src="devices/figures/raid-mountpoints.pdf" />{width=”40%”}
-<img alt="image" src="devices/figures/raid-onemount.pdf" />{width=”50%”}</p>
+<p><img alt="image" src="../_images/raid-mountpoints.png" />{width=”40%”}
+<img alt="image" src="../_images/raid-onemount.png" />{width=”50%”}</p>
 <p>This has disadvantages, though. What if you have 3 100GB disks, but
 200GB of home directories? Now you’re stuck with home directories that
 look like /home/disk1/joe and /home/disk2/jane, and no matter how you
@@ -1845,7 +1843,7 @@ disks. In the figure, when writing strips 0 through 5, strips 0, 1, and
 followed by writes to strips 3, 4, and 5. Thus, writing six strips would
 take the same amount of time it takes to write two strips to a single
 disk.</p>
-<p><img alt="Striping across three disks" src="devices/figures/raid-stripe.pdf" />{#fig:raid:stripe
+<p><img alt="Striping across three disks" src="../_images/raid-stripe.png" />{#fig:raid:stripe
 width=”80%”}</p>
 <p>How big is a strip? It depends, as this value is typically
 configurable—the RAID algorithms work with any strip size, although
@@ -1880,9 +1878,7 @@ integer arithmetic:</p>
 </section>
 <section id="mirroring">
 <h3><span class="section-number">37.4.4. </span>Mirroring<a class="headerlink" href="#mirroring" title="Permalink to this headline">#</a></h3>
-<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/raid-mirrorfail.pdf){height=&quot;7\\baselineskip&quot;}
-</pre></div>
-</div>
+<p><img alt="image" src="../_images/raid-mirrorfail.png" />{height=”7\baselineskip”}</p>
 <p>Disks fail, and if you don’t have a copy of the data on that disk, it’s
 lost. A lot of effort has been spent on creating multi-disk systems
 which are more reliable than single-disk ones, by adding
@@ -1939,12 +1935,12 @@ to.)
 hardware support, the OS can check on startup to see if it was cleanly
 shut down, and if not it may need to check both sides of the mirror and
 ensure they are consistent. (a lengthy process with modern disks)</p>
-<p><img alt="Failure during mirror write causinginconsistency" src="devices/figures/raid-consistency.pdf" />{#fig:mirrorincons
+<p><img alt="Failure during mirror write causinginconsistency" src="../_images/raid-consistency.png" />{#fig:mirrorincons
 width=”90%”}</p>
 </section>
 <section id="striping-mirroring-raid-0-1-raid-1-0">
 <h3><span class="section-number">37.4.6. </span>Striping + Mirroring (RAID 0+1, RAID 1+0)<a class="headerlink" href="#striping-mirroring-raid-0-1-raid-1-0" title="Permalink to this headline">#</a></h3>
-<p><img alt="image" src="devices/figures/raid-zero-one.pdf" />{width=”60%”}</p>
+<p><img alt="image" src="../_images/raid-zero-one.png" />{width=”60%”}</p>
 <p>Mirroring and striping can also be used to construct a logical volume
 out of other logical volumes, so you can create a mirrored volume
 consisting of two striped volumes, or a striped volume consisting of two
@@ -1975,9 +1971,7 @@ between 2 and 5 disks would have to fail (3.66 on average). If you plan
 on replacing disks as soon as they fail, this may be more reliability
 than you need or are willing to pay for. RAID 4 provides a high degree
 of reliability with much less overhead than mirroring or RAID 1+0.</p>
-<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/raid-parity.pdf){height=&quot;6\\baselineskip&quot;}
-</pre></div>
-</div>
+<p><img alt="image" src="../_images/raid-parity.png" />{height=”6\baselineskip”}</p>
 <p>RAID 4 takes N drives and adds a single parity drive, creating an array
 that can tolerate the failure of any single disk without loss of data.
 It does this by using the parity function (also known as exclusive-OR,
@@ -1999,7 +1993,7 @@ striped (RAID 0) volume, except for the parity drive. We can see this in
 reference=”fig:raid4”} — each data block is located in the same place
 as in the striped volume, and then the corresponding parity block is
 located on a separate disk.</p>
-<p><img alt="RAID 4 organization" src="devices/figures/raid-four.pdf" />{#fig:raid4 width=”40%”}</p>
+<p><img alt="RAID 4 organization" src="../_images/raid-four.png" />{#fig:raid4 width=”40%”}</p>
 <p><strong>Writing to a RAID 4 Volume</strong>: How you write to a RAID 4 volume depends
 on whether it is a small or large write. For large writes you can
 over-write a complete stripe set at a time, letting you calculate the
@@ -2014,7 +2008,7 @@ reference=”fig:raid4:write”} you can see that a small write can take
 twice as long and require four times as many operations as the
 corresponding write to a striped volume, where no parity recalculation
 is needed.</p>
-<p><img alt="image" src="devices/figures/raid-four-bigwrite.pdf" />{width=”\textwidth”}<br />
+<p><img alt="image" src="../_images/raid-four-bigwrite.png" />{width=”\textwidth”}<br />
 Large write:</p>
 <div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Calculate parity (no I/O needed)
 
@@ -2022,7 +2016,7 @@ Large write:</p>
 </pre></div>
 </div>
 <hr class="docutils" />
-<p><img alt="image" src="devices/figures/raid-four-smallwrite.eps" />{width=”110%”}<br />
+<p><img alt="image" src="../_images/raid-four-smallwrite.png" />{width=”110%”}<br />
 Small write:</p>
 <div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>\(1\) read old data, parity
 
@@ -2072,9 +2066,7 @@ unlikely.) In the five-drive case shown here, if a disk can complete 200
 operations a second, the RAID 4 array would be limited to 100 small
 writes per second, while the RAID 5 array could perform 250. (5 disks =
 1000 requests/second, and 4 requests per small write)</p>
-<div class="highlight-center notranslate"><div class="highlight"><pre><span></span>![image](figures/raid-five.pdf){width=&quot;80%&quot;}
-</pre></div>
-</div>
+<p><img alt="image" src="../_images/raid-five.png" />{width=”80%”}</p>
 </section>
 <section id="raid-6-more-reliability">
 <h3><span class="section-number">37.4.9. </span>RAID 6 - more reliability<a class="headerlink" href="#raid-6-more-reliability" title="Permalink to this headline">#</a></h3>
@@ -2124,9 +2116,7 @@ typically offer functions to migrate storage contents and to create
 snapshots of a volume.</p>
 <p><strong>Volume snapshots</strong> rely on a copy-on-write mechanism almost identical
 to that used in virtual memory:</p>
-<div class="highlight-center notranslate"><div class="highlight"><pre><span></span>![image](figures/lvm-snapshot.pdf){width=&quot;90%&quot;}
-</pre></div>
-</div>
+<p><img alt="image" src="../_images/lvm-snapshot.png" />{width=”90%”}</p>
 <p>A snapshot is a “lazy copy” of a volume—it preserves the contents
 without immediately consuming any additional disk space, instead
 consuming space as the volume is written to. (It’s also much faster than
@@ -2139,9 +2129,7 @@ takes so long to copy all the data from a modern disk. If you merely
 copied all the files off of the disk, the backed-up version of one file
 might be hours older than another file; this can be avoided by backing
 up a snapshot instead of the volume itself.</p>
-<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/lvm-migrate.pdf){height=&quot;6\\baselineskip&quot;}
-</pre></div>
-</div>
+<p><img alt="image" src="../_images/lvm-migrate.png" />{height=”6\baselineskip”}</p>
 <p>Live migration is a sort of magical operation, allowing you to switch
 from one disk drive to another while the machine continues to run. It
 works by using a map to direct individual requests to either the old
@@ -2298,7 +2286,7 @@ called (not surprisingly) <em>deduplication</em>. We see this in the figure
 below, where the data to be stored is 26 long, but only contains 9
 unique blocks, giving a nearly 3:1 compression ratio if the 26 blocks of
 data are replaced by pointers to unique data blocks:</p>
-<p><img alt="De-duplication" src="devices/figures/dedup.eps" />{width=”80%”}</p>
+<p><img alt="De-duplication" src="../_images/dedup.png" />{width=”80%”}</p>
 <p>To perform deduplication, a cryptographic hash (a form of checksum) is
 calculated over each block to be written, and checked against a
 database. If the hash is found, then a block containing the same bits
