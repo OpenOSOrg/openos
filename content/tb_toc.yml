@@ -42,7 +42,7 @@ parts:
   - file: sync/deadlock
   - file: sync/hardware_challenges
   - file: sync/linux_locking
-  - file: peter-syncro
+  - file: sync/peter-syncro
 - caption: 'Other Topics'
   numbered: True
   chapters:
