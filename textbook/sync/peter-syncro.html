@@ -1,0 +1,2069 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>30. Synchronization – Safety &amp; Sequencing &#8212; Introduction to Operating Systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="31. Overview of other topics" href="../misc/OtherInro.html" />
+    <link rel="prev" title="29. Locking in the Linux Kernel" href="linux_locking.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/pref.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/purpose.html">
+   2. Purpose of operating systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/structure.html">
+   3. OS structure
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/services.html">
+   4. Operating System Services
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/tools.html">
+   5. Tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/peter-other.html">
+   6. Other stuff from peter to integrate
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Scheduling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/scheduling.html">
+   9. Processor Scheduling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Memory Management
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mm.html">
+   10. Memory Management
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/Overview.html">
+   11. The purpose of Memory Management
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/reclamation.html">
+   13. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/datastruc.html">
+   14. Data structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/pagefaults.html">
+   15. Page Faults
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mmhw.html">
+   16. Memory management hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mmdyn.html">
+   17. Paging Dynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/realworld.html">
+   18. Memory management in the real world
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/peter-mm.html">
+   19. Peter’s Virtual Memory chapter
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/intro.html">
+   20. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/interface.html">
+   21. Interface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
+   22. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/kernelimp.html">
+   23. Kernel implementation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="sync.html">
+   24. Intro Concurrency Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sharing.html">
+   25. Cooperating Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="locking.html">
+   26. Synchronization Primitives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlock.html">
+   27. Deadlocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hardware_challenges.html">
+   28. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linux_locking.html">
+   29. Locking in the Linux Kernel
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   30. Synchronization – Safety &amp; Sequencing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/OtherInro.html">
+   31. Overview of other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sec/sec.html">
+   32. Security
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../virt/virt.html">
+   34. Virtualization and Cloud computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/other.html">
+   36. Other OS structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../devices/block-dev.html">
+   37. # I/O, Drivers, and DMA {#chap:blockdevs}
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   38. Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/bib.html">
+   39. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/sync/peter-syncro.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/sync/peter-syncro.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/okrieg/openos"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fsync/peter-syncro.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/edit/main/content/sync/peter-syncro.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/sync/peter-syncro.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problem-introduction">
+   30.1. Problem Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#race-conditions-and-mutual-exclusion">
+   30.2. Race Conditions and Mutual Exclusion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#review-questions">
+     30.2.1. Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-mutexes">
+   30.3. Implementing Mutexes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     30.3.1. Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-bounded-buffer-problem-and-semaphores">
+   30.4. The Bounded Buffer Problem and Semaphores
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     30.4.1. Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deadlock">
+   30.5. Deadlock
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classic-conditions-for-deadlock">
+     30.5.1. Classic Conditions for Deadlock
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avoiding-deadlock-lock-ranking">
+     30.5.2. Avoiding Deadlock: Lock Ranking
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
+       30.5.2.1. Review Questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monitors">
+   30.6. Monitors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-conditions">
+   30.7. Using Conditions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     30.7.1. Review Questions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-monitors">
+     30.7.2. Implementing Monitors
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id15">
+       30.7.2.1. Review Questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graphical-notation">
+   30.8. Graphical Notation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-it-all-together">
+   30.9. Putting it all together
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#answers-to-review-questions">
+     30.9.1. Answers to Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Synchronization – Safety & Sequencing</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problem-introduction">
+   30.1. Problem Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#race-conditions-and-mutual-exclusion">
+   30.2. Race Conditions and Mutual Exclusion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#review-questions">
+     30.2.1. Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-mutexes">
+   30.3. Implementing Mutexes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     30.3.1. Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-bounded-buffer-problem-and-semaphores">
+   30.4. The Bounded Buffer Problem and Semaphores
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     30.4.1. Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deadlock">
+   30.5. Deadlock
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classic-conditions-for-deadlock">
+     30.5.1. Classic Conditions for Deadlock
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avoiding-deadlock-lock-ranking">
+     30.5.2. Avoiding Deadlock: Lock Ranking
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
+       30.5.2.1. Review Questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monitors">
+   30.6. Monitors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-conditions">
+   30.7. Using Conditions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     30.7.1. Review Questions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-monitors">
+     30.7.2. Implementing Monitors
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id15">
+       30.7.2.1. Review Questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graphical-notation">
+   30.8. Graphical Notation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-it-all-together">
+   30.9. Putting it all together
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#answers-to-review-questions">
+     30.9.1. Answers to Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="synchronization-safety-sequencing">
+<h1><span class="section-number">30. </span>Synchronization – Safety &amp; Sequencing<a class="headerlink" href="#synchronization-safety-sequencing" title="Permalink to this headline">#</a></h1>
+<section id="problem-introduction">
+<h2><span class="section-number">30.1. </span>Problem Introduction<a class="headerlink" href="#problem-introduction" title="Permalink to this headline">#</a></h2>
+<p>One of the key responsibilities of an operating system is that of
+synchronization—handling nearly simultaneous events in a reasonable
+way, and providing mechanisms for user applications to do so as well.</p>
+<p>In <a class="reference external" href="#ch3:lst:bank">[ch3:lst:bank]</a>{reference-type=”autoref”
+reference=”ch3:lst:bank”} we see a simplified example of a program to
+maintain a bank account balance at the Bank of Lost Funds. When running
+on a single CPU, the <code class="docutils literal notranslate"><span class="pre">deposit</span></code> function is trivially correct: after it
+completes execution, the value of <code class="docutils literal notranslate"><span class="pre">balance</span></code> will be <code class="docutils literal notranslate"><span class="pre">sum</span></code> greater than
+it was before the function was invoked.</p>
+<p>In <a class="reference external" href="#ch3:fig:badbank">[ch3:fig:badbank]</a>{reference-type=”autoref”
+reference=”ch3:fig:badbank”}, however, we see one possible result when
+this function is invoked by two threads nearly simultaneously. In this
+case thread 1 is interrupted after it has read the current value of
+<code class="docutils literal notranslate"><span class="pre">balance</span></code>, but before it could store the new value back to memory. The
+result is that the update performed by thread 2 is lost, being
+over-written by thread 1’s computation, and after depositing a total of
+$150 to the account we have a final balance of $50.</p>
+<div class="highlight-{#ch3:lst:bank notranslate"><div class="highlight"><pre><span></span>money_t balance;
+function deposit(money_t sum) {
+   balance = balance + sum;
+}
+</pre></div>
+</div>
+</section>
+<section id="race-conditions-and-mutual-exclusion">
+<h2><span class="section-number">30.2. </span>Race Conditions and Mutual Exclusion<a class="headerlink" href="#race-conditions-and-mutual-exclusion" title="Permalink to this headline">#</a></h2>
+<p>Such errors are referred to as <em>race conditions</em>, because the result
+depends on a “race” between threads, where it is unknown which will
+execute some piece of code first.</p>
+<p><img alt="Incorrect operation of banking example. An interrupt causes a threadswitch after thread 1 has loaded  into R1 and before itwrites the updated value back into , so thread 2's update islost." src="../_images/sync-bank-flow.png" />{#ch3:fig:badbank width=”90%”}</p>
+<p><img alt="Linked list corruption. (a) code for push and pop, (b) starting datastructure, (c) interleaving of pop and push, (d) final state. Items 2and 3 are no longer on the list, and item 1 is both on the list and thereturn value from " src="../_images/sync-linked-list.png" />{#fig:sync:linked
+width=”85%”}</p>
+<p>Another example of such a race condition is shown in
+<a class="reference external" href="#fig:sync:linked">[fig:sync:linked]</a>{reference-type=”autoref”
+reference=”fig:sync:linked”}(a) and (b), which shows a simple linked
+list, along with the code to use it as a push-down stack by pushing and
+popping elements. In
+<a class="reference external" href="#fig:sync:linked">[fig:sync:linked]</a>{reference-type=”autoref”
+reference=”fig:sync:linked”}(c) and (d) we see what happens when a push
+and a pop conflict with each other, causing the list to become
+disconnected; in this case the right-hand side of the list is
+effectively “lost”, with potentially disastrous consequences.</p>
+<p>The most insidious aspect of each of these race conditions is that they
+occur in otherwise bug-free code; in particular, there is no amount of
+testing which is guaranteed to find them.</p>
+<div class="highlight-gsidebar notranslate"><div class="highlight"><pre><span></span>In classic operating systems textbooks this is referred to as the
+*critical section problem*, defined as the case where there is a
+*critical section* of code which must be guarded against simultaneous
+execution. This is unfortunately a misleading term, as it should be
+obvious that it is the *data* that must be protected, not the code. For
+instance, in an object-oriented program a class may have two (or more)
+methods which can interfere with each other, even though different
+sections of code are being executed; conversely no interference will
+occur if any of these methods are invoked simultaneously on separate
+object instances.
+</pre></div>
+</div>
+<div class="highlight-{#fig:sync:fakemutex notranslate"><div class="highlight"><pre><span></span>mutex_t n = mutex_create()
+ mutex_lock(n)
+ mutex_unlock(n)
+ mutex_destroy(n)
+</pre></div>
+</div>
+<p>The solution to race conditions is fairly obvious, although not always
+simple: we identify all the cases where data must be protected against
+simultaneous modification or access, and prevent this from occuring<a class="footnote-reference brackets" href="#id17" id="id1">1</a>.
+To do this we create an object called a <code class="docutils literal notranslate"><span class="pre">mutex</span></code> (see
+<a class="reference external" href="#fig:sync:fakemutex">[fig:sync:fakemutex]</a>{reference-type=”autoref”
+reference=”fig:sync:fakemutex”}) which has the ability to guard against
+simultaneous access. This object has two methods, <code class="docutils literal notranslate"><span class="pre">lock</span></code> and <code class="docutils literal notranslate"><span class="pre">unlock</span></code>,
+and the following properties:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Given a mutex `m`, once some thread T1 returns from `m.lock()`, no other
+thread T2 will return from `m.lock()` until T1 enters `m.unlock()`.
+
+If thread T1 is holding mutex [m](m){.uri} (i.e. it has entered and
+returned from [m.lock](m.lock){.uri} and T2 is waiting for [m](m){.uri}
+(it has entered but not returned from [m.lock()](m.lock()){.uri}), then
+when T1 enters [m.ulock()](m.ulock()){.uri}, T2 (or some other thread
+blocked on [m](m){.uri}) will &quot;promptly&quot; return from
+[m.lock()](m.lock()){.uri}.
+</pre></div>
+</div>
+<p>(these properties are also termed <em>mutual exclusion</em>—hence the name
+mutex—and <em>progress</em>, and are two of the three formal requirements for
+a solution to the critical section problem.)</p>
+<p>When thread T1 returns from <code class="docutils literal notranslate"><span class="pre">m.lock()</span></code>, we often say that T1 has
+<em>acquired</em> the mutex <code class="docutils literal notranslate"><span class="pre">m</span></code>, or that it is <em>holding</em> it; when T1 invokes
+<code class="docutils literal notranslate"><span class="pre">m.unlock()</span></code> it <em>releases</em> the mutex. Note that other threads are free
+to <em>call</em> the lock method on <code class="docutils literal notranslate"><span class="pre">m</span></code> while <code class="docutils literal notranslate"><span class="pre">m</span></code> is held by T1; however none
+of those threads will <em>return</em> from the call until the mutex is
+released. If T1 were to hold the mutex for a long time, this would delay
+the other threads; if it fails to ever release the mutex (e.g. due to
+raising an exception before the call to <code class="docutils literal notranslate"><span class="pre">unlock()</span></code>) it would be a
+serious bug, typically causing the program to freeze.</p>
+<p>We can now write a thread-safe version of our bank account object, as
+seen in
+<a class="reference external" href="#fig:sync:safebank">[fig:sync:safebank]</a>{reference-type=”autoref”
+reference=”fig:sync:safebank”}. It avoids the race condition described
+in the beginning of the chapter by using a per-instance mutex to guard
+operations which modify the balance. By doing this we have made the
+modification of the balance <em>atomic</em><a class="footnote-reference brackets" href="#id18" id="id2">2</a>, at least with respect to any
+other code which properly locks the mutex—i.e. it appears to happen as
+a single operation, with any other modification happening either before
+or after, but not simultaneously.</p>
+<div class="highlight-{#fig:sync:safebank notranslate"><div class="highlight"><pre><span></span>object account is:
+    mutex  m
+    int    balance
+
+    method deposit(int amount):
+        m.lock()
+        balance = balance + amount
+        m.unlock()
+
+    method get_balance():
+        return balance
+</pre></div>
+</div>
+<div class="highlight-{#fig:sync:safebank2 notranslate"><div class="highlight"><pre><span></span>object account is:
+    mutex   m
+    int     balance_dollars
+    int     balance_cents
+
+    method deposit(int dollars,  int cents):
+        m.lock()
+        balance_cents = balance_cents + cents
+        if balance_cents &gt;= 100:
+            balance_dollars = balance_dollars + 1
+            balance_cents = balance_cents - 100
+        balance_dollars = balance_dollars + dollars
+        m.unlock()
+
+    method get_balance(out &amp;d, out &amp;c):  // d,c are outputs
+        m.lock()
+        d = balance_dollars
+        c = balance_cents
+        m.unlock()
+</pre></div>
+</div>
+<p>In <a class="reference external" href="#fig:sync:safebank">[fig:sync:safebank]</a>{reference-type=”autoref”
+reference=”fig:sync:safebank”} we can (on most computers) safely read
+the balance without locking the mutex, because the hardware can usually
+be trusted to perform a read of a single integer atomically. Another way
+to state this is that the object is in a <em>safe</em> state at all times—it
+changes atomically from one safe state to another. In
+<a class="reference external" href="#fig:sync:safebank2">[fig:sync:safebank2]</a>{reference-type=”autoref”
+reference=”fig:sync:safebank2”} we see a bank account object with a
+slightly more complex state, representing integer dollars and cents
+separately; in this case reading the object state in the middle of an
+update could give incorrect results, e.g. showing <span class="math notranslate nohighlight">\(balance\_cents&gt;99\)</span>.
+(more serious problems such as null pointer errors can occur when
+accessing complex data structures such as linked lists or trees during
+an update) To prevent this, the code in
+<a class="reference external" href="#fig:sync:safebank2">[fig:sync:safebank2]</a>{reference-type=”autoref”
+reference=”fig:sync:safebank2”} locks the object <em>when observing its
+state</em>, so that it only sees the consistent state found after an update
+has fully completed.</p>
+<section id="review-questions">
+<h3><span class="section-number">30.2.1. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="implementing-mutexes">
+<h2><span class="section-number">30.3. </span>Implementing Mutexes<a class="headerlink" href="#implementing-mutexes" title="Permalink to this headline">#</a></h2>
+<p>So mutexes are great, but how do they actually work? In
+<a class="reference external" href="#fig:sync:fakemutex">[fig:sync:fakemutex]</a>{reference-type=”autoref”
+reference=”fig:sync:fakemutex”} we saw a hypothetical system call
+interface which allows us to create, destroy, lock and unlock mutexes.
+Internal to the OS we can assume that each mutex has a state—locked or
+unlocked—and a list of threads waiting for the mutex. If a process
+calls <span class="xref myst">mutex_lock</span>{.uri} on an unlocked mutex, the mutex is
+marked as locked and <span class="xref myst">mutex_lock</span>{.uri} returns immediately.
+If the mutex is locked, then the call is treated almost exactly like
+waiting for I/O: the OS puts the thread on the mutex wait queue, and
+then switches to the next active thread. When
+<span class="xref myst">mutex_unlock</span>{.uri} is called, the OS takes the first
+thread (if any) off the queue and puts it back on the active list.</p>
+<p>So now that we know exactly how our mutex system calls are supposed to
+behave, how do we implement them? In addition, how does the operating
+system protect its own data structures, which (in e.g. Linux and
+Windows) reside in a single address space and are accessed from not only
+multiple user processes (via system calls) and kernel threads, but also
+from exception handlers for e.g. page faults and hardware interrupts?</p>
+<p>On a single-processor system this is fairly straightforward. Code runs
+in a straight line unless it is interrupted by a hardware interrupt or
+an exception such as a page fault, so all we need to do is to (a)
+disable interrupts, and (b) ensure that the operating system code and
+data (or at least the code and data needed for mutexes) is always mapped
+into physical memory, to avoid page faults.</p>
+<p>(Note that user-level code is not allowed to disable interrupts, as
+doing so for more than a brief period is likely to crash the machine.)</p>
+<p>``` {#lst:sync:osmutexA float=”” basicstyle=”\ttfamily\footnotesize” caption=”Simple single-CPU kernel mutex. The ``locked’’ flag and list of waiting processes are guarded by disabling interrupts” label=”lst:sync:osmutexA”}
+structure mutex:
+bool locked = False // guarded by IRQ disable
+queue waitlist      // waiting threads (also guarded)</p>
+<p>mutex_lock(mutex m):
+disable_interrupts()
+if not m.locked
+m.locked = True
+enable_interrupts()
+else:
+pause(current_process) // remove it from active list
+m.waitlist.add(current_process)
+enable_interrupts()
+sleep()                // wake here when mutex acquired</p>
+<p>mutex_unlock(mutex m):
+disable_interrupts()
+if waitlist is empty:
+m.locked = False
+enable_interrupts()
+else
+local next_thread = m.waitlist.pop_from_head()
+enable_interrupts()
+wake(next_thread) // add it to the active list</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+In [\[lst:sync:osmutexA\]](#lst:sync:osmutexA){reference-type=&quot;autoref&quot;
+reference=&quot;lst:sync:osmutexA&quot;} we see a mutex implementation based on
+this. We assume the same context-switching structure used in
+[\[fig:ch2:serialin2\]](#fig:ch2:serialin2){reference-type=&quot;autoref&quot;
+reference=&quot;fig:ch2:serialin2&quot;} in the previous chapter, with a thread
+control structure containing fields such as the saved stack pointer as
+well as links for creating lists:
+
+- [current](current){.uri} points to the currently running thread
+- [active](active){.uri} is a list of other threads ready to run
+- [sleep](sleep){.uri} pops the next runnable thread from
+- [active](active){.uri}, assigns it to [current](current){.uri}, and
+switches to it[^3].
+- [wake](wake){.uri} appends a thread to the active list so that it can
+run again.
+
+
+On a single-CPU system the fields of the mutex structure are protected
+from race conditions, as no interrupts will occur during modifications.
+We can see that our mutex requirements will be met, by noting that:
+
+- the first thread to call [lock(m)](lock(m)){.uri} will set
+[m.locked](m.locked){.uri} to true and return immediately.
+
+- if another thread calls [lock(m)](lock(m)){.uri} before the mutex is
+unlocked, it will queue itself on [m.waitq](m.waitq){.uri} and sleep.
+
+- when [unlock(m)](unlock(m)){.uri} is called, if there are any threads
+waiting then the first one will be woken up (and thus continue from its
+- [sleep](sleep){.uri} call and return from [lock(m)](lock(m)){.uri} the
+next time it is scheduled), and the mutex will remain locked;
+
+- if no threads are waiting the mutex will be unlocked.
+
+::: gsidebarN
+16 An exercise for the reader - many textbooks describe Dekker&#39;s and
+Peterson&#39;s algorithms for mutual exclusion, which use normal memory load
+and store instructions to provide mutual exclusion. Try implementing
+Peterson&#39;s algorithm as described in Wikipedia, with two threads each
+looping N times, each time (a) entering the critical section, (b)
+incrementing a counter, and (c) leaving the critical section. For large
+N (e.g. $10^7$) does the counter always get incremented 2N times? Why
+not? (feel free to ask in class if you don&#39;t find the answer)
+:::
+
+On a multi-core system the problem is more complicated, however, as the
+CPU cores are all executing simultaneously, accessing the same memory,
+whether interrupts are enabled or not. Implementing a mutex on a
+multi-core system requires coordinating via the memory system shared
+between all the CPUs, using special instructions which are guaranteed to
+execute uninterrupted by instructions running on any of the other CPU
+cores.
+
+``` {#lst:sync:spinlock float=&quot;&quot; caption=&quot;Spinlock implementation. If the lock contains 0, it is unlocked; if 1, then it is locked, in which case a second thread (or CPU) trying to acquire it will ``spin&#39;&#39; (i.e. loop) until it is released.&quot; label=&quot;lst:sync:spinlock&quot;}
+typedef int spinlock_t 
+        spin_lock(spinlock_t *lock_addr):
+            register r = 1
+            while r == 1:
+                SWAP r, lock_addr
+
+        spin_unlock(spinlock_t *lock_addr):
+            *lock_addr = 0
+</pre></div>
+</div>
+<p>There are a number of specialized CPU instructions which are typically
+provided to implement mutual exclusion; we will consider one of them,
+the atomic SWAP instruction<a class="footnote-reference brackets" href="#id19" id="id3">4</a>:</p>
+<ul class="simple">
+<li><p>SWAP <em>register</em>, <em>address</em></p></li>
+</ul>
+<p>This instruction swaps the contents of a register with the data in a
+specified memory location, and unlike normal instructions it is
+guaranteed to do so atomically. In other words, no matter how many CPU
+cores are trying to swap with the same memory location simultaneously,
+one of them will do so first, another second, and so on, and every CPU
+will see the location change values in the same order.</p>
+<p>This is in contrast to normal load/store instructions, where different
+CPU cores may see differences in the order in which changes occur. This
+is not surprising when you consider that each CPU is handling multiple
+instructions at once, possibly out of order, and writing into cache
+lines which are only later flushed to main memory. For instance, if CPU
+1 writes to cache line A and then to cache line B, they could
+conceivably be flushed to memory in the opposite order, so while CPU 1
+sees A written before B, other CPUs see B written before A. Although
+it’s possible to achieve consistent ordering—that’s what atomic
+instructions do—it’s much slower.</p>
+<p><img alt="Spinlock operation. Here we see CPU 1 acquire the lock, after whichCPU 2 and then CPU 0 attempt to acquire it. After CPU 1 releases thelock (by writing 0) one of the waiting CPUs (in this case 0) is thenable to acquire it." src="../_images/spin-lock.png" />{#fig:sync:spinlockop
+width=”60%”}</p>
+<p>The SWAP instruction allows us to implement what is called a <em>spinlock</em>,
+as shown in
+<a class="reference external" href="#lst:sync:spinlock">[lst:sync:spinlock]</a>{reference-type=”autoref”
+reference=”lst:sync:spinlock”}. An example of its operation is shown in
+<a class="reference external" href="#fig:sync:spinlockop">[fig:sync:spinlockop]</a>{reference-type=”autoref”
+reference=”fig:sync:spinlockop”}: in effect the 0 value is treated as a
+token that is passed between waiting CPUs (or threads) and the lock
+memory location. This lock is extremely simple, and by making use of the
+hardware-provided atomic SWAP instruction, it guarantees mutual
+exclusion. However as we see in the figure it can be (a) unfair, as it
+does not respect the order in which CPUs begin to wait for the lock, and
+(b) inefficient, as CPUs 2 and 0 are unable to perform any work while
+waiting. We therefore use spinlocks to guard very short pieces of code,
+and then use these pieces of code to construct efficient and
+well-behaved primitives for applications to use.</p>
+<div class="highlight-{#lst:sync:osmutex notranslate"><div class="highlight"><pre><span></span>structure mutex:
+    int  spinlock
+    bool free = True  // guarded by spinlock
+    queue waitlist    // waiting threads, guarded by spinlock
+
+mutex_lock(mutex m):
+    disable_interrupts()
+    spin_lock(&amp;m.spinlock)
+    if m.free
+        m.free = False
+        spin_unlock(&amp;m.spinlock)
+        enable_interrupts()
+    else:
+        pause(current_process) // remove it from active list
+        m.waitlist.add(current_process)
+        spin_unlock(&amp;m.spinlock)
+        enable_interrupts()
+        sleep()                // wake here when mutex acquired
+
+mutex_unlock(mutex m):
+    disable_interrupts()
+    spin_lock(&amp;m.spinlock)
+    if waitlist is empty:
+        m.free = True
+        spin_unlock(&amp;m.spinlock)
+        enable_interrupts()
+    else
+        local next_thread = m.waitlist.pop_from_head()
+        spin_unlock(&amp;m.spinlock)
+        enable_interrupts()
+        wake(next_thread) // add it to the active list
+</pre></div>
+</div>
+<p>A spinlock-enhanced version of the mutex in
+<a class="reference external" href="#lst:sync:osmutexA">[lst:sync:osmutexA]</a>{reference-type=”autoref”
+reference=”lst:sync:osmutexA”} is shown in
+<a class="reference external" href="#lst:sync:osmutex">[lst:sync:osmutex]</a>{reference-type=”autoref”
+reference=”lst:sync:osmutex”}; it is identical except for the addition
+of a spinlock, which is used in addition to disabling interrupts to
+guard the <span class="xref myst">locked</span>{.uri} flag and wait queue.</p>
+<p>This implementation retains almost all the efficiency of the single-CPU
+version, as the spinlock is never held for more than a few instructions,
+limiting the length of time that other CPUs are stuck busy-waiting<a class="footnote-reference brackets" href="#id20" id="id4">5</a>.
+Unlike the basic spinlock, this mutex is also fair, as waiting threads
+will be queued and acquire the mutex in FIFO order. (at most, any
+unfairness in the underlying spinlock mechanism will effect the order in
+which threads go onto the list, not how many turns they get holding the
+mutex.)</p>
+<div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>6 A question for the reader - why is it important to unlock the spinlock
+and enable interrupts before calling `sleep()` in `mutex_lock`?
+</pre></div>
+</div>
+<p>More formally, what we mean by “fair” in this case is <em>bounded
+waiting</em>—i.e. no thread can be “starved” while other threads
+repeatedly acquire and release the mutex. (this is the third requirement
+for solutions to the critical section problem)</p>
+<p>In particular, if thread A is waiting for the mutex, bounded waiting
+means that another thread B cannot acquire and then release it many
+times while A is still waiting. (note that spinlocks cannot guarantee
+this property, as any waiting thread can acquire the lock, regardless of
+how long it has been waiting.) If multiple threads (on separate CPUs)
+call <span class="xref myst">mutex_lock</span>{.uri} at once, the spinlock will determine
+what order they will be added on the queue, but the FIFO ordering of the
+queue ensures that if a thread acquires the mutex and releases it, when
+it tries to lock the mutex again it will go to the tail of the line.</p>
+<section id="id5">
+<h3><span class="section-number">30.3.1. </span>Review Questions<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p><img alt="Scenario for question[prob:synchro:2:1]{reference-type=&quot;ref&quot;reference=&quot;prob:synchro:2:1&quot;}" src="../_images/sync-badswap.png" />{#fig:sync:badswap
+width=”70%”}</p>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="the-bounded-buffer-problem-and-semaphores">
+<h2><span class="section-number">30.4. </span>The Bounded Buffer Problem and Semaphores<a class="headerlink" href="#the-bounded-buffer-problem-and-semaphores" title="Permalink to this headline">#</a></h2>
+<p>Mutexes can be used to <em>prevent</em> certain orders of execution—e.g.
+multiple threads executing certain operations at the same time—but
+what if we want to <em>cause</em> a certain order of execution? (for instance,
+waking a thread which is waiting for keystroke input.) We refer to this
+as <em>synchronization</em>, and to the primitives which are used for this
+purpose as <em>synchronization primitives</em>.</p>
+<p>To begin we’ll examine a “classic” or pedagogical<a class="footnote-reference brackets" href="#id21" id="id6">6</a> synchronization
+problem frequently used as an example of multi-threaded programming: the
+<em>Bounded Buffer Problem</em>, which may be defined as follows:</p>
+<div class="highlight-enumerate* notranslate"><div class="highlight"><pre><span></span>An object `buffer` has methods `put` and `get`.
+
+Successive calls to `buffer.put(item)` insert items into the buffer.
+
+Successive calls to `item = buffer.get()` remove items from the buffer
+in the same order as they were inserted.
+
+If the buffer contains no items, `buffer.get()` will block until an item
+is inserted.
+
+If the buffer contains N items, `buffer.put()` will block until an item
+is removed.
+</pre></div>
+</div>
+<p>We can start with a single-threaded version of the bounded buffer. In
+this case parts 3 and 4 of the definition must be modified, as no other
+thread will arrive to insert or remove an item; instead we will return
+NULL if no item is available, and ERROR if the buffer is full, as seen
+in <a class="reference external" href="#fig:sync:bb">[fig:sync:bb]</a>{reference-type=”autoref”
+reference=”fig:sync:bb”}.</p>
+<hr class="docutils" />
+<div class="highlight-{basicstyle=&quot;\ttfamily\footnotesize&quot; notranslate"><div class="highlight"><pre><span></span>list buffer
+
+put(item):
+    if len(buffer) &gt;= N
+        return ERROR
+    else
+        buffer.add_tail(item)
+        return OK
+
+get(item):
+    if len(buffer) == 0
+        return NULL
+    else
+        return buffer.remove_head()
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>By adding a mutex we can safely handle multiple threads, as seen in
+<a class="reference external" href="#fig:sync:tsbb">[fig:sync:tsbb]</a>{reference-type=”autoref”
+reference=”fig:sync:tsbb”}.<a class="footnote-reference brackets" href="#id22" id="id7">7</a></p>
+<hr class="docutils" />
+<div class="highlight-{basicstyle=&quot;\ttfamily\footnotesize&quot; notranslate"><div class="highlight"><pre><span></span>mutex m
+list  buffer
+
+put(item):
+    m.lock()
+    if len(buffer) &gt;= N
+        result = ERROR
+    else
+        buffer.add_tail(item)
+        result = OK
+    m.unlock()
+    return result
+
+get(item):
+    m.lock()
+    if len(buffer) == 0
+        result = NULL
+    else
+        result = buffer.remove_head()
+    m.unlock()
+    return result
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>However we still don’t have a full solution to the bounded buffer
+problem—we need to not only protect the threads from each other,</p>
+<div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>10 The two operations on a semaphore were originally given Dutch
+abbreviations *P* and *V* by their inventor, Edsger Dijkstra. Since then
+they have also been called *down* and *up*, *acquire* and *release*,
+*wait* and *signal*, *await* and *notify*, etc. We will call them *wait*
+and *signal*.
+</pre></div>
+</div>
+<p>but to <em>coordinate</em> or <em>synchronize</em> them, so that e.g. one thread
+sleeps in <code class="docutils literal notranslate"><span class="pre">get()</span></code> until another thread invokes <code class="docutils literal notranslate"><span class="pre">put()</span></code>. We haven’t seen
+how to use a mutex for this purpose, and in fact many real-world mutex
+implementations cannot be used to do this<a class="footnote-reference brackets" href="#id23" id="id8">8</a>.</p>
+<p>Instead we introduce a new object called the <em>counting semaphore</em>, which
+is deliberately designed for synchronizing the actions of multiple
+threads. Like a mutex, a semaphore is an OS-provided object; however an
+initial count N is specified when it is created. It has two methods,
+<code class="docutils literal notranslate"><span class="pre">wait()</span></code> and <code class="docutils literal notranslate"><span class="pre">signal()</span></code>, with the following behavior:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>For semaphore $S$ with initial count $N$, if $N_w$ is the total number
+of times any thread has returned from `S.wait()`, and $N_s$ is the
+number of times any thread has entered `S.signal()`, then
+$N_w-N_s \le N$.
+</pre></div>
+</div>
+<p>Intuitively a semaphore may be understood by assuming that it maintains
+a count initialized to <span class="math notranslate nohighlight">\(N\)</span>. When <em>wait</em> is called it (a) waits until the
+count is greater than zero, then (b) decrements the count and returns.
+Calling <em>signal</em> increments the count, possibly waking up one of the
+threads waiting for <span class="math notranslate nohighlight">\(count &gt; 0\)</span>. In practice this is done by maintaining
+a list of waiting threads; if there are threads waiting on this list
+then <em>signal</em> wakes the first one rather than incrementing the count.</p>
+<div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>10 A question for the reader - if you are given a function
+`NewSemaphore0()` which creates a new counting semaphore with its count
+initialized to 0, how would you write a function `NewSemaphore(N)` which
+returns a semaphore initialized to an arbitrary positive count N?.
+</pre></div>
+</div>
+<p>A <em>binary semaphore</em> is a semaphore which can only take on the values 0
+and 1, and is the same thing as a mutex. (well, disregarding
+implementation details of many mutexes, such as ownership checks.) Note
+that this behaves slightly differently from a counting semaphore
+initialized to 1, specifically in the case where <code class="docutils literal notranslate"><span class="pre">signal()</span></code> is called
+multiple times without intervening calls to <code class="docutils literal notranslate"><span class="pre">wait</span></code><a class="footnote-reference brackets" href="#id24" id="id9">9</a>.</p>
+<p>Note that the behavior of the wait and signal methods of a counting
+semaphore are almost exactly the same behaviors as those we want for the
+put and get methods in our bounded buffer, keeping track of a count and
+blocking when that count reaches a limit. Using one semaphore to track
+the number of items in the buffer, and another to track the number of
+free spaces, we have the implementation in
+<a class="reference external" href="#fig:sync:bb3">[fig:sync:bb3]</a>{reference-type=”autoref”
+reference=”fig:sync:bb3”}.</p>
+<hr class="docutils" />
+<div class="highlight-{basicstyle=&quot;\ttfamily\footnotesize&quot; notranslate"><div class="highlight"><pre><span></span>mutex     m
+list      buffer
+semaphore space = semaphore(N)
+semaphore items = semaphore(0)
+
+put(item):
+    space.wait()
+    m.lock() 
+    buffer.add_tail(item)
+    m.unlock()
+    items.signal()
+
+get(item):
+    items.wait()
+    m.lock() 
+    result = buffer.remove_head()
+    m.unlock()
+    space.signal()
+    return result
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>Note that we still need a mutex to protect the linked list, as although
+the semaphore limits the number of threads which can be modifying the
+list simultaneously, that limit is greater than 1. (alternately we could
+implement a “thread-safe linked list” class which included a mutex, thus
+simplifying any threaded code which used it.)</p>
+<p><img alt="Operation of bounded buffer from[fig:sync:bb3]{reference-type=&quot;autoref&quot;reference=&quot;fig:sync:bb3&quot;}, limit=2" src="../_images/boundedbuf.png" />{#fig:sync:bb4
+width=”80%”}</p>
+<p>In <a class="reference external" href="#fig:sync:bb4">[fig:sync:bb4]</a>{reference-type=”autoref”
+reference=”fig:sync:bb4”} we see this in operation. With a limit of 2
+items, the first two calls to <code class="docutils literal notranslate"><span class="pre">put</span></code> return immediately; however the
+third one blocks as the “space” semaphore has dropped to zero. When a
+call to <code class="docutils literal notranslate"><span class="pre">get</span></code> from thread 4 increments the “space” semaphore again,
+thread 3 is able to return from <code class="docutils literal notranslate"><span class="pre">space.wait()</span></code>, decrementing its value
+to zero again, and can then insert its item into the list.</p>
+<section id="id10">
+<h3><span class="section-number">30.4.1. </span>Review Questions<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="deadlock">
+<h2><span class="section-number">30.5. </span>Deadlock<a class="headerlink" href="#deadlock" title="Permalink to this headline">#</a></h2>
+<p>Consider the ways that the following code can execute, with thread 1
+executing <code class="docutils literal notranslate"><span class="pre">foo()</span></code>, and thread 2 executes <code class="docutils literal notranslate"><span class="pre">bar()</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mutex A, B;
+
+foo:
+    lock A
+    lock B
+     ...
+    unlock B
+    unlock A
+
+
+
+bar:
+    lock B
+    lock A
+     ...
+    unlock A
+    unlock B
+</pre></div>
+</div>
+<p><img alt="Three possible interleavings of  and." src="../_images/sync-deadlk-1.png" />{#fig:sync:deadlk width=”\textwidth”}</p>
+<p><img alt="Three possible interleavings of  and." src="../_images/sync-deadlk-2.png" />{#fig:sync:deadlk width=”\textwidth”}</p>
+<p><img alt="Three possible interleavings of  and." src="../_images/sync-deadlk-3.png" />{#fig:sync:deadlk width=”\textwidth”}</p>
+<p>\</p>
+<p>(a)</p>
+<p>(b)</p>
+<p>(c)</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>If thread 1 starts early enough, we may see the result in
+[\[fig:sync:deadlk\]](#fig:sync:deadlk){reference-type=&quot;autoref&quot;
+reference=&quot;fig:sync:deadlk&quot;}(a), where thread 1 or alternately thread 2)
+finishes completely before thread 2 starts.
+
+Or, if they start close enough in time, they may overlap somewhat but
+still complete successfully, as in
+[\[fig:sync:deadlk\]](#fig:sync:deadlk){reference-type=&quot;autoref&quot;
+reference=&quot;fig:sync:deadlk&quot;}(b).
+
+But if they start at about the same time, there is a chance of getting
+the situation in
+[\[fig:sync:deadlk\]](#fig:sync:deadlk){reference-type=&quot;autoref&quot;
+reference=&quot;fig:sync:deadlk&quot;}(c), where both threads are blocking on
+their second lock operation.
+</pre></div>
+</div>
+<p>This is a deadlock, where two threads are each waiting for a lock held
+by the other thread. As you can see, it can halt program execution just
+as completely as a program crash or infinite loop, and typically
+requires the application to be killed and restarted.</p>
+<section id="classic-conditions-for-deadlock">
+<h3><span class="section-number">30.5.1. </span>Classic Conditions for Deadlock<a class="headerlink" href="#classic-conditions-for-deadlock" title="Permalink to this headline">#</a></h3>
+<p>Intuitively a deadlock is when multiple processes (or threads) are
+waiting for locks held by other processes in the group, each unable to
+give up the locks it is holding before it acquires the lock that it is
+waiting for. More generally, deadlocks can occur when acquiring not just
+locks, but other sorts of <em>resources</em>: e.g. each process might be trying
+to allocate N buffers out of a fixed-sized pool.</p>
+<p>Phrased more formally, there are four classic conditions for deadlock
+among multiple processes contending for resources:</p>
+<ol class="simple">
+<li><p><strong>Mutual exclusion</strong>: A deadlock requires resources (like mutexes) that
+can only be held by one process</p></li>
+<li><p><strong>Hold and wait</strong>: A process holds one or more acquired resources and
+then blocks waiting to acquire another resource</p></li>
+<li><p><strong>No preemption</strong>: Resources are only released when a process is done
+with them and calls the release function (like unlock). One process
+cannot force another to release a resource.</p></li>
+<li><p><strong>Circular wait</strong>: Given the three prior conditions, if there is a
+circular wait then there is a deadlock</p></li>
+</ol>
+<p>The processes that deadlock can be any form of concurrent activity:
+threads, processes, or interrupts vs. a foreground process. There can be
+any number of processes, and in some cases a process can even deadlock
+with itself. Finally, the resources being acquired can be anything which
+has both the mutual exclusion and hold and wait properties. These
+resources aren’t just mutexes and semaphores, but things like memory
+buffers or the process of obtaining exclusive access to a file.</p>
+<p>Finally, there is a deadlock case not quite covered by these
+conditions—the one where the programmer forgot to release a lock. Try
+not to do that.</p>
+</section>
+<section id="avoiding-deadlock-lock-ranking">
+<h3><span class="section-number">30.5.2. </span>Avoiding Deadlock: Lock Ranking<a class="headerlink" href="#avoiding-deadlock-lock-ranking" title="Permalink to this headline">#</a></h3>
+<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in \[8\]\[0in\]
+</pre></div>
+</div>
+<p>If any one of these four conditions can be avoided, deadlock cannot
+occur. If locks are always acquired in the same order, no matter what
+thread is acquiring them via which code path, then there will be no
+circular wait and thus no deadlock, as you can see in
+<a class="reference external" href="#fig:sync:ordered">[fig:sync:ordered]</a>{reference-type=”autoref”
+reference=”fig:sync:ordered”}.</p>
+<p>Using lock ranking requires three steps:</p>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>Find all locks in a program.
+
+Number them in the order (&quot;rank&quot;) in which they should be acquired
+
+Verify that no lock is acquired out of order, via e.g. the use of debug
+assertions and extensive testing.
+</pre></div>
+</div>
+<p>This technique is difficult to implement, and cannot be used in every
+case. An example of its use is in the VMware virtualization product,
+where several hundred (as of when I worked there in 2007) locks are
+ranked in order, and beta builds will assert and crash if a
+lower-priority lock is acquired while holding a higher-priority one.</p>
+<section id="id11">
+<h4><span class="section-number">30.5.2.1. </span>Review Questions<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="monitors">
+<h2><span class="section-number">30.6. </span>Monitors<a class="headerlink" href="#monitors" title="Permalink to this headline">#</a></h2>
+<p>Semaphores do a good job of solving simple problems like the bounded
+buffer, and in theory are sufficient to solve any synchronization
+problem<a class="footnote-reference brackets" href="#id25" id="id12">10</a>, but become quite complicated to use when a problem can’t
+be solved by simple counting. As an example, we’ll look at what we’ll
+call the <em>Weighted Bounded Buffer Problem</em>, which differs from the
+bounded buffer problem in these ways:</p>
+<div class="highlight-enumerate* notranslate"><div class="highlight"><pre><span></span>Each item has a weight, `item.weight`
+
+The total weight of the items in the buffer cannot exceed N. If
+`buffer.put()` would cause this limit to be exceeded, then it will block
+until enough space is available.
+</pre></div>
+</div>
+<p>At first it seems like it would be sufficient for <code class="docutils literal notranslate"><span class="pre">put</span></code> and <code class="docutils literal notranslate"><span class="pre">get</span></code> to
+call <code class="docutils literal notranslate"><span class="pre">signal</span></code> and <code class="docutils literal notranslate"><span class="pre">wait</span></code> <em>W</em> times if <em>W</em> is the weight of the item
+being added or removed; however this could cause problems if two threads
+called <code class="docutils literal notranslate"><span class="pre">put</span></code> or <code class="docutils literal notranslate"><span class="pre">get</span></code> simultaneously, and is not possible at all if
+<code class="docutils literal notranslate"><span class="pre">weight</span></code> is a continuous (i.e. floating point) value. Unlike the simple
+case, we’re going to have to write our own code to maintain counts and
+make decisions about when to sleep, and if we do this with semaphores
+it’s going to be quite ugly.</p>
+<p>Instead we introduce a programming language feature for synchronization
+called a <em>monitor</em>. Unlike mutexes and semaphores, which are operating
+system-defined types, a monitor is a special type of user-defined object
+or class, where the language provides support for constructing
+user-defined synchronization behavior.</p>
+<p>In particular, a monitor has (a) special instance variables called
+<em>conditions</em>, which support the methods <code class="docutils literal notranslate"><span class="pre">wait</span></code>, <code class="docutils literal notranslate"><span class="pre">signal</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">broadcast</span></code>, and (b) a per-instance <em>implicit mutex</em>, which ensures that
+only one thread is <em>in</em> the monitor (instance) at any one time,
+executing method code. More precisely, what we mean by this is:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>A thread *enters* the monitor by entering one of its methods. Any number
+of threads can try to invoke methods on the same instance at once, but
+only one will get through and begin to execute method code.
+
+A thread *leaves* the monitor when it returns from a method. This is
+pretty obvious.
+
+A thread also *leaves* the monitor when it calls wait on any of the
+instance condition variables. This is less obvious, but important, as
+otherwise no other thread would be able to enter the monitor to wake it
+up.
+
+A thread then *enters* the monitor again when it returns from wait. Note
+that this can&#39;t actually happen until *after* the thread which is
+currently in the monitor---usually the one that called notify---leaves
+the monitor.
+</pre></div>
+</div>
+<p>When a thread calls <code class="docutils literal notranslate"><span class="pre">wait(C)</span></code> it goes to sleep, and must be woken by a
+future call to notify or broadcast. When a thread calls <code class="docutils literal notranslate"><span class="pre">signal(C),</span></code> a
+thread waiting on C is made eligible to return from <code class="docutils literal notranslate"><span class="pre">wait(),</span></code> and will
+do so as soon as it gets a chance to re-enter the monitor. On most
+systems threads waiting on C are picked in FIFO order, but this is not
+guaranteed. Finally, when a thread calls <code class="docutils literal notranslate"><span class="pre">broadcast(C),</span></code> all threads
+waiting on C are made eligible to return from <code class="docutils literal notranslate"><span class="pre">wait(),</span></code> and again will
+do so as soon as they are able to. If either notify or broadcast are
+called on a condition with no waiting threads, nothing will happen and
+no error will occur. Unlike calling <code class="docutils literal notranslate"><span class="pre">signal</span></code> on a semaphore with a
+positive count, the call won’t be “saved up” for future calls to <code class="docutils literal notranslate"><span class="pre">wait</span></code>.
+And unlike unlocking a free mutex, it won’t result in an error.</p>
+<hr class="docutils" />
+<div class="highlight-{basicstyle=&quot;\ttfamily\scriptsize&quot; notranslate"><div class="highlight"><pre><span></span>monitor weighted_bb:
+    condition C_put, C_space, C_get
+    total = 0
+    space_needed = 0
+    buffer
+
+    method put(item):
+1       while space_needed &gt; 0
+1           wait(C_put)
+        space_needed = item.weight
+2       while item.weight + total &gt; max
+2           wait(C_space)
+        buffer.add_tail(item)
+        total = total + item.weight
+4       signal(C_get)
+1       space_needed = 0
+1       signal(C_put)
+
+    method get():
+3       while total == 0
+3           wait(C_get)
+        item = buffer.remove_head()
+        total = total - item.weight
+2       if total + space_needed &lt;= max
+2           signal(C_space)
+        return item
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>Here we see a monitor implementation of the weighted bounded buffer.
+Despite the increased complexity of the problem, this solution is only
+slightly longer than the semaphore solution to the simpler problem. A
+more detailed description of its operation:</p>
+<p>(1) The lines marked 1 serve as “gatekeepers”: only one thread at a
+time can be executing the lines in the middle, including the
+<code class="docutils literal notranslate"><span class="pre">wait(C_space)</span></code> call. After leaving this section of code we signal the
+next waiting thread, if any.</p>
+<p>(2) Here a thread calling <code class="docutils literal notranslate"><span class="pre">put()</span></code> waits for space, and <code class="docutils literal notranslate"><span class="pre">get()</span></code> wakes
+it up if it has created enough space by removing an object.</p>
+<p>(3) Here a thread calling <code class="docutils literal notranslate"><span class="pre">get()</span></code> waits for an item if the buffer is
+empty, and is signalled by a thread at (4) calling <code class="docutils literal notranslate"><span class="pre">put().</span></code> Note that
+this interaction is simpler, because (as in the simple bounded-buffer
+case) there is a one-to-one relationship between items and calls to
+<code class="docutils literal notranslate"><span class="pre">get()</span></code>.</p>
+</section>
+<section id="using-conditions">
+<h2><span class="section-number">30.7. </span>Using Conditions<a class="headerlink" href="#using-conditions" title="Permalink to this headline">#</a></h2>
+<p>Like many programming features, there are different ways to use
+condition variables, and some of them are “better” than others, being
+easier to understand, write correctly, and debug. In this class we teach
+the following rule for using them:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Each condition $C$ is associated with a boolean predicate $P$, and that
+condition is used in &quot;guards&quot; of the form `while (not P) wait(C)`, so
+that after the guard has been executed the invariant $P$ is true.
+</pre></div>
+</div>
+<p>In the example above, for instance, <code class="docutils literal notranslate"><span class="pre">C_space</span></code> is associated with the
+predicate <span class="math notranslate nohighlight">\(item.weight + total \le max\)</span>, or in other words that there is
+enough room for the item. If there isn’t then we wait; immediately after
+passing these two lines (marked 2 in the listing) we can be sure that
+there is indeed enough room.</p>
+<p>How can we be sure? If the predicate is true, and we don’t have to wait,
+the answer is trivial. In the other case, we need to make sure that
+every piece of code which <em>might</em> make the predicate become true checks
+it, and if the predicate actually <em>has</em> become true it signals the
+associated condition variable.</p>
+<p>Note that this association only exists in the mind of the programmer,
+and is not enforced in any way by the programming language.
+Multithreaded programming would be much easier if we could just wait on
+the boolean predicate itself, but no one has yet invented a way to do
+this efficiently. Instead the programmer is responsible for the job of
+identifying what other pieces of code might make the predicate become
+true, with the resulting bugs if you miss any cases.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">(condition)</span></code> vs <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(condition)</span></code></strong>: In
+<a class="reference external" href="#fig:sync:wbb">[fig:sync:wbb]</a>{reference-type=”autoref”
+reference=”fig:sync:wbb”} it would be nice if we could just call
+<span class="xref myst">wait(C_put)</span>{.uri} or <span class="xref myst">wait(C_space)</span>{.uri}
+and assume that the associated predicate is true after returning from
+wait. Unfortunately, it’s not really possible, or at least not
+efficiently—even if mutexes and condition variables preserve FIFO
+ordering, there’s often a window between when a thread calls
+<span class="xref myst">signal(C)</span>{.uri} and the thread blocked in
+<span class="xref myst">wait(C)</span>{.uri} returns, where a third thread can call the
+monitor method and grab the monitor mutex before the second thread is
+able to acquire it while returning from <span class="xref myst">wait(C)</span>{.uri}.</p>
+<p>To handle this race condition we loop checking the predicate and waiting
+on the condition variable. In the (very rare) case where another thread
+entered the monitor while we were waking up, and e.g. grabbed whatever
+thing or resource we were waiting for, we go back to sleep and wait for
+another one.</p>
+<section id="id13">
+<h3><span class="section-number">30.7.1. </span>Review Questions<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+<section id="implementing-monitors">
+<h3><span class="section-number">30.7.2. </span>Implementing Monitors<a class="headerlink" href="#implementing-monitors" title="Permalink to this headline">#</a></h3>
+<p>So far we’ve described monitors as a language feature, but if you look
+at the languages in use today you won’t find the ‘monitor’ keyword
+anywhere. Java has very limited direct support for monitors—a
+synchronized class is essentially a monitor with a single condition
+variable, accessed implicitly via <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> and <code class="docutils literal notranslate"><span class="pre">release()</span></code>. In
+general, however, you have to implement monitors yourself, using some
+sort of condition variable object supplied by the operating system or
+thread library.</p>
+<p>POSIX threads<a class="footnote-reference brackets" href="#id26" id="id14">11</a>: This threading package, provided on Unix-like
+systems such as Linux and OSX, provides the following types and
+functions we can use:</p>
+<div class="highlight-{basicstyle=&quot;\ttfamily\footnotesize&quot; notranslate"><div class="highlight"><pre><span></span>pthread_mutex_t mutex
+      pthread_mutex_lock(mutex)
+      pthread_mutex_unlock(mutex)
+      pthread_cond_t  cond
+      pthread_cond_wait(cond, mutex)
+      pthread_cond_signal(cond)
+      pthread_cond_broadcast(cond)
+</pre></div>
+</div>
+<p>Since the language doesn’t provide an implicit monitor mutex, we
+allocate an <em>explicit</em> per-object mutex, locking it on entry to each
+method and unlocking before returning from the method. Condition
+variables are also provided directly, e.g. by the pthread_cond_create
+function; however the thread library cannot know what object instance
+and mutex a condition variable is associated with, and so we have to
+pass the mutex explicitly when we wait on a condition. More precisely,
+the translation (as shown in
+<a class="reference external" href="#lst:mon:posix">[lst:mon:posix]</a>{reference-type=”autoref”
+reference=”lst:mon:posix”}) is:</p>
+<div class="highlight-enumerate* notranslate"><div class="highlight"><pre><span></span>(implicit mutex) : create a per-instance mutex `m` which is locked on
+entry to each method and unlocked on exit. (being careful with multiple
+exits, or worse yet exceptions)
+
+condition variables : translate each to an instance variable of type
+`pthread_cond_t`
+
+`signal(C)`, `broadcast(C)` : `pthread_cond_signal(C)` and
+`pthread_cond_broadcast(C)`
+
+`wait(C)` : `pthread_cond_wait(C, m)` where `m` is the per-instance
+mutex.
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="highlight-{basicstyle=&quot;\ttfamily\footnotesize&quot; notranslate"><div class="highlight"><pre><span></span>monitor myclass:
+    condition C1, C2
+
+    method m1():
+        C1.wait()
+        C2.signal()
+        return
+
+
+
+
+
+class myclass {
+private:
+    pthread_mutex_t m;
+    pthread_cond_t C1, C2;
+
+public:
+    void m1(void) {
+        pthread_mutex_lock(&amp;m);
+        pthread_cond_wait(&amp;C1, &amp;m);
+        pthread_cond_signal(&amp;C2);
+        pthread_mutex_unlock(&amp;m);
+    }
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>Note that for programming exercises in this class we may implement
+singleton objects in C, in which case we can simplify our implementation
+somewhat:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Methods become functions, as there is no need to specify which object
+instance to apply a method to.
+
+Instance variables become global variables, because we only need one
+copy of them, but they must be shared between methods.
+</pre></div>
+</div>
+<div class="highlight-{#lst:mon:single notranslate"><div class="highlight"><pre><span></span>pthread_mutex_t m;
+pthread_cond_t C1, C2;
+void m1() {
+    pthread_mutex_lock(&amp;m);
+    pthread_cond_wait(&amp;C1, &amp;m);
+    pthread_cond_signal(&amp;C2);
+    pthread_mutex_unlock(&amp;m);
+}
+</pre></div>
+</div>
+<p><strong>Java:</strong> In this case we use an instance of <em>ReentrantLock</em> (in
+java.util.concurrent.locks) as our mutex, with methods <code class="docutils literal notranslate"><span class="pre">lock</span></code> and
+<code class="docutils literal notranslate"><span class="pre">unlock</span></code>. Condition variables are associated with a ReentrantLock (i.e.
+mutex), so given a ReentrantLock <span class="math notranslate nohighlight">\(m\)</span> created to be the per-object mutex,
+for each condition variable <span class="math notranslate nohighlight">\(C\)</span> in the original monitor we create a
+Condition via m.newCondition(); operations on these conditions are
+<em>wait</em>, <em>notify</em>, and <em>notifyAll</em>.</p>
+<div class="highlight-{#lst:mon:java notranslate"><div class="highlight"><pre><span></span>import ReentrantLock from java.util.concurrent.locks;
+class myclass {
+    ReentrantLock m = new ReentrantLock();
+    Condition C1 = m.newCondition(), C2 = m.newCondition();
+
+    void m1() {
+        m.lock();
+        C1.wait();
+        C2.notify();
+        m.unlock();
+    }
+</pre></div>
+</div>
+<p><strong>Python:</strong> The module <code class="docutils literal notranslate"><span class="pre">threading</span></code> implements two classes, <code class="docutils literal notranslate"><span class="pre">Lock</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Condition</span></code>, which we use as above. (note that the methods for
+<code class="docutils literal notranslate"><span class="pre">threading.Lock</span></code> are <code class="docutils literal notranslate"><span class="pre">acquire</span></code> and <code class="docutils literal notranslate"><span class="pre">release</span></code>) Like Java, conditions are
+associated with locks at the time of creation, so there is no need to
+remember to pass the mutex in the <code class="docutils literal notranslate"><span class="pre">wait()</span></code> function.</p>
+<div class="highlight-{#lst:mon:python notranslate"><div class="highlight"><pre><span></span>import threading
+class myclass:
+    def __init__(self):
+        self.m = threading.Lock()
+        self.C1 = threading.Condition(self.m)
+        self.C2 = threading.Condition(self.m)
+
+    def m1(self):
+        self.m.acquire()
+        self.C1.wait()
+        self.C2.notify()
+        self.m.release()
+</pre></div>
+</div>
+<section id="id15">
+<h4><span class="section-number">30.7.2.1. </span>Review Questions<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="graphical-notation">
+<h2><span class="section-number">30.8. </span>Graphical Notation<a class="headerlink" href="#graphical-notation" title="Permalink to this headline">#</a></h2>
+<p>Reasoning about multi-threaded programs is harder than single-threaded
+ones. For single-threaded programs most people can visualize how program
+execution moves from one line of code to another; however in the
+multi-threaded case you have to be aware of many possible copies of the
+same code, each possibly executing a different line.</p>
+<p><img alt="image" src="../_images/sync-method.png" />{width=”10%”}</p>
+<p><img alt="image" src="../_images/sync-choice.png" />{width=”18%”}</p>
+<p><img alt="image" src="../_images/sync-cond.png" />{width=”18%”}</p>
+<p><img alt="image" src="../_images/sync-signal.png" />{width=”38%”}</p>
+<p>In <a class="reference external" href="#fig:sync:graphic">[fig:sync:graphic]</a>{reference-type=”autoref”
+reference=”fig:sync:graphic”} we see the elements of a graphical
+representation for a monitor, which allows us to see more directly how
+different threads interact in the execution of a multi-threaded program.
+Each method is represented by a path (a), which may involve decisions
+(b), waiting on conditions (c), and signalling those conditions (d).</p>
+<p><img alt="Graphical representation for weighted bounded buffer solution shown in[fig:sync:wbb]{reference-type=&quot;autoref&quot;reference=&quot;fig:sync:wbb&quot;}" src="../_images/sync-pic1.png" />{#fig:sync:gwbb
+width=”70%”}</p>
+<hr class="docutils" />
+<p><img alt="image" src="../_images/sync-pic2.png" />{height=”0.27\textheight”}<br />
+<img alt="image" src="../_images/sync-pic3.png" />{height=”0.27\textheight”}</p>
+<hr class="docutils" />
+<p>\</p>
+<hr class="docutils" />
+<p><img alt="image" src="../_images/sync-pic4.png" />{height=”0.27\textheight”}<br />
+<img alt="image" src="../_images/sync-pic5.png" />{height=”0.27\textheight”}</p>
+<hr class="docutils" />
+<p>In <a class="reference external" href="#fig:sync:gwbb">[fig:sync:gwbb]</a>{reference-type=”autoref”
+reference=”fig:sync:gwbb”} we see the weighted bounded buffer solution
+from <a class="reference external" href="#fig:sync:wbb">[fig:sync:wbb]</a>{reference-type=”autoref”
+reference=”fig:sync:wbb”} represented in this graphical notation, and in
+<a class="reference external" href="#fig:sync:gwbb2">[fig:sync:gwbb2]</a>{reference-type=”autoref”
+reference=”fig:sync:gwbb2”} we see multiple threads moving through this
+representation.</p>
+<p>(Note that the figures have been simplified slightly by using
+<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(!P)</span> <span class="pre">wait(C);</span></code> instead of <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">(!P)</span> <span class="pre">wait(C)</span></code>.)</p>
+</section>
+<section id="putting-it-all-together">
+<h2><span class="section-number">30.9. </span>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">#</a></h2>
+<p>Most of the synchronization techniques discussed in this chapter are
+applicable to multi-threaded application programs, rather than operating
+systems themselves; however synchronization and the prevention of race
+conditions are still key techniques within an OS.</p>
+<p>**Condition variables and **signal()****: The I/O wait mechanism is an
+example of this. When the shell invokes the <code class="docutils literal notranslate"><span class="pre">read</span></code> system call to read
+characters from the keyboard, the process is removed from the active
+list and placed on a wait queue in the kernel; the keyboard interrupt
+handler then wakes a process waiting on this queue when a character is
+received. The semantics of this I/O wait queue and the operation to wake
+a process from it are identical to those of a condition variable with
+<code class="docutils literal notranslate"><span class="pre">wait</span></code> and <code class="docutils literal notranslate"><span class="pre">signal</span></code>. (the design choices are similar, too. Simple
+operating systems may use the equivalent of <code class="docutils literal notranslate"><span class="pre">broadcast</span></code>, waking all
+processes waiting on any sort of I/O and having each of them re-check
+the condition they are waiting on before going to sleep, while for
+highest performance more complete OSes have separate wait queues per I/O
+source, and when data arrives a single waiting process will be woken.)</p>
+<p><strong>Mutexes</strong>: An operating system is full of potential race conditions,
+and heavy use is made of locking mechanisms to prevent errors or
+crashes. Asynchronous events can occur due to timer or I/O interrupts,
+and on a multi-core CPU there can be OS code running on multiple cores
+at the same time. In either case it is essential to protect key OS data
+structures, such as the list of active processes, which is typically
+implemented as a singly- or doubly-linked list.</p>
+<p>Data structures such as this will typically be protected by a
+combination of spinlocks and disabling interrupts—e.g. to modify the
+active process list, OS code will (1) disable interrupts, (2) acquire a
+spinlock which guards that list, (3) perform the modifications, (4)
+release the spinlock and (5) re-enable interrupts. (Interrupts are
+typically disabled while an interrupt handler executes, so when
+accessing these data structures from an interrupt handler it is
+sufficient to acquire the spinlock.)</p>
+<p>When switching to the next runnable process, it’s necessary to protect
+not only the active process list, so that it doesn’t get corrupted, but
+to also protect the variable identifying the current process on each
+CPU, to prevent two processes from being assigned to the same CPU at the
+same time. A simple way of doing this is to have a <code class="docutils literal notranslate"><span class="pre">schedule()</span></code> function
+which is called under a lock, and which pops the next runnable process
+off the active list, makes it the current process, and switches to it;
+e.g. an implementation using simple round-robin scheduling might be as
+shown in
+<a class="reference external" href="#fig:sync:rrsched">[fig:sync:rrsched]</a>{reference-type=”autoref”
+reference=”fig:sync:rrsched”}.</p>
+<hr class="docutils" />
+<div class="highlight-{basicstyle=&quot;\ttfamily\footnotesize&quot; notranslate"><div class="highlight"><pre><span></span>[e.g. yield:]
+       ...
+    lock(plist_lock);
+    schedule();
+    unlock(plist_lock);
+       ...
+
+schedule() {
+    active_tail-&gt;next = current;
+    active_tail = current;
+    current = active_head;
+    active_head = active_head-&gt;next; 
+    switch_to(current);
+}
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>Note that the lock can’t be “encapsulated” within <code class="docutils literal notranslate"><span class="pre">schedule</span></code> and hidden
+from other code, because special handling is required when creating
+processes—when a new process begins it will execute a “trampoline”
+function, rather than the second half of the <code class="docutils literal notranslate"><span class="pre">schedule</span></code> function, and
+must drop the lock that was acquired when switching to it.</p>
+<p>Finally, deadlocks are a risk when implementing an operating system. In
+many cases the objects of contention are not mutexes themselves, but
+resources such as pages of memory E.g. consider the case<a class="footnote-reference brackets" href="#id27" id="id16">12</a> where a
+process tries to allocate a page of memory when (almost) all pages are
+in use. The OS finds a page it can “steal” from another process after
+writing its contents to disk; however if that page is associated with a
+network file, the OS may need to temporarily allocate another page of
+memory in order to send the network message to write it back.</p>
+<p>The solution to this is to reserve the last few blocks of memory to
+various high-priority uses. This works in much the same way as lock
+ranking, because the original request is made at low priority (i.e. by
+the process) and thus can’t acquire and hold the resources which would
+be needed by the higher-priority page-out and networking tasks.</p>
+<section id="answers-to-review-questions">
+<h3><span class="section-number">30.9.1. </span>Answers to Review Questions<a class="headerlink" href="#answers-to-review-questions" title="Permalink to this headline">#</a></h3>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>in synchro:1,synchro:2,synchro:3,synchro:4,synchro:5,synchro:6
+</pre></div>
+</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>The simplest way to do this is to only allow single-threaded
+programs. This was the case for almost all operating systems until
+the mid-90s; multi-threading and locking were obscure concerns which
+only kernel programmers had to worry about</p>
+</dd>
+<dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>The name <em>atom</em> derives from the ancient Greek word for
+<em>indivisible</em>, and so is something that can’t be cut or divided. (or
+at least couldn’t be until the physicists got to work on it) An
+<em>atomic operation</em> cannot be divided into parts by another
+operation.</p>
+</dd>
+<dt class="label" id="id19"><span class="brackets"><a class="fn-backref" href="#id3">4</a></span></dt>
+<dd><p>Another such instruction is Compare And Swap (e.g. the Intel
+CMPXCHG instruction), which only performs the swap if the value in
+memory matches an expected value.</p>
+</dd>
+<dt class="label" id="id20"><span class="brackets"><a class="fn-backref" href="#id4">5</a></span></dt>
+<dd><p>Sort of. On massively multi-core machines—e.g. 72 cores is a
+common number nowadays—highly contented locks are still
+inefficient, as waiting for 71 other CPUs to do a few instructions
+each can take a while.</p>
+</dd>
+<dt class="label" id="id21"><span class="brackets"><a class="fn-backref" href="#id6">6</a></span></dt>
+<dd><p>which means “for teaching purposes only”, i.e. not necessarily
+practical.</p>
+</dd>
+<dt class="label" id="id22"><span class="brackets"><a class="fn-backref" href="#id7">7</a></span></dt>
+<dd><p>Note how locks complicate control flow—you have to make sure
+that all locks are released, even in failure cases.</p>
+</dd>
+<dt class="label" id="id23"><span class="brackets"><a class="fn-backref" href="#id8">8</a></span></dt>
+<dd><p>In particular, for debugging purposes many implementations (such
+as the POSIX threads implementation in Linux) require that a mutex
+be unlocked by the same thread that locked it.</p>
+</dd>
+<dt class="label" id="id24"><span class="brackets"><a class="fn-backref" href="#id9">9</a></span></dt>
+<dd><p>Not that it really matters, as a well-behaved program probably
+wouldn’t do this.</p>
+</dd>
+<dt class="label" id="id25"><span class="brackets"><a class="fn-backref" href="#id12">10</a></span></dt>
+<dd><p>Or at least any that can be solved by other techniques described
+in this text.</p>
+</dd>
+<dt class="label" id="id26"><span class="brackets"><a class="fn-backref" href="#id14">11</a></span></dt>
+<dd><p>The same threading model is available in C11, with slightly
+different names—e.g. mutexes are of type <span class="xref myst">mtx_t</span>{.uri},
+with functions <span class="xref myst">mtx_lock</span>{.uri} and
+<span class="xref myst">mtx_unlock</span>{.uri}</p>
+</dd>
+<dt class="label" id="id27"><span class="brackets"><a class="fn-backref" href="#id16">12</a></span></dt>
+<dd><p>Yes, I know we haven’t covered some of the parts of this yet, but
+we’ll get to them in the next chapter…</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./sync"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="linux_locking.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">29. </span>Locking in the Linux Kernel</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../misc/OtherInro.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">31. </span>Overview of other topics</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Angela Demke Brown, Orran Krieger & Larry Woodman<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

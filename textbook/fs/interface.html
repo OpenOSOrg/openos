@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>17. Interface &#8212; Introduction to Operating Systems</title>
+    <title>21. Interface &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="18. File System Layout" href="disklayout.html" />
-    <link rel="prev" title="16. Introduction" href="intro.html" />
+    <link rel="next" title="22. File System Layout" href="disklayout.html" />
+    <link rel="prev" title="20. Introduction" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -147,6 +147,11 @@ const thebe_selector_output = ".output, .cell_output"
    5. Tools
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/peter-other.html">
+   6. Other stuff from peter to integrate
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -156,7 +161,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   6. Processor Scheduling
+   9. Processor Scheduling
   </a>
  </li>
 </ul>
@@ -168,42 +173,47 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/mm.html">
-   7. Memory Management
+   10. Memory Management
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/Overview.html">
-   8. The purpose of Memory Management
+   11. The purpose of Memory Management
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   10. Memory reclaiming algorithms.
+   13. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/datastruc.html">
-   11. Data structures
+   14. Data structures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   12. Page Faults
+   15. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/mmhw.html">
-   13. Memory management hardware
+   16. Memory management hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/mmdyn.html">
-   14. Paging Dynamics
+   17. Paging Dynamics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   15. Memory management in the real world
+   18. Memory management in the real world
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/peter-mm.html">
+   19. Peter’s Virtual Memory chapter
   </a>
  </li>
 </ul>
@@ -215,22 +225,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   16. Introduction
+   20. Introduction
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   17. Interface
+   21. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="disklayout.html">
-   18. File System Layout
+   22. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="kernelimp.html">
-   19. Kernel implementation
+   23. Kernel implementation
   </a>
  </li>
 </ul>
@@ -242,32 +252,37 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   20. Intro Concurrency Synchronization and Deadlock
+   24. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   21. Cooperating Processes
+   25. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   22. Synchronization Primitives
+   26. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   23. Deadlocks
+   27. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   24. Challenges of Modern Hardware
+   28. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   25. Locking in the Linux Kernel
+   29. Locking in the Linux Kernel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/peter-syncro.html">
+   30. Synchronization – Safety &amp; Sequencing
   </a>
  </li>
 </ul>
@@ -279,22 +294,27 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   26. Overview of other topics
+   31. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   27. Security
+   32. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   28. Virtualization and Cloud computing
+   34. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   29. Other OS structures
+   36. Other OS structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../devices/block-dev.html">
+   37. # I/O, Drivers, and DMA {#chap:blockdevs}
   </a>
  </li>
 </ul>
@@ -306,12 +326,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   30. Contributing
+   38. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   31. Bibliography
+   39. Bibliography
   </a>
  </li>
 </ul>
@@ -557,22 +577,22 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#objects">
-   17.1. Objects
+   21.1. Objects
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#file-system-operations">
-   17.2. File System Operations:
+   21.2. File System Operations:
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#symbolic-links">
-   17.3. Symbolic links
+   21.3. Symbolic links
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review-questions">
-     17.3.1. Review Questions
+     21.3.1. Review Questions
     </a>
    </li>
   </ul>
@@ -598,22 +618,22 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#objects">
-   17.1. Objects
+   21.1. Objects
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#file-system-operations">
-   17.2. File System Operations:
+   21.2. File System Operations:
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#symbolic-links">
-   17.3. Symbolic links
+   21.3. Symbolic links
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review-questions">
-     17.3.1. Review Questions
+     21.3.1. Review Questions
     </a>
    </li>
   </ul>
@@ -629,9 +649,9 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="interface">
-<span id="cont-fs-interface"></span><h1><span class="section-number">17. </span>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">#</a></h1>
+<span id="cont-fs-interface"></span><h1><span class="section-number">21. </span>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">#</a></h1>
 <section id="objects">
-<h2><span class="section-number">17.1. </span>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">21.1. </span>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">#</a></h2>
 <p>General-purpose operating systems typically provide access to block
 storage (i.e. disks) via a <em>file system</em>, which provides a much more
 application- and user-friendly interface to storage. From the point of
@@ -659,9 +679,9 @@ only with multiples of 8-bit bytes (e.g. 16 and 32-bit words), replacing
 older systems which frequently used odd word sizes such as 36 bits.
 (Note that a machine with 36-bit instructions already needs two
 incompatible types of files, one for text and one for executable code)</p>
-<p><img alt="Logical view of a hierarchical file system name space." src="../_images/filesys-tree.png" />{#fig:filesys:tree
+<p><img alt="Logical view of a hierarchical file system name space." src="images/pb-figures/filesys-tree.png" />{#fig:filesys:tree
 width=”80%”}</p>
-<p><img alt="implementation view of a hierarchical file system name space." src="../_images/filesys-tree2.png" />{#fig:filesys:tree
+<p><img alt="implementation view of a hierarchical file system name space." src="images/pb-figures/filesys-tree2.png" />{#fig:filesys:tree
 width=”80%”}</p>
 <p>Modern operating systems follow the UNIX model, which imposes no
 structure on a file—a file is merely a sequence of bytes.[^2] Any
@@ -696,7 +716,7 @@ the the paths <code class="docutils literal notranslate"><span class="pre">pjd/.
 file, and <code class="docutils literal notranslate"><span class="pre">../bin/cat</span></code> and <code class="docutils literal notranslate"><span class="pre">/bin/cat</span></code> refer to the same file.</p>
 </section>
 <section id="file-system-operations">
-<h2><span class="section-number">17.2. </span>File System Operations:<a class="headerlink" href="#file-system-operations" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">21.2. </span>File System Operations:<a class="headerlink" href="#file-system-operations" title="Permalink to this headline">#</a></h2>
 <p>There are several common types of file operations supported by Linux
 (and with slight differences, Windows). They can be classified into
 three main categories: open/close, read/write, and naming and
@@ -782,7 +802,7 @@ delete an empty directory.</p></li>
 </ul>
 </section>
 <section id="symbolic-links">
-<h2><span class="section-number">17.3. </span>Symbolic links<a class="headerlink" href="#symbolic-links" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">21.3. </span>Symbolic links<a class="headerlink" href="#symbolic-links" title="Permalink to this headline">#</a></h2>
 <p>An alternative to hard links to allow multiple names for a file is a
 third file system object (in addition to files and directories), a
 <em>symbolic link</em>. This holds a text string which is interpreted as a
@@ -862,7 +882,7 @@ top-level directory on disk2,and then search for “pjd”.</p>
 Unix systems see the <code class="docutils literal notranslate"><span class="pre">path_resolution(7)</span></code> man page, which may be
 accessed with the command <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">path_resolution</span></code>.</p>
 <section id="review-questions">
-<h3><span class="section-number">17.3.1. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">21.3.1. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
@@ -901,13 +921,13 @@ accessed with the command <code class="docutils literal notranslate"><span class
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">16. </span>Introduction</p>
+            <p class="prev-next-title"><span class="section-number">20. </span>Introduction</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="disklayout.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">18. </span>File System Layout</p>
+        <p class="prev-next-title"><span class="section-number">22. </span>File System Layout</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

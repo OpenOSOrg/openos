@@ -1,0 +1,2736 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>37. # I/O, Drivers, and DMA {#chap:blockdevs} &#8212; Introduction to Operating Systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="38. Contributing" href="../contributing/Contributing.html" />
+    <link rel="prev" title="36. Other OS structures" href="../intro/other.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/pref.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/purpose.html">
+   2. Purpose of operating systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/structure.html">
+   3. OS structure
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/services.html">
+   4. Operating System Services
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/tools.html">
+   5. Tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/peter-other.html">
+   6. Other stuff from peter to integrate
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Scheduling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/scheduling.html">
+   9. Processor Scheduling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Memory Management
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mm.html">
+   10. Memory Management
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/Overview.html">
+   11. The purpose of Memory Management
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/reclamation.html">
+   13. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/datastruc.html">
+   14. Data structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/pagefaults.html">
+   15. Page Faults
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mmhw.html">
+   16. Memory management hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mmdyn.html">
+   17. Paging Dynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/realworld.html">
+   18. Memory management in the real world
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/peter-mm.html">
+   19. Peter’s Virtual Memory chapter
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/intro.html">
+   20. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/interface.html">
+   21. Interface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
+   22. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/kernelimp.html">
+   23. Kernel implementation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sync.html">
+   24. Intro Concurrency Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   25. Cooperating Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locking.html">
+   26. Synchronization Primitives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/deadlock.html">
+   27. Deadlocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   28. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   29. Locking in the Linux Kernel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/peter-syncro.html">
+   30. Synchronization – Safety &amp; Sequencing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/OtherInro.html">
+   31. Overview of other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sec/sec.html">
+   32. Security
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../virt/virt.html">
+   34. Virtualization and Cloud computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/other.html">
+   36. Other OS structures
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   37. # I/O, Drivers, and DMA {#chap:blockdevs}
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   38. Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/bib.html">
+   39. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/devices/block-dev.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/devices/block-dev.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/okrieg/openos"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fdevices/block-dev.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/edit/main/content/devices/block-dev.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/devices/block-dev.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   37.1. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pc-architecture-and-buses">
+   37.2. PC architecture and buses
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-i-o-bus-and-devices">
+     37.2.1. Simple I/O bus and devices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polled-vs-interrupt-driven-i-o">
+     37.2.2. Polled vs. Interrupt-driven I/O
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#latency-and-programmed-i-o">
+     37.2.3. Latency and Programmed I/O
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#review-questions">
+       37.2.3.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-pcie-bus-and-direct-memory-access-dma">
+     37.2.4. The PCIe Bus and Direct Memory Access (DMA)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dma-descriptors">
+     37.2.5. DMA Descriptors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#device-driver-architecture">
+     37.2.6. Device Driver Architecture
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       37.2.6.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hard-disk-drives-sec-hdds">
+   37.3. Hard Disk Drives {#sec:hdds}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hard-drive-performance">
+     37.3.1. Hard Drive Performance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#geometric-disk-addressing">
+     37.3.2. Geometric disk addressing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#performance-examples">
+     37.3.3. Performance examples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#disk-scheduling">
+     37.3.4. Disk scheduling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#primary-disk-scheduling-algorithms">
+     37.3.5. Primary Disk Scheduling Algorithms
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-disk-scheduling">
+     37.3.6. Implementing Disk Scheduling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#on-disk-cache">
+     37.3.7. On-Disk Cache
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sata-and-scsi">
+     37.3.8. SATA and SCSI
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scsi-over-everything">
+     37.3.9. SCSI over everything
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id6">
+       37.3.9.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#raid-and-other-re-mappings">
+   37.4. RAID and other re-mappings
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#partitioning">
+     37.4.1. Partitioning
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id7">
+       37.4.1.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#concatenation">
+     37.4.2. Concatenation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#striping-faster-concatenation">
+     37.4.3. Striping — faster concatenation
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id8">
+       37.4.3.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mirroring">
+     37.4.4. Mirroring
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mirroring-and-consistency">
+     37.4.5. Mirroring and Consistency
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#striping-mirroring-raid-0-1-raid-1-0">
+     37.4.6. Striping + Mirroring (RAID 0+1, RAID 1+0)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id9">
+       37.4.6.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#raid-4">
+     37.4.7. RAID 4
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id10">
+       37.4.7.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#raid-5">
+     37.4.8. RAID 5
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#raid-6-more-reliability">
+     37.4.9. RAID 6 - more reliability
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id12">
+       37.4.9.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logical-volume-management">
+     37.4.10. Logical Volume Management
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solid-state-drives">
+     37.4.11. Solid State Drives
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#new-disk-technologies">
+     37.4.12. New Disk Technologies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#storage-area-networks">
+     37.4.13. Storage-area Networks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#de-duplication">
+     37.4.14. De-duplication
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-it-all-together">
+   37.5. Putting it all together
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id19">
+     37.5.1. Review questions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#answers-to-review-questions">
+     37.5.2. Answers to Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1># I/O, Drivers, and DMA {#chap:blockdevs}</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   37.1. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pc-architecture-and-buses">
+   37.2. PC architecture and buses
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-i-o-bus-and-devices">
+     37.2.1. Simple I/O bus and devices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polled-vs-interrupt-driven-i-o">
+     37.2.2. Polled vs. Interrupt-driven I/O
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#latency-and-programmed-i-o">
+     37.2.3. Latency and Programmed I/O
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#review-questions">
+       37.2.3.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-pcie-bus-and-direct-memory-access-dma">
+     37.2.4. The PCIe Bus and Direct Memory Access (DMA)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dma-descriptors">
+     37.2.5. DMA Descriptors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#device-driver-architecture">
+     37.2.6. Device Driver Architecture
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       37.2.6.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hard-disk-drives-sec-hdds">
+   37.3. Hard Disk Drives {#sec:hdds}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hard-drive-performance">
+     37.3.1. Hard Drive Performance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#geometric-disk-addressing">
+     37.3.2. Geometric disk addressing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#performance-examples">
+     37.3.3. Performance examples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#disk-scheduling">
+     37.3.4. Disk scheduling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#primary-disk-scheduling-algorithms">
+     37.3.5. Primary Disk Scheduling Algorithms
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-disk-scheduling">
+     37.3.6. Implementing Disk Scheduling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#on-disk-cache">
+     37.3.7. On-Disk Cache
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sata-and-scsi">
+     37.3.8. SATA and SCSI
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scsi-over-everything">
+     37.3.9. SCSI over everything
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id6">
+       37.3.9.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#raid-and-other-re-mappings">
+   37.4. RAID and other re-mappings
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#partitioning">
+     37.4.1. Partitioning
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id7">
+       37.4.1.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#concatenation">
+     37.4.2. Concatenation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#striping-faster-concatenation">
+     37.4.3. Striping — faster concatenation
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id8">
+       37.4.3.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mirroring">
+     37.4.4. Mirroring
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mirroring-and-consistency">
+     37.4.5. Mirroring and Consistency
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#striping-mirroring-raid-0-1-raid-1-0">
+     37.4.6. Striping + Mirroring (RAID 0+1, RAID 1+0)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id9">
+       37.4.6.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#raid-4">
+     37.4.7. RAID 4
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id10">
+       37.4.7.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#raid-5">
+     37.4.8. RAID 5
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#raid-6-more-reliability">
+     37.4.9. RAID 6 - more reliability
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id12">
+       37.4.9.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logical-volume-management">
+     37.4.10. Logical Volume Management
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solid-state-drives">
+     37.4.11. Solid State Drives
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#new-disk-technologies">
+     37.4.12. New Disk Technologies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#storage-area-networks">
+     37.4.13. Storage-area Networks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#de-duplication">
+     37.4.14. De-duplication
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-it-all-together">
+   37.5. Putting it all together
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id19">
+     37.5.1. Review questions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#answers-to-review-questions">
+     37.5.2. Answers to Review Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="i-o-drivers-and-dma-chap-blockdevs">
+<h1><span class="section-number">37. </span># I/O, Drivers, and DMA {#chap:blockdevs}<a class="headerlink" href="#i-o-drivers-and-dma-chap-blockdevs" title="Permalink to this headline">#</a></h1>
+<p>This chapter covers (a) the memory and I/O bus architecture of modern
+computers, (b) programmed I/O and direct-memory access, (c) disk drive
+components and how they influence performance, and (d) logical block
+addressing and the SATA and SCSI buses.</p>
+<section id="introduction">
+<h2><span class="section-number">37.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p>Input/Output (I/O) devices are crucial to the operation of a computer.
+The data that a program processes — as well as the program binary
+itself — must be loaded into memory from some I/O device such as a
+disk, network, or keyboard. Similarly, without a way to output the
+results of a computation to the user or to storage, those results would
+be lost. One of the primary functions of the operating system is to
+manage these I/O devices. It should control access to them, as well as
+providing a consistent programming interface across a wide range of
+hardware devices with similar functionality but differing details. This
+chapter describes how I/O devices fit within the architecture of modern
+computer systems, and the role of programmed I/O, interrupts, direct
+memory access (DMA), and device drivers in interacting with them. In
+addition, you will examine one device, the hard disk drive and its
+corresponding controller, which is the source and destination of most
+I/O on typical systems.</p>
+<p><img alt="Standard Intel PC Architecture" src="devices/figures/iobus-fig1.pdf" />{#fig:iobus:1
+width=”60%”}</p>
+</section>
+<section id="pc-architecture-and-buses">
+<h2><span class="section-number">37.2. </span>PC architecture and buses<a class="headerlink" href="#pc-architecture-and-buses" title="Permalink to this headline">#</a></h2>
+<p>In <a class="reference external" href="#fig:iobus:1">[fig:iobus:1]</a>{reference-type=”autoref”
+reference=”fig:iobus:1”} you see the architecture of a typical
+Intel-architecture computer from a few years ago. Different parts of the
+system are connected by buses, or communication channels, operating at
+various speeds. The Front-Side Bus carries all memory transactions which
+miss in L1 and L2 cache, and the North Bridge directs these transactions
+to memory (DDR2 bus) or I/O devices (PCIe bus) based on their address.
+The PCI Express (PCIe) is somewhat slower than the front-side bus, but
+can be extended farther; it connects all the I/O devices on the system.
+In some cases (like USB and SATA), a controller connected to the PCIe
+bus (although typically located on the motherboard itself) may interface
+to a yet slower external interface. Finally, the ISA bus is a vestige of
+the original IBM PC; for some reason, they’ve never moved some crucial
+system functions off of it, so it’s still needed.<a class="footnote-reference brackets" href="#id20" id="id1">1</a></p>
+<section id="simple-i-o-bus-and-devices">
+<h3><span class="section-number">37.2.1. </span>Simple I/O bus and devices<a class="headerlink" href="#simple-i-o-bus-and-devices" title="Permalink to this headline">#</a></h3>
+<p>The fictional computer system described in earlier chapters included a
+number of memory-mapped I/O devices, which are accessible at particular
+physical memory addresses. On early computers such as the Apple II and
+the original IBM PC this was done via a simple I/O bus as shown in
+<a class="reference external" href="#fig:iobus:2">[fig:iobus:2]</a>{reference-type=”autoref”
+reference=”fig:iobus:2”} and
+<a class="reference external" href="#fig:iobus:3">[fig:iobus:3]</a>{reference-type=”autoref”
+reference=”fig:iobus:3”}. Address and data lines were extended across a
+series of connectors, allowing hardware on a card plugged into one of
+these slots to respond to read and write requests in much the same way
+as memory chips on the motherboard would. (This required each card to
+respond to a different address, no matter what combination of cards were
+plugged in, typically requiring the user to manually configure card
+addresses with DIP switches.)</p>
+<p>The term “bus” was taken from electrical engineering; in high-power
+electric systems a <em>bus bar</em> is a copper bar used to distribute power to
+multiple pieces of equipment. A simple bus like this one distributes
+address and data signals in much the same way.</p>
+<p>figures/io-bus Simple memory/IO bus using shared address and data lines
+fig:iobus:2 figures/iobus-fig2 Simple memory/IO bus with extension cards
+fig:iobus:3</p>
+<p><strong>I/O vs. memory-mapped access</strong>: Certain CPUs, including Intel
+architecture, contain support for a secondary I/O bus, with a smaller
+address width and accessed via special instructions. (e.g. “IN 0x100” to
+read a byte from I/O location 0x100, which has nothing to do with
+reading a byte from memory location 0x100)</p>
+<p><strong>Memory-mapped I/O:</strong> like in our fictional computer, devices can be
+mapped in the physical memory space and accessed via standard load and
+store instructions. In either case, I/O devices will have access to an
+interrupt line, allowing interrupts to be raised for events like I/O
+completion.</p>
+<p><strong>Device selection:</strong> Depending on the system architecture, the device
+may be responsible for decoding the full address and determining when it
+has been selected, or a select signal may indicate when a particular
+slot on the bus is being accessed. Almost all computers today use a
+version of the PCI bus, which uses memory-mapped access, and at boot
+time, assigns each I/O device a physical address range to which it
+should respond.</p>
+</section>
+<section id="polled-vs-interrupt-driven-i-o">
+<h3><span class="section-number">37.2.2. </span>Polled vs. Interrupt-driven I/O<a class="headerlink" href="#polled-vs-interrupt-driven-i-o" title="Permalink to this headline">#</a></h3>
+<p><strong>Polled (or “programmed”) I/O</strong>: As described in earlier chapters, the
+simplest way to control an I/O device is for the CPU to issue commands
+and then wait, polling a device status register until the operation is
+complete. In
+<a class="reference external" href="#fig:iobus:polled">[fig:iobus:polled]</a>{reference-type=”autoref”
+reference=”fig:iobus:polled”}(a) an application requests I/O via e.g. a
+<code class="docutils literal notranslate"><span class="pre">read</span></code> system call; the OS (step 1) then writes to the device command
+register to start an operation, after which (step 2) it begins to poll
+the status register to detect completion. Meanwhile (step 3) the device
+carries out the operation, after which (step 4) polling by the OS
+detects that it is complete, and finally (step 5) the original request
+(e.g. <code class="docutils literal notranslate"><span class="pre">read</span></code>) can return to the application.</p>
+<p><strong>Interrupt-driven I/O</strong>: The alternate is interrupt-driven I/O, as
+shown in
+<a class="reference external" href="#fig:iobus:polled">[fig:iobus:polled]</a>{reference-type=”autoref”
+reference=”fig:iobus:polled”}(b). After (step 1) issuing a request to
+the hardware, the OS (step 2) puts the calling process to sleep and
+switches to another process while (step 3) the hardware handles the
+request. When the I/O is complete, the device (step 4) raises an
+interrupt. The interrupt handler then finishes the request. In the
+illustrated example, the interrupt handler (step 5) reads data that has
+become available, and then (step 6) wakes the waiting process, which
+returns from the I/O call (step 7) and continues.</p>
+<p><img alt="image" src="devices/figures/iobus-irq" />{width=”50%”}\</p>
+<hr class="docutils" />
+<p>(a) polled</p>
+<hr class="docutils" />
+<p>(b) interrupt-driven</p>
+</section>
+<section id="latency-and-programmed-i-o">
+<h3><span class="section-number">37.2.3. </span>Latency and Programmed I/O<a class="headerlink" href="#latency-and-programmed-i-o" title="Permalink to this headline">#</a></h3>
+<p>On our fictional computer the CPU is responsible for copying data
+between I/O devices and memory, using normal memory load and store
+instructions. Such an approach works well on computers such as the Apple
+II or the original IBM PC which run at a few MHz, where the address and
+data buses can be extended at full speed to external I/O cards. A modern
+CPU runs at over 3 GHz, however; during a single clock cycle light can
+only travel about 4 inches, and electrical signals even less.
+<a class="reference external" href="#fig:iobus:latency">[fig:iobus:latency]</a>{reference-type=”autoref”
+reference=”fig:iobus:latency”} shows example latencies for a modern CPU
+(in this case an Intel i5, with L3 cache omitted) to read a data value
+from L1 and L2 cache, a random location in memory (sequential access is
+faster), and a register on a device on the PCIe bus. (e.g. the disk or
+ethernet controller) In such a system, reading data from a device in
+4-byte words would result in a throughput of 5 words every microsecond,
+or 20MB/s — far slower than a modern network adapter or disk
+controller.</p>
+<p><img alt="DMA access for high-speed datatransfer" src="devices/figures/iobus-latency" />{#fig:iobus:dma width=”90%”}</p>
+<p><img alt="DMA access for high-speed datatransfer" src="devices/figures/iobus-dma" />{#fig:iobus:dma width=”\textwidth”}</p>
+<section id="review-questions">
+<h4><span class="section-number">37.2.3.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="highlight-gbar notranslate"><div class="highlight"><pre><span></span>As CPU speeds have become faster and faster, RAM and I/O devices have
+only slowly increased in speed. The strategies for coping with the high
+relative latency of RAM and I/O are very different, however---caching
+works quite well with RAM, which stores data generated by the CPU, while
+I/O (at least the input side) involves reading new data; here latency is
+overcome by pipelining, instead.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="the-pcie-bus-and-direct-memory-access-dma">
+<h3><span class="section-number">37.2.4. </span>The PCIe Bus and Direct Memory Access (DMA)<a class="headerlink" href="#the-pcie-bus-and-direct-memory-access-dma" title="Permalink to this headline">#</a></h3>
+<p>Almost all computers today use the PCIe bus. Transactions on the PCIe
+bus require a negotiation stage, when the CPU (or a device) requests
+access to bus resources, and then is able to perform a transaction after
+being granted access. In addition to basic read and write requests, the
+bus also supports Direct Memory Access (DMA), where I/O devices are able
+to read or write memory directly without CPU intervention.
+<a class="reference external" href="#fig:iobus:dma">[fig:iobus:dma]</a>{reference-type=”autoref”
+reference=”fig:iobus:dma”} shows a single programmed-I/O read (top)
+compared to a DMA burst transfer (bottom). While the read request
+requires a round trip to read each and every 4-byte word, once the DMA
+transfer is started it is able to transfer data at a rate limited by the
+maximum bus speed. (For an 8 or 16-lane PCIe card this limit is many
+GB/s)</p>
+</section>
+<section id="dma-descriptors">
+<h3><span class="section-number">37.2.5. </span>DMA Descriptors<a class="headerlink" href="#dma-descriptors" title="Permalink to this headline">#</a></h3>
+<p>A device typically requires multiple parameters to perform an operation
+and transfer the data to or from memory. In the case of a disk
+controller, for instance, these parameters would include the type of
+access (read or write), the disk locations to be accessed, and the
+memory address where data will be stored or retrieved from. Rather than
+writing each of these parameters individually to device registers, the
+parameters are typically combined in memory in what is called a <em>DMA
+descriptor</em>, such as the one shown in
+<a class="reference external" href="#fig:iobus:desc">[fig:iobus:desc]</a>{reference-type=”autoref”
+reference=”fig:iobus:desc”}. A single write is then used to tell the
+device the address of this descriptor, and the device can read the
+entire descriptor in a single DMA read burst. In addition to being more
+efficient than multiple programmed I/O writes, this approach also allows
+multiple requests to be queued for a device. (In the case of queued disk
+commands, the device may even process multiple such requests
+simultaneously.) When an I/O completes, the device notifies the CPU via
+an interrupt, and writes status information (such as success/failure)
+into a</p>
+<div class="highlight-gsidebar notranslate"><div class="highlight"><pre><span></span>**Cache-coherent I/O:** The PCIe bus is *cache-consistent*; many earlier
+I/O buses weren&#39;t. Consider what would happen if the CPU wrote a value
+to location 1000 (say that&#39;s the command/status field of a DMA
+descriptor), then the device wrote a new value to that same location,
+and finally the CPU tried to read it back?
+</pre></div>
+</div>
+<p>field in the DMA descriptor. (or sometimes in a device register, for
+simple devices which do not allow multiple outstanding requests.) The
+interrupt handler can then determine which operations have completed,
+free their DMA descriptors, and notify any waiting processes.</p>
+<p><img alt="List of typical DMAdescriptors" src="devices/figures/iobus-desc.pdf" />{#fig:iobus:desc width=”85%”}</p>
+</section>
+<section id="device-driver-architecture">
+<h3><span class="section-number">37.2.6. </span>Device Driver Architecture<a class="headerlink" href="#device-driver-architecture" title="Permalink to this headline">#</a></h3>
+<p><a class="reference external" href="#fig:iobus:driver">[fig:iobus:driver]</a>{reference-type=”autoref”
+reference=”fig:iobus:driver”} illustrates the I/O process for a typical
+device from user-space application request through the driver, hardware
+I/O operation, interrupt, and finally back to user space.</p>
+<p><img alt="Driver Architecture" src="devices/figures/iobus-driver.eps" />{#fig:iobus:driver
+width=”80%”}</p>
+<p>In more detail:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>The user process executes a `read` system call, which in turn invokes
+the driver `read` operation, found via the `read` method of the file
+operations structure.
+
+The driver fills in a DMA descriptor (in motherboard RAM), writes the
+physical address of the descriptor to a device register (generating a
+Memory Write operation across the PCIe bus), and then goes to sleep.
+
+The device issues a PCIe Memory Read Multiple command to read the DMA
+descriptor from RAM.
+
+The device does some sort of I/O. (e.g. read from a disk, or receive a
+network packet)
+
+A Memory Write and Invalidate operation is used to write the received
+data back across the PCIe bus to the motherboard RAM, and to tell the
+CPU to invalidate any cached copies of those addresses.
+
+A hardware interrupt from the device causes the device driver interrupt
+handler to run.
+
+The interrupt handler wakes up the original process, which is currently
+in kernel space in the device driver read method, in a call to something
+like `interruptible_sleep_on`. After waking up, the read method copies
+the data to the user buffer and returns.
+</pre></div>
+</div>
+<section id="id2">
+<h4><span class="section-number">37.2.6.1. </span>Review questions<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="hard-disk-drives-sec-hdds">
+<h2><span class="section-number">37.3. </span>Hard Disk Drives {#sec:hdds}<a class="headerlink" href="#hard-disk-drives-sec-hdds" title="Permalink to this headline">#</a></h2>
+<p>The most widely used storage technology today is the hard disk drive,
+which records data magnetically on one or more spinning platters, in
+concentric circular tracks. The performance of a hard drive is primarily
+determined by physical factors: the size and geometry of its components
+and the speeds at which they move:</p>
+<p><strong>Platter:</strong> the platter rotates at a constant speed, typically one of
+the following:</p>
+<div class="highlight-center notranslate"><div class="highlight"><pre><span></span>    Speed      Rotations/sec   ms/rotation
+  ------------ --------------- -------------
+  5400 RPM     90              11
+  7200 RPM     120             8.3
+  10,000 RPM   167             6
+  15,000 RPM   250             4
+</pre></div>
+</div>
+<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/disk-pic.pdf){height=&quot;10\\baselineskip&quot;}
+</pre></div>
+</div>
+<p><strong>Head and actuator arm:</strong> these take between 1 and 10 ms to move from
+one track to another on consumer disk drives, depending on the distance
+between tracks, and between 1 and 4 ms on high-end enterprise drives.
+(at the cost of higher power consumption and noise)</p>
+<p><strong>Bits and tracks:</strong> on modern drives each track is about 3 micro-inches
+(75nm) wide, and bits are about 1 micro-inch (25nm) long; with a bit of
+effort and knowing that the disk is 3.5 inches at its outer diameter you
+could calculate the maximum speed at which bits pass under the head.</p>
+<p><strong>Electronics and interface:</strong> the drive electronics are responsible for
+controlling the actuator and transferring data to and from the host. On
+a consumer drive this occurs over a SATA interface, which has a top
+speed of 150, 300, or 600MB/s for SATA 1, 2, or 3.</p>
+<section id="hard-drive-performance">
+<h3><span class="section-number">37.3.1. </span>Hard Drive Performance<a class="headerlink" href="#hard-drive-performance" title="Permalink to this headline">#</a></h3>
+<p>Data on a drive can be identified by the platter surface it is on, the
+track on that surface, and finally the position on that track. Reading
+data from a disk (or writing to it) requires the following steps:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Switching the electronics to communicate with the appropriate head.
+(we&#39;ll ignore this, as it&#39;s fast)
+
+Moving the head assembly until the head is positioned over the target
+track. (*seek time*)
+
+Waiting for the platter to rotate until the first bit of the target data
+is passing under the head (*rotational latency*)
+
+Reading or writing until the last bit has passed under the head.
+(*transfer time*)
+</pre></div>
+</div>
+<p><img alt="Hard disk latency" src="devices/figures/disk-latency.eps" />{#fig:disk:latency
+width=”90%”}</p>
+</section>
+<section id="geometric-disk-addressing">
+<h3><span class="section-number">37.3.2. </span>Geometric disk addressing<a class="headerlink" href="#geometric-disk-addressing" title="Permalink to this headline">#</a></h3>
+<p>Unlike memory, data on a disk drive is read and written in fixed-sized
+units, or sectors, of either 512 or 4096 bytes. Thus small changes (e.g.
+a single byte) require what is known as a read/modify/write operation
+— a full sector is read from disk into memory, modified, and then
+written back to disk. These sectors are arranged in concentric tracks on
+each platter surface; a sector may thus be identified by its geometric
+coordinates:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>**Cylinder:** this is the track number; for historical reasons the group
+formed by the same track on all disk platters has been called a
+cylinder, as shown in the figure. Early disk drives could switch rapidly
+between accesses to tracks in the same cylinder; however this is no
+longer the case with modern drives.
+
+**Head:** this identifies one of the platter surfaces, as there is a
+separate head per surface and the drive electronics switches
+electrically between them in order to access the different surfaces.
+
+**Sector:** the sector within the track.
+</pre></div>
+</div>
+<p>Why a track is also called a <em>cylinder</em> — the same track on each
+surface forms a “virtual” cylinder. fig:disk:chs figures/disk-perf Disk
+access diagram fig:disk:perf</p>
+</section>
+<section id="performance-examples">
+<h3><span class="section-number">37.3.3. </span>Performance examples<a class="headerlink" href="#performance-examples" title="Permalink to this headline">#</a></h3>
+<p>The overhead of seek and rotational delay has a major effect on disk
+performance. To give an example, consider randomly accessing a data
+block on a 7200 RPM disk with the following parameters:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Average seek time: 8 ms.
+
+Average rotational delay: 4 ms. (i.e., 1/2 rotation --- after seeking to
+a track, the rotational delay for sectors on that track will be
+uniformly distributed between 0 and 1 rotation)
+
+Transfer rate: 200 MB/s. (outer tracks on disks available in 2017)
+</pre></div>
+</div>
+<p>On average, reading a random 4KB block (i.e. one not immediately
+following the previous read) requires: $<span class="math notranslate nohighlight">\(8 + 4 + 0.02 = 12ms\)</span><span class="math notranslate nohighlight">\( for an
+average throughput of 34 KB/s. (0.02 is 4KB / 200KB per ms) Random
+access to a 5 MB block, or over 1000 times more data, requires:
+\)</span><span class="math notranslate nohighlight">\(8 + 4 + 25 = 37ms\)</span>$ for an average throughput of 134MB/s. (25ms is
+obtained by dividing 5000KB by a rate of 200KB/ms)</p>
+<p>In other words, although disks are random-access devices, random access
+is expensive. To achieve anywhere near full bandwidth on a modern disk
+drive you need to read or write data in large contiguous blocks; in our
+random access example, for instance, a 2 MB transfer would require
+22 ms, or less than twice as long <a class="footnote-reference brackets" href="#id21" id="id3">2</a> as the smallest transfer.</p>
+</section>
+<section id="disk-scheduling">
+<h3><span class="section-number">37.3.4. </span>Disk scheduling<a class="headerlink" href="#disk-scheduling" title="Permalink to this headline">#</a></h3>
+<p>A number of strategies are used to avoid the full penalties of seek and
+rotational delay in disks. One of these strategies is that of optimizing
+the order in which requests are performed—for instance reading sectors
+10 and 11 on a single track, in that order, would require a seek,
+followed by a rotational delay until sector 10 was available, and then
+two sectors of transfer time. However reading 11 first would require the
+same seek and about the same rotational delay (waiting until sector 11
+was under the head), followed by a full rotation to get from section 12
+all the way back to sector 10.</p>
+<p>Changing the order in which disk reads and writes are performed in order
+to minimize disk rotations is known as <em>disk scheduling</em>, and relies on
+the fact that multitasking operating systems frequently generate
+multiple disk requests in parallel, which do not have to be completed in
+strict order. Although a single process may wait for a read or write to
+complete before continuing, when multiple processes are running they can
+each issue requests and go to sleep, and then be woken in the order that
+requests complete.</p>
+</section>
+<section id="primary-disk-scheduling-algorithms">
+<h3><span class="section-number">37.3.5. </span>Primary Disk Scheduling Algorithms<a class="headerlink" href="#primary-disk-scheduling-algorithms" title="Permalink to this headline">#</a></h3>
+<p>The primary algorithms used for disk scheduling are:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>**first-come first-served (FCFS):** in other words no scheduling, with
+requests handled in the order that they are received.
+
+**Shortest seek time first (SSTF):** this is the throughput-optimal
+strategy; however it is prone to starvation, as a stream of requests to
+nearby sections of the disk can prevent another request from being
+serviced for a long time.
+
+**SCAN:** this (and variants) are what is termed the *elevator
+algorithm* --- pending requests are served from the inside to the
+outside of the disk, then from the outside back in, etc., much like an
+elevator goes from the first floor to the highest requested one before
+going back down again. It is nearly as efficient as SSTF, while avoiding
+starvation. (With SSTF one process can keep sending requests which will
+require less seek time than another waiting request, &quot;starving&quot; the
+waiting one.)
+</pre></div>
+</div>
+<p>More sophisticated disk head scheduling algorithms exist, and could no
+doubt be found by a scan of the patent literature; however they are
+mostly of interest to hard drive designers.</p>
+</section>
+<section id="implementing-disk-scheduling">
+<h3><span class="section-number">37.3.6. </span>Implementing Disk Scheduling<a class="headerlink" href="#implementing-disk-scheduling" title="Permalink to this headline">#</a></h3>
+<p>Disk scheduling can be implemented in two ways — in the operating
+system, or in the device itself. OS-level scheduling is performed by
+keeping a queue of requests which can be re-ordered before they are sent
+to the disk. On-disk scheduling requires the ability to send multiple
+commands to the disk before the first one completes, so that the disk is
+given a choice of which to complete first. This is supported as Command
+Queuing in SCSI, and in SATA as Native Command Queuing (NCQ).</p>
+<p>Note that OS-level I/O scheduling is of limited use today for improving
+overall disk performance, as the OS has little or no visibility into the
+internal geometry of a drive. (OS scheduling is still used to merge
+adjacent requests into larger ones and to allocate performance fairly to
+different processes, however.)</p>
+</section>
+<section id="on-disk-cache">
+<h3><span class="section-number">37.3.7. </span>On-Disk Cache<a class="headerlink" href="#on-disk-cache" title="Permalink to this headline">#</a></h3>
+<p>In addition to scheduling, the other strategy used to improve disk
+performance is caching, which takes two forms—<em>read caching</em> (also
+called track buffering) and <em>write buffering</em>. Disk drives typically
+have a small amount of RAM used for caching data <a class="footnote-reference brackets" href="#id22" id="id4">3</a>. Although this is
+very small in comparison the the amount of RAM typically dedicated to
+caching on the host, if used properly it can make a significant
+difference in performance.</p>
+<p>At read time, after seeking to a track it is common practice for the
+disk to store the entire track in the on-disk cache, in case the host
+requests this data in the near future. Consider, for example, the case
+when the host requests sector 10 on a track, then almost (but not quite)
+immediately requests sector 11. Without the track buffer it would have
+missed the chance to read 11, and would have to wait an entire
+revolution for it to come back around; with the track buffer, small
+sequential requests such as this can be handled efficiently.</p>
+<p>Write buffering is a different matter entirely, and refers to a feature
+where a disk drive may acknowledge a write request while the data is
+still in RAM, before it has been written to disk. This can risk loss of
+data, as there is a period of time during which the application thinks
+that data has been safely written, while it would in fact be lost if
+power failed.</p>
+<p>Although in theory most or all of the performance benefit of write
+buffering could be achieved in a safer fashion via proper use of command
+queuing, this feature was not available (or poorly implemented) in
+consumer drives until recently; as a result write buffering is enabled
+in SATA drives by default. Although write buffering can be disabled on a
+per-drive basis, modern file systems typically issue commands<a class="footnote-reference brackets" href="#id23" id="id5">4</a> to
+flush the cache when necessary to ensure file system data is not lost.</p>
+</section>
+<section id="sata-and-scsi">
+<h3><span class="section-number">37.3.8. </span>SATA and SCSI<a class="headerlink" href="#sata-and-scsi" title="Permalink to this headline">#</a></h3>
+<p>Almost all disk drives today use one of two interfaces: SATA (or its
+precursor, IDE) or SCSI. The SATA and IDE interfaces are derived from an
+ancient disk controller for the PC, the ST-506, introduced in about
+1980. This controller was similar to—but even cruder than—the disk
+interface in our fictional computer, with registers for the command to
+execute (read/write/other) and address (cylinder/head/sector), and a
+single register which the CPU read from or wrote to repeatedly to
+transfer data. What is called the ATA (AT bus-attached) or IDE
+(integrated drive electronics) disk was created by putting this
+controller on the drive itself, and using an extender cable to connect
+it back to the bus, so that the same software could still access the
+control registers. Over the years many extensions were made, including
+DMA support, logical block addressing, and a high-speed serial
+connection instead of a multi-wire cable; however the protocol is still
+based on the idea of the CPU writing to and reading from a set of
+remote, disk-resident registers.</p>
+<div class="highlight-gbar notranslate"><div class="highlight"><pre><span></span>**Logical vs. CHS addressing:** For CHS addressing to work the OS (and
+bootloader, e.g. BIOS) has to know the geometry of the drive, so it can
+tell e.g. whether the sector following (cyl=1,head=1,sector=51) is
+(1,1,52) or (2,1,0). For large computers sold with a small selection of
+vendor-approved disks this was not a problem, but it was a major hassle
+with PCs---you had to read a label on the disk and set BIOS options.
+Then drive manufacturers started using &quot;fake&quot; geometries because there
+weren&#39;t enough bits in the cylinder and sector fields, making drives
+that claimed to have 255 heads, giving the worst features of both
+logical and CHS addressing.
+</pre></div>
+</div>
+<p>In contrast, SCSI was developed around 1980 as a high-level,
+device-independent protocol with the following features:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Packet-based. The initiator (i.e. host) sends a command packet (e.g.
+READ or WRITE) over the bus to the target; DATA packets are then sent in
+the appropriate direction followed by a status indication. SCSI
+specifies these packets over the bus; how the CPU interacts with the
+disk controller to generate them is up to the maker of the disk
+controller. (often called an HBA, or host bus adapter)
+</pre></div>
+</div>
+<p></p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Logical block addressing. SCSI does not support C/H/S addressing ---
+instead the disk sectors are numbered starting from 0, and the disk is
+responsible for translating this logical block address (LBA) into a
+location on a particular platter. In recent years logical addressing has
+been adopted by IDE and SATA, as well.
+</pre></div>
+</div>
+</section>
+<section id="scsi-over-everything">
+<h3><span class="section-number">37.3.9. </span>SCSI over everything<a class="headerlink" href="#scsi-over-everything" title="Permalink to this headline">#</a></h3>
+<p>SCSI (like e.g. TCP/IP) is defined in a way that allows it to be carried
+across many different transport layers. Thus today it is found in:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>USB drives. The USB storage protocol transports SCSI command and data
+packets.
+
+CD and DVD drives. The first CD-ROM and CD-R drives were SCSI drives,
+and when IDE CDROM drives were introduced, rather than invent a new set
+of commands for CD-specific functions (e.g. eject) the drive makers
+defined a way to tunnel existing SCSI commands over IDE/ATA (and now
+SATA).
+
+Firewire, as used in some Apple systems.
+
+Fibre Channel, used in enterprise Storage Area Networks.
+
+iSCSI, which carries SCSI over TCP/IP, typically over Ethernet
+</pre></div>
+</div>
+<p>and no doubt several other protocols as well. By using SCSI instead of
+defining another block protocol, the device makers gained SCSI features
+like the following:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Standard commands (&quot;Mode pages&quot;) for discovering drive properties and
+parameters.
+
+Command queuing, allowing multiple requests to be processed by the drive
+at once. (also offered by SATA, but not earlier IDE drives)
+
+Tagged command queuing, which allows a host to place constraints on the
+re-ordering of outstanding requests.
+</pre></div>
+</div>
+<section id="id6">
+<h4><span class="section-number">37.3.9.1. </span>Review questions<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="raid-and-other-re-mappings">
+<h2><span class="section-number">37.4. </span>RAID and other re-mappings<a class="headerlink" href="#raid-and-other-re-mappings" title="Permalink to this headline">#</a></h2>
+<p>In the previous section you learned about:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Disk drives: how they work, and how that determines their performance
+
+SCSI and SATA buses, which carry block I/O commands between host
+controllers and disk drives
+
+The PCI bus, DMA, and device drivers which communicate between host
+controllers and the operating system
+</pre></div>
+</div>
+<p>This section is about about <em>disk-like</em> devices, which behave like disks
+but aren’t; this includes multi-disk arrays, solid-state drives (SSDs),
+and other block devices.</p>
+<p>Early disk drives used cylinder/head/sector addressing, required the
+operating system to be aware of the exact parameters of each disk so
+that it could store and retrieve data from valid locations. The
+development of logical block addressing, first in SCSI, then in IDE and
+SATA drives, allowed drives to be interchangeable: with logical block
+addressing the operating system only needs to know how big a disk is,
+and can ignore its internal details.</p>
+<p>This model is more powerful than that, however, as there is no need for
+the device on the other end of the SCSI (or SATA) bus to actually <em>be</em> a
+disk drive. (You can do this with C/H/S addressing, as well, but it
+requires creating a fake drive geometry, and then hoping that the
+operating system won’t assume that it’s the real geometry when it
+schedules I/O requests)</p>
+<p>Instead the device on the other end of the wire can be an array of disk
+drives, a solid-state drive, or any other device which stores and
+retrieves blocks of data in response to write and read commands. Such
+disk-like devices are found in many of today’s computer systems, both on
+the desktop and especially in enterprise and data center systems, and
+include:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Partitions and logical volume management, for flexible division of disk
+space
+
+Disk arrays, especially RAID (redundant arrays of inexpensive disks),
+for performance and reliability
+
+Solid-state drives, which use flash memory instead of magnetic disks
+
+Storage-area networks (SANs)
+
+De-duplication, to compress multiple copies of the same data
+</pre></div>
+</div>
+<p>Almost all of these systems look exactly like a disk to the operating
+system. Their function, however, is typically (at least in the case of
+disk arrays) an attempt to overcome one or more deficiencies of disk
+drives, which include:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Performance: Disk transfer speed is determined by (a) how small bits can
+be made, and (b) how fast the disk can spin under the head. Rotational
+latency is determined by (b again) how fast the disk spins. Seek time is
+determined by (c) how fast the head assembly can move and settle to a
+final position. For enough money, you can make (b) and (c) about twice
+as fast as in a desktop drive, although you may need to make the tracks
+wider, resulting in a lower-capacity drive. To go any faster requires
+using more disks, or a different technology, like SSDs.
+
+Reliability: Although disks are surprisingly reliable, they fail from
+time to time. If your data is worth a lot (like the records from the
+Bank of Lost Funds), you will be willing to pay for a system which
+doesn&#39;t lose data, even if one (or more) of the disks fails.
+
+Size: The maximum disk size is determined by the available technology at
+any time---if they could build them bigger for an affordable price, they
+would. If you want to store more data, you need to either wait until
+they can build larger disks, or use more than one. Conversely, in some
+cases (like dual-booting) a single disk may be more than big enough, but
+you may need to split it into multiple logical parts.
+</pre></div>
+</div>
+<p>In the rest of this section we will look at drive <em>re-mappings</em>, where a
+<em>logical volume</em> is created which is a different size or has different
+properties than the disk or disks it is built from. These mappings are
+not complex—in most cases a simple mathematical operation on a logical
+block address (LBA) within the logical volume will determine which disk
+or disks the operation will be directed to, and to what LBA on that
+disk. This translation may be done on an external device (a <em>RAID
+array</em>), within a host bus adaptor, transparently to the host (a <em>RAID
+adapter</em>), or within the operating system itself (<em>software RAID</em>), but
+the translations performed are the same in each case.</p>
+<section id="partitioning">
+<h3><span class="section-number">37.4.1. </span>Partitioning<a class="headerlink" href="#partitioning" title="Permalink to this headline">#</a></h3>
+<p>The first remapping strategy, partitioning, is familiar to most advanced
+computer users. A desktop or laptop computer typically has a single disk
+drive; however it is frequently useful to split that device into
+multiple logical devices via partitioning. An example is shown in
+<a class="reference external" href="#lst:partition">[lst:partition]</a>{reference-type=”autoref”
+reference=”lst:partition”}, where a single 250GB disk (named <code class="docutils literal notranslate"><span class="pre">sda</span></code>, SCSI
+disk a) has been split into three sections for a Linux installation. A
+small partition (‘sda1’) is used by the boot loader, followed by a swap
+partition used for virtual memory, and then the remainder (‘sda3’) is
+used for the root file system. Another common use for partitioning is
+for dual-booting a machine, where e.g. Windows might be installed into
+one partition and Linux or Apple OS X installed in another. Note that
+unlike some of the other remappings we will examine, partitioning is
+almost always handled in the operating system itself, rather than in an
+external device.</p>
+<div class="highlight-{#lst:partition notranslate"><div class="highlight"><pre><span></span>Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *          63      208844      104391   83  Linux
+/dev/sda2          208845     4401809     2096482+  82  Linux swap
+/dev/sda3         4401810   488392064   241995127+  83  Linux
+</pre></div>
+</div>
+<p>There are two parts to disk partitioning: (a) a method for recording
+partition information in a <em>partition table</em> to be read by the operating
+system, and (b) translating in-partition logical block addresses (LBAs)
+into <em>absolute</em> LBAs (i.e. counting from the beginning of the entire
+disk) at runtime.</p>
+<p>The first step is done via a <em>partition table</em> on the disk, which gives
+the starting logical block address (LBA), length, and type of each
+partition. On boot the operating system reads this table, and then
+creates virtual block devices (each with an LBA range starting at 0) for
+each partition. There are two partition table formats in wide use today
+— Master Boot Record (MBR) boot tables based on the original IBM PC
+disk format, and GUID Partition Table (GPT) tables used in new systems;
+for more detail see the following Wikipedia entries:
+<a class="reference external" href="http://en.wikipedia.org/wiki/Master_Boot_Record">http://en.wikipedia.org/wiki/Master_Boot_Record</a>,
+<a class="reference external" href="http://en.wikipedia.org/wiki/GUID_Partition_Table">http://en.wikipedia.org/wiki/GUID_Partition_Table</a></p>
+<p><strong>Address translation:</strong>
+<a class="reference external" href="#fig:raid:partition">[fig:raid:partition]</a>{reference-type=”autoref”
+reference=”fig:raid:partition”} shows a logical view of the translation
+between logical block addresses within a partition and physical
+addresses on the actual device.</p>
+<p>Given a partition with start address S and length L and a block address
+A within that partition, the actual on-disk address A0 can be determined
+as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if A &gt; L: 
+   error
+else: 
+   A0 = A + S
+</pre></div>
+</div>
+<p><img alt="Partition layout andformula" src="devices/figures/raid-partition.eps" />{#fig:raid:partition
+width=”\textwidth”}</p>
+<section id="id7">
+<h4><span class="section-number">37.4.1.1. </span>Review questions<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="concatenation">
+<h3><span class="section-number">37.4.2. </span>Concatenation<a class="headerlink" href="#concatenation" title="Permalink to this headline">#</a></h3>
+<p>Concatenation means joining two things (like strings) end-to-end; a
+concatenated volume is the opposite of a partitioned disk, joining the
+LBA spaces of each disk, one after the other, into a single logical
+volume which is the sum of multiple physical disks.</p>
+<p>Why would you do this? After all, you can just create separate file
+systems on multiple disks and use the mount command to join them into a
+single file system hierarchy, as shown in
+<a class="reference external" href="#fig:raid:mountpoints">[fig:raid:mountpoints]</a>{reference-type=”autoref”
+reference=”fig:raid:mountpoints”}.</p>
+<p><img alt="image" src="devices/figures/raid-mountpoints.pdf" />{width=”40%”}
+<img alt="image" src="devices/figures/raid-onemount.pdf" />{width=”50%”}</p>
+<p>This has disadvantages, though. What if you have 3 100GB disks, but
+200GB of home directories? Now you’re stuck with home directories that
+look like /home/disk1/joe and /home/disk2/jane, and no matter how you
+assign accounts, one of the disks is likely to fill up while there is
+still a lot of free space on the other one.</p>
+<p>If you can paste all three disks together and create a single large
+volume, however, with a single file system on top, then you have a
+single large, flexible volume, and you don’t need to guess how much
+space to allocate for different directories. (the most modern file
+systems — ZFS and Btrfs — will handle this for you, but widely-used
+file systems like NTFS and ext3 do not.)</p>
+<p>In <a class="reference external" href="#fig:raid:concat">[fig:raid:concat]</a>{reference-type=”autoref”
+reference=”fig:raid:concat”} we see concatenation with three disks,
+<span class="math notranslate nohighlight">\(D_1\)</span>, <span class="math notranslate nohighlight">\(D_2\)</span>, <span class="math notranslate nohighlight">\(D_3\)</span>, of size <span class="math notranslate nohighlight">\(S_1\)</span>, <span class="math notranslate nohighlight">\(S_2\)</span>, <span class="math notranslate nohighlight">\(S_3\)</span>. The address A in the
+concatenated volume is translated to a physical disk <span class="math notranslate nohighlight">\(D_0\)</span> and an
+address on that disk <span class="math notranslate nohighlight">\(A_0\)</span>, and (as for partitioning) the translation is
+very simple:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if A &lt; S1 then
+   D0 = D1
+   A0 = A
+else if A &lt; S2 then
+   D0 = D2
+   A0 = A-S1
+else if A &lt; S3 then
+   D0 = D3
+   A0 = A-S1-S2
+else
+   error
+</pre></div>
+</div>
+<p>Concatenation may be implemented in the OS (via the Logical Volume
+Manager in Linux, or as a type of “software RAID” in Windows) or in an
+external storage device. With the right tools for modifying the file
+system, it can even be used to add another disk to an existing file
+system.</p>
+</section>
+<section id="striping-faster-concatenation">
+<h3><span class="section-number">37.4.3. </span>Striping — faster concatenation<a class="headerlink" href="#striping-faster-concatenation" title="Permalink to this headline">#</a></h3>
+<div class="highlight-gsidebar notranslate"><div class="highlight"><pre><span></span>**Isn&#39;t that RAID0?** The term &quot;RAID&quot; was coined in a 1988 paper by
+Paterson, Gibson, and Katz, titled &quot;A case for redundant arrays of
+inexpensive disks (RAID)&quot;, where they defined RAID levels 0 through
+5---it turns out RAID0 and RAID1 were what everyone had been calling
+&quot;striping&quot; and &quot;mirroring&quot; for years, but no one had a name for the
+newer parity-based systems. RAID2 and 3 are weird and obsolete; no one
+talks about them.
+</pre></div>
+</div>
+<p>Although the size of a concatenated volume is the sum of the individual
+disk sizes, the performance is typically not. For instance, if you
+create a single large file, it will probably be placed on contiguous
+blocks on one of the disks, limiting read and write throughput to that
+of a single disk. If you’ve paid for more than one disk, it would be
+nice to actually get more than one disk’s performance, if you can.</p>
+<p>If the file was instead split into small chunks, and each chunk placed
+on a different disk than the chunk before it, it would be possible to
+read and write to all disks in parallel. This is called <em>striping</em>, as
+the data is split into stripes which are spread across the set of
+drives.</p>
+<p>In <a class="reference external" href="#fig:raid:stripe">[fig:raid:stripe]</a>{reference-type=”autoref”
+reference=”fig:raid:stripe”} we see individual <em>strips</em>, or chunks of
+data, layed out in horizontal rows (called <em>stripes</em>) across three
+disks. In the figure, when writing strips 0 through 5, strips 0, 1, and
+2 would be written first at the same time to the three different disks,
+followed by writes to strips 3, 4, and 5. Thus, writing six strips would
+take the same amount of time it takes to write two strips to a single
+disk.</p>
+<p><img alt="Striping across three disks" src="devices/figures/raid-stripe.pdf" />{#fig:raid:stripe
+width=”80%”}</p>
+<p>How big is a strip? It depends, as this value is typically
+configurable—the RAID algorithms work with any strip size, although
+for convenience everyone uses a power of 2. If it’s too small, the large
+number of I/Os may result in overhead for the host (software RAID) or
+for the RAID adapter; if it’s too large, then large I/Os will read or
+write from individual disks one at a time, rather than in parallel.
+Typical values are 16 KB to 512 KB. (the last one is kind of large, but
+it’s the default built into the <code class="docutils literal notranslate"><span class="pre">mdadm</span></code> utility for creating software
+RAID volumes on Linux. And the <code class="docutils literal notranslate"><span class="pre">mdadm</span></code> man page calls them “chunks”
+instead of “strips”, which seems like a much more reasonable name.)</p>
+<p>Striping data across multiple drives requires translating an address
+within the striped volume to an address on one of the physical disks
+making up the volume, using these steps:</p>
+<ul class="simple">
+<li><p>Find the stripe set that the address is located in - this will give the
+stripe number within an individual disk.</p></li>
+<li><p>Calculate the stripe number within that stripe set, which tells you the
+physical disk the stripe is located on.</p></li>
+<li><p>Calculate the address offset within the stripe.</p></li>
+</ul>
+<p>Note that—unlike concatenation—each disk must be of the same size
+for striping to work. (Well, if any disks are bigger than the smallest
+one, that extra space will be wasted.)</p>
+<p>Given 3 disks d1, d2, d3 of the same size, with a strip size of N
+sectors, an address A in the striped volume is translated to a physical
+disk <span class="math notranslate nohighlight">\(D_0\)</span> and an address on that disk <span class="math notranslate nohighlight">\(A_0\)</span> as follows, assuming
+integer arithmetic:</p>
+<section id="id8">
+<h4><span class="section-number">37.4.3.1. </span>Review questions<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h4>
+</section>
+</section>
+<section id="mirroring">
+<h3><span class="section-number">37.4.4. </span>Mirroring<a class="headerlink" href="#mirroring" title="Permalink to this headline">#</a></h3>
+<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/raid-mirrorfail.pdf){height=&quot;7\\baselineskip&quot;}
+</pre></div>
+</div>
+<p>Disks fail, and if you don’t have a copy of the data on that disk, it’s
+lost. A lot of effort has been spent on creating multi-disk systems
+which are more reliable than single-disk ones, by adding
+<em>redundancy</em>—i.e. additional copies of data so that even if one disk
+fails completely there is still a copy of each piece of your data stored
+safely somewhere. (Note that striping is actually a step in the wrong
+direction - if <em>any one</em> of the disks in a striped volume fail, which is
+more likely than failure of a single disk, then you will almost
+certainly lose all the data in that volume.)</p>
+<p>The simplest redundant configuration is <em>mirroring</em>, where two identical
+(“mirror image”) copies of the entire volume are kept on two identical
+disks. In <a class="reference external" href="#fig:mirrorfail">[fig:mirrorfail]</a>{reference-type=”autoref”
+reference=”fig:mirrorfail”} we see a mirrored volume comprising two
+physical disks; writes are sent to both disks, and reads may be sent to
+either one. If one disk fails, reads (and writes) will go to the
+remaining disk, and data is not lost. After the failed disk is replaced,
+the mirrored volume must be rebuilt (sometimes termed “re-silvering”) by
+copying its contents from the other drive. If you wait too long to
+replace the failed drive, you risk having the second drive crash, losing
+your data.</p>
+<p>Address translation in a mirrored volume is trivial: address A in the
+logical volume corresponds to the same address A on each of the physical
+disks. As with striping, both disks must be of the same size. (or any
+extra sectors in the larger drive must be ignored.)</p>
+</section>
+<section id="mirroring-and-consistency">
+<h3><span class="section-number">37.4.5. </span>Mirroring and Consistency<a class="headerlink" href="#mirroring-and-consistency" title="Permalink to this headline">#</a></h3>
+<p>A mirrored volume can be temporarily inconsistent during writing.
+Consider the following case, illustrated in
+<a class="reference external" href="#fig:mirrorincons">[fig:mirrorincons]</a>{reference-type=”autoref”
+reference=”fig:mirrorincons”}:</p>
+<div class="highlight-enumerate* notranslate"><div class="highlight"><pre><span></span>a block in the logical volume contains the value X, and a write is
+issued changing it to Y, and
+
+Y is successfully written to one disk but not the other, and then
+
+the power fails
+</pre></div>
+</div>
+<p>Now, when the system comes back up (step 4 in the figure) the value of
+this block will depend on which disk the request is sent to, and may
+change if a disk fails.</p>
+<p>High-end storage systems typically solve this problem by storing a
+temporary copy of written data to non-volatile memory (NVRAM), either
+battery-backed RAM or flash. If power fails, on startup the system</p>
+<div class="highlight-gsidebar notranslate"><div class="highlight"><pre><span></span>When recovering an inconsistent mirrored volume, the value from either
+disk may be used. Why is this OK? (it helps to remember that from the
+point of view of the file system or application, a write to a mirrored
+volume does not complete until both sides have been successfully written
+to.)
+</pre></div>
+</div>
+<p>can check that all recent writes completed to each disk. Without
+hardware support, the OS can check on startup to see if it was cleanly
+shut down, and if not it may need to check both sides of the mirror and
+ensure they are consistent. (a lengthy process with modern disks)</p>
+<p><img alt="Failure during mirror write causinginconsistency" src="devices/figures/raid-consistency.pdf" />{#fig:mirrorincons
+width=”90%”}</p>
+</section>
+<section id="striping-mirroring-raid-0-1-raid-1-0">
+<h3><span class="section-number">37.4.6. </span>Striping + Mirroring (RAID 0+1, RAID 1+0)<a class="headerlink" href="#striping-mirroring-raid-0-1-raid-1-0" title="Permalink to this headline">#</a></h3>
+<p><img alt="image" src="devices/figures/raid-zero-one.pdf" />{width=”60%”}</p>
+<p>Mirroring and striping can also be used to construct a logical volume
+out of other logical volumes, so you can create a mirrored volume
+consisting of two striped volumes, or a striped volume consisting of two
+mirrored volumes. In either case, a volume holding N drives worth of
+data will take 2N drives to hold (in this figure, that works out to
+eight drives) and will give N times the performance of a single disk.</p>
+<p>Since striping is also known as RAID 0 and mirroring as RAID 1, these
+configurations are called RAID 0+1 and RAID 1+0, respectively. RAID 0+1
+is less reliable, as if one disk fails in each of the two striped
+volumes the whole volume will fail. Interestingly enough, the disks
+contain exactly the same data in both cases; however, in the RAID 0+1
+case the controller doesn’t try as hard to recover it.</p>
+<section id="id9">
+<h4><span class="section-number">37.4.6.1. </span>Review questions<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="raid-4">
+<h3><span class="section-number">37.4.7. </span>RAID 4<a class="headerlink" href="#raid-4" title="Permalink to this headline">#</a></h3>
+<p>Although mirroring and RAID 1+0 are good for constructing highly
+reliable storage systems, sometimes you don’t want reliability bad
+enough to be willing to devote half of your disk space to redundant
+copies of data. This is where RAID 4 (and the related RAID 5) come in.</p>
+<p>For the 8-disk RAID 1+0 volume described previously to fail, somewhere
+between 2 and 5 disks would have to fail (3.66 on average). If you plan
+on replacing disks as soon as they fail, this may be more reliability
+than you need or are willing to pay for. RAID 4 provides a high degree
+of reliability with much less overhead than mirroring or RAID 1+0.</p>
+<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/raid-parity.pdf){height=&quot;6\\baselineskip&quot;}
+</pre></div>
+</div>
+<p>RAID 4 takes N drives and adds a single parity drive, creating an array
+that can tolerate the failure of any single disk without loss of data.
+It does this by using the parity function (also known as exclusive-OR,
+or addition modulo 2), which has the truth table seen in the figure to
+the right. As you can see in the equation, given the parity calculated
+over a set of bits, if one bit is lost, it can be re-created given the
+other bits and the parity. In the case of a disk drive, instead of
+computing parity over N bits, you compute it over N disk blocks, as
+shown here where the parity of two blocks is computed:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>      001010011101010010001 ... 001101010101 +
+      011010100111010100100 ... 011000101010
+
+    = 010000111010000110101 ... 010101111111
+</pre></div>
+</div>
+<p><strong>RAID 4 - Organization</strong>: RAID 4 is organized almost exactly like a
+striped (RAID 0) volume, except for the parity drive. We can see this in
+<a class="reference external" href="#fig:raid4">[fig:raid4]</a>{reference-type=”autoref”
+reference=”fig:raid4”} — each data block is located in the same place
+as in the striped volume, and then the corresponding parity block is
+located on a separate disk.</p>
+<p><img alt="RAID 4 organization" src="devices/figures/raid-four.pdf" />{#fig:raid4 width=”40%”}</p>
+<p><strong>Writing to a RAID 4 Volume</strong>: How you write to a RAID 4 volume depends
+on whether it is a small or large write. For large writes you can
+over-write a complete stripe set at a time, letting you calculate the
+parity before you write. Small writes are less efficient: you have to
+read back some amount of data in order to re-calculate the parity. There
+are two options: you can either read the entire stripe set and calculate
+its parity after modifying it, or you can read the old data and parity,
+subtract the old data, and add in the new data, which is more efficient
+for larger RAID volumes (i.e. with more than 4 drives).</p>
+<p>In <a class="reference external" href="#fig:raid4:write">[fig:raid4:write]</a>{reference-type=”autoref”
+reference=”fig:raid4:write”} you can see that a small write can take
+twice as long and require four times as many operations as the
+corresponding write to a striped volume, where no parity recalculation
+is needed.</p>
+<p><img alt="image" src="devices/figures/raid-four-bigwrite.pdf" />{width=”\textwidth”}<br />
+Large write:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Calculate parity (no I/O needed)
+
+\(1\) Write stripe set to disk
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><img alt="image" src="devices/figures/raid-four-smallwrite.eps" />{width=”110%”}<br />
+Small write:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>\(1\) read old data, parity
+
+Calculate new parity (no I/O)
+
+\(2\) write new data, parity
+</pre></div>
+</div>
+<div class="highlight-gbar notranslate"><div class="highlight"><pre><span></span>A question for the reader: why does a small write to RAID 4 take twice
+as long, rather than four times as long, as a single disk write?
+</pre></div>
+</div>
+<p><strong>Reading from a RAID 4 Volume</strong>: There are two cases when reading from
+a RAID 4 volume: normal mode and <em>degraded mode</em>. In normal mode the
+data is available on the disk(s) it was written to, which is the case
+when no disks have failed, and for data on the remaining disks after one
+has failed. In <em>degraded</em> mode the data being read was written to the
+failed drive, and must be reconstructed from the remaining data and
+parity in the stripe set. (The actual reconstruction is quite simple, as
+the missing data stripe is just the exclusive OR of all the remaining
+data and parity in the stripe set.)</p>
+<p>To write in degraded mode, parity is calculated and stripes are written
+to all but the failed disk. When the disk is replaced, its contents will
+be reconstructed from the other drives.</p>
+<section id="id10">
+<h4><span class="section-number">37.4.7.1. </span>Review questions<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="raid-5">
+<h3><span class="section-number">37.4.8. </span>RAID 5<a class="headerlink" href="#raid-5" title="Permalink to this headline">#</a></h3>
+<p>Small writes to RAID 4 require four operations: one read each for the
+old data and parity, and one write for each of the new data and parity.
+Two of these four operations go to the parity drive, no matter what LBA
+is being written, creating a bottleneck. If one drive can handle 200
+random operations per second, the entire array will be limited to a
+total throughput of 100 random small writes per second, no matter how
+many disks are in the array.</p>
+<p>By distributing the parity across drives in RAID 5, the parity
+bottleneck is eliminated. It still takes four operations to perform a
+single small write, but those operations are distributed evenly across
+all the drives. (Because of the distribution algorithm, it’s technically
+possible for all the writes to go to the same drive; however it’s highly
+unlikely.) In the five-drive case shown here, if a disk can complete 200
+operations a second, the RAID 4 array would be limited to 100 small
+writes per second, while the RAID 5 array could perform 250. (5 disks =
+1000 requests/second, and 4 requests per small write)</p>
+<div class="highlight-center notranslate"><div class="highlight"><pre><span></span>![image](figures/raid-five.pdf){width=&quot;80%&quot;}
+</pre></div>
+</div>
+</section>
+<section id="raid-6-more-reliability">
+<h3><span class="section-number">37.4.9. </span>RAID 6 - more reliability<a class="headerlink" href="#raid-6-more-reliability" title="Permalink to this headline">#</a></h3>
+<p>RAID level 1 (including 1+0 and 0+1), and levels 4 and 5 are designed to
+protect against the total failure of any single disk, assuming that the
+remaining disks operate perfectly. However, there is another failure
+mode known as a <em>latent sector error</em>, in which the disk continues to
+operate but one or more sectors are corrupted and cannot be read back.
+As disks become larger these errors become more problematic: for
+instance, one vendor specifies their current desktop drives to have no
+more than 1 unrecoverable read error per <span class="math notranslate nohighlight">\(10^{14}\)</span> bits of data read, or
+12.5 TB. In other words, there might be in the worst case a 1 in 4
+chance of an unrecoverable read error while reading the entire contents
+of a 3TB disk. (Luckily, actual error rates are typically much lower,
+but not low enough.)</p>
+<p>If a disk in a RAID 5 array fails and is replaced, the “rebuild” process
+requires reading the entire contents of each remaining disk in order to
+reconstruct the contents of the failed disk. If any block in the
+remaining drives is unreadable, data will be lost. (Worse yet, some RAID
+adapters and software will abandon the whole rebuild, causing the entire
+volume to be lost.)</p>
+<p>RAID 6 refers to a number of RAID mechanisms which add additional
+redundancy, using a second parity drive with a more complex
+error-correcting code<a class="footnote-reference brackets" href="#id24" id="id11">5</a>. If a read failure occurs during a RAID
+rebuild, this additional protection may be used to recover the contents
+of the lost block, preventing data loss. Details of RAID 6
+implementation will not be covered in this class, due to the complexity
+of the codes used.</p>
+<section id="id12">
+<h4><span class="section-number">37.4.9.1. </span>Review questions<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="logical-volume-management">
+<h3><span class="section-number">37.4.10. </span>Logical Volume Management<a class="headerlink" href="#logical-volume-management" title="Permalink to this headline">#</a></h3>
+<p>If you have managed a Linux system (especially Fedora or Red Hat) you
+may have used the Logical Volume Manager (LVM), which allows disks on
+the system to be flexibly combined and split into different volumes;
+similar functionality is available on other operating systems, as well
+as on high-end storage arrays.</p>
+<p>The volume types which can be created under LVM are those which have
+been described in this section: partitioned, concatenated, and the
+various RAID levels. In addition, however, logical volume managers
+typically offer functions to migrate storage contents and to create
+snapshots of a volume.</p>
+<p><strong>Volume snapshots</strong> rely on a copy-on-write mechanism almost identical
+to that used in virtual memory:</p>
+<div class="highlight-center notranslate"><div class="highlight"><pre><span></span>![image](figures/lvm-snapshot.pdf){width=&quot;90%&quot;}
+</pre></div>
+</div>
+<p>A snapshot is a “lazy copy” of a volume—it preserves the contents
+without immediately consuming any additional disk space, instead
+consuming space as the volume is written to. (It’s also much faster than
+copying all the data) Why would you want to make a snapshot? Maybe you
+want to save the state of your machine before you make major changes,
+like installing new software and drivers, or upgrading the OS. If things
+don’t work out, you can revert back to the snapshot and try again.</p>
+<p>Snapshots are also frequently used for backing up a computer, because it
+takes so long to copy all the data from a modern disk. If you merely
+copied all the files off of the disk, the backed-up version of one file
+might be hours older than another file; this can be avoided by backing
+up a snapshot instead of the volume itself.</p>
+<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/lvm-migrate.pdf){height=&quot;6\\baselineskip&quot;}
+</pre></div>
+</div>
+<p>Live migration is a sort of magical operation, allowing you to switch
+from one disk drive to another while the machine continues to run. It
+works by using a map to direct individual requests to either the old
+volume or the new volume, with the dividing line moving as data is
+copied from one to the other. What happens if you try to write to the
+small section being copied in the middle? The write gets stalled until
+the copy is done, and then is directed to the new location.</p>
+</section>
+<section id="solid-state-drives">
+<h3><span class="section-number">37.4.11. </span>Solid State Drives<a class="headerlink" href="#solid-state-drives" title="Permalink to this headline">#</a></h3>
+<p>Solid-state drives (SSDs) store data on semiconductor-based flash memory
+instead of magnetic disk; however by using the same block-based
+interface (e.g. SATA) to connect to the host they are able to directly
+replace disk drives.</p>
+<p>SSDs rely on flash memory, which stores data electrically: a high
+programming voltage is used to inject a charge onto a circuit element (a
+<em>floating gate</em>—ask your EE friends if you want an explanation) that
+is isolated by insulating layers, and the presence or absence of such a
+stored charge can be detected in order to read the contents of the cell.
+Flash memory has several advantages over magnetic disk, including:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Random access performance: since flash memory is addressed electrically,
+instead of mechanically, random access can be very fast.
+
+Throughput: by using many flash chips in parallel, a consumer SSD (in
+2018) can read speeds of 1-2 GB/s, while the fastest disks are limited
+to a bit more than 200MB/s.
+</pre></div>
+</div>
+<p>Flash is organized in pages of 4KB to 16KB, which must be read or
+written as a unit. These pages may be written only once before they are
+erased in blocks of 128 to 256 pages, making it impossible to directly
+modify a single page. Instead, the same copy-on-write algorithm used in
+LVM snapshots is used internally in an SSD: a new write is written to a
+page in one of a small number of spare blocks, and a map is updated to
+point to the new location; the old page is now invalid and is not
+needed. When not enough spare blocks are left, a garbage collection
+process finds a block with many invalid pages, copies any remaining
+valid pages to another spare block, and erases the block.</p>
+<p>When data is written sequentially, this process will be efficient, as
+the garbage collector will almost always find an entirely invalid block
+which can be erased without any copying. For very random workloads,
+especially on cheap drives with few spare blocks and less sophisticated
+garbage collection, this process can involve huge amounts of copying
+(called write amplification) and run very slowly.</p>
+<p><strong>SSD Wear-out</strong>: Flash can only be written and erased a certain number
+of times before it begins to degrade and will not hold data reliably:
+most flash today is rated for 3000 write/erase operations before it
+becomes unreliable. The internal SSD algorithms distribute writes evenly
+to all blocks in the device, so in theory you can safely write 3000
+times the capacity of a current SSD, or the entire drive capacity every
+day for 8 years. (Note that 3000 refers to <em>internal</em> writes; random
+writes with high write amplification will wear out an SSD more than the
+same volume of sequential writes.)</p>
+<p>For a laptop or desktop this would be an impossibly high workload,
+especially since they are typically used only half the hours in a day or
+less. For some server applications, however, this is a valid concern.
+Special-purpose SSDs are available (using what is called Single-Level
+Cell, or SLC, flash) which are much more expensive but are rated for as
+many as 100,000 write/erase cycles. (This capacity is the equivalent of
+overwriting an entire drive every 30 minutes for 5 years. For a 128GB
+drive, this would require continuously writing at over 70MB/s, 24 hours
+a day.)</p>
+</section>
+<section id="new-disk-technologies">
+<h3><span class="section-number">37.4.12. </span>New Disk Technologies<a class="headerlink" href="#new-disk-technologies" title="Permalink to this headline">#</a></h3>
+<p>The capacity of a disk drive is determined by how many bits there are on
+a track (i.e. how <em>short</em> the bits are), how many tracks fit on each
+side of a platter (how <em>narrow</em> the bits are), and how many platters and
+sssociated heads fit into a drive enclosure. Since sometime around the
+late 90s most of the increase in drive density has come from making the
+tracks narrower; however this has hit a stumbling block recently. The
+narrower you make the write head, the weaker its magnetic field, until
+eventually it becomes too weak to magnetize bits on the platter. You can
+fix this for a while by making the platter easier to magnetize (lower
+<em>coercivity</em>), but if you go too far in that direction, the bits will
+flip spontaneously due to thermal noise. (There’s a cure for that—make
+the bits bigger—but it obviously won’t help.)</p>
+<p>In the last few years disks have come perilously close to this limit.
+Much of the capacity growth in the last couple of years (2018) and most
+in coming years is expected to come from the following technologies:</p>
+<ul class="simple">
+<li><p><strong>Helium:</strong> Filling the drive with helium<a class="footnote-reference brackets" href="#id25" id="id13">6</a> reduces the air
+turbulence around the heads and platters, allowing them to be
+thinner so you can cram more of them into a disk. (The highest
+capacity air-filled drives typically had 4 platters and 8 heads; the
+largest helium-filled drives today have 9 platters.)</p></li>
+<li><p><strong>Shingled magnetic recording (SMR):</strong> Narrow tracks can be written
+with a wide (and thus high magnetic field) head by overlapping the
+wide tracks, like rows of shingles<a class="footnote-reference brackets" href="#id26" id="id14">7</a>, and read back by a narrower
+read head. Unfortunately, overwriting a sector on an SMR disk will
+damage the neighboring sector, requiring a translation layer (much
+like a flash translation layer) in order to be used by a normal file
+system.</p></li>
+<li><p><strong>Heat-assisted Magnetic Recording (HAMR):</strong> If you heat a magnetic
+material it becomes easier to magnetize. HAMR relies on narrow, weak
+write heads that shouldn’t be able to write to the platter, and
+heats the surface with a laser just before writing to it.</p></li>
+</ul>
+<p>Although the impending death of hard disk drives has been predicted many
+times—Google “bubble memory” for an example–technological
+breakthroughs have come through each time to keep them in the position
+of the most cost-effective bulk storage medium available. It remains to
+be seen whether high-density SSDs based on low-performance NAND flash
+are able to catch up to disk in cost per terabyte, or whether some
+technological advance will keep disk ahead for yet another decade.</p>
+</section>
+<section id="storage-area-networks">
+<h3><span class="section-number">37.4.13. </span>Storage-area Networks<a class="headerlink" href="#storage-area-networks" title="Permalink to this headline">#</a></h3>
+<p>In enterprise environments it is typical to separate storage systems
+from the servers that use the storage. This allows tasks such as backup
+to be centralized, as well as simplifying the task of replacing or
+servicing hardware. (In fact, in a virtualized environment (covered in a
+later chapter) external storage allows running servers to be moved from
+one piece of hardware to another without interruption.)</p>
+<p>Storage-Area Networks, or SANs, typically use the SCSI protocol and a
+transport which can be routed or switched as a network. The most common
+SAN technologies are Fibre Channel and iSCSI:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Fibre Channel is a bizarre networking protocol used only in SANs; for
+historic reasons it is typically used with optical fiber cabling, which
+is expensive and unreliable for short connections.
+
+iSCSI is an encapsulation of SCSI within TCP/IP; it uses traditional
+ethernet cabling, switching, and IP routing, although an iSCSI
+deployment may use a separate network for storage.
+</pre></div>
+</div>
+<p>“Disks” on a SAN are identified by a transport address (either an IP
+address or DNS name, for iSCSI, or a 64-bit World Wide Name (WWN) for
+Fibre Channel) plus a logical unit number (LUN), which identifies a
+specific volume on a target. In other words, an individual block of data
+on a SAN can be identified by address + LUN + LBA.</p>
+<p>One of the key administrative features in a SAN is LUN masking, which
+determines which resources (LUNs) on the network may be seen by which
+hosts. This lets each server see only the LUNs which have been assigned
+to it, so that a misconfigured host cannot access or corrupt storage
+which it is not supposed to have access to. In addition to source-based
+access control, iSCSI also offers several authentication protocols, to
+prevent access to disk volumes from unauthorized hosts or applications.</p>
+</section>
+<section id="de-duplication">
+<h3><span class="section-number">37.4.14. </span>De-duplication<a class="headerlink" href="#de-duplication" title="Permalink to this headline">#</a></h3>
+<p>Large enterprise storage systems typically store large amounts of
+similar data. As an example, your CCIS account stores your home
+directory on a central server; if you log onto a college Windows or
+Linux machine almost all the files you create and edit will be located
+on this server.</p>
+<p>In a corporate environment this approach is frequently used with desktop
+machines, resulting in many copies of the same data (items like a
+spreadsheet or document sent to several people will be copied into each
+users’ email inbox) In addition in such environments data is backed up
+frequently, creating even more copies. Very high compression ratios can
+be achieved by saving only a single copy of such data, using a process
+called (not surprisingly) <em>deduplication</em>. We see this in the figure
+below, where the data to be stored is 26 long, but only contains 9
+unique blocks, giving a nearly 3:1 compression ratio if the 26 blocks of
+data are replaced by pointers to unique data blocks:</p>
+<p><img alt="De-duplication" src="devices/figures/dedup.eps" />{width=”80%”}</p>
+<p>To perform deduplication, a cryptographic hash (a form of checksum) is
+calculated over each block to be written, and checked against a
+database. If the hash is found, then a block containing the same bits
+has already been written to storage, and we store a pointer to that
+block. If not—i.e. it is the first time we saw that particular data
+pattern—it is written to a new location on disk, and a pointer to that
+location is stored. By using this map we can then (somewhat slowly)
+retrieve the data later.</p>
+<p>De-duplication is widely used for storing backups and retaining data for
+legal purposes, as it achieves very high compression (and thus lower
+cost) in many such cases. However, due to the overhead and
+non-sequential reads involved in retrieving data, it is typically much
+slower than normal storage.</p>
+</section>
+</section>
+<section id="putting-it-all-together">
+<h2><span class="section-number">37.5. </span>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">#</a></h2>
+<p>In our <code class="docutils literal notranslate"><span class="pre">ls</span></code> example the block layer and disk drive get used extensively
+by the file system. When the new process is created the kernel must read
+the first page from disk, to identify the type of executable, and then
+after the sections are mapped into memory, page faults will cause block
+read requests to be sent through the file system to the underlying
+device. Additional disk requests will come in response to the <code class="docutils literal notranslate"><span class="pre">readdir</span></code>
+system call, as the file system reads directory and inode data to list
+the files in a directory.</p>
+<p>We’ll ignore the file system for now, as it is described in more detail
+in later chapters, and focus on the role of the Linux block layer, which
+sits between file systems and the physical devices<a class="footnote-reference brackets" href="#id27" id="id15">8</a>. The block layer
+is organized around the <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">bio</span></code> object, a typical Linux kernel
+object which is fantastically complicated in order to track lots of
+things we don’t really care about. We’ll ignore most of this complexity;
+the fields that we’re concerned with are the command flag (indicating
+read or write), data pointer (points to one or more pages), a callback
+function and private data field provided by the subsystem which
+submitted the I/O (more on this below), and a pointer to the device to
+which the I/O has been issued. (actually a pointer to a
+<code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">block_device</span></code>)</p>
+<p>First, a note about the private data pointer and callbacks, which are a
+common design pattern in C. (at least in the Linux kernel) In a proper
+object-oriented language, if you want to specialize a class (e.g. a
+block I/O descriptor) by adding additional fields (e.g. for details like
+timers or queues needed by your device driver), you can create a derived
+class with these additional fields. You can’t do that in C—you can
+allocate two structures, or embed an instance of the general structure
+within the specialized one, but there will be cases (like callback
+functions) where a function handling the general class will in turn
+invoke another function which needs to access the specialized structure.</p>
+<p>The most straightforward way to do this is via a “private data” field in
+a object; this is a generic pointer which is set to point to a separate
+structure holding the specialized data. An example shown in the listing
+below is the bio callback function (called <code class="docutils literal notranslate"><span class="pre">bi_end_io</span></code>): this is a
+function pointer which is invoked when the I/O operation completes,
+which is given a pointer to the bio itself as an argument.</p>
+<div class="highlight-{caption=&quot;Using notranslate"><div class="highlight"><pre><span></span>struct my_data {
+  ... specific data ...
+};
+
+void my_end_io(struct bio *b)
+{
+    struct my_data *md = b-&gt;bi_private;
+    ...
+}
+
+...
+{
+    struct bio *b = ...
+    struct my_data *priv = ...
+    b-&gt;bi_private = priv;
+    b-&gt;bi_end_io = my_end_io;
+    submit_bio(b);
+}
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">bio</span></code> has no way to indicate the <em>type</em> of attached
+data; instead we need to be sure that functions which interpret
+<code class="docutils literal notranslate"><span class="pre">bi_private</span></code> as a pointer to <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">my_data</span></code> are only ever called on
+bios where the attached object actually <em>is</em> of that type. (e.g. in this
+case <code class="docutils literal notranslate"><span class="pre">bi_end_io</span></code> will only be set to <code class="docutils literal notranslate"><span class="pre">my_end_io</span></code> in cases where the
+attached object is of type <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">my_data</span></code>)</p>
+<p>Turning our attention back to the block layer, let’s trace the case
+where a file system submits a single page read or write to a
+old-fashioned programmed-IO IDE drive. If you remember the IDE drive is
+similar to the disk controller described earlier in the text, with a few
+registers to indicate the disk sector, command (read / write), and the
+number of sectors to transfer, as well as a register which the CPU reads
+or writes to transfer the data. For a write you push the command and
+data, then wait for an interrupt to indicate that it’s done; for a read
+you wait until the interrupt before transferring the data.</p>
+<p>Here we see the path for submitting a read request in ext2<a class="footnote-reference brackets" href="#id28" id="id16">9</a>:</p>
+<div class="highlight-{caption=&quot;Ext2 notranslate"><div class="highlight"><pre><span></span>fs/ext2/inode.c:
+793  int ext2_readpage(struct file *file, struct page *page) {
+795          return mpage_readpage(page, ext2_get_block);
+
+fs/mpage.c: 
+398 int mpage_readpage(struct page *page, get_block_t get_block) {
+408         bio = do_mpage_readpage(bio, page, 1, &amp;last_block_in_bio,
+411                 mpage_bio_submit(REQ_OP_READ, 0, bio); 
+
+143 struct bio *
+144 do_mpage_readpage(struct bio *bio, struct page *page, ...) {
+284                 bio = mpage_alloc(bdev, blocks[0] &lt;&lt; (blkbits - 9),
+
+68  struct bio *
+69  mpage_alloc(struct block_device *bdev, ...) {
+77          bio = bio_alloc(gfp_flags, nr_vecs);
+85                  bio-&gt;bi_bdev = bdev;
+
+
+59  struct bio *mpage_bio_submit(int op, int op_flags, ...
+61          bio-&gt;bi_end_io = mpage_end_io;  
+64          submit_bio(bio);
+</pre></div>
+</div>
+<p>Ignoring all sorts of bookkeeping and optimizations, we have: a <code class="docutils literal notranslate"><span class="pre">bio</span></code> is
+allocated (<code class="docutils literal notranslate"><span class="pre">mpage_alloc</span></code> line 77) and a pointer is stored to the
+destination device (line 85), then a callback function is set
+(<code class="docutils literal notranslate"><span class="pre">mpage_bio_submit</span></code> line 61) and the I/O enters the block system via
+<code class="docutils literal notranslate"><span class="pre">submit_bio</span></code>.</p>
+<p>From this point the block system generates a <em>request</em><a class="footnote-reference brackets" href="#id29" id="id17">10</a> to the
+underlying device:</p>
+<div class="highlight-{caption=&quot;Submit\_bio notranslate"><div class="highlight"><pre><span></span>block/blk-core.c:
+2067 blk_qc_t submit_bio(struct bio *bio) {
+2099         return generic_make_request(bio);
+
+1995 blk_qc_t generic_make_request(struct bio *bio) {
+2036             struct request_queue *q = bdev_get_queue(bio-&gt;bi_bdev);
+2039                         ret = q-&gt;make_request_fn(q, bio);
+</pre></div>
+</div>
+<p>We’ll skip over the details of how I figured out what value
+<code class="docutils literal notranslate"><span class="pre">q-&gt;make_request_fn</span></code> has here; just trust me that in our case it’s
+<code class="docutils literal notranslate"><span class="pre">blk_queue_bio:</span></code></p>
+<div class="highlight-{caption=&quot;\texttt{block/block-core.c}, notranslate"><div class="highlight"><pre><span></span>block/blk-core.c:
+1663 blk_qc_t blk_queue_bio(struct request_queue *q, struct bio *bio)
+
+1704         el_ret = elv_merge(q, &amp;req, bio);
+1705         if (el_ret == ELEVATOR_BACK_MERGE) {
+1706                if (bio_attempt_back_merge(q, req, bio)) {
+1710                         goto out_unlock;
+
+1739         req = get_request(q, bio_data_dir(bio), rw_flags, bio, ...
+1752         init_request_from_bio(req, bio);
+
+1775                 add_acct_request(q, req, where);
+1776                 __blk_run_queue(q);
+</pre></div>
+</div>
+<p>It first calls the “elevator” merge function (a reference to the classic
+disk scheduling algorithm) which tries to merge it with an existing
+queued I/O; if it can, then we return via <code class="docutils literal notranslate"><span class="pre">goto</span></code><a class="footnote-reference brackets" href="#id30" id="id18">11</a> (lines 1704-1710).
+If not, we allocate a <em>request structure</em> (basically a bunch of
+information for queueing, hashing, accounting, sleeping, and stuff like
+that) and set up all its fields (lines 1739, 1752). Then we add the
+request to the elevator queue (line 1775, which in turn calls
+<code class="docutils literal notranslate"><span class="pre">__elv_add_request</span></code>, which has a lot of very complicated logic to figure
+out where to put the request in the queue) and then run a request from
+the queue:</p>
+<div class="highlight-{caption=&quot;Running notranslate"><div class="highlight"><pre><span></span>block/block-core.c
+311  inline void __blk_run_queue_uncond(struct request_queue *q)
+
+324          q-&gt;request_fn(q);
+</pre></div>
+</div>
+<p>For a “legacy” (i.e. really old) IDE device the request function is
+<code class="docutils literal notranslate"><span class="pre">do_ide_request</span></code>. If you’re looking at the code yourself, note that
+anything with <code class="docutils literal notranslate"><span class="pre">_pm_</span></code> in it is power management, that while
+<code class="docutils literal notranslate"><span class="pre">start_request</span></code> is important, <code class="docutils literal notranslate"><span class="pre">blk_start_request</span></code> doesn’t do anything
+interesting, and that “plugging” refers to a complicated mechanism of
+delaying I/Os a short time to see if they’ll be followed by additional
+requests that can be merged into one big request. You can skip over
+those parts; I did.</p>
+<div class="highlight-{xleftmargin=&quot;1em&quot; notranslate"><div class="highlight"><pre><span></span>drivers/ide/ide-io.c:
+456  void do_ide_request(struct request_queue *q)
+517                          rq = blk_fetch_request(drive-&gt;queue);
+551                  startstop = start_request(drive, rq);
+
+block/blk-core.c:
+2506 struct request *blk_fetch_request(struct request_queue *q)
+2510         rq = blk_peek_request(q);
+
+2349 struct request *blk_peek_request(struct request_queue *q)
+2354          ... rq = __elv_next_request(q) ...
+2399                 ret = q-&gt;prep_rq_fn(q, rq);
+
+drivers/ide/ide-io.c
+306  ide_startstop_t start_request (ide_drive_t *drive, ... *rq)
+
+343                  if (rq-&gt;cmd_type == REQ_TYPE_ATA_TASKFILE)
+344                        return execute_drive_cmd(drive, rq);
+</pre></div>
+</div>
+<p>So in order of execution, we grab a request from the queue (<code class="docutils literal notranslate"><span class="pre">blk-core.c</span></code>
+2354) and call the queue prep function (<code class="docutils literal notranslate"><span class="pre">idedisk_prep_fn</span></code>, which sets
+<code class="docutils literal notranslate"><span class="pre">rq-&gt;cmd_type</span></code> to <code class="docutils literal notranslate"><span class="pre">REQ_TYPE_ATA_TASKFILE</span></code> and does a lot of other things
+we ignore), and then we call <code class="docutils literal notranslate"><span class="pre">start_request</span></code> (<code class="docutils literal notranslate"><span class="pre">ide-io.c</span></code> line 551) which
+calls <code class="docutils literal notranslate"><span class="pre">execute_drive_cmd</span></code> (line 344).</p>
+<div class="highlight-{xleftmargin=&quot;1em&quot; notranslate"><div class="highlight"><pre><span></span>drivers/ide/ide-io.c
+253  ide_startstop_t execute_drive_cmd (ide_drive_t *drive, ... *rq)
+259              if (cmd-&gt;protocol == ATA_PROT_PIO) {
+260                      ide_init_sg_cmd(cmd, blk_rq_sectors(rq) &lt;&lt; 9);
+261                      ide_map_sg(drive, cmd);
+264              return do_rw_taskfile(drive, cmd);
+</pre></div>
+</div>
+<p>If the drive controller is in programmed I/O mode (PIO),
+<code class="docutils literal notranslate"><span class="pre">ide_init_sg_cmd</span></code> creates a “taskfile”, the bytes that have to be
+written to the control registers of the device; <code class="docutils literal notranslate"><span class="pre">ide_map_sg</span></code> gets
+pointers to all the memory regions to transfer. *Now* we’re finally
+ready to send a command to the disk controller.</p>
+<p>We’ll trace a write operation, since it’s easier:</p>
+<div class="highlight-{xleftmargin=&quot;1em&quot; notranslate"><div class="highlight"><pre><span></span>drivers/ide/ide-taskfile.c:
+78   ide_startstop_t do_rw_taskfile(ide_drive_t *drive, ...
+
+118             tp_ops-&gt;tf_load(drive, &amp;cmd-&gt;hob, cmd-&gt;valid.out.hob);
+119             tp_ops-&gt;tf_load(drive, &amp;cmd-&gt;tf,  cmd-&gt;valid.out.tf);
+
+122        switch (cmd-&gt;protocol) {
+123        case ATA_PROT_PIO:
+123              if (cmd-&gt;tf_flags &amp; IDE_TFLAG_WRITE) {
+125                      tp_ops-&gt;exec_command(hwif, tf-&gt;command);
+126                      ndelay(400);    /* FIXME */
+127                      return pre_task_out_intr(drive, cmd);
+</pre></div>
+</div>
+<p>(Fun fact: that FIXME comment was there in kernel 2.4.31 in 2005. I
+don’t think it will get fixed.)</p>
+<p>First the taskfile (and extended taskfile, known as the HOB since it’s
+valid when the High Order Bit is set somewhere in the basic taskfile) to
+the controller, using <code class="docutils literal notranslate"><span class="pre">ide_tf_load</span></code>, which uses the <code class="docutils literal notranslate"><span class="pre">outb</span></code> instruction
+to write the bytes to the appropriate control registers; e.g. the 3
+bytes of LBA in each get written as so:</p>
+<div class="highlight-{xleftmargin=&quot;1em&quot; notranslate"><div class="highlight"><pre><span></span>...
+        if (valid &amp; IDE_VALID_LBAL)
+                tf_outb(tf-&gt;lbal, io_ports-&gt;lbal_addr);
+        if (valid &amp; IDE_VALID_LBAM)
+                tf_outb(tf-&gt;lbam, io_ports-&gt;lbam_addr);
+        if (valid &amp; IDE_VALID_LBAH)
+                tf_outb(tf-&gt;lbah, io_ports-&gt;lbah_addr);
+             ...
+</pre></div>
+</div>
+<p>Then <code class="docutils literal notranslate"><span class="pre">ide_exec_command</span></code> writes the command byte to the appropriate
+register, and calls <code class="docutils literal notranslate"><span class="pre">pre_task_out_intr</span></code>:</p>
+<div class="highlight-{xleftmargin=&quot;1em&quot; notranslate"><div class="highlight"><pre><span></span>drivers/ide/ide-taskfile.c:
+403  ide_startstop_t pre_task_out_intr(ide_drive_t *drive, ... cmd)
+419          ide_set_handler(drive, &amp;task_pio_intr, WAIT_WORSTCASE);
+421          ide_pio_datablock(drive, cmd, 1);
+</pre></div>
+</div>
+<p>which sets a handler (saved in <code class="docutils literal notranslate"><span class="pre">hwif-&gt;handler</span></code>, with a timer in case the
+disk hangs) to be called when the request completes, and then actually
+copies the data to the data register.</p>
+<p>We’re almost done; bear with me. When the drive finishes writing its
+data, the IDE interrupt handler is called, which invokes the handler we
+just registered above, and then through a long, complicated chain of
+calls invokes <code class="docutils literal notranslate"><span class="pre">bio-&gt;bi_end_io</span></code>, which is the <code class="docutils literal notranslate"><span class="pre">mpage_end_io</span></code> that we
+stuck in the <code class="docutils literal notranslate"><span class="pre">bio</span></code> structure way back up at the top:</p>
+<div class="highlight-{xleftmargin=&quot;1em&quot; notranslate"><div class="highlight"><pre><span></span>drivers/ide/ide-io.c:
+892  irqreturn_t ide_intr (int irq, void *dev_id)
+793          handler = hwif-&gt;handler;
+849          startstop = handler(drive);
+
+drivers/ide/ide-taskfile.c:
+344  ide_startstop_t task_pio_intr(ide_drive_t *drive)
+348          u8 stat = hwif-&gt;tp_ops-&gt;read_status(hwif);
+  ... handle partial transfers; if done: 
+396          ide_complete_rq(drive, 0, blk_rq_sectors(cmd-&gt;rq) &lt;&lt; 9);
+
+drivers/ide/ide-io.c:
+115  int ide_complete_rq(ide_drive_t *drive, int error, ...
+128          rc = ide_end_rq(drive, rq, error, nr_bytes);
+
+57  int ide_end_rq(ide_drive_t *drive, struct request *rq, ...
+70          return blk_end_request(rq, error, nr_bytes);
+
+block/blk-core.c
+2796 bool blk_end_request(struct request *rq, int error, ...
+2798        return blk_end_bidi_request(rq, error, nr_bytes, 0);
+
+2740 bool blk_end_bidi_request(struct request *rq, int error,
+2746        if (blk_update_bidi_request(rq, error, nr_bytes, ...
+
+2654 bool blk_update_bidi_request(struct request *rq, int error,
+2658         if (blk_update_request(rq, error, nr_bytes))
+
+2539 bool blk_update_request(struct request *req, int error, ...
+2604                 req_bio_endio(req, bio, bio_bytes, error);
+
+142  void req_bio_endio(struct request *rq, struct bio *bio, ...
+155                 bio_endio(bio);
+
+block/bio.c:
+1742 void bio_endio(struct bio *bio)
+1761         if (bio-&gt;bi_end_io)
+1762                bio-&gt;bi_end_io(bio);
+</pre></div>
+</div>
+<section id="id19">
+<h3><span class="section-number">37.5.1. </span>Review questions<a class="headerlink" href="#id19" title="Permalink to this headline">#</a></h3>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+<section id="answers-to-review-questions">
+<h3><span class="section-number">37.5.2. </span>Answers to Review Questions<a class="headerlink" href="#answers-to-review-questions" title="Permalink to this headline">#</a></h3>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>in
+blockio:1,blockio:2,blockio:3,blockio:4,blockio:5,blockio:6,blockio:7,blockio:8,blockio:9
+</pre></div>
+</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id20"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>The primary difference between this figure and contemporary (2016)
+systems is that (a) the memory bus is DDR3 or DDR4, and (b) the
+north bridge is located on the CPU chip, with no external front-side
+bus.</p>
+</dd>
+<dt class="label" id="id21"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p>For system operations such as this where performance has a fixed
+and a variable component, you can think of the point where the two
+costs are equal as the “knee” in the curve, where you switch from
+the region where performance is dominated by the fixed cost to where
+it is dominated by the variable cost. To get high throughput you
+want to be firmly in the variable-cost region, where the fixed-cost
+effects are relatively minor.</p>
+</dd>
+<dt class="label" id="id22"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
+<dd><p>8-16MB two or three years ago; 128 MB is common today, probably in
+part because 128 MB chips are now cheaper than the old 16 MB ones.</p>
+</dd>
+<dt class="label" id="id23"><span class="brackets"><a class="fn-backref" href="#id5">4</a></span></dt>
+<dd><p>In SATA the FLUSH command or the FUA (force unit attention) flag.
+Don’t ask me what “force unit attention” means - I have no idea.</p>
+</dd>
+<dt class="label" id="id24"><span class="brackets"><a class="fn-backref" href="#id11">5</a></span></dt>
+<dd><p>Commonly a Reed-Solomon code; see Wikipedia if you want to find
+out what that is.</p>
+</dd>
+<dt class="label" id="id25"><span class="brackets"><a class="fn-backref" href="#id13">6</a></span></dt>
+<dd><p>Which is harder than it sounds, since helium will leak through
+cast aluminum, which is the preferred material for HDD enclosures.</p>
+</dd>
+<dt class="label" id="id26"><span class="brackets"><a class="fn-backref" href="#id14">7</a></span></dt>
+<dd><p>Really more like clapboards, but “clapboarded” just doesn’t have
+the same ring to it.</p>
+</dd>
+<dt class="label" id="id27"><span class="brackets"><a class="fn-backref" href="#id15">8</a></span></dt>
+<dd><p>For a more detailed description of the Linux block layer, see
+<a class="reference external" href="https://lwn.net/Articles/736534/">https://lwn.net/Articles/736534/</a>.</p>
+</dd>
+<dt class="label" id="id28"><span class="brackets"><a class="fn-backref" href="#id16">9</a></span></dt>
+<dd><p>Line numbers from Linux kernel 4.8.0</p>
+</dd>
+<dt class="label" id="id29"><span class="brackets"><a class="fn-backref" href="#id17">10</a></span></dt>
+<dd><p>Unix block devices have always been different from normal files
+in that they have a single submission function for both reads and
+writes.</p>
+</dd>
+<dt class="label" id="id30"><span class="brackets"><a class="fn-backref" href="#id18">11</a></span></dt>
+<dd><p>The use of gotos to jump to cleanup code is a common design
+pattern in kernel coding, replacing the try/finally pattern in more
+civilized programming languages.</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./devices"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../intro/other.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">36. </span>Other OS structures</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../contributing/Contributing.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">38. </span>Contributing</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Angela Demke Brown, Orran Krieger & Larry Woodman<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
