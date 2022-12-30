@@ -284,7 +284,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/peter-syncro.html">
-   30. Synchronization – Safety &amp; Sequencing
+   30. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
   </a>
  </li>
 </ul>
@@ -933,7 +933,7 @@ system—depending on the type of use, that would be system
 administration, programming, or just using a computer. Instead the goal
 is to teach you how computers work, by describing the interacting parts
 underneath the user and programming interfaces.</p>
-<p><img alt="Linux text console with simplecommand." src="intro/figures/intro-screenshot.png" />{#ch1:fig:console width=”80%”}</p>
+<p><img alt="Linux text console with simplecommand." src="../_images/intro-screenshot.png" />{#ch1:fig:console width=”80%”}</p>
 <p>For an example of what this means, consider running a simple command
 such as <code class="docutils literal notranslate"><span class="pre">ls</span></code> on a Linux system. In
 <a class="reference external" href="#ch1:fig:console">[ch1:fig:console]</a>{reference-type=”autoref”
@@ -1089,9 +1089,9 @@ of the stack and jumping to it.
 <em>memory-mapped</em>—particular memory addresses correspond to registers in
 these devices, rather than normal memory, and reads or writes to these
 addresses are used to operate the device. These devices include:</p>
-<p><img alt="image" src="intro/figures/csx600-fbuf" />{width=”\textwidth”}\</p>
+<p><img alt="image" src="../_images/csx600-fbuf.png" />{width=”\textwidth”}\</p>
 <p><br />
-<img alt="image" src="intro/figures/csx600-kbd" />{width=”\textwidth”}\</p>
+<img alt="image" src="../_images/csx600-kbd.png" />{width=”\textwidth”}\</p>
 <p>\</p>
 <div class="highlight-enumerate* notranslate"><div class="highlight"><pre><span></span>*frame buffer*: A region of 1920 bytes, corresponding to 24 lines of 80
 characters displayed on a video display. Writing a byte to one of these
@@ -1207,9 +1207,7 @@ get a new program onto a computer.</p>
 </section>
 <section id="program-loading">
 <h2><span class="section-number">8.4. </span>Program Loading<a class="headerlink" href="#program-loading" title="Permalink to this headline">#</a></h2>
-<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/csx600-disk){height=&quot;4\\baselineskip&quot;}
-</pre></div>
-</div>
+<p><img alt="image" src="../_images/csx600-disk.png" />{height=”4\baselineskip”}</p>
 <p>In order to load programs we need a device to load them from—in this
 case a disk drive, which (unlike memory) maintains its data while
 powered off, and is typically much larger than memory, allowing it to
@@ -1243,9 +1241,7 @@ Read 256 16-bit words from data register (0xF824), typically into a
 buffer in memory.
 </pre></div>
 </div>
-<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/memory-map-2.eps){height=&quot;15\\baselineskip&quot;}
-</pre></div>
-</div>
+<p><img alt="image" src="../_images/memory-map-2.png" />{height=”15\baselineskip”}</p>
 <p>Now that we have a device to load programs from, the next step is to
 reserve separate portions of the address space for the OS and program,
 as shown in <a class="reference external" href="#ch2:fig:map2">[ch2:fig:map2]</a>{reference-type=”autoref”
@@ -1321,7 +1317,7 @@ functions was performed via the x86 INT instruction.</p>
 <section id="comparison-to-ms-dos-1-0">
 <h3><span class="section-number">8.4.2. </span>Comparison to MS-DOS 1.0<a class="headerlink" href="#comparison-to-ms-dos-1-0" title="Permalink to this headline">#</a></h3>
 <div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in
-\[12\]\[0in\]![image](figures/osbasics-msdos){height=&quot;15\\baselineskip&quot;}
+\[12\]\[0in\]![image](../images/pb-figures/intro/osbasics-msdos.png){height=&quot;15\\baselineskip&quot;}
 </pre></div>
 </div>
 <p>This simple OS is very similar to the first version of MS-DOS. In MS-DOS
@@ -1388,11 +1384,11 @@ read-write initialized data, <em>initialized-zero data</em>, called “BSS” fo
 obscure historical reasons, <em>heap</em> or dynamically allocated memory, and
 <em>stack</em>.</p>
 <hr class="docutils" />
-<p><img alt="Awkward process memory map, with fixed-sized stackallocation." src="intro/figures/trad-addr-space" />{#fig:bad:addr
+<p><img alt="Awkward process memory map, with fixed-sized stackallocation." src="../_images/trad-addr-space.png" />{#fig:bad:addr
 width=”0.8\columnwidth”}</p>
 <hr class="docutils" />
 <hr class="docutils" />
-<p><img alt="Awkward process memory map, with fixed-sized stackallocation." src="intro/figures/bad-addr-space" />{#fig:bad:addr
+<p><img alt="Awkward process memory map, with fixed-sized stackallocation." src="../_images/bad-addr-space.png" />{#fig:bad:addr
 width=”0.8\columnwidth”}</p>
 <hr class="docutils" />
 <p>In <a class="reference external" href="#fig:trad:addr">[fig:trad:addr]</a>{reference-type=”autoref”
@@ -1638,7 +1634,7 @@ to an entirely different location.</p>
     RET
 </pre></div>
 </div>
-<p><img alt="Different ways of looking at a context switch from Process 1 toProcess 2." src="intro/figures/threads.pdf" />{#ch2:fig:thrds width=”\textwidth”}</p>
+<p><img alt="Different ways of looking at a context switch from Process 1 toProcess 2." src="../_images/threads.png" />{#ch2:fig:thrds width=”\textwidth”}</p>
 <hr class="docutils" />
 <p>We see different representations of this in Figures
 <a class="reference external" href="#ch2:fig:thrds">1.4</a>{reference-type=”ref” reference=”ch2:fig:thrds”}
@@ -1652,7 +1648,7 @@ return address popped from the stack are different from the ones saved
 in the first half of the function.</p>
 <hr class="docutils" />
 <hr class="docutils" />
-<p><img alt="Simplified C run-time library (crt0.o) - invoke , and then call to terminate process, guaranteeing no return from the true startfunction." src="intro/figures/switch.pdf" />{#fig:start:main width=”95%”}</p>
+<p><img alt="Simplified C run-time library (crt0.o) - invoke , and then call to terminate process, guaranteeing no return from the true startfunction." src="../_images/switch.png" />{#fig:start:main width=”95%”}</p>
 <div class="highlight-{frame=&quot;none&quot; notranslate"><div class="highlight"><pre><span></span>_start() {
    /* prepare argc, argv */
    int val = main(argc, argv);
@@ -1672,9 +1668,7 @@ function.
 during context switch. In each case control enters <code class="docutils literal notranslate"><span class="pre">switch</span></code> via a call
 from one process (or <em>thread</em> of control) but exits by returning to a
 different process.</p>
-<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>R0in ![image](figures/trampoline.pdf){height=&quot;8\\baselineskip&quot;}
-</pre></div>
-</div>
+<p><img alt="image" src="../_images/trampoline.png" />{height=”8\baselineskip”}</p>
 <p>This is a curious property of context switching: we can only switch <em>to</em>
 a process if we have switched <em>from</em> it at some point in the past. This
 results in a chicken-and-egg<a class="footnote-reference brackets" href="#id30" id="id11">9</a> sort of problem—how do we start a
@@ -1711,9 +1705,7 @@ reference=”fig:start:main”}.</p>
 </section>
 <section id="advanced-context-switching">
 <h2><span class="section-number">8.9. </span>Advanced Context Switching<a class="headerlink" href="#advanced-context-switching" title="Permalink to this headline">#</a></h2>
-<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/csx600-serial.pdf){height=&quot;7\\baselineskip&quot;}
-</pre></div>
-</div>
+<p><img alt="image" src="../_images/csx600-serial.png" />{height=”7\baselineskip”}</p>
 <p>So far we have considered the case where switching between processes is
 initiated by an explicit call into the OS from the currently running
 process. But an interrupt is essentially a function call from the
@@ -1737,7 +1729,7 @@ text.</p>
 <h3><span class="section-number">8.9.2. </span>Multi-User Computer System<a class="headerlink" href="#multi-user-computer-system" title="Permalink to this headline">#</a></h3>
 <p>Old (c. 1975?) multi-user computer system with 4 serial terminals.
 fig:ch2:multiuser
-<img alt="image" src="intro/figures/multi-user-mem-map" />{width=”0.95\columnwidth”} Possible
+<img alt="image" src="../_images/multi-user-mem-map.png" />{width=”0.95\columnwidth”} Possible
 memory address layout for 4 processes plus operating system.
 fig:ch2:serialin</p>
 <p>We now have all the software mechanisms needed to construct a multi-user
@@ -1878,7 +1870,7 @@ operation.
 <section id="memory-protection-and-translation">
 <h2><span class="section-number">8.11. </span>Memory Protection and Translation<a class="headerlink" href="#memory-protection-and-translation" title="Permalink to this headline">#</a></h2>
 <hr class="docutils" />
-<p><img alt="Virtual-to-physical address translation. All addresses in the CPU arevirtual, and are translated to physical addresses by the MMU (MemoryManagement Unit) before being used to access physicalmemory." src="intro/figures/vm-virtual-trans.pdf" />{#fig:virtmem width=”70%”}</p>
+<p><img alt="Virtual-to-physical address translation. All addresses in the CPU arevirtual, and are translated to physical addresses by the MMU (MemoryManagement Unit) before being used to access physicalmemory." src="../_images/vm-virtual-trans.png" />{#fig:virtmem width=”70%”}</p>
 <hr class="docutils" />
 <p>Hardware-supported address translation and memory protection (e.g. see
 Figure <a class="reference external" href="#fig:virtmem">1.6</a>{reference-type=”ref”
@@ -1930,7 +1922,7 @@ mechanism for safely entering supervisor mode when either (a) an
 application invokes a system call, or (b) a hardware interrupt occurs,
 and then switching back to user mode when returning.</p>
 <hr class="docutils" />
-<p><img alt="image" src="intro/figures/vm-base-bounds.pdf" />{width=”90%”}<br />
+<p><img alt="image" src="../_images/vm-base-bounds.png" />{width=”90%”}<br />
 (a) (b)  \</p>
 <hr class="docutils" />
 <div class="highlight-gsidebar notranslate"><div class="highlight"><pre><span></span>A question for the reader - what might happen if unprivileged programs
