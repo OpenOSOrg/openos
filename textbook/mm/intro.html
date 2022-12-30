@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>30. Synchronization Primitives &#8212; Introduction to Operating Systems</title>
+    <title>10. Introduction &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="31. Deadlocks" href="deadlock.html" />
-    <link rel="prev" title="29. Cooperating Processes" href="sharing.html" />
+    <link rel="next" title="11. Memory management without translation" href="physmem.html" />
+    <link rel="prev" title="9. Processor Scheduling" href="../scheduling/scheduling.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -170,69 +170,69 @@ const thebe_selector_output = ".output, .cell_output"
   Memory Management
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/intro.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    10. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/physmem.html">
+  <a class="reference internal" href="physmem.html">
    11. Memory management without translation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/virt-seg.html">
+  <a class="reference internal" href="virt-seg.html">
    12. Segmentation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/virt-paging.html">
+  <a class="reference internal" href="virt-paging.html">
    13. Paging
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/reclamation.html">
+  <a class="reference internal" href="reclamation.html">
    14. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/buffer-cache.html">
+  <a class="reference internal" href="buffer-cache.html">
    15. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/pagefaults.html">
+  <a class="reference internal" href="pagefaults.html">
    16. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/misc.html">
+  <a class="reference internal" href="misc.html">
    17. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/realworld.html">
+  <a class="reference internal" href="realworld.html">
    18. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/concl.html">
+  <a class="reference internal" href="concl.html">
    19. Other Stuff
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/mm.html">
+  <a class="reference internal" href="mm.html">
    20. EVERYTHING BELOW HERE IS CRAP
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/Overview.html">
+  <a class="reference internal" href="Overview.html">
    22. Overview of MM
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/peter-mm.html">
+  <a class="reference internal" href="peter-mm.html">
    23. Peter’s Virtual Memory chapter
   </a>
  </li>
@@ -269,39 +269,39 @@ const thebe_selector_output = ".output, .cell_output"
   Concurrency
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="sync.html">
+  <a class="reference internal" href="../sync/sync.html">
    28. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sharing.html">
+  <a class="reference internal" href="../sync/sharing.html">
    29. Cooperating Processes
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locking.html">
    30. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="deadlock.html">
+  <a class="reference internal" href="../sync/deadlock.html">
    31. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="hardware_challenges.html">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
    32. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="linux_locking.html">
+  <a class="reference internal" href="../sync/linux_locking.html">
    33. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="peter-syncro.html">
+  <a class="reference internal" href="../sync/peter-syncro.html">
    34. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
   </a>
  </li>
@@ -413,7 +413,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/sync/locking.ipynb"
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/mm/intro.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -431,7 +431,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/sync/locking.ipynb&branch=main"
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/mm/intro.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -491,7 +491,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fsync/locking.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fmm/intro.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -508,7 +508,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/edit/main/content/sync/locking.ipynb"
+        <a href="https://github.com/okrieg/openos/edit/main/content/mm/intro.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -536,7 +536,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/sync/locking.ipynb"
+        <a href="../_sources/mm/intro.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -585,7 +585,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Synchronization Primitives</h1>
+                <h1>Introduction</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -597,26 +597,115 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="synchronization-primitives">
-<span id="cont-sync-locking"></span><h1><span class="section-number">30. </span>Synchronization Primitives<a class="headerlink" href="#synchronization-primitives" title="Permalink to this headline">#</a></h1>
-<p>Introduce various solutions to the critical section problem here.</p>
-<ol class="simple">
-<li><p>Locks (Mutex)</p>
-<ol class="simple">
-<li><p>Software solutions (Dekker, Peterson)</p></li>
-<li><p>Spinlocks + hardware atomic instructions (TAS, CAS, LL/SC)</p></li>
-<li><p>Sleep locks</p></li>
-</ol>
+  <p>Outline</p>
+<ul class="simple">
+<li><p>intro</p>
+<ul>
+<li><p>Overview - Why do we need a memory manager</p></li>
+<li><p>overview of all the chapters</p></li>
+</ul>
 </li>
-<li><p>Semaphores</p></li>
-<li><p>Monitors</p></li>
-</ol>
-<p>Classic synchronization problems solved in various ways.</p>
-<ol class="simple">
-<li><p>Bank account withdraw / deposit</p></li>
-<li><p>Bounded buffer problem (producer / consumer)</p></li>
-<li><p>Readers / Writers</p></li>
-</ol>
+<li><p>physmem</p>
+<ul>
+<li><p>how program laid out - peter - address space and program loading</p></li>
+<li><p>relocation</p></li>
+<li><p>compaction</p></li>
+<li><p>challenges</p></li>
+</ul>
+</li>
+<li><p>virt-seg</p>
+<ul>
+<li><p>picture of MMU - sends physical address over bus</p></li>
+<li><p>segmentation hardware - translation</p></li>
+<li><p>what is virtual memory</p></li>
+<li><p>physical mem management</p></li>
+<li><p>swapping</p></li>
+<li><p>compaction</p></li>
+<li><p>keeping track of free memory</p></li>
+<li><p>challenges</p></li>
+</ul>
+</li>
+<li><p>virt-paging</p>
+<ul>
+<li><p>MMU with some mapping hardware - same picture, but now table</p></li>
+<li><p>page frames and virtual pages
+- keeping track of which memory used</p></li>
+<li><p>mapping &amp; notion of faults</p></li>
+<li><p>page table entry</p></li>
+<li><p>page table organizations:</p>
+<ul>
+<li><p>single level.</p></li>
+<li><p>multi-level page table.</p>
+<ul>
+<li><p>inverted</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>TLB
+- global, local, tagged TLB
+- software managed TLB</p></li>
+<li><p>contrast to segmentation, paging of blocks… rather than swapping entire program</p></li>
+<li><p>what we use for:
+- anonymous - program,
+- file backed - mention file caching
+- page fault</p></li>
+<li><p>concluding remarks
+- once you have multi-level, massive address space.
+- until now, described HW, and the benefits of having paged virtual memory, next chapters describe some of the key policies, mechanisms</p></li>
+</ul>
+</li>
+<li><p>reclamation</p>
+<ul>
+<li><p>describe how we got here … we run out of memory, … using</p></li>
+<li><p>describe all the policies</p></li>
+<li><p>FIFO</p></li>
+<li><p>CLOCK</p></li>
+<li><p>belady anomaly</p></li>
+<li><p>… all from peter</p></li>
+</ul>
+</li>
+<li><p>page-sizes</p>
+<ul>
+<li><p>why big, why small, supporting multiple</p></li>
+</ul>
+</li>
+<li><p>buffer-cache</p>
+<ul>
+<li><p>most memory used.</p></li>
+</ul>
+</li>
+<li><p>pagefaults</p>
+<ul>
+<li><p>anonymous - zero filled first access..</p></li>
+<li><p>file backed</p></li>
+<li><p>COW</p></li>
+</ul>
+</li>
+<li><p>misc</p>
+<ul>
+<li><p>sharing-memory</p>
+<ul>
+<li><p>sharing page frames</p></li>
+<li><p>sharing page table pages</p></li>
+</ul>
+</li>
+<li><p>pinning memory</p></li>
+</ul>
+</li>
+<li><p>realworld</p>
+<ul>
+<li><p>Linux implementation</p></li>
+</ul>
+</li>
+<li><p>concl</p>
+<ul>
+<li><p>Review of MM</p></li>
+</ul>
+</li>
+</ul>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<span id="cont-mm-intro"></span><h1><span class="section-number">10. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -632,7 +721,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./sync"
+            path: "./mm"
         },
         predefinedOutput: true
     }
@@ -646,17 +735,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="sharing.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../scheduling/scheduling.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">29. </span>Cooperating Processes</p>
+            <p class="prev-next-title"><span class="section-number">9. </span>Processor Scheduling</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="deadlock.html" title="next page">
+    <a class='right-next' id="next-link" href="physmem.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">31. </span>Deadlocks</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Memory management without translation</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

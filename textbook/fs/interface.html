@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>21. Interface &#8212; Introduction to Operating Systems</title>
+    <title>25. Interface &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="22. File System Layout" href="disklayout.html" />
-    <link rel="prev" title="20. Introduction" href="intro.html" />
+    <link rel="next" title="26. File System Layout" href="disklayout.html" />
+    <link rel="prev" title="24. Introduction" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -172,38 +172,43 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/mm.html">
-   10. Memory Management
+  <a class="reference internal" href="../mm/intro.html">
+   10. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/Overview.html">
-   11. The purpose of Memory Management
+  <a class="reference internal" href="../mm/physmem.html">
+   11. Memory management without translation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/virt-seg.html">
+   12. Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/virt-paging.html">
+   13. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   13. Memory reclaiming algorithms.
+   14. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/datastruc.html">
-   14. Data structures
+  <a class="reference internal" href="../mm/buffer-cache.html">
+   15. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   15. Page Faults
+   16. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/mmhw.html">
-   16. Memory management hardware
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/mmdyn.html">
-   17. Paging Dynamics
+  <a class="reference internal" href="../mm/misc.html">
+   17. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
@@ -212,8 +217,23 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../mm/concl.html">
+   19. Other Stuff
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/mm.html">
+   20. EVERYTHING BELOW HERE IS CRAP
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/Overview.html">
+   22. Overview of MM
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../mm/peter-mm.html">
-   19. Peter’s Virtual Memory chapter
+   23. Peter’s Virtual Memory chapter
   </a>
  </li>
 </ul>
@@ -225,22 +245,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   20. Introduction
+   24. Introduction
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   21. Interface
+   25. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="disklayout.html">
-   22. File System Layout
+   26. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="kernelimp.html">
-   23. Kernel implementation
+   27. Kernel implementation
   </a>
  </li>
 </ul>
@@ -252,37 +272,37 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   24. Intro Concurrency Synchronization and Deadlock
+   28. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   25. Cooperating Processes
+   29. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   26. Synchronization Primitives
+   30. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   27. Deadlocks
+   31. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   28. Challenges of Modern Hardware
+   32. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   29. Locking in the Linux Kernel
+   33. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/peter-syncro.html">
-   30. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
+   34. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
   </a>
  </li>
 </ul>
@@ -294,27 +314,27 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   31. Overview of other topics
+   35. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   32. Security
+   36. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   34. Virtualization and Cloud computing
+   38. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   36. Other OS structures
+   40. Other OS structures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/block-dev.html">
-   37. I/O, Drivers, and DMA {#chap:blockdevs}
+   41. I/O, Drivers, and DMA {#chap:blockdevs}
   </a>
  </li>
 </ul>
@@ -326,12 +346,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   38. Contributing
+   42. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   39. Bibliography
+   43. Bibliography
   </a>
  </li>
 </ul>
@@ -577,22 +597,22 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#objects">
-   21.1. Objects
+   25.1. Objects
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#file-system-operations">
-   21.2. File System Operations:
+   25.2. File System Operations:
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#symbolic-links">
-   21.3. Symbolic links
+   25.3. Symbolic links
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review-questions">
-     21.3.1. Review Questions
+     25.3.1. Review Questions
     </a>
    </li>
   </ul>
@@ -618,22 +638,22 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#objects">
-   21.1. Objects
+   25.1. Objects
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#file-system-operations">
-   21.2. File System Operations:
+   25.2. File System Operations:
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#symbolic-links">
-   21.3. Symbolic links
+   25.3. Symbolic links
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review-questions">
-     21.3.1. Review Questions
+     25.3.1. Review Questions
     </a>
    </li>
   </ul>
@@ -648,10 +668,12 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="interface">
-<span id="cont-fs-interface"></span><h1><span class="section-number">21. </span>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">#</a></h1>
+  <div class="cell tag_remove-input tag_hide-output docutils container">
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="interface">
+<span id="cont-fs-interface"></span><h1><span class="section-number">25. </span>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">#</a></h1>
 <section id="objects">
-<h2><span class="section-number">21.1. </span>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">25.1. </span>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">#</a></h2>
 <p>General-purpose operating systems typically provide access to block
 storage (i.e. disks) via a <em>file system</em>, which provides a much more
 application- and user-friendly interface to storage. From the point of
@@ -662,14 +684,19 @@ view of the user, a file system contains the following elements:</p>
 <li><p><em>operations</em> on these objects.</p></li>
 </ul>
 <p><strong>Hierarchical namespace:</strong> File systems have traditionally used a
-tree-structured namespace[^1], as shown
-<a class="reference external" href="#fig:filesys:tree">[fig:filesys:tree]</a>{reference-type=”autoref”
-reference=”fig:filesys:tree”}. This tree is constructed via the use of
+tree-structured namespace<a class="footnote-reference brackets" href="#hier" id="id1">1</a>, as shown in <a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 25.1</span></a>.
+This tree is constructed via the use of
 <em>directories</em>, or objects in the namespace which map strings to further
 file system objects. A full filename thus specifies a <em>path</em> from the
 root, through the tree, to the object (a file or directory) itself.
 (Hence the use of the term “path” to mean “filename” in Unix
 documentation)</p>
+<figure class="align-default" id="fs-tree-logical">
+<a class="reference internal image-reference" href="../_images/filesys-tree.png"><img alt="../_images/filesys-tree.png" src="../_images/filesys-tree.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 25.1 </span><span class="caption-text">Logical view: hierarchical file system name space</span><a class="headerlink" href="#fs-tree-logical" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p><strong>File:</strong> Early operating systems supported many different file
 types—binary executables, text files, and record-structured files, and
 others. The Unix operating system is the earliest I know of that
@@ -679,12 +706,14 @@ only with multiples of 8-bit bytes (e.g. 16 and 32-bit words), replacing
 older systems which frequently used odd word sizes such as 36 bits.
 (Note that a machine with 36-bit instructions already needs two
 incompatible types of files, one for text and one for executable code)</p>
-<p><img alt="Logical view of a hierarchical file system name space." src="images/pb-figures/filesys-tree.png" />{#fig:filesys:tree
-width=”80%”}</p>
-<p><img alt="implementation view of a hierarchical file system name space." src="images/pb-figures/filesys-tree2.png" />{#fig:filesys:tree
-width=”80%”}</p>
+<figure class="align-default" id="fs-tree-imp">
+<a class="reference internal image-reference" href="../_images/filesys-tree2.png"><img alt="../_images/filesys-tree2.png" src="../_images/filesys-tree2.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 25.2 </span><span class="caption-text">Implementation view: hierarchical file system name space. Gray blocks are directories that contain entries that point to files.</span><a class="headerlink" href="#fs-tree-imp" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Modern operating systems follow the UNIX model, which imposes no
-structure on a file—a file is merely a sequence of bytes.[^2] Any
+structure on a file—a file is merely a sequence of bytes.<a class="footnote-reference brackets" href="#simple" id="id2">2</a> Any
 structure to the file (such as a JPEG image, an executable program, or a
 database) is the responsibility of applications which read and write the
 file. The file format is commonly indicated by a file extension like
@@ -710,13 +739,12 @@ relative to the root of the naming tree, while <em>relative</em> names are
 interpreted beginning at the current directory. (In addition, <code class="docutils literal notranslate"><span class="pre">d/..</span></code>
 always points to the parent directory of <code class="docutils literal notranslate"><span class="pre">d</span></code>, and <code class="docutils literal notranslate"><span class="pre">d/.</span></code> points to <code class="docutils literal notranslate"><span class="pre">d</span></code>
 itself.) Thus in the file system in
-<a class="reference external" href="#fig:filesys:tree">[fig:filesys:tree]</a>{reference-type=”autoref”
-reference=”fig:filesys:tree”}, if the current directory were <code class="docutils literal notranslate"><span class="pre">/home</span></code>,
+<a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 25.1</span></a>, if the current directory were <code class="docutils literal notranslate"><span class="pre">/home</span></code>,
 the the paths <code class="docutils literal notranslate"><span class="pre">pjd/.profile</span></code> and <code class="docutils literal notranslate"><span class="pre">/home/pjd/.profile</span></code> refer to the same
 file, and <code class="docutils literal notranslate"><span class="pre">../bin/cat</span></code> and <code class="docutils literal notranslate"><span class="pre">/bin/cat</span></code> refer to the same file.</p>
 </section>
 <section id="file-system-operations">
-<h2><span class="section-number">21.2. </span>File System Operations:<a class="headerlink" href="#file-system-operations" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">25.2. </span>File System Operations:<a class="headerlink" href="#file-system-operations" title="Permalink to this headline">#</a></h2>
 <p>There are several common types of file operations supported by Linux
 (and with slight differences, Windows). They can be classified into
 three main categories: open/close, read/write, and naming and
@@ -802,7 +830,7 @@ delete an empty directory.</p></li>
 </ul>
 </section>
 <section id="symbolic-links">
-<h2><span class="section-number">21.3. </span>Symbolic links<a class="headerlink" href="#symbolic-links" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">25.3. </span>Symbolic links<a class="headerlink" href="#symbolic-links" title="Permalink to this headline">#</a></h2>
 <p>An alternative to hard links to allow multiple names for a file is a
 third file system object (in addition to files and directories), a
 <em>symbolic link</em>. This holds a text string which is interpreted as a
@@ -811,41 +839,40 @@ searching for a file and encounters a symbolic link, it substitutes this
 text into the current portion of the path, and continues the translation
 process.</p>
 <p>Thus if we have:</p>
+<pre>
+directory: /usr/program-1.0.1
+  file:      /usr/program-1.0.1/file.txt
+  sym link:  /usr/program-current -> "program-1.0.1"
+</pre>
 <p>and if the OS is looking up the file <code class="docutils literal notranslate"><span class="pre">/usr/program-current/file.txt</span></code>, it
 will:</p>
-<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>look up `usr` in the root directory, finding a pointer to the `/usr`
-directory
-
-look up `program-current` in `/usr`, finding the link with contents
-`program-1.0.1`
-
-look up `program-1.0.1` and use this result instead of the result from
-looking up `program-current`, getting a pointer to the
-`/usr/program-1.0.1` directory.
-
-look up `file.txt` in this directory, and find it.
-</pre></div>
-</div>
+<ol class="simple">
+<li><p>look up <code class="docutils literal notranslate"><span class="pre">usr</span></code> in the root directory, finding a pointer to the <code class="docutils literal notranslate"><span class="pre">/usr</span></code>
+directory</p></li>
+<li><p>look up <code class="docutils literal notranslate"><span class="pre">program-current</span></code> in <code class="docutils literal notranslate"><span class="pre">/usr</span></code>, finding the link with contents
+<code class="docutils literal notranslate"><span class="pre">program-1.0.1</span></code></p></li>
+<li><p>look up <code class="docutils literal notranslate"><span class="pre">program-1.0.1</span></code> and use this result instead of the result from
+looking up <code class="docutils literal notranslate"><span class="pre">program-current</span></code>, getting a pointer to the
+<code class="docutils literal notranslate"><span class="pre">/usr/program-1.0.1</span></code> directory.</p></li>
+<li><p>look up <code class="docutils literal notranslate"><span class="pre">file.txt</span></code> in this directory, and find it.</p></li>
+</ol>
 <p>Note that unlike hard links, a symbolic link may be “broken”—i.e. if
 the file it points to does not exist. This can happen if the link was
 created in error, or the file or directory it points to is deleted
 later. In that case path translation will fail with an error:</p>
-<div class="highlight-{frame=&quot;none&quot; notranslate"><div class="highlight"><pre><span></span>pjd-1:tmp pjd$ ln -s /bad/file/name bad-link
-pjd-1:tmp pjd$ ls -l bad-link 
-lrwxr-xr-x  1 pjd  wheel  22 Aug  2 00:07 bad-link -&gt; /bad/file/name
-pjd-1:tmp pjd$ cat bad-link
-cat: bad-link: No such file or directory
-</pre></div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "a6d20289148f4c7eab5176673306c28c", "version_major": 2, "version_minor": 0}
+</script></div>
 </div>
 <p>Finally, to prevent loops there is a limit on how many levels of
 symbolic link may be traversed in a single path translation:</p>
-<div class="highlight-{frame=&quot;none&quot; notranslate"><div class="highlight"><pre><span></span>pjd@pjd-fx:/tmp$ ln -s loopy loopy
-pjd@pjd-fx:/tmp$ ls -l loopy
-lrwxrwxrwx 1 pjd pjd 5 Aug 24 04:25 loopy -&gt; loopy
-pjd@pjd-fx:/tmp$ cat loopy
-cat: loopy: Too many levels of symbolic links
-pjd@pjd-fx:/tmp$ 
-</pre></div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "ccf3ce4091ae4f52b095faf2fed31d06", "version_major": 2, "version_minor": 0}
+</script></div>
 </div>
 <p>In early versions of Linux (pre-2.6.18) the link translation code was
 recursive, and this limit was set to 5 to avoid stack overflow. Current
@@ -858,17 +885,16 @@ in a single file system, as well as identifying the file system itself.
 (in Unix this name is called an <em>absolute pathname</em>, providing an
 unambiguous “path” to the file.) There are two common approaches to
 identifying file systems:</p>
-<div class="highlight-compactitem notranslate"><div class="highlight"><pre><span></span>Explicitly: each file system is given a name, so that a full pathname
-looks like e.g. `C:``\``MyDirectory``\``file.txt` (Windows[^6]) or
-`DISK1:[MYDIR]file.txt` (VMS).
-
-Implicitly: a file system is transparently *mounted* onto a directory in
+<ol class="simple">
+<li><p>Explicitly: each file system is given a name, so that a full pathname
+looks like e.g. <code class="docutils literal notranslate"><span class="pre">C:``\``MyDirectory``\``file.txt</span></code> (Windows<a class="footnote-reference brackets" href="#id4" id="id3">6</a>) or
+<code class="docutils literal notranslate"><span class="pre">DISK1:[MYDIR]file.txt</span></code> (VMS).</p></li>
+<li><p>Implicitly: a file system is transparently <em>mounted</em> onto a directory in
 another file system, giving a single uniform namespace; thus on a Linux
-system with a separate disk for user directories, the file &quot;/etc/passwd&quot;
-would be on one file system (e.g. &quot;disk1&quot;), while &quot;/home/pjd/file.txt&quot;
-would be on another (e.g. &quot;disk2&quot;).
-</pre></div>
-</div>
+system with a separate disk for user directories, the file “/etc/passwd”
+would be on one file system (e.g. “disk1”), while “/home/pjd/file.txt”
+would be on another (e.g. “disk2”).</p></li>
+</ol>
 <p>The actual implementation of mounting in Linux and other Unix-like
 systems is implemented via a <em>mount table</em>, a small table in the kernel
 mapping directories to directories on other file systems. In the example
@@ -882,13 +908,33 @@ top-level directory on disk2,and then search for “pjd”.</p>
 Unix systems see the <code class="docutils literal notranslate"><span class="pre">path_resolution(7)</span></code> man page, which may be
 accessed with the command <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">path_resolution</span></code>.</p>
 <section id="review-questions">
-<h3><span class="section-number">21.3.1. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">25.3.1. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="hier"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Very early file systems sometimes had a single flat directory per user, or like MS-DOS 1.0, a single directory per floppy disk</p>
+</dd>
+<dt class="label" id="simple"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Almost. Apple OSX uses resource forks to store information associated with a file (HFS and HFS+ file systems only), Windows NTFS provides for multiple data streams in single file, although they were never put to use, and several file systems support file attributes, small tags associated with a file.</p>
+</dd>
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id3">6</a></span></dt>
+<dd><p>Modern Windows systems actually use a mount-like naming convention
+internally; e.g. the <code class="docutils literal notranslate"><span class="pre">C:</span></code> drive actually corresponds to the name
+<code class="docutils literal notranslate"><span class="pre">\``DosDevices``\``C:</span></code> in this internal namespace.</p>
+</dd>
+</dl>
 </section>
 </section>
 </section>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"07b85207cfe746f39bc9ab3877a22152": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_21430aa49929402daedaf44766c5c721", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ rm -rf bad-link\r\n$     rm -rf loopy\r\n$ "}]}}, "21430aa49929402daedaf44766c5c721": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "77aad6beb5944ec289fe27bc9db4bfca": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "a6d20289148f4c7eab5176673306c28c": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_77aad6beb5944ec289fe27bc9db4bfca", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ln -s /bad/file/name bad-link\r\n$ ls -l bad-link\r\nlrwxrwxrwx. 1 jovyan root 14 Dec 30 19:10 \u001b[0m\u001b[40;31;01mbad-link\u001b[0m -> \u001b[40;31;01m/bad/file/name\u001b[0m\r\n$ cat bat-link\r\ncat: bat-link: No such file or directory\r\n$ "}]}}, "ccf3ce4091ae4f52b095faf2fed31d06": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_d49e5a068dca4fadb5c5e30eb5dfa984", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ln -s loopy loopy\r\n$ ls -l loopy\r\nlrwxrwxrwx. 1 jovyan root 5 Dec 30 19:10 \u001b[0m\u001b[40;31;01mloopy\u001b[0m -> \u001b[40;31;01mloopy\u001b[0m\r\n$ cat loopy\r\ncat: loopy: Too many levels of symbolic links\r\n$ "}]}}, "d49e5a068dca4fadb5c5e30eb5dfa984": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+</script>
+
 
     <script type="text/x-thebe-config">
     {
@@ -921,13 +967,13 @@ accessed with the command <code class="docutils literal notranslate"><span class
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">20. </span>Introduction</p>
+            <p class="prev-next-title"><span class="section-number">24. </span>Introduction</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="disklayout.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">22. </span>File System Layout</p>
+        <p class="prev-next-title"><span class="section-number">26. </span>File System Layout</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
