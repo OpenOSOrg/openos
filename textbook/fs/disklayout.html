@@ -908,14 +908,18 @@ that would be ignored by older versions of MS-DOS.</p>
 <p>File systems derived from the original Unix file system (e.g. Linux ext2
 and ext3) use a per-file structure called an inode (“indirect node”)
 designed with three goals in mind:</p>
-<div class="highlight-gsidebar notranslate"><div class="highlight"><pre><span></span>**Why not use e.g. a balanced binary tree?** The in-memory tree
-structures from your algorithms class aren&#39;t appropriate for a file
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Why not use e.g. a balanced binary tree?</strong> The in-memory tree
+structures from your algorithms class aren’t appropriate for a file
 system, for several reasons: (a) the minimum allocation unit is a disk
 block, typically 4 KB, (b) disk seeks are really expensive, and (c) we
 want to avoid re-arranging existing data on disk as the file grows, so
-that we don&#39;t lose it if the system crashes mid-operation.
-</pre></div>
+that we don’t lose it if the system crashes mid-operation.</p>
 </div>
+</aside>
 <p>(a) low overhead for small files, in terms of both disk seeks and
 allocated blocks<a class="footnote-reference brackets" href="#id13" id="id5">10</a>, (b) ability to represent sufficiently large files
 without excessive storage space or performance overhead, and (c) crash
@@ -923,9 +927,7 @@ resiliency—crashing while the file is growing should not endanger
 existing data.</p>
 <p>To do this, the inode uses an asymmetric tree, or actually a series of
 trees of increasing height with the root of each tree stored in the
-inode. As seen in
-<a class="reference external" href="#fig:filesys:inode">[fig:filesys:inode]</a>{reference-type=”autoref”
-reference=”fig:filesys:inode”} the inode contains N <em>direct</em> block
+inode. As seen in <a class="reference internal" href="#filesys-inode"><span class="std std-numref">Fig. 26.3</span></a> the inode contains N <em>direct</em> block
 pointers (12 in ext2/ext3), so that files of N blocks or less need no
 indirect blocks. A single <em>indirect pointer</em> specifies an <em>indirect
 block</em>, holding pointers to blocks <span class="math notranslate nohighlight">\(N, N+1, ... N+N_1-1\)</span> where <span class="math notranslate nohighlight">\(N_1\)</span> is
@@ -954,7 +956,13 @@ This also allows a file to have <em>zero</em> names—when a file is opened the
 reference count (in memory, not on disk) is incremented, and decremented
 when it is closed, so if you unlink a file which is in use, it is not
 actually deleted until the last open file descriptor is closed<a class="footnote-reference brackets" href="#id15" id="id7">12</a>.</p>
-<p><img alt="Inode-type file organization as found in many Unix file systems (e.g.Linux ext2, ext3). Note that the degree of branching is far lower thanin real file systems, and the triple-indirect pointer ismissing." src="../_images/filesys-inode.png" />{#fig:filesys:inode width=”80%”}</p>
+<figure class="align-default" id="filesys-inode">
+<a class="reference internal image-reference" href="../_images/filesys-inode.png"><img alt="../_images/filesys-inode.png" src="../_images/filesys-inode.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 26.3 </span><span class="caption-text">Inode-type file organization as found in many Unix file systems (e.g.
+Linux ext2, ext3)</span><a class="headerlink" href="#filesys-inode" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p><strong>Ext2 space allocation</strong>: The original Unix file system used a free
 list to store a list of unused blocks; blocks were allocated from the
 head of this list for new files, and returned to the head when freed. As
