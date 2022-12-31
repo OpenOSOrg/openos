@@ -21,6 +21,7 @@ parts:
   - file: mm/physmem
   - file: mm/virt-seg
   - file: mm/virt-paging
+  - file: mm/page-tables
   - file: mm/reclamation
   - file: mm/page-size
   - file: mm/buffer-cache
