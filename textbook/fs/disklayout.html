@@ -784,14 +784,18 @@ with for the following three problems:</p>
 </ol>
 <section id="cd-rom-file-system">
 <h2><span class="section-number">26.1. </span>CD-ROM File System<a class="headerlink" href="#cd-rom-file-system" title="Permalink to this headline">#</a></h2>
-<p>In <a class="reference external" href="#fig:filesys:iso9660">[fig:filesys:iso9660]</a>{reference-type=”autoref”
-reference=”fig:filesys:iso9660”} we see an example of an extremely
+<p>In <a class="reference internal" href="#fs-cd-rom"><span class="std std-numref">Fig. 26.1</span></a> we see an example of an extremely
 simple file system, similar to early versions of the ISO-9660 file
 system for CD-ROM disks. Objects on disk are either files or
 directories, each composed of one or more 2048-byte<a class="footnote-reference brackets" href="#id10" id="id1">7</a> <em>blocks</em>; all
 pointers in the file system are in terms of <em>block numbers</em>, with blocks
 numbered from block 0 at the beginning of the disk.</p>
-<p><img alt="image" src="../_images/filesys-cdrom.png" />{height=”19\baselineskip”}</p>
+<figure class="align-default" id="fs-cd-rom">
+<a class="reference internal image-reference" href="../_images/filesys-cdrom.png"><img alt="../_images/filesys-cdrom.png" src="../_images/filesys-cdrom.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 26.1 </span><span class="caption-text">Simpliﬁed ISO-9660 (CDROM) ﬁle layout for tree in <a class="reference internal" href="interface.html#fs-tree-logical"><span class="std std-numref">Fig. 25.1</span></a>, 2KB blocks</span><a class="headerlink" href="#fs-cd-rom" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>There are no links—each object has exactly one name—and the type of
 an object is indicated in its directory entry. (The only exception is
 the root directory, which has no name; however it is always found at the
@@ -810,25 +814,25 @@ the CDROM file system has no method for tracking free space, so
 allocation would be very inefficient.)</p>
 <p>In the simple CD-ROM file system, what were the solutions to the three
 design problems?</p>
-<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>File identification: files are identified by their starting block number
-
-File organization: blocks in a file are contiguous, so an offset in the
-file can be found by adding to the starting block number.
-
-Free space allocation: since it&#39;s a read-only file system, there is no
-free space to worry about.
-</pre></div>
-</div>
+<ol class="simple">
+<li><p>File identification: files are identified by their starting block number</p></li>
+<li><p>File organization: blocks in a file are contiguous, so an offset in the
+file can be found by adding to the starting block number.</p></li>
+<li><p>Free space allocation: since it’s a read-only file system, there is no
+free space to worry about.</p></li>
+</ol>
 <section id="review-questions">
 <h3><span class="section-number">26.1.1. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
-<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
+<figure class="align-default" id="fig-filesys-linked">
+<a class="reference internal image-reference" href="../_images/filesys-linked.png"><img alt="../_images/filesys-linked.png" src="../_images/filesys-linked.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 26.2 </span><span class="caption-text">Linked list organization with in-object pointers (typical for in-memory structures) and external pointers, as used in MS-DOS File Allocation Table.</span><a class="headerlink" href="#fig-filesys-linked" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 </section>
 <section id="ms-dos-file-system">
 <h2><span class="section-number">26.2. </span>MS-DOS file system<a class="headerlink" href="#ms-dos-file-system" title="Permalink to this headline">#</a></h2>
-<p><img alt="image" src="../_images/filesys-linked.png" />{height=”13\baselineskip”}</p>
 <p>The next file system we consider is the MS-DOS (or FAT, File Allocation
 Table) file system. Here blocks within a file are organized in a linked
 list; however implementation of this list is somewhat restricted by the
@@ -842,16 +846,14 @@ directory, or (c) the block is free. The FAT is thus used for free space
 management as well as file organization; when a block is needed the
 table may be searched for a free entry which can then be allocated.</p>
 <p>Again, what were the solutions to the three design problems?</p>
-<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>File identification - Files and directories are identified by their
-starting block number
-
-File organization - blocks within a file are linked by pointers in the
-FAT
-
-Free space allocation - free blocks are marked in the FAT, and linear
-search is used to find free space
-</pre></div>
-</div>
+<ol class="simple">
+<li><p>File identification - Files and directories are identified by their
+starting block number</p></li>
+<li><p>File organization - blocks within a file are linked by pointers in the
+FAT</p></li>
+<li><p>Free space allocation - free blocks are marked in the FAT, and linear
+search is used to find free space</p></li>
+</ol>
 <p>Directories are similar to the CD-ROM file system - each entry has a
 name, the object type (file or directory), its length, and the starting
 address of the file contents. Note that although the last block of a
@@ -879,7 +881,11 @@ file systems, too) but works poorly for very large directories. (That’s
 why your browser cache has filenames that look like
 <code class="docutils literal notranslate"><span class="pre">ab/xy/abxy123x.dat</span></code>, instead of putting all its files in the same
 directory.)</p>
-<div class="highlight-gbar notranslate"><div class="highlight"><pre><span></span>A note for the reader - the original MS-DOS file system only supported
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A note for the reader - the original MS-DOS file system only supported
 8-byte upper-case names with 3-byte extensions, with (seemingly) no way
 to get around this restriction, since the size of a directory entry is
 fixed. A crazy mechanism was devised that is still used today: multiple
@@ -887,9 +893,9 @@ directory entries are used for each file, with the extra entries filled
 with up to 13 2-character Unicode filename characters in not only the
 filename field, but also the space that would have otherwise been used
 for timestamp, size, starting block number, etc., and marked in a way
-that would be ignored by older versions of MS-DOS.
-</pre></div>
+that would be ignored by older versions of MS-DOS.</p>
 </div>
+</aside>
 <section id="id4">
 <h3><span class="section-number">26.2.1. </span>Review Questions<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
