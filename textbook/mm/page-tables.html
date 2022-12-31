@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>21. EVERYTHING BELOW HERE IS CRAP &#8212; Introduction to Operating Systems</title>
+    <title>14. Page Tables &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,10 +53,12 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="23. Overview of MM" href="Overview.html" />
-    <link rel="prev" title="20. Other Stuff" href="concl.html" />
+    <link rel="next" title="15. Memory reclaiming algorithms." href="reclamation.html" />
+    <link rel="prev" title="13. Paging" href="virt-paging.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -191,8 +193,8 @@ const thebe_selector_output = ".output, .cell_output"
    13. Paging
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="page-tables.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    14. Page Tables
   </a>
  </li>
@@ -226,8 +228,8 @@ const thebe_selector_output = ".output, .cell_output"
    20. Other Stuff
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="mm.html">
    21. EVERYTHING BELOW HERE IS CRAP
   </a>
  </li>
@@ -418,7 +420,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/mm/mm.ipynb"
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/mm/page-tables.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -436,7 +438,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/mm/mm.ipynb&branch=main"
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/mm/page-tables.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -496,7 +498,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fmm/mm.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fmm/page-tables.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -513,7 +515,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/edit/main/content/mm/mm.ipynb"
+        <a href="https://github.com/okrieg/openos/edit/main/content/mm/page-tables.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -541,7 +543,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/mm/mm.ipynb"
+        <a href="../_sources/mm/page-tables.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -600,19 +602,41 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   21. EVERYTHING BELOW HERE IS CRAP
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#single-level-page-table">
+   14.1. Single-level Page Table
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   22. Introduction
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#level-page-table-operation">
+   14.2. 2-Level Page Table Operation
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#notes">
-     22.1. Notes
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#review-questions">
+     14.2.1. Review questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-table-entries">
+   14.3. Page Table Entries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-permissions-p-w-and-u-bits">
+   14.4. Page Permissions - P, W, and U bits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-a-page-table-vm-sec-4-6">
+   14.5. Creating a Page Table {#vm:sec:4:6}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     14.5.1. Review questions
     </a>
    </li>
   </ul>
@@ -626,7 +650,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>EVERYTHING BELOW HERE IS CRAP</h1>
+                <h1>Page Tables</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -636,19 +660,41 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   21. EVERYTHING BELOW HERE IS CRAP
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#single-level-page-table">
+   14.1. Single-level Page Table
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   22. Introduction
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#level-page-table-operation">
+   14.2. 2-Level Page Table Operation
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#notes">
-     22.1. Notes
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#review-questions">
+     14.2.1. Review questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-table-entries">
+   14.3. Page Table Entries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-permissions-p-w-and-u-bits">
+   14.4. Page Permissions - P, W, and U bits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-a-page-table-vm-sec-4-6">
+   14.5. Creating a Page Table {#vm:sec:4:6}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     14.5.1. Review questions
     </a>
    </li>
   </ul>
@@ -663,61 +709,204 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="everything-below-here-is-crap">
-<h1><span class="section-number">21. </span>EVERYTHING BELOW HERE IS CRAP<a class="headerlink" href="#everything-below-here-is-crap" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="page-tables">
+<span id="cont-mm-pate-tables"></span><h1><span class="section-number">14. </span>Page Tables<a class="headerlink" href="#page-tables" title="Permalink to this headline">#</a></h1>
+<section id="single-level-page-table">
+<h2><span class="section-number">14.1. </span>Single-level Page Table<a class="headerlink" href="#single-level-page-table" title="Permalink to this headline">#</a></h2>
+<p>One of the simplest ways to structure a page table for mapping 20-bit
+page numbers is as a simple array with <span class="math notranslate nohighlight">\(2^{20}\)</span> entries. With this
+configuration, each virtual page has an entry, and the value in that
+entry is the corresponding physical page number, as seen in
+<a class="reference external" href="#fig:vm:fig11">[fig:vm:fig11]</a>{reference-type=”autoref”
+reference=”fig:vm:fig11”}. This single-level table is located in
+physical memory, and the MMU is given a pointer to this table, which is
+stored in an MMU register. (On Intel-compatible CPUs, the page table
+pointer is Control Register 3, or CR3.) This is shown in
+<a class="reference external" href="#fig:vm:fig11">[fig:vm:fig11]</a>{reference-type=”autoref”
+reference=”fig:vm:fig11”}, where we see the first two entries in a
+<span class="math notranslate nohighlight">\(2^{20}\)</span> or 1048576-entry mapping table. In addition to the translated
+page number, each entry contains a <em>P</em> bit to indicate whether or not
+the entry is “present,” i.e., valid. Unlike in C or Java we can’t use a
+special null pointer, because 0 is a perfectly valid page number[^3].</p>
+<p><img alt="Single-level 32-bit pagetable" src="../_images/virt-mem-pic11.png" />{#fig:vm:fig11 width=”85%”}</p>
+<p>In <a class="reference external" href="#lst:map:pcode">[lst:map:pcode]</a>{reference-type=”autoref”
+reference=”lst:map:pcode”} we see pseudo-code for the translation
+algorithm implemented in an MMU using a single-level table; VA and PA
+stand for virtual and physical addresses, and VPN and PPN are the
+virtual and physical page numbers.</p>
+<div class="highlight-{#lst:map:pcode notranslate"><div class="highlight"><pre><span></span>PA = translate(VA):
+            VPN, offset = split[20 bits, 12 bits](VA)
+            PTE = physical_read(CR3 + VPN*sizeof(PTE), sizeof(PTE))
+            if not PTE.present:
+                fault
+            return PTE.PPN + offset
+</pre></div>
+</div>
+<p>Note that this means that every memory operation performed by the CPU
+now requires two physical memory operations: one to translate the
+virtual address, and a second one to perform the actual operation. If
+this seems inefficient, it is, and it will get worse. However, in a page
+or two we’ll discuss the <em>translation lookaside buffer</em> or TLB, which
+caches these translations to eliminate most of the overhead.</p>
+<p>The single-level page table handles the problem of encoding the
+virtual-to-physical page map, but causes another: it uses 4 MB of memory
+per map. Years ago (e.g. in the mid-80s when the first Intel CPUs using
+this paging structure were introduced) this was entirely out of the
+question, as a single computer might have a total of 4 MB of memory or
+less. Even today, it remains problematic. As an example, when these
+notes were first written (2013), the most heavily-used machine in the
+CCIS lab (<a class="reference external" href="http://login.ccs.neu.edu">login.ccs.neu.edu</a>) had 4 GB of memory, and when I checked it
+had 640 running processes. With 4 MB page tables and one table per
+process, this would require 2.5GB of memory just for page tables, or
+most of the machine’s memory. Worse yet, each table would require a
+contiguous 4MB region of memory, running into the same problem of
+external fragmentation that paged address translation was supposed to
+solve.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<span id="cont-mm-intro"></span><h1><span class="section-number">22. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
-<p>There is a massive amount of memory… Today a simple home computer…</p>
-<p>programs will expand to fill it all up…</p>
-<ol class="simple">
-<li><p>Abstracting a useful memory model.</p></li>
-<li><p>Managing all of the RAM or physical memory on the whole system.</p></li>
-<li><p>Creating and managing a virtual memory address space for each process.</p></li>
-<li><p>Providing a useful programming interface for applications running on the system.</p></li>
-<li><p>Transitioning the processor(s) between physical memory mode and virtual memory mode as the kernel boots and initializes.</p></li>
-</ol>
-<p>Very basic systems do not abstract memory at all.  Instead, programs are loaded directly into physical memory
-and all the addresses presented to those programs are physical addresses.  This means that programs running in
-a physical memory model must be relocatable because its not known what address they will be loaded and run at.
-Being relocatable means that all addresses are either relative or they can be fixed up whenever the program is loaded and/or
-moved to a different physical address.</p>
-<p>No memory abstraction also implies that there is no protection between multiple programs loaded into memory at the same time.
-If a program takes a wild branch or writes to a random address it will corrupt other programs or even the entire system.</p>
-<ul class="simple">
-<li><p>Introduction: Fundamental jobs of the memory manager:</p>
-<ul>
-<li><p>Abstracting a useful memory model.</p></li>
-<li><p>Managing the physical memory on the system.</p></li>
-<li><p>Providing and managing a private virtual address space for each user.
-give an overview of the chapters in this section.</p></li>
-</ul>
-</li>
-<li><p>The memory manager is responsible for:</p>
-<ul>
-<li><p>1.) Managing all of the RAM or physical memory on the whole system.</p></li>
-<li><p>2.) Creating and managing virtual memory for each process.</p></li>
-<li><p>3.) Transitioning the processor(s) between physical memory mode and virtual memory mode as the kernel boots and initializes.</p></li>
-</ul>
-</li>
-</ul>
-<p>Stole below from elsewhere</p>
-<p>The memory management subsystem has 3 basic responsibilities;</p>
-<ol class="simple">
-<li><p>Providing an abstraction so that every user appears to have total and unique access to all of the memory on the system.</p></li>
-<li><p>Managing all of the physical memory on the system.</p></li>
-<li><p>Providing and managing a unique private virtual address space for every process currently running on the system.</p></li>
-</ol>
-<p>Very basic systems do not abstract memory at all.  Instead, programs are loaded directly into physical memory
-and all the addresses presented to those programs are physical addresses.  This means that programs running in
-a physical memory model must be relocatable because its not known what address they will be loaded and run at.
-Being relocatable means that all addresses are either relative or they can be fixed up whenever the program is loaded and/or
-moved to a different physical address.</p>
-<p>No memory abstraction also implies that there is no protection between multiple programs loaded into memory at the same time.
-If a program takes a wild branch or writes to a random address it will corrupt other programs or even the entire system.</p>
-<section id="notes">
-<h2><span class="section-number">22.1. </span>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">#</a></h2>
-<p>Refer <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/shellintro.html#arithmetic-expansion">here</a> for doing binary math in shell</p>
+<section id="level-page-table-operation">
+<h2><span class="section-number">14.2. </span>2-Level Page Table Operation<a class="headerlink" href="#level-page-table-operation" title="Permalink to this headline">#</a></h2>
+<p>In <a class="reference external" href="#fig:vm:pic13">[fig:vm:pic13]</a>{reference-type=”autoref”
+reference=”fig:vm:pic13”} we see a page table constructed of 3 pages:
+physical pages 00000 (the root directory), 00001, and 00003. Two data
+pages are mapped: 00002 and 00004. Any entries not shown are assumed to
+be null, i.e., the present bit is set to 0. As an example we use this
+page table to translate a read from virtual address 0x0040102C.</p>
+<p><img alt="2-level Page Table Example" src="../_images/virt-mem-pic13.png" />{#fig:vm:pic13
+width=”90%”}</p>
+<p>The steps involved in translating this address are:</p>
+<p>1) Split the address into page number and offset</p>
+<p><br />
+<img alt="image" src="../_images/virt-mem-pic14.png" />{width=”0.35\columnwidth”}</p>
+<p>2) Split the page number into top and bottom 10 bits, giving <code class="docutils literal notranslate"><span class="pre">0x001</span></code>
+and <code class="docutils literal notranslate"><span class="pre">0x001</span></code>. (in the figure the top row is hex, the middle two rows are
+binary, and the bottom is hex again.)</p>
+<p>\</p>
+<p><img alt="image" src="../_images/virt-mem-pic15.png" />{width=”0.9\columnwidth”}</p>
+<p>3) Read entry <code class="docutils literal notranslate"><span class="pre">[001]</span></code> from the top-level page directory (physical page
+<code class="docutils literal notranslate"><span class="pre">00000</span></code>) (note sizeof(entry) is 4 bytes):\</p>
+<div class="highlight-{xleftmargin=&quot;12pt&quot; notranslate"><div class="highlight"><pre><span></span>address = start [00000000] + index [001] * sizeof(entry)
+read 4 bytes from physical address 00000004 (page 00000, offset 004)
+result = [p=1, pgnum = 00001]
+</pre></div>
+</div>
+<p>4) Read entry <code class="docutils literal notranslate"><span class="pre">[001]</span></code> from the page table in physical page <code class="docutils literal notranslate"><span class="pre">00001</span></code>:</p>
+<div class="highlight-{xleftmargin=&quot;12pt&quot; notranslate"><div class="highlight"><pre><span></span>address = 00001000 + 001*4 = 00001004
+read 4 bytes from physical address 00001004
+:result = [p=1, pgnum = 00002]
+</pre></div>
+</div>
+<p>This means that the translated physical page number is <code class="docutils literal notranslate"><span class="pre">00002</span></code>. The
+offset in the original virtual address is <code class="docutils literal notranslate"><span class="pre">02C</span></code>, so combining the two we
+get the final physical address, <code class="docutils literal notranslate"><span class="pre">0000202C</span></code>.</p>
+<section id="review-questions">
+<h3><span class="section-number">14.2.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
+<p><img alt="Reference page table for reviewquestions" src="../_images/virt-mem-pic16.png" />{#fig:vm:review1 width=”95%”}</p>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>13 A famous computer science quote attributed to David Wheeler is: &quot;All
+problems in computer science can be solved by another level of
+indirection,&quot; to which some add &quot;except the performance problems caused
+by indirection.&quot; A corollary to this is that most performance problems
+can be solved by adding caching. How are these quotes applicable to
+paged address translation?
+</pre></div>
+</div>
+</section>
+</section>
+<section id="page-table-entries">
+<h2><span class="section-number">14.3. </span>Page Table Entries<a class="headerlink" href="#page-table-entries" title="Permalink to this headline">#</a></h2>
+<p>The components of a 32-bit Intel page table entry are shown in
+<a class="reference external" href="#fig:vm:pic17">[fig:vm:pic17]</a>{reference-type=”autoref”
+reference=”fig:vm:pic17”}; for more information you may wish to refer to
+<a class="reference external" href="http://wiki.osdev.org/Paging">http://wiki.osdev.org/Paging</a>.</p>
+<p><img alt="32-bit Intel page table entry(PTE)." src="../_images/virt-mem-pic17.png" />{#fig:vm:pic17 width=”\textwidth”}</p>
+</section>
+<section id="page-permissions-p-w-and-u-bits">
+<h2><span class="section-number">14.4. </span>Page Permissions - P, W, and U bits<a class="headerlink" href="#page-permissions-p-w-and-u-bits" title="Permalink to this headline">#</a></h2>
+<p>Page tables allow different permissions to be applied to memory at a
+per-page level of granularity.</p>
+<p><strong>P=0/1</strong> - If the present bit is zero, the entry is ignored entirely by
+the MMU, thus preventing any form of access to the corresponding virtual
+page.</p>
+<p><strong>W = 0/1</strong> - Write permission. If the W bit is zero, then read accesses
+to this page will be allowed, but any attempt to write will cause a
+fault. By setting the W bit to zero, pages that should not be modified
+(i.e., program instructions) can be protected. Since
+correctly-functioning programs in most languages do not change the code
+generated by the compiler, any attempt to write to such a page must be a
+bug, and stopping the program earlier rather than later may reduce the
+amount of damage caused.</p>
+<p><strong>U = 0/1</strong> - User permission. If the U bit is zero, then accesses to
+this page will fail unless the CPU is running in supervisor mode.
+Typically the OS kernel will “live” in a portion of the same address
+space as the current process, but will hide its code and data structures
+from access by user processes by setting U=0 on the OS-only mappings.</p>
+</section>
+<section id="creating-a-page-table-vm-sec-4-6">
+<h2><span class="section-number">14.5. </span>Creating a Page Table {#vm:sec:4:6}<a class="headerlink" href="#creating-a-page-table-vm-sec-4-6" title="Permalink to this headline">#</a></h2>
+<div class="highlight-{#ch2:lst:hello notranslate"><div class="highlight"><pre><span></span>char hello[] = ``hello world\n&#39;&#39;;
+void _start(void)
+{
+    syscall(4, 1, hello, 12); /* syscall 4 = write(fd,buf,len) */
+    syscall(1);               /* syscall 1 = exit() */
+}
+</pre></div>
+</div>
+<p>To see how a page table is created, we start by examining the virtual
+memory map of perhaps the simplest possible Linux program, shown in
+<a class="reference external" href="#ch2:lst:hello">[ch2:lst:hello]</a>{reference-type=”autoref”
+reference=”ch2:lst:hello”}. This program doesn’t use any libraries, but
+rather uses direct system calls to write to standard output (always file
+descriptor 1 in Unix) and to exit. In Linux, _start is the point at
+which execution of a program begins; normally the _start function is
+part of the standard library, which performs initialization before
+calling main.</p>
+<p>When this program runs and its memory map is examined (using the <code class="docutils literal notranslate"><span class="pre">pmap</span></code>
+command) you see the following:\</p>
+<div class="highlight-{xleftmargin=&quot;1em&quot; notranslate"><div class="highlight"><pre><span></span>00110000    4K r-x--    [ anon ]      &lt;- file header - used by OS
+08048000    4K r-x--    /tmp/hello    &lt;- .text segment (code)
+08049000    4K rwx--    /tmp/hello    &lt;- .data segment
+bffdf000    128K rwx--  [ stack ]
+</pre></div>
+</div>
+<p>The address space is constructed of a series of contiguous <em>segments</em>,
+each a multiple of the 4 KB page size (although most are the minimum
+4 KB here), with different permissions for each. (realistic programs
+will have many more segments; as an example, the address space for the
+Nautilus file manager process on my Ubuntu 15.10 system has more than
+800 segments.) To create a page table for this program, the first step
+is splitting the page numbers into top and bottom halves (all numbers
+given in hex or binary), as shown in
+<a class="reference external" href="#lst:vm:split">[lst:vm:split]</a>{reference-type=”autoref”
+reference=”lst:vm:split”}.</p>
+<div class="highlight-{#lst:vm:split notranslate"><div class="highlight"><pre><span></span>VPN 00110 = 0000 0000 00 01 0001 0000
+    top10 = 000  bottom10 = 110
+VPN 08048 = 0000 1000 00 00 0100 1000
+top10 = 020  bottom10 = 048
+VPN 08049 = 0000 1000 00 00 0100 1001
+top10 = 020  bottom10 = 049
+VPN BFFDF = 1011 1111 11 11 1101 1111
+top10 = 2FF  bottom10 = 3DF
+</pre></div>
+</div>
+<p>The first three segments are one page long; note that the last segment
+is 32 pages (128 KB), so it uses entries 0x3DF to 0x3FF in the
+second-level page table.</p>
+<p>The program needs four physical pages for the table; assume that pages
+0000, 0001, 0002, and 0003 are used for the table, and pages 00004 and
+up for data/code pages. The actual page table may be seen in
+<a class="reference external" href="#fig:vm:review2">[fig:vm:review2]</a>{reference-type=”autoref”
+reference=”fig:vm:review2”}. (note that the choice of physical pages is
+arbitrary; the page numbers within the page directory and page table
+entries would of course change if different physical pages were used.)</p>
+<p><img alt="Page table corresponding to memory map for[ch2:lst:hello]{reference-type=&quot;autoref&quot;reference=&quot;ch2:lst:hello&quot;}, also used for reviewquestions." src="../_images/virt-mem-review2.png" />{#fig:vm:review2 width=”80%”}</p>
+<section id="id1">
+<h3><span class="section-number">14.5.1. </span>Review questions<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
@@ -748,17 +937,17 @@ If a program takes a wild branch or writes to a random address it will corrupt o
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="concl.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="virt-paging.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">20. </span>Other Stuff</p>
+            <p class="prev-next-title"><span class="section-number">13. </span>Paging</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="Overview.html" title="next page">
+    <a class='right-next' id="next-link" href="reclamation.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">23. </span>Overview of MM</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Memory reclaiming algorithms.</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

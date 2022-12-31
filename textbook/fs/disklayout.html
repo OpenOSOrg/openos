@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>26. File System Layout &#8212; Introduction to Operating Systems</title>
+    <title>27. File System Layout &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="27. Kernel implementation" href="kernelimp.html" />
-    <link rel="prev" title="25. Interface" href="interface.html" />
+    <link rel="next" title="28. Kernel implementation" href="kernelimp.html" />
+    <link rel="prev" title="26. Interface" href="interface.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -194,48 +194,53 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../mm/page-tables.html">
+   14. Page Tables
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   14. Memory reclaiming algorithms.
+   15. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   15. Page Sizes
+   16. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   16. Page Faults
+   17. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   17. Conclusion
+   18. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   18. Memory management in the real world
+   19. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   19. Other Stuff
+   20. Other Stuff
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/mm.html">
-   20. EVERYTHING BELOW HERE IS CRAP
+   21. EVERYTHING BELOW HERE IS CRAP
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/Overview.html">
-   22. Overview of MM
+   23. Overview of MM
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/peter-mm.html">
-   23. Peter’s Virtual Memory chapter
+   24. Peter’s Virtual Memory chapter
   </a>
  </li>
 </ul>
@@ -247,22 +252,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   24. Introduction
+   25. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="interface.html">
-   25. Interface
+   26. Interface
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   26. File System Layout
+   27. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="kernelimp.html">
-   27. Kernel implementation
+   28. Kernel implementation
   </a>
  </li>
 </ul>
@@ -274,37 +279,37 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   28. Intro Concurrency Synchronization and Deadlock
+   29. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   29. Cooperating Processes
+   30. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   30. Synchronization Primitives
+   31. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   31. Deadlocks
+   32. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   32. Challenges of Modern Hardware
+   33. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   33. Locking in the Linux Kernel
+   34. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/peter-syncro.html">
-   34. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
+   35. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
   </a>
  </li>
 </ul>
@@ -316,27 +321,27 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   35. Overview of other topics
+   36. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   36. Security
+   37. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   38. Virtualization and Cloud computing
+   39. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   40. Other OS structures
+   41. Other OS structures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/block-dev.html">
-   41. I/O, Drivers, and DMA {#chap:blockdevs}
+   42. I/O, Drivers, and DMA {#chap:blockdevs}
   </a>
  </li>
 </ul>
@@ -348,12 +353,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   42. Contributing
+   43. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   43. Bibliography
+   44. Bibliography
   </a>
  </li>
 </ul>
@@ -599,66 +604,66 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cd-rom-file-system">
-   26.1. CD-ROM File System
+   27.1. CD-ROM File System
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review-questions">
-     26.1.1. Review Questions
+     27.1.1. Review Questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ms-dos-file-system">
-   26.2. MS-DOS file system
+   27.2. MS-DOS file system
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
-     26.2.1. Review Questions
+     27.2.1. Review Questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#unix-file-systems-e-g-ext2">
-   26.3. Unix file systems (e.g. ext2)
+   27.3. Unix file systems (e.g. ext2)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#superblock">
-   26.4. Superblock
+   27.4. Superblock
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#extents-ntfs-and-ext4">
-   26.5. Extents, NTFS, and Ext4
+   27.5. Extents, NTFS, and Ext4
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#smarter-directories">
-   26.6. Smarter Directories
+   27.6. Smarter Directories
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-b-tree">
-   26.7. The B-tree
+   27.7. The B-tree
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#consistency-and-journaling">
-   26.8. Consistency and Journaling
+   27.8. Consistency and Journaling
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#journaling">
-   26.9. Journaling
+   27.9. Journaling
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#log-structured-file-systems">
-   26.10. Log-Structured File Systems
+   27.10. Log-Structured File Systems
   </a>
  </li>
 </ul>
@@ -682,66 +687,66 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cd-rom-file-system">
-   26.1. CD-ROM File System
+   27.1. CD-ROM File System
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review-questions">
-     26.1.1. Review Questions
+     27.1.1. Review Questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ms-dos-file-system">
-   26.2. MS-DOS file system
+   27.2. MS-DOS file system
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
-     26.2.1. Review Questions
+     27.2.1. Review Questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#unix-file-systems-e-g-ext2">
-   26.3. Unix file systems (e.g. ext2)
+   27.3. Unix file systems (e.g. ext2)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#superblock">
-   26.4. Superblock
+   27.4. Superblock
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#extents-ntfs-and-ext4">
-   26.5. Extents, NTFS, and Ext4
+   27.5. Extents, NTFS, and Ext4
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#smarter-directories">
-   26.6. Smarter Directories
+   27.6. Smarter Directories
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-b-tree">
-   26.7. The B-tree
+   27.7. The B-tree
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#consistency-and-journaling">
-   26.8. Consistency and Journaling
+   27.8. Consistency and Journaling
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#journaling">
-   26.9. Journaling
+   27.9. Journaling
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#log-structured-file-systems">
-   26.10. Log-Structured File Systems
+   27.10. Log-Structured File Systems
   </a>
  </li>
 </ul>
@@ -755,7 +760,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="file-system-layout">
-<span id="cont-fs-layout"></span><h1><span class="section-number">26. </span>File System Layout<a class="headerlink" href="#file-system-layout" title="Permalink to this headline">#</a></h1>
+<span id="cont-fs-layout"></span><h1><span class="section-number">27. </span>File System Layout<a class="headerlink" href="#file-system-layout" title="Permalink to this headline">#</a></h1>
 <p>To store a file system on a real disk, the high-level objects
 (directories, files, symbolic links) must be translated into fixed-sized
 blocks identified by logical block addresses.</p>
@@ -783,8 +788,8 @@ with for the following three problems:</p>
 <li><p>How to allocate free space for creating new files.</p></li>
 </ol>
 <section id="cd-rom-file-system">
-<h2><span class="section-number">26.1. </span>CD-ROM File System<a class="headerlink" href="#cd-rom-file-system" title="Permalink to this headline">#</a></h2>
-<p>In <a class="reference internal" href="#fs-cd-rom"><span class="std std-numref">Fig. 26.1</span></a> we see an example of an extremely
+<h2><span class="section-number">27.1. </span>CD-ROM File System<a class="headerlink" href="#cd-rom-file-system" title="Permalink to this headline">#</a></h2>
+<p>In <a class="reference internal" href="#fs-cd-rom"><span class="std std-numref">Fig. 27.1</span></a> we see an example of an extremely
 simple file system, similar to early versions of the ISO-9660 file
 system for CD-ROM disks. Objects on disk are either files or
 directories, each composed of one or more 2048-byte<a class="footnote-reference brackets" href="#id10" id="id1">7</a> <em>blocks</em>; all
@@ -793,7 +798,7 @@ numbered from block 0 at the beginning of the disk.</p>
 <figure class="align-default" id="fs-cd-rom">
 <a class="reference internal image-reference" href="../_images/filesys-cdrom.png"><img alt="../_images/filesys-cdrom.png" src="../_images/filesys-cdrom.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 26.1 </span><span class="caption-text">Simpliﬁed ISO-9660 (CDROM) ﬁle layout for tree in <a class="reference internal" href="interface.html#fs-tree-logical"><span class="std std-numref">Fig. 25.1</span></a>, 2KB blocks</span><a class="headerlink" href="#fs-cd-rom" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 27.1 </span><span class="caption-text">Simpliﬁed ISO-9660 (CDROM) ﬁle layout for tree in <a class="reference internal" href="interface.html#fs-tree-logical"><span class="std std-numref">Fig. 26.1</span></a>, 2KB blocks</span><a class="headerlink" href="#fs-cd-rom" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>There are no links—each object has exactly one name—and the type of
@@ -822,17 +827,18 @@ file can be found by adding to the starting block number.</p></li>
 free space to worry about.</p></li>
 </ol>
 <section id="review-questions">
-<h3><span class="section-number">26.1.1. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">27.1.1. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
+<p>FIXME</p>
 <figure class="align-default" id="fig-filesys-linked">
 <a class="reference internal image-reference" href="../_images/filesys-linked.png"><img alt="../_images/filesys-linked.png" src="../_images/filesys-linked.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 26.2 </span><span class="caption-text">Linked list organization with in-object pointers (typical for in-memory structures) and external pointers, as used in MS-DOS File Allocation Table.</span><a class="headerlink" href="#fig-filesys-linked" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 27.2 </span><span class="caption-text">Linked list organization with in-object pointers (typical for in-memory structures) and external pointers, as used in MS-DOS File Allocation Table.</span><a class="headerlink" href="#fig-filesys-linked" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="ms-dos-file-system">
-<h2><span class="section-number">26.2. </span>MS-DOS file system<a class="headerlink" href="#ms-dos-file-system" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">27.2. </span>MS-DOS file system<a class="headerlink" href="#ms-dos-file-system" title="Permalink to this headline">#</a></h2>
 <p>The next file system we consider is the MS-DOS (or FAT, File Allocation
 Table) file system. Here blocks within a file are organized in a linked
 list; however implementation of this list is somewhat restricted by the
@@ -897,14 +903,12 @@ that would be ignored by older versions of MS-DOS.</p>
 </div>
 </aside>
 <section id="id4">
-<h3><span class="section-number">26.2.1. </span>Review Questions<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
-<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
+<h3><span class="section-number">27.2.1. </span>Review Questions<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>FIXME</p>
 </section>
 </section>
 <section id="unix-file-systems-e-g-ext2">
-<h2><span class="section-number">26.3. </span>Unix file systems (e.g. ext2)<a class="headerlink" href="#unix-file-systems-e-g-ext2" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">27.3. </span>Unix file systems (e.g. ext2)<a class="headerlink" href="#unix-file-systems-e-g-ext2" title="Permalink to this headline">#</a></h2>
 <p>File systems derived from the original Unix file system (e.g. Linux ext2
 and ext3) use a per-file structure called an inode (“indirect node”)
 designed with three goals in mind:</p>
@@ -927,7 +931,7 @@ resiliency—crashing while the file is growing should not endanger
 existing data.</p>
 <p>To do this, the inode uses an asymmetric tree, or actually a series of
 trees of increasing height with the root of each tree stored in the
-inode. As seen in <a class="reference internal" href="#filesys-inode"><span class="std std-numref">Fig. 26.3</span></a> the inode contains N <em>direct</em> block
+inode. As seen in <a class="reference internal" href="#filesys-inode"><span class="std std-numref">Fig. 27.3</span></a> the inode contains N <em>direct</em> block
 pointers (12 in ext2/ext3), so that files of N blocks or less need no
 indirect blocks. A single <em>indirect pointer</em> specifies an <em>indirect
 block</em>, holding pointers to blocks <span class="math notranslate nohighlight">\(N, N+1, ... N+N_1-1\)</span> where <span class="math notranslate nohighlight">\(N_1\)</span> is
@@ -959,7 +963,7 @@ actually deleted until the last open file descriptor is closed<a class="footnote
 <figure class="align-default" id="filesys-inode">
 <a class="reference internal image-reference" href="../_images/filesys-inode.png"><img alt="../_images/filesys-inode.png" src="../_images/filesys-inode.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 26.3 </span><span class="caption-text">Inode-type file organization as found in many Unix file systems (e.g.
+<p><span class="caption-number">Fig. 27.3 </span><span class="caption-text">Inode-type file organization as found in many Unix file systems (e.g.
 Linux ext2, ext3)</span><a class="headerlink" href="#filesys-inode" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
@@ -996,7 +1000,13 @@ inode and data blocks of a file in the same block group, as well as a
 directory and its contents. In this way common operations (e.g. open and
 read a file, or ‘ls -l’) will typically access blocks within a single
 block group, avoiding long disk seeks.</p>
-<p><img alt="Ext2 on-disklayout" src="../_images/filesys-blockgroups.png" />{#fig:fs:ext2layout width=”90%”}</p>
+<p><img alt="" src="../_images/fs" />{# width=”90%”}</p>
+<figure class="align-default" id="fig-fs-ext2layout">
+<a class="reference internal image-reference" href="../_images/filesys-blockgroups.png"><img alt="../_images/filesys-blockgroups.png" src="../_images/filesys-blockgroups.png" style="width: 90%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27.4 </span><span class="caption-text">Ext2 on-disk layout</span><a class="headerlink" href="#fig-fs-ext2layout" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p><strong>Long file names:</strong> Ext2 supports long file names using the mechanism
 used in FFS. Rather than treating the directory as an array of
 fixed-sized structures, it is instead organized as a sequence of
@@ -1033,7 +1043,7 @@ contiguous blocks when writing to a file, while greatly decreasing the
 fraction of the bitmap we may need to search to find a free block.</p>
 </section>
 <section id="superblock">
-<h2><span class="section-number">26.4. </span>Superblock<a class="headerlink" href="#superblock" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">27.4. </span>Superblock<a class="headerlink" href="#superblock" title="Permalink to this headline">#</a></h2>
 <p>Before a disk can be used in most systems it needs to be <em>initialized</em>
 or <em>formatted</em>—the basic file system structures need to be put in
 place, describing a file system with a single directory and no files. A
@@ -1068,7 +1078,7 @@ additional error checks are needed before mounting the file system.
 </div>
 </section>
 <section id="extents-ntfs-and-ext4">
-<h2><span class="section-number">26.5. </span>Extents, NTFS, and Ext4<a class="headerlink" href="#extents-ntfs-and-ext4" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">27.5. </span>Extents, NTFS, and Ext4<a class="headerlink" href="#extents-ntfs-and-ext4" title="Permalink to this headline">#</a></h2>
 <p>The ext2 and MS-DOS file systems use separate pointers to every data
 block in a file, located in inodes and indirect blocks in the case of
 ext2, and in the file allocation table in MS-DOS. But the values stored
@@ -1149,7 +1159,7 @@ steps, while for moderate-sized files only a single level of the tree (a
 width=”70%”}</p>
 </section>
 <section id="smarter-directories">
-<h2><span class="section-number">26.6. </span>Smarter Directories<a class="headerlink" href="#smarter-directories" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">27.6. </span>Smarter Directories<a class="headerlink" href="#smarter-directories" title="Permalink to this headline">#</a></h2>
 <p>In the CD-ROM, MS-DOS, and ext2 file systems, a directory is just an
 array of directory entries, in unsorted order. To find a file, you
 search through the directory linearly; to delete a file, you mark its
@@ -1184,7 +1194,7 @@ really interested, you can look these up in Google.</p>
 <p><img alt="image" src="../_images/files-btree.png" />{height=”25\baselineskip”}</p>
 </section>
 <section id="the-b-tree">
-<h2><span class="section-number">26.7. </span>The B-tree<a class="headerlink" href="#the-b-tree" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">27.7. </span>The B-tree<a class="headerlink" href="#the-b-tree" title="Permalink to this headline">#</a></h2>
 <p>The B-tree is one of those widely-used data structures that you never
 see in your data structures course. It’s not a file system— the B-tree
 is a disk-optimized search structure, optimized for the case where
@@ -1232,7 +1242,7 @@ becomes the new root.
 </div>
 </section>
 <section id="consistency-and-journaling">
-<h2><span class="section-number">26.8. </span>Consistency and Journaling<a class="headerlink" href="#consistency-and-journaling" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">27.8. </span>Consistency and Journaling<a class="headerlink" href="#consistency-and-journaling" title="Permalink to this headline">#</a></h2>
 <p>Unlike in-memory structures, data structures on disk must survive system
 crashes, whether due to hardware reasons (e.g. power failure) or
 software failures. This is a different problem than the consistency
@@ -1368,7 +1378,7 @@ state.</p>
 <p><img alt="Synchronous disk writes for ext2consistency." src="../_images/files-syncwrite.png" />{#fig:syncwrites width=”100%”}</p>
 </section>
 <section id="journaling">
-<h2><span class="section-number">26.9. </span>Journaling<a class="headerlink" href="#journaling" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">27.9. </span>Journaling<a class="headerlink" href="#journaling" title="Permalink to this headline">#</a></h2>
 <p>Most modern file systems (NTFS, ext3, ext4, and various others) use
 <em>journaling</em>, a variant of the database technique of <em>write-ahead
 logging</em>. The idea is to keep a log which records the changes that are
@@ -1429,7 +1439,7 @@ a file may be lost.
 </div>
 </section>
 <section id="log-structured-file-systems">
-<h2><span class="section-number">26.10. </span>Log-Structured File Systems<a class="headerlink" href="#log-structured-file-systems" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">27.10. </span>Log-Structured File Systems<a class="headerlink" href="#log-structured-file-systems" title="Permalink to this headline">#</a></h2>
 <p>Log-structured file systems (like LFS in NetBSD, or NetApp WAFL) are an
 extreme version of a journaled file system: the journal is the entire
 file system. Data is never over-written; instead a form of copy-on-write
@@ -1565,13 +1575,13 @@ recorded in the log.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">25. </span>Interface</p>
+            <p class="prev-next-title"><span class="section-number">26. </span>Interface</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="kernelimp.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">27. </span>Kernel implementation</p>
+        <p class="prev-next-title"><span class="section-number">28. </span>Kernel implementation</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
