@@ -1167,13 +1167,13 @@ into smaller fragments, separated by longer-lived small allocations, as
 seen in <a class="reference external" href="#fig:vm:fig2">[fig:vm:fig2]</a>{reference-type=”autoref”
 reference=”fig:vm:fig2”}.</p>
 <p>Start: 32 locations, all free<br />
-<img alt="image" src="../_images/virt-mem-frag-1.png" />{width=”80%”}\</p>
+<img alt="image" src="../_images/virt-mem-frag-1.png" />\</p>
 <p>Step 1, 2: a = alloc(10), b = alloc(1)<br />
-<img alt="image" src="../_images/virt-mem-frag-2.png" />{width=”80%”}\</p>
+<img alt="image" src="../_images/virt-mem-frag-2.png" />\</p>
 <p>Step 3, 4, 5: c = alloc(10), d = alloc(1), e = alloc(10)<br />
-<img alt="image" src="../_images/virt-mem-frag-3.png" />{width=”80%”}\</p>
+<img alt="image" src="../_images/virt-mem-frag-3.png" />\</p>
 <p>Step 6, 7, 8: free(a), free(c), free(e)<br />
-<img alt="image" src="../_images/virt-mem-frag-4.png" />{width=”80%”}</p>
+<img alt="image" src="../_images/virt-mem-frag-4.png" /></p>
 <p>In the last line, you can see that only 2 units of memory (out of 32)
 remain allocated, but the largest amount that can be allocated at one
 time is 10 units. If all allocation requests are small, this might not
@@ -1679,13 +1679,13 @@ running on that CPU.
 </div>
 <p>A single instruction can cause multiple, different page faults, of which
 there are two different types:</p>
-<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>**Instruction fetch:** A fault can occur when the CPU tries to fetch the
-instruction at a particular address. If the instruction \&quot;straddles\&quot; a
+<ul class="simple">
+<li><p><strong>Instruction fetch:</strong> A fault can occur when the CPU tries to fetch the
+instruction at a particular address. If the instruction “straddles” a
 page boundary (i.e., a 6-byte instruction that starts 2 bytes before the
 end of a page) then you could (in the worst case) get two page faults
-while trying to fetch an instruction.
-</pre></div>
-</div>
+while trying to fetch an instruction.</p></li>
+</ul>
 <div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>**Memory access:** Once the instruction has been fetched and decoded, it
 may require one or more memory accesses that result in page faults.
 These memory accesses include those to the stack (e.g., for CALL and RET

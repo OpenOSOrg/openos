@@ -615,7 +615,7 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
+    <a class="reference internal nav-link" href="#id4">
      26.2.1. Review Questions
     </a>
    </li>
@@ -698,7 +698,7 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
+    <a class="reference internal nav-link" href="#id4">
      26.2.1. Review Questions
     </a>
    </li>
@@ -788,7 +788,7 @@ with for the following three problems:</p>
 reference=”fig:filesys:iso9660”} we see an example of an extremely
 simple file system, similar to early versions of the ISO-9660 file
 system for CD-ROM disks. Objects on disk are either files or
-directories, each composed of one or more 2048-byte[^7] <em>blocks</em>; all
+directories, each composed of one or more 2048-byte<a class="footnote-reference brackets" href="#id10" id="id1">7</a> <em>blocks</em>; all
 pointers in the file system are in terms of <em>block numbers</em>, with blocks
 numbered from block 0 at the beginning of the disk.</p>
 <p><img alt="image" src="../_images/filesys-cdrom.png" />{height=”19\baselineskip”}</p>
@@ -833,7 +833,7 @@ free space to worry about.
 Table) file system. Here blocks within a file are organized in a linked
 list; however implementation of this list is somewhat restricted by the
 requirement that all access to the disk be done in multiples of a fixed
-block size.[^8] Instead these pointers are kept in a separate array,
+block size.<a class="footnote-reference brackets" href="#id11" id="id2">8</a> Instead these pointers are kept in a separate array,
 with an entry corresponding to each disk block, in what is called the
 File Allocation Table.</p>
 <p>Entries in this table can indicate (a) the number of the next block in
@@ -865,7 +865,7 @@ requires walking the linked list to find the corresponding entry, which
 can be slow even when cached in memory. (Consider random I/O within a
 1 GB virtual disk image with 4 KB blocks—the linked list will be 256K
 long, and on average each I/O will require searching halfway through the
-list[^9]).</p>
+list<a class="footnote-reference brackets" href="#id12" id="id3">9</a>).</p>
 <p>Directories in the MS-DOS file system are similar to those in ISO-9660.
 Each directory entry is a fixed size and has a field indicating whether
 it is valid; to delete a file, this field is set to invalid and the
@@ -890,8 +890,8 @@ for timestamp, size, starting block number, etc., and marked in a way
 that would be ignored by older versions of MS-DOS.
 </pre></div>
 </div>
-<section id="id1">
-<h3><span class="section-number">26.2.1. </span>Review Questions<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<section id="id4">
+<h3><span class="section-number">26.2.1. </span>Review Questions<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
@@ -911,7 +911,7 @@ that we don&#39;t lose it if the system crashes mid-operation.
 </pre></div>
 </div>
 <p>(a) low overhead for small files, in terms of both disk seeks and
-allocated blocks[^10], (b) ability to represent sufficiently large files
+allocated blocks<a class="footnote-reference brackets" href="#id13" id="id5">10</a>, (b) ability to represent sufficiently large files
 without excessive storage space or performance overhead, and (c) crash
 resiliency—crashing while the file is growing should not endanger
 existing data.</p>
@@ -929,7 +929,7 @@ specifies a block holding pointers to <span class="math notranslate nohighlight"
 turn hold pointers to blocks <span class="math notranslate nohighlight">\(N+N_1 ... N+N_1+N_1^2-1\)</span>—i.e. an
 <span class="math notranslate nohighlight">\(N_1\)</span>-ary tree of height 2; a triple indirect block in turn points to a
 tree of height 3. For ext2 with 4-byte block numbers, if we use 4K
-blocks this gives a maximum file size of <span class="math notranslate nohighlight">\((4096/4)^3\)</span> 4 KiB[^11] blocks,
+blocks this gives a maximum file size of <span class="math notranslate nohighlight">\((4096/4)^3\)</span> 4 KiB<a class="footnote-reference brackets" href="#id14" id="id6">11</a> blocks,
 or 4.004 TiB. This organization allows random access within a file with
 overhead <span class="math notranslate nohighlight">\(O(logN)\)</span> where <span class="math notranslate nohighlight">\(N\)</span> is the file size, which is vastly better
 than the <span class="math notranslate nohighlight">\(O(N)\)</span> overhead of the MS-DOS File Access Table system.</p>
@@ -947,7 +947,7 @@ is decremented, and when the count goes to zero the file is deleted.
 This also allows a file to have <em>zero</em> names—when a file is opened the
 reference count (in memory, not on disk) is incremented, and decremented
 when it is closed, so if you unlink a file which is in use, it is not
-actually deleted until the last open file descriptor is closed[^12].</p>
+actually deleted until the last open file descriptor is closed<a class="footnote-reference brackets" href="#id15" id="id7">12</a>.</p>
 <p><img alt="Inode-type file organization as found in many Unix file systems (e.g.Linux ext2, ext3). Note that the degree of branching is far lower thanin real file systems, and the triple-indirect pointer ismissing." src="../_images/filesys-inode.png" />{#fig:filesys:inode width=”80%”}</p>
 <p><strong>Ext2 space allocation</strong>: The original Unix file system used a free
 list to store a list of unused blocks; blocks were allocated from the
@@ -1236,7 +1236,7 @@ involve writing to multiple disk blocks—for example, moving a file
 from one directory to another requires writing to blocks in the source
 and destination directories, while creating a file writes to the block
 and inode allocation bitmaps, the new inode, the directory block, and
-the file data block or blocks[^13]. If some but not all of</p>
+the file data block or blocks<a class="footnote-reference brackets" href="#id16" id="id8">13</a>. If some but not all of</p>
 <div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/files-corruption.pdf){height=&quot;8\\baselineskip&quot;}
 </pre></div>
 </div>
@@ -1364,7 +1364,7 @@ any order; after they are all written, the section of log recording
 those changes can be freed.</p>
 <p>When recovering from a crash, the OS goes through the log and checks
 that all the changes recorded there have been performed on the file
-system itself[^14]. Some thought should convince you that if a log entry
+system itself<a class="footnote-reference brackets" href="#id17" id="id9">14</a>. Some thought should convince you that if a log entry
 is written, then the modification is guaranteed to happen, either before
 or after a crash; if the log entry isn’t written completely then the
 modification never happened. (There are several ways to detect a
@@ -1471,6 +1471,52 @@ the file system at the point in time corresponding to that version.
 (e.g. look in your .snapshot directory on <code class="docutils literal notranslate"><span class="pre">login.ccs.neu.edu</span></code> - this
 data is stored on a NetApp filer using WAFL and its snapshot
 functionality.)</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id1">7</a></span></dt>
+<dd><p>Why 2048? Because the designers of the CDROM file system defined
+it that way. Data is stored on CD in 2048-byte blocks plus error
+correction, making use of smaller block sizes difficult, and the
+authors evidently didn’t see any need to allow larger block sizes,
+either.</p>
+</dd>
+<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id2">8</a></span></dt>
+<dd><p>The astute reader will note that the pointer could use bytes
+within a block, causing each block to store slightly less than a
+full block of data. This would pose difficulties for operating
+systems such as Linux which tightly couple the virtual memory and
+file systems, and assume that each 4 KB virtual memory page
+corresponds to one (or maybe 2 or 4) file system blocks.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id3">9</a></span></dt>
+<dd><p>A benchmark run on <a class="reference external" href="http://login.ccs.neu.edu">login.ccs.neu.edu</a> indicates that “pointer
+chasing” on a high-end Xeon takes about 200 ns when data is not in
+cache; each such random I/O would thus take about 25 ms of CPU time.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id5">10</a></span></dt>
+<dd><p>The median file size in a recent study was 4 KB, or one block</p>
+</dd>
+<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id6">11</a></span></dt>
+<dd><p>When we’re being really precise, we’ll use KiB, MiB, GiB etc. to
+mean <span class="math notranslate nohighlight">\(2^{10}\)</span>, <span class="math notranslate nohighlight">\(2^{20}\)</span>, <span class="math notranslate nohighlight">\(2^{30}\)</span> and KB, MB, GB to mean <span class="math notranslate nohighlight">\(10^3\)</span>,
+<span class="math notranslate nohighlight">\(10^6\)</span> and <span class="math notranslate nohighlight">\(10^9\)</span>.</p>
+</dd>
+<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id7">12</a></span></dt>
+<dd><p>Deleting open files is a tricky problem, as there’s no good way
+to handle operations on those open handles after the file is
+deleted. Unix solves it by postponing the actual deletion until the
+file descriptor is closed; Windows instead locks the file against
+deletion until any open file handles are closed.</p>
+</dd>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id8">13</a></span></dt>
+<dd><p>These steps ignore inode writes to update file or directory
+modification times.</p>
+</dd>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id9">14</a></span></dt>
+<dd><p>Actually it doesn’t check, but rather “replays” all the changes
+recorded in the log.</p>
+</dd>
+</dl>
 </section>
 </section>
 

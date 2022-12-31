@@ -638,13 +638,17 @@ title="Print to PDF"
 <span id="cont-mm-virt-seg"></span><h1><span class="section-number">12. </span>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">#</a></h1>
 <section id="base-and-bounds-translation">
 <h2><span class="section-number">12.1. </span>Base and Bounds translation<a class="headerlink" href="#base-and-bounds-translation" title="Permalink to this headline">#</a></h2>
-<p><img alt="image" src="../_images/virt-mem-base-bounds.png" /></p>
+<figure class="align-default" id="mm-base-bound">
+<a class="reference internal image-reference" href="../_images/virt-mem-base-bounds.png"><img alt="../_images/virt-mem-base-bounds.png" src="../_images/virt-mem-base-bounds.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 12.1 </span><span class="caption-text">Base-bound registers for translation</span><a class="headerlink" href="#mm-base-bound" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>We first looked at direct physical addressing, where no matter which
 process is executing, the same address (e.g. 0x1000) refers to the same
 memory location. In addition we reviewed a very simple form of address
-translation, shown here in
-<a class="reference external" href="#fig:vm:fig1">[fig:vm:fig1]</a>{reference-type=”autoref”
-reference=”fig:vm:fig1”}, where base and bounds registers are used to
+translation, shown here in <a class="reference internal" href="#mm-base-bound"><span class="std std-numref">Fig. 12.1</span></a></p>
+<p>where base and bounds registers are used to
 relocate a section of the <em>virtual address space</em>—the addresses seen
 by the program, corresponding to values in the CPU registers—to
 somewhere else in the physical address space. By changing these

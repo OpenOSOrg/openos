@@ -794,7 +794,7 @@ relative to the beginning, end, or current position in the file.</p></li>
 </ul>
 <p>Note that in the basic Unix interface (unlike e.g. Windows) there is no
 way to specify a particular location in a file to read or write
-from[^3]. Programs like databases (e.g. SQLite, MySQL) which need to
+from<a class="footnote-reference brackets" href="#id7" id="id3">3</a>. Programs like databases (e.g. SQLite, MySQL) which need to
 write to and read from arbitrary file locations must instead move the
 current position by using <code class="docutils literal notranslate"><span class="pre">lseek</span></code> before a read or write. However most
 programs either read or write a file from the beginning to the end
@@ -812,8 +812,8 @@ points to. The naming and directories operations are:</p>
 either changing the name in its directory entry (if the destination is
 in the same directory) or creating a new entry and deleting the old one
 (if moving into a new directory).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">link(path1,</span> <span class="pre">path2)</span></code> Add a <em>hard link</em> to a file[^4].</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">unlink(path)</span></code> - Delete a file.[^5]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">link(path1,</span> <span class="pre">path2)</span></code> Add a <em>hard link</em> to a file<a class="footnote-reference brackets" href="#id8" id="id4">4</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unlink(path)</span></code> - Delete a file.<a class="footnote-reference brackets" href="#id9" id="id5">5</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">desc</span> <span class="pre">=</span> <span class="pre">opendir(path)</span></code><br />
 <code class="docutils literal notranslate"><span class="pre">readdir(desc,</span> <span class="pre">dirent*),</span> <span class="pre">dirent=(name,type,length)</span></code> This interface
 allows a program to enumerate names in a directory, and determine their
@@ -887,7 +887,7 @@ unambiguous “path” to the file.) There are two common approaches to
 identifying file systems:</p>
 <ol class="simple">
 <li><p>Explicitly: each file system is given a name, so that a full pathname
-looks like e.g. <code class="docutils literal notranslate"><span class="pre">C:``\``MyDirectory``\``file.txt</span></code> (Windows<a class="footnote-reference brackets" href="#id4" id="id3">6</a>) or
+looks like e.g. <code class="docutils literal notranslate"><span class="pre">C:``\``MyDirectory``\``file.txt</span></code> (Windows<a class="footnote-reference brackets" href="#id10" id="id6">6</a>) or
 <code class="docutils literal notranslate"><span class="pre">DISK1:[MYDIR]file.txt</span></code> (VMS).</p></li>
 <li><p>Implicitly: a file system is transparently <em>mounted</em> onto a directory in
 another file system, giving a single uniform namespace; thus on a Linux
@@ -920,7 +920,30 @@ accessed with the command <code class="docutils literal notranslate"><span class
 <dt class="label" id="simple"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
 <dd><p>Almost. Apple OSX uses resource forks to store information associated with a file (HFS and HFS+ file systems only), Windows NTFS provides for multiple data streams in single file, although they were never put to use, and several file systems support file attributes, small tags associated with a file.</p>
 </dd>
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id3">6</a></span></dt>
+<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>On Linux the <code class="docutils literal notranslate"><span class="pre">pread</span></code> and <code class="docutils literal notranslate"><span class="pre">pwrite</span></code> system calls allow specifying an
+offset for the read or write; other UNIX-derived operating systems
+have their own extensions for this purpose.</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dd><p>A hard link is an additional directory entry pointing to the same
+file, giving the file two (or more) names. Hard links are peculiar
+to Unix, and in modern systems have mostly been replaced with
+symbolic links (covered next); however Apple’s Time Machine makes
+very good use of them: multiple backups can point to the same single
+copy of an un-modified file using hard links.</p>
+</dd>
+<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id5">5</a></span></dt>
+<dd><p>Sort of. If there are multiple hard links to a file, then this
+just removes one of them; the file isn’t deleted until the last link
+is removed. Even then it might not be removed yet - on Unix, if you
+delete an open file it won’t actually be removed until all open file
+handles are closed.. In general, deleting open files is a problem:
+while Unix solves the problem by deferring the actual delete,
+Windows solves it by protecting open files so that they cannot be
+deleted</p>
+</dd>
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id6">6</a></span></dt>
 <dd><p>Modern Windows systems actually use a mount-like naming convention
 internally; e.g. the <code class="docutils literal notranslate"><span class="pre">C:</span></code> drive actually corresponds to the name
 <code class="docutils literal notranslate"><span class="pre">\``DosDevices``\``C:</span></code> in this internal namespace.</p>
