@@ -1396,10 +1396,12 @@ or after a crash; if the log entry isn’t written completely then the
 modification never happened. (There are several ways to detect a
 half-written log entry, including using an explicit end marker or a
 checksum; we’ll just assume that it’s possible.)</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="../_images/files-corruption2.png"><img alt="fishy" class="bg-primary mb-1 align-left" src="../_images/files-corruption2.png" style="width: 200px;" /></a>
-<p>Step 1: record action in log</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="../_images/files-logging.png"><img alt="fishy" class="bg-primary mb-1 align-left" src="../_images/files-logging.png" style="width: 200px;" /></a>
-<p>Step 2: write blocks in any order</p>
+<figure class="align-left">
+<a class="reference internal image-reference" href="../_images/files-corruption2.png"><img alt="../_images/files-corruption2.png" src="../_images/files-corruption2.png" style="width: 200px;" /></a>
+</figure>
+<figure class="align-right">
+<a class="reference internal image-reference" href="../_images/files-logging.png"><img alt="../_images/files-logging.png" src="../_images/files-logging.png" style="width: 200px;" /></a>
+</figure>
 <p>** Ext3 Journaling **: The ext3 file system uses physical block logging:
 each log entry contains a header identifying the disk blocks which are
 modified (in the example you saw earlier, the bitmap and the directory
@@ -1418,23 +1420,24 @@ every few seconds, this typically isn’t a problem. (If your program
 needs a guarantee that data is written to a file <em>right now</em>, you need
 to use the <code class="docutils literal notranslate"><span class="pre">fsync</span></code> system call to flush data to disk.)</p>
 <p>Ext3 supports three different journaling modes:</p>
-<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>* Journaled *: In this mode, all changes (to file data, directories,
+<ul class="simple">
+<li><ul>
+<li><p>Journaled *: In this mode, all changes (to file data, directories,
 inodes and bitmaps) are written to the log before any modifications are
-made to the main file system.
-
-*Ordered*: Here, data blocks are flushed to the main file system before
+made to the main file system.</p></li>
+</ul>
+</li>
+<li><p><em>Ordered</em>: Here, data blocks are flushed to the main file system before
 a journal entry for any metadata changes (directories, free space
 bitmaps, inodes) is written to the log, after which the metadata changes
 may be made in the file system. This provides the same consistency
-guarantees as journaled mode, but is usually faster.
-
-*Writeback*: In this mode, metadata changes are always written to the
+guarantees as journaled mode, but is usually faster.</p></li>
+<li><p><em>Writeback</em>: In this mode, metadata changes are always written to the
 log before being applied to the main file system, but data may be
 written at any time. It is faster than the other two modes, and will
 prevent the file system itself from becoming corrupted, but data within
-a file may be lost.
-</pre></div>
-</div>
+a file may be lost.</p></li>
+</ul>
 </section>
 <section id="log-structured-file-systems">
 <h2><span class="section-number">27.10. </span>Log-Structured File Systems<a class="headerlink" href="#log-structured-file-systems" title="Permalink to this headline">#</a></h2>
@@ -1444,8 +1447,7 @@ file system. Data is never over-written; instead a form of copy-on-write
 is used: modified data is written sequentially to new locations in the
 log. This gives very high write speeds because all writes (even random
 ones) are written sequentially to the disk.</p>
-<p><a class="reference external" href="#fig:fs:lfs">[fig:fs:lfs]</a>{reference-type=”autoref”
-reference=”fig:fs:lfs”} compares LFS to ext2, showing a simple file
+<p><a class="reference internal" href="#fig-fs-lfs"><span class="std std-numref">Fig. 27.13</span></a> compares LFS to ext2, showing a simple file
 system with two directories (dir1, dir2) and two files (/dir1/file1,
 /dir2/file2). In ext2 the root directory inode is found in a fixed
 location, and its data blocks do not move after being allocated; in LFS
@@ -1454,7 +1456,13 @@ blocks get written to the head of the log rather than overwriting the
 old ones. The result can be seen graphically in the figure—in the LFS
 image, pointers only point to the left, pointing to data that is older
 than the block holding a pointer.</p>
-<p><img alt="Ext2 vs Log-structured file systemlayout" src="../_images/files-lfs.png" />{#fig:fs:lfs}</p>
+<figure class="align-default" id="fig-fs-lfs">
+<a class="reference internal image-reference" href="../_images/files-lfs.png"><img alt="../_images/files-lfs.png" src="../_images/files-lfs.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27.13 </span><span class="caption-text">Ext2 vs Log-structured file system
+layout</span><a class="headerlink" href="#fig-fs-lfs" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Unlike ext2 there is no fixed location to find the root directory; this
 is solved by periodically storing its location in a small checkpoint
 record in a fixed location in the superblock. (This checkpoint is not
@@ -1468,9 +1476,18 @@ stored as a file. (The astute reader may wonder why this update doesn’t
 in fact trigger another update to the inode file, leading to an infinite
 loop. This is solved by buffering blocks in memory before they are
 written, so that multiple changes can be made.)</p>
-<p><img alt="image" src="../_images/files-wafl1.png" />{width=”20%”}
-<img alt="image" src="../_images/files-wafl2.png" />{width=”30%”}</p>
-<hr class="docutils" />
+<figure class="align-default" id="fig-fs-waflbef">
+<a class="reference internal image-reference" href="../_images/files-wafl1.png"><img alt="../_images/files-wafl1.png" src="../_images/files-wafl1.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27.14 </span><span class="caption-text">WAFL tree before update</span><a class="headerlink" href="#fig-fs-waflbef" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-fs-wafaft">
+<a class="reference internal image-reference" href="../_images/files-wafl2.png"><img alt="../_images/files-wafl2.png" src="../_images/files-wafl2.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27.15 </span><span class="caption-text">WAFL tree after update</span><a class="headerlink" href="#fig-fs-wafaft" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>In WAFL these changes percolate all the way up through directory
 entries, directory inodes, etc., to the root of the file system,
 potentially causing a large number of writes for a small modification.
@@ -1479,8 +1496,7 @@ write) To avoid this overhead, WAFL buffers a large number of changes
 before writing to disk; thus although any single write will modify the
 root directory, only a single modified copy of the root directory has to
 be written in each batch.</p>
-<p>In <a class="reference external" href="#fig:fs:wafl">[fig:fs:wafl]</a>{reference-type=”autoref”
-reference=”fig:fs:wafl”} a WAFL directory tree is shown before and after
+<p>In <a class="reference internal" href="#fig-fs-waflbef"><span class="std std-numref">Fig. 27.14</span></a> and <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig:fs:waflaft</span></code> a WAFL directory tree is shown before and after
 modifying /dir1/file2, with the out-of-date blocks shown in grey. If we
 keep a pointer to the old root node, then you can access a copy of the
 file system as it was at that point in time. When the disk fills up
