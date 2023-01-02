@@ -792,7 +792,7 @@ with for the following three problems:</p>
 <p>In <a class="reference internal" href="#fs-cd-rom"><span class="std std-numref">Fig. 27.1</span></a> we see an example of an extremely
 simple file system, similar to early versions of the ISO-9660 file
 system for CD-ROM disks. Objects on disk are either files or
-directories, each composed of one or more 2048-byte<a class="footnote-reference brackets" href="#id10" id="id1">7</a> <em>blocks</em>; all
+directories, each composed of one or more 2048-byte<a class="footnote-reference brackets" href="#id13" id="id1">7</a> <em>blocks</em>; all
 pointers in the file system are in terms of <em>block numbers</em>, with blocks
 numbered from block 0 at the beginning of the disk.</p>
 <figure class="align-default" id="fs-cd-rom">
@@ -843,9 +843,24 @@ free space to worry about.</p></li>
 Table) file system. Here blocks within a file are organized in a linked
 list; however implementation of this list is somewhat restricted by the
 requirement that all access to the disk be done in multiples of a fixed
-block size.<a class="footnote-reference brackets" href="#id11" id="id2">8</a> Instead these pointers are kept in a separate array,
+block size.<a class="footnote-reference brackets" href="#id14" id="id2">8</a> Instead these pointers are kept in a separate array,
 with an entry corresponding to each disk block, in what is called the
 File Allocation Table.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The original MS-DOS file system only supported
+8-byte upper-case names with 3-byte extensions, with (seemingly) no way
+to get around this restriction, since the size of a directory entry is
+fixed. A crazy mechanism was devised that is still used today: multiple
+directory entries are used for each file, with the extra entries filled
+with up to 13 2-character Unicode filename characters in not only the
+filename field, but also the space that would have otherwise been used
+for timestamp, size, starting block number, etc., and marked in a way
+that would be ignored by older versions of MS-DOS.</p>
+</div>
+</aside>
 <p>Entries in this table can indicate (a) the number of the next block in
 the file or directory, (b) that the block is the last one in a file or
 directory, or (c) the block is free. The FAT is thus used for free space
@@ -873,7 +888,7 @@ requires walking the linked list to find the corresponding entry, which
 can be slow even when cached in memory. (Consider random I/O within a
 1 GB virtual disk image with 4 KB blocks—the linked list will be 256K
 long, and on average each I/O will require searching halfway through the
-list<a class="footnote-reference brackets" href="#id12" id="id3">9</a>).</p>
+list<a class="footnote-reference brackets" href="#id15" id="id3">9</a>).</p>
 <p>Directories in the MS-DOS file system are similar to those in ISO-9660.
 Each directory entry is a fixed size and has a field indicating whether
 it is valid; to delete a file, this field is set to invalid and the
@@ -887,21 +902,6 @@ file systems, too) but works poorly for very large directories. (That’s
 why your browser cache has filenames that look like
 <code class="docutils literal notranslate"><span class="pre">ab/xy/abxy123x.dat</span></code>, instead of putting all its files in the same
 directory.)</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>A note for the reader - the original MS-DOS file system only supported
-8-byte upper-case names with 3-byte extensions, with (seemingly) no way
-to get around this restriction, since the size of a directory entry is
-fixed. A crazy mechanism was devised that is still used today: multiple
-directory entries are used for each file, with the extra entries filled
-with up to 13 2-character Unicode filename characters in not only the
-filename field, but also the space that would have otherwise been used
-for timestamp, size, starting block number, etc., and marked in a way
-that would be ignored by older versions of MS-DOS.</p>
-</div>
-</aside>
 <section id="id4">
 <h3><span class="section-number">27.2.1. </span>Review Questions<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <p>FIXME</p>
@@ -925,7 +925,7 @@ that we don’t lose it if the system crashes mid-operation.</p>
 </div>
 </aside>
 <p>(a) low overhead for small files, in terms of both disk seeks and
-allocated blocks<a class="footnote-reference brackets" href="#id13" id="id5">10</a>, (b) ability to represent sufficiently large files
+allocated blocks<a class="footnote-reference brackets" href="#id16" id="id5">10</a>, (b) ability to represent sufficiently large files
 without excessive storage space or performance overhead, and (c) crash
 resiliency—crashing while the file is growing should not endanger
 existing data.</p>
@@ -941,7 +941,7 @@ specifies a block holding pointers to <span class="math notranslate nohighlight"
 turn hold pointers to blocks <span class="math notranslate nohighlight">\(N+N_1 ... N+N_1+N_1^2-1\)</span>—i.e. an
 <span class="math notranslate nohighlight">\(N_1\)</span>-ary tree of height 2; a triple indirect block in turn points to a
 tree of height 3. For ext2 with 4-byte block numbers, if we use 4K
-blocks this gives a maximum file size of <span class="math notranslate nohighlight">\((4096/4)^3\)</span> 4 KiB<a class="footnote-reference brackets" href="#id14" id="id6">11</a> blocks,
+blocks this gives a maximum file size of <span class="math notranslate nohighlight">\((4096/4)^3\)</span> 4 KiB<a class="footnote-reference brackets" href="#id17" id="id6">11</a> blocks,
 or 4.004 TiB. This organization allows random access within a file with
 overhead <span class="math notranslate nohighlight">\(O(logN)\)</span> where <span class="math notranslate nohighlight">\(N\)</span> is the file size, which is vastly better
 than the <span class="math notranslate nohighlight">\(O(N)\)</span> overhead of the MS-DOS File Access Table system.</p>
@@ -959,7 +959,7 @@ is decremented, and when the count goes to zero the file is deleted.
 This also allows a file to have <em>zero</em> names—when a file is opened the
 reference count (in memory, not on disk) is incremented, and decremented
 when it is closed, so if you unlink a file which is in use, it is not
-actually deleted until the last open file descriptor is closed<a class="footnote-reference brackets" href="#id15" id="id7">12</a>.</p>
+actually deleted until the last open file descriptor is closed<a class="footnote-reference brackets" href="#id18" id="id7">12</a>.</p>
 <figure class="align-default" id="filesys-inode">
 <a class="reference internal image-reference" href="../_images/filesys-inode.png"><img alt="../_images/filesys-inode.png" src="../_images/filesys-inode.png" style="width: 80%;" /></a>
 <figcaption>
@@ -991,16 +991,13 @@ greatly improving performance. (An additional bitmap is used for
 allocating inodes; in this case we don’t care about sequential
 allocation, but it’s a compact representation, and we can re-use some of
 the code written for block allocation.)</p>
-<p><em>Block groups</em>, as shown in
-<a class="reference external" href="#fig:fs:ext2layout">[fig:fs:ext2layout]</a>{reference-type=”autoref”
-reference=”fig:fs:ext2layout”}, are an additional optimization from FFS.
+<p><em>Block groups</em>, as shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig:fs:ext2layout</span></code>, are an additional optimization from FFS.
 Each block group is a miniature file system, with block and inode
 bitmaps, inodes, and data blocks. The file system tries to keep the
 inode and data blocks of a file in the same block group, as well as a
 directory and its contents. In this way common operations (e.g. open and
 read a file, or ‘ls -l’) will typically access blocks within a single
 block group, avoiding long disk seeks.</p>
-<p><img alt="" src="../_images/fs" />{# width=”90%”}</p>
 <figure class="align-default" id="fig-fs-ext2layout">
 <a class="reference internal image-reference" href="../_images/filesys-blockgroups.png"><img alt="../_images/filesys-blockgroups.png" src="../_images/filesys-blockgroups.png" style="width: 90%;" /></a>
 <figcaption>
@@ -1013,18 +1010,16 @@ fixed-sized structures, it is instead organized as a sequence of
 length/value-encoded entries, with free space treated as just another
 type of entry. Directory search is performed using linear search.</p>
 <p>Ext2 solutions to the three design problems?</p>
-<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>File identification - files and directories are identified by inode
+<ol class="simple">
+<li><p>File identification - files and directories are identified by inode
 number, and the location of the fixed-sized inode can be calculated from
-inode number and the inode table location.
-
-File organization - blocks within a file are located via pointers from
-the inode
-
-Free space allocation - free blocks are tracked in a free-space bitmap,
+inode number and the inode table location.</p></li>
+<li><p>File organization - blocks within a file are located via pointers from
+the inode</p></li>
+<li><p>Free space allocation - free blocks are tracked in a free-space bitmap,
 and block groups are used to keep blocks from the same file near to each
-other, their inode, and their directory.
-</pre></div>
-</div>
+other, their inode, and their directory.</p></li>
+</ol>
 <p>Note the difference here between the data structure (a bitmap) and
 strategies used such as trying to allocate the block immediately after
 the previous one written. The MS-DOS file system organizes its free list
@@ -1051,31 +1046,28 @@ key structure written in this process is the <em>superblock</em>, written at a
 well-known location on the disk. (This is often block 1, allowing block
 0 to be used by the boot loader.) The superblock specifies various file
 system parameters, such as:</p>
-<div class="highlight-compactitem notranslate"><div class="highlight"><pre><span></span>Block size - most file systems can be formatted with different block
+<ol class="simple">
+<li><p>Block size - most file systems can be formatted with different block
 sizes, and the OS needs to know this size before it can interpret any
 pointers given in terms of disk blocks. Historically larger blocks were
 used for performance and to allow larger file systems, and smaller
 blocks for space efficiency. In recent years disk drives have
 transitioned to using an internal block size of 4KB, while keeping the
 traditional 512-byte sector addressing, so any file system should use a
-block size of at least 4KB.
-
-Version - including a version number allows backwards compatibility as a
+block size of at least 4KB.</p></li>
+<li><p>Version - including a version number allows backwards compatibility as a
 file system evolves. That way you can upgrade your OS, for instance,
-without reformatting your disk.
-
-Other parameters - in the MS-DOS file system the OS needs to know how
-large the FAT table is, so that it doesn&#39;t accidently go off the end and
+without reformatting your disk.</p></li>
+<li><p>Other parameters - in the MS-DOS file system the OS needs to know how
+large the FAT table is, so that it doesn’t accidently go off the end and
 start looking at the first data block. In ext2 you need to know the
 sizes of the block groups, as well as the bitmap sizes, how many inodes
-are in each group, etc.
-
-Dirty flag - when a file system is mounted, this flag is set; as part of
+are in each group, etc.</p></li>
+<li><p>Dirty flag - when a file system is mounted, this flag is set; as part of
 a clean shutdown the flag is cleared again. If the system crashes
 without clearing the flag, at the next boot this indicates that
-additional error checks are needed before mounting the file system.
-</pre></div>
-</div>
+additional error checks are needed before mounting the file system.</p></li>
+</ol>
 </section>
 <section id="extents-ntfs-and-ext4">
 <h2><span class="section-number">27.5. </span>Extents, NTFS, and Ext4<a class="headerlink" href="#extents-ntfs-and-ext4" title="Permalink to this headline">#</a></h2>
@@ -1089,9 +1081,7 @@ will be 101, the third 102, etc.</p>
 <p>We can take advantage of this to greatly compress the information needed
 to identify the blocks in a file - rather than having separate pointers
 to blocks 100,101,…120 we just need to identify the starting block
-(100) and the length (21 blocks). This is shown in
-<a class="reference external" href="#fig:filesys:extent">[fig:filesys:extent]</a>{reference-type=”autoref”
-reference=”fig:filesys:extent”}, where five data blocks are identified
+(100) and the length (21 blocks). This is shown in <a class="reference internal" href="#fig-filesys-extent"><span class="std std-numref">Fig. 27.6</span></a>, where five data blocks are identified
 by inodes or indirect block pointers; to the right, the same five data
 blocks are identified by a single extent. Why would we want to compress
 the information needed to organize the blocks in a file? Mostly for
@@ -1104,9 +1094,20 @@ small number of extents; if the file grows too big, then you add the
 equivalent of indirect blocks - extents pointing to blocks holding more
 extents. Both Microsoft NTFS and Linux ext4 use this sort of extent
 structure.</p>
-<p><img alt="File structure---pointers vs.extents" src="../_images/files-pointers.png" />{#fig:filesys:extent width=”30%”}</p>
-<hr class="docutils" />
-<p><img alt="File structure---pointers vs.extents" src="../_images/files-extent.png" />{#fig:filesys:extent width=”30%”}</p>
+<figure class="align-default" id="id8">
+<a class="reference internal image-reference" href="../_images/files-pointers.png"><img alt="../_images/files-pointers.png" src="../_images/files-pointers.png" style="width: 90%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27.5 </span><span class="caption-text">File structure—pointers vs.
+extents</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-filesys-extent">
+<a class="reference internal image-reference" href="../_images/files-extent.png"><img alt="../_images/files-extent.png" src="../_images/files-extent.png" style="width: 30%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27.6 </span><span class="caption-text">File structure—pointers vs.
+extents</span><a class="headerlink" href="#fig-filesys-extent" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p><strong>NTFS</strong>: Each NTFS file system has a Master File Table (MFT), which is
 somewhat like the inode table in ext2—each file or directory has an
 entry in this table which holds things like permissions, timestamps, and
@@ -1140,23 +1141,23 @@ overhead; however in practice it does not seem significant, as unless
 highly fragmented the extent lists tend to be fairly short and easily
 cached.)</p>
 <p>NTFS solutions to the three design problems?</p>
-<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>file identification - Master File Table entry
-
-file organization - (possibly multi-level) extent list
-
-free space management - sorted extent list.
-</pre></div>
-</div>
+<ol class="simple">
+<li><p>file identification - Master File Table entry</p></li>
+<li><p>file organization - (possibly multi-level) extent list</p></li>
+<li><p>free space management - sorted extent list.</p></li>
+</ol>
 <p><strong>Ext4</strong>: Ext4 supports extent-based file organization with minimal
 change to the inode structure in ext2/ext3: an extent tree is used, with
-each node explicitly marked as an interior or leaf node, as shown in
-<a class="reference external" href="#fig:filesys:ext4">[fig:filesys:ext4]</a>{reference-type=”autoref”
-reference=”fig:filesys:ext4”}. The inode holds a four-entry extent tree
+each node explicitly marked as an interior or leaf node, as shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig:fig:filesys:ext4</span></code>. The inode holds a four-entry extent tree
 node, allowing small files to be accessed without additional lookup
 steps, while for moderate-sized files only a single level of the tree (a
 “leaf node” in the figure) is needed.</p>
-<p><img alt="Ext4 on-disk structure" src="../_images/files-ext4.png" />{#fig:filesys:ext4
-width=”70%”}</p>
+<figure class="align-default" id="fig-filesys-ext4">
+<a class="reference internal image-reference" href="../_images/files-ext4.png"><img alt="../_images/files-ext4.png" src="../_images/files-ext4.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27.7 </span><span class="caption-text">Ext4 on-disk structure</span><a class="headerlink" href="#fig-filesys-ext4" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="smarter-directories">
 <h2><span class="section-number">27.6. </span>Smarter Directories<a class="headerlink" href="#smarter-directories" title="Permalink to this headline">#</a></h2>
@@ -1191,7 +1192,12 @@ directories. NTFS (and Linux Btrfs) use B-trees, a form of a balanced
 tree. Other file systems, like Sun ZFS, use hash tables for their
 directories, while ext4 uses a hybrid hash/tree structure. If you’re
 really interested, you can look these up in Google.</p>
-<p><img alt="image" src="../_images/files-btree.png" />{height=”25\baselineskip”}</p>
+<figure class="align-default" id="fig-btree">
+<a class="reference internal image-reference" href="../_images/files-btree.png"><img alt="../_images/files-btree.png" src="../_images/files-btree.png" style="width: 20%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27.8 </span><span class="caption-text">B-tree growth</span><a class="headerlink" href="#fig-btree" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="the-b-tree">
 <h2><span class="section-number">27.7. </span>The B-tree<a class="headerlink" href="#the-b-tree" title="Permalink to this headline">#</a></h2>
@@ -1214,32 +1220,23 @@ the new block in the correct position in the parent; if the parent
 overflows it is split, and so on. If the root node splits, a new root is
 allocated with pointers to the two pieces.</p>
 <p>If the branching factor of a B-tree is m, then each block (except for
-the root) holds between m/2 and m entries. In the example shown in
-<a class="reference external" href="#fig:btree">[fig:btree]</a>{reference-type=”autoref”
-reference=”fig:btree”}, m=2; in a real system each node would contain
+the root) holds between m/2 and m entries. In the example shown in <a class="reference internal" href="#fig-btree"><span class="std std-numref">Fig. 27.8</span></a>, m=2; in a real system each node would contain
 many more entries.</p>
-<p>In <a class="reference external" href="#fig:btree">[fig:btree]</a>{reference-type=”autoref”
-reference=”fig:btree”} we see seven values being added to the tree,
+<p>In <a class="reference internal" href="#fig-btree"><span class="std std-numref">Fig. 27.8</span></a> we see seven values being added to the tree,
 which grows “from the bottom up”:</p>
-<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>The first value goes in the root
-
-Since the root isn&#39;t full, the second value goes here too
-
-Now it&#39;s full - split the block. Since the block doesn&#39;t have a parent
-(it&#39;s the root) we add one, which becomes the new root
-
-&#39;4&#39; fits into one of the leaf nodes where there&#39;s room
-
-&#39;5&#39; doesn&#39;t fit, so we split the node. There&#39;s room in the parent to
-hold another pointer
-
-&#39;6&#39; fits in the leaf node
-
-&#39;7&#39; doesn&#39;t, so we split the leaf node, but that causes the parent node
+<ol class="simple">
+<li><p>The first value goes in the root</p></li>
+<li><p>Since the root isn’t full, the second value goes here too</p></li>
+<li><p>Now it’s full - split the block. Since the block doesn’t have a parent
+(it’s the root) we add one, which becomes the new root</p></li>
+<li><p>‘4’ fits into one of the leaf nodes where there’s room</p></li>
+<li><p>‘5’ doesn’t fit, so we split the node. There’s room in the parent to
+hold another pointer</p></li>
+<li><p>‘6’ fits in the leaf node</p></li>
+<li><p>‘7’ doesn’t, so we split the leaf node, but that causes the parent node
 to overflow, so we split it, and have to add a new parent node which
-becomes the new root.
-</pre></div>
-</div>
+becomes the new root.</p></li>
+</ol>
 </section>
 <section id="consistency-and-journaling">
 <h2><span class="section-number">27.8. </span>Consistency and Journaling<a class="headerlink" href="#consistency-and-journaling" title="Permalink to this headline">#</a></h2>
@@ -1260,28 +1257,32 @@ involve writing to multiple disk blocks—for example, moving a file
 from one directory to another requires writing to blocks in the source
 and destination directories, while creating a file writes to the block
 and inode allocation bitmaps, the new inode, the directory block, and
-the file data block or blocks<a class="footnote-reference brackets" href="#id16" id="id8">13</a>. If some but not all of</p>
-<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/files-corruption.pdf){height=&quot;8\\baselineskip&quot;}
-</pre></div>
-</div>
-<p>these writes occur before a crash, the file system may become
+the file data block or blocks<a class="footnote-reference brackets" href="#id19" id="id9">13</a>. If some but not all of
+these writes occur before a crash, the file system may become
 <em>inconsistent</em>—i.e. in a state not achievable through any legal
 sequence of file system operations, where some operations may return
 improper data or cause data loss.</p>
+<figure class="align-default" id="fig-delete-vicious">
+<a class="reference internal image-reference" href="../_images/files-corruption.png"><img alt="../_images/files-corruption.png" src="../_images/files-corruption.png" style="width: 20%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27.9 </span><span class="caption-text">File, directory, bitmap</span><a class="headerlink" href="#fig-delete-vicious" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>For a particularly vicious example, consider deleting the file <code class="docutils literal notranslate"><span class="pre">/a/b</span></code> as
 shown in
-<a class="reference external" href="#fig:delete:vicious">[fig:delete:vicious]</a>{reference-type=”autoref”
-reference=”fig:delete:vicious”}, which requires the following actions:</p>
-<div class="highlight-enumerate* notranslate"><div class="highlight"><pre><span></span>Clear the directory entry for /a/b. This is done by marking the entry as
-unused and writing its block back to the directory.
-
-Free the file data block, by clearing the corresponding entry in the
-block allocation bitmap
-</pre></div>
-</div>
-<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/files-failure-case1.pdf){height=&quot;8\\baselineskip&quot;}
-</pre></div>
-</div>
+<code class="xref std std-numref docutils literal notranslate"><span class="pre">fig:delete:vicious</span></code>, which requires the following actions:</p>
+<ol class="simple">
+<li><p>Clear the directory entry for /a/b. This is done by marking the entry as
+unused and writing its block back to the directory.</p></li>
+<li><p>Free the file data block, by clearing the corresponding entry in the
+block allocation bitmap</p></li>
+</ol>
+<figure class="align-default" id="id10">
+<a class="reference internal image-reference" href="../_images/files-failure-case1.png"><img alt="../_images/files-failure-case1.png" src="../_images/files-failure-case1.png" style="width: 20%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27.10 </span><span class="caption-text">Directory block written before crash</span><a class="headerlink" href="#id10" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>This results in two disk blocks being modified and written back to disk;
 if the blocks are cached and written back at a later point in time they
 may be written to disk in any order. (this doesn’t matter for running
@@ -1290,29 +1291,30 @@ data before going to disk)</p>
 <p>If the system crashes (e.g. due to a power failure) after one of these
 blocks has been written to disk, but not the other, two case are
 possible:</p>
-<div class="highlight-enumerate* notranslate"><div class="highlight"><pre><span></span>The directory block is written, but not the bitmap. The file is no
+<ol class="simple">
+<li><p>The directory block is written, but not the bitmap. The file is no
 longer accessible, but the block is still marked as in use. This is a
 disk space leak (like a memory leak), resulting in a small loss of disk
-space but no serious problems.
-
-The bitmap block is written, but not the directory. Applications are
+space but no serious problems.</p></li>
+<li><p>The bitmap block is written, but not the directory. Applications are
 still able to find the file, open it, and write to it, but the block is
 also available to be allocated to a new file or directory. This is much
-more serious.
-</pre></div>
-</div>
+more serious.</p></li>
+</ol>
 <p>If the same block is now re-allocated for a new file (<code class="docutils literal notranslate"><span class="pre">/a/c</span></code> in this
 case) we now have two files sharing the same data block, which is
 obviously a problem. If an application writes to <code class="docutils literal notranslate"><span class="pre">/a/b</span></code> it will also
 overwrite any data in <code class="docutils literal notranslate"><span class="pre">/a/c</span></code>, and vice versa. If <code class="docutils literal notranslate"><span class="pre">/a/c</span></code> is a directory
 rather than a file things are even worse - a write to <code class="docutils literal notranslate"><span class="pre">/a/b</span></code> will wipe
 out directory entries, causing files pointed to by those entries to be
-lost. (The files themselves won’t be erased, but</p>
-<div class="highlight-wrapfigure notranslate"><div class="highlight"><pre><span></span>r0in ![image](figures/files-failure-case2.pdf){height=&quot;8\\baselineskip&quot;}
-</pre></div>
-</div>
-<p>without directory entries pointing to them there won’t be any way for a
+lost. (The files themselves won’t be erased, but without directory entries pointing to them there won’t be any way for a
 program to access them.)</p>
+<figure class="align-default" id="id11">
+<a class="reference internal image-reference" href="../_images/files-failure-case2.png"><img alt="../_images/files-failure-case2.png" src="../_images/files-failure-case2.png" style="width: 20%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27.11 </span><span class="caption-text">Bitmap block written before crash</span><a class="headerlink" href="#id11" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>This can be prevented by writing blocks in a specific order—for
 instance in this case the directory entry could always be cleared before
 the block is marked as free, so that in the worst case a crash might
@@ -1326,32 +1328,27 @@ machine boots, if the file system is marked dirty, (<code class="docutils litera
 in Windows) is run to repair any problems.</p>
 <p>In particular, the Unix file system checker performs the following
 checks and corrections:</p>
-<div class="highlight-enumerate* notranslate"><div class="highlight"><pre><span></span>Blocks and sizes. Each allocated inode is checked to see that (a) the
+<ol class="simple">
+<li><p>Blocks and sizes. Each allocated inode is checked to see that (a) the
 number of blocks reachable through direct and indirect pointers is
 consistent with the file size in the inode, (b) all block pointers are
 within the valid range for the volume, and (c) no blocks are referenced
-by more than one inode.
-
-Pathnames. The directory tree is traversed from the root, and each entry
+by more than one inode.</p></li>
+<li><p>Pathnames. The directory tree is traversed from the root, and each entry
 is checked to make sure that it points to a valid inode of the same type
-(directory / file / device) as indicated in the entry.
-
-Connectivity. Verifies that all directory inodes are reachable from the
-root.
-
-Reference counts. Each inode holds a count of how many directory entries
+(directory / file / device) as indicated in the entry.</p></li>
+<li><p>Connectivity. Verifies that all directory inodes are reachable from the
+root.</p></li>
+<li><p>Reference counts. Each inode holds a count of how many directory entries
 (hard links) are pointing to it. This step validates that count against
 the count determined by traversing the directory tree, and fixes it if
-necessary.
-
-&quot;Cylinder Groups&quot; The block and inode bitmaps are checked for
+necessary.</p></li>
+<li><p>“Cylinder Groups” The block and inode bitmaps are checked for
 consistency. In particular, are all blocks and inodes reachable from the
-root marked in use, and all unreachable ones marked free?
-
-&quot;Salvage Cylinder Groups&quot; Free inode and block bitmaps are updated to
-fix any discrepancies.
-</pre></div>
-</div>
+root marked in use, and all unreachable ones marked free?</p></li>
+<li><p>“Salvage Cylinder Groups” Free inode and block bitmaps are updated to
+fix any discrepancies.</p></li>
+</ol>
 <p>This is a lot of work, and involves a huge number of disk seeks. On a
 large volume it can take hours to run. Note that full recovery may
 involve a lot of manual work; for instance, if fsck finds any files
@@ -1375,7 +1372,12 @@ termed <em>journaling</em> file systems, has incorporated mechanisms which add
 additional information which can be used for recovery, allowing caching
 and efficient use of the disk, while maintaining a consistent on-disk
 state.</p>
-<p><img alt="Synchronous disk writes for ext2consistency." src="../_images/files-syncwrite.png" />{#fig:syncwrites width=”100%”}</p>
+<figure class="align-default" id="fig-syncwrites">
+<a class="reference internal image-reference" href="../_images/files-syncwrite.png"><img alt="../_images/files-syncwrite.png" src="../_images/files-syncwrite.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27.12 </span><span class="caption-text">Synchronous disk writes for ext2 consistency.</span><a class="headerlink" href="#fig-syncwrites" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="journaling">
 <h2><span class="section-number">27.9. </span>Journaling<a class="headerlink" href="#journaling" title="Permalink to this headline">#</a></h2>
@@ -1388,20 +1390,16 @@ any order; after they are all written, the section of log recording
 those changes can be freed.</p>
 <p>When recovering from a crash, the OS goes through the log and checks
 that all the changes recorded there have been performed on the file
-system itself<a class="footnote-reference brackets" href="#id17" id="id9">14</a>. Some thought should convince you that if a log entry
+system itself<a class="footnote-reference brackets" href="#id20" id="id12">14</a>. Some thought should convince you that if a log entry
 is written, then the modification is guaranteed to happen, either before
 or after a crash; if the log entry isn’t written completely then the
 modification never happened. (There are several ways to detect a
 half-written log entry, including using an explicit end marker or a
 checksum; we’ll just assume that it’s possible.)</p>
-<div class="highlight-center notranslate"><div class="highlight"><pre><span></span>![image](figures/files-corruption2.pdf){width=&quot;45%&quot;}\
-Step 1: record action in log
-
-------------------------------------------------------------------------
-
-Step 2: write blocks in any order
-</pre></div>
-</div>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/files-corruption2.png"><img alt="fishy" class="bg-primary mb-1 align-left" src="../_images/files-corruption2.png" style="width: 200px;" /></a>
+<p>Step 1: record action in log</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="images/pb-figures/fs/files-logging.png"><img alt="fishy" class="bg-primary mb-1 align-left" src="images/pb-figures/fs/files-logging.png" style="width: 200px;" /></a>
+<p>Step 2: write blocks in any order</p>
 <p>** Ext3 Journaling **: The ext3 file system uses physical block logging:
 each log entry contains a header identifying the disk blocks which are
 modified (in the example you saw earlier, the bitmap and the directory
@@ -1497,14 +1495,14 @@ data is stored on a NetApp filer using WAFL and its snapshot
 functionality.)</p>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
-<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id1">7</a></span></dt>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id1">7</a></span></dt>
 <dd><p>Why 2048? Because the designers of the CDROM file system defined
 it that way. Data is stored on CD in 2048-byte blocks plus error
 correction, making use of smaller block sizes difficult, and the
 authors evidently didn’t see any need to allow larger block sizes,
 either.</p>
 </dd>
-<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id2">8</a></span></dt>
+<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id2">8</a></span></dt>
 <dd><p>The astute reader will note that the pointer could use bytes
 within a block, causing each block to store slightly less than a
 full block of data. This would pose difficulties for operating
@@ -1512,31 +1510,31 @@ systems such as Linux which tightly couple the virtual memory and
 file systems, and assume that each 4 KB virtual memory page
 corresponds to one (or maybe 2 or 4) file system blocks.</p>
 </dd>
-<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id3">9</a></span></dt>
+<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id3">9</a></span></dt>
 <dd><p>A benchmark run on <a class="reference external" href="http://login.ccs.neu.edu">login.ccs.neu.edu</a> indicates that “pointer
 chasing” on a high-end Xeon takes about 200 ns when data is not in
 cache; each such random I/O would thus take about 25 ms of CPU time.</p>
 </dd>
-<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id5">10</a></span></dt>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id5">10</a></span></dt>
 <dd><p>The median file size in a recent study was 4 KB, or one block</p>
 </dd>
-<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id6">11</a></span></dt>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id6">11</a></span></dt>
 <dd><p>When we’re being really precise, we’ll use KiB, MiB, GiB etc. to
 mean <span class="math notranslate nohighlight">\(2^{10}\)</span>, <span class="math notranslate nohighlight">\(2^{20}\)</span>, <span class="math notranslate nohighlight">\(2^{30}\)</span> and KB, MB, GB to mean <span class="math notranslate nohighlight">\(10^3\)</span>,
 <span class="math notranslate nohighlight">\(10^6\)</span> and <span class="math notranslate nohighlight">\(10^9\)</span>.</p>
 </dd>
-<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id7">12</a></span></dt>
+<dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id7">12</a></span></dt>
 <dd><p>Deleting open files is a tricky problem, as there’s no good way
 to handle operations on those open handles after the file is
 deleted. Unix solves it by postponing the actual deletion until the
 file descriptor is closed; Windows instead locks the file against
 deletion until any open file handles are closed.</p>
 </dd>
-<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id8">13</a></span></dt>
+<dt class="label" id="id19"><span class="brackets"><a class="fn-backref" href="#id9">13</a></span></dt>
 <dd><p>These steps ignore inode writes to update file or directory
 modification times.</p>
 </dd>
-<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id9">14</a></span></dt>
+<dt class="label" id="id20"><span class="brackets"><a class="fn-backref" href="#id12">14</a></span></dt>
 <dd><p>Actually it doesn’t check, but rather “replays” all the changes
 recorded in the log.</p>
 </dd>
