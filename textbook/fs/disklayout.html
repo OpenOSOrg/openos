@@ -1087,14 +1087,7 @@ blocks are identified by a single extent. Why would we want to compress
 the information needed to organize the blocks in a file? Mostly for
 performance—although the code is more complicated, it will require
 fewer disk seeks to read from disk.</p>
-<p>This organization is the basis of <em>extent-based</em> file systems, where
-blocks in a file are identified via one or more <em>extents</em>, or
-(start,length) pairs. The inode (or equivalent) can contain space for a
-small number of extents; if the file grows too big, then you add the
-equivalent of indirect blocks - extents pointing to blocks holding more
-extents. Both Microsoft NTFS and Linux ext4 use this sort of extent
-structure.</p>
-<figure class="align-left" id="id8">
+<figure class="align-right" id="id8">
 <a class="reference internal image-reference" href="../_images/files-pointers.png"><img alt="../_images/files-pointers.png" src="../_images/files-pointers.png" style="width: 51%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 27.5 </span><span class="caption-text">File structure—pointers</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
@@ -1106,6 +1099,13 @@ structure.</p>
 <p><span class="caption-number">Fig. 27.6 </span><span class="caption-text">File structure— extents</span><a class="headerlink" href="#fig-filesys-extent" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+<p>This organization is the basis of <em>extent-based</em> file systems, where
+blocks in a file are identified via one or more <em>extents</em>, or
+(start,length) pairs. The inode (or equivalent) can contain space for a
+small number of extents; if the file grows too big, then you add the
+equivalent of indirect blocks - extents pointing to blocks holding more
+extents. Both Microsoft NTFS and Linux ext4 use this sort of extent
+structure.</p>
 <p><strong>NTFS</strong>: Each NTFS file system has a Master File Table (MFT), which is
 somewhat like the inode table in ext2—each file or directory has an
 entry in this table which holds things like permissions, timestamps, and
