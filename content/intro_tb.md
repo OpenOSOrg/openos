@@ -1,6 +1,6 @@
-0.1st Edition Edited by Angela Demke Brown, [Orran Krieger](https://okrieg.github.io) and Larry Woodman with a  [community](https://github.com/okrieg/openos/graphs/contributors) of contributors. 
+0.1st Edition Edited by Angela Demke Brown, Peter Desnoyers,  [Orran Krieger](https://okrieg.github.io) and Larry Woodman with a  [community](https://github.com/okrieg/openos/graphs/contributors) of contributors. 
 
-This text was originally developed for the Boston University course [EC 440 Operating Systems][EC440].
+This text is being used for the Boston University course [EC 440 Operating Systems][EC440] with a huge amount of material stolen from Northeastern's CS 5600 course. 
 
 You can [view this text online][ghpages] or [view the source][source].
 
