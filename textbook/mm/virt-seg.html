@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>12. Segmentation &#8212; Introduction to Operating Systems</title>
+    <title>13. Segmentation &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="13. Paging" href="virt-paging.html" />
-    <link rel="prev" title="11. Memory management without translation" href="physmem.html" />
+    <link rel="next" title="14. Paging" href="virt-paging.html" />
+    <link rel="prev" title="12. Memory management without translation" href="physmem.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -134,7 +134,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/structure.html">
-   3. OS structure
+   3. Operating System Structure &amp; Unix/Linux
   </a>
  </li>
  <li class="toctree-l1">
@@ -144,12 +144,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/tools.html">
-   5. Tools
+   6. Tools
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/peter-other.html">
-   6. Other stuff from peter to integrate
+   7. Other stuff from peter to integrate
   </a>
  </li>
 </ul>
@@ -161,7 +161,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   9. Processor Scheduling
+   10. Processor Scheduling
   </a>
  </li>
 </ul>
@@ -173,72 +173,72 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   10. Introduction
+   11. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="physmem.html">
-   11. Memory management without translation
+   12. Memory management without translation
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   12. Segmentation
+   13. Segmentation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-paging.html">
-   13. Paging
+   14. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-tables.html">
-   14. Page Tables
+   15. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="reclamation.html">
-   15. Memory reclaiming algorithms.
+   16. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="buffer-cache.html">
-   16. Page Sizes
+   17. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pagefaults.html">
-   17. Page Faults
+   18. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="misc.html">
-   18. Conclusion
+   19. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="realworld.html">
-   19. Memory management in the real world
+   20. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concl.html">
-   20. Other Stuff
+   21. Other Stuff
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mm.html">
-   21. EVERYTHING BELOW HERE IS CRAP
+   22. EVERYTHING BELOW HERE IS CRAP
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Overview.html">
-   23. Overview of MM
+   24. Overview of MM
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="peter-mm.html">
-   24. Peter’s Virtual Memory chapter
+   25. Peter’s Virtual Memory chapter
   </a>
  </li>
 </ul>
@@ -250,22 +250,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   25. Introduction
+   26. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   26. Interface
+   27. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   27. File System Layout
+   28. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   28. Kernel implementation
+   29. Kernel implementation
   </a>
  </li>
 </ul>
@@ -277,37 +277,37 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   29. Intro Concurrency Synchronization and Deadlock
+   30. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   30. Cooperating Processes
+   31. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   31. Synchronization Primitives
+   32. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   32. Deadlocks
+   33. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   33. Challenges of Modern Hardware
+   34. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   34. Locking in the Linux Kernel
+   35. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/peter-syncro.html">
-   35. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
+   36. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
   </a>
  </li>
 </ul>
@@ -319,27 +319,27 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   36. Overview of other topics
+   37. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   37. Security
+   38. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   39. Virtualization and Cloud computing
+   40. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   41. Other OS structures
+   42. Other OS structures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/block-dev.html">
-   42. I/O, Drivers, and DMA {#chap:blockdevs}
+   43. I/O, Drivers, and DMA {#chap:blockdevs}
   </a>
  </li>
 </ul>
@@ -351,12 +351,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   43. Contributing
+   44. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   44. Bibliography
+   45. Bibliography
   </a>
  </li>
 </ul>
@@ -602,7 +602,7 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#base-and-bounds-translation">
-   12.1. Base and Bounds translation
+   13.1. Base and Bounds translation
   </a>
  </li>
 </ul>
@@ -626,7 +626,7 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#base-and-bounds-translation">
-   12.1. Base and Bounds translation
+   13.1. Base and Bounds translation
   </a>
  </li>
 </ul>
@@ -640,19 +640,19 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="segmentation">
-<span id="cont-mm-virt-seg"></span><h1><span class="section-number">12. </span>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">#</a></h1>
+<span id="cont-mm-virt-seg"></span><h1><span class="section-number">13. </span>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">#</a></h1>
 <section id="base-and-bounds-translation">
-<h2><span class="section-number">12.1. </span>Base and Bounds translation<a class="headerlink" href="#base-and-bounds-translation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">13.1. </span>Base and Bounds translation<a class="headerlink" href="#base-and-bounds-translation" title="Permalink to this headline">#</a></h2>
 <figure class="align-default" id="mm-base-bound">
 <a class="reference internal image-reference" href="../_images/virt-mem-base-bounds.png"><img alt="../_images/virt-mem-base-bounds.png" src="../_images/virt-mem-base-bounds.png" style="width: 45%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 12.1 </span><span class="caption-text">Base-bound registers for translation</span><a class="headerlink" href="#mm-base-bound" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 13.1 </span><span class="caption-text">Base-bound registers for translation</span><a class="headerlink" href="#mm-base-bound" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We first looked at direct physical addressing, where no matter which
 process is executing, the same address (e.g. 0x1000) refers to the same
 memory location. In addition we reviewed a very simple form of address
-translation, shown here in <a class="reference internal" href="#mm-base-bound"><span class="std std-numref">Fig. 12.1</span></a></p>
+translation, shown here in <a class="reference internal" href="#mm-base-bound"><span class="std std-numref">Fig. 13.1</span></a></p>
 <p>where base and bounds registers are used to
 relocate a section of the <em>virtual address space</em>—the addresses seen
 by the program, corresponding to values in the CPU registers—to
@@ -728,13 +728,13 @@ contiguous memory into smaller pieces.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">11. </span>Memory management without translation</p>
+            <p class="prev-next-title"><span class="section-number">12. </span>Memory management without translation</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="virt-paging.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>Paging</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Paging</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

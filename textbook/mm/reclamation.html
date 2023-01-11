@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>15. Memory reclaiming algorithms. &#8212; Introduction to Operating Systems</title>
+    <title>16. Memory reclaiming algorithms. &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,10 +53,12 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="16. Page Sizes" href="buffer-cache.html" />
-    <link rel="prev" title="14. Page Tables" href="page-tables.html" />
+    <link rel="next" title="17. Page Sizes" href="buffer-cache.html" />
+    <link rel="prev" title="15. Page Tables" href="page-tables.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -134,7 +136,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/structure.html">
-   3. OS structure
+   3. Operating System Structure &amp; Unix/Linux
   </a>
  </li>
  <li class="toctree-l1">
@@ -144,12 +146,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/tools.html">
-   5. Tools
+   6. Tools
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/peter-other.html">
-   6. Other stuff from peter to integrate
+   7. Other stuff from peter to integrate
   </a>
  </li>
 </ul>
@@ -161,7 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   9. Processor Scheduling
+   10. Processor Scheduling
   </a>
  </li>
 </ul>
@@ -173,72 +175,72 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   10. Introduction
+   11. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="physmem.html">
-   11. Memory management without translation
+   12. Memory management without translation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-seg.html">
-   12. Segmentation
+   13. Segmentation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-paging.html">
-   13. Paging
+   14. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-tables.html">
-   14. Page Tables
+   15. Page Tables
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   15. Memory reclaiming algorithms.
+   16. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="buffer-cache.html">
-   16. Page Sizes
+   17. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pagefaults.html">
-   17. Page Faults
+   18. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="misc.html">
-   18. Conclusion
+   19. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="realworld.html">
-   19. Memory management in the real world
+   20. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concl.html">
-   20. Other Stuff
+   21. Other Stuff
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mm.html">
-   21. EVERYTHING BELOW HERE IS CRAP
+   22. EVERYTHING BELOW HERE IS CRAP
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Overview.html">
-   23. Overview of MM
+   24. Overview of MM
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="peter-mm.html">
-   24. Peter’s Virtual Memory chapter
+   25. Peter’s Virtual Memory chapter
   </a>
  </li>
 </ul>
@@ -250,22 +252,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   25. Introduction
+   26. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   26. Interface
+   27. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   27. File System Layout
+   28. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   28. Kernel implementation
+   29. Kernel implementation
   </a>
  </li>
 </ul>
@@ -277,37 +279,37 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   29. Intro Concurrency Synchronization and Deadlock
+   30. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   30. Cooperating Processes
+   31. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   31. Synchronization Primitives
+   32. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   32. Deadlocks
+   33. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   33. Challenges of Modern Hardware
+   34. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   34. Locking in the Linux Kernel
+   35. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/peter-syncro.html">
-   35. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
+   36. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
   </a>
  </li>
 </ul>
@@ -319,27 +321,27 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   36. Overview of other topics
+   37. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   37. Security
+   38. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   39. Virtualization and Cloud computing
+   40. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   41. Other OS structures
+   42. Other OS structures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/block-dev.html">
-   42. I/O, Drivers, and DMA {#chap:blockdevs}
+   43. I/O, Drivers, and DMA {#chap:blockdevs}
   </a>
  </li>
 </ul>
@@ -351,12 +353,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   43. Contributing
+   44. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   44. Bibliography
+   45. Bibliography
   </a>
  </li>
 </ul>
@@ -578,12 +580,85 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-memory-hierarchy">
+   16.1. The Memory Hierarchy
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#review-questions">
+     16.1.1. Review questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dirty-and-clean-pages">
+   16.2. Dirty and Clean Pages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-replacement">
+   16.3. Page Replacement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-replacement-strategies">
+   16.4. Page Replacement Strategies
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fifo">
+     16.4.1. FIFO
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lru">
+     16.4.2. LRU
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#opt">
+     16.4.3. OPT
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fifo-with-second-chance-clock">
+     16.4.4. FIFO with Second Chance (CLOCK)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clock">
+     16.4.5. CLOCK
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -595,6 +670,68 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-memory-hierarchy">
+   16.1. The Memory Hierarchy
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#review-questions">
+     16.1.1. Review questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dirty-and-clean-pages">
+   16.2. Dirty and Clean Pages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-replacement">
+   16.3. Page Replacement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-replacement-strategies">
+   16.4. Page Replacement Strategies
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fifo">
+     16.4.1. FIFO
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lru">
+     16.4.2. LRU
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#opt">
+     16.4.3. OPT
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fifo-with-second-chance-clock">
+     16.4.4. FIFO with Second Chance (CLOCK)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clock">
+     16.4.5. CLOCK
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -603,7 +740,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="memory-reclaiming-algorithms">
-<span id="cont-mm-reclaim"></span><h1><span class="section-number">15. </span>Memory reclaiming algorithms.<a class="headerlink" href="#memory-reclaiming-algorithms" title="Permalink to this headline">#</a></h1>
+<span id="cont-mm-reclaim"></span><h1><span class="section-number">16. </span>Memory reclaiming algorithms.<a class="headerlink" href="#memory-reclaiming-algorithms" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
 <li><p>Global page reclaiming</p>
 <ul>
@@ -617,6 +754,222 @@ title="Print to PDF"
 </li>
 <li><p>Working set page reclaiming</p></li>
 </ul>
+<section id="the-memory-hierarchy">
+<h2><span class="section-number">16.1. </span>The Memory Hierarchy<a class="headerlink" href="#the-memory-hierarchy" title="Permalink to this headline">#</a></h2>
+<p>Demand paging from files and from swap provides the mechanisms to create
+the traditional memory hierarchy, as shown in
+<a class="reference external" href="#fig:vm:pic107">[fig:vm:pic107]</a>{reference-type=”autoref”
+reference=”fig:vm:pic107”}.</p>
+<hr class="docutils" />
+<p><img alt="Memory Hierarchy" src="../_images/virt-mem-pic108.png" />{#fig:vm:pic108
+width=”60%”}</p>
+<p>To access address A:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>If it&#39;s not in the cache, then the old cache line is evicted, and A is
+loaded into the resulting empty cache line. This is done in hardware.
+
+If it&#39;s not in memory, then the old page is evicted, and the page
+containing A is loaded into the resulting empty page. This is done in
+software.
+</pre></div>
+</div>
+<p>In general, this works because of <em>locality</em>: when a cache line is
+brought in from memory, a page is loaded into in memory from disk, etc.,
+it tends to get accessed multiple times before eviction.</p>
+<p>Decades ago this was used to run programs much bigger than physical
+memory—CPUs were slow and disks were almost as fast as they are today,
+so the relative overhead of paging infrequently-used data to disk was
+low. Today’s CPUs are thousands of times faster, while disks are only a
+few times faster, and virtual memory doesn’t seem like such a great idea
+anymore. However it still gets used, even on desktop and laptop systems,
+to “steal” memory from idle programs: if you leave a large program like
+Chrome or Microsoft Word idle for half an hour while you use another
+memory-hungry program, memory will be released from the idle process and
+given to the active one; if you switch back, the original program will
+run slowly for a while as it swaps these pages back in.</p>
+<section id="review-questions">
+<h3><span class="section-number">16.1.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dirty-and-clean-pages">
+<h2><span class="section-number">16.2. </span>Dirty and Clean Pages<a class="headerlink" href="#dirty-and-clean-pages" title="Permalink to this headline">#</a></h2>
+<p>How does the operating system determine whether a page has been modified
+and needs to be written to disk? It uses the D bit in the page table
+entry for this, as seen in
+<a class="reference external" href="#fig:vm:pic106">[fig:vm:pic106]</a>{reference-type=”autoref”
+reference=”fig:vm:pic106”}. When a page is mapped in the page table, the
+D bit in the PTE is set to zero; when the CPU writes to a page with D =
+0, the MMU re-writes the page table entry with D = 1. When the OS
+decides to evict a page, the D bit tells it whether the page is “clean,”
+i.e., it hasn’t been modified, or whether it is “dirty” and has to be
+written back to disk.</p>
+<p>When the OS is paging in from a file (e.g. executable code), it is
+straightforward to find the data to read in, as there is a direct
+mapping between a range of pages in a specific file and corresponding
+pages in the virtual memory space. This correspondence can easily be
+stored in the definition of that virtual address segment. When pages are
+saved to swap space this doesn’t work, however, as the locations they
+are saved to are allocated dynamically and fairly arbitrarily.</p>
+<p>This problem is solved by using the page table itself. After evicting a
+page, its page table entry is invalidated by setting P = 0; however, the
+other 31 bits of the entry are ignored by the MMU. These bits are used
+to store the location of the page in swap space, so it can be found
+later later at page fault time. Thus, the page table entry does dual
+duty: when the page is present it points to the physical page itself,
+and is interpreted by the MMU; otherwise, it points to a location in
+swap space, and is ignored by the MMU and used by the software page
+fault handler.</p>
+</section>
+<section id="page-replacement">
+<h2><span class="section-number">16.3. </span>Page Replacement<a class="headerlink" href="#page-replacement" title="Permalink to this headline">#</a></h2>
+<p>If there’s a limited amount of memory available, then every time a page
+is swapped in from disk, it will be necessary to remove, or evict,
+another page from memory. The choice of which page to evict is
+important: the best page to choose would be one that won’t be needed
+anymore, while the worst page to evict would be one of the next to be
+used. (in that case, paging it back in would force another page to be
+evicted, and the work of paging it out and back in again would be
+wasted.) In fact, replacement of items in a cache is a general problem
+in computer systems; examples include:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Cache line replacement in the hardware CPU cache
+
+Entry replacement in the TLB
+
+Buffer replacement in a file system buffer pool
+
+Page replacement in virtual memory
+</pre></div>
+</div>
+<p>The page replacement problem can be stated in abstract form:</p>
+<p>Given the following:</p>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>A disk holding $d$ (virtual) pages, with virtual addresses
+$0,\ldots d-1$;
+
+A memory ${M}$ consisting of $m$ (physical) pages, where each page is
+either empty or holds one of the $d$ virtual pages, and
+
+An access pattern $a_1, a_2, a_3, \cdots$ where each $a_i$ is a virtual
+address in the range $(0,d-1)$:
+</pre></div>
+</div>
+<p>a demand-paging strategy is an algorithm which for each access <span class="math notranslate nohighlight">\(a_i\)</span>
+does the following:</p>
+<div class="highlight-compactitem notranslate"><div class="highlight"><pre><span></span>If $a_i$ is already in one of the $m$ physical pages in ${M}$ (i.e. a
+*hit*): do nothing
+
+Otherwise (a miss) it must:
+
+Select a physical page $j$ in ${M}$ (holding some virtual address $M_j$)
+and evict it, then
+
+Fetch virtual page $a_i$ from disk into physical page $j$
+</pre></div>
+</div>
+<p>In other words it only fetches page <span class="math notranslate nohighlight">\(j\)</span> <em>on demand</em>—i.e. in response
+to a request for it.</p>
+</section>
+<section id="page-replacement-strategies">
+<h2><span class="section-number">16.4. </span>Page Replacement Strategies<a class="headerlink" href="#page-replacement-strategies" title="Permalink to this headline">#</a></h2>
+<p>In this class we consider the following page replacement strategies:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>FIFO: *first-in first-out*. The page evicted from memory is the first
+page to have been fetched into memory.
+
+LRU: *least-recently used*. Here, accesses to each page are tracked
+after it has been loaded into memory, and the least-recently-used page
+is evicted (unsurprisingly, given the name of the strategy).
+
+OPT: this is the optimal demand-paged strategy, which is simple but
+impossible to implement, since it requires knowledge of the future. It&#39;s
+examined because it provides a way of telling how well a real
+replacement strategy is performing---is it close to OPT, or is it far
+worse?
+</pre></div>
+</div>
+<section id="fifo">
+<h3><span class="section-number">16.4.1. </span>FIFO<a class="headerlink" href="#fifo" title="Permalink to this headline">#</a></h3>
+<p><img alt="FIFO cleaning" src="../_images/virt-mem-pic107.png" />{#fig:vm:pic107 width=”100%”}</p>
+<p>This strategy is very simple to implement, as it only requires keeping
+track of the order in which pages were fetched into memory. Given 4
+pages in physical memory, and the following access pattern:</p>
+<p>1 2 3 4 2 1 3 4 5 4 1 2 5 6 3 2 5 2 3 6</p>
+<p>The contents of memory after each access is shown in
+<a class="reference external" href="#fig:vm:pic107">[fig:vm:pic107]</a>{reference-type=”autoref”
+reference=”fig:vm:pic107”}, with hits shown in light grey and pages
+evicted (when misses occur) shown in dark grey.</p>
+<p><img alt="LRU cleaning" src="../_images/virt-mem-pic109.png" />{#fig:vm:pic109 width=”100%”}</p>
+</section>
+<section id="lru">
+<h3><span class="section-number">16.4.2. </span>LRU<a class="headerlink" href="#lru" title="Permalink to this headline">#</a></h3>
+<p>The idea behind LRU is that pages which have been accessed in the recent
+past are likely to be accessed in the near future, and pages which
+haven’t, aren’t. LRU replacement is shown in
+<a class="reference external" href="#fig:vm:pic109">[fig:vm:pic109]</a>{reference-type=”autoref”
+reference=”fig:vm:pic109”}.</p>
+<p>To make the operation of the LRU algorithm more clear, on each hit, the
+accessed page is moved to the top of the column. (This is how LRU is
+typically implemented in software: elements are kept in a list, and on
+access, an element is removed and reinserted at the front of the list.
+The least-recently-used element may then be found by taking the tail of
+the list) Although this is a small example, a performance improvement is
+noted, with four misses compared to six for FIFO.</p>
+<p><img alt="optimal cleaning" src="../_images/virt-mem-pic110.png" />{#fig:vm:pic110
+width=”100%”}</p>
+</section>
+<section id="opt">
+<h3><span class="section-number">16.4.3. </span>OPT<a class="headerlink" href="#opt" title="Permalink to this headline">#</a></h3>
+<p>The optimal algorithm picks a page to evict by looking forward in time
+and finding the page which goes for the longest time without being
+accessed again. Except for seeing the future, OPT plays by the same
+rules as other demand-paging algorithms: in particular, it can’t fetch a
+page until it is accessed. (That’s why the OPT strategy still has
+misses.) OPT is shown in
+<a class="reference external" href="#fig:vm:pic110">[fig:vm:pic110]</a>{reference-type=”autoref”
+reference=”fig:vm:pic110”}, using the same access pattern as before. The
+first eviction decision is shown graphically: pages 4, 2, and 1 are
+accessed 1, 3, and 2 steps in the future, respectively, while page 3
+isn’t accessed for 6 steps and is thus chosen to be evicted.</p>
+<p><br />
+<img alt="image" src="../_images/virt-mem-pic111.png" />{width=”\textwidth”}</p>
+<p><img alt="CLOCK Algorithm" src="../_images/virt-mem-pic112.png" />{#fig:vm:pic112
+width=”\textwidth”}</p>
+</section>
+<section id="fifo-with-second-chance-clock">
+<h3><span class="section-number">16.4.4. </span>FIFO with Second Chance (CLOCK)<a class="headerlink" href="#fifo-with-second-chance-clock" title="Permalink to this headline">#</a></h3>
+<p>LRU is simple and quite effective in many caching applications, and it’s
+ideal that the operating system uses it to determine which pages to
+evict from memory. But there is one small problem in using it in a
+virtual memory system: in this case, a “miss” corresponds to a page
+fault and fetching a page from disk, while a “hit” is when the page is
+already mapped in memory and the access succeeds in hardware. This means
+that once a page is faulted into memory, any further use of that page is
+“invisible” to the operating system. If the OS doesn’t know when a page
+was last used, it can’t implement the Least-Recently-Used replacement
+strategy.</p>
+<p>Despite this issue, it’s still possible to do better than FIFO by using
+the A (“accessed”) bit in the page table entry, which indicates whether
+the page has been accessed since the last time the bit was cleared[^18].
+In <a class="reference external" href="#fig:vm:pic111">[fig:vm:pic111]</a>{reference-type=”autoref”
+reference=”fig:vm:pic111”} we see an algorithm called “FIFO with second
+chance,” where the A bit is used to determine whether a page has been
+accessed while it was in the FIFO queue. If the A bit is 1, the
+replacement algorithm clears it and re-writes the page table entry, and
+the page is given “another chance,” i.e., it is cycled back to the head
+of the list. If the A bit is 0, then there have been no accesses to the
+page during its entire trip through the list, and so it is selected for
+replacement.</p>
+</section>
+<section id="clock">
+<h3><span class="section-number">16.4.5. </span>CLOCK<a class="headerlink" href="#clock" title="Permalink to this headline">#</a></h3>
+<p>An alternate way of visualizing the FIFO with second chance algorithm is
+shown in <a class="reference external" href="#fig:vm:pic112">[fig:vm:pic112]</a>{reference-type=”autoref”
+reference=”fig:vm:pic112”}. Pages are arranged in a circle, with a
+“hand” advancing around the circle testing pages and determining whether
+to keep or evict them. This description is the origin of the widely-used
+name for this algorithm, CLOCK.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -650,13 +1003,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">14. </span>Page Tables</p>
+            <p class="prev-next-title"><span class="section-number">15. </span>Page Tables</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="buffer-cache.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">16. </span>Page Sizes</p>
+        <p class="prev-next-title"><span class="section-number">17. </span>Page Sizes</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

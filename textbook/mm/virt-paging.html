@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>13. Paging &#8212; Introduction to Operating Systems</title>
+    <title>14. Paging &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="14. Page Tables" href="page-tables.html" />
-    <link rel="prev" title="12. Segmentation" href="virt-seg.html" />
+    <link rel="next" title="15. Page Tables" href="page-tables.html" />
+    <link rel="prev" title="13. Segmentation" href="virt-seg.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -136,7 +136,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/structure.html">
-   3. OS structure
+   3. Operating System Structure &amp; Unix/Linux
   </a>
  </li>
  <li class="toctree-l1">
@@ -146,12 +146,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/tools.html">
-   5. Tools
+   6. Tools
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/peter-other.html">
-   6. Other stuff from peter to integrate
+   7. Other stuff from peter to integrate
   </a>
  </li>
 </ul>
@@ -163,7 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   9. Processor Scheduling
+   10. Processor Scheduling
   </a>
  </li>
 </ul>
@@ -175,72 +175,72 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   10. Introduction
+   11. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="physmem.html">
-   11. Memory management without translation
+   12. Memory management without translation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-seg.html">
-   12. Segmentation
+   13. Segmentation
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   13. Paging
+   14. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-tables.html">
-   14. Page Tables
+   15. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="reclamation.html">
-   15. Memory reclaiming algorithms.
+   16. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="buffer-cache.html">
-   16. Page Sizes
+   17. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pagefaults.html">
-   17. Page Faults
+   18. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="misc.html">
-   18. Conclusion
+   19. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="realworld.html">
-   19. Memory management in the real world
+   20. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concl.html">
-   20. Other Stuff
+   21. Other Stuff
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mm.html">
-   21. EVERYTHING BELOW HERE IS CRAP
+   22. EVERYTHING BELOW HERE IS CRAP
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Overview.html">
-   23. Overview of MM
+   24. Overview of MM
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="peter-mm.html">
-   24. Peter’s Virtual Memory chapter
+   25. Peter’s Virtual Memory chapter
   </a>
  </li>
 </ul>
@@ -252,22 +252,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   25. Introduction
+   26. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   26. Interface
+   27. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   27. File System Layout
+   28. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   28. Kernel implementation
+   29. Kernel implementation
   </a>
  </li>
 </ul>
@@ -279,37 +279,37 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   29. Intro Concurrency Synchronization and Deadlock
+   30. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   30. Cooperating Processes
+   31. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   31. Synchronization Primitives
+   32. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   32. Deadlocks
+   33. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   33. Challenges of Modern Hardware
+   34. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   34. Locking in the Linux Kernel
+   35. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/peter-syncro.html">
-   35. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
+   36. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
   </a>
  </li>
 </ul>
@@ -321,27 +321,27 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   36. Overview of other topics
+   37. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   37. Security
+   38. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   39. Virtualization and Cloud computing
+   40. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   41. Other OS structures
+   42. Other OS structures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/block-dev.html">
-   42. I/O, Drivers, and DMA {#chap:blockdevs}
+   43. I/O, Drivers, and DMA {#chap:blockdevs}
   </a>
  </li>
 </ul>
@@ -353,12 +353,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   43. Contributing
+   44. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   44. Bibliography
+   45. Bibliography
   </a>
  </li>
 </ul>
@@ -603,20 +603,25 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#memory-over-commitment-and-paging">
+   14.1. Memory Over-Commitment and Paging
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paging-avoiding-fragmentation">
-   13.1. Paging - Avoiding Fragmentation
+   14.2. Paging - Avoiding Fragmentation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#internal-fragmentation">
-     13.1.1. Internal Fragmentation
+     14.2.1. Internal Fragmentation
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paged-address-translation">
-   13.2. Paged Address Translation
+   14.3. Paged Address Translation
   </a>
  </li>
 </ul>
@@ -639,20 +644,25 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#memory-over-commitment-and-paging">
+   14.1. Memory Over-Commitment and Paging
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paging-avoiding-fragmentation">
-   13.1. Paging - Avoiding Fragmentation
+   14.2. Paging - Avoiding Fragmentation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#internal-fragmentation">
-     13.1.1. Internal Fragmentation
+     14.2.1. Internal Fragmentation
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paged-address-translation">
-   13.2. Paged Address Translation
+   14.3. Paged Address Translation
   </a>
  </li>
 </ul>
@@ -666,9 +676,45 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="paging">
-<span id="cont-mm-paging"></span><h1><span class="section-number">13. </span>Paging<a class="headerlink" href="#paging" title="Permalink to this headline">#</a></h1>
+<span id="cont-mm-paging"></span><h1><span class="section-number">14. </span>Paging<a class="headerlink" href="#paging" title="Permalink to this headline">#</a></h1>
+<section id="memory-over-commitment-and-paging">
+<h2><span class="section-number">14.1. </span>Memory Over-Commitment and Paging<a class="headerlink" href="#memory-over-commitment-and-paging" title="Permalink to this headline">#</a></h2>
+<p>Page faults allow data to be dynamically fetched into memory when it is
+needed, in the same way that the CPU dynamically fetches data from
+memory into the cache. This allows the operating system to over-commit
+memory: the sum of all process address spaces can add up to more memory
+than is available, although the total amount of memory mapped at any
+point in time must fit into RAM. This means that when a page fault
+occurs and a page is allocated to a process, another page (from that or
+another process) may need to be evicted from memory.</p>
+<div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>12 **Types of Virtual Segments**: There are two types of virtual
+segments: file-backed and anonymous. File-backed segments are what the
+name says; approximately 99.9% of them are read-only mappings of
+demand-paged executables. Anonymous mappings are called this because
+they don&#39;t correspond to a file; most of them contain writable program
+data or stacks.
+</pre></div>
+</div>
+<p>Evicting a read-only page mapped from a file is simple: just forget the
+mapping and free the page; if a fault for that page occurs later, the
+page can be read back from disk. Occasionally pages are mapped
+read/write from a file, when a program explicitly requests it with
+<code class="docutils literal notranslate"><span class="pre">mmap</span></code>—in that case the OS can write any modified data back to the
+file and then evict the page; again it can be paged back from disk if
+needed again.</p>
+<p>Anonymous segments such as stack and heap are typically created in
+memory and do not need to be swapped; however if the system runs low on
+memory it may evict anonymous pages owned by idle processes, in order to
+give more memory to the currently-running ones. To do this the OS
+allocates a location in “swap space” on disk: typically a dedicated swap
+partition in Linux, and the <code class="docutils literal notranslate"><span class="pre">PAGEFILE.sys</span></code> and <code class="docutils literal notranslate"><span class="pre">/var/vm/swapfile</span></code> files
+in Windows and OSX respectively. The data must first be written out to
+that location, then the OS can store the page-to-location mapping and
+release the memory page.</p>
+<p><img alt="Page Table Entry with D (dirty)bit" src="../_images/virt-mem-pic106.png" />{#fig:vm:pic106 width=”\textwidth”}</p>
+</section>
 <section id="paging-avoiding-fragmentation">
-<h2><span class="section-number">13.1. </span>Paging - Avoiding Fragmentation<a class="headerlink" href="#paging-avoiding-fragmentation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">14.2. </span>Paging - Avoiding Fragmentation<a class="headerlink" href="#paging-avoiding-fragmentation" title="Permalink to this headline">#</a></h2>
 <p>The fragmentation in
 <a class="reference external" href="#fig:vm:fig2">[fig:vm:fig2]</a>{reference-type=”autoref”
 reference=”fig:vm:fig2”} is termed <em>external fragmentation</em>, because the
@@ -698,7 +744,7 @@ combination of physical pages may be used for an allocation request,
 there is no external fragmentation, and a request will not fail as long
 as there are enough free physical pages to fulfill it.</p>
 <section id="internal-fragmentation">
-<h3><span class="section-number">13.1.1. </span>Internal Fragmentation<a class="headerlink" href="#internal-fragmentation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">14.2.1. </span>Internal Fragmentation<a class="headerlink" href="#internal-fragmentation" title="Permalink to this headline">#</a></h3>
 <p>Paging solves the problem of external fragmentation, but it suffers from
 another issue, <em>internal fragmentation</em>, because space may be wasted
 <em>inside</em> the allocated pages. E.g. if 10 KB of memory is allocated in
@@ -715,7 +761,7 @@ are slightly more efficient than 4 KB pages, they are rarely used.)</p>
 </section>
 </section>
 <section id="paged-address-translation">
-<h2><span class="section-number">13.2. </span>Paged Address Translation<a class="headerlink" href="#paged-address-translation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">14.3. </span>Paged Address Translation<a class="headerlink" href="#paged-address-translation" title="Permalink to this headline">#</a></h2>
 <p>We examine a single model of address translation in detail: the one used
 by the original Pentium, and by any Intel-compatible CPU running in
 32-bit mode. It uses 32-bit virtual addresses, 32-bit physical
@@ -774,13 +820,13 @@ tables in memory to specify virtual-to-physical mappings.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">12. </span>Segmentation</p>
+            <p class="prev-next-title"><span class="section-number">13. </span>Segmentation</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="page-tables.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>Page Tables</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Page Tables</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
