@@ -53,6 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. Operating System Services" href="services.html" />
@@ -198,7 +200,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   14. Page Sizes
+   14. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
@@ -571,13 +573,13 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#monolithic-os-structure">
-   3.1. Monolithic OS structure
+  <a class="reference internal nav-link" href="#unix-and-linux">
+   3.1. Unix and Linux
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unix-and-linux">
-   3.2. Unix and Linux
+  <a class="reference internal nav-link" href="#os-structure-and-services">
+   3.2. OS Structure and services
   </a>
  </li>
 </ul>
@@ -600,13 +602,13 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#monolithic-os-structure">
-   3.1. Monolithic OS structure
+  <a class="reference internal nav-link" href="#unix-and-linux">
+   3.1. Unix and Linux
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unix-and-linux">
-   3.2. Unix and Linux
+  <a class="reference internal nav-link" href="#os-structure-and-services">
+   3.2. OS Structure and services
   </a>
  </li>
 </ul>
@@ -623,38 +625,72 @@ title="Print to PDF"
 <p class="admonition-title">Warning</p>
 <p>This portion of the book is under construction, not ready to be read</p>
 </div>
+<div class="toggle docutils container">
+<p>Outline</p>
+<ul class="simple">
+<li><p>Unix and Linux</p>
+<ul>
+<li><p>100s of OS, but we want to focus on one</p></li>
+<li><p>linux obvious choice, OS for developers by developers</p></li>
+<li><p>covers massive</p></li>
+</ul>
+</li>
+<li><p>Structure</p>
+<ul>
+<li><p>discuss picture, virtual computer on top of physical computer, enbabling many applications to run</p></li>
+<li><p>as we already aluded, process is the virtual computer, most of the instructions are the same, but the kernel adds additional logical instructions, we call system calls</p></li>
+<li><p>has virtual CPU, virtual memory, and it has files for I/O, i.e. persistence, special files (pipes and sockets) for communication; these are discussed more in next chapter</p></li>
+<li><p>the structure is shown in more detail in next figure, core OS services include,</p></li>
+<li><p>much of the code both in applications and the kernel are dyanically loaded</p></li>
+</ul>
+</li>
+</ul>
+</div>
 <section class="tex2jax_ignore mathjax_ignore" id="operating-system-structure-unix-linux">
 <span id="cont-gs-structure"></span><h1><span class="section-number">3. </span>Operating System Structure &amp; Unix/Linux<a class="headerlink" href="#operating-system-structure-unix-linux" title="Permalink to this headline">#</a></h1>
-<ul class="simple">
-<li><p>OS structure, system calls, and interrupts</p></li>
-<li><p>why we are doing Unix and linux</p></li>
-<li><p>how OS comes up</p></li>
-<li><p>how programs are loaded</p></li>
-</ul>
-<section id="monolithic-os-structure">
-<h2><span class="section-number">3.1. </span>Monolithic OS structure<a class="headerlink" href="#monolithic-os-structure" title="Permalink to this headline">#</a></h2>
-<p>As shown in figure <a class="reference internal" href="#os-struc"><span class="std std-ref">Monolitic Operating system structure</span></a>, most operating systems today have …</p>
-<figure class="align-right" id="os-struc">
-<a class="reference internal image-reference" href="../_images/osstructure.syscall.drawio.png"><img alt="../_images/osstructure.syscall.drawio.png" src="../_images/osstructure.syscall.drawio.png" style="width: 200pt;" /></a>
+<p>We <span class="xref myst">first</span> discuss why we focus in this book on Linux, and <span class="xref myst">then</span> discuss how systems like Linux are structured and how the core services.  The <span class="xref myst">next</span> chapter describes some of the key abstractions those services provide to applications.</p>
+<section id="unix-and-linux">
+<span id="cont-gs-structure-linux"></span><h2><span class="section-number">3.1. </span>Unix and Linux<a class="headerlink" href="#unix-and-linux" title="Permalink to this headline">#</a></h2>
+<p>There are hundreds of operating systems that have been developed over the years, many of which are designed to hide most aspect of the computer from “normal” users.  Those users mainly just wants to use programs written by others.  The interface of these operating systems tend to focus on graphics and visually oriented ways of interacting with programs.  <a class="reference internal" href="../_images/Unix.gif"><img alt="../_images/Unix.gif" class="align-right" src="../_images/Unix.gif" style="width: 25%;" /></a>
+UNIX on the other hand assumes that its users are primarily programmers.  Its design and collection of tools are not meant to be particularly user friendly.   Rather UNIX is designed to allow programmers to be very productive and to support a broad range of programming tools.</p>
+<p>While most elements of this book apply to most operating systems, we typically focus on Unix, and, in particular, the  <em>Linux</em> open source variant of Unix for a number of reasons:</p>
+<ol class="simple">
+<li><p>Even many operating systems like MacOS and Android, have a form of Unix or Linux at their core.  If you want to really understand these systems, you need to understand Unix.</p></li>
+<li><p>The <a class="reference external" href="https://www.opengroup.org/membership/forums/platform/unix">UNIX</a> operating system was built by master programmers who valued programmability and productivity.  In some sense learning to work on the UNIX systems is a right of passage that not only teaches you how to be productive on a computer running the UNIX operating system but teaches you to think and act like a programmer.</p></li>
+<li><p>Unix is designed with a core principle of small programs that can compose together through file system interfaces. You are encouraged to writing little re-usable programs that you incrementally evolve as needed and combine with others to get big tasks done.</p></li>
+<li><p>UNIX’s programming oriented nature leads to an environment in which almost anything about the OS and user experience can be customized and programmed.  UNIX makes automation the name of the game – largely everything you can do manually can be turned into a program that automates the task.</p></li>
+<li><p>Linux, the dominant Unix today, is open source, enabling programmers and researchers to go deep into the code. Anyone can modify the operating system to support their system, or to enable their new workload.</p></li>
+</ol>
+<p>UNIX/Linux’s programming friendly nature has lead to the development of a very large and rich body of existing software, with contributions from researchers, industry, students and hobbyists  alike.  This body of software has come to be a large scale shared human repository that we rely on heavily.
+As a result, the computer servers that form the core of the Internet and the Cloud largely run Linux. Many of the computers embedded in the devices that surround us from wifi routers, medical devices, automobiles, and everything else also often run a version of Linux.  In fact, Android is, at its core, Linux.</p>
+<blockquote>
+<div><p><a class="reference internal" href="../_images/history.png"><img alt="../_images/history.png" class="align-left" src="../_images/history.png" style="width: 60px;" /></a> <p style="background-color:powderblue;"> Unix recently celebrated its 50th year Anniversary. <br>
+<a class="reference external" href="https://www.bell-labs.com/about/history/innovation-stories/50-years-unix/#gref">50 Years of Unix</a> <br>
+The people and its history are a fascinating journey into how we have gotten to where we are today. <br>
+<a class="reference external" href="https://spectrum.ieee.org/the-strange-birth-and-long-life-of-unix#toggle-gdpr">The Strange birth and long life of Unix</a> <br>
+UNIX and it’s children literally make our digital world go around and will likely continue to do so for the quite some time.</p>
+</div></blockquote>
+</p>
+</section>
+<section id="os-structure-and-services">
+<span id="id1"></span><h2><span class="section-number">3.2. </span>OS Structure and services<a class="headerlink" href="#os-structure-and-services" title="Permalink to this headline">#</a></h2>
+<p>As stated <a class="reference internal" href="purpose.html#cont-gs-purpose-platform-abs"><span class="std std-ref">earlier</span></a>, operating systems provide a set of virtual abstractions on top of the primitive capabilities provided by hardware.  Most operating systems today, and Linux in particular, provide these abstractions in the OS <em>kernel</em> (see <a class="reference internal" href="#os-struc"><span class="std std-numref">Fig. 3.1</span></a>).  The kernel runs at the highest permissions in the hardware, can access any memory or device.  All untrusted application code, runs in <em>processes</em>, where any access to the real computer is controlled by the kernel.</p>
+<p>As we will discuss more later, you can think of a process as a virtual computer. The Linux kernel multiplexes the CPU between different processes, creates a <em>virtual memory</em> abstraction that the process has a massive contiguous amount of memory that starts at address <span class="math notranslate nohighlight">\(0x0\)</span>, and a set of file system abstractions that allow the process to persist data and communicate with other processes.</p>
+<figure class="align-default" id="os-struc">
+<a class="reference internal image-reference" href="../_images/osstructure.syscall.drawio.png"><img alt="../_images/osstructure.syscall.drawio.png" src="../_images/osstructure.syscall.drawio.png" style="width: 600pt;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Monolitic Operating system structure</span><a class="headerlink" href="#os-struc" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">The kernel controls the computer and provides the abstraction of <em>processes</em> for application code.</span><a class="headerlink" href="#os-struc" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<figure class="align-right" id="os-struc-services">
-<a class="reference internal image-reference" href="../_images/osstructure.services.drawio.png"><img alt="../_images/osstructure.services.drawio.png" src="../_images/osstructure.services.drawio.png" style="width: 200pt;" /></a>
+<p>Only the kernel can executed the priviledged instructions that, for example, control the memory hat a process can see, or switch which process is currently running on a CPU.<br />
+Also, when some external event happens, e.g., a timer completed, a network packet arrived, an <em>interrupt</em> starts executing code in the kernel.</p>
+<p>The kernel adds <em>logical</em> instructions to the process, called system calls, that can be used to create new processes, communicate other processes/virtual computers, allocate memory, etc… These system calls are really special procedure calls that happen to switch address spaces and start executing at a specific entry point in the kernel.  It also provides <em>signals</em> that, similar to interrupts, will will inform the application of external events.</p>
+<figure class="align-default" id="os-struc-services">
+<a class="reference internal image-reference" href="../_images/osstructure.services.drawio.png"><img alt="../_images/osstructure.services.drawio.png" src="../_images/osstructure.services.drawio.png" style="width: 600pt;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">Core services</span><a class="headerlink" href="#os-struc-services" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-</section>
-<section id="unix-and-linux">
-<h2><span class="section-number">3.2. </span>Unix and Linux<a class="headerlink" href="#unix-and-linux" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>general principles of Unix and why we are using: Refer and steal some content from <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/intro.html#operating-systems-and-unix">here</a></p></li>
-<li><p>everything is a file</p></li>
-<li><p>discuss processes, libraries, dynamically loaded modules</p></li>
-<li><p>importance open source</p></li>
-</ul>
 <div class="cell tag_output_scroll tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">

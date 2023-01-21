@@ -57,7 +57,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="14. Page Sizes" href="buffer-cache.html" />
+    <link rel="next" title="14. Buffer Cache" href="buffer-cache.html" />
     <link rel="prev" title="12. Page Tables" href="page-tables.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -200,7 +200,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="buffer-cache.html">
-   14. Page Sizes
+   14. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
@@ -728,11 +728,14 @@ title="Print to PDF"
 <h2><span class="section-number">13.1. </span>The Memory Hierarchy<a class="headerlink" href="#the-memory-hierarchy" title="Permalink to this headline">#</a></h2>
 <p>Demand paging from files and from swap provides the mechanisms to create
 the traditional memory hierarchy, as shown in
-<a class="reference external" href="#fig:vm:pic107">[fig:vm:pic107]</a>{reference-type=”autoref”
-reference=”fig:vm:pic107”}.</p>
+(#fig:vm:pic108).</p>
 <hr class="docutils" />
-<p><img alt="Memory Hierarchy" src="../_images/virt-mem-pic108.png" />{#fig:vm:pic108
-width=”60%”}</p>
+<figure class="align-default" id="fig-vm-fig108">
+<a class="reference internal image-reference" href="../_images/virt-mem-pic108.png"><img alt="../_images/virt-mem-pic108.png" src="../_images/virt-mem-pic108.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 13.1 </span><span class="caption-text">4-level Memory Hierarchy</span><a class="headerlink" href="#fig-vm-fig108" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>To access address A:</p>
 <div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>If it&#39;s not in the cache, then the old cache line is evicted, and A is
 loaded into the resulting empty cache line. This is done in hardware.
@@ -979,7 +982,7 @@ name for this algorithm, CLOCK.</p>
     <a class='right-next' id="next-link" href="buffer-cache.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>Page Sizes</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Buffer Cache</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
