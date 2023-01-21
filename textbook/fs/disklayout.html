@@ -306,7 +306,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   32. Other OS structures
+   31. Other OS structures
   </a>
  </li>
 </ul>
@@ -318,17 +318,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   33. How to read this book
+   32. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   34. Contributing
+   33. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   35. Bibliography
+   34. Bibliography
   </a>
  </li>
 </ul>
@@ -762,7 +762,7 @@ with for the following three problems:</p>
 <p>In <a class="reference internal" href="#fs-cd-rom"><span class="std std-numref">Fig. 21.1</span></a> we see an example of an extremely
 simple file system, similar to early versions of the ISO-9660 file
 system for CD-ROM disks. Objects on disk are either files or
-directories, each composed of one or more 2048-byte<a class="footnote-reference brackets" href="#id11" id="id1">7</a> <em>blocks</em>; all
+directories, each composed of one or more 2048-byte<a class="footnote-reference brackets" href="#id10" id="id1">7</a> <em>blocks</em>; all
 pointers in the file system are in terms of <em>block numbers</em>, with blocks
 numbered from block 0 at the beginning of the disk.</p>
 <figure class="align-default" id="fs-cd-rom">
@@ -813,7 +813,7 @@ free space to worry about.</p></li>
 Table) file system. Here blocks within a file are organized in a linked
 list; however implementation of this list is somewhat restricted by the
 requirement that all access to the disk be done in multiples of a fixed
-block size.<a class="footnote-reference brackets" href="#id12" id="id2">8</a> Instead these pointers are kept in a separate array,
+block size.<a class="footnote-reference brackets" href="#id11" id="id2">8</a> Instead these pointers are kept in a separate array,
 with an entry corresponding to each disk block, in what is called the
 File Allocation Table.</p>
 <aside class="margin sidebar">
@@ -858,7 +858,7 @@ requires walking the linked list to find the corresponding entry, which
 can be slow even when cached in memory. (Consider random I/O within a
 1 GB virtual disk image with 4 KB blocks—the linked list will be 256K
 long, and on average each I/O will require searching halfway through the
-list<a class="footnote-reference brackets" href="#id13" id="id3">9</a>).</p>
+list<a class="footnote-reference brackets" href="#id12" id="id3">9</a>).</p>
 <p>Directories in the MS-DOS file system are similar to those in ISO-9660.
 Each directory entry is a fixed size and has a field indicating whether
 it is valid; to delete a file, this field is set to invalid and the
@@ -895,7 +895,7 @@ that we don’t lose it if the system crashes mid-operation.</p>
 </div>
 </aside>
 <p>(a) low overhead for small files, in terms of both disk seeks and
-allocated blocks<a class="footnote-reference brackets" href="#id14" id="id5">10</a>, (b) ability to represent sufficiently large files
+allocated blocks<a class="footnote-reference brackets" href="#id13" id="id5">10</a>, (b) ability to represent sufficiently large files
 without excessive storage space or performance overhead, and (c) crash
 resiliency—crashing while the file is growing should not endanger
 existing data.</p>
@@ -911,7 +911,7 @@ specifies a block holding pointers to <span class="math notranslate nohighlight"
 turn hold pointers to blocks <span class="math notranslate nohighlight">\(N+N_1 ... N+N_1+N_1^2-1\)</span>—i.e. an
 <span class="math notranslate nohighlight">\(N_1\)</span>-ary tree of height 2; a triple indirect block in turn points to a
 tree of height 3. For ext2 with 4-byte block numbers, if we use 4K
-blocks this gives a maximum file size of <span class="math notranslate nohighlight">\((4096/4)^3\)</span> 4 KiB<a class="footnote-reference brackets" href="#id15" id="id6">11</a> blocks,
+blocks this gives a maximum file size of <span class="math notranslate nohighlight">\((4096/4)^3\)</span> 4 KiB<a class="footnote-reference brackets" href="#id14" id="id6">11</a> blocks,
 or 4.004 TiB. This organization allows random access within a file with
 overhead <span class="math notranslate nohighlight">\(O(logN)\)</span> where <span class="math notranslate nohighlight">\(N\)</span> is the file size, which is vastly better
 than the <span class="math notranslate nohighlight">\(O(N)\)</span> overhead of the MS-DOS File Access Table system.</p>
@@ -929,7 +929,7 @@ is decremented, and when the count goes to zero the file is deleted.
 This also allows a file to have <em>zero</em> names—when a file is opened the
 reference count (in memory, not on disk) is incremented, and decremented
 when it is closed, so if you unlink a file which is in use, it is not
-actually deleted until the last open file descriptor is closed<a class="footnote-reference brackets" href="#id16" id="id7">12</a>.</p>
+actually deleted until the last open file descriptor is closed<a class="footnote-reference brackets" href="#id15" id="id7">12</a>.</p>
 <figure class="align-default" id="filesys-inode">
 <a class="reference internal image-reference" href="../_images/filesys-inode.png"><img alt="../_images/filesys-inode.png" src="../_images/filesys-inode.png" style="width: 80%;" /></a>
 <figcaption>
@@ -1226,7 +1226,7 @@ involve writing to multiple disk blocks—for example, moving a file
 from one directory to another requires writing to blocks in the source
 and destination directories, while creating a file writes to the block
 and inode allocation bitmaps, the new inode, the directory block, and
-the file data block or blocks<a class="footnote-reference brackets" href="#id17" id="id8">13</a>. If some but not all of
+the file data block or blocks<a class="footnote-reference brackets" href="#id16" id="id8">13</a>. If some but not all of
 these writes occur before a crash, the file system may become
 <em>inconsistent</em>—i.e. in a state not achievable through any legal
 sequence of file system operations, where some operations may return
@@ -1239,17 +1239,17 @@ improper data or cause data loss.</p>
 </figure>
 <p>For a particularly vicious example, consider deleting the file <code class="docutils literal notranslate"><span class="pre">/a/b</span></code> as
 shown in
-<code class="xref std std-numref docutils literal notranslate"><span class="pre">fig:delete:vicious</span></code>, which requires the following actions:</p>
+<a class="reference internal" href="#fig-delete-vicious"><span class="std std-numref">Fig. 21.9</span></a>, which requires the following actions:</p>
 <ol class="simple">
 <li><p>Clear the directory entry for /a/b. This is done by marking the entry as
 unused and writing its block back to the directory.</p></li>
 <li><p>Free the file data block, by clearing the corresponding entry in the
 block allocation bitmap</p></li>
 </ol>
-<figure class="align-right" id="id19">
+<figure class="align-right" id="id18">
 <a class="reference internal image-reference" href="../_images/files-failure-case1.png"><img alt="../_images/files-failure-case1.png" src="../_images/files-failure-case1.png" style="width: 200pt;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.10 </span><span class="caption-text">Directory block written before crash</span><a class="headerlink" href="#id19" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.10 </span><span class="caption-text">Directory block written before crash</span><a class="headerlink" href="#id18" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>This results in two disk blocks being modified and written back to disk;
@@ -1278,10 +1278,10 @@ rather than a file things are even worse - a write to <code class="docutils lite
 out directory entries, causing files pointed to by those entries to be
 lost. (The files themselves won’t be erased, but without directory entries pointing to them there won’t be any way for a
 program to access them.)</p>
-<figure class="align-right" id="id9">
+<figure class="align-right" id="fig-delete-vicious2">
 <a class="reference internal image-reference" href="../_images/files-failure-case2.png"><img alt="../_images/files-failure-case2.png" src="../_images/files-failure-case2.png" style="width: 200pt;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.11 </span><span class="caption-text">Bitmap block written before crash</span><a class="headerlink" href="#id9" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.11 </span><span class="caption-text">Bitmap block written before crash</span><a class="headerlink" href="#fig-delete-vicious2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>This can be prevented by writing blocks in a specific order—for
@@ -1359,22 +1359,22 @@ any order; after they are all written, the section of log recording
 those changes can be freed.</p>
 <p>When recovering from a crash, the OS goes through the log and checks
 that all the changes recorded there have been performed on the file
-system itself<a class="footnote-reference brackets" href="#id18" id="id10">14</a>. Some thought should convince you that if a log entry
+system itself<a class="footnote-reference brackets" href="#id17" id="id9">14</a>. Some thought should convince you that if a log entry
 is written, then the modification is guaranteed to happen, either before
 or after a crash; if the log entry isn’t written completely then the
 modification never happened. (There are several ways to detect a
 half-written log entry, including using an explicit end marker or a
 checksum; we’ll just assume that it’s possible.)</p>
-<figure class="align-right" id="id20">
+<figure class="align-right" id="id19">
 <a class="reference internal image-reference" href="../_images/files-logging.png"><img alt="../_images/files-logging.png" src="../_images/files-logging.png" style="width: 200pt;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.13 </span><span class="caption-text">Step 1: record action in log</span><a class="headerlink" href="#id20" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.13 </span><span class="caption-text">Step 1: record action in log</span><a class="headerlink" href="#id19" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<figure class="align-right" id="id21">
+<figure class="align-right" id="id20">
 <a class="reference internal image-reference" href="../_images/files-corruption2.png"><img alt="../_images/files-corruption2.png" src="../_images/files-corruption2.png" style="width: 200pt;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.14 </span><span class="caption-text">Step 2: write blocks in any order</span><a class="headerlink" href="#id21" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.14 </span><span class="caption-text">Step 2: write blocks in any order</span><a class="headerlink" href="#id20" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p><strong>Ext3 Journaling</strong>: The ext3 file system uses physical block logging:
@@ -1454,10 +1454,10 @@ written, so that multiple changes can be made.)</p>
 <p><span class="caption-number">Fig. 21.16 </span><span class="caption-text">WAFL tree before update</span><a class="headerlink" href="#fig-fs-waflbef" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<figure class="align-right" id="fig-fs-wafaft">
+<figure class="align-right" id="fig-fs-waflaft">
 <a class="reference internal image-reference" href="../_images/files-wafl2.png"><img alt="../_images/files-wafl2.png" src="../_images/files-wafl2.png" style="width: 200pt;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.17 </span><span class="caption-text">WAFL tree after update</span><a class="headerlink" href="#fig-fs-wafaft" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.17 </span><span class="caption-text">WAFL tree after update</span><a class="headerlink" href="#fig-fs-waflaft" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In WAFL these changes percolate all the way up through directory
@@ -1468,7 +1468,7 @@ write) To avoid this overhead, WAFL buffers a large number of changes
 before writing to disk; thus although any single write will modify the
 root directory, only a single modified copy of the root directory has to
 be written in each batch.</p>
-<p>In <a class="reference internal" href="#fig-fs-waflbef"><span class="std std-numref">Fig. 21.16</span></a> and <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig:fs:waflaft</span></code> a WAFL directory tree is shown before and after
+<p>In <a class="reference internal" href="#fig-fs-waflbef"><span class="std std-numref">Fig. 21.16</span></a> and <a class="reference internal" href="#fig-fs-waflaft"><span class="std std-numref">Fig. 21.17</span></a> a WAFL directory tree is shown before and after
 modifying /dir1/file2, with the out-of-date blocks shown in grey. If we
 keep a pointer to the old root node, then you can access a copy of the
 file system as it was at that point in time. When the disk fills up
@@ -1483,14 +1483,14 @@ data is stored on a NetApp filer using WAFL and its snapshot
 functionality.)</p>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
-<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id1">7</a></span></dt>
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id1">7</a></span></dt>
 <dd><p>Why 2048? Because the designers of the CDROM file system defined
 it that way. Data is stored on CD in 2048-byte blocks plus error
 correction, making use of smaller block sizes difficult, and the
 authors evidently didn’t see any need to allow larger block sizes,
 either.</p>
 </dd>
-<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id2">8</a></span></dt>
+<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id2">8</a></span></dt>
 <dd><p>The astute reader will note that the pointer could use bytes
 within a block, causing each block to store slightly less than a
 full block of data. This would pose difficulties for operating
@@ -1498,31 +1498,31 @@ systems such as Linux which tightly couple the virtual memory and
 file systems, and assume that each 4 KB virtual memory page
 corresponds to one (or maybe 2 or 4) file system blocks.</p>
 </dd>
-<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id3">9</a></span></dt>
+<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id3">9</a></span></dt>
 <dd><p>A benchmark run on <a class="reference external" href="http://login.ccs.neu.edu">login.ccs.neu.edu</a> indicates that “pointer
 chasing” on a high-end Xeon takes about 200 ns when data is not in
 cache; each such random I/O would thus take about 25 ms of CPU time.</p>
 </dd>
-<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id5">10</a></span></dt>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id5">10</a></span></dt>
 <dd><p>The median file size in a recent study was 4 KB, or one block</p>
 </dd>
-<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id6">11</a></span></dt>
+<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id6">11</a></span></dt>
 <dd><p>When we’re being really precise, we’ll use KiB, MiB, GiB etc. to
 mean <span class="math notranslate nohighlight">\(2^{10}\)</span>, <span class="math notranslate nohighlight">\(2^{20}\)</span>, <span class="math notranslate nohighlight">\(2^{30}\)</span> and KB, MB, GB to mean <span class="math notranslate nohighlight">\(10^3\)</span>,
 <span class="math notranslate nohighlight">\(10^6\)</span> and <span class="math notranslate nohighlight">\(10^9\)</span>.</p>
 </dd>
-<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id7">12</a></span></dt>
+<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id7">12</a></span></dt>
 <dd><p>Deleting open files is a tricky problem, as there’s no good way
 to handle operations on those open handles after the file is
 deleted. Unix solves it by postponing the actual deletion until the
 file descriptor is closed; Windows instead locks the file against
 deletion until any open file handles are closed.</p>
 </dd>
-<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id8">13</a></span></dt>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id8">13</a></span></dt>
 <dd><p>These steps ignore inode writes to update file or directory
 modification times.</p>
 </dd>
-<dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id10">14</a></span></dt>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id9">14</a></span></dt>
 <dd><p>Actually it doesn’t check, but rather “replays” all the changes
 recorded in the log.</p>
 </dd>
@@ -1578,7 +1578,7 @@ recorded in the log.</p>
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Angela Demke Brown, Peter Desnoyers, Orran Krieger, Eric Munson & Larry Woodman<br/>
+    By (see contributing chapter book)<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

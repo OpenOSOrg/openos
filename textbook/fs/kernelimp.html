@@ -304,7 +304,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   32. Other OS structures
+   31. Other OS structures
   </a>
  </li>
 </ul>
@@ -316,17 +316,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   33. How to read this book
+   32. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   34. Contributing
+   33. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   35. Bibliography
+   34. Bibliography
   </a>
  </li>
 </ul>
@@ -652,14 +652,13 @@ translated into operations on the on-disk file system, where data is
 identified by its block number and all reads and writes must be in units
 of disk blocks.</p>
 <p>The primary parts of this task are:</p>
-<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Path translation - given a list of path components (e.g. &quot;usr&quot;, &quot;local&quot;,
-&quot;bin&quot;, &quot;program&quot;) perform the directory lookups necessary to find the
-file or directory named by that list.
-
-Read and write - translate operations on arbitrary offsets within a file
-to reads, writes, and allocations of complete disk blocks.
-</pre></div>
-</div>
+<ul class="simple">
+<li><p>Path translation - given a list of path components (e.g. “usr”, “local”,
+“bin”, “program”) perform the directory lookups necessary to find the
+file or directory named by that list.</p></li>
+<li><p>Read and write - translate operations on arbitrary offsets within a file
+to reads, writes, and allocations of complete disk blocks.</p></li>
+</ul>
 <p>Path translation is a straightforward tree search - starting at the root
 directory, search for an entry for the first path component, find the
 location for that file or directory, and repeat until the last component
@@ -832,31 +831,27 @@ allowing the kernel to traverse and list directories, create and delete
 files, and read and write arbitrary offsets within a file.</p>
 <p>The primary differences between the NFS (up through v3 - v4 is more
 complicated) and SMB are:</p>
-<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>State - NFS is designed to be stateless for reliability. Once you have
-obtained a file&#39;s unique ID (from the directory entry) you can just read
+<ul class="simple">
+<li><p>State - NFS is designed to be stateless for reliability. Once you have
+obtained a file’s unique ID (from the directory entry) you can just read
 from or write to a location in it, without opening the file. Operations
 are idempotent, which means they can be repeated multiple times without
 error. (e.g. writing page P to offset x can be repeated, while appending
-page P to the end of the file can&#39;t.) In contrast SMB is
+page P to the end of the file can’t.) In contrast SMB is
 connection-oriented, and requires files and directories to be opened
 before they can be operated on. NFS tolerates server crashes and
 restarts more gracefully, but does not have some of the
 connection-related features in SMB such as authentication, described
-below.
-
-Identity - NFS acts like a local file system, trusting the client to
+below.</p></li>
+<li><p>Identity - NFS acts like a local file system, trusting the client to
 authenticate users and pass numeric user IDs to the server. SMB handles
 authentication on the server side - each connection to the server begins
 with a handshake that authenticates to the server with a specific
 username, and all operations within that connection are done as that
-user.
-</pre></div>
-</div>
+user.</p></li>
+</ul>
 <section id="answers-to-review-questions">
 <h3><span class="section-number">22.3.1. </span>Answers to Review Questions<a class="headerlink" href="#answers-to-review-questions" title="Permalink to this headline">#</a></h3>
-<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>in filesys:1,filesys:2,filesys:3,filesys:4
-</pre></div>
-</div>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">15</a></span></dt>
@@ -917,7 +912,7 @@ a <em>sparse</em> address space.</p>
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Angela Demke Brown, Peter Desnoyers, Orran Krieger, Eric Munson & Larry Woodman<br/>
+    By (see contributing chapter book)<br/>
   
       &copy; Copyright 2022.<br/>
 </p>
