@@ -574,11 +574,45 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#objects">
    19.1. Objects
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hierarchical-namespace">
+     19.1.1. Hierarchical namespace
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file">
+     19.1.2. File
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unix-file-name-translation">
+     19.1.3. Unix file name translation
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#file-system-operations">
    19.2. File System Operations:
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#open-close">
+     19.2.1. Open/close
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#read-write-operations">
+     19.2.2. Read/Write operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naming-and-directories">
+     19.2.3. Naming and Directories
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#symbolic-links">
@@ -613,11 +647,45 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#objects">
    19.1. Objects
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hierarchical-namespace">
+     19.1.1. Hierarchical namespace
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file">
+     19.1.2. File
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unix-file-name-translation">
+     19.1.3. Unix file name translation
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#file-system-operations">
    19.2. File System Operations:
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#open-close">
+     19.2.1. Open/close
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#read-write-operations">
+     19.2.2. Read/Write operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naming-and-directories">
+     19.2.3. Naming and Directories
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#symbolic-links">
@@ -654,7 +722,9 @@ view of the user, a file system contains the following elements:</p>
 <li><p><em>objects</em> such as the files themselves as well as directories and other supporting objects;</p></li>
 <li><p><em>operations</em> on these objects.</p></li>
 </ul>
-<p><strong>Hierarchical namespace:</strong> File systems have traditionally used a
+<section id="hierarchical-namespace">
+<h3><span class="section-number">19.1.1. </span>Hierarchical namespace<a class="headerlink" href="#hierarchical-namespace" title="Permalink to this headline">#</a></h3>
+<p>File systems have traditionally used a
 tree-structured namespace<a class="footnote-reference brackets" href="#hier" id="id1">1</a>, as shown in <a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 19.1</span></a>.
 This tree is constructed via the use of
 <em>directories</em>, or objects in the namespace which map strings to further
@@ -668,7 +738,10 @@ documentation)</p>
 <p><span class="caption-number">Fig. 19.1 </span><span class="caption-text">Logical view: hierarchical file system name space</span><a class="headerlink" href="#fs-tree-logical" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p><strong>File:</strong> Early operating systems supported many different file
+</section>
+<section id="file">
+<h3><span class="section-number">19.1.2. </span>File<a class="headerlink" href="#file" title="Permalink to this headline">#</a></h3>
+<p>Early operating systems supported many different file
 types—binary executables, text files, and record-structured files, and
 others. The Unix operating system is the earliest I know of that
 restricted files to sequences of 8-bit bytes; it is probably not a
@@ -703,7 +776,10 @@ However, it can’t be “moved” from one offset to another: if you use a
 text editor to add or delete text in the middle of a file, the editor
 must re-write the entire file (or at least from the modified part to the
 end).</p>
-<p><strong>Unix file name translation:</strong> each process has an associated <em>current
+</section>
+<section id="unix-file-name-translation">
+<h3><span class="section-number">19.1.3. </span>Unix file name translation<a class="headerlink" href="#unix-file-name-translation" title="Permalink to this headline">#</a></h3>
+<p>Eeach process has an associated <em>current
 directory</em>, which may be changed via the <code class="docutils literal notranslate"><span class="pre">chdir</span></code> system call. File names
 beginning in ‘<code class="docutils literal notranslate"><span class="pre">/</span></code>’ are termed <em>absolute</em> names, and are interpreted
 relative to the root of the naming tree, while <em>relative</em> names are
@@ -714,32 +790,38 @@ itself.) Thus in the file system in
 the the paths <code class="docutils literal notranslate"><span class="pre">pjd/.profile</span></code> and <code class="docutils literal notranslate"><span class="pre">/home/pjd/.profile</span></code> refer to the same
 file, and <code class="docutils literal notranslate"><span class="pre">../bin/cat</span></code> and <code class="docutils literal notranslate"><span class="pre">/bin/cat</span></code> refer to the same file.</p>
 </section>
+</section>
 <section id="file-system-operations">
 <h2><span class="section-number">19.2. </span>File System Operations:<a class="headerlink" href="#file-system-operations" title="Permalink to this headline">#</a></h2>
 <p>There are several common types of file operations supported by Linux
 (and with slight differences, Windows). They can be classified into
 three main categories: open/close, read/write, and naming and
 directories.</p>
-<p><strong>Open/close</strong>: In order to access a file in Linux (or most operating
+<section id="open-close">
+<h3><span class="section-number">19.2.1. </span>Open/close<a class="headerlink" href="#open-close" title="Permalink to this headline">#</a></h3>
+<p>In order to access a file in Linux (or most operating
 systems) you first need to open the file, passing the file name and
 other parameters and receiving a <em>handle</em> (called a <em>file descriptor</em> in
 Unix) which may be used for further operations. The corresponding system
 calls are:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">desc</span> <span class="pre">=</span> <span class="pre">open(name,</span> <span class="pre">O_READ)</span></code> - Verify that file <code class="docutils literal notranslate"><span class="pre">name</span></code> exists and may
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">desc</span> <span class="pre">=</span> <span class="pre">open(name,</span> <span class="pre">O_READ)</span></code>: Verify that file <code class="docutils literal notranslate"><span class="pre">name</span></code> exists and may
 be read, and then return a <em>descriptor</em> which may be used to refer to
 that file when reading it.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">desc</span> <span class="pre">=</span> <span class="pre">open(name,</span> <span class="pre">O_WRITE</span> <span class="pre">|</span> <span class="pre">flags,</span> <span class="pre">mode)</span></code> - Verify permissions and
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">desc</span> <span class="pre">=</span> <span class="pre">open(name,</span> <span class="pre">O_WRITE</span> <span class="pre">|</span> <span class="pre">flags,</span> <span class="pre">mode)</span></code>: Verify permissions and
 open <code class="docutils literal notranslate"><span class="pre">name</span></code> for writing, creating it (or erasing existing contents) if
 necessary as specified in <code class="docutils literal notranslate"><span class="pre">flags</span></code>. Returns a descriptor which may be
 used for writing to that file.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">close(desc)</span></code> - stop using this descriptor, and free any resources
+<li><p><code class="docutils literal notranslate"><span class="pre">close(desc)</span></code>: stop using this descriptor, and free any resources
 allocated for it.</p></li>
 </ul>
 <p>Note that application programs rarely use the system calls themselves to
 access files, but instead use higher-level frameworks, ranging from Unix
 Standard I/O to high-level application frameworks.</p>
-<p><strong>Read/Write operations</strong>: To get a file with data in it, you need to
+</section>
+<section id="read-write-operations">
+<h3><span class="section-number">19.2.2. </span>Read/Write operations<a class="headerlink" href="#read-write-operations" title="Permalink to this headline">#</a></h3>
+<p>To get a file with data in it, you need to
 write it; to use that data you need to read it. To allow reading and
 writing in units of less than an entire file, or tedius calculations of
 the current file offset, UNIX uses the concept of a <em>current position</em>
@@ -752,14 +834,14 @@ overwrite old data, or start at the end (<code class="docutils literal notransla
 data to the file.</p>
 <p>System calls for reading and writing are:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">read(desc,</span> <span class="pre">buffer,</span> <span class="pre">max)</span></code> - Read <code class="docutils literal notranslate"><span class="pre">max</span></code> bytes (or fewer if the end of
+<li><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">read(desc,</span> <span class="pre">buffer,</span> <span class="pre">max)</span></code>: Read <code class="docutils literal notranslate"><span class="pre">max</span></code> bytes (or fewer if the end of
 the file is reached) into <code class="docutils literal notranslate"><span class="pre">buffer</span></code>, starting at the current position,
 and returning the actual number of bytes <code class="docutils literal notranslate"><span class="pre">n</span></code> read; the current position
 is then incremented by <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">write(desc,</span> <span class="pre">buffer,</span> <span class="pre">len)</span></code> - write <code class="docutils literal notranslate"><span class="pre">len</span></code> bytes from <code class="docutils literal notranslate"><span class="pre">buffer</span></code> into
+<li><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">write(desc,</span> <span class="pre">buffer,</span> <span class="pre">len)</span></code>: Write <code class="docutils literal notranslate"><span class="pre">len</span></code> bytes from <code class="docutils literal notranslate"><span class="pre">buffer</span></code> into
 the file, starting at the current position, and incrementing the current
 position by <code class="docutils literal notranslate"><span class="pre">len</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lseek(desc,</span> <span class="pre">offset,</span> <span class="pre">flag)</span></code> Set an open file’s current position to that
+<li><p><code class="docutils literal notranslate"><span class="pre">lseek(desc,</span> <span class="pre">offset,</span> <span class="pre">flag)</span></code>: Set an open file’s current position to that
 specified by <code class="docutils literal notranslate"><span class="pre">offset</span></code> and <code class="docutils literal notranslate"><span class="pre">flag</span></code>, which specifies whether <code class="docutils literal notranslate"><span class="pre">offset</span></code> is
 relative to the beginning, end, or current position in the file.</p></li>
 </ul>
@@ -775,7 +857,10 @@ Unix programs use simple “stream” input and output, these may be
 re-directed so that the same program can—without any special
 programming—read from or write to a terminal, a network connection, a
 file, or a pipe from or to another program.</p>
-<p><strong>Naming and Directories</strong>: In Unix there is a difference between a name
+</section>
+<section id="naming-and-directories">
+<h3><span class="section-number">19.2.3. </span>Naming and Directories<a class="headerlink" href="#naming-and-directories" title="Permalink to this headline">#</a></h3>
+<p>In Unix there is a difference between a name
 (a directory entry) and the object (file or directory) that the name
 points to. The naming and directories operations are:</p>
 <ul class="simple">
@@ -783,22 +868,22 @@ points to. The naming and directories operations are:</p>
 either changing the name in its directory entry (if the destination is
 in the same directory) or creating a new entry and deleting the old one
 (if moving into a new directory).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">link(path1,</span> <span class="pre">path2)</span></code> Add a <em>hard link</em> to a file<a class="footnote-reference brackets" href="#id8" id="id4">4</a>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">unlink(path)</span></code> - Delete a file.<a class="footnote-reference brackets" href="#id9" id="id5">5</a></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">desc</span> <span class="pre">=</span> <span class="pre">opendir(path)</span></code><br />
-<code class="docutils literal notranslate"><span class="pre">readdir(desc,</span> <span class="pre">dirent*),</span> <span class="pre">dirent=(name,type,length)</span></code> This interface
+<li><p><code class="docutils literal notranslate"><span class="pre">link(path1,</span> <span class="pre">path2)</span></code>: Add a <em>hard link</em> to a file<a class="footnote-reference brackets" href="#id8" id="id4">4</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unlink(path)</span></code>: Delete a file.<a class="footnote-reference brackets" href="#id9" id="id5">5</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">desc</span> <span class="pre">=</span> <span class="pre">opendir(path)</span></code>, <code class="docutils literal notranslate"><span class="pre">readdir(desc,</span> <span class="pre">dirent*),</span> <span class="pre">dirent=(name,type,length)</span></code>: This interface
 allows a program to enumerate names in a directory, and determine their
 type. (i.e. file, directory, symbolic link, or special-purpose file)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stat(file,</span> <span class="pre">statbuf)</span></code><br />
-<code class="docutils literal notranslate"><span class="pre">fstat(desc,</span> <span class="pre">statbuf)</span></code> - returns file attributes - size, owner,
+<li><p><code class="docutils literal notranslate"><span class="pre">stat(file,</span> <span class="pre">statbuf)</span></code>
+<code class="docutils literal notranslate"><span class="pre">fstat(desc,</span> <span class="pre">statbuf)</span></code>:  returns file attributes - size, owner,
 permissions, modification time, etc. In Unix these are attributes of the
 file itself, residing in the i-node, and can’t be found in the directory
 entry - otherwise it would be necessary to keep multiple copies
 consistent.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mkdir(path)</span></code><br />
-<code class="docutils literal notranslate"><span class="pre">rmdir(path)</span></code> - directory operations: create a new, empty directory, or
+<li><p><code class="docutils literal notranslate"><span class="pre">mkdir(path)</span></code>
+<code class="docutils literal notranslate"><span class="pre">rmdir(path)</span></code>: directory operations: create a new, empty directory, or
 delete an empty directory.</p></li>
 </ul>
+</section>
 </section>
 <section id="symbolic-links">
 <h2><span class="section-number">19.3. </span>Symbolic links<a class="headerlink" href="#symbolic-links" title="Permalink to this headline">#</a></h2>
