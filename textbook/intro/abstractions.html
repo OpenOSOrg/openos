@@ -1,0 +1,803 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4. Operating System Abstractions &#8212; Introduction to Operating Systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. Tools" href="tools.html" />
+    <link rel="prev" title="3. Operating System Structure &amp; Unix/Linux" href="structure.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="pref.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="purpose.html">
+   2. Purpose of operating systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="structure.html">
+   3. Operating System Structure &amp; Unix/Linux
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4. Operating System Abstractions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tools.html">
+   6. Tools
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Scheduling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/scheduling.html">
+   7. Processor Scheduling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Memory Management
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/intro.html">
+   8. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/physmem.html">
+   9. Memory management without translation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/virt-seg.html">
+   10. Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/virt-paging.html">
+   11. Paging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/page-tables.html">
+   12. Page Tables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/reclamation.html">
+   13. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/buffer-cache.html">
+   14. Buffer Cache
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/pagefaults.html">
+   15. Page Faults
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/misc.html">
+   16. Conclusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/realworld.html">
+   17. Memory management in the real world
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/concl.html">
+   18. Other Stuff
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/intro.html">
+   19. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/interface.html">
+   20. Interface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
+   21. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/kernelimp.html">
+   22. Kernel implementation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sync.html">
+   23. Intro Concurrency Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   24. Cooperating Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locking.html">
+   25. Synchronization Primitives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/deadlock.html">
+   26. Deadlocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   27. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   28. Locking in the Linux Kernel
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/OtherInro.html">
+   29. Overview of other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../virt/virt.html">
+   30. Virtualization and Cloud computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="other.html">
+   31. Other OS structures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/howto.html">
+   32. How to read this book
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   33. Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/bib.html">
+   34. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/intro/abstractions.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/intro/abstractions.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/okrieg/openos"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fintro/abstractions.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/edit/main/content/intro/abstractions.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/intro/abstractions.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   4. Operating System Abstractions
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#files">
+     4.1. Files
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operating-system-services">
+   5. Operating System Services
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-systems">
+     5.1. File Systems
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Operating System Abstractions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   4. Operating System Abstractions
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#files">
+     4.1. Files
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operating-system-services">
+   5. Operating System Services
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-systems">
+     5.1. File Systems
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This portion of the book is under construction, not ready to be read</p>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="operating-system-abstractions">
+<span id="cont-gs-abstractions"></span><h1><span class="section-number">4. </span>Operating System Abstractions<a class="headerlink" href="#operating-system-abstractions" title="Permalink to this headline">#</a></h1>
+<p>UNIX has instilled in generations of computer scientists a basic aesthetic for how to design and structure complicated collections of software.  In particular one learns that the designers of UNIX tried to structure the system around a small core set of ideas, “abstractions”, that once understood allows a programmer to understand the rest of the system and how to get things done.   In this chapter we introduce some of those key abstractions.</p>
+<section id="files">
+<h2><span class="section-number">4.1. </span>Files<a class="headerlink" href="#files" title="Permalink to this headline">#</a></h2>
+<p>Probably the most novel idea of Unix is that everything is a file, where a file is a stream of bytes.  A process can use files to access durable state on a disk, communicate with other processes, find out information about the system, and communicate over the network.   This central idea enables one to write programs that do the same task irrespective of where the data is coming from or going to.  As we will see, it also allows programmers to tie together multiple simple programs to do a more complex task.</p>
+<figure class="align-default" id="file-desc">
+<a class="reference internal image-reference" href="../_images/file-desc.png"><img alt="../_images/file-desc.png" src="../_images/file-desc.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">The kernel array of file descriptors.</span><a class="headerlink" href="#file-desc" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>As shown <a class="reference internal" href="#file-desc"><span class="std std-numref">Fig. 4.1</span></a> the kernel maintains a table of open files, and a file descriptor is an index into that table that can be used to read or write to a particular file.  Entries are added to the table by operations that open or create a file or create a special file like a network connection.  There are three special file descriptors shown in <a class="reference internal" href="#fd-table"><span class="std std-numref">Table 4.1</span></a></p>
+<table class="table" id="fd-table">
+<caption><span class="caption-number">Table 4.1 </span><span class="caption-text">Standard well known file descriptors. </span><a class="headerlink" href="#fd-table" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>stdin</p></td>
+<td><p>standard input; process should read data from here</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>stdout</p></td>
+<td><p>standard output; process will write its output here</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>stderr</p></td>
+<td><p>standard error; process should write out errors here</p></td>
+</tr>
+</tbody>
+</table>
+<p>The two most important operations on files are:</p>
+<ul class="simple">
+<li><p><strong>ssize_t read(int fd, void *buf, size_t count)</strong>: read from file referenced by descriptor <em>fd</em> into memory pointed to by <em>buf</em> as up to <em>count</em> bytes.</p></li>
+<li><p><strong>ssize_t write(int fd, void *buf, size_t count)</strong>: write from file referenced by descriptor <em>fd</em> from memory pointed to by <em>buf</em>, up to <em>count</em> bytes.</p></li>
+</ul>
+<p>To understand how to use these operations, you really need to read the manual.  In Linux you can find out about everything using the <strong>man</strong> program.  For example:</p>
+<div class="cell tag_output_scroll tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "367cfec2941b429bb0b0d962a4a75cbb", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<div class="margin admonition note">
+<p class="admonition-title">Note</p>
+<p>In this case, the <em>2</em> refers to the section of the manual for system calls.  To find out about the different sections, you, of course, read the manual about the man command.</p>
+</div>
+<p>So, what</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="operating-system-services">
+<span id="cont-gs-services"></span><h1><span class="section-number">5. </span>Operating System Services<a class="headerlink" href="#operating-system-services" title="Permalink to this headline">#</a></h1>
+<section id="file-systems">
+<h2><span class="section-number">5.1. </span>File Systems<a class="headerlink" href="#file-systems" title="Permalink to this headline">#</a></h2>
+<p>use some of these</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ls -l /proc/$$/fd/{0..2}
+lrwx------. 1 jovyan root 64 Aug  7 02:10 /proc/6121/fd/0 -&gt; /dev/pts/2
+lrwx------. 1 jovyan root 64 Aug  7 02:10 /proc/6121/fd/1 -&gt; /dev/pts/2
+lrwx------. 1 jovyan root 64 Aug  7 02:10 /proc/6121/fd/2 -&gt; /dev/pts/2
+
+file /dev/pts/2
+/dev/pts/2: character special (136/2)
+</pre></div>
+</div>
+</section>
+</section>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"367cfec2941b429bb0b0d962a4a75cbb": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_b2f38fdfc46347a886c980c0b71ddefa", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ man 2 write\r\nWRITE(2)                   Linux Programmer's Manual                  WRITE(2)\r\n\r\nN\bNA\bAM\bME\bE\r\n       write - write to a file descriptor\r\n\r\nS\bSY\bYN\bNO\bOP\bPS\bSI\bIS\bS\r\n       #\b#i\bin\bnc\bcl\blu\bud\bde\be <\b<u\bun\bni\bis\bst\btd\bd.\b.h\bh>\b>\r\n\r\n       s\bss\bsi\biz\bze\be_\b_t\bt w\bwr\bri\bit\bte\be(\b(i\bin\bnt\bt _\bf_\bd,\b, c\bco\bon\bns\bst\bt v\bvo\boi\bid\bd *\b*_\bb_\bu_\bf,\b, s\bsi\biz\bze\be_\b_t\bt _\bc_\bo_\bu_\bn_\bt)\b);\b;\r\n\r\nD\bDE\bES\bSC\bCR\bRI\bIP\bPT\bTI\bIO\bON\bN\r\n       w\bwr\bri\bit\bte\be() writes up to _\bc_\bo_\bu_\bn_\bt bytes from the buffer starting at _\bb_\bu_\bf to the\r\n       file referred to by the file descriptor _\bf_\bd.\r\n\r\n       The number of bytes written may be less than  _\bc_\bo_\bu_\bn_\bt  if,  for  example,\r\n       there  is  insufficient space on the underlying physical medium, or the\r\n       R\bRL\bLI\bIM\bMI\bIT\bT_\b_F\bFS\bSI\bIZ\bZE\bE resource limit is encountered (see s\bse\bet\btr\brl\bli\bim\bmi\bit\bt(2)),  or  the\r\n       call was interrupted by a signal handler after having written less than\r\n       _\bc_\bo_\bu_\bn_\bt bytes.  (See also p\bpi\bip\bpe\be(7).)\r\n\r\n       For a seekable file (i.e., one to which l\bls\bse\bee\bek\bk(2) may  be  applied,  for\r\n       example,  a  regular  file) writing takes place at the file offset, and\r\n       the file offset is incremented by the number of bytes actually written.\r\n       If  the  file was o\bop\bpe\ben\bn(2)ed with O\bO_\b_A\bAP\bPP\bPE\bEN\bND\bD, the file offset is first set\r\n       to the end of the file before writing.  The adjustment of the file off\u2010\r\n       set and the write operation are performed as an atomic step.\r\n\r\n       POSIX  requires  that  a  r\bre\bea\bad\bd(2)  that  can be proved to occur after a\r\n       w\bwr\bri\bit\bte\be() has returned will return the  new  data.   Note  that  not  all\r\n       filesystems are POSIX conforming.\r\n\r\n       According to POSIX.1, if _\bc_\bo_\bu_\bn_\bt is greater than S\bSS\bSI\bIZ\bZE\bE_\b_M\bMA\bAX\bX, the result is\r\n       implementation-defined; see NOTES for the upper limit on Linux.\r\n\r\nR\bRE\bET\bTU\bUR\bRN\bN V\bVA\bAL\bLU\bUE\bE\r\n       On success, the number of bytes written is returned.  On error,  -1  is\r\n       returned, and _\be_\br_\br_\bn_\bo is set to indicate the cause of the error.\r\n\r\n       Note  that  a  successful  w\bwr\bri\bit\bte\be() may transfer fewer than _\bc_\bo_\bu_\bn_\bt bytes.\r\n       Such partial writes can occur for various reasons; for example, because\r\n       there was insufficient space on the disk device to write all of the re\u2010\r\n       quested bytes, or because a blocked w\bwr\bri\bit\bte\be() to a socket, pipe, or simi\u2010\r\n       lar  was interrupted by a signal handler after it had transferred some,\r\n       but before it had transferred all of the requested bytes.  In the event\r\n       of  a partial write, the caller can make another w\bwr\bri\bit\bte\be() call to trans\u2010\r\n       fer the remaining bytes.  The subsequent call will either transfer fur\u2010\r\n       ther bytes or may result in an error (e.g., if the disk is now full).\r\n\r\n       If  _\bc_\bo_\bu_\bn_\bt is zero and _\bf_\bd refers to a regular file, then w\bwr\bri\bit\bte\be() may re\u2010\r\n       turn a failure status if one of the errors below is  detected.   If  no\r\n       errors are detected, or error detection is not performed, 0 will be re\u2010\r\n       turned without causing any other effect.   If  _\bc_\bo_\bu_\bn_\bt  is  zero  and  _\bf_\bd\r\n       refers  to a file other than a regular file, the results are not speci\u2010\r\n       fied.\r\n\r\nE\bER\bRR\bRO\bOR\bRS\bS\r\n       E\bEA\bAG\bGA\bAI\bIN\bN The file descriptor _\bf_\bd refers to a file other than a socket  and\r\n              has  been  marked  nonblocking (O\bO_\b_N\bNO\bON\bNB\bBL\bLO\bOC\bCK\bK), and the write would\r\n              block.  See o\bop\bpe\ben\bn(2) for further details on the O\bO_\b_N\bNO\bON\bNB\bBL\bLO\bOC\bCK\bK flag.\r\n\r\n       E\bEA\bAG\bGA\bAI\bIN\bN or E\bEW\bWO\bOU\bUL\bLD\bDB\bBL\bLO\bOC\bCK\bK\r\n              The file descriptor _\bf_\bd refers to a socket and  has  been  marked\r\n              nonblocking   (O\bO_\b_N\bNO\bON\bNB\bBL\bLO\bOC\bCK\bK),   and   the   write   would   block.\r\n              POSIX.1-2001 allows either error to be returned for  this  case,\r\n              and  does not require these constants to have the same value, so\r\n              a portable application should check for both possibilities.\r\n\r\n       E\bEB\bBA\bAD\bDF\bF  _\bf_\bd is not a valid file descriptor or is not open for writing.\r\n\r\n       E\bED\bDE\bES\bST\bTA\bAD\bDD\bDR\bRR\bRE\bEQ\bQ\r\n              _\bf_\bd refers to a datagram socket for which a peer address has  not\r\n              been set using c\bco\bon\bnn\bne\bec\bct\bt(2).\r\n\r\n       E\bED\bDQ\bQU\bUO\bOT\bT The user's quota of disk blocks on the filesystem containing the\r\n              file referred to by _\bf_\bd has been exhausted.\r\n\r\n       E\bEF\bFA\bAU\bUL\bLT\bT _\bb_\bu_\bf is outside your accessible address space.\r\n\r\n       E\bEF\bFB\bBI\bIG\bG  An attempt was made to write a file that exceeds the implementa\u2010\r\n              tion-defined maximum file size or the process's file size limit,\r\n              or to write at a position past the maximum allowed offset.\r\n\r\n       E\bEI\bIN\bNT\bTR\bR  The call was interrupted by a signal before any data  was  writ\u2010\r\n              ten; see s\bsi\big\bgn\bna\bal\bl(7).\r\n\r\n       E\bEI\bIN\bNV\bVA\bAL\bL _\bf_\bd  is attached to an object which is unsuitable for writing; or\r\n              the file was opened with the O\bO_\b_D\bDI\bIR\bRE\bEC\bCT\bT flag, and either  the  ad\u2010\r\n              dress  specified  in  _\bb_\bu_\bf,  the value specified in _\bc_\bo_\bu_\bn_\bt, or the\r\n              file offset is not suitably aligned.\r\n\r\n       E\bEI\bIO\bO    A low-level I/O error occurred while modifying the inode.   This\r\n              error may relate to the write-back of data written by an earlier\r\n              w\bwr\bri\bit\bte\be(), which may have been issued to a different file descrip\u2010\r\n              tor  on the same file.  Since Linux 4.13, errors from write-back\r\n              come with a promise that they _\bm_\ba_\by  be  reported  by  subsequent.\r\n              w\bwr\bri\bit\bte\be()  requests, and _\bw_\bi_\bl_\bl be reported by a subsequent f\bfs\bsy\byn\bnc\bc(2)\r\n              (whether or not they were also reported by w\bwr\bri\bit\bte\be()).  An  alter\u2010\r\n              nate  cause  of E\bEI\bIO\bO on networked filesystems is when an advisory\r\n              lock had been taken out on the file descriptor and this lock has\r\n              been  lost.   See the _\bL_\bo_\bs_\bt _\bl_\bo_\bc_\bk_\bs section of f\bfc\bcn\bnt\btl\bl(2) for further\r\n              details.\r\n\r\n       E\bEN\bNO\bOS\bSP\bPC\bC The device containing the file referred to by _\bf_\bd has no room for\r\n              the data.\r\n\r\n       E\bEP\bPE\bER\bRM\bM  The operation was prevented by a file seal; see f\bfc\bcn\bnt\btl\bl(2).\r\n\r\n       E\bEP\bPI\bIP\bPE\bE  _\bf_\bd is connected to a pipe or socket whose reading end is closed.\r\n              When this happens the writing process will also receive  a  S\bSI\bIG\bG\u2010\b\u2010\r\n              P\bPI\bIP\bPE\bE  signal.  (Thus, the write return value is seen only if the\r\n              program catches, blocks or ignores this signal.)\r\n\r\n       Other errors may occur, depending on the object connected to _\bf_\bd.\r\n\r\nC\bCO\bON\bNF\bFO\bOR\bRM\bMI\bIN\bNG\bG T\bTO\bO\r\n       SVr4, 4.3BSD, POSIX.1-2001.\r\n\r\n       Under SVr4 a write may be interrupted and return E\bEI\bIN\bNT\bTR\bR  at  any  point,\r\n       not just before any data is written.\r\n\r\nN\bNO\bOT\bTE\bES\bS\r\n       The types _\bs_\bi_\bz_\be_\b__\bt and _\bs_\bs_\bi_\bz_\be_\b__\bt are, respectively, unsigned and signed in\u2010\r\n       teger data types specified by POSIX.1.\r\n\r\n       A successful return from w\bwr\bri\bit\bte\be() does not make any guarantee that  data\r\n       has  been  committed  to  disk.  On some filesystems, including NFS, it\r\n       does not even guarantee that space has successfully been  reserved  for\r\n       the  data.   In  this case, some errors might be delayed until a future\r\n       w\bwr\bri\bit\bte\be(), f\bfs\bsy\byn\bnc\bc(2), or even c\bcl\blo\bos\bse\be(2).  The only way to  be  sure  is  to\r\n       call f\bfs\bsy\byn\bnc\bc(2) after you are done writing all your data.\r\n\r\n       If  a  w\bwr\bri\bit\bte\be()  is interrupted by a signal handler before any bytes are\r\n       written, then the call fails with the error E\bEI\bIN\bNT\bTR\bR; if it is interrupted\r\n       after  at  least  one byte has been written, the call succeeds, and re\u2010\r\n       turns the number of bytes written.\r\n\r\n       On Linux, w\bwr\bri\bit\bte\be() (and similar system  calls)  will  transfer  at  most\r\n       0x7ffff000  (2,147,479,552)  bytes, returning the number of bytes actu\u2010\r\n       ally transferred.  (This is true on both 32-bit and 64-bit systems.)\r\n\r\n       An error return value while performing w\bwr\bri\bit\bte\be() using  direct  I/O  does\r\n       not  mean  the entire write has failed. Partial data may be written and\r\n       the data at the file offset on which the w\bwr\bri\bit\bte\be() was  attempted  should\r\n       be considered inconsistent.\r\n\r\nB\bBU\bUG\bGS\bS\r\n       According to POSIX.1-2008/SUSv4 Section XSI 2.9.7 (\"Thread Interactions\r\n       with Regular File Operations\"):\r\n\r\n           All of the following functions shall be atomic with respect to each\r\n           other in the effects specified in POSIX.1-2008 when they operate on\r\n           regular files or symbolic links: ...\r\n\r\n       Among the APIs subsequently listed  are  w\bwr\bri\bit\bte\be()  and  w\bwr\bri\bit\bte\bev\bv(2).   And\r\n       among  the effects that should be atomic across threads (and processes)\r\n       are updates of the file offset.  However, on Linux before version 3.14,\r\n       this  was  not  the  case: if two processes that share an open file de\u2010\r\n       scription (see o\bop\bpe\ben\bn(2)) perform a w\bwr\bri\bit\bte\be() (or w\bwr\bri\bit\bte\bev\bv(2))  at  the  same\r\n       time, then the I/O operations were not atomic with respect updating the\r\n       file offset, with the result that the blocks of data output by the  two\r\n       processes might (incorrectly) overlap.  This problem was fixed in Linux\r\n       3.14.\r\n\r\nS\bSE\bEE\bE A\bAL\bLS\bSO\bO\r\n       c\bcl\blo\bos\bse\be(2), f\bfc\bcn\bnt\btl\bl(2), f\bfs\bsy\byn\bnc\bc(2), i\bio\boc\bct\btl\bl(2), l\bls\bse\bee\bek\bk(2),  o\bop\bpe\ben\bn(2),  p\bpw\bwr\bri\bit\bte\be(2),\r\n       r\bre\bea\bad\bd(2), s\bse\bel\ble\bec\bct\bt(2), w\bwr\bri\bit\bte\bev\bv(2), f\bfw\bwr\bri\bit\bte\be(3)\r\n\r\nC\bCO\bOL\bLO\bOP\bPH\bHO\bON\bN\r\n       This  page  is  part of release 5.05 of the Linux _\bm_\ba_\bn_\b-_\bp_\ba_\bg_\be_\bs project.  A\r\n       description of the project, information about reporting bugs,  and  the\r\n       latest     version     of     this    page,    can    be    found    at\r\n       https://www.kernel.org/doc/man-pages/.\r\n\r\nLinux                             2019-10-10                          WRITE(2)\r\n$ "}]}}, "b2f38fdfc46347a886c980c0b71ddefa": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "1in", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d28d0613ac0a4368990e2a1e2c32327f": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_dbb0ad440c9a4eeca1cb7c279f3b159a", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     [[ -a myfile ]] && rm myfile\r\n$     [[ -a errors ]] && rm errors \r\n$     [[ -a mydate ]] && rm mydate\r\n$     [[ -a mynewdir ]] && rm -rf mynewdir\r\n$     [[ -a anotherfile ]] && rm anotherfile\r\n$     [[ -a mybin ]] && rm -rf  mybin\r\n$     [[ -a myinfo ]] && rm myinfo\r\n$ "}]}}, "dbb0ad440c9a4eeca1cb7c279f3b159a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+</script>
+
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./intro"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="structure.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>Operating System Structure &amp; Unix/Linux</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="tools.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Tools</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By (see contributing chapter book)<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
