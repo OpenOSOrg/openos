@@ -644,16 +644,35 @@ for each process. If memory is allocated and de-allocated in chunks of
 different sizes and at different times, then it can become <em>fragmented</em>
 so that even if large amounts of memory are free, it will be divided
 into smaller fragments, separated by longer-lived small allocations, as
-seen in <a class="reference external" href="#fig:vm:fig2">[fig:vm:fig2]</a>{reference-type=”autoref”
-reference=”fig:vm:fig2”}.</p>
-<p>Start: 32 locations, all free<br />
-<img alt="image" src="../_images/virt-mem-frag-1.png" />{width=”80%”}\</p>
-<p>Step 1, 2: a = alloc(10), b = alloc(1)<br />
-<img alt="image" src="../_images/virt-mem-frag-2.png" />{width=”80%”}\</p>
-<p>Step 3, 4, 5: c = alloc(10), d = alloc(1), e = alloc(10)<br />
-<img alt="image" src="../_images/virt-mem-frag-3.png" />{width=”80%”}\</p>
-<p>Step 6, 7, 8: free(a), free(c), free(e)<br />
-<img alt="image" src="../_images/virt-mem-frag-4.png" />{width=”80%”}</p>
+seen in (#fig:vm:fig2).</p>
+<p>Start: 32 locations, all free</p>
+<figure class="align-default" id="mm-virt-mem-frag-1">
+<a class="reference internal image-reference" href="../_images/virt-mem-frag-1.png"><img alt="../_images/virt-mem-frag-1.png" src="../_images/virt-mem-frag-1.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10.2 </span><span class="caption-text">Everything is free</span><a class="headerlink" href="#mm-virt-mem-frag-1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Step 1, 2: a = alloc(10), b = alloc(1)</p>
+<figure class="align-default" id="mm-virt-mem-frag-2">
+<a class="reference internal image-reference" href="../_images/virt-mem-frag-2.png"><img alt="../_images/virt-mem-frag-2.png" src="../_images/virt-mem-frag-2.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10.3 </span><span class="caption-text">Buffer A allocates 10 and Buffer B allocates 1</span><a class="headerlink" href="#mm-virt-mem-frag-2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Step 3, 4, 5: c = alloc(10), d = alloc(1), e = alloc(10)</p>
+<figure class="align-default" id="mm-virt-mem-frag-3">
+<a class="reference internal image-reference" href="../_images/virt-mem-frag-3.png"><img alt="../_images/virt-mem-frag-3.png" src="../_images/virt-mem-frag-3.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10.4 </span><span class="caption-text">Buffer C allocates 10, Buffer D allocates 1 and Buffer E allocates 10</span><a class="headerlink" href="#mm-virt-mem-frag-3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Step 6, 7, 8: free(a), free( c ), free(e)</p>
+<figure class="align-default" id="mm-virt-mem-frag-4">
+<a class="reference internal image-reference" href="../_images/virt-mem-frag-4.png"><img alt="../_images/virt-mem-frag-4.png" src="../_images/virt-mem-frag-4.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10.5 </span><span class="caption-text">Buffer A frees 10, Buffer C frees 1 and Buffer E frees 10</span><a class="headerlink" href="#mm-virt-mem-frag-4" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>In the last line, you can see that only 2 units of memory (out of 32)
 remain allocated, but the largest amount that can be allocated at one
 time is 10 units. If all allocation requests are small, this might not
