@@ -7,7 +7,7 @@ parts:
   - file: intro/intro
   - file: intro/purpose
   - file: intro/structure
-  - file: intro/services
+  - file: intro/abstractions
   - file: intro/tools
 # commenting out other materials for now to be potentially integrated
 #  - file: intro/peter-other
