@@ -7,9 +7,10 @@ parts:
   - file: intro/intro
   - file: intro/purpose
   - file: intro/structure
-  - file: intro/services
+  - file: intro/abstractions
   - file: intro/tools
-  - file: intro/peter-other
+# commenting out other materials for now to be potentially integrated
+#  - file: intro/peter-other
 - caption: 'Scheduling'
   numbered: True
   chapters:
@@ -30,9 +31,10 @@ parts:
   - file: mm/misc
   - file: mm/realworld
   - file: mm/concl
-  - file: mm/mm
-  - file: mm/Overview
-  - file: mm/peter-mm
+# Below is stuff deleted, but content may still be needed
+#  - file: mm/mm
+#  - file: mm/Overview
+#  - file: mm/peter-mm
 - caption: 'File Systems'
   numbered: True
   chapters:
@@ -49,18 +51,22 @@ parts:
   - file: sync/deadlock
   - file: sync/hardware_challenges
   - file: sync/linux_locking
-  - file: sync/peter-syncro
+# materials to be integrated from peter's book
+#  - file: sync/peter-syncro
 - caption: 'Other Topics'
   numbered: True
   chapters:
   - file: misc/OtherInro
-  - file: sec/sec
+# security right now is broken
+#  - file: sec/sec
   - file: virt/virt
   - file: intro/other
-  - file: devices/block-dev
+# decide later the extent to which we want to conver block devices
+#  - file: devices/block-dev
 - caption: 'Appendices'
   numbered: True
   chapters:
+  - file: misc/howto
   - file: contributing/Contributing
   - file: misc/bib
 
