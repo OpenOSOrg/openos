@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>21. EVERYTHING BELOW HERE IS CRAP &#8212; Introduction to Operating Systems</title>
+    <title>19. EVERYTHING BELOW HERE IS CRAP &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="23. Overview of MM" href="Overview.html" />
-    <link rel="prev" title="20. Other Stuff" href="concl.html" />
+    <link rel="next" title="21. Overview of MM" href="Overview.html" />
+    <link rel="prev" title="18. Other Stuff" href="concl.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -147,11 +147,6 @@ const thebe_selector_output = ".output, .cell_output"
    6. Tools
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro/peter-other.html">
-   7. Other stuff from peter to integrate
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -161,7 +156,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   10. Processor Scheduling
+   7. Processor Scheduling
   </a>
  </li>
 </ul>
@@ -173,67 +168,72 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   11. Introduction
+   8. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="physmem.html">
+   9. Memory management without translation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-seg.html">
-   12. Segmentation
+   10. Segmentation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-paging.html">
-   13. Paging
+   11. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-tables.html">
-   14. Page Tables
+   12. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="reclamation.html">
-   15. Memory reclaiming algorithms.
+   13. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="buffer-cache.html">
-   16. Page Sizes
+   14. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pagefaults.html">
-   17. Page Faults
+   15. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="misc.html">
-   18. Conclusion
+   16. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="realworld.html">
-   19. Memory management in the real world
+   17. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concl.html">
-   20. Other Stuff
+   18. Other Stuff
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   21. EVERYTHING BELOW HERE IS CRAP
+   19. EVERYTHING BELOW HERE IS CRAP
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Overview.html">
-   23. Overview of MM
+   21. Overview of MM
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="peter-mm.html">
-   24. Peter’s Virtual Memory chapter
+   22. Peter’s Virtual Memory chapter
   </a>
  </li>
 </ul>
@@ -245,22 +245,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   25. Introduction
+   23. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   26. Interface
+   24. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   27. File System Layout
+   25. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   28. Kernel implementation
+   26. Kernel implementation
   </a>
  </li>
 </ul>
@@ -272,37 +272,37 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   29. Intro Concurrency Synchronization and Deadlock
+   27. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   30. Cooperating Processes
+   28. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   31. Synchronization Primitives
+   29. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   32. Deadlocks
+   30. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   33. Challenges of Modern Hardware
+   31. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   34. Locking in the Linux Kernel
+   32. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/peter-syncro.html">
-   35. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
+   33. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
   </a>
  </li>
 </ul>
@@ -314,27 +314,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   36. Overview of other topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sec/sec.html">
-   37. Security
+   34. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   39. Virtualization and Cloud computing
+   35. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   41. Other OS structures
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../devices/block-dev.html">
-   42. I/O, Drivers, and DMA {#chap:blockdevs}
+   37. Other OS structures
   </a>
  </li>
 </ul>
@@ -345,13 +335,18 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../misc/howto.html">
+   38. How to read this book
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   43. Contributing
+   39. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   44. Bibliography
+   40. Bibliography
   </a>
  </li>
 </ul>
@@ -597,17 +592,17 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   21. EVERYTHING BELOW HERE IS CRAP
+   19. EVERYTHING BELOW HERE IS CRAP
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   22. Introduction
+   20. Introduction
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#notes">
-     22.1. Notes
+     20.1. Notes
     </a>
    </li>
   </ul>
@@ -633,17 +628,17 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   21. EVERYTHING BELOW HERE IS CRAP
+   19. EVERYTHING BELOW HERE IS CRAP
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   22. Introduction
+   20. Introduction
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#notes">
-     22.1. Notes
+     20.1. Notes
     </a>
    </li>
   </ul>
@@ -659,10 +654,10 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="everything-below-here-is-crap">
-<h1><span class="section-number">21. </span>EVERYTHING BELOW HERE IS CRAP<a class="headerlink" href="#everything-below-here-is-crap" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">19. </span>EVERYTHING BELOW HERE IS CRAP<a class="headerlink" href="#everything-below-here-is-crap" title="Permalink to this headline">#</a></h1>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<span id="cont-mm-intro"></span><h1><span class="section-number">22. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
+<span id="cont-mm-intro"></span><h1><span class="section-number">20. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
 <p>There is a massive amount of memory… Today a simple home computer…</p>
 <p>programs will expand to fill it all up…</p>
 <ol class="simple">
@@ -711,7 +706,7 @@ moved to a different physical address.</p>
 <p>No memory abstraction also implies that there is no protection between multiple programs loaded into memory at the same time.
 If a program takes a wild branch or writes to a random address it will corrupt other programs or even the entire system.</p>
 <section id="notes">
-<h2><span class="section-number">22.1. </span>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">20.1. </span>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">#</a></h2>
 <p>Refer <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/shellintro.html#arithmetic-expansion">here</a> for doing binary math in shell</p>
 </section>
 </section>
@@ -747,13 +742,13 @@ If a program takes a wild branch or writes to a random address it will corrupt o
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">20. </span>Other Stuff</p>
+            <p class="prev-next-title"><span class="section-number">18. </span>Other Stuff</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Overview.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">23. </span>Overview of MM</p>
+        <p class="prev-next-title"><span class="section-number">21. </span>Overview of MM</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
