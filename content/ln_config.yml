@@ -47,6 +47,9 @@ parse:
     - substitution
     - html_admonition
 
+numbering:
+  code: true
+
 execute:
   execute_notebooks: "cache"
   allow_error: true
