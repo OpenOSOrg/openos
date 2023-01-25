@@ -17,13 +17,15 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-bash.run("echo "hello class" > " + bash_stdout)
+### Changing stdin/stdout 
+
+Introduce dup2, show how that works
 ------------------
 
-[0;36m  Input [0;32mIn [6][0;36m[0m
-[0;31m    bash.run("echo "hello class" > " + bash_stdout)[0m
-[0m             ^[0m
-[0;31mSyntaxError[0m[0;31m:[0m invalid syntax. Perhaps you forgot a comma?
+[0;36m  Input [0;32mIn [11][0;36m[0m
+[0;31m    Introduce dup2, show how that works[0m
+[0m              ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
 
-SyntaxError: invalid syntax. Perhaps you forgot a comma? (2907036639.py, line 1)
+SyntaxError: invalid syntax (3095215939.py, line 3)
 
