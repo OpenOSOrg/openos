@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>27. Deadlocks &#8212; Introduction to Operating Systems</title>
+    <title>6. Processes, Threads, and Scheduling &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="28. Challenges of Modern Hardware" href="hardware_challenges.html" />
-    <link rel="prev" title="26. Synchronization Primitives" href="locking.html" />
+    <link rel="next" title="8. Virtualizing a processor" href="process.html" />
+    <link rel="prev" title="5. Tools" href="../intro/tools.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -153,19 +153,19 @@ const thebe_selector_output = ".output, .cell_output"
   Scheduling
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/intro.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    6. Processes, Threads, and Scheduling
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/process.html">
+  <a class="reference internal" href="process.html">
    8. Virtualizing a processor
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/scheduling.html">
+  <a class="reference internal" href="scheduling.html">
    9. Scheduling
   </a>
  </li>
@@ -259,34 +259,34 @@ const thebe_selector_output = ".output, .cell_output"
   Concurrency
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="sync.html">
+  <a class="reference internal" href="../sync/sync.html">
    24. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sharing.html">
+  <a class="reference internal" href="../sync/sharing.html">
    25. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="locking.html">
+  <a class="reference internal" href="../sync/locking.html">
    26. Synchronization Primitives
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/deadlock.html">
    27. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="hardware_challenges.html">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
    28. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="linux_locking.html">
+  <a class="reference internal" href="../sync/linux_locking.html">
    29. Locking in the Linux Kernel
   </a>
  </li>
@@ -393,7 +393,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/sync/deadlock.ipynb"
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/scheduling/intro.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -411,7 +411,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/sync/deadlock.ipynb&branch=main"
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/scheduling/intro.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -471,7 +471,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fsync/deadlock.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fscheduling/intro.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -488,7 +488,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/edit/main/content/sync/deadlock.ipynb"
+        <a href="https://github.com/okrieg/openos/edit/main/content/scheduling/intro.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -516,7 +516,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/sync/deadlock.ipynb"
+        <a href="../_sources/scheduling/intro.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -553,23 +553,70 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   6. Processes, Threads, and Scheduling
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   7. Introduction
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Deadlocks</h1>
+                <h1>Processes, Threads, and Scheduling</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   6. Processes, Threads, and Scheduling
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   7. Introduction
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -577,15 +624,19 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="deadlocks">
-<span id="cont-sync-deadlock"></span><h1><span class="section-number">27. </span>Deadlocks<a class="headerlink" href="#deadlocks" title="Permalink to this headline">#</a></h1>
-<p>Describe deadlocks.</p>
-<ol class="simple">
-<li><p>Conditions for deadlock</p></li>
-<li><p>Deadlock prevention</p></li>
-<li><p>Deadlock avoidance</p></li>
-<li><p>Deadlock detection and recovery</p></li>
-</ol>
+  <div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This portion of the book is under construction, not ready to be read</p>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="processes-threads-and-scheduling">
+<span id="cont-scheduling"></span><h1><span class="section-number">6. </span>Processes, Threads, and Scheduling<a class="headerlink" href="#processes-threads-and-scheduling" title="Permalink to this headline">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1><span class="section-number">7. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
+<p>We are going to discuss the various methods used by the operating system to allow multiple programs to execute on a computer while giving each the illusion it has the entire computer to itself. But before we get to discussing scheduling algorithms, we need to define a few terms we will use in that discussion. The terms <em>program</em> and <em>process</em> are often used inter-chageably, but we will distinguish them and only use them according to our individual definitions. Recall when we discussed abstracting hardware {ref}’cont:gs:purpose:platform:abs’ we drew the distinction between the contents of the executable stored on disk (the program) from an execution of those contents (a process). In this chapter we will briefly introduce the problem solved by scheduling and then dive into how it happens.</p>
+<p>Consider a very simple computer with a single processor and some memory. If we have a single user who only wants to run a single instance of a program on that processor, we are able to meed the users need. However, this model isn’t very useful because if we introduce a second user or a second task, we need a way to ensure that all users can run the processes they need. Without help from an operating system, the users would have to coordinate time for using this computer. This coordination gives users good control over when their process runs, but does not handle conflicts or changes well. What if the user scheduled to use the computer misses their appointment? The hardware is left idle and that users process still needs to run.</p>
+<p>As with other resources managed by an operating system, we solve the scheduling problem by <em>virtualizing</em> the processor or CPU. As with memory, this virtualization of the resource allows the operating system to provide the illusion of an infinite number of CPUs on which a process can run.</p>
+<p>For the remainder of this chapter we will discuss what a process is and how we can virtualize the CPU. Next we will look at threads and how they differ from a process. Finally, we will end with a look at the methods for scheduling processes.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -601,7 +652,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./sync"
+            path: "./scheduling"
         },
         predefinedOutput: true
     }
@@ -615,17 +666,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="locking.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../intro/tools.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">26. </span>Synchronization Primitives</p>
+            <p class="prev-next-title"><span class="section-number">5. </span>Tools</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="hardware_challenges.html" title="next page">
+    <a class='right-next' id="next-link" href="process.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">28. </span>Challenges of Modern Hardware</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Virtualizing a processor</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

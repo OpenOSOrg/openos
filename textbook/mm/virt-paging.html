@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>8. Paging &#8212; Introduction to Operating Systems</title>
+    <title>12. Paging &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="9. Page Tables" href="page-tables.html" />
-    <link rel="prev" title="7. Segmentation" href="virt-seg.html" />
+    <link rel="next" title="13. Page Tables" href="page-tables.html" />
+    <link rel="prev" title="11. Segmentation" href="virt-seg.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -152,58 +152,80 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
+  Scheduling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/intro.html">
+   6. Processes, Threads, and Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/process.html">
+   8. Virtualizing a processor
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/scheduling.html">
+   9. Scheduling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
   Memory Management
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   6. Introduction
+   10. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-seg.html">
-   7. Segmentation
+   11. Segmentation
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   8. Paging
+   12. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-tables.html">
-   9. Page Tables
+   13. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="reclamation.html">
-   10. Memory reclaiming algorithms.
+   14. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="buffer-cache.html">
-   11. Buffer Cache
+   15. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pagefaults.html">
-   12. Page Faults
+   16. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="misc.html">
-   13. Conclusion
+   17. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="realworld.html">
-   14. Memory management in the real world
+   18. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concl.html">
-   15. Other Stuff
+   19. Other Stuff
   </a>
  </li>
 </ul>
@@ -215,22 +237,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   16. Introduction
+   20. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   17. Interface
+   21. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   18. File System Layout
+   22. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   19. Kernel implementation
+   23. Kernel implementation
   </a>
  </li>
 </ul>
@@ -242,32 +264,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   20. Intro Concurrency Synchronization and Deadlock
+   24. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   21. Cooperating Processes
+   25. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   22. Synchronization Primitives
+   26. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   23. Deadlocks
+   27. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   24. Challenges of Modern Hardware
+   28. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   25. Locking in the Linux Kernel
+   29. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -279,17 +301,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   26. Overview of other topics
+   30. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   27. Virtualization and Cloud computing
+   31. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   28. Other OS structures
+   32. Other OS structures
   </a>
  </li>
 </ul>
@@ -301,17 +323,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   29. How to read this book
+   33. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   30. Contributing
+   34. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   31. Bibliography
+   35. Bibliography
   </a>
  </li>
 </ul>
@@ -557,24 +579,24 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#memory-over-commitment-and-paging">
-   8.1. Memory Over-Commitment and Paging
+   12.1. Memory Over-Commitment and Paging
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paging-avoiding-fragmentation">
-   8.2. Paging - Avoiding Fragmentation
+   12.2. Paging - Avoiding Fragmentation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#internal-fragmentation">
-     8.2.1. Internal Fragmentation
+     12.2.1. Internal Fragmentation
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paged-address-translation">
-   8.3. Paged Address Translation
+   12.3. Paged Address Translation
   </a>
  </li>
 </ul>
@@ -598,24 +620,24 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#memory-over-commitment-and-paging">
-   8.1. Memory Over-Commitment and Paging
+   12.1. Memory Over-Commitment and Paging
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paging-avoiding-fragmentation">
-   8.2. Paging - Avoiding Fragmentation
+   12.2. Paging - Avoiding Fragmentation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#internal-fragmentation">
-     8.2.1. Internal Fragmentation
+     12.2.1. Internal Fragmentation
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paged-address-translation">
-   8.3. Paged Address Translation
+   12.3. Paged Address Translation
   </a>
  </li>
 </ul>
@@ -629,9 +651,9 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="paging">
-<span id="cont-mm-paging"></span><h1><span class="section-number">8. </span>Paging<a class="headerlink" href="#paging" title="Permalink to this headline">#</a></h1>
+<span id="cont-mm-paging"></span><h1><span class="section-number">12. </span>Paging<a class="headerlink" href="#paging" title="Permalink to this headline">#</a></h1>
 <section id="memory-over-commitment-and-paging">
-<h2><span class="section-number">8.1. </span>Memory Over-Commitment and Paging<a class="headerlink" href="#memory-over-commitment-and-paging" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">12.1. </span>Memory Over-Commitment and Paging<a class="headerlink" href="#memory-over-commitment-and-paging" title="Permalink to this headline">#</a></h2>
 <p>Page faults allow data to be dynamically fetched into memory when it is
 needed, in the same way that the CPU dynamically fetches data from
 memory into the cache. This allows the operating system to over-commit
@@ -667,7 +689,7 @@ release the memory page.</p>
 <p><img alt="Page Table Entry with D (dirty)bit" src="../_images/virt-mem-pic106.png" />{#fig:vm:pic106 width=”\textwidth”}</p>
 </section>
 <section id="paging-avoiding-fragmentation">
-<h2><span class="section-number">8.2. </span>Paging - Avoiding Fragmentation<a class="headerlink" href="#paging-avoiding-fragmentation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">12.2. </span>Paging - Avoiding Fragmentation<a class="headerlink" href="#paging-avoiding-fragmentation" title="Permalink to this headline">#</a></h2>
 <p>The fragmentation in
 <a class="reference external" href="#fig:vm:fig2">[fig:vm:fig2]</a>{reference-type=”autoref”
 reference=”fig:vm:fig2”} is termed <em>external fragmentation</em>, because the
@@ -697,7 +719,7 @@ combination of physical pages may be used for an allocation request,
 there is no external fragmentation, and a request will not fail as long
 as there are enough free physical pages to fulfill it.</p>
 <section id="internal-fragmentation">
-<h3><span class="section-number">8.2.1. </span>Internal Fragmentation<a class="headerlink" href="#internal-fragmentation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">12.2.1. </span>Internal Fragmentation<a class="headerlink" href="#internal-fragmentation" title="Permalink to this headline">#</a></h3>
 <p>Paging solves the problem of external fragmentation, but it suffers from
 another issue, <em>internal fragmentation</em>, because space may be wasted
 <em>inside</em> the allocated pages. E.g. if 10 KB of memory is allocated in
@@ -714,7 +736,7 @@ are slightly more efficient than 4 KB pages, they are rarely used.)</p>
 </section>
 </section>
 <section id="paged-address-translation">
-<h2><span class="section-number">8.3. </span>Paged Address Translation<a class="headerlink" href="#paged-address-translation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">12.3. </span>Paged Address Translation<a class="headerlink" href="#paged-address-translation" title="Permalink to this headline">#</a></h2>
 <p>We examine a single model of address translation in detail: the one used
 by the original Pentium, and by any Intel-compatible CPU running in
 32-bit mode. It uses 32-bit virtual addresses, 32-bit physical
@@ -773,13 +795,13 @@ tables in memory to specify virtual-to-physical mappings.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">7. </span>Segmentation</p>
+            <p class="prev-next-title"><span class="section-number">11. </span>Segmentation</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="page-tables.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>Page Tables</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Page Tables</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
