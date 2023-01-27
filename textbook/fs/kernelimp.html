@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>21. Kernel implementation &#8212; Introduction to Operating Systems</title>
+    <title>19. Kernel implementation &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="22. Intro Concurrency Synchronization and Deadlock" href="../sync/sync.html" />
-    <link rel="prev" title="20. File System Layout" href="disklayout.html" />
+    <link rel="next" title="20. Intro Concurrency Synchronization and Deadlock" href="../sync/sync.html" />
+    <link rel="prev" title="18. File System Layout" href="disklayout.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -150,75 +150,58 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Scheduling
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/scheduling.html">
-   6. Processor Scheduling
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
   Memory Management
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   7. Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/physmem.html">
-   8. Memory management without translation
+   6. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-seg.html">
-   9. Segmentation
+   7. Segmentation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   10. Paging
+   8. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   11. Page Tables
+   9. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   12. Memory reclaiming algorithms.
+   10. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   13. Buffer Cache
+   11. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   14. Page Faults
+   12. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   15. Conclusion
+   13. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   16. Memory management in the real world
+   14. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   17. Other Stuff
+   15. Other Stuff
   </a>
  </li>
 </ul>
@@ -230,22 +213,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   18. Introduction
+   16. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="interface.html">
-   19. Interface
+   17. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="disklayout.html">
-   20. File System Layout
+   18. File System Layout
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   21. Kernel implementation
+   19. Kernel implementation
   </a>
  </li>
 </ul>
@@ -257,32 +240,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   22. Intro Concurrency Synchronization and Deadlock
+   20. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   23. Cooperating Processes
+   21. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   24. Synchronization Primitives
+   22. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   25. Deadlocks
+   23. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   26. Challenges of Modern Hardware
+   24. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   27. Locking in the Linux Kernel
+   25. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -294,17 +277,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   28. Overview of other topics
+   26. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   29. Virtualization and Cloud computing
+   27. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   30. Other OS structures
+   28. Other OS structures
   </a>
  </li>
 </ul>
@@ -316,17 +299,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   31. How to read this book
+   29. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   32. Contributing
+   30. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   33. Bibliography
+   31. Bibliography
   </a>
  </li>
 </ul>
@@ -572,22 +555,22 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#caching">
-   21.1. Caching
+   19.1. Caching
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#vfs">
-   21.2. VFS
+   19.2. VFS
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#network-file-systems">
-   21.3. Network File Systems
+   19.3. Network File Systems
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#answers-to-review-questions">
-     21.3.1. Answers to Review Questions
+     19.3.1. Answers to Review Questions
     </a>
    </li>
   </ul>
@@ -613,22 +596,22 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#caching">
-   21.1. Caching
+   19.1. Caching
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#vfs">
-   21.2. VFS
+   19.2. VFS
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#network-file-systems">
-   21.3. Network File Systems
+   19.3. Network File Systems
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#answers-to-review-questions">
-     21.3.1. Answers to Review Questions
+     19.3.1. Answers to Review Questions
     </a>
    </li>
   </ul>
@@ -644,7 +627,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="kernel-implementation">
-<span id="cont-fs-kernel"></span><h1><span class="section-number">21. </span>Kernel implementation<a class="headerlink" href="#kernel-implementation" title="Permalink to this headline">#</a></h1>
+<span id="cont-fs-kernel"></span><h1><span class="section-number">19. </span>Kernel implementation<a class="headerlink" href="#kernel-implementation" title="Permalink to this headline">#</a></h1>
 <p>When applications access files they identify them by file and directory
 names, or by file descriptors (handles), and reads and writes may be
 performed in arbitrary lengths and alignments. These requests need to be
@@ -714,7 +697,7 @@ to access <code class="docutils literal notranslate"><span class="pre">/home/pjd
 <code class="docutils literal notranslate"><span class="pre">/home/pjd/classes</span></code> is protected so that only user <code class="docutils literal notranslate"><span class="pre">pjd</span></code> may access it.</p></li>
 </ol>
 <section id="caching">
-<h2><span class="section-number">21.1. </span>Caching<a class="headerlink" href="#caching" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">19.1. </span>Caching<a class="headerlink" href="#caching" title="Permalink to this headline">#</a></h2>
 <p>Disk accesses are slow, and multiple disk accesses are even slower. If
 every file operation required multiple disk accesses, your computer
 would run very slowly. Instead much of the information from the disk is
@@ -751,7 +734,7 @@ pages and the file system cache come from the same pool. It’s a bit
 complicated, and is not covered in this class.</p>
 </section>
 <section id="vfs">
-<h2><span class="section-number">21.2. </span>VFS<a class="headerlink" href="#vfs" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">19.2. </span>VFS<a class="headerlink" href="#vfs" title="Permalink to this headline">#</a></h2>
 <p>In order to support multiple file systems such as Ext3, CD-ROMs, and
 others at the same time, Linux and other Unix variants use an interface
 called VFS, or the Virtual File System interface. (Windows uses a much
@@ -815,7 +798,7 @@ the kernel (not the file system) handles file positions.</p></li>
 </ul>
 </section>
 <section id="network-file-systems">
-<h2><span class="section-number">21.3. </span>Network File Systems<a class="headerlink" href="#network-file-systems" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">19.3. </span>Network File Systems<a class="headerlink" href="#network-file-systems" title="Permalink to this headline">#</a></h2>
 <p>The file systems discussed so far are local file systems, where data is
 stored on local disk and is only directly accessible from the computer
 attached to that disk. Network file systems are used when we want to
@@ -851,7 +834,7 @@ username, and all operations within that connection are done as that
 user.</p></li>
 </ul>
 <section id="answers-to-review-questions">
-<h3><span class="section-number">21.3.1. </span>Answers to Review Questions<a class="headerlink" href="#answers-to-review-questions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.3.1. </span>Answers to Review Questions<a class="headerlink" href="#answers-to-review-questions" title="Permalink to this headline">#</a></h3>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">15</a></span></dt>
@@ -895,13 +878,13 @@ a <em>sparse</em> address space.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">20. </span>File System Layout</p>
+            <p class="prev-next-title"><span class="section-number">18. </span>File System Layout</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../sync/sync.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">22. </span>Intro Concurrency Synchronization and Deadlock</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>Intro Concurrency Synchronization and Deadlock</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

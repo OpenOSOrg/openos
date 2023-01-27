@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>22. Peter’s Virtual Memory chapter &#8212; Introduction to Operating Systems</title>
+    <title>24. Peter’s Virtual Memory chapter &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="23. Introduction" href="../fs/intro.html" />
-    <link rel="prev" title="21. Overview of MM" href="Overview.html" />
+    <link rel="next" title="25. Introduction" href="../fs/intro.html" />
+    <link rel="prev" title="23. Overview of MM" href="Overview.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -149,6 +149,11 @@ const thebe_selector_output = ".output, .cell_output"
    6. Tools
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/peter-other.html">
+   7. Other stuff from peter to integrate
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -158,7 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   7. Processor Scheduling
+   10. Processor Scheduling
   </a>
  </li>
 </ul>
@@ -170,72 +175,67 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   8. Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="physmem.html">
-   9. Memory management without translation
+   11. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-seg.html">
-   10. Segmentation
+   12. Segmentation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-paging.html">
-   11. Paging
+   13. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-tables.html">
-   12. Page Tables
+   14. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="reclamation.html">
-   13. Memory reclaiming algorithms.
+   15. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="buffer-cache.html">
-   14. Page Sizes
+   16. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pagefaults.html">
-   15. Page Faults
+   17. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="misc.html">
-   16. Conclusion
+   18. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="realworld.html">
-   17. Memory management in the real world
+   19. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concl.html">
-   18. Other Stuff
+   20. Other Stuff
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mm.html">
-   19. EVERYTHING BELOW HERE IS CRAP
+   21. EVERYTHING BELOW HERE IS CRAP
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Overview.html">
-   21. Overview of MM
+   23. Overview of MM
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   22. Peter’s Virtual Memory chapter
+   24. Peter’s Virtual Memory chapter
   </a>
  </li>
 </ul>
@@ -247,22 +247,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   23. Introduction
+   25. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   24. Interface
+   26. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   25. File System Layout
+   27. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   26. Kernel implementation
+   28. Kernel implementation
   </a>
  </li>
 </ul>
@@ -274,37 +274,37 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   27. Intro Concurrency Synchronization and Deadlock
+   29. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   28. Cooperating Processes
+   30. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   29. Synchronization Primitives
+   31. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   30. Deadlocks
+   32. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   31. Challenges of Modern Hardware
+   33. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   32. Locking in the Linux Kernel
+   34. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/peter-syncro.html">
-   33. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
+   35. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
   </a>
  </li>
 </ul>
@@ -316,17 +316,27 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   34. Overview of other topics
+   36. Overview of other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sec/sec.html">
+   37. Security
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   35. Virtualization and Cloud computing
+   39. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   37. Other OS structures
+   41. Other OS structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../devices/block-dev.html">
+   42. I/O, Drivers, and DMA {#chap:blockdevs}
   </a>
  </li>
 </ul>
@@ -337,18 +347,13 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../misc/howto.html">
-   38. How to read this book
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   39. Contributing
+   43. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   40. Bibliography
+   44. Bibliography
   </a>
  </li>
 </ul>
@@ -594,44 +599,44 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#base-and-bounds-translation">
-   22.1. Base and Bounds translation
+   24.1. Base and Bounds translation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paging-avoiding-fragmentation">
-   22.2. Paging - Avoiding Fragmentation
+   24.2. Paging - Avoiding Fragmentation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#internal-fragmentation">
-     22.2.1. Internal Fragmentation
+     24.2.1. Internal Fragmentation
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paged-address-translation">
-   22.3. Paged Address Translation
+   24.3. Paged Address Translation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#single-level-page-table">
-     22.3.1. Single-level Page Table
+     24.3.1. Single-level Page Table
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#level-page-tables">
-     22.3.2. 2-level Page Tables
+     24.3.2. 2-level Page Tables
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#level-page-table-operation">
-     22.3.3. 2-Level Page Table Operation
+     24.3.3. 2-Level Page Table Operation
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#review-questions">
-       22.3.3.1. Review questions
+       24.3.3.1. Review questions
       </a>
      </li>
     </ul>
@@ -640,88 +645,88 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#translation-look-aside-buffers-tlbs">
-   22.4. Translation Look-aside Buffers (TLBs)
+   24.4. Translation Look-aside Buffers (TLBs)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tlb-consistency">
-   22.5. TLB Consistency
+   24.5. TLB Consistency
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#preventing-tlb-inconsistencies">
-     22.5.1. Preventing TLB Inconsistencies
+     24.5.1. Preventing TLB Inconsistencies
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-table-entries">
-     22.5.2. Page Table Entries
+     24.5.2. Page Table Entries
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-permissions-p-w-and-u-bits">
-     22.5.3. Page Permissions - P, W, and U bits
+     24.5.3. Page Permissions - P, W, and U bits
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-sharing">
-     22.5.4. Page Sharing
+     24.5.4. Page Sharing
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-size-address-space-size-and-64-bits">
-   22.6. Page Size, Address Space Size, and 64 Bits
+   24.6. Page Size, Address Space Size, and 64 Bits
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#creating-a-page-table-vm-sec-4-6">
-   22.7. Creating a Page Table {#vm:sec:4:6}
+   24.7. Creating a Page Table {#vm:sec:4:6}
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id7">
-     22.7.1. Review questions
+     24.7.1. Review questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-faulting">
-   22.8. Page Faulting
+   24.8. Page Faulting
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-faults">
-     22.8.1. Page Faults
+     24.8.1. Page Faults
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#handling-page-faults">
-     22.8.2. Handling Page Faults
+     24.8.2. Handling Page Faults
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id9">
-       22.8.2.1. Review questions
+       24.8.2.1. Review questions
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#process-address-space-revisited">
-     22.8.3. Process Address Space, Revisited
+     24.8.3. Process Address Space, Revisited
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#executable-file-and-process-address-space">
-       22.8.3.1. Executable file and process address space
+       24.8.3.1. Executable file and process address space
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id13">
-       22.8.3.2. Review questions
+       24.8.3.2. Review questions
       </a>
      </li>
     </ul>
@@ -730,29 +735,29 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-fault-handling">
-   22.9. Page Fault Handling
+   24.9. Page Fault Handling
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-faults-in-the-kernel">
-     22.9.1. Page Faults in the Kernel
+     24.9.1. Page Faults in the Kernel
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#shared-executables-and-libraries">
-   22.10. Shared Executables and Libraries
+   24.10. Shared Executables and Libraries
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id17">
-     22.10.1. Review questions
+     24.10.1. Review questions
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#more-memory-sharing-fork-and-copy-on-write">
-     22.10.2. More Memory Sharing:
+     24.10.2. More Memory Sharing:
      <code class="docutils literal notranslate">
       <span class="pre">
        fork()
@@ -763,29 +768,29 @@ title="Print to PDF"
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id20">
-       22.10.2.1. Review questions
+       24.10.2.1. Review questions
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#memory-over-commitment-and-paging">
-     22.10.3. Memory Over-Commitment and Paging
+     24.10.3. Memory Over-Commitment and Paging
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dirty-and-clean-pages">
-     22.10.4. Dirty and Clean Pages
+     24.10.4. Dirty and Clean Pages
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-memory-hierarchy">
-     22.10.5. The Memory Hierarchy
+     24.10.5. The Memory Hierarchy
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id21">
-       22.10.5.1. Review questions
+       24.10.5.1. Review questions
       </a>
      </li>
     </ul>
@@ -794,49 +799,49 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-replacement">
-   22.11. Page Replacement
+   24.11. Page Replacement
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-replacement-strategies">
-   22.12. Page Replacement Strategies
+   24.12. Page Replacement Strategies
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fifo">
-     22.12.1. FIFO
+     24.12.1. FIFO
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lru">
-     22.12.2. LRU
+     24.12.2. LRU
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#opt">
-     22.12.3. OPT
+     24.12.3. OPT
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fifo-with-second-chance-clock">
-     22.12.4. FIFO with Second Chance (CLOCK)
+     24.12.4. FIFO with Second Chance (CLOCK)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#clock">
-     22.12.5. CLOCK
+     24.12.5. CLOCK
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id23">
-       22.12.5.1. Review questions
+       24.12.5.1. Review questions
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#answers-to-review-questions">
-     22.12.6. Answers to Review questions
+     24.12.6. Answers to Review questions
     </a>
    </li>
   </ul>
@@ -862,44 +867,44 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#base-and-bounds-translation">
-   22.1. Base and Bounds translation
+   24.1. Base and Bounds translation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paging-avoiding-fragmentation">
-   22.2. Paging - Avoiding Fragmentation
+   24.2. Paging - Avoiding Fragmentation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#internal-fragmentation">
-     22.2.1. Internal Fragmentation
+     24.2.1. Internal Fragmentation
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paged-address-translation">
-   22.3. Paged Address Translation
+   24.3. Paged Address Translation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#single-level-page-table">
-     22.3.1. Single-level Page Table
+     24.3.1. Single-level Page Table
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#level-page-tables">
-     22.3.2. 2-level Page Tables
+     24.3.2. 2-level Page Tables
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#level-page-table-operation">
-     22.3.3. 2-Level Page Table Operation
+     24.3.3. 2-Level Page Table Operation
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#review-questions">
-       22.3.3.1. Review questions
+       24.3.3.1. Review questions
       </a>
      </li>
     </ul>
@@ -908,88 +913,88 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#translation-look-aside-buffers-tlbs">
-   22.4. Translation Look-aside Buffers (TLBs)
+   24.4. Translation Look-aside Buffers (TLBs)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tlb-consistency">
-   22.5. TLB Consistency
+   24.5. TLB Consistency
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#preventing-tlb-inconsistencies">
-     22.5.1. Preventing TLB Inconsistencies
+     24.5.1. Preventing TLB Inconsistencies
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-table-entries">
-     22.5.2. Page Table Entries
+     24.5.2. Page Table Entries
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-permissions-p-w-and-u-bits">
-     22.5.3. Page Permissions - P, W, and U bits
+     24.5.3. Page Permissions - P, W, and U bits
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-sharing">
-     22.5.4. Page Sharing
+     24.5.4. Page Sharing
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-size-address-space-size-and-64-bits">
-   22.6. Page Size, Address Space Size, and 64 Bits
+   24.6. Page Size, Address Space Size, and 64 Bits
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#creating-a-page-table-vm-sec-4-6">
-   22.7. Creating a Page Table {#vm:sec:4:6}
+   24.7. Creating a Page Table {#vm:sec:4:6}
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id7">
-     22.7.1. Review questions
+     24.7.1. Review questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-faulting">
-   22.8. Page Faulting
+   24.8. Page Faulting
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-faults">
-     22.8.1. Page Faults
+     24.8.1. Page Faults
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#handling-page-faults">
-     22.8.2. Handling Page Faults
+     24.8.2. Handling Page Faults
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id9">
-       22.8.2.1. Review questions
+       24.8.2.1. Review questions
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#process-address-space-revisited">
-     22.8.3. Process Address Space, Revisited
+     24.8.3. Process Address Space, Revisited
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#executable-file-and-process-address-space">
-       22.8.3.1. Executable file and process address space
+       24.8.3.1. Executable file and process address space
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id13">
-       22.8.3.2. Review questions
+       24.8.3.2. Review questions
       </a>
      </li>
     </ul>
@@ -998,29 +1003,29 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-fault-handling">
-   22.9. Page Fault Handling
+   24.9. Page Fault Handling
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-faults-in-the-kernel">
-     22.9.1. Page Faults in the Kernel
+     24.9.1. Page Faults in the Kernel
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#shared-executables-and-libraries">
-   22.10. Shared Executables and Libraries
+   24.10. Shared Executables and Libraries
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id17">
-     22.10.1. Review questions
+     24.10.1. Review questions
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#more-memory-sharing-fork-and-copy-on-write">
-     22.10.2. More Memory Sharing:
+     24.10.2. More Memory Sharing:
      <code class="docutils literal notranslate">
       <span class="pre">
        fork()
@@ -1031,29 +1036,29 @@ title="Print to PDF"
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id20">
-       22.10.2.1. Review questions
+       24.10.2.1. Review questions
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#memory-over-commitment-and-paging">
-     22.10.3. Memory Over-Commitment and Paging
+     24.10.3. Memory Over-Commitment and Paging
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dirty-and-clean-pages">
-     22.10.4. Dirty and Clean Pages
+     24.10.4. Dirty and Clean Pages
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-memory-hierarchy">
-     22.10.5. The Memory Hierarchy
+     24.10.5. The Memory Hierarchy
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id21">
-       22.10.5.1. Review questions
+       24.10.5.1. Review questions
       </a>
      </li>
     </ul>
@@ -1062,49 +1067,49 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-replacement">
-   22.11. Page Replacement
+   24.11. Page Replacement
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-replacement-strategies">
-   22.12. Page Replacement Strategies
+   24.12. Page Replacement Strategies
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fifo">
-     22.12.1. FIFO
+     24.12.1. FIFO
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lru">
-     22.12.2. LRU
+     24.12.2. LRU
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#opt">
-     22.12.3. OPT
+     24.12.3. OPT
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fifo-with-second-chance-clock">
-     22.12.4. FIFO with Second Chance (CLOCK)
+     24.12.4. FIFO with Second Chance (CLOCK)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#clock">
-     22.12.5. CLOCK
+     24.12.5. CLOCK
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id23">
-       22.12.5.1. Review questions
+       24.12.5.1. Review questions
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#answers-to-review-questions">
-     22.12.6. Answers to Review questions
+     24.12.6. Answers to Review questions
     </a>
    </li>
   </ul>
@@ -1120,7 +1125,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="peter-s-virtual-memory-chapter">
-<h1><span class="section-number">22. </span>Peter’s Virtual Memory chapter<a class="headerlink" href="#peter-s-virtual-memory-chapter" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">24. </span>Peter’s Virtual Memory chapter<a class="headerlink" href="#peter-s-virtual-memory-chapter" title="Permalink to this headline">#</a></h1>
 <p>In <a class="reference external" href="#chap:osbasics">[chap:osbasics]</a>{reference-type=”autoref”
 reference=”chap:osbasics”} we discussed operating systems basics such as
 I/O, program loading, and context switching primarily for a simple
@@ -1131,7 +1136,7 @@ and select a particular location in a memory chip, so that no matter
 what process is executing, the same address (e.g. 0x1000) always refers
 to the same memory location.</p>
 <section id="base-and-bounds-translation">
-<h2><span class="section-number">22.1. </span>Base and Bounds translation<a class="headerlink" href="#base-and-bounds-translation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">24.1. </span>Base and Bounds translation<a class="headerlink" href="#base-and-bounds-translation" title="Permalink to this headline">#</a></h2>
 <p><img alt="image" src="../_images/virt-mem-base-bounds.png" /></p>
 <p>We first looked at direct physical addressing, where no matter which
 process is executing, the same address (e.g. 0x1000) refers to the same
@@ -1181,7 +1186,7 @@ free, because long-lived small allocations fragment the available
 contiguous memory into smaller pieces.</p>
 </section>
 <section id="paging-avoiding-fragmentation">
-<h2><span class="section-number">22.2. </span>Paging - Avoiding Fragmentation<a class="headerlink" href="#paging-avoiding-fragmentation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">24.2. </span>Paging - Avoiding Fragmentation<a class="headerlink" href="#paging-avoiding-fragmentation" title="Permalink to this headline">#</a></h2>
 <p>The fragmentation in
 <a class="reference external" href="#fig:vm:fig2">[fig:vm:fig2]</a>{reference-type=”autoref”
 reference=”fig:vm:fig2”} is termed <em>external fragmentation</em>, because the
@@ -1202,7 +1207,7 @@ combination of physical pages may be used for an allocation request,
 there is no external fragmentation, and a request will not fail as long
 as there are enough free physical pages to fulfill it.</p>
 <section id="internal-fragmentation">
-<h3><span class="section-number">22.2.1. </span>Internal Fragmentation<a class="headerlink" href="#internal-fragmentation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.2.1. </span>Internal Fragmentation<a class="headerlink" href="#internal-fragmentation" title="Permalink to this headline">#</a></h3>
 <p>Paging solves the problem of external fragmentation, but it suffers from
 another issue, <em>internal fragmentation</em>, because space may be wasted
 <em>inside</em> the allocated pages. E.g. if 10 KB of memory is allocated in
@@ -1228,7 +1233,7 @@ as there are enough free physical pages to fulfill it.</p>
 </section>
 </section>
 <section id="paged-address-translation">
-<h2><span class="section-number">22.3. </span>Paged Address Translation<a class="headerlink" href="#paged-address-translation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">24.3. </span>Paged Address Translation<a class="headerlink" href="#paged-address-translation" title="Permalink to this headline">#</a></h2>
 <p>We examine a single model of address translation in detail: the one used
 by the original Pentium, and by any Intel-compatible CPU running in
 32-bit mode. It uses 32-bit virtual addresses, 32-bit physical
@@ -1254,7 +1259,7 @@ The only possible place to store the amount of information required by
 paged address translation is in memory itself, so the MMU uses page
 tables in memory to specify virtual-to-physical mappings.</p>
 <section id="single-level-page-table">
-<h3><span class="section-number">22.3.1. </span>Single-level Page Table<a class="headerlink" href="#single-level-page-table" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.3.1. </span>Single-level Page Table<a class="headerlink" href="#single-level-page-table" title="Permalink to this headline">#</a></h3>
 <p>One of the simplest ways to structure a page table for mapping 20-bit
 page numbers is as a simple array with <span class="math notranslate nohighlight">\(2^{20}\)</span> entries. With this
 configuration, each virtual page has an entry, and the value in that
@@ -1306,7 +1311,7 @@ external fragmentation that paged address translation was supposed to
 solve.</p>
 </section>
 <section id="level-page-tables">
-<h3><span class="section-number">22.3.2. </span>2-level Page Tables<a class="headerlink" href="#level-page-tables" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.3.2. </span>2-level Page Tables<a class="headerlink" href="#level-page-tables" title="Permalink to this headline">#</a></h3>
 <p><img alt="Two-level page table for 32-bit addresses and 4 KBpages" src="../_images/virt-mem-pic12.png" />{#fig:vm:pic12 width=”80%”}</p>
 <p>To fix this, almost all 32-bit processors (e.g. Intel, ARM) use a
 2-level page table, structured as a tree, as seen in
@@ -1333,7 +1338,7 @@ the beginning of a page and fits within that page, which simplifies
 array lookups when translating a page number.</p>
 </section>
 <section id="level-page-table-operation">
-<h3><span class="section-number">22.3.3. </span>2-Level Page Table Operation<a class="headerlink" href="#level-page-table-operation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.3.3. </span>2-Level Page Table Operation<a class="headerlink" href="#level-page-table-operation" title="Permalink to this headline">#</a></h3>
 <p>In <a class="reference external" href="#fig:vm:pic13">[fig:vm:pic13]</a>{reference-type=”autoref”
 reference=”fig:vm:pic13”} we see a page table constructed of 3 pages:
 physical pages 00000 (the root directory), 00001, and 00003. Two data
@@ -1368,7 +1373,7 @@ read 4 bytes from physical address 00001004
 offset in the original virtual address is <code class="docutils literal notranslate"><span class="pre">02C</span></code>, so combining the two we
 get the final physical address, <code class="docutils literal notranslate"><span class="pre">0000202C</span></code>.</p>
 <section id="review-questions">
-<h4><span class="section-number">22.3.3.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">24.3.3.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h4>
 <p><img alt="Reference page table for reviewquestions" src="../_images/virt-mem-pic16.png" />{#fig:vm:review1 width=”95%”}</p>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
@@ -1385,7 +1390,7 @@ paged address translation?
 </section>
 </section>
 <section id="translation-look-aside-buffers-tlbs">
-<h2><span class="section-number">22.4. </span>Translation Look-aside Buffers (TLBs)<a class="headerlink" href="#translation-look-aside-buffers-tlbs" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">24.4. </span>Translation Look-aside Buffers (TLBs)<a class="headerlink" href="#translation-look-aside-buffers-tlbs" title="Permalink to this headline">#</a></h2>
 <p>The 2-level table address translation processes you just learned about
 is highly inefficient, even more so than the single-level table. Even if
 MMU accesses to memory can be satisfied from the L1 cache, this will
@@ -1427,7 +1432,7 @@ MMU accesses to the page table go through the cache, further speeding up
 the translation process)</p>
 </section>
 <section id="tlb-consistency">
-<h2><span class="section-number">22.5. </span>TLB Consistency<a class="headerlink" href="#tlb-consistency" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">24.5. </span>TLB Consistency<a class="headerlink" href="#tlb-consistency" title="Permalink to this headline">#</a></h2>
 <p>Like any other cache, a TLB only functions correctly if it is
 consistent, i.e. the entries in the TLB accurately reflect the in-memory
 values (i.e. page tables) which they are caching. Since the values
@@ -1450,7 +1455,7 @@ to the address space of the new process, and it’s clearly important for
 both security and correctness to ensure that the MMU uses these
 mappings, not the old ones.</p>
 <section id="preventing-tlb-inconsistencies">
-<h3><span class="section-number">22.5.1. </span>Preventing TLB Inconsistencies<a class="headerlink" href="#preventing-tlb-inconsistencies" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.5.1. </span>Preventing TLB Inconsistencies<a class="headerlink" href="#preventing-tlb-inconsistencies" title="Permalink to this headline">#</a></h3>
 <p>The issue of modifications can be solved in a fairly straightforward
 way: the MMU provides one instruction to flush the TLB entry for a
 particular page, and another to flush the entire TLB (e.g. if a large
@@ -1480,7 +1485,7 @@ field will prevent them from being mistakenly used by another
 process<a class="footnote-reference brackets" href="#id28" id="id5">5</a>.</p>
 </section>
 <section id="page-table-entries">
-<h3><span class="section-number">22.5.2. </span>Page Table Entries<a class="headerlink" href="#page-table-entries" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.5.2. </span>Page Table Entries<a class="headerlink" href="#page-table-entries" title="Permalink to this headline">#</a></h3>
 <p>The components of a 32-bit Intel page table entry are shown in
 <a class="reference external" href="#fig:vm:pic17">[fig:vm:pic17]</a>{reference-type=”autoref”
 reference=”fig:vm:pic17”}; for more information you may wish to refer to
@@ -1488,7 +1493,7 @@ reference=”fig:vm:pic17”}; for more information you may wish to refer to
 <p><img alt="32-bit Intel page table entry(PTE)." src="../_images/virt-mem-pic17.png" />{#fig:vm:pic17 width=”\textwidth”}</p>
 </section>
 <section id="page-permissions-p-w-and-u-bits">
-<h3><span class="section-number">22.5.3. </span>Page Permissions - P, W, and U bits<a class="headerlink" href="#page-permissions-p-w-and-u-bits" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.5.3. </span>Page Permissions - P, W, and U bits<a class="headerlink" href="#page-permissions-p-w-and-u-bits" title="Permalink to this headline">#</a></h3>
 <p>Page tables allow different permissions to be applied to memory at a
 per-page level of granularity.</p>
 <p><strong>P=0/1</strong> - If the present bit is zero, the entry is ignored entirely by
@@ -1509,7 +1514,7 @@ space as the current process, but will hide its code and data structures
 from access by user processes by setting U=0 on the OS-only mappings.</p>
 </section>
 <section id="page-sharing">
-<h3><span class="section-number">22.5.4. </span>Page Sharing<a class="headerlink" href="#page-sharing" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.5.4. </span>Page Sharing<a class="headerlink" href="#page-sharing" title="Permalink to this headline">#</a></h3>
 <p>What happens if a single physical memory page is mapped into two
 different process address spaces? It works just fine.</p>
 <div class="highlight-gsidebar notranslate"><div class="highlight"><pre><span></span>A question for the reader - why doesn&#39;t sharing read-only pages violate
@@ -1538,7 +1543,7 @@ mapped into the address space of each process using the library.</p>
 </section>
 </section>
 <section id="page-size-address-space-size-and-64-bits">
-<h2><span class="section-number">22.6. </span>Page Size, Address Space Size, and 64 Bits<a class="headerlink" href="#page-size-address-space-size-and-64-bits" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">24.6. </span>Page Size, Address Space Size, and 64 Bits<a class="headerlink" href="#page-size-address-space-size-and-64-bits" title="Permalink to this headline">#</a></h2>
 <p>The page size of a processor plays a large role in determining how much
 address space can be addressed. In particular, assuming that the page
 table tree is built out of single pages, a 2-level page table can map
@@ -1577,7 +1582,7 @@ than 256 TB, it will be necessary to go to a deeper page table, or
 larger pages, or perhaps another organization entirely.</p>
 </section>
 <section id="creating-a-page-table-vm-sec-4-6">
-<h2><span class="section-number">22.7. </span>Creating a Page Table {#vm:sec:4:6}<a class="headerlink" href="#creating-a-page-table-vm-sec-4-6" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">24.7. </span>Creating a Page Table {#vm:sec:4:6}<a class="headerlink" href="#creating-a-page-table-vm-sec-4-6" title="Permalink to this headline">#</a></h2>
 <div class="highlight-{#ch2:lst:hello notranslate"><div class="highlight"><pre><span></span>char hello[] = ``hello world\n&#39;&#39;;
 void _start(void)
 {
@@ -1635,20 +1640,20 @@ arbitrary; the page numbers within the page directory and page table
 entries would of course change if different physical pages were used.)</p>
 <p><img alt="Page table corresponding to memory map for[ch2:lst:hello]{reference-type=&quot;autoref&quot;reference=&quot;ch2:lst:hello&quot;}, also used for reviewquestions." src="../_images/virt-mem-review2.png" />{#fig:vm:review2 width=”80%”}</p>
 <section id="id7">
-<h3><span class="section-number">22.7.1. </span>Review questions<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.7.1. </span>Review questions<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="page-faulting">
-<h2><span class="section-number">22.8. </span>Page Faulting<a class="headerlink" href="#page-faulting" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">24.8. </span>Page Faulting<a class="headerlink" href="#page-faulting" title="Permalink to this headline">#</a></h2>
 <p>In the previous section you saw how the MMU in a Pentium-like CPU
 determines whether a memory access will succeed:</p>
 <p>If translation fails at any one of the six possible points above (P, W,
 or U at each level) then a page fault is generated.</p>
 <section id="page-faults">
-<h3><span class="section-number">22.8.1. </span>Page Faults<a class="headerlink" href="#page-faults" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.8.1. </span>Page Faults<a class="headerlink" href="#page-faults" title="Permalink to this headline">#</a></h3>
 <p>A page fault is a special form of exception that has the following two
 characteristics: first, it is generated when an address translation
 fails, and second, it occurs in the middle of an instruction, not after
@@ -1700,7 +1705,7 @@ additional faults.
 </div>
 </section>
 <section id="handling-page-faults">
-<h3><span class="section-number">22.8.2. </span>Handling Page Faults<a class="headerlink" href="#handling-page-faults" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.8.2. </span>Handling Page Faults<a class="headerlink" href="#handling-page-faults" title="Permalink to this headline">#</a></h3>
 <p>Operating systems use two primary strategies in handling page faults:</p>
 <p><strong>Kill the program.</strong> If the access is in fact an error, the default
 action is to kill the process, so that the page fault handler never
@@ -1733,14 +1738,14 @@ and copy-on-write. More complex page fault mechanisms are used in
 hardware virtualization, to support virtual machines; those mechanisms
 will be described later in this book.</p>
 <section id="id9">
-<h4><span class="section-number">22.8.2.1. </span>Review questions<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">24.8.2.1. </span>Review questions<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h4>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="process-address-space-revisited">
-<h3><span class="section-number">22.8.3. </span>Process Address Space, Revisited<a class="headerlink" href="#process-address-space-revisited" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.8.3. </span>Process Address Space, Revisited<a class="headerlink" href="#process-address-space-revisited" title="Permalink to this headline">#</a></h3>
 <p>How does the OS know how to handle a page fault? By examining its
 internal memory map for a process. We’ve talked briefly about process
 memory maps earlier, but now we will look in more detail at a specific
@@ -1814,7 +1819,7 @@ following sections can be seen:</p>
 zero; since the BSS section is initialized to all zeros, there is no
 need to store its initial contents in the executable file.</p>
 <section id="executable-file-and-process-address-space">
-<h4><span class="section-number">22.8.3.1. </span>Executable file and process address space<a class="headerlink" href="#executable-file-and-process-address-space" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">24.8.3.1. </span>Executable file and process address space<a class="headerlink" href="#executable-file-and-process-address-space" title="Permalink to this headline">#</a></h4>
 <p>Here you can see the relationship between the structure of the
 executable file and the process address space created by the kernel when
 it runs this executable. One page (08048xxx) is used for read-only code
@@ -1823,7 +1828,7 @@ data.</p>
 <p><img alt="Relationship of executable file header to memory mapstructure" src="../_images/virt-mem-pic101.png" />{#fig:vm:pic101 width=”100%”}</p>
 </section>
 <section id="id13">
-<h4><span class="section-number">22.8.3.2. </span>Review questions<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">24.8.3.2. </span>Review questions<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h4>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
@@ -1831,7 +1836,7 @@ data.</p>
 </section>
 </section>
 <section id="page-fault-handling">
-<h2><span class="section-number">22.9. </span>Page Fault Handling<a class="headerlink" href="#page-fault-handling" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">24.9. </span>Page Fault Handling<a class="headerlink" href="#page-fault-handling" title="Permalink to this headline">#</a></h2>
 <p>In the Linux kernel, the memory map is represented as a list of
 <code class="docutils literal notranslate"><span class="pre">vm_area_struct</span></code> objects, each corresponding to a separate segment, and
 each containing the following information:</p>
@@ -1875,7 +1880,7 @@ and is handled the same way.
 </pre></div>
 </div>
 <section id="page-faults-in-the-kernel">
-<h3><span class="section-number">22.9.1. </span>Page Faults in the Kernel<a class="headerlink" href="#page-faults-in-the-kernel" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.9.1. </span>Page Faults in the Kernel<a class="headerlink" href="#page-faults-in-the-kernel" title="Permalink to this headline">#</a></h3>
 <div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>9 Although common in the past, modern Windows and Linux systems rarely
 seem to crash due to driver problems. (Although my Mac panics every
 month or two.) If you ever develop kernel drivers, however, you will
@@ -1975,7 +1980,7 @@ always result in a system crash.
 </section>
 </section>
 <section id="shared-executables-and-libraries">
-<h2><span class="section-number">22.10. </span>Shared Executables and Libraries<a class="headerlink" href="#shared-executables-and-libraries" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">24.10. </span>Shared Executables and Libraries<a class="headerlink" href="#shared-executables-and-libraries" title="Permalink to this headline">#</a></h2>
 <p>In addition to simplifying memory allocation, virtual memory can also
 allow memory to be used more efficiently when running multiple
 processes.</p>
@@ -2090,13 +2095,13 @@ ffffffffff600000      4K r-x--   [ anon ]
 </pre></div>
 </div>
 <section id="id17">
-<h3><span class="section-number">22.10.1. </span>Review questions<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.10.1. </span>Review questions<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h3>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </section>
 <section id="more-memory-sharing-fork-and-copy-on-write">
-<h3><span class="section-number">22.10.2. </span>More Memory Sharing: <code class="docutils literal notranslate"><span class="pre">fork()</span></code> and copy-on-write<a class="headerlink" href="#more-memory-sharing-fork-and-copy-on-write" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.10.2. </span>More Memory Sharing: <code class="docutils literal notranslate"><span class="pre">fork()</span></code> and copy-on-write<a class="headerlink" href="#more-memory-sharing-fork-and-copy-on-write" title="Permalink to this headline">#</a></h3>
 <p>In all the cases you’ve seen so far, page sharing has been used to share
 read-only pages—these are intrinsically safe to share, because
 processes are unable to modify the pages and thereby affect other
@@ -2155,14 +2160,14 @@ tries to write to one of these pages; the page fault handler then
 the old one, and mapping a separate page read-write in each of the
 processes.</p>
 <section id="id20">
-<h4><span class="section-number">22.10.2.1. </span>Review questions<a class="headerlink" href="#id20" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">24.10.2.1. </span>Review questions<a class="headerlink" href="#id20" title="Permalink to this headline">#</a></h4>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="memory-over-commitment-and-paging">
-<h3><span class="section-number">22.10.3. </span>Memory Over-Commitment and Paging<a class="headerlink" href="#memory-over-commitment-and-paging" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.10.3. </span>Memory Over-Commitment and Paging<a class="headerlink" href="#memory-over-commitment-and-paging" title="Permalink to this headline">#</a></h3>
 <p>Page faults allow data to be dynamically fetched into memory when it is
 needed, in the same way that the CPU dynamically fetches data from
 memory into the cache. This allows the operating system to over-commit
@@ -2198,7 +2203,7 @@ release the memory page.</p>
 <p><img alt="Page Table Entry with D (dirty)bit" src="../_images/virt-mem-pic106.png" />{#fig:vm:pic106 width=”\textwidth”}</p>
 </section>
 <section id="dirty-and-clean-pages">
-<h3><span class="section-number">22.10.4. </span>Dirty and Clean Pages<a class="headerlink" href="#dirty-and-clean-pages" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.10.4. </span>Dirty and Clean Pages<a class="headerlink" href="#dirty-and-clean-pages" title="Permalink to this headline">#</a></h3>
 <p>How does the operating system determine whether a page has been modified
 and needs to be written to disk? It uses the D bit in the page table
 entry for this, as seen in
@@ -2227,7 +2232,7 @@ swap space, and is ignored by the MMU and used by the software page
 fault handler.</p>
 </section>
 <section id="the-memory-hierarchy">
-<h3><span class="section-number">22.10.5. </span>The Memory Hierarchy<a class="headerlink" href="#the-memory-hierarchy" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.10.5. </span>The Memory Hierarchy<a class="headerlink" href="#the-memory-hierarchy" title="Permalink to this headline">#</a></h3>
 <p>Demand paging from files and from swap provides the mechanisms to create
 the traditional memory hierarchy, as shown in
 <a class="reference external" href="#fig:vm:pic107">[fig:vm:pic107]</a>{reference-type=”autoref”
@@ -2259,7 +2264,7 @@ memory-hungry program, memory will be released from the idle process and
 given to the active one; if you switch back, the original program will
 run slowly for a while as it swaps these pages back in.</p>
 <section id="id21">
-<h4><span class="section-number">22.10.5.1. </span>Review questions<a class="headerlink" href="#id21" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">24.10.5.1. </span>Review questions<a class="headerlink" href="#id21" title="Permalink to this headline">#</a></h4>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
@@ -2267,7 +2272,7 @@ run slowly for a while as it swaps these pages back in.</p>
 </section>
 </section>
 <section id="page-replacement">
-<h2><span class="section-number">22.11. </span>Page Replacement<a class="headerlink" href="#page-replacement" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">24.11. </span>Page Replacement<a class="headerlink" href="#page-replacement" title="Permalink to this headline">#</a></h2>
 <p>If there’s a limited amount of memory available, then every time a page
 is swapped in from disk, it will be necessary to remove, or evict,
 another page from memory. The choice of which page to evict is
@@ -2315,7 +2320,7 @@ Fetch virtual page $a_i$ from disk into physical page $j$
 to a request for it.</p>
 </section>
 <section id="page-replacement-strategies">
-<h2><span class="section-number">22.12. </span>Page Replacement Strategies<a class="headerlink" href="#page-replacement-strategies" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">24.12. </span>Page Replacement Strategies<a class="headerlink" href="#page-replacement-strategies" title="Permalink to this headline">#</a></h2>
 <p>In this class we consider the following page replacement strategies:</p>
 <div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>FIFO: *first-in first-out*. The page evicted from memory is the first
 page to have been fetched into memory.
@@ -2332,7 +2337,7 @@ worse?
 </pre></div>
 </div>
 <section id="fifo">
-<h3><span class="section-number">22.12.1. </span>FIFO<a class="headerlink" href="#fifo" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.12.1. </span>FIFO<a class="headerlink" href="#fifo" title="Permalink to this headline">#</a></h3>
 <p><img alt="FIFO cleaning" src="../_images/virt-mem-pic107.png" />{#fig:vm:pic107 width=”100%”}</p>
 <p>This strategy is very simple to implement, as it only requires keeping
 track of the order in which pages were fetched into memory. Given 4
@@ -2345,7 +2350,7 @@ evicted (when misses occur) shown in dark grey.</p>
 <p><img alt="LRU cleaning" src="../_images/virt-mem-pic109.png" />{#fig:vm:pic109 width=”100%”}</p>
 </section>
 <section id="lru">
-<h3><span class="section-number">22.12.2. </span>LRU<a class="headerlink" href="#lru" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.12.2. </span>LRU<a class="headerlink" href="#lru" title="Permalink to this headline">#</a></h3>
 <p>The idea behind LRU is that pages which have been accessed in the recent
 past are likely to be accessed in the near future, and pages which
 haven’t, aren’t. LRU replacement is shown in
@@ -2362,7 +2367,7 @@ noted, with four misses compared to six for FIFO.</p>
 width=”100%”}</p>
 </section>
 <section id="opt">
-<h3><span class="section-number">22.12.3. </span>OPT<a class="headerlink" href="#opt" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.12.3. </span>OPT<a class="headerlink" href="#opt" title="Permalink to this headline">#</a></h3>
 <p>The optimal algorithm picks a page to evict by looking forward in time
 and finding the page which goes for the longest time without being
 accessed again. Except for seeing the future, OPT plays by the same
@@ -2380,7 +2385,7 @@ isn’t accessed for 6 steps and is thus chosen to be evicted.</p>
 width=”\textwidth”}</p>
 </section>
 <section id="fifo-with-second-chance-clock">
-<h3><span class="section-number">22.12.4. </span>FIFO with Second Chance (CLOCK)<a class="headerlink" href="#fifo-with-second-chance-clock" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.12.4. </span>FIFO with Second Chance (CLOCK)<a class="headerlink" href="#fifo-with-second-chance-clock" title="Permalink to this headline">#</a></h3>
 <p>LRU is simple and quite effective in many caching applications, and it’s
 ideal that the operating system uses it to determine which pages to
 evict from memory. But there is one small problem in using it in a
@@ -2405,7 +2410,7 @@ page during its entire trip through the list, and so it is selected for
 replacement.</p>
 </section>
 <section id="clock">
-<h3><span class="section-number">22.12.5. </span>CLOCK<a class="headerlink" href="#clock" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.12.5. </span>CLOCK<a class="headerlink" href="#clock" title="Permalink to this headline">#</a></h3>
 <p>An alternate way of visualizing the FIFO with second chance algorithm is
 shown in <a class="reference external" href="#fig:vm:pic112">[fig:vm:pic112]</a>{reference-type=”autoref”
 reference=”fig:vm:pic112”}. Pages are arranged in a circle, with a
@@ -2413,14 +2418,14 @@ reference=”fig:vm:pic112”}. Pages are arranged in a circle, with a
 to keep or evict them. This description is the origin of the widely-used
 name for this algorithm, CLOCK.</p>
 <section id="id23">
-<h4><span class="section-number">22.12.5.1. </span>Review questions<a class="headerlink" href="#id23" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">24.12.5.1. </span>Review questions<a class="headerlink" href="#id23" title="Permalink to this headline">#</a></h4>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="answers-to-review-questions">
-<h3><span class="section-number">22.12.6. </span>Answers to Review questions<a class="headerlink" href="#answers-to-review-questions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">24.12.6. </span>Answers to Review questions<a class="headerlink" href="#answers-to-review-questions" title="Permalink to this headline">#</a></h3>
 <div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>in virtmem:2,virtmem:3,virtmem:4,virtmem:5,
 virtmem:6,virtmem:7,virtmem:8a,virtmem:8b
 </pre></div>
@@ -2556,13 +2561,13 @@ with the A bit set.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">21. </span>Overview of MM</p>
+            <p class="prev-next-title"><span class="section-number">23. </span>Overview of MM</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../fs/intro.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">23. </span>Introduction</p>
+        <p class="prev-next-title"><span class="section-number">25. </span>Introduction</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

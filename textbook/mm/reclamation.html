@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>12. Memory reclaiming algorithms. &#8212; Introduction to Operating Systems</title>
+    <title>10. Memory reclaiming algorithms. &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="13. Buffer Cache" href="buffer-cache.html" />
-    <link rel="prev" title="11. Page Tables" href="page-tables.html" />
+    <link rel="next" title="11. Buffer Cache" href="buffer-cache.html" />
+    <link rel="prev" title="9. Page Tables" href="page-tables.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -152,75 +152,58 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Scheduling
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/scheduling.html">
-   6. Processor Scheduling
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
   Memory Management
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   7. Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="physmem.html">
-   8. Memory management without translation
+   6. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-seg.html">
-   9. Segmentation
+   7. Segmentation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-paging.html">
-   10. Paging
+   8. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-tables.html">
-   11. Page Tables
+   9. Page Tables
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   12. Memory reclaiming algorithms.
+   10. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="buffer-cache.html">
-   13. Buffer Cache
+   11. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pagefaults.html">
-   14. Page Faults
+   12. Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="misc.html">
-   15. Conclusion
+   13. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="realworld.html">
-   16. Memory management in the real world
+   14. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concl.html">
-   17. Other Stuff
+   15. Other Stuff
   </a>
  </li>
 </ul>
@@ -232,22 +215,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   18. Introduction
+   16. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   19. Interface
+   17. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   20. File System Layout
+   18. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   21. Kernel implementation
+   19. Kernel implementation
   </a>
  </li>
 </ul>
@@ -259,32 +242,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   22. Intro Concurrency Synchronization and Deadlock
+   20. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   23. Cooperating Processes
+   21. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   24. Synchronization Primitives
+   22. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   25. Deadlocks
+   23. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   26. Challenges of Modern Hardware
+   24. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   27. Locking in the Linux Kernel
+   25. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -296,17 +279,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   28. Overview of other topics
+   26. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   29. Virtualization and Cloud computing
+   27. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   30. Other OS structures
+   28. Other OS structures
   </a>
  </li>
 </ul>
@@ -318,17 +301,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   31. How to read this book
+   29. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   32. Contributing
+   30. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   33. Bibliography
+   31. Bibliography
   </a>
  </li>
 </ul>
@@ -574,54 +557,54 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-memory-hierarchy">
-   12.1. The Memory Hierarchy
+   10.1. The Memory Hierarchy
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review-questions">
-     12.1.1. Review questions
+     10.1.1. Review questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dirty-and-clean-pages">
-   12.2. Dirty and Clean Pages
+   10.2. Dirty and Clean Pages
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-replacement">
-   12.3. Page Replacement
+   10.3. Page Replacement
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-replacement-strategies">
-   12.4. Page Replacement Strategies
+   10.4. Page Replacement Strategies
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fifo">
-     12.4.1. FIFO
+     10.4.1. FIFO
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lru">
-     12.4.2. LRU
+     10.4.2. LRU
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#opt">
-     12.4.3. OPT
+     10.4.3. OPT
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fifo-with-second-chance-clock">
-     12.4.4. FIFO with Second Chance (CLOCK)
+     10.4.4. FIFO with Second Chance (CLOCK)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#clock">
-     12.4.5. CLOCK
+     10.4.5. CLOCK
     </a>
    </li>
   </ul>
@@ -647,54 +630,54 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-memory-hierarchy">
-   12.1. The Memory Hierarchy
+   10.1. The Memory Hierarchy
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review-questions">
-     12.1.1. Review questions
+     10.1.1. Review questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dirty-and-clean-pages">
-   12.2. Dirty and Clean Pages
+   10.2. Dirty and Clean Pages
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-replacement">
-   12.3. Page Replacement
+   10.3. Page Replacement
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-replacement-strategies">
-   12.4. Page Replacement Strategies
+   10.4. Page Replacement Strategies
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fifo">
-     12.4.1. FIFO
+     10.4.1. FIFO
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lru">
-     12.4.2. LRU
+     10.4.2. LRU
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#opt">
-     12.4.3. OPT
+     10.4.3. OPT
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fifo-with-second-chance-clock">
-     12.4.4. FIFO with Second Chance (CLOCK)
+     10.4.4. FIFO with Second Chance (CLOCK)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#clock">
-     12.4.5. CLOCK
+     10.4.5. CLOCK
     </a>
    </li>
   </ul>
@@ -710,7 +693,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="memory-reclaiming-algorithms">
-<span id="cont-mm-reclaim"></span><h1><span class="section-number">12. </span>Memory reclaiming algorithms.<a class="headerlink" href="#memory-reclaiming-algorithms" title="Permalink to this headline">#</a></h1>
+<span id="cont-mm-reclaim"></span><h1><span class="section-number">10. </span>Memory reclaiming algorithms.<a class="headerlink" href="#memory-reclaiming-algorithms" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
 <li><p>Global page reclaiming</p>
 <ul>
@@ -725,7 +708,7 @@ title="Print to PDF"
 <li><p>Working set page reclaiming</p></li>
 </ul>
 <section id="the-memory-hierarchy">
-<h2><span class="section-number">12.1. </span>The Memory Hierarchy<a class="headerlink" href="#the-memory-hierarchy" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.1. </span>The Memory Hierarchy<a class="headerlink" href="#the-memory-hierarchy" title="Permalink to this headline">#</a></h2>
 <p>Demand paging from files and from swap provides the mechanisms to create
 the traditional memory hierarchy, as shown in
 (#fig:vm:pic108).</p>
@@ -733,7 +716,7 @@ the traditional memory hierarchy, as shown in
 <figure class="align-default" id="fig-vm-fig108">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic108.png"><img alt="../_images/virt-mem-pic108.png" src="../_images/virt-mem-pic108.png" style="width: 45%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 12.1 </span><span class="caption-text">4-level Memory Hierarchy</span><a class="headerlink" href="#fig-vm-fig108" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 10.1 </span><span class="caption-text">4-level Memory Hierarchy</span><a class="headerlink" href="#fig-vm-fig108" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To access address A:</p>
@@ -760,14 +743,14 @@ memory-hungry program, memory will be released from the idle process and
 given to the active one; if you switch back, the original program will
 run slowly for a while as it swaps these pages back in.</p>
 <section id="review-questions">
-<h3><span class="section-number">12.1.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">10.1.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="dirty-and-clean-pages">
-<h2><span class="section-number">12.2. </span>Dirty and Clean Pages<a class="headerlink" href="#dirty-and-clean-pages" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.2. </span>Dirty and Clean Pages<a class="headerlink" href="#dirty-and-clean-pages" title="Permalink to this headline">#</a></h2>
 <p>How does the operating system determine whether a page has been modified
 and needs to be written to disk? It uses the D bit in the page table
 entry for this, as seen in
@@ -796,7 +779,7 @@ swap space, and is ignored by the MMU and used by the software page
 fault handler.</p>
 </section>
 <section id="page-replacement">
-<h2><span class="section-number">12.3. </span>Page Replacement<a class="headerlink" href="#page-replacement" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.3. </span>Page Replacement<a class="headerlink" href="#page-replacement" title="Permalink to this headline">#</a></h2>
 <p>If there’s a limited amount of memory available, then every time a page
 is swapped in from disk, it will be necessary to remove, or evict,
 another page from memory. The choice of which page to evict is
@@ -844,7 +827,7 @@ Fetch virtual page $a_i$ from disk into physical page $j$
 to a request for it.</p>
 </section>
 <section id="page-replacement-strategies">
-<h2><span class="section-number">12.4. </span>Page Replacement Strategies<a class="headerlink" href="#page-replacement-strategies" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.4. </span>Page Replacement Strategies<a class="headerlink" href="#page-replacement-strategies" title="Permalink to this headline">#</a></h2>
 <p>In this class we consider the following page replacement strategies:</p>
 <div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>FIFO: *first-in first-out*. The page evicted from memory is the first
 page to have been fetched into memory.
@@ -861,7 +844,7 @@ worse?
 </pre></div>
 </div>
 <section id="fifo">
-<h3><span class="section-number">12.4.1. </span>FIFO<a class="headerlink" href="#fifo" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">10.4.1. </span>FIFO<a class="headerlink" href="#fifo" title="Permalink to this headline">#</a></h3>
 <p><img alt="FIFO cleaning" src="../_images/virt-mem-pic107.png" />{#fig:vm:pic107 width=”100%”}</p>
 <p>This strategy is very simple to implement, as it only requires keeping
 track of the order in which pages were fetched into memory. Given 4
@@ -874,7 +857,7 @@ evicted (when misses occur) shown in dark grey.</p>
 <p><img alt="LRU cleaning" src="../_images/virt-mem-pic109.png" />{#fig:vm:pic109 width=”100%”}</p>
 </section>
 <section id="lru">
-<h3><span class="section-number">12.4.2. </span>LRU<a class="headerlink" href="#lru" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">10.4.2. </span>LRU<a class="headerlink" href="#lru" title="Permalink to this headline">#</a></h3>
 <p>The idea behind LRU is that pages which have been accessed in the recent
 past are likely to be accessed in the near future, and pages which
 haven’t, aren’t. LRU replacement is shown in
@@ -891,7 +874,7 @@ noted, with four misses compared to six for FIFO.</p>
 width=”100%”}</p>
 </section>
 <section id="opt">
-<h3><span class="section-number">12.4.3. </span>OPT<a class="headerlink" href="#opt" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">10.4.3. </span>OPT<a class="headerlink" href="#opt" title="Permalink to this headline">#</a></h3>
 <p>The optimal algorithm picks a page to evict by looking forward in time
 and finding the page which goes for the longest time without being
 accessed again. Except for seeing the future, OPT plays by the same
@@ -909,7 +892,7 @@ isn’t accessed for 6 steps and is thus chosen to be evicted.</p>
 width=”\textwidth”}</p>
 </section>
 <section id="fifo-with-second-chance-clock">
-<h3><span class="section-number">12.4.4. </span>FIFO with Second Chance (CLOCK)<a class="headerlink" href="#fifo-with-second-chance-clock" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">10.4.4. </span>FIFO with Second Chance (CLOCK)<a class="headerlink" href="#fifo-with-second-chance-clock" title="Permalink to this headline">#</a></h3>
 <p>LRU is simple and quite effective in many caching applications, and it’s
 ideal that the operating system uses it to determine which pages to
 evict from memory. But there is one small problem in using it in a
@@ -934,7 +917,7 @@ page during its entire trip through the list, and so it is selected for
 replacement.</p>
 </section>
 <section id="clock">
-<h3><span class="section-number">12.4.5. </span>CLOCK<a class="headerlink" href="#clock" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">10.4.5. </span>CLOCK<a class="headerlink" href="#clock" title="Permalink to this headline">#</a></h3>
 <p>An alternate way of visualizing the FIFO with second chance algorithm is
 shown in <a class="reference external" href="#fig:vm:pic112">[fig:vm:pic112]</a>{reference-type=”autoref”
 reference=”fig:vm:pic112”}. Pages are arranged in a circle, with a
@@ -976,13 +959,13 @@ name for this algorithm, CLOCK.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">11. </span>Page Tables</p>
+            <p class="prev-next-title"><span class="section-number">9. </span>Page Tables</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="buffer-cache.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>Buffer Cache</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Buffer Cache</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
