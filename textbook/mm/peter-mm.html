@@ -1,0 +1,2594 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>22. Peter’s Virtual Memory chapter &#8212; Introduction to Operating Systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="23. Introduction" href="../fs/intro.html" />
+    <link rel="prev" title="21. Overview of MM" href="Overview.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/pref.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/purpose.html">
+   2. Purpose of operating systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/structure.html">
+   3. Operating System Structure &amp; Unix/Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/services.html">
+   4. Operating System Services
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/tools.html">
+   6. Tools
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Scheduling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/scheduling.html">
+   7. Processor Scheduling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Memory Management
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   8. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="physmem.html">
+   9. Memory management without translation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="virt-seg.html">
+   10. Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="virt-paging.html">
+   11. Paging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="page-tables.html">
+   12. Page Tables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reclamation.html">
+   13. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="buffer-cache.html">
+   14. Page Sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pagefaults.html">
+   15. Page Faults
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="misc.html">
+   16. Conclusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="realworld.html">
+   17. Memory management in the real world
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concl.html">
+   18. Other Stuff
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mm.html">
+   19. EVERYTHING BELOW HERE IS CRAP
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Overview.html">
+   21. Overview of MM
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   22. Peter’s Virtual Memory chapter
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/intro.html">
+   23. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/interface.html">
+   24. Interface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
+   25. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/kernelimp.html">
+   26. Kernel implementation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sync.html">
+   27. Intro Concurrency Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   28. Cooperating Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locking.html">
+   29. Synchronization Primitives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/deadlock.html">
+   30. Deadlocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   31. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   32. Locking in the Linux Kernel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/peter-syncro.html">
+   33. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/OtherInro.html">
+   34. Overview of other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../virt/virt.html">
+   35. Virtualization and Cloud computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/other.html">
+   37. Other OS structures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/howto.html">
+   38. How to read this book
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   39. Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/bib.html">
+   40. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/mm/peter-mm.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/mm/peter-mm.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/okrieg/openos"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fmm/peter-mm.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/edit/main/content/mm/peter-mm.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/mm/peter-mm.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#base-and-bounds-translation">
+   22.1. Base and Bounds translation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paging-avoiding-fragmentation">
+   22.2. Paging - Avoiding Fragmentation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#internal-fragmentation">
+     22.2.1. Internal Fragmentation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paged-address-translation">
+   22.3. Paged Address Translation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#single-level-page-table">
+     22.3.1. Single-level Page Table
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#level-page-tables">
+     22.3.2. 2-level Page Tables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#level-page-table-operation">
+     22.3.3. 2-Level Page Table Operation
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#review-questions">
+       22.3.3.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#translation-look-aside-buffers-tlbs">
+   22.4. Translation Look-aside Buffers (TLBs)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tlb-consistency">
+   22.5. TLB Consistency
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preventing-tlb-inconsistencies">
+     22.5.1. Preventing TLB Inconsistencies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-table-entries">
+     22.5.2. Page Table Entries
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-permissions-p-w-and-u-bits">
+     22.5.3. Page Permissions - P, W, and U bits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-sharing">
+     22.5.4. Page Sharing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-size-address-space-size-and-64-bits">
+   22.6. Page Size, Address Space Size, and 64 Bits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-a-page-table-vm-sec-4-6">
+   22.7. Creating a Page Table {#vm:sec:4:6}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     22.7.1. Review questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-faulting">
+   22.8. Page Faulting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-faults">
+     22.8.1. Page Faults
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#handling-page-faults">
+     22.8.2. Handling Page Faults
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id9">
+       22.8.2.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#process-address-space-revisited">
+     22.8.3. Process Address Space, Revisited
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#executable-file-and-process-address-space">
+       22.8.3.1. Executable file and process address space
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id13">
+       22.8.3.2. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-fault-handling">
+   22.9. Page Fault Handling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-faults-in-the-kernel">
+     22.9.1. Page Faults in the Kernel
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shared-executables-and-libraries">
+   22.10. Shared Executables and Libraries
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id17">
+     22.10.1. Review questions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-memory-sharing-fork-and-copy-on-write">
+     22.10.2. More Memory Sharing:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       fork()
+      </span>
+     </code>
+     and copy-on-write
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id20">
+       22.10.2.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#memory-over-commitment-and-paging">
+     22.10.3. Memory Over-Commitment and Paging
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dirty-and-clean-pages">
+     22.10.4. Dirty and Clean Pages
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-memory-hierarchy">
+     22.10.5. The Memory Hierarchy
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id21">
+       22.10.5.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-replacement">
+   22.11. Page Replacement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-replacement-strategies">
+   22.12. Page Replacement Strategies
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fifo">
+     22.12.1. FIFO
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lru">
+     22.12.2. LRU
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#opt">
+     22.12.3. OPT
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fifo-with-second-chance-clock">
+     22.12.4. FIFO with Second Chance (CLOCK)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clock">
+     22.12.5. CLOCK
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id23">
+       22.12.5.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#answers-to-review-questions">
+     22.12.6. Answers to Review questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Peter’s Virtual Memory chapter</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#base-and-bounds-translation">
+   22.1. Base and Bounds translation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paging-avoiding-fragmentation">
+   22.2. Paging - Avoiding Fragmentation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#internal-fragmentation">
+     22.2.1. Internal Fragmentation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paged-address-translation">
+   22.3. Paged Address Translation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#single-level-page-table">
+     22.3.1. Single-level Page Table
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#level-page-tables">
+     22.3.2. 2-level Page Tables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#level-page-table-operation">
+     22.3.3. 2-Level Page Table Operation
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#review-questions">
+       22.3.3.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#translation-look-aside-buffers-tlbs">
+   22.4. Translation Look-aside Buffers (TLBs)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tlb-consistency">
+   22.5. TLB Consistency
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preventing-tlb-inconsistencies">
+     22.5.1. Preventing TLB Inconsistencies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-table-entries">
+     22.5.2. Page Table Entries
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-permissions-p-w-and-u-bits">
+     22.5.3. Page Permissions - P, W, and U bits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-sharing">
+     22.5.4. Page Sharing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-size-address-space-size-and-64-bits">
+   22.6. Page Size, Address Space Size, and 64 Bits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-a-page-table-vm-sec-4-6">
+   22.7. Creating a Page Table {#vm:sec:4:6}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     22.7.1. Review questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-faulting">
+   22.8. Page Faulting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-faults">
+     22.8.1. Page Faults
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#handling-page-faults">
+     22.8.2. Handling Page Faults
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id9">
+       22.8.2.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#process-address-space-revisited">
+     22.8.3. Process Address Space, Revisited
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#executable-file-and-process-address-space">
+       22.8.3.1. Executable file and process address space
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id13">
+       22.8.3.2. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-fault-handling">
+   22.9. Page Fault Handling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-faults-in-the-kernel">
+     22.9.1. Page Faults in the Kernel
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shared-executables-and-libraries">
+   22.10. Shared Executables and Libraries
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id17">
+     22.10.1. Review questions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-memory-sharing-fork-and-copy-on-write">
+     22.10.2. More Memory Sharing:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       fork()
+      </span>
+     </code>
+     and copy-on-write
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id20">
+       22.10.2.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#memory-over-commitment-and-paging">
+     22.10.3. Memory Over-Commitment and Paging
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dirty-and-clean-pages">
+     22.10.4. Dirty and Clean Pages
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-memory-hierarchy">
+     22.10.5. The Memory Hierarchy
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id21">
+       22.10.5.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-replacement">
+   22.11. Page Replacement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-replacement-strategies">
+   22.12. Page Replacement Strategies
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fifo">
+     22.12.1. FIFO
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lru">
+     22.12.2. LRU
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#opt">
+     22.12.3. OPT
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fifo-with-second-chance-clock">
+     22.12.4. FIFO with Second Chance (CLOCK)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clock">
+     22.12.5. CLOCK
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id23">
+       22.12.5.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#answers-to-review-questions">
+     22.12.6. Answers to Review questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="peter-s-virtual-memory-chapter">
+<h1><span class="section-number">22. </span>Peter’s Virtual Memory chapter<a class="headerlink" href="#peter-s-virtual-memory-chapter" title="Permalink to this headline">#</a></h1>
+<p>In <a class="reference external" href="#chap:osbasics">[chap:osbasics]</a>{reference-type=”autoref”
+reference=”chap:osbasics”} we discussed operating systems basics such as
+I/O, program loading, and context switching primarily for a simple
+computer with a single <em>physical address space</em>. By this we mean that
+the bits in an address register—for instance the program counter—are
+the same bits that go out over wires on the motherboard to DIMM sockets
+and select a particular location in a memory chip, so that no matter
+what process is executing, the same address (e.g. 0x1000) always refers
+to the same memory location.</p>
+<section id="base-and-bounds-translation">
+<h2><span class="section-number">22.1. </span>Base and Bounds translation<a class="headerlink" href="#base-and-bounds-translation" title="Permalink to this headline">#</a></h2>
+<p><img alt="image" src="../_images/virt-mem-base-bounds.png" /></p>
+<p>We first looked at direct physical addressing, where no matter which
+process is executing, the same address (e.g. 0x1000) refers to the same
+memory location. In addition we reviewed a very simple form of address
+translation, shown here in
+<a class="reference external" href="#fig:vm:fig1">[fig:vm:fig1]</a>{reference-type=”autoref”
+reference=”fig:vm:fig1”}, where base and bounds registers are used to
+relocate a section of the <em>virtual address space</em>—the addresses seen
+by the program, corresponding to values in the CPU registers—to
+somewhere else in the physical address space. By changing these
+translations the operating system can create multiple virtual address
+spaces, one per process; however there is still only one physical
+address space, uniquely identifying each byte in each memory chip. In
+this chapter we introduce <em>paged address translation</em>, a more complex
+address translation mechanism used by most modern CPUs, and present the
+32-bit Intel implementation as an example.</p>
+<p><strong>Limitations of base+bound translation:</strong> Modern hardware and operating
+systems provide a very similar process address space model, but no
+longer use base and bounds registers for address translation<a class="footnote-reference brackets" href="#id24" id="id1">1</a> ,
+despite it being simple, cheap, and quite possibly faster than alternate
+methods. There are a number of reasons why base and bounds translation
+is no longer used, but the fundamental reason is memory fragmentation.</p>
+<p>Base and bounds address translation requires a contiguous memory region
+for each process. If memory is allocated and de-allocated in chunks of
+different sizes and at different times, then it can become <em>fragmented</em>
+so that even if large amounts of memory are free, it will be divided
+into smaller fragments, separated by longer-lived small allocations, as
+seen in <a class="reference external" href="#fig:vm:fig2">[fig:vm:fig2]</a>{reference-type=”autoref”
+reference=”fig:vm:fig2”}.</p>
+<p>Start: 32 locations, all free<br />
+<img alt="image" src="../_images/virt-mem-frag-1.png" />{width=”80%”}\</p>
+<p>Step 1, 2: a = alloc(10), b = alloc(1)<br />
+<img alt="image" src="../_images/virt-mem-frag-2.png" />{width=”80%”}\</p>
+<p>Step 3, 4, 5: c = alloc(10), d = alloc(1), e = alloc(10)<br />
+<img alt="image" src="../_images/virt-mem-frag-3.png" />{width=”80%”}\</p>
+<p>Step 6, 7, 8: free(a), free(c), free(e)<br />
+<img alt="image" src="../_images/virt-mem-frag-4.png" />{width=”80%”}</p>
+<p>In the last line, you can see that only 2 units of memory (out of 32)
+remain allocated, but the largest amount that can be allocated at one
+time is 10 units. If all allocation requests are small, this might not
+be a problem; however, in an operating system it is common to have one
+or two very large processes (e.g., a web browser and word processing
+software), and many small, long-running processes (e.g., the on-screen
+battery display or wifi signal strength indicator). In this case, large
+memory allocations may fail, even when there is enough total memory
+free, because long-lived small allocations fragment the available
+contiguous memory into smaller pieces.</p>
+</section>
+<section id="paging-avoiding-fragmentation">
+<h2><span class="section-number">22.2. </span>Paging - Avoiding Fragmentation<a class="headerlink" href="#paging-avoiding-fragmentation" title="Permalink to this headline">#</a></h2>
+<p>The fragmentation in
+<a class="reference external" href="#fig:vm:fig2">[fig:vm:fig2]</a>{reference-type=”autoref”
+reference=”fig:vm:fig2”} is termed <em>external fragmentation</em>, because the
+memory wasted is <em>external</em> to the regions allocated. This situation can
+be avoided by <em>compacting</em> memory—moving existing allocations around,
+thereby consolidating multiple blocks of free memory into a single large
+chunk. This is a slow process, requiring processes to be paused, large
+amounts of memory to be copied, and base+bounds registers modified to
+point to new locations<a class="footnote-reference brackets" href="#id25" id="id2">2</a>.</p>
+<p><img alt="image" src="../_images/virt-mem-map.png" />{height=”8\baselineskip”}</p>
+<p>Instead, modern CPUs use <em>paged address translation</em>, which divides the
+physical and virtual memory spaces into fixed-sized pages, typically
+4KB, and provides a flexible mapping between virtual and physical pages,
+as shown in <a class="reference external" href="#fig:vm:fig3">[fig:vm:fig3]</a>{reference-type=”autoref”
+reference=”fig:vm:fig3”}. The operating system can then maintain a list
+of free physical pages, and allocate them as needed. Because any
+combination of physical pages may be used for an allocation request,
+there is no external fragmentation, and a request will not fail as long
+as there are enough free physical pages to fulfill it.</p>
+<section id="internal-fragmentation">
+<h3><span class="section-number">22.2.1. </span>Internal Fragmentation<a class="headerlink" href="#internal-fragmentation" title="Permalink to this headline">#</a></h3>
+<p>Paging solves the problem of external fragmentation, but it suffers from
+another issue, <em>internal fragmentation</em>, because space may be wasted
+<em>inside</em> the allocated pages. E.g. if 10 KB of memory is allocated in
+4KB pages, 3 pages (a total of 12 KB) are allocated, and 2KB is wasted.
+To allocate hundreds of KB in pages of 4KB this is a minor overhead:
+about <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> a page, or 2 KB, wasted per allocation. But internal
+fragmentation makes this approach inefficient for very small allocations
+(e.g. the <code class="docutils literal notranslate"><span class="pre">new</span></code> operator in C++), as shown in
+<a class="reference external" href="#fig:vm:fig4">[fig:vm:fig4]</a>{reference-type=”autoref”
+reference=”fig:vm:fig4”}. (It is also one reason why even though most
+CPUs support multi-megabyte or even multi-gigabyte “huge” pages, which
+are slightly more efficient than 4 KB pages, they are rarely used.)</p>
+<p><img alt="image" src="../_images/virt-mem-pic7.png" />{width=”90%”}\</p>
+<p>Instead, modern CPUs use <em>paged address translation</em>, which divides the
+physical and virtual memory spaces into fixed-sized pages, typically
+4KB, and provides a flexible mapping between virtual and physical pages,
+as shown in <a class="reference external" href="#fig:vm:fig3">[fig:vm:fig3]</a>{reference-type=”autoref”
+reference=”fig:vm:fig3”}. The operating system can then maintain a list
+of free physical pages, and allocate them as needed. Because any
+combination of physical pages may be used for an allocation request,
+there is no external fragmentation, and a request will not fail as long
+as there are enough free physical pages to fulfill it.</p>
+</section>
+</section>
+<section id="paged-address-translation">
+<h2><span class="section-number">22.3. </span>Paged Address Translation<a class="headerlink" href="#paged-address-translation" title="Permalink to this headline">#</a></h2>
+<p>We examine a single model of address translation in detail: the one used
+by the original Pentium, and by any Intel-compatible CPU running in
+32-bit mode. It uses 32-bit virtual addresses, 32-bit physical
+addresses, and a page size of 4096 bytes. Since pages are <span class="math notranslate nohighlight">\(2^{12}\)</span> bytes
+each, addresses can be divided into 20-bit page numbers and 12-bit
+offsets within each page, as shown in
+<a class="reference external" href="#fig:vm:fig5">[fig:vm:fig5]</a>{reference-type=”autoref”
+reference=”fig:vm:fig5”}</p>
+<p><img alt="image" src="../_images/virt-mem-pic10.png" />{height=”5.5\baselineskip”}</p>
+<p>The Memory Management Unit (MMU) maps a 20-bit virtual page number to a
+20-bit physical page number; the offset can pass through unchanged, as
+shown in <a class="reference external" href="#fig:vm:fig6">[fig:vm:fig6]</a>{reference-type=”autoref”
+reference=”fig:vm:fig6”}, giving the physical address the CPU should
+access.</p>
+<p><img alt="Page number and offset in 32-bit paged translation with 4KBpages" src="../_images/virt-mem-pic9.png" />{#fig:vm:fig5 width=”\textwidth”}</p>
+<p>Although paged address translation is far more flexible than base and
+bounds registers, it requires much more information. Base and bounds
+translation only requires two values, which can easily be held in
+registers in the MMU. In contrast, paged translation must be able to
+handle a separate mapping value for each of over a million virtual
+pages. (although most programs will only map a fraction of those pages)
+The only possible place to store the amount of information required by
+paged address translation is in memory itself, so the MMU uses page
+tables in memory to specify virtual-to-physical mappings.</p>
+<section id="single-level-page-table">
+<h3><span class="section-number">22.3.1. </span>Single-level Page Table<a class="headerlink" href="#single-level-page-table" title="Permalink to this headline">#</a></h3>
+<p>One of the simplest ways to structure a page table for mapping 20-bit
+page numbers is as a simple array with <span class="math notranslate nohighlight">\(2^{20}\)</span> entries. With this
+configuration, each virtual page has an entry, and the value in that
+entry is the corresponding physical page number, as seen in
+<a class="reference external" href="#fig:vm:fig11">[fig:vm:fig11]</a>{reference-type=”autoref”
+reference=”fig:vm:fig11”}. This single-level table is located in
+physical memory, and the MMU is given a pointer to this table, which is
+stored in an MMU register. (On Intel-compatible CPUs, the page table
+pointer is Control Register 3, or CR3.) This is shown in
+<a class="reference external" href="#fig:vm:fig11">[fig:vm:fig11]</a>{reference-type=”autoref”
+reference=”fig:vm:fig11”}, where we see the first two entries in a
+<span class="math notranslate nohighlight">\(2^{20}\)</span> or 1048576-entry mapping table. In addition to the translated
+page number, each entry contains a <em>P</em> bit to indicate whether or not
+the entry is “present,” i.e., valid. Unlike in C or Java we can’t use a
+special null pointer, because 0 is a perfectly valid page number<a class="footnote-reference brackets" href="#id26" id="id3">3</a>.</p>
+<p><img alt="Single-level 32-bit pagetable" src="../_images/virt-mem-pic11.png" />{#fig:vm:fig11 width=”85%”}</p>
+<p>In <a class="reference external" href="#lst:map:pcode">[lst:map:pcode]</a>{reference-type=”autoref”
+reference=”lst:map:pcode”} we see pseudo-code for the translation
+algorithm implemented in an MMU using a single-level table; VA and PA
+stand for virtual and physical addresses, and VPN and PPN are the
+virtual and physical page numbers.</p>
+<div class="highlight-{#lst:map:pcode notranslate"><div class="highlight"><pre><span></span>PA = translate(VA):
+            VPN, offset = split[20 bits, 12 bits](VA)
+            PTE = physical_read(CR3 + VPN*sizeof(PTE), sizeof(PTE))
+            if not PTE.present:
+                fault
+            return PTE.PPN + offset
+</pre></div>
+</div>
+<p>Note that this means that every memory operation performed by the CPU
+now requires two physical memory operations: one to translate the
+virtual address, and a second one to perform the actual operation. If
+this seems inefficient, it is, and it will get worse. However, in a page
+or two we’ll discuss the <em>translation lookaside buffer</em> or TLB, which
+caches these translations to eliminate most of the overhead.</p>
+<p>The single-level page table handles the problem of encoding the
+virtual-to-physical page map, but causes another: it uses 4 MB of memory
+per map. Years ago (e.g. in the mid-80s when the first Intel CPUs using
+this paging structure were introduced) this was entirely out of the
+question, as a single computer might have a total of 4 MB of memory or
+less. Even today, it remains problematic. As an example, when these
+notes were first written (2013), the most heavily-used machine in the
+CCIS lab (<a class="reference external" href="http://login.ccs.neu.edu">login.ccs.neu.edu</a>) had 4 GB of memory, and when I checked it
+had 640 running processes. With 4 MB page tables and one table per
+process, this would require 2.5GB of memory just for page tables, or
+most of the machine’s memory. Worse yet, each table would require a
+contiguous 4MB region of memory, running into the same problem of
+external fragmentation that paged address translation was supposed to
+solve.</p>
+</section>
+<section id="level-page-tables">
+<h3><span class="section-number">22.3.2. </span>2-level Page Tables<a class="headerlink" href="#level-page-tables" title="Permalink to this headline">#</a></h3>
+<p><img alt="Two-level page table for 32-bit addresses and 4 KBpages" src="../_images/virt-mem-pic12.png" />{#fig:vm:pic12 width=”80%”}</p>
+<p>To fix this, almost all 32-bit processors (e.g. Intel, ARM) use a
+2-level page table, structured as a tree, as seen in
+<a class="reference external" href="#fig:vm:pic12">[fig:vm:pic12]</a>{reference-type=”autoref”
+reference=”fig:vm:pic12”}.</p>
+<p>The top ten bits of the virtual page number index into the top-level
+table (sometimes called the <em>page directory</em>), which holds a pointer to
+a second-level table. The bottom ten bits of the virtual page number are
+used as an index into this second-level table, giving the location where
+the actual physical address will be found. At first glance, it appears
+that this structure takes just as much space as a single-level table. To
+map a full 4 GB of memory, it still requires 4 MB (plus 1 additional
+page) for page tables. But if a process only needs a small amount of
+memory, most of the entries in the top-level directory will be empty
+(shown here as P=0), and only a small number of second-level tables will
+be needed; small-memory processes will thus have small page tables. And
+since the table is made out of individual pages, we can use whatever set
+of 4 KB pages are available, instead of needing a contiguous 4 MB block.</p>
+<p>Note that this is a key characteristic of almost every page table
+implementation: a page table is made up of pages, allowing the same pool
+of free pages to be used for both user memory allocation and for page
+tables themselves. In addition it means that each sub-table starts at
+the beginning of a page and fits within that page, which simplifies
+array lookups when translating a page number.</p>
+</section>
+<section id="level-page-table-operation">
+<h3><span class="section-number">22.3.3. </span>2-Level Page Table Operation<a class="headerlink" href="#level-page-table-operation" title="Permalink to this headline">#</a></h3>
+<p>In <a class="reference external" href="#fig:vm:pic13">[fig:vm:pic13]</a>{reference-type=”autoref”
+reference=”fig:vm:pic13”} we see a page table constructed of 3 pages:
+physical pages 00000 (the root directory), 00001, and 00003. Two data
+pages are mapped: 00002 and 00004. Any entries not shown are assumed to
+be null, i.e., the present bit is set to 0. As an example we use this
+page table to translate a read from virtual address 0x0040102C.</p>
+<p><img alt="2-level Page Table Example" src="../_images/virt-mem-pic13.png" />{#fig:vm:pic13
+width=”90%”}</p>
+<p>The steps involved in translating this address are:</p>
+<p>1) Split the address into page number and offset</p>
+<p><br />
+<img alt="image" src="../_images/virt-mem-pic14.png" />{width=”0.35\columnwidth”}</p>
+<p>2) Split the page number into top and bottom 10 bits, giving <code class="docutils literal notranslate"><span class="pre">0x001</span></code>
+and <code class="docutils literal notranslate"><span class="pre">0x001</span></code>. (in the figure the top row is hex, the middle two rows are
+binary, and the bottom is hex again.)</p>
+<p>\</p>
+<p><img alt="image" src="../_images/virt-mem-pic15.png" />{width=”0.9\columnwidth”}</p>
+<p>3) Read entry <code class="docutils literal notranslate"><span class="pre">[001]</span></code> from the top-level page directory (physical page
+<code class="docutils literal notranslate"><span class="pre">00000</span></code>) (note sizeof(entry) is 4 bytes):\</p>
+<div class="highlight-{xleftmargin=&quot;12pt&quot; notranslate"><div class="highlight"><pre><span></span>address = start [00000000] + index [001] * sizeof(entry)
+read 4 bytes from physical address 00000004 (page 00000, offset 004)
+result = [p=1, pgnum = 00001]
+</pre></div>
+</div>
+<p>4) Read entry <code class="docutils literal notranslate"><span class="pre">[001]</span></code> from the page table in physical page <code class="docutils literal notranslate"><span class="pre">00001</span></code>:</p>
+<div class="highlight-{xleftmargin=&quot;12pt&quot; notranslate"><div class="highlight"><pre><span></span>address = 00001000 + 001*4 = 00001004
+read 4 bytes from physical address 00001004
+:result = [p=1, pgnum = 00002]
+</pre></div>
+</div>
+<p>This means that the translated physical page number is <code class="docutils literal notranslate"><span class="pre">00002</span></code>. The
+offset in the original virtual address is <code class="docutils literal notranslate"><span class="pre">02C</span></code>, so combining the two we
+get the final physical address, <code class="docutils literal notranslate"><span class="pre">0000202C</span></code>.</p>
+<section id="review-questions">
+<h4><span class="section-number">22.3.3.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h4>
+<p><img alt="Reference page table for reviewquestions" src="../_images/virt-mem-pic16.png" />{#fig:vm:review1 width=”95%”}</p>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>13 A famous computer science quote attributed to David Wheeler is: &quot;All
+problems in computer science can be solved by another level of
+indirection,&quot; to which some add &quot;except the performance problems caused
+by indirection.&quot; A corollary to this is that most performance problems
+can be solved by adding caching. How are these quotes applicable to
+paged address translation?
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="translation-look-aside-buffers-tlbs">
+<h2><span class="section-number">22.4. </span>Translation Look-aside Buffers (TLBs)<a class="headerlink" href="#translation-look-aside-buffers-tlbs" title="Permalink to this headline">#</a></h2>
+<p>The 2-level table address translation processes you just learned about
+is highly inefficient, even more so than the single-level table. Even if
+MMU accesses to memory can be satisfied from the L1 cache, this will
+still slow down the CPU by a factor of three or more. To reduce this
+inefficiency, a special-purpose cache called the Translation Look-Aside
+Buffer (TLB) is introduced. Instead of holding memory values, like the
+L1 and L2 caches, the TLB holds virtual page number to physical page
+number mappings. The TLB is typically very small: examining the machines
+I have readily available, I see a TLB size ranging from 64 mappings (on
+certain Intel Atom CPUs) to 640 mappings on Core i7 and Xeon E7 CPUs.
+One reason for this small size is because the TLB has to be very
+fast—they are needed for every memory operation before the CPU can
+look in its cache for a value.</p>
+<p>Using the TLB, the translation process now looks like this:</p>
+<div class="highlight-{#lst:vm:tlb notranslate"><div class="highlight"><pre><span></span>translate VA -&gt; PA:
+    (VPN, offset) = split([20,12],VA)
+    if VPN is in TLB:
+        return TLB[VPN] + offset
+    (top10, bottom10) = split([10,10],VPN)
+    PDE = phys_read(CR3 + top10*4)
+    PTE = phys_read(PDE.pg&lt;&lt;12 + bottom10*4)
+    PPN = PTE.pg
+    add (VPN-&gt;PPN) to TLB, evicting another entry
+    return PPN + offset
+</pre></div>
+</div>
+<p>where PDE is the page <em>directory</em> (i.e. top-level) entry, PTE is the
+page <em>table</em> (second-level) entry, and VPN, PPN are virtual and physical
+page numbers as before.</p>
+<p>How well does this perform? If all of the code and data fits into 640
+pages (about 2.5MB) on a high-end machine, all translations will come
+out of the TLB and there will be no additional overhead for address
+translation. If the <em>working set</em> (the memory in active use) is larger
+than this then some accesses will miss in the TLB and require page-table
+lookup in memory; however in most cases the translated mapping will be
+used many times before being evicted from the TLB, and the overhead of
+accessing in-memory page tables will be modest. (In addition, note that
+MMU accesses to the page table go through the cache, further speeding up
+the translation process)</p>
+</section>
+<section id="tlb-consistency">
+<h2><span class="section-number">22.5. </span>TLB Consistency<a class="headerlink" href="#tlb-consistency" title="Permalink to this headline">#</a></h2>
+<p>Like any other cache, a TLB only functions correctly if it is
+consistent, i.e. the entries in the TLB accurately reflect the in-memory
+values (i.e. page tables) which they are caching. Since the values
+loaded into the TLB come from a page table in memory at the address
+identified by CR3, the values may become invalid if either (a) the page
+table values in memory change (due to CPU writes) or (b) CR3 is
+modified, so that it points to a different page table. In other words,
+inconsistencies can arise due to:</p>
+<p><strong>Individual Entry Modifications:</strong> Sometimes the OS must modify the
+address space of a running program, e.g. during demand paging (covered
+below), where the OS maps in new pages and un-maps others. When changing
+the page table in memory, the OS must ensure that the TLB is not caching
+a copy of the old entry.</p>
+<p><strong>Context switches:</strong> The OS provides each process with a separate
+<em>virtual address space</em>, or set of virtual to physical mappings; the
+same virtual address may be mapped to a different physical memory
+location in each process. (i.e. to a memory location “owned” by that
+process.) When switching between processes the OS changes CR3 to point
+to the address space of the new process, and it’s clearly important for
+both security and correctness to ensure that the MMU uses these
+mappings, not the old ones.</p>
+<section id="preventing-tlb-inconsistencies">
+<h3><span class="section-number">22.5.1. </span>Preventing TLB Inconsistencies<a class="headerlink" href="#preventing-tlb-inconsistencies" title="Permalink to this headline">#</a></h3>
+<p>The issue of modifications can be solved in a fairly straightforward
+way: the MMU provides one instruction to flush the TLB entry for a
+particular page, and another to flush the entire TLB (e.g. if a large
+number of mappings are modified). When entries are flushed from the TLB,
+there is almost always a performance impact, because of the extra memory
+accesses needed to reload those entries the next time they are required.
+In this case, this overhead is not that significant, because (a) the OS
+is already spending a lot of time modifying the page table, and (b) it
+doesn’t do this very often, anyway.</p>
+<p>However, the issue with context switches is harder to solve. The easy
+solution is to ignore the performance overhead and flush the entire TLB
+on every context switch, as is done on most Intel-compatible CPUs.</p>
+<div class="highlight-gsidebar notranslate"><div class="highlight"><pre><span></span>Note that measuring the &quot;cost&quot; of an OS operation is often problematic.
+In a case like this, the operation may complete quickly, but cause other
+operations to slow down.
+</pre></div>
+</div>
+<p>With a 500-entry TLB and a 4-level page table<a class="footnote-reference brackets" href="#id27" id="id4">4</a>, this results in
+throwing away 2000 memory accesses worth of work on each context switch.
+Another solution is to tag each TLB entry with an identifier (an Address
+Space ID or ASID) identifying the context in which it is valid, allowing
+entries from multiple contexts to remain in the TLB at once. A special
+MMU register specifies the ASID of the current process, and entries
+tagged with other ASIDs are ignored. If a process is interrupted for a
+short time, most of its TLB entries will remain cached, while the ASID
+field will prevent them from being mistakenly used by another
+process<a class="footnote-reference brackets" href="#id28" id="id5">5</a>.</p>
+</section>
+<section id="page-table-entries">
+<h3><span class="section-number">22.5.2. </span>Page Table Entries<a class="headerlink" href="#page-table-entries" title="Permalink to this headline">#</a></h3>
+<p>The components of a 32-bit Intel page table entry are shown in
+<a class="reference external" href="#fig:vm:pic17">[fig:vm:pic17]</a>{reference-type=”autoref”
+reference=”fig:vm:pic17”}; for more information you may wish to refer to
+<a class="reference external" href="http://wiki.osdev.org/Paging">http://wiki.osdev.org/Paging</a>.</p>
+<p><img alt="32-bit Intel page table entry(PTE)." src="../_images/virt-mem-pic17.png" />{#fig:vm:pic17 width=”\textwidth”}</p>
+</section>
+<section id="page-permissions-p-w-and-u-bits">
+<h3><span class="section-number">22.5.3. </span>Page Permissions - P, W, and U bits<a class="headerlink" href="#page-permissions-p-w-and-u-bits" title="Permalink to this headline">#</a></h3>
+<p>Page tables allow different permissions to be applied to memory at a
+per-page level of granularity.</p>
+<p><strong>P=0/1</strong> - If the present bit is zero, the entry is ignored entirely by
+the MMU, thus preventing any form of access to the corresponding virtual
+page.</p>
+<p><strong>W = 0/1</strong> - Write permission. If the W bit is zero, then read accesses
+to this page will be allowed, but any attempt to write will cause a
+fault. By setting the W bit to zero, pages that should not be modified
+(i.e., program instructions) can be protected. Since
+correctly-functioning programs in most languages do not change the code
+generated by the compiler, any attempt to write to such a page must be a
+bug, and stopping the program earlier rather than later may reduce the
+amount of damage caused.</p>
+<p><strong>U = 0/1</strong> - User permission. If the U bit is zero, then accesses to
+this page will fail unless the CPU is running in supervisor mode.
+Typically the OS kernel will “live” in a portion of the same address
+space as the current process, but will hide its code and data structures
+from access by user processes by setting U=0 on the OS-only mappings.</p>
+</section>
+<section id="page-sharing">
+<h3><span class="section-number">22.5.4. </span>Page Sharing<a class="headerlink" href="#page-sharing" title="Permalink to this headline">#</a></h3>
+<p>What happens if a single physical memory page is mapped into two
+different process address spaces? It works just fine.</p>
+<div class="highlight-gsidebar notranslate"><div class="highlight"><pre><span></span>A question for the reader - why doesn&#39;t sharing read-only pages violate
+the security principle of preventing access from one process to
+another&#39;s memory space?
+</pre></div>
+</div>
+<p>Each process is able to read from the page, and any modifications it
+makes are visible to the other process, as well. In particular, note
+that the MMU only sees one page table at a time, and doesn’t care how a
+page is mapped in a page table that might be used at some point in the
+future. If the two processes are running on different CPU cores, then
+each core has a separate MMU and will not know or care what translations
+the other cores are using<a class="footnote-reference brackets" href="#id29" id="id6">6</a>.</p>
+<p><img alt="Page sharing between two process addressspaces" src="../_images/virt-mem-pic18.png" />{#fig:vm:pageshare width=”60%”}</p>
+<p>There are two ways in which page sharing can be used:</p>
+<p><strong>Information sharing:</strong> Some databases and other large programs use
+memory segments shared between processes to efficiently pass information
+between those processes.</p>
+<p><strong>Memory saving:</strong> Most processes use the same set of libraries to
+communicate with the OS, the graphical interface, etc., and these
+libraries must be mapped into the address space of each process. But
+most of the memory used by these libraries (program code, strings and
+other constant data) is read-only, and so a single copy can be safely
+mapped into the address space of each process using the library.</p>
+</section>
+</section>
+<section id="page-size-address-space-size-and-64-bits">
+<h2><span class="section-number">22.6. </span>Page Size, Address Space Size, and 64 Bits<a class="headerlink" href="#page-size-address-space-size-and-64-bits" title="Permalink to this headline">#</a></h2>
+<p>The page size of a processor plays a large role in determining how much
+address space can be addressed. In particular, assuming that the page
+table tree is built out of single pages, a 2-level page table can map
+<span class="math notranslate nohighlight">\(N^2\)</span> pages, where N is the number of page table entries that fit in a
+single page. Thus, if the address space is about 32 bits, so that a page
+table entry (physical page number plus some extra bits) can fit in 4
+bytes, the maximum virtual memory that can be mapped with a 2-level page
+table is:</p>
+<div class="highlight-description* notranslate"><div class="highlight"><pre><span></span>512 ($2^9$) entries per page = virtual address space of $2^{18}$ pages
+of $2^{11}$ bytes each = $2^{29}$ bytes (0.5 GB)
+
+1024 ($2^{10}$) entries per page = virtual address space of $2^{20}$
+pages of $2^{12}$ bytes each = $2^{32}$ bytes (4GB)
+
+2048 ($2^{11}$) entries per page = virtual address space of $2^{22}$
+pages of $2^{35}$ bytes each = $2^{35}$ bytes (32GB)
+</pre></div>
+</div>
+<p>In other words, 2K pages are too small for a 32-bit virtual address
+space unless the process moves to a deeper page table, while 8K pages
+are bigger than necessary. (The SPARC and Alpha CPUs, early 64-bit
+processors, used 8KB pages.)</p>
+<p><img alt="4-level page table for 64-bitmode." src="../_images/virt-mem-pic19.png" />{#fig:4level}</p>
+<p>64-bit Intel-compatible CPUs use 4K pages for compatibility, and 8-byte
+page table entries, because four bytes is too small to hold large
+physical page numbers. This requires a 4-level page table, as shown in
+<a class="reference external" href="#fig:4level">[fig:4level]</a>{reference-type=”autoref”
+reference=”fig:4level”}.</p>
+<p>Since each of the 4 levels maps 9 bits of address, for a total of 36
+bits mapped, and the offset is 12 bits, the total virtual address space
+is 48 bits—not the full 64 bits, but still huge (256 TB). Clearly the
+penalty for TLB misses is higher in this case than for 32-bit mode, as
+there are four memory accesses to the page table for a single
+translation instead of two. To support virtual address spaces greater
+than 256 TB, it will be necessary to go to a deeper page table, or
+larger pages, or perhaps another organization entirely.</p>
+</section>
+<section id="creating-a-page-table-vm-sec-4-6">
+<h2><span class="section-number">22.7. </span>Creating a Page Table {#vm:sec:4:6}<a class="headerlink" href="#creating-a-page-table-vm-sec-4-6" title="Permalink to this headline">#</a></h2>
+<div class="highlight-{#ch2:lst:hello notranslate"><div class="highlight"><pre><span></span>char hello[] = ``hello world\n&#39;&#39;;
+void _start(void)
+{
+    syscall(4, 1, hello, 12); /* syscall 4 = write(fd,buf,len) */
+    syscall(1);               /* syscall 1 = exit() */
+}
+</pre></div>
+</div>
+<p>To see how a page table is created, we start by examining the virtual
+memory map of perhaps the simplest possible Linux program, shown in
+<a class="reference external" href="#ch2:lst:hello">[ch2:lst:hello]</a>{reference-type=”autoref”
+reference=”ch2:lst:hello”}. This program doesn’t use any libraries, but
+rather uses direct system calls to write to standard output (always file
+descriptor 1 in Unix) and to exit. In Linux, _start is the point at
+which execution of a program begins; normally the _start function is
+part of the standard library, which performs initialization before
+calling main.</p>
+<p>When this program runs and its memory map is examined (using the <code class="docutils literal notranslate"><span class="pre">pmap</span></code>
+command) you see the following:\</p>
+<div class="highlight-{xleftmargin=&quot;1em&quot; notranslate"><div class="highlight"><pre><span></span>00110000    4K r-x--    [ anon ]      &lt;- file header - used by OS
+08048000    4K r-x--    /tmp/hello    &lt;- .text segment (code)
+08049000    4K rwx--    /tmp/hello    &lt;- .data segment
+bffdf000    128K rwx--  [ stack ]
+</pre></div>
+</div>
+<p>The address space is constructed of a series of contiguous <em>segments</em>,
+each a multiple of the 4 KB page size (although most are the minimum
+4 KB here), with different permissions for each. (realistic programs
+will have many more segments; as an example, the address space for the
+Nautilus file manager process on my Ubuntu 15.10 system has more than
+800 segments.) To create a page table for this program, the first step
+is splitting the page numbers into top and bottom halves (all numbers
+given in hex or binary), as shown in
+<a class="reference external" href="#lst:vm:split">[lst:vm:split]</a>{reference-type=”autoref”
+reference=”lst:vm:split”}.</p>
+<div class="highlight-{#lst:vm:split notranslate"><div class="highlight"><pre><span></span>VPN 00110 = 0000 0000 00 01 0001 0000
+    top10 = 000  bottom10 = 110
+VPN 08048 = 0000 1000 00 00 0100 1000
+top10 = 020  bottom10 = 048
+VPN 08049 = 0000 1000 00 00 0100 1001
+top10 = 020  bottom10 = 049
+VPN BFFDF = 1011 1111 11 11 1101 1111
+top10 = 2FF  bottom10 = 3DF
+</pre></div>
+</div>
+<p>The first three segments are one page long; note that the last segment
+is 32 pages (128 KB), so it uses entries 0x3DF to 0x3FF in the
+second-level page table.</p>
+<p>The program needs four physical pages for the table; assume that pages
+0000, 0001, 0002, and 0003 are used for the table, and pages 00004 and
+up for data/code pages. The actual page table may be seen in
+<a class="reference external" href="#fig:vm:review2">[fig:vm:review2]</a>{reference-type=”autoref”
+reference=”fig:vm:review2”}. (note that the choice of physical pages is
+arbitrary; the page numbers within the page directory and page table
+entries would of course change if different physical pages were used.)</p>
+<p><img alt="Page table corresponding to memory map for[ch2:lst:hello]{reference-type=&quot;autoref&quot;reference=&quot;ch2:lst:hello&quot;}, also used for reviewquestions." src="../_images/virt-mem-review2.png" />{#fig:vm:review2 width=”80%”}</p>
+<section id="id7">
+<h3><span class="section-number">22.7.1. </span>Review questions<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="page-faulting">
+<h2><span class="section-number">22.8. </span>Page Faulting<a class="headerlink" href="#page-faulting" title="Permalink to this headline">#</a></h2>
+<p>In the previous section you saw how the MMU in a Pentium-like CPU
+determines whether a memory access will succeed:</p>
+<p>If translation fails at any one of the six possible points above (P, W,
+or U at each level) then a page fault is generated.</p>
+<section id="page-faults">
+<h3><span class="section-number">22.8.1. </span>Page Faults<a class="headerlink" href="#page-faults" title="Permalink to this headline">#</a></h3>
+<p>A page fault is a special form of exception that has the following two
+characteristics: first, it is generated when an address translation
+fails, and second, it occurs in the middle of an instruction, not after
+it is done, so that the instruction can be continued after fixing the
+problem which caused the page fault. Typical information that the MMU
+passes to the page fault handler is:</p>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>The instruction address when the page fault occurred. (this is the
+return address pushed on the stack as part of the exception handling
+process)
+
+The address that caused the page fault
+
+Whether the access attempt was a read or a write
+
+Whether the access was attempted in user or supervisor mode
+</pre></div>
+</div>
+<p>After the page fault handler returns, the instruction that caused the
+fault resumes, and it retries the memory access that caused the fault in
+the first place.</p>
+<div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>15 Many of the examples in this section are illustrated using Linux, as
+the source code is readily available, but same principles (although not
+details) hold true for other modern OSes such as Windows, Mac OS X, or
+Solaris.
+
+In addition, keep in mind that the virtual memory map for a process is a
+software concept, and will almost certainly differ between two unrelated
+operating systems. In contrast, the page table structure is defined by
+the CPU itself, and must be used in that form by any operating system
+running on that CPU.
+</pre></div>
+</div>
+<p>A single instruction can cause multiple, different page faults, of which
+there are two different types:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>**Instruction fetch:** A fault can occur when the CPU tries to fetch the
+instruction at a particular address. If the instruction \&quot;straddles\&quot; a
+page boundary (i.e., a 6-byte instruction that starts 2 bytes before the
+end of a page) then you could (in the worst case) get two page faults
+while trying to fetch an instruction.
+</pre></div>
+</div>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>**Memory access:** Once the instruction has been fetched and decoded, it
+may require one or more memory accesses that result in page faults.
+These memory accesses include those to the stack (e.g., for CALL and RET
+instructions) in addition to load and store instructions. As before,
+accessing memory that straddles a page boundary will result in
+additional faults.
+</pre></div>
+</div>
+</section>
+<section id="handling-page-faults">
+<h3><span class="section-number">22.8.2. </span>Handling Page Faults<a class="headerlink" href="#handling-page-faults" title="Permalink to this headline">#</a></h3>
+<p>Operating systems use two primary strategies in handling page faults:</p>
+<p><strong>Kill the program.</strong> If the access is in fact an error, the default
+action is to kill the process, so that the page fault handler never
+returns.<a class="footnote-reference brackets" href="#id30" id="id8">7</a></p>
+<p><strong>Resolve the fault.</strong> The OS modifies the page tables to establish a
+valid mapping for the failing address, and then returns from the page
+fault handler. The CPU retries the memory access, which should succeed
+(or at least continue farther) this time.</p>
+<p>In fact, a single instruction can in the worst case result in quite a
+large number of page faults:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>On an Intel or similar CPU, multi-byte instructions and data may cross
+page boundaries; e.g. reading a 4-byte integer at address 0x1FFE
+(occupying bytes 0x1FFE, 1FFF, 2000, and 2001) could trigger page faults
+on both page 0x1000 and 0x2000.
+
+Every instruction can fault on instruction fetch; memory instructions
+like LOAD and STORE can also fault on data access.
+
+Finally, remember that the stack is in memory, too, so that CALL, PUSH,
+POP, and RET can all fault if the operation causes an access to a
+non-mapped stack address.
+</pre></div>
+</div>
+<p>If the page fault handler updates the page table (to point to an
+appropriately initialized page of memory) and then returns promptly, the
+whole page fault process is invisible to the user or programmer.</p>
+<p>The page fault handler for an operating system typically only uses the
+four responses described above—crash, demand-allocate, demand-page,
+and copy-on-write. More complex page fault mechanisms are used in
+hardware virtualization, to support virtual machines; those mechanisms
+will be described later in this book.</p>
+<section id="id9">
+<h4><span class="section-number">22.8.2.1. </span>Review questions<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="process-address-space-revisited">
+<h3><span class="section-number">22.8.3. </span>Process Address Space, Revisited<a class="headerlink" href="#process-address-space-revisited" title="Permalink to this headline">#</a></h3>
+<p>How does the OS know how to handle a page fault? By examining its
+internal memory map for a process. We’ve talked briefly about process
+memory maps earlier, but now we will look in more detail at a specific
+one, from a fairly recent (kernel 2.6 or 3.0) 32-bit Linux system. A
+more thorough description of the Linux memory layout can be found at<br />
+<a class="reference external" href="http://duartes.org/gustavo/blog/post/anatomy-of-a-program-in-memory">http://duartes.org/gustavo/blog/post/anatomy-of-a-program-in-memory</a></p>
+<p><img alt="image" src="../_images/virt-mem-pic100.png" />{height=”9\baselineskip”}</p>
+<p>In earlier chapters we saw how simple operating systems may use separate
+portions of the address space for programs and for the operating system.
+The same approach is often used in dividing up the virtual address space
+in more complex operating systems, as seen in the 32-bit Linux memory
+map in <a class="reference external" href="#fig:vm:pic100">[fig:vm:pic100]</a>{reference-type=”autoref”
+reference=”fig:vm:pic100”}. In recent Linux versions running on 32-bit
+Intel-compatible CPUs, the kernel “owns” the top 1GB, from virtual
+address 0xC0000000 to 0xFFFFFFFF, and all kernel code, data structures,
+and temporary mappings go in this range.</p>
+<p>The kernel must be part of every address space, so that when exceptions
+like system calls and page faults change execution from user mode to
+supervisor mode, all the kernel code and data needed to execute the
+system call or page fault handler are already available in the current
+virtual memory map<a class="footnote-reference brackets" href="#id31" id="id10">8</a> This is the primary use for the U bit in the page
+table—by setting the U bit to zero in any mappings for operating
+system code and data, user processes are prevented from modifying the OS
+or viewing protected data.</p>
+<p>Here is the memory map of a very simple process<a class="footnote-reference brackets" href="#id32" id="id11">9</a>, as reported in
+<code class="docutils literal notranslate"><span class="pre">/proc/&lt;pid&gt;/maps</span></code>:</p>
+<p>The memory space has four segments:</p>
+<div class="highlight-description* notranslate"><div class="highlight"><pre><span></span>**08048000** (one page) - read-only, executable, mapped from file
+*a.out*
+
+**08049000** (one page) - read/write, mapped from file *a.out*
+
+**0804a000** (one page) - read/write, &quot;anonymous&quot;
+
+**bffd5000-bfff6000** (33 4KB pages) - read/write, &quot;stack&quot;
+</pre></div>
+</div>
+<p>Where does this map come from? When the OS creates the new address space
+in the <code class="docutils literal notranslate"><span class="pre">exec()</span></code> system call, it knows it needs to create a stack, but
+the rest of the information comes from the executable file itself:</p>
+<div class="highlight-{basicstyle=&quot;\ttfamily\footnotesize&quot; notranslate"><div class="highlight"><pre><span></span>$ objdump -h a.out
+a.out:     file format elf32-i386
+
+Idx Name          Size      VMA       LMA       File off  Algn
+
+  0 .text         00000072  08048094  08048094  00000094  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .rodata       000006bd  08048108  08048108  00000108  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  2 .data         00000030  080497c8  080497c8  000007c8  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .bss          00001000  08049800  08049800  000007f8  2**5
+                  ALLOC
+$
+</pre></div>
+</div>
+<p>Executable files on Linux are stored in the ELF format (Executable and
+Linking Format), and include a header that describes the file to the OS;
+the information above came from this header. Looking at the file, the
+following sections can be seen:</p>
+<hr class="docutils" />
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>          `0 ... x93` various header information   
+`00000094 - 00000107` &quot;.text&quot;                      program code
+`00000108 - 000007c7` &quot;.rodata&quot;                    read/only data (mostly strings)
+`000007c8 - 000007e7` &quot;.data&quot;&#39;                     initialized writable data
+            (no data) &quot;.bss&quot;&#39;                      zero-initialized data
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>The BSS section<a class="footnote-reference brackets" href="#id33" id="id12">10</a> corresponds to global variables initialized to
+zero; since the BSS section is initialized to all zeros, there is no
+need to store its initial contents in the executable file.</p>
+<section id="executable-file-and-process-address-space">
+<h4><span class="section-number">22.8.3.1. </span>Executable file and process address space<a class="headerlink" href="#executable-file-and-process-address-space" title="Permalink to this headline">#</a></h4>
+<p>Here you can see the relationship between the structure of the
+executable file and the process address space created by the kernel when
+it runs this executable. One page (08048xxx) is used for read-only code
+and data, while two pages (08049xxx and 0804Axxx) are used for writable
+data.</p>
+<p><img alt="Relationship of executable file header to memory mapstructure" src="../_images/virt-mem-pic101.png" />{#fig:vm:pic101 width=”100%”}</p>
+</section>
+<section id="id13">
+<h4><span class="section-number">22.8.3.2. </span>Review questions<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="page-fault-handling">
+<h2><span class="section-number">22.9. </span>Page Fault Handling<a class="headerlink" href="#page-fault-handling" title="Permalink to this headline">#</a></h2>
+<p>In the Linux kernel, the memory map is represented as a list of
+<code class="docutils literal notranslate"><span class="pre">vm_area_struct</span></code> objects, each corresponding to a separate segment, and
+each containing the following information:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Start address
+
+End+1 address
+
+Permissions: read/write/execute
+
+Flags: various details on how to handle this segment
+
+File, offset (if mapped from a file)
+</pre></div>
+</div>
+<p>Unlike the page table, which is a simple structure defined by the CPU
+hardware, the virtual memory map in the OS is a purely software data
+structure, and can be as simple or complex as the OS writers decide.</p>
+<p>With the map from
+<a class="reference external" href="#fig:vm:pic101">[fig:vm:pic101]</a>{reference-type=”autoref”
+reference=”fig:vm:pic101”}, the possibilities when the page fault
+handler looks up a faulting address are:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>No match: This is an access to an undefined address. It&#39;s a bug, and the
+OS terminates the process with a \&quot;segmentation fault\&quot; error.
+
+Any page in bff08000-bff29000: These are demand-allocate stack pages.
+The page fault handler allocates a physical memory page, zeros it (for
+safety), puts it into the page table, and returns.
+
+Page 08048000: This page is mapped read-only from the executable file
+&#39;a.out,&#39; so the page fault handler allocates a page, reads the first 4KB
+from &#39;a.out&#39; into it, inserts it into the page table (marked read-only),
+and returns.
+
+Page 08049000: This page is mapped read/write from the executable file.
+Just like page 08048000, the page fault handler allocates a page, reads
+its contents from the executable, maps the page in the page table
+(read/write this time) and returns.
+
+Page 0804a000: Like the stack, this is demand-allocated and zero-filled,
+and is handled the same way.
+</pre></div>
+</div>
+<section id="page-faults-in-the-kernel">
+<h3><span class="section-number">22.9.1. </span>Page Faults in the Kernel<a class="headerlink" href="#page-faults-in-the-kernel" title="Permalink to this headline">#</a></h3>
+<div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>9 Although common in the past, modern Windows and Linux systems rarely
+seem to crash due to driver problems. (Although my Mac panics every
+month or two.) If you ever develop kernel drivers, however, you will
+become very familiar with them.
+</pre></div>
+</div>
+<p>What happens if there is a page fault while the CPU is running kernel
+code in supervisor mode? It depends.</p>
+<p>If the error is due to a bug in kernel-mode code, then in most operating
+systems the kernel is unable to handle it. In Linux the system will
+display an “Oops” message, as shown in
+<a class="reference external" href="#lst:vm:oops">[lst:vm:oops]</a>{reference-type=”autoref”
+reference=”lst:vm:oops”}, while in Windows the result is typically a
+“kernel panic”, which used to be called a Blue Screen of Death. Most of
+the time in Linux the process executing when this happens will be
+terminated, but the rest of the system remains running with possibly
+reduced functionality.</p>
+<p>``` {#lst:vm:oops float=”” basicstyle=”\ttfamily\scriptsize” mathescape=”false” label=”lst:vm:oops” caption=”Linux kernel ``Oops’’ message due to NULL pointer dereference.” xleftmargin=”0pt” framexleftmargin=”0pt”}
+[  397.864759] BUG: unable to handle kernel NULL pointer dereference at
+0000000000000004
+[  397.865725] IP: [<ffffffffc01d1027>] track2lba+0x27/0x3f [dm_vguard]
+[  397.866619] PGD 0
+[  397.866929] Oops: 0000 [#1] SMP
+[  397.867395] Modules linked in: […]
+[  397.872730] CPU: 0 PID: 1335 Comm: dmsetup Tainted: G           OE   4.6.0 #3
+[  397.873419] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS …
+[  397.874487] task: ffff88003cd10e40 ti: ffff880037080000 task.ti: ffff88003708
+[  397.875375] RIP: 0010:[<ffffffffc01d1027>]  [<ffffffffc01d1027>] track2lba+0x27
+[  397.876509] RSP: 0018:ffff880037083bd0  EFLAGS: 00010282
+[  397.877193] RAX: 0000000000000001 RBX: 0000000000003520 RCX: 0000000000000000
+[  397.878085] RDX: 0000000000000000 RSI: 0000000000003520 RDI: ffff880036bd70c0
+[  397.879016] RBP: ffff880037083bd0 R08: 00000000000001b0 R09: 0000000000000000
+[  397.879912] R10: 000000000000000a R11: f000000000000000 R12: ffff880036bd70c0
+[  397.880763] R13: 00000000002e46e0 R14: ffffc900001f7040 R15: 0000000000000000
+[  397.881618] FS:  00007f5767938700(0000) GS:ffff88003fc00000(0000)
+[  397.915186] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  397.932122] CR2: 0000000000000004 CR3: 000000003d3ea000 CR4: 00000000000406f0
+[  397.949459] Stack:
+… stack contents and backtrace omitted …</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+But what about addresses passed by the user in a system call? For
+example, what if the memory address passed to a [read](read){.uri}
+system call has been paged out, or not instantiated yet? It turns out
+that the same page faulting logic can be used in the kernel, as
+well---the first access to an unmapped page will result in a fault, the
+process will be interrupted (in the kernel this time, rather than in
+user-space code), and then execution will resume after the page fault is
+handled.
+
+But what if the user passes a bad address? We can&#39;t just kill the
+process partway through the system call, because that would risk leaving
+internal operating system data structures in an inconsistent state. (Not
+only that, but the POSIX standard requires that system calls return the
+EFAULT error in response to bad addresses, not exit.) Instead, all code
+in the Linux kernel which accesses user-provided memory addresses is
+supposed to use a pair of functions,
+[copy_from_user](copy_from_user){.uri} and
+[copy_to_user](copy_to_user){.uri}, which check that the user-provided
+memory region is valid for user-mode access[^11].
+
+In very early versions of Linux the kernel ran in a separate address
+space where virtual addresses mapped directly to physical addresses, and
+so these functions actually interpreted the page tables to translate
+virtual addresses to physical (i.e. kernel virtual) addresses, which was
+slow but made it easy to return an error if an address was bad. Newer
+Linux versions map the kernel and its data structures into each process
+virtual address space, making these functions much faster but more
+complicated. The speedup is because there is no longer any need to
+translate page tables in software; instead the two
+[copy\_\*\_user](copy_*_user){.uri} functions just perform a few checks
+and then a [memcpy](memcpy){.uri}. More complicated because if it fails
+we don&#39;t find out about it in either of these functions, but rather in
+the page fault handler itself. To make this work, if the page fault (a)
+occurs in kernel mode, and (b) the handler can&#39;t find a translation for
+the address, it checks to see if the fault occurred while executing the
+[copy_from_user](copy_from_user){.uri} or
+[copy_to_user](copy_to_user){.uri} functions, and if so it performs some
+horrible stack manipulation to cause that function to return an error
+code[^12].
+
+But what if a page fault occurs in the kernel outside of these two
+functions? That should never happen, because kernel structures are
+allocated from memory that&#39;s already mapped in the kernel address space.
+In other words it&#39;s a bug, just like the bugs that cause segmentation
+faults in your C programs. And just like those bugs it causes a crash,
+resulting in an error message such as the one shown in
+[\[lst:vm:oops\]](#lst:vm:oops){reference-type=&quot;autoref&quot;
+reference=&quot;lst:vm:oops&quot;}. If the kernel was running in a process context
+(e.g. executing system call code) then the currently-running process
+will be killed, while if this occurs during an interrupt the system will
+crash. The equivalent in Windows is called a Blue Screen of Death
+(although they changed the color several versions back); since almost
+all Windows kernel code executes in interrupt context, these errors
+always result in a system crash.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="shared-executables-and-libraries">
+<h2><span class="section-number">22.10. </span>Shared Executables and Libraries<a class="headerlink" href="#shared-executables-and-libraries" title="Permalink to this headline">#</a></h2>
+<p>In addition to simplifying memory allocation, virtual memory can also
+allow memory to be used more efficiently when running multiple
+processes.</p>
+<p>Consider the case of a multi-user computer, where multiple users are
+running the same program (i.e., the shell, <span class="xref myst">/bin/bash</span>{.uri})
+at the same time. If we just follow the rules we’ve seen above for
+allocating and filling memory, the memory usage of the three programs
+will look something like the left-hand side of
+<a class="reference external" href="#fig:vm:pic113">[fig:vm:pic113]</a>{reference-type=”autoref”
+reference=”fig:vm:pic113”}.</p>
+<p><img alt="Memory usage of three copies of the sameprogram." src="../_images/virt-mem-pic113.png" />{#fig:vm:pic113
+width=”\textwidth”}</p>
+<p>(a) without memory sharing (b) with memory sharing</p>
+<p>However since the code section of each process is identical, we can
+share those pages, giving the picture on the right-hand side of
+<a class="reference external" href="#fig:vm:pic113">[fig:vm:pic113]</a>{reference-type=”autoref”
+reference=”fig:vm:pic113”}. <a class="footnote-reference brackets" href="#id34" id="id14">13</a></p>
+<p>How does the OS determine that it can share the same page between two
+processes? When a page fault happens, and the page fault handler
+determines that it needs to read (i.e., page 10 from the executable
+<span class="xref myst">/bin/bash</span>{.uri}) it first searches to see whether that page
+is already stored in some existing memory page<a class="footnote-reference brackets" href="#id35" id="id15">14</a>. If so, it can
+increment a reference count on that page and map it into the process
+page table, instead of having to allocate a new page and read the data
+in from the disk. When a process exits, instead of blindly de-allocating
+any memory mapped by that process, the reference count of each page is
+decremented, and it is only freed when this count goes to zero,
+indicating that no other address spaces are mapping that page.</p>
+<p><img alt="image" src="../_images/virt-mem-pic103.png" />{width=”\textwidth”}\</p>
+<p><img alt="Address mismatch when lib1 and lib2 are linked with differentprograms" src="../_images/virt-mem-pic104.png" />{#fig:vm:pic103
+width=”\textwidth”}</p>
+<p>Note that the operating system also provides a way for applications to
+create memory regions which are explicitly shared between processes, and
+used for communication between them. This can be used for
+high-performance communication between processes, and is used in at
+least one program that people actually use.</p>
+<p>Sharing memory at the program level worked well on multi-user systems,
+as you just saw, where many people ran the same simple programs (e.g.,
+the shell, editor, and compiler) at the same time. With the advent of
+graphical interfaces and single-user workstations, it stopped working so
+well. Instead, now there’s a single user running one copy each of
+several different programs. Worse yet, each program is far more
+complicated than in the past, as the libraries for interacting with the
+display, mouse, and keyboard are inevitably larger and more complex than
+the simple libraries needed to define functions like <code class="docutils literal notranslate"><span class="pre">printf</span></code> for
+terminal output.<a class="footnote-reference brackets" href="#id36" id="id16">15</a></p>
+<p>The problem here is that even though your browser, text editor, and
+email program all use the same libraries, each program ends up being a
+unique combination of code, combining the actual program code with a
+specific set of libraries, as seen in
+<a class="reference external" href="#fig:vm:pic103">[fig:vm:pic103]</a>{reference-type=”autoref”
+reference=”fig:vm:pic103”}. So even if the operating system <em>tried</em> to
+recognize identical regions in the two files, the differing alignment
+would make it impossible to share pages between them.</p>
+<p><img alt="image" src="../_images/virt-mem-pic105.png" />{height=”8\baselineskip”}</p>
+<p><em>Shared libraries</em> eliminate this wasted space by combining code and
+libraries in a way that allows sharing in most cases. To do this, the
+program and the libraries are structured so that different programs can
+share a single copy of the same library. In simple terms, each library
+is made to look like a separate program, which means that multiple
+copies of the same library can be shared, even if the different programs
+that use it can’t be shared.</p>
+<p>In <a class="reference external" href="#fig:vm:pic105">[fig:vm:pic105]</a>{reference-type=”autoref”
+reference=”fig:vm:pic105”} we see how each shared library is given its
+own region of address space, rather than packing them all into a single
+segment. The base programs (program1 and program2 below) still differ,
+but the libraries remain identical and can be shared between address
+spaces.</p>
+<p>``` {#lst:vm:hello2 float=”t” caption=”Traditional ``hello world’’ program \vspace{-\baselineskip}” label=”lst:vm:hello2” basicstyle=”\ttfamily\footnotesize”}
+#include &lt;stdio.h&gt;
+int main()
+{
+printf(“hello world\n”);
+}</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+``` {#lst:vm:ldd float=&quot;t&quot; xleftmargin=&quot;12pt&quot; framexleftmargin=&quot;12pt&quot; basicstyle=&quot;\\ttfamily\\scriptsize&quot; mathescape=&quot;false&quot; caption=&quot;Libraries linked with program in \\autoref{lst:vm:hello2}. \\vspace{-\\baselineskip}&quot; label=&quot;lst:vm:ldd&quot;}
+pjd@pjd-fx:/tmp$ ldd a.out
+    linux-vdso.so.1 =&gt;  (0x00007fff99d56000)
+    libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f5a0bb94000)
+    /lib64/ld-linux-x86-64.so.2 (0x00005590e6bba000)
+</pre></div>
+</div>
+<p>This approach is taken in Linux; if we compile the standard “hello
+world” program shown in
+<a class="reference external" href="#lst:vm:hello2">[lst:vm:hello2]</a>{reference-type=”autoref”
+reference=”lst:vm:hello2”} we can use the <code class="docutils literal notranslate"><span class="pre">ldd</span></code> command to list the
+libraries which will be loaded at runtime, as seen in
+<a class="reference external" href="#lst:vm:ldd">[lst:vm:ldd]</a>{reference-type=”autoref”
+reference=”lst:vm:ldd”}, resulting in the memory map in
+<a class="reference external" href="#lst:vm:map:hello2">[lst:vm:map:hello2]</a>{reference-type=”autoref”
+reference=”lst:vm:map:hello2”}.</p>
+<div class="highlight-{#lst:vm:map:hello2 notranslate"><div class="highlight"><pre><span></span>pjd@pjd-fx:~$ pmap -p 18012
+0000000000400000      4K r-x-- /tmp/a.out
+0000000000600000      4K r---- /tmp/a.out
+0000000000601000      4K rw--- /tmp/a.out
+00007ffff7a0f000   1792K r-x-- /lib/x86_64-linux-gnu/libc-2.21.so
+00007ffff7bcf000   2048K ----- /lib/x86_64-linux-gnu/libc-2.21.so
+00007ffff7dcf000     16K r---- /lib/x86_64-linux-gnu/libc-2.21.so
+00007ffff7dd3000      8K rw--- /lib/x86_64-linux-gnu/libc-2.21.so
+00007ffff7dd5000     16K rw---   [ anon ]
+00007ffff7dd9000    144K r-x-- /lib/x86_64-linux-gnu/ld-2.21.so
+00007ffff7fcd000     12K rw---   [ anon ]
+00007ffff7ff6000      8K rw---   [ anon ]
+00007ffff7ff8000      8K r----   [ anon ]
+00007ffff7ffa000      8K r-x--   [ anon ]
+00007ffff7ffc000      4K r---- /lib/x86_64-linux-gnu/ld-2.21.so
+00007ffff7ffd000      4K rw--- /lib/x86_64-linux-gnu/ld-2.21.so
+00007ffff7ffe000      4K rw---   [ anon ]
+00007ffffffde000    132K rw---   [ stack ]
+ffffffffff600000      4K r-x--   [ anon ]
+ total             4220K
+</pre></div>
+</div>
+<section id="id17">
+<h3><span class="section-number">22.10.1. </span>Review questions<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h3>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+<section id="more-memory-sharing-fork-and-copy-on-write">
+<h3><span class="section-number">22.10.2. </span>More Memory Sharing: <code class="docutils literal notranslate"><span class="pre">fork()</span></code> and copy-on-write<a class="headerlink" href="#more-memory-sharing-fork-and-copy-on-write" title="Permalink to this headline">#</a></h3>
+<p>In all the cases you’ve seen so far, page sharing has been used to share
+read-only pages—these are intrinsically safe to share, because
+processes are unable to modify the pages and thereby affect other
+processes. But, can writable pages be shared safely? The answer is yes,
+but it has to be done carefully.</p>
+<p>First, some background on why this is important. The Unix operating
+system uses two system calls to create new processes and execute
+programs: <code class="docutils literal notranslate"><span class="pre">fork()</span></code> and <code class="docutils literal notranslate"><span class="pre">exec()</span></code>. <code class="docutils literal notranslate"><span class="pre">fork()</span></code> makes a copy of the current
+process<a class="footnote-reference brackets" href="#id37" id="id18">16</a>, while <code class="docutils literal notranslate"><span class="pre">exec(file)</span></code> replaces the address space of the
+current process with the program defined by <code class="docutils literal notranslate"><span class="pre">file</span></code> and begins executing
+that program at its designated starting point.</p>
+<p>UNIX uses this method because of an arbitrary choice someone made 40
+years ago; there are many other ways to do it, each of them with their
+own problems. However this is how UNIX works, and we’re stuck with it,
+so it’s important to be able to do it quickly.</p>
+<p>In early versions of Unix, <code class="docutils literal notranslate"><span class="pre">fork()</span></code> was implemented by literally copying
+all the writable sections (e.g., stack, data) of the parent process
+address space into the child process address space. After doing all this
+work, most (but not all) of the time, the first thing the child process
+would do is to call exec(), throwing away the entire contents of the
+address space that were just copied. It’s bad enough when the shell does
+this, but even worse when a large program (e.g. Chrome) tries to execute
+a small program (e.g. /bin/ls) in a child process.</p>
+<p>We’ve already seen how to share read-only data, but can we do anything
+about writable data? In particular, data which is writable, but isn’t
+actually going to be written?</p>
+<p>A quick inspection of several Firefox and Safari instances (using pmap
+on Linux and vmmap on OS X) indicates that a browser with two or three
+open tabs can easily have over 300MB of writable address space<a class="footnote-reference brackets" href="#id38" id="id19">17</a>.
+When fork is executed these writable pages can’t just be given writable
+mappings in the child process, or changes made in one process would be
+visible in the other. In certain cases (i.e., the stack) this mutual
+over-writing of memory would almost certainly be disastrous.</p>
+<p>However in practice, most of these writable pages <em>won’t</em> be written to
+again. In fact, if the child process only executes a few lines of code
+and then calls <span class="xref myst">exec</span>{.uri}, it may only modify a handful of pages
+before its virtual address space is destroyed and replaced with a new
+one.</p>
+<div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>12 Copy-on-write is in fact a widely-used strategy in computer systems.
+It is effectively a &quot;lazy&quot; copy, doing only the minimal amount of work
+needed and reducing both the cost of copying and the total space
+consumed. Similar copy-on-write mechanisms can be seen in file systems,
+storage devices, and some programming language runtime systems.
+</pre></div>
+</div>
+<p>Linux uses a technique called <em>copy-on-write</em> to eliminate the need to
+copy most of this memory. When a child process is created in the
+<span class="xref myst">fork</span>{.uri} system call, its address space shares not only the
+read-only pages from the parent process, but the writable pages as well.
+To prevent the two processes from interfering with each other, these
+pages are mapped read-only, resulting in a page fault whenever they are
+accessed by either process, but flagged as copy-on-write in the kernel
+memory map structures. This results in a page fault when either process
+tries to write to one of these pages; the page fault handler then
+“breaks” the sharing for that page, by allocating a new page, copying
+the old one, and mapping a separate page read-write in each of the
+processes.</p>
+<section id="id20">
+<h4><span class="section-number">22.10.2.1. </span>Review questions<a class="headerlink" href="#id20" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="memory-over-commitment-and-paging">
+<h3><span class="section-number">22.10.3. </span>Memory Over-Commitment and Paging<a class="headerlink" href="#memory-over-commitment-and-paging" title="Permalink to this headline">#</a></h3>
+<p>Page faults allow data to be dynamically fetched into memory when it is
+needed, in the same way that the CPU dynamically fetches data from
+memory into the cache. This allows the operating system to over-commit
+memory: the sum of all process address spaces can add up to more memory
+than is available, although the total amount of memory mapped at any
+point in time must fit into RAM. This means that when a page fault
+occurs and a page is allocated to a process, another page (from that or
+another process) may need to be evicted from memory.</p>
+<div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>12 **Types of Virtual Segments**: There are two types of virtual
+segments: file-backed and anonymous. File-backed segments are what the
+name says; approximately 99.9% of them are read-only mappings of
+demand-paged executables. Anonymous mappings are called this because
+they don&#39;t correspond to a file; most of them contain writable program
+data or stacks.
+</pre></div>
+</div>
+<p>Evicting a read-only page mapped from a file is simple: just forget the
+mapping and free the page; if a fault for that page occurs later, the
+page can be read back from disk. Occasionally pages are mapped
+read/write from a file, when a program explicitly requests it with
+<code class="docutils literal notranslate"><span class="pre">mmap</span></code>—in that case the OS can write any modified data back to the
+file and then evict the page; again it can be paged back from disk if
+needed again.</p>
+<p>Anonymous segments such as stack and heap are typically created in
+memory and do not need to be swapped; however if the system runs low on
+memory it may evict anonymous pages owned by idle processes, in order to
+give more memory to the currently-running ones. To do this the OS
+allocates a location in “swap space” on disk: typically a dedicated swap
+partition in Linux, and the <code class="docutils literal notranslate"><span class="pre">PAGEFILE.sys</span></code> and <code class="docutils literal notranslate"><span class="pre">/var/vm/swapfile</span></code> files
+in Windows and OSX respectively. The data must first be written out to
+that location, then the OS can store the page-to-location mapping and
+release the memory page.</p>
+<p><img alt="Page Table Entry with D (dirty)bit" src="../_images/virt-mem-pic106.png" />{#fig:vm:pic106 width=”\textwidth”}</p>
+</section>
+<section id="dirty-and-clean-pages">
+<h3><span class="section-number">22.10.4. </span>Dirty and Clean Pages<a class="headerlink" href="#dirty-and-clean-pages" title="Permalink to this headline">#</a></h3>
+<p>How does the operating system determine whether a page has been modified
+and needs to be written to disk? It uses the D bit in the page table
+entry for this, as seen in
+<a class="reference external" href="#fig:vm:pic106">[fig:vm:pic106]</a>{reference-type=”autoref”
+reference=”fig:vm:pic106”}. When a page is mapped in the page table, the
+D bit in the PTE is set to zero; when the CPU writes to a page with D =
+0, the MMU re-writes the page table entry with D = 1. When the OS
+decides to evict a page, the D bit tells it whether the page is “clean,”
+i.e., it hasn’t been modified, or whether it is “dirty” and has to be
+written back to disk.</p>
+<p>When the OS is paging in from a file (e.g. executable code), it is
+straightforward to find the data to read in, as there is a direct
+mapping between a range of pages in a specific file and corresponding
+pages in the virtual memory space. This correspondence can easily be
+stored in the definition of that virtual address segment. When pages are
+saved to swap space this doesn’t work, however, as the locations they
+are saved to are allocated dynamically and fairly arbitrarily.</p>
+<p>This problem is solved by using the page table itself. After evicting a
+page, its page table entry is invalidated by setting P = 0; however, the
+other 31 bits of the entry are ignored by the MMU. These bits are used
+to store the location of the page in swap space, so it can be found
+later later at page fault time. Thus, the page table entry does dual
+duty: when the page is present it points to the physical page itself,
+and is interpreted by the MMU; otherwise, it points to a location in
+swap space, and is ignored by the MMU and used by the software page
+fault handler.</p>
+</section>
+<section id="the-memory-hierarchy">
+<h3><span class="section-number">22.10.5. </span>The Memory Hierarchy<a class="headerlink" href="#the-memory-hierarchy" title="Permalink to this headline">#</a></h3>
+<p>Demand paging from files and from swap provides the mechanisms to create
+the traditional memory hierarchy, as shown in
+<a class="reference external" href="#fig:vm:pic107">[fig:vm:pic107]</a>{reference-type=”autoref”
+reference=”fig:vm:pic107”}.</p>
+<hr class="docutils" />
+<p><img alt="Memory Hierarchy" src="../_images/virt-mem-pic108.png" />{#fig:vm:pic108
+width=”60%”}</p>
+<p>To access address A:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>If it&#39;s not in the cache, then the old cache line is evicted, and A is
+loaded into the resulting empty cache line. This is done in hardware.
+
+If it&#39;s not in memory, then the old page is evicted, and the page
+containing A is loaded into the resulting empty page. This is done in
+software.
+</pre></div>
+</div>
+<p>In general, this works because of <em>locality</em>: when a cache line is
+brought in from memory, a page is loaded into in memory from disk, etc.,
+it tends to get accessed multiple times before eviction.</p>
+<p>Decades ago this was used to run programs much bigger than physical
+memory—CPUs were slow and disks were almost as fast as they are today,
+so the relative overhead of paging infrequently-used data to disk was
+low. Today’s CPUs are thousands of times faster, while disks are only a
+few times faster, and virtual memory doesn’t seem like such a great idea
+anymore. However it still gets used, even on desktop and laptop systems,
+to “steal” memory from idle programs: if you leave a large program like
+Chrome or Microsoft Word idle for half an hour while you use another
+memory-hungry program, memory will be released from the idle process and
+given to the active one; if you switch back, the original program will
+run slowly for a while as it swaps these pages back in.</p>
+<section id="id21">
+<h4><span class="section-number">22.10.5.1. </span>Review questions<a class="headerlink" href="#id21" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="page-replacement">
+<h2><span class="section-number">22.11. </span>Page Replacement<a class="headerlink" href="#page-replacement" title="Permalink to this headline">#</a></h2>
+<p>If there’s a limited amount of memory available, then every time a page
+is swapped in from disk, it will be necessary to remove, or evict,
+another page from memory. The choice of which page to evict is
+important: the best page to choose would be one that won’t be needed
+anymore, while the worst page to evict would be one of the next to be
+used. (in that case, paging it back in would force another page to be
+evicted, and the work of paging it out and back in again would be
+wasted.) In fact, replacement of items in a cache is a general problem
+in computer systems; examples include:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>Cache line replacement in the hardware CPU cache
+
+Entry replacement in the TLB
+
+Buffer replacement in a file system buffer pool
+
+Page replacement in virtual memory
+</pre></div>
+</div>
+<p>The page replacement problem can be stated in abstract form:</p>
+<p>Given the following:</p>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>A disk holding $d$ (virtual) pages, with virtual addresses
+$0,\ldots d-1$;
+
+A memory ${M}$ consisting of $m$ (physical) pages, where each page is
+either empty or holds one of the $d$ virtual pages, and
+
+An access pattern $a_1, a_2, a_3, \cdots$ where each $a_i$ is a virtual
+address in the range $(0,d-1)$:
+</pre></div>
+</div>
+<p>a demand-paging strategy is an algorithm which for each access <span class="math notranslate nohighlight">\(a_i\)</span>
+does the following:</p>
+<div class="highlight-compactitem notranslate"><div class="highlight"><pre><span></span>If $a_i$ is already in one of the $m$ physical pages in ${M}$ (i.e. a
+*hit*): do nothing
+
+Otherwise (a miss) it must:
+
+Select a physical page $j$ in ${M}$ (holding some virtual address $M_j$)
+and evict it, then
+
+Fetch virtual page $a_i$ from disk into physical page $j$
+</pre></div>
+</div>
+<p>In other words it only fetches page <span class="math notranslate nohighlight">\(j\)</span> <em>on demand</em>—i.e. in response
+to a request for it.</p>
+</section>
+<section id="page-replacement-strategies">
+<h2><span class="section-number">22.12. </span>Page Replacement Strategies<a class="headerlink" href="#page-replacement-strategies" title="Permalink to this headline">#</a></h2>
+<p>In this class we consider the following page replacement strategies:</p>
+<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>FIFO: *first-in first-out*. The page evicted from memory is the first
+page to have been fetched into memory.
+
+LRU: *least-recently used*. Here, accesses to each page are tracked
+after it has been loaded into memory, and the least-recently-used page
+is evicted (unsurprisingly, given the name of the strategy).
+
+OPT: this is the optimal demand-paged strategy, which is simple but
+impossible to implement, since it requires knowledge of the future. It&#39;s
+examined because it provides a way of telling how well a real
+replacement strategy is performing---is it close to OPT, or is it far
+worse?
+</pre></div>
+</div>
+<section id="fifo">
+<h3><span class="section-number">22.12.1. </span>FIFO<a class="headerlink" href="#fifo" title="Permalink to this headline">#</a></h3>
+<p><img alt="FIFO cleaning" src="../_images/virt-mem-pic107.png" />{#fig:vm:pic107 width=”100%”}</p>
+<p>This strategy is very simple to implement, as it only requires keeping
+track of the order in which pages were fetched into memory. Given 4
+pages in physical memory, and the following access pattern:</p>
+<p>1 2 3 4 2 1 3 4 5 4 1 2 5 6 3 2 5 2 3 6</p>
+<p>The contents of memory after each access is shown in
+<a class="reference external" href="#fig:vm:pic107">[fig:vm:pic107]</a>{reference-type=”autoref”
+reference=”fig:vm:pic107”}, with hits shown in light grey and pages
+evicted (when misses occur) shown in dark grey.</p>
+<p><img alt="LRU cleaning" src="../_images/virt-mem-pic109.png" />{#fig:vm:pic109 width=”100%”}</p>
+</section>
+<section id="lru">
+<h3><span class="section-number">22.12.2. </span>LRU<a class="headerlink" href="#lru" title="Permalink to this headline">#</a></h3>
+<p>The idea behind LRU is that pages which have been accessed in the recent
+past are likely to be accessed in the near future, and pages which
+haven’t, aren’t. LRU replacement is shown in
+<a class="reference external" href="#fig:vm:pic109">[fig:vm:pic109]</a>{reference-type=”autoref”
+reference=”fig:vm:pic109”}.</p>
+<p>To make the operation of the LRU algorithm more clear, on each hit, the
+accessed page is moved to the top of the column. (This is how LRU is
+typically implemented in software: elements are kept in a list, and on
+access, an element is removed and reinserted at the front of the list.
+The least-recently-used element may then be found by taking the tail of
+the list) Although this is a small example, a performance improvement is
+noted, with four misses compared to six for FIFO.</p>
+<p><img alt="optimal cleaning" src="../_images/virt-mem-pic110.png" />{#fig:vm:pic110
+width=”100%”}</p>
+</section>
+<section id="opt">
+<h3><span class="section-number">22.12.3. </span>OPT<a class="headerlink" href="#opt" title="Permalink to this headline">#</a></h3>
+<p>The optimal algorithm picks a page to evict by looking forward in time
+and finding the page which goes for the longest time without being
+accessed again. Except for seeing the future, OPT plays by the same
+rules as other demand-paging algorithms: in particular, it can’t fetch a
+page until it is accessed. (That’s why the OPT strategy still has
+misses.) OPT is shown in
+<a class="reference external" href="#fig:vm:pic110">[fig:vm:pic110]</a>{reference-type=”autoref”
+reference=”fig:vm:pic110”}, using the same access pattern as before. The
+first eviction decision is shown graphically: pages 4, 2, and 1 are
+accessed 1, 3, and 2 steps in the future, respectively, while page 3
+isn’t accessed for 6 steps and is thus chosen to be evicted.</p>
+<p><br />
+<img alt="image" src="../_images/virt-mem-pic111.png" />{width=”\textwidth”}</p>
+<p><img alt="CLOCK Algorithm" src="../_images/virt-mem-pic112.png" />{#fig:vm:pic112
+width=”\textwidth”}</p>
+</section>
+<section id="fifo-with-second-chance-clock">
+<h3><span class="section-number">22.12.4. </span>FIFO with Second Chance (CLOCK)<a class="headerlink" href="#fifo-with-second-chance-clock" title="Permalink to this headline">#</a></h3>
+<p>LRU is simple and quite effective in many caching applications, and it’s
+ideal that the operating system uses it to determine which pages to
+evict from memory. But there is one small problem in using it in a
+virtual memory system: in this case, a “miss” corresponds to a page
+fault and fetching a page from disk, while a “hit” is when the page is
+already mapped in memory and the access succeeds in hardware. This means
+that once a page is faulted into memory, any further use of that page is
+“invisible” to the operating system. If the OS doesn’t know when a page
+was last used, it can’t implement the Least-Recently-Used replacement
+strategy.</p>
+<p>Despite this issue, it’s still possible to do better than FIFO by using
+the A (“accessed”) bit in the page table entry, which indicates whether
+the page has been accessed since the last time the bit was cleared<a class="footnote-reference brackets" href="#id39" id="id22">18</a>.
+In <a class="reference external" href="#fig:vm:pic111">[fig:vm:pic111]</a>{reference-type=”autoref”
+reference=”fig:vm:pic111”} we see an algorithm called “FIFO with second
+chance,” where the A bit is used to determine whether a page has been
+accessed while it was in the FIFO queue. If the A bit is 1, the
+replacement algorithm clears it and re-writes the page table entry, and
+the page is given “another chance,” i.e., it is cycled back to the head
+of the list. If the A bit is 0, then there have been no accesses to the
+page during its entire trip through the list, and so it is selected for
+replacement.</p>
+</section>
+<section id="clock">
+<h3><span class="section-number">22.12.5. </span>CLOCK<a class="headerlink" href="#clock" title="Permalink to this headline">#</a></h3>
+<p>An alternate way of visualizing the FIFO with second chance algorithm is
+shown in <a class="reference external" href="#fig:vm:pic112">[fig:vm:pic112]</a>{reference-type=”autoref”
+reference=”fig:vm:pic112”}. Pages are arranged in a circle, with a
+“hand” advancing around the circle testing pages and determining whether
+to keep or evict them. This description is the origin of the widely-used
+name for this algorithm, CLOCK.</p>
+<section id="id23">
+<h4><span class="section-number">22.12.5.1. </span>Review questions<a class="headerlink" href="#id23" title="Permalink to this headline">#</a></h4>
+<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="answers-to-review-questions">
+<h3><span class="section-number">22.12.6. </span>Answers to Review questions<a class="headerlink" href="#answers-to-review-questions" title="Permalink to this headline">#</a></h3>
+<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>in virtmem:2,virtmem:3,virtmem:4,virtmem:5,
+virtmem:6,virtmem:7,virtmem:8a,virtmem:8b
+</pre></div>
+</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id24"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Not even on Intel CPUs, which support base+bounds translation
+using <em>segment registers</em>. Nearly every operating system running on
+these CPUs sets base=0 and bound=max as one of the very first steps
+in hardware initialization.</p>
+</dd>
+<dt class="label" id="id25"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>This is similar to <em>garbage collection</em> in Java and other
+languages; however in that case pointers to the garbage-collected
+memory must be changed to point to the new locations.</p>
+</dd>
+<dt class="label" id="id26"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>Besides, the hardware designers would rather check the value of a
+single wire than compare a whole bunch of bits at once.</p>
+</dd>
+<dt class="label" id="id27"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dd><p>Both values typical of 64-bit desktop CPUs.</p>
+</dd>
+<dt class="label" id="id28"><span class="brackets"><a class="fn-backref" href="#id5">5</a></span></dt>
+<dd><p>ASIDs are supported in most modern x86 processors as part of
+hardware virtualization extensions, which are discussed (in not very
+much detail) later in this book.</p>
+</dd>
+<dt class="label" id="id29"><span class="brackets"><a class="fn-backref" href="#id6">6</a></span></dt>
+<dd><p>Conversely, if two threads from the same process are running on
+different cores, then the MMU for each core will be pointing at the
+same page table and thus use the same mappings.</p>
+</dd>
+<dt class="label" id="id30"><span class="brackets"><a class="fn-backref" href="#id8">7</a></span></dt>
+<dd><p>You are no doubt familiar with this process from debugging C
+programs.</p>
+</dd>
+<dt class="label" id="id31"><span class="brackets"><a class="fn-backref" href="#id10">8</a></span></dt>
+<dd><p>In fact the x86 has a way of telling the CPU to switch page tables
+when an exception occurs, but it’s slow. It was used by early Linux
+versions, but replaced in 1997 or so.</p>
+</dd>
+<dt class="label" id="id32"><span class="brackets"><a class="fn-backref" href="#id11">9</a></span></dt>
+<dd><p>Similar to the program in
+<a class="reference external" href="#ch2:lst:hello">[ch2:lst:hello]</a>{reference-type=”autoref”
+reference=”ch2:lst:hello”}, but not exactly the same. I’ve
+completely forgotten what program it was, actually.</p>
+</dd>
+<dt class="label" id="id33"><span class="brackets"><a class="fn-backref" href="#id12">10</a></span></dt>
+<dd><p>In most compiled languages (e.g. C, C++) global variables which
+aren’t explicitly initialized have their values set to zero. The
+compiler and linker lump these values together into a single
+section, called BSS for an ancient IBM assembly language command
+that is an abbreviation for something that no one remembers. Since
+the entire section is going to contain all zero bytes, there is no
+need to store its contents - just its starting address and length.</p>
+</dd>
+<dt class="label" id="id34"><span class="brackets"><a class="fn-backref" href="#id14">13</a></span></dt>
+<dd><p>Why are the code sections for each process identical? Because (a)
+they are mapped from the same file, and so started with the same
+values, and (b) they are read-only, so those values haven’t changed.
+Is this safe? Doesn’t it give a process access to another processes’
+memory space? It’s safe because each process still sees exactly the
+same data as they would without sharing, and can’t change that data
+for other processes.</p>
+</dd>
+<dt class="label" id="id35"><span class="brackets"><a class="fn-backref" href="#id15">14</a></span></dt>
+<dd><p>Most operating systems only check for the case where pages in
+different processes map to exactly the same page in exactly the same
+file. If you have two different executable files that happen to be
+exact copies of each other, the OS will have no idea that they’re
+the same, and will happily load pages from both of them into memory
+at the same time.</p>
+</dd>
+<dt class="label" id="id36"><span class="brackets"><a class="fn-backref" href="#id16">15</a></span></dt>
+<dd><p>Example: <code class="docutils literal notranslate"><span class="pre">xterm</span></code> is the original graphical terminal emulator for
+Unix, and uses very few fancy features. The program itself compiles
+to about 372KB of machine instructions and some amount of data, but
+it also uses 26 separate external libraries which add up to 5.6MB of
+additional program space. A newer program, <code class="docutils literal notranslate"><span class="pre">gnome-terminal</span></code>, uses
+only 300KB of memory for the program itself, but links in 48
+libraries, for a total of 22MB of additional memory. Although both
+of these examples are taken from Linux, both Apple OS X and Windows
+use similar large libraries for the graphical interface.</p>
+</dd>
+<dt class="label" id="id37"><span class="brackets"><a class="fn-backref" href="#id18">16</a></span></dt>
+<dd><p>In fact the system call returns twice, once in the parent and
+once in the child</p>
+</dd>
+<dt class="label" id="id38"><span class="brackets"><a class="fn-backref" href="#id19">17</a></span></dt>
+<dd><p>This measurement was made in 2012; more recent versions use more
+memory.</p>
+</dd>
+<dt class="label" id="id39"><span class="brackets"><a class="fn-backref" href="#id22">18</a></span></dt>
+<dd><p>When the hardware reads a page table entry into the TLB it checks
+the A bit; if it is clear, then the hardware re-writes the entry
+with the A bit set.</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./mm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Overview.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">21. </span>Overview of MM</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../fs/intro.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">23. </span>Introduction</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Angela Demke Brown, Orran Krieger & Larry Woodman<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
