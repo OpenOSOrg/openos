@@ -3,14 +3,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include <spawn.h>
 #include "doforke.h"
 
 
 int
-do_fork_exec(char *prog, char *const argv[])
+do_posix_spawn(char *prog, char *const argv[])
 {
   pid_t cpid;
-  int status=0;
+  int status=0, i;
+
+  err = posix_spa
+
   cpid = fork();
   if (cpid < 0) {
     perror("fork failed\n");

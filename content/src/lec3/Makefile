@@ -1,7 +1,7 @@
 override CFLAGS :=  -Werror -Wall -std=gnu99 -O0 -g $(CFLAGS) -I.
 CC = gcc
 
-prog = testfork testforkexec
+prog = testfork testforkexec pipe
 
 
 all: $(prog)
