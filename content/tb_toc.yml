@@ -16,7 +16,6 @@ parts:
   chapters:
   - file: scheduling/intro
   - file: scheduling/process
-  - file: scheduling/threads
   - file: scheduling/scheduling
 - caption: 'Memory Management'
   numbered: True
