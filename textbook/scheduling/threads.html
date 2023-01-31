@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>14. Data structures &#8212; Introduction to Operating Systems</title>
+    <title>8. How are threads different? &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="15. Page Faults" href="pagefaults.html" />
-    <link rel="prev" title="13. Memory reclaiming algorithms." href="reclamation.html" />
+    <link rel="next" title="9. Scheduling" href="scheduling.html" />
+    <link rel="prev" title="7. Virtualizing a processor" href="process.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -134,22 +134,17 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/structure.html">
-   3. OS structure
+   3. Operating System Structure &amp; Unix/Linux
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../intro/services.html">
-   4. Operating System Services
+  <a class="reference internal" href="../intro/abstractions.html">
+   4. Operating System Abstractions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/tools.html">
    5. Tools
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro/peter-other.html">
-   6. Other stuff from peter to integrate
   </a>
  </li>
 </ul>
@@ -158,10 +153,25 @@ const thebe_selector_output = ".output, .cell_output"
   Scheduling
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/scheduling.html">
-   9. Processor Scheduling
+  <a class="reference internal" href="intro.html">
+   6. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="process.html">
+   7. Virtualizing a processor
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   8. How are threads different?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scheduling.html">
+   9. Scheduling
   </a>
  </li>
 </ul>
@@ -170,50 +180,55 @@ const thebe_selector_output = ".output, .cell_output"
   Memory Management
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="mm.html">
-   10. Memory Management
+  <a class="reference internal" href="../mm/intro.html">
+   10. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Overview.html">
-   11. The purpose of Memory Management
+  <a class="reference internal" href="../mm/virt-seg.html">
+   11. Segmentation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="reclamation.html">
-   13. Memory reclaiming algorithms.
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   14. Data structures
+  <a class="reference internal" href="../mm/virt-paging.html">
+   12. Paging
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="pagefaults.html">
-   15. Page Faults
+  <a class="reference internal" href="../mm/page-tables.html">
+   13. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mmhw.html">
-   16. Memory management hardware
+  <a class="reference internal" href="../mm/reclamation.html">
+   14. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mmdyn.html">
-   17. Paging Dynamics
+  <a class="reference internal" href="../mm/buffer-cache.html">
+   15. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="realworld.html">
+  <a class="reference internal" href="../mm/pagefaults.html">
+   16. Page Faults
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/misc.html">
+   17. Conclusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/realworld.html">
    18. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="peter-mm.html">
-   19. Peter’s Virtual Memory chapter
+  <a class="reference internal" href="../mm/concl.html">
+   19. Other Stuff
   </a>
  </li>
 </ul>
@@ -280,11 +295,6 @@ const thebe_selector_output = ".output, .cell_output"
    29. Locking in the Linux Kernel
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/peter-syncro.html">
-   30. Synchronization – Safety &amp; Sequencing - FROM PETER’s BOOK
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -294,27 +304,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   31. Overview of other topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sec/sec.html">
-   32. Security
+   30. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   34. Virtualization and Cloud computing
+   31. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   36. Other OS structures
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../devices/block-dev.html">
-   37. I/O, Drivers, and DMA {#chap:blockdevs}
+   32. Other OS structures
   </a>
  </li>
 </ul>
@@ -325,13 +325,18 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../misc/howto.html">
+   33. How to read this book
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   38. Contributing
+   34. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   39. Bibliography
+   35. Bibliography
   </a>
  </li>
 </ul>
@@ -393,7 +398,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/mm/datastruc.ipynb"
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/scheduling/threads.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -411,7 +416,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/mm/datastruc.ipynb&branch=main"
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/scheduling/threads.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -471,7 +476,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fmm/datastruc.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fscheduling/threads.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -488,7 +493,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/edit/main/content/mm/datastruc.ipynb"
+        <a href="https://github.com/okrieg/openos/edit/main/content/scheduling/threads.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -516,7 +521,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/mm/datastruc.ipynb"
+        <a href="../_sources/scheduling/threads.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -565,7 +570,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Data structures</h1>
+                <h1>How are threads different?</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -577,31 +582,12 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="data-structures">
-<span id="cont-mm-ds"></span><h1><span class="section-number">14. </span>Data structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">#</a></h1>
-<p>We need to keep track of … what is free, what is used…</p>
-<ul class="simple">
-<li><p>Free lists</p>
-<ul>
-<li><p>coalescing free memory.</p></li>
-</ul>
-</li>
-<li><p>In-use page lists</p>
-<ul>
-<li><p>active and inactive lists for reclaiming.</p></li>
-<li><p>Buffer Cache</p>
-<ul>
-<li><p>Using RAM to cache file system data &amp; metadata</p>
-<ul>
-<li><p>Global page hash</p></li>
-<li><p>Per file page hash</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+  <section id="how-are-threads-different">
+<h1><span class="section-number">8. </span>How are threads different?<a class="headerlink" href="#how-are-threads-different" title="Permalink to this headline">#</a></h1>
+<p>A core part of the UNIX model is separation of processes, or to be more specific, one running process should not be able to directly interact with the resources (memory, etc.) owned by another process without explicitly being setup to do so. This model is great for simple processes which do not need to utilize multiple CPUs, but it can make writing programs to use multiple CPUs more difficult as memory must be explicitly shared or processes must use another form of communication. A <em>thread</em> is like a process in that it has its own PCB, however, unlike a process it does not have its own address space. Instead threads all belong to a process and share the address space of that process so any changes made to memory by one thread are visible to all the other threads belonging to the same process. From the <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> above, what this means is that the <code class="docutils literal notranslate"><span class="pre">mm</span></code> pointer in the task creating a new thread is used directly in the child thread instead of making a new copy of the structure. Figure <code class="xref std std-numref docutils literal notranslate"><span class="pre">thread</span></code> shows the difference from a forked process.</p>
+<figure class="align-default" id="thread">
+<img alt="../_images/Threads.png" src="../_images/Threads.png" />
+</figure>
 </section>
 
     <script type="text/x-thebe-config">
@@ -617,7 +603,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./mm"
+            path: "./scheduling"
         },
         predefinedOutput: true
     }
@@ -631,17 +617,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="reclamation.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="process.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">13. </span>Memory reclaiming algorithms.</p>
+            <p class="prev-next-title"><span class="section-number">7. </span>Virtualizing a processor</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="pagefaults.html" title="next page">
+    <a class='right-next' id="next-link" href="scheduling.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Page Faults</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Scheduling</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -652,7 +638,7 @@ title="Print to PDF"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Angela Demke Brown, Orran Krieger & Larry Woodman<br/>
+    By (see contributing chapter book)<br/>
   
       &copy; Copyright 2022.<br/>
 </p>
