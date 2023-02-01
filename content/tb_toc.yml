@@ -27,10 +27,9 @@ parts:
   - file: mm/page-tables
   - file: mm/reclamation
   - file: mm/page-size
-  - file: mm/buffer-cache
-  - file: mm/page-fault-handling
-  - file: mm/pagefaults
   - file: mm/misc
+  - file: mm/buffer-cache
+  - file: mm/pagefaults
   - file: mm/realworld
   - file: mm/concl
 # Below is stuff deleted, but content may still be needed
