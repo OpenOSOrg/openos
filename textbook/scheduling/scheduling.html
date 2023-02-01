@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="9. Introduction" href="../mm/intro.html" />
-    <link rel="prev" title="7. Virtualizing a processor" href="process.html" />
+    <link rel="prev" title="7. Virtualizing a CPU" href="process.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -150,7 +150,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Scheduling
+  Virtual Processor
  </span>
 </p>
 <ul class="current nav bd-sidenav">
@@ -161,7 +161,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="process.html">
-   7. Virtualizing a processor
+   7. Virtualizing a CPU
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -172,7 +172,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Memory Management
+  Virtual Memory
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -182,48 +182,58 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../mm/physmem.html">
+   10. Memory management without translation
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-seg.html">
-   10. Segmentation
+   11. Segmentation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   11. Paging
+   12. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   12. Page Tables
+   13. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   13. Memory reclaiming algorithms.
+   14. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/buffer-cache.html">
-   14. Buffer Cache
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/pagefaults.html">
-   15. Page Faults
+  <a class="reference internal" href="../mm/page-size.html">
+   15. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   16. Conclusion
+   16. Other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/buffer-cache.html">
+   17. Buffer Cache
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/pagefaults.html">
+   18. Memory Management Dynamics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   17. Memory management in the real world
+   19. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   18. Other Stuff
+   20. Conclusion
   </a>
  </li>
 </ul>
@@ -235,22 +245,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   19. Introduction
+   21. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   20. Interface
+   22. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   21. File System Layout
+   23. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   22. Kernel implementation
+   24. Kernel implementation
   </a>
  </li>
 </ul>
@@ -262,32 +272,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   23. Intro Concurrency Synchronization and Deadlock
+   25. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   24. Cooperating Processes
+   26. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   25. Synchronization Primitives
+   27. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   26. Deadlocks
+   28. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   27. Challenges of Modern Hardware
+   29. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   28. Locking in the Linux Kernel
+   30. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -299,17 +309,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   29. Overview of other topics
+   31. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   30. Virtualization and Cloud computing
+   32. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   31. Other OS structures
+   33. Other OS structures
   </a>
  </li>
 </ul>
@@ -321,17 +331,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   32. How to read this book
+   34. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   33. Contributing
+   35. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   34. Bibliography
+   36. Bibliography
   </a>
  </li>
 </ul>
@@ -847,9 +857,16 @@ title="Print to PDF"
 </section>
 <section id="priority">
 <h3><span class="section-number">8.5.4. </span>Priority<a class="headerlink" href="#priority" title="Permalink to this headline">#</a></h3>
+<p>The core idea behind priority scheduling is that some processes may be more important than others and should be given access to the CPU first. To implement this the OS maintains two or more priority queues which hold processes assigned to that each priority. Runnable processes in a higher priority queue are run before runnable processes in lower priority queues. In general we assign higher priorities to I/O bound processes and lower priorities to CPU bound ones.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It may seem counter-intuitive to assign high priority to I/O bound processes because they often do not make use of their full time slice. We do this because a process that is frequently blocking on I/O is more like to be interactive and therefore have a user who will notice latency when the scheduler ignores the process for several periods.</p>
+</div>
 </section>
 <section id="lottery">
 <h3><span class="section-number">8.5.5. </span>Lottery<a class="headerlink" href="#lottery" title="Permalink to this headline">#</a></h3>
+<p>As the name suggests, in lottery scheduling the OS gives ‘tickets’ to each runnable process. When the scheduler needs to select a new process to run, it picks a ticket at random and the process holding that ticket runs. With a small modification, we can express priority in this method by assigning more tickets to high priority processes than low.</p>
+<p>These examples are not exhaustive, there are other algorithms for selecting the next runnable process. These examples are meant to illustrate that there are a number of ways to approach this problem and this is an active area of research today.</p>
 </section>
 </section>
 <section id="a-quick-look-at-the-linux-scheduler">
@@ -888,7 +905,7 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">7. </span>Virtualizing a processor</p>
+            <p class="prev-next-title"><span class="section-number">7. </span>Virtualizing a CPU</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../mm/intro.html" title="next page">
