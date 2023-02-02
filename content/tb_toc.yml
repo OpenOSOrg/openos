@@ -17,6 +17,7 @@ parts:
   - file: scheduling/intro
   - file: scheduling/process
   - file: scheduling/scheduling
+  - file: scheduling/real_sched
 - caption: 'Virtual Memory'
   numbered: True
   chapters:
