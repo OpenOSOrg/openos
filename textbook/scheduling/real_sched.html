@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>7. Virtualizing a CPU &#8212; Introduction to Operating Systems</title>
+    <title>9. A Look at the Linux Scheduler &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="8. Scheduling" href="scheduling.html" />
-    <link rel="prev" title="6. Introduction" href="intro.html" />
+    <link rel="next" title="10. Introduction" href="../mm/intro.html" />
+    <link rel="prev" title="8. Scheduling" href="scheduling.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -159,8 +159,8 @@ const thebe_selector_output = ".output, .cell_output"
    6. Introduction
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="process.html">
    7. Virtualizing a CPU
   </a>
  </li>
@@ -169,8 +169,8 @@ const thebe_selector_output = ".output, .cell_output"
    8. Scheduling
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="real_sched.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    9. A Look at the Linux Scheduler
   </a>
  </li>
@@ -408,7 +408,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/scheduling/process.ipynb"
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/scheduling/real_sched.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -426,7 +426,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/scheduling/process.ipynb&branch=main"
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/scheduling/real_sched.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -486,7 +486,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fscheduling/process.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fscheduling/real_sched.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -503,7 +503,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/edit/main/content/scheduling/process.ipynb"
+        <a href="https://github.com/okrieg/openos/edit/main/content/scheduling/real_sched.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -531,7 +531,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/scheduling/process.ipynb"
+        <a href="../_sources/scheduling/real_sched.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -591,18 +591,13 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-process-abstraction">
-   7.1. The Process Abstraction
+  <a class="reference internal nav-link" href="#a-bit-of-history">
+   9.1. A Bit of History
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-a-new-process">
-   7.2. Creating a New Process
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-are-threads-different">
-   7.3. How are threads different?
+  <a class="reference internal nav-link" href="#the-completely-fair-scheduler-cfs">
+   9.2. The Completely Fair Scheduler (CFS)
   </a>
  </li>
 </ul>
@@ -614,7 +609,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Virtualizing a CPU</h1>
+                <h1>A Look at the Linux Scheduler</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -625,18 +620,13 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-process-abstraction">
-   7.1. The Process Abstraction
+  <a class="reference internal nav-link" href="#a-bit-of-history">
+   9.1. A Bit of History
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-a-new-process">
-   7.2. Creating a New Process
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-are-threads-different">
-   7.3. How are threads different?
+  <a class="reference internal nav-link" href="#the-completely-fair-scheduler-cfs">
+   9.2. The Completely Fair Scheduler (CFS)
   </a>
  </li>
 </ul>
@@ -649,41 +639,16 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="virtualizing-a-cpu">
-<h1><span class="section-number">7. </span>Virtualizing a CPU<a class="headerlink" href="#virtualizing-a-cpu" title="Permalink to this headline">#</a></h1>
-<p>When we say “virtualizing” what we mean is actually adding a layer of indirection between the target (in this case the CPU) and the user (the process). In order to do this, we will need a way of pausing the execution of a process while another process runs and then resuming execution later without the process having to be aware of this pause which means we need to capture all of the state that is relevant to a process in one or more data structures we can use to hold them when the process is not active. When the OS changes the active process on a CPU, we call this a “context switch”. To complete a context switch we need to save the CPU state for the process coming off the CPU and then load the state for the incoming process before allowing the CPU to execute the incoming process.</p>
-<section id="the-process-abstraction">
-<span id="cont-scheduling-process-abstraction"></span><h2><span class="section-number">7.1. </span>The Process Abstraction<a class="headerlink" href="#the-process-abstraction" title="Permalink to this headline">#</a></h2>
-<p>So far this has remained fairly high level, but we need to concretely define what all of this process state actually is in order to be able to save it for a context switch. If a process is simply the execution of a program, what parts of the computer might be important to the state of a process? We need to capture any non-durable data used by this process, so memory is part of process state. CPU registers are also modified so their contents are part of process state. In order to pause the execution of a process we need to save that processes view of memory and the contents of all the CPU registers where it was executing. Saving register contents is fairly simple, the OS copies them into a structure associated with this process so they are saved for later retrieval. However, memory is slightly harder. As we will cover later in this book, we use virtualization of memory to provide each process with the illusion that it has an almost limitless amount of memory to work with. This virtual memory is encapsulated in a process <em>address space</em> or its view of memory.</p>
-<p>Now that we have a collection of things we need to keep together for this process we need to introduce a data structure to contain them. Generically we use a process control block or PCB to keep these related objects together. In Linux, this structure is call the <code class="docutils literal notranslate"><span class="pre">task_struct</span></code>, so let’s take a quick look.</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="c1">// Defined in include/linux/sched.h</span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">task_struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">//...</span>
-<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">mm_struct</span><span class="w">                </span><span class="o">*</span><span class="n">mm</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="cm">/* CPU-specific state of this task: */</span><span class="w"></span>
-<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">thread_struct</span><span class="w">            </span><span class="kr">thread</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
-</div>
-<p>The actual <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> is quite a bit larger, but for our simplified explanation, these two fields are the ones we care about. The <code class="docutils literal notranslate"><span class="pre">mm_struct</span></code> contains the view of memory for this process and the <code class="docutils literal notranslate"><span class="pre">thread_struct</span></code> contains space to save register values when a process is paused for scheduling. So when the OS decides that a process needs to be removed from the CPU and replaced with another, waiting process it uses these fields to save process state and uses the fields from another task to populate the CPU registers and view of memory before resuming its execution. The relationship is shown in figure <code class="xref std std-numref docutils literal notranslate"><span class="pre">process</span></code>.</p>
-<figure class="align-default" id="process">
-<img alt="../_images/Process.png" src="../_images/Process.png" />
-</figure>
+  <section class="tex2jax_ignore mathjax_ignore" id="a-look-at-the-linux-scheduler">
+<h1><span class="section-number">9. </span>A Look at the Linux Scheduler<a class="headerlink" href="#a-look-at-the-linux-scheduler" title="Permalink to this headline">#</a></h1>
+<section id="a-bit-of-history">
+<h2><span class="section-number">9.1. </span>A Bit of History<a class="headerlink" href="#a-bit-of-history" title="Permalink to this headline">#</a></h2>
+<p>Prior to kernel version 2.6.23, Linux employed a scheduler that combined priority queues with a heuristic that altered a processes priority based on the amount of a time slice it used. CPU bound processes would consume their entire slice and would drop in priority. Conversely, I/O bound processes would often block before consuming an entire time slice and so their priority would be increased. This was meant to allow for interactive processes to stay in the high priority queues and batch processing jobs (really anything that was CPU bound) to drop. This scheduler had a number of heuristics that were used in decision making that were also exposed as tunable parameters but the biggest feature it boasted was that it had O(1) run time.</p>
 </section>
-<section id="creating-a-new-process">
-<h2><span class="section-number">7.2. </span>Creating a New Process<a class="headerlink" href="#creating-a-new-process" title="Permalink to this headline">#</a></h2>
-<p>As we discussed earlier in Getting Started, we create a new process with the <code class="docutils literal notranslate"><span class="pre">fork()</span></code> system call. This call instructs the operating system to create a new PCB based on the the active PCB when <code class="docutils literal notranslate"><span class="pre">fork()</span></code> is called.  When discussing <code class="docutils literal notranslate"><span class="pre">fork()</span></code> we typically refer to the process calling <code class="docutils literal notranslate"><span class="pre">fork()</span></code> as the <em>parent</em> process and the newly created process as the <em>child</em> process. The child process contains a new address space that is based on the one from the parent.  We will discuss the how in a later chapter, but even though the new address space is based on the one from the parent process, the two processes do not <em>share</em> memory.</p>
-<figure class="align-default" id="new-process">
-<img alt="../_images/CreateNewProcess.png" src="../_images/CreateNewProcess.png" />
-</figure>
-</section>
-<section id="how-are-threads-different">
-<h2><span class="section-number">7.3. </span>How are threads different?<a class="headerlink" href="#how-are-threads-different" title="Permalink to this headline">#</a></h2>
-<p>A core part of the UNIX model is separation of processes, or to be more specific, one running process should not be able to directly interact with the resources (memory, etc.) owned by another process without explicitly being setup to do so. This model is great for simple processes which do not need to utilize multiple CPUs, but it can make writing programs to use multiple CPUs more difficult as memory must be explicitly shared or processes must use another form of communication. A <em>thread</em> is like a process in that it has its own PCB, however, unlike a process it does not have its own address space. Instead threads all belong to a process and share the address space of that process so any changes made to memory by one thread are visible to all the other threads belonging to the same process. From the <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> above, what this means is that the <code class="docutils literal notranslate"><span class="pre">mm</span></code> pointer in the task creating a new thread is used directly in the child thread instead of making a new copy of the structure. Figure <code class="xref std std-numref docutils literal notranslate"><span class="pre">thread</span></code> shows the difference from a forked process.</p>
-<figure class="align-default" id="thread">
-<img alt="../_images/Threads.png" src="../_images/Threads.png" />
-</figure>
+<section id="the-completely-fair-scheduler-cfs">
+<h2><span class="section-number">9.2. </span>The Completely Fair Scheduler (CFS)<a class="headerlink" href="#the-completely-fair-scheduler-cfs" title="Permalink to this headline">#</a></h2>
+<p>The Linux Kernel documentation as the whole story <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html">here.</a> The completely fair scheduler was a from scratch redesign of the Linux scheduler, it did away with priority queues and with all[^notall] heuristics and tunables found in the O(1) scheduler. CFS introduced keeping a counter for the amount of runtime each task has received and this counter is used to decide on the next task to run. Instead of priority queues CFS places all tasks in an RB-tree sorted on their accumulated runtime with task on the left having less accumulated run time than tasks on the right. When a the system needs a new task to run the left most task is selected. This change allows CFS to completely avoid the starvation of CPU bound tasks that could occur with the previous scheduler.</p>
+<p>[^notall] CFS still has a single tunable than can be exposed, but the kernel must be configured with <code class="docutils literal notranslate"><span class="pre">SCHED_DEBUG</span></code> selected.</p>
 </section>
 </section>
 
@@ -714,17 +679,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="scheduling.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">6. </span>Introduction</p>
+            <p class="prev-next-title"><span class="section-number">8. </span>Scheduling</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="scheduling.html" title="next page">
+    <a class='right-next' id="next-link" href="../mm/intro.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Scheduling</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Introduction</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

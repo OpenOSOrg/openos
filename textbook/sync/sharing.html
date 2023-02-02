@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>26. Cooperating Processes &#8212; Introduction to Operating Systems</title>
+    <title>27. Cooperating Processes &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="27. Synchronization Primitives" href="locking.html" />
-    <link rel="prev" title="25. Intro Concurrency Synchronization and Deadlock" href="sync.html" />
+    <link rel="next" title="28. Synchronization Primitives" href="locking.html" />
+    <link rel="prev" title="26. Intro Concurrency Synchronization and Deadlock" href="sync.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -169,6 +169,11 @@ const thebe_selector_output = ".output, .cell_output"
    8. Scheduling
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/real_sched.html">
+   9. A Look at the Linux Scheduler
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -178,62 +183,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   9. Introduction
+   10. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/physmem.html">
-   10. Memory management without translation
+   11. Memory management without translation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-seg.html">
-   11. Segmentation
+   12. Segmentation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   12. Paging
+   13. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   13. Page Tables
+   14. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   14. Memory reclaiming algorithms.
+   15. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   15. Page Sizes
+   16. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   16. Other topics
+   17. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   17. Buffer Cache
+   18. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   18. Memory Management Dynamics
+   19. Memory Management Dynamics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   19. Memory management in the real world
+   20. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   20. Conclusion
+   21. Conclusion
   </a>
  </li>
 </ul>
@@ -245,22 +250,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   21. Introduction
+   22. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   22. Interface
+   23. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   23. File System Layout
+   24. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   24. Kernel implementation
+   25. Kernel implementation
   </a>
  </li>
 </ul>
@@ -272,32 +277,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="sync.html">
-   25. Intro Concurrency Synchronization and Deadlock
+   26. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   26. Cooperating Processes
+   27. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="locking.html">
-   27. Synchronization Primitives
+   28. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="deadlock.html">
-   28. Deadlocks
+   29. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hardware_challenges.html">
-   29. Challenges of Modern Hardware
+   30. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linux_locking.html">
-   30. Locking in the Linux Kernel
+   31. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -309,17 +314,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   31. Overview of other topics
+   32. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   32. Virtualization and Cloud computing
+   33. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   33. Other OS structures
+   34. Other OS structures
   </a>
  </li>
 </ul>
@@ -331,17 +336,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   34. How to read this book
+   35. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   35. Contributing
+   36. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   36. Bibliography
+   37. Bibliography
   </a>
  </li>
 </ul>
@@ -588,7 +593,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="cooperating-processes">
-<span id="cont-sync-sharing"></span><h1><span class="section-number">26. </span>Cooperating Processes<a class="headerlink" href="#cooperating-processes" title="Permalink to this headline">#</a></h1>
+<span id="cont-sync-sharing"></span><h1><span class="section-number">27. </span>Cooperating Processes<a class="headerlink" href="#cooperating-processes" title="Permalink to this headline">#</a></h1>
 <p>The process abstraction is designed to give the illusion that a program executes on its own
 private, isolated (virtual) machine. The OS scheduling mechanism hides the fact that the
 physical CPU is, in fact, shared by multiple processes. From the perspective of any given
@@ -639,13 +644,13 @@ cooperate if they are completely isolated from each other?</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">25. </span>Intro Concurrency Synchronization and Deadlock</p>
+            <p class="prev-next-title"><span class="section-number">26. </span>Intro Concurrency Synchronization and Deadlock</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="locking.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">27. </span>Synchronization Primitives</p>
+        <p class="prev-next-title"><span class="section-number">28. </span>Synchronization Primitives</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

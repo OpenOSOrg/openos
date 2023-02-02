@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>22. Interface &#8212; Introduction to Operating Systems</title>
+    <title>23. Interface &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="23. File System Layout" href="disklayout.html" />
-    <link rel="prev" title="21. Introduction" href="intro.html" />
+    <link rel="next" title="24. File System Layout" href="disklayout.html" />
+    <link rel="prev" title="22. Introduction" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -169,6 +169,11 @@ const thebe_selector_output = ".output, .cell_output"
    8. Scheduling
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/real_sched.html">
+   9. A Look at the Linux Scheduler
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -178,62 +183,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   9. Introduction
+   10. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/physmem.html">
-   10. Memory management without translation
+   11. Memory management without translation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-seg.html">
-   11. Segmentation
+   12. Segmentation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   12. Paging
+   13. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   13. Page Tables
+   14. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   14. Memory reclaiming algorithms.
+   15. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   15. Page Sizes
+   16. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   16. Other topics
+   17. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   17. Buffer Cache
+   18. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   18. Memory Management Dynamics
+   19. Memory Management Dynamics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   19. Memory management in the real world
+   20. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   20. Conclusion
+   21. Conclusion
   </a>
  </li>
 </ul>
@@ -245,22 +250,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   21. Introduction
+   22. Introduction
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   22. Interface
+   23. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="disklayout.html">
-   23. File System Layout
+   24. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="kernelimp.html">
-   24. Kernel implementation
+   25. Kernel implementation
   </a>
  </li>
 </ul>
@@ -272,32 +277,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   25. Intro Concurrency Synchronization and Deadlock
+   26. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   26. Cooperating Processes
+   27. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   27. Synchronization Primitives
+   28. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   28. Deadlocks
+   29. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   29. Challenges of Modern Hardware
+   30. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   30. Locking in the Linux Kernel
+   31. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -309,17 +314,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   31. Overview of other topics
+   32. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   32. Virtualization and Cloud computing
+   33. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   33. Other OS structures
+   34. Other OS structures
   </a>
  </li>
 </ul>
@@ -331,17 +336,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   34. How to read this book
+   35. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   35. Contributing
+   36. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   36. Bibliography
+   37. Bibliography
   </a>
  </li>
 </ul>
@@ -587,56 +592,56 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#objects">
-   22.1. Objects
+   23.1. Objects
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#hierarchical-namespace">
-     22.1.1. Hierarchical namespace
+     23.1.1. Hierarchical namespace
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#file">
-     22.1.2. File
+     23.1.2. File
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#unix-file-name-translation">
-     22.1.3. Unix file name translation
+     23.1.3. Unix file name translation
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#file-system-operations">
-   22.2. File System Operations:
+   23.2. File System Operations:
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#open-close">
-     22.2.1. Open/close
+     23.2.1. Open/close
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#read-write-operations">
-     22.2.2. Read/Write operations
+     23.2.2. Read/Write operations
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#naming-and-directories">
-     22.2.3. Naming and Directories
+     23.2.3. Naming and Directories
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#symbolic-links">
-   22.3. Symbolic links
+   23.3. Symbolic links
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#review-questions">
-   22.4. Review Questions
+   23.4. Review Questions
   </a>
  </li>
 </ul>
@@ -660,56 +665,56 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#objects">
-   22.1. Objects
+   23.1. Objects
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#hierarchical-namespace">
-     22.1.1. Hierarchical namespace
+     23.1.1. Hierarchical namespace
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#file">
-     22.1.2. File
+     23.1.2. File
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#unix-file-name-translation">
-     22.1.3. Unix file name translation
+     23.1.3. Unix file name translation
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#file-system-operations">
-   22.2. File System Operations:
+   23.2. File System Operations:
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#open-close">
-     22.2.1. Open/close
+     23.2.1. Open/close
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#read-write-operations">
-     22.2.2. Read/Write operations
+     23.2.2. Read/Write operations
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#naming-and-directories">
-     22.2.3. Naming and Directories
+     23.2.3. Naming and Directories
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#symbolic-links">
-   22.3. Symbolic links
+   23.3. Symbolic links
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#review-questions">
-   22.4. Review Questions
+   23.4. Review Questions
   </a>
  </li>
 </ul>
@@ -725,9 +730,9 @@ title="Print to PDF"
   <div class="cell tag_remove-input tag_hide-output docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="interface">
-<span id="cont-fs-interface"></span><h1><span class="section-number">22. </span>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">#</a></h1>
+<span id="cont-fs-interface"></span><h1><span class="section-number">23. </span>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">#</a></h1>
 <section id="objects">
-<h2><span class="section-number">22.1. </span>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">23.1. </span>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">#</a></h2>
 <p>General-purpose operating systems typically provide access to block
 storage (i.e. disks) via a <em>file system</em>, which provides a much more
 application- and user-friendly interface to storage. From the point of
@@ -738,9 +743,9 @@ view of the user, a file system contains the following elements:</p>
 <li><p><em>operations</em> on these objects.</p></li>
 </ul>
 <section id="hierarchical-namespace">
-<h3><span class="section-number">22.1.1. </span>Hierarchical namespace<a class="headerlink" href="#hierarchical-namespace" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">23.1.1. </span>Hierarchical namespace<a class="headerlink" href="#hierarchical-namespace" title="Permalink to this headline">#</a></h3>
 <p>File systems have traditionally used a
-tree-structured namespace<a class="footnote-reference brackets" href="#hier" id="id1">1</a>, as shown in <a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 22.1</span></a>.
+tree-structured namespace<a class="footnote-reference brackets" href="#hier" id="id1">1</a>, as shown in <a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 23.1</span></a>.
 This tree is constructed via the use of
 <em>directories</em>, or objects in the namespace which map strings to further
 file system objects. A full filename thus specifies a <em>path</em> from the
@@ -750,12 +755,12 @@ documentation)</p>
 <figure class="align-default" id="fs-tree-logical">
 <a class="reference internal image-reference" href="../_images/filesys-tree.png"><img alt="../_images/filesys-tree.png" src="../_images/filesys-tree.png" style="width: 45%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 22.1 </span><span class="caption-text">Logical view: hierarchical file system name space</span><a class="headerlink" href="#fs-tree-logical" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 23.1 </span><span class="caption-text">Logical view: hierarchical file system name space</span><a class="headerlink" href="#fs-tree-logical" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="file">
-<h3><span class="section-number">22.1.2. </span>File<a class="headerlink" href="#file" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">23.1.2. </span>File<a class="headerlink" href="#file" title="Permalink to this headline">#</a></h3>
 <p>Early operating systems supported many different file
 types—binary executables, text files, and record-structured files, and
 others. The Unix operating system is the earliest I know of that
@@ -768,7 +773,7 @@ incompatible types of files, one for text and one for executable code)</p>
 <figure class="align-default" id="fs-tree-imp">
 <a class="reference internal image-reference" href="../_images/filesys-tree2.png"><img alt="../_images/filesys-tree2.png" src="../_images/filesys-tree2.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 22.2 </span><span class="caption-text">Implementation view: hierarchical file system name space. Gray blocks are directories that contain entries that point to files.</span><a class="headerlink" href="#fs-tree-imp" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 23.2 </span><span class="caption-text">Implementation view: hierarchical file system name space. Gray blocks are directories that contain entries that point to files.</span><a class="headerlink" href="#fs-tree-imp" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Modern operating systems follow the UNIX model, which imposes no
@@ -793,7 +798,7 @@ must re-write the entire file (or at least from the modified part to the
 end).</p>
 </section>
 <section id="unix-file-name-translation">
-<h3><span class="section-number">22.1.3. </span>Unix file name translation<a class="headerlink" href="#unix-file-name-translation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">23.1.3. </span>Unix file name translation<a class="headerlink" href="#unix-file-name-translation" title="Permalink to this headline">#</a></h3>
 <p>Eeach process has an associated <em>current
 directory</em>, which may be changed via the <code class="docutils literal notranslate"><span class="pre">chdir</span></code> system call. File names
 beginning in ‘<code class="docutils literal notranslate"><span class="pre">/</span></code>’ are termed <em>absolute</em> names, and are interpreted
@@ -801,19 +806,19 @@ relative to the root of the naming tree, while <em>relative</em> names are
 interpreted beginning at the current directory. (In addition, <code class="docutils literal notranslate"><span class="pre">d/..</span></code>
 always points to the parent directory of <code class="docutils literal notranslate"><span class="pre">d</span></code>, and <code class="docutils literal notranslate"><span class="pre">d/.</span></code> points to <code class="docutils literal notranslate"><span class="pre">d</span></code>
 itself.) Thus in the file system in
-<a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 22.1</span></a>, if the current directory were <code class="docutils literal notranslate"><span class="pre">/home</span></code>,
+<a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 23.1</span></a>, if the current directory were <code class="docutils literal notranslate"><span class="pre">/home</span></code>,
 the the paths <code class="docutils literal notranslate"><span class="pre">pjd/.profile</span></code> and <code class="docutils literal notranslate"><span class="pre">/home/pjd/.profile</span></code> refer to the same
 file, and <code class="docutils literal notranslate"><span class="pre">../bin/cat</span></code> and <code class="docutils literal notranslate"><span class="pre">/bin/cat</span></code> refer to the same file.</p>
 </section>
 </section>
 <section id="file-system-operations">
-<h2><span class="section-number">22.2. </span>File System Operations:<a class="headerlink" href="#file-system-operations" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">23.2. </span>File System Operations:<a class="headerlink" href="#file-system-operations" title="Permalink to this headline">#</a></h2>
 <p>There are several common types of file operations supported by Linux
 (and with slight differences, Windows). They can be classified into
 three main categories: open/close, read/write, and naming and
 directories.</p>
 <section id="open-close">
-<h3><span class="section-number">22.2.1. </span>Open/close<a class="headerlink" href="#open-close" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">23.2.1. </span>Open/close<a class="headerlink" href="#open-close" title="Permalink to this headline">#</a></h3>
 <p>In order to access a file in Linux (or most operating
 systems) you first need to open the file, passing the file name and
 other parameters and receiving a <em>handle</em> (called a <em>file descriptor</em> in
@@ -835,7 +840,7 @@ access files, but instead use higher-level frameworks, ranging from Unix
 Standard I/O to high-level application frameworks.</p>
 </section>
 <section id="read-write-operations">
-<h3><span class="section-number">22.2.2. </span>Read/Write operations<a class="headerlink" href="#read-write-operations" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">23.2.2. </span>Read/Write operations<a class="headerlink" href="#read-write-operations" title="Permalink to this headline">#</a></h3>
 <p>To get a file with data in it, you need to
 write it; to use that data you need to read it. To allow reading and
 writing in units of less than an entire file, or tedius calculations of
@@ -874,7 +879,7 @@ programming—read from or write to a terminal, a network connection, a
 file, or a pipe from or to another program.</p>
 </section>
 <section id="naming-and-directories">
-<h3><span class="section-number">22.2.3. </span>Naming and Directories<a class="headerlink" href="#naming-and-directories" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">23.2.3. </span>Naming and Directories<a class="headerlink" href="#naming-and-directories" title="Permalink to this headline">#</a></h3>
 <p>In Unix there is a difference between a name
 (a directory entry) and the object (file or directory) that the name
 points to. The naming and directories operations are:</p>
@@ -901,7 +906,7 @@ delete an empty directory.</p></li>
 </section>
 </section>
 <section id="symbolic-links">
-<h2><span class="section-number">22.3. </span>Symbolic links<a class="headerlink" href="#symbolic-links" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">23.3. </span>Symbolic links<a class="headerlink" href="#symbolic-links" title="Permalink to this headline">#</a></h2>
 <p>An alternative to hard links to allow multiple names for a file is a
 third file system object (in addition to files and directories), a
 <em>symbolic link</em>. This holds a text string which is interpreted as a
@@ -980,7 +985,7 @@ Unix systems see the <code class="docutils literal notranslate"><span class="pre
 accessed with the command <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">path_resolution</span></code>.</p>
 </section>
 <section id="review-questions">
-<h2><span class="section-number">22.4. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">23.4. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h2>
 <p>FIXME</p>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
@@ -1059,13 +1064,13 @@ internally; e.g. the <code class="docutils literal notranslate"><span class="pre
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">21. </span>Introduction</p>
+            <p class="prev-next-title"><span class="section-number">22. </span>Introduction</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="disklayout.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">23. </span>File System Layout</p>
+        <p class="prev-next-title"><span class="section-number">24. </span>File System Layout</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

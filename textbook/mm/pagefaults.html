@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>18. Memory Management Dynamics &#8212; Introduction to Operating Systems</title>
+    <title>19. Memory Management Dynamics &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="19. Memory management in the real world" href="realworld.html" />
-    <link rel="prev" title="17. Buffer Cache" href="buffer-cache.html" />
+    <link rel="next" title="20. Memory management in the real world" href="realworld.html" />
+    <link rel="prev" title="18. Buffer Cache" href="buffer-cache.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -169,6 +169,11 @@ const thebe_selector_output = ".output, .cell_output"
    8. Scheduling
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/real_sched.html">
+   9. A Look at the Linux Scheduler
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -178,62 +183,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   9. Introduction
+   10. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="physmem.html">
-   10. Memory management without translation
+   11. Memory management without translation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-seg.html">
-   11. Segmentation
+   12. Segmentation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-paging.html">
-   12. Paging
+   13. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-tables.html">
-   13. Page Tables
+   14. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="reclamation.html">
-   14. Memory reclaiming algorithms.
+   15. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-size.html">
-   15. Page Sizes
+   16. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="misc.html">
-   16. Other topics
+   17. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="buffer-cache.html">
-   17. Buffer Cache
+   18. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   18. Memory Management Dynamics
+   19. Memory Management Dynamics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="realworld.html">
-   19. Memory management in the real world
+   20. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concl.html">
-   20. Conclusion
+   21. Conclusion
   </a>
  </li>
 </ul>
@@ -245,22 +250,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   21. Introduction
+   22. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   22. Interface
+   23. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   23. File System Layout
+   24. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   24. Kernel implementation
+   25. Kernel implementation
   </a>
  </li>
 </ul>
@@ -272,32 +277,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   25. Intro Concurrency Synchronization and Deadlock
+   26. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   26. Cooperating Processes
+   27. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   27. Synchronization Primitives
+   28. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   28. Deadlocks
+   29. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   29. Challenges of Modern Hardware
+   30. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   30. Locking in the Linux Kernel
+   31. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -309,17 +314,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   31. Overview of other topics
+   32. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   32. Virtualization and Cloud computing
+   33. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   33. Other OS structures
+   34. Other OS structures
   </a>
  </li>
 </ul>
@@ -331,17 +336,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   34. How to read this book
+   35. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   35. Contributing
+   36. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   36. Bibliography
+   37. Bibliography
   </a>
  </li>
 </ul>
@@ -587,29 +592,29 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-faulting">
-   18.1. Page Faulting
+   19.1. Page Faulting
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-faults">
-     18.1.1. Page Faults
+     19.1.1. Page Faults
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#process-address-space-revisited">
-     18.1.2. Process Address Space, Revisited
+     19.1.2. Process Address Space, Revisited
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#executable-file-and-process-address-space">
-       18.1.2.1. Executable file and process address space
+       19.1.2.1. Executable file and process address space
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-faults-in-the-kernel">
-     18.1.3. Page Faults in the Kernel
+     19.1.3. Page Faults in the Kernel
     </a>
    </li>
   </ul>
@@ -635,29 +640,29 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-faulting">
-   18.1. Page Faulting
+   19.1. Page Faulting
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-faults">
-     18.1.1. Page Faults
+     19.1.1. Page Faults
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#process-address-space-revisited">
-     18.1.2. Process Address Space, Revisited
+     19.1.2. Process Address Space, Revisited
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#executable-file-and-process-address-space">
-       18.1.2.1. Executable file and process address space
+       19.1.2.1. Executable file and process address space
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#page-faults-in-the-kernel">
-     18.1.3. Page Faults in the Kernel
+     19.1.3. Page Faults in the Kernel
     </a>
    </li>
   </ul>
@@ -673,14 +678,14 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="memory-management-dynamics">
-<span id="cont-mm-mmdyn"></span><h1><span class="section-number">18. </span>Memory Management Dynamics<a class="headerlink" href="#memory-management-dynamics" title="Permalink to this headline">#</a></h1>
+<span id="cont-mm-mmdyn"></span><h1><span class="section-number">19. </span>Memory Management Dynamics<a class="headerlink" href="#memory-management-dynamics" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
 <li><p>File backed page faults</p></li>
 <li><p>Anonymous page faults</p></li>
 <li><p>Copy On Write page faults</p></li>
 </ul>
 <section id="page-faulting">
-<h2><span class="section-number">18.1. </span>Page Faulting<a class="headerlink" href="#page-faulting" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">19.1. </span>Page Faulting<a class="headerlink" href="#page-faulting" title="Permalink to this headline">#</a></h2>
 <p>In the previous section you saw how the MMU in a Pentium-like CPU
 determines whether a memory access will succeed:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">the</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">entry</span> <span class="n">has</span> <span class="n">P</span><span class="o">=</span><span class="mi">1</span>
@@ -697,7 +702,7 @@ determines whether a memory access will succeed:</p>
 <p>If translation fails at any one of the six possible points above (P, W,
 or U at each level) then a page fault is generated.</p>
 <section id="page-faults">
-<h3><span class="section-number">18.1.1. </span>Page Faults<a class="headerlink" href="#page-faults" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.1.1. </span>Page Faults<a class="headerlink" href="#page-faults" title="Permalink to this headline">#</a></h3>
 <p>A page fault is a special form of exception that has the following two
 characteristics: first, it is generated when an address translation
 fails, and second, it occurs in the middle of an instruction, not after
@@ -744,7 +749,7 @@ additional faults.</p></li>
 </ul>
 </section>
 <section id="process-address-space-revisited">
-<h3><span class="section-number">18.1.2. </span>Process Address Space, Revisited<a class="headerlink" href="#process-address-space-revisited" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.1.2. </span>Process Address Space, Revisited<a class="headerlink" href="#process-address-space-revisited" title="Permalink to this headline">#</a></h3>
 <p>How does the OS know how to handle a page fault? By examining its
 internal memory map for a process. We’ve talked briefly about process
 memory maps earlier, but now we will look in more detail at a specific
@@ -754,7 +759,7 @@ more thorough description of the Linux memory layout can be found at<br />
 <figure class="align-default" id="fig-vm-fig100">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic100.png"><img alt="../_images/virt-mem-pic100.png" src="../_images/virt-mem-pic100.png" style="width: 25%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 18.1 </span><span class="caption-text">Top 1GB is the Kernel address space and bottom 3GB is the user address space.</span><a class="headerlink" href="#fig-vm-fig100" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 19.1 </span><span class="caption-text">Top 1GB is the Kernel address space and bottom 3GB is the user address space.</span><a class="headerlink" href="#fig-vm-fig100" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In earlier chapters we saw how simple operating systems may use separate
@@ -818,7 +823,7 @@ following sections can be seen:</p>
 zero; since the BSS section is initialized to all zeros, there is no
 need to store its initial contents in the executable file.</p>
 <section id="executable-file-and-process-address-space">
-<h4><span class="section-number">18.1.2.1. </span>Executable file and process address space<a class="headerlink" href="#executable-file-and-process-address-space" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">19.1.2.1. </span>Executable file and process address space<a class="headerlink" href="#executable-file-and-process-address-space" title="Permalink to this headline">#</a></h4>
 <p>Here you can see the relationship between the structure of the
 executable file and the process address space created by the kernel when
 it runs this executable. One page (08048xxx) is used for read-only code
@@ -827,14 +832,14 @@ data.</p>
 <figure class="align-default" id="vm-pic101">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic101.png"><img alt="../_images/virt-mem-pic101.png" src="../_images/virt-mem-pic101.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 18.2 </span><span class="caption-text">Relationship of executable file header to memory map
+<p><span class="caption-number">Fig. 19.2 </span><span class="caption-text">Relationship of executable file header to memory map
 structure</span><a class="headerlink" href="#vm-pic101" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="page-faults-in-the-kernel">
-<h3><span class="section-number">18.1.3. </span>Page Faults in the Kernel<a class="headerlink" href="#page-faults-in-the-kernel" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">19.1.3. </span>Page Faults in the Kernel<a class="headerlink" href="#page-faults-in-the-kernel" title="Permalink to this headline">#</a></h3>
 <div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>Although common in the past, modern Windows and Linux systems rarely
 seem to crash due to driver problems. (Although my Mac panics every
 month or two.) If you ever develop kernel drivers, however, you will
@@ -965,13 +970,13 @@ always result in a system crash.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">17. </span>Buffer Cache</p>
+            <p class="prev-next-title"><span class="section-number">18. </span>Buffer Cache</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="realworld.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">19. </span>Memory management in the real world</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>Memory management in the real world</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

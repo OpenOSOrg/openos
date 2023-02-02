@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>13. Page Tables &#8212; Introduction to Operating Systems</title>
+    <title>14. Page Tables &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="14. Memory reclaiming algorithms." href="reclamation.html" />
-    <link rel="prev" title="12. Paging" href="virt-paging.html" />
+    <link rel="next" title="15. Memory reclaiming algorithms." href="reclamation.html" />
+    <link rel="prev" title="13. Paging" href="virt-paging.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -171,6 +171,11 @@ const thebe_selector_output = ".output, .cell_output"
    8. Scheduling
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/real_sched.html">
+   9. A Look at the Linux Scheduler
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -180,62 +185,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   9. Introduction
+   10. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="physmem.html">
-   10. Memory management without translation
+   11. Memory management without translation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-seg.html">
-   11. Segmentation
+   12. Segmentation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-paging.html">
-   12. Paging
+   13. Paging
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   13. Page Tables
+   14. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="reclamation.html">
-   14. Memory reclaiming algorithms.
+   15. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-size.html">
-   15. Page Sizes
+   16. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="misc.html">
-   16. Other topics
+   17. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="buffer-cache.html">
-   17. Buffer Cache
+   18. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pagefaults.html">
-   18. Memory Management Dynamics
+   19. Memory Management Dynamics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="realworld.html">
-   19. Memory management in the real world
+   20. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concl.html">
-   20. Conclusion
+   21. Conclusion
   </a>
  </li>
 </ul>
@@ -247,22 +252,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   21. Introduction
+   22. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   22. Interface
+   23. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   23. File System Layout
+   24. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   24. Kernel implementation
+   25. Kernel implementation
   </a>
  </li>
 </ul>
@@ -274,32 +279,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   25. Intro Concurrency Synchronization and Deadlock
+   26. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   26. Cooperating Processes
+   27. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   27. Synchronization Primitives
+   28. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   28. Deadlocks
+   29. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   29. Challenges of Modern Hardware
+   30. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   30. Locking in the Linux Kernel
+   31. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -311,17 +316,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   31. Overview of other topics
+   32. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   32. Virtualization and Cloud computing
+   33. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   33. Other OS structures
+   34. Other OS structures
   </a>
  </li>
 </ul>
@@ -333,17 +338,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   34. How to read this book
+   35. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   35. Contributing
+   36. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   36. Bibliography
+   37. Bibliography
   </a>
  </li>
 </ul>
@@ -589,39 +594,39 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#single-level-page-table">
-   13.1. Single-level Page Table
+   14.1. Single-level Page Table
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#level-page-table-operation">
-   13.2. 2-Level Page Table Operation
+   14.2. 2-Level Page Table Operation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review-questions">
-     13.2.1. Review questions
+     14.2.1. Review questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-table-entries">
-   13.3. Page Table Entries
+   14.3. Page Table Entries
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-permissions-p-w-and-u-bits">
-   13.4. Page Permissions - P, W, and U bits
+   14.4. Page Permissions - P, W, and U bits
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#creating-a-page-table">
-   13.5. Creating a Page Table
+   14.5. Creating a Page Table
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id1">
-     13.5.1. Review questions
+     14.5.1. Review questions
     </a>
    </li>
   </ul>
@@ -647,39 +652,39 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#single-level-page-table">
-   13.1. Single-level Page Table
+   14.1. Single-level Page Table
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#level-page-table-operation">
-   13.2. 2-Level Page Table Operation
+   14.2. 2-Level Page Table Operation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review-questions">
-     13.2.1. Review questions
+     14.2.1. Review questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-table-entries">
-   13.3. Page Table Entries
+   14.3. Page Table Entries
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#page-permissions-p-w-and-u-bits">
-   13.4. Page Permissions - P, W, and U bits
+   14.4. Page Permissions - P, W, and U bits
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#creating-a-page-table">
-   13.5. Creating a Page Table
+   14.5. Creating a Page Table
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id1">
-     13.5.1. Review questions
+     14.5.1. Review questions
     </a>
    </li>
   </ul>
@@ -695,16 +700,16 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="page-tables">
-<span id="cont-mm-page-tables"></span><h1><span class="section-number">13. </span>Page Tables<a class="headerlink" href="#page-tables" title="Permalink to this headline">#</a></h1>
+<span id="cont-mm-page-tables"></span><h1><span class="section-number">14. </span>Page Tables<a class="headerlink" href="#page-tables" title="Permalink to this headline">#</a></h1>
 <section id="single-level-page-table">
-<h2><span class="section-number">13.1. </span>Single-level Page Table<a class="headerlink" href="#single-level-page-table" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">14.1. </span>Single-level Page Table<a class="headerlink" href="#single-level-page-table" title="Permalink to this headline">#</a></h2>
 <p>One of the simplest ways to structure a page table for mapping 20-bit
 page numbers is as a simple array with <span class="math notranslate nohighlight">\(2^{20}\)</span> entries. With this
 configuration, each virtual page has an entry, and the value in that
-entry is the corresponding physical page number, as seen in <a class="reference internal" href="#fig-vm-fig11"><span class="std std-numref">Fig. 13.1</span></a>. This single-level table is located in
+entry is the corresponding physical page number, as seen in <a class="reference internal" href="#fig-vm-fig11"><span class="std std-numref">Fig. 14.1</span></a>. This single-level table is located in
 physical memory, and the MMU is given a pointer to this table, which is
 stored in an MMU register. (On Intel-compatible CPUs, the page table
-pointer is Control Register 3, or CR3.) This is shown in <a class="reference internal" href="#fig-vm-fig11"><span class="std std-numref">Fig. 13.1</span></a>, where we see the first two entries in a
+pointer is Control Register 3, or CR3.) This is shown in <a class="reference internal" href="#fig-vm-fig11"><span class="std std-numref">Fig. 14.1</span></a>, where we see the first two entries in a
 <span class="math notranslate nohighlight">\(2^{20}\)</span> or 1048576-entry mapping table. In addition to the translated
 page number, each entry contains a <em>P</em> bit to indicate whether or not
 the entry is “present,” i.e., valid. Unlike in C or Java we can’t use a
@@ -712,7 +717,7 @@ special null pointer, because 0 is a perfectly valid page number[^3].</p>
 <figure class="align-default" id="fig-vm-fig11">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic11.png"><img alt="../_images/virt-mem-pic11.png" src="../_images/virt-mem-pic11.png" style="width: 45%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 13.1 </span><span class="caption-text">Single-level 32-bit page table</span><a class="headerlink" href="#fig-vm-fig11" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 14.1 </span><span class="caption-text">Single-level 32-bit page table</span><a class="headerlink" href="#fig-vm-fig11" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Below we see pseudo-code for the translation
@@ -749,8 +754,8 @@ external fragmentation that paged address translation was supposed to
 solve.</p>
 </section>
 <section id="level-page-table-operation">
-<h2><span class="section-number">13.2. </span>2-Level Page Table Operation<a class="headerlink" href="#level-page-table-operation" title="Permalink to this headline">#</a></h2>
-<p>In <a class="reference internal" href="#fig-vm-fig13"><span class="std std-numref">Fig. 13.2</span></a> we see a page table constructed of 3 pages:
+<h2><span class="section-number">14.2. </span>2-Level Page Table Operation<a class="headerlink" href="#level-page-table-operation" title="Permalink to this headline">#</a></h2>
+<p>In <a class="reference internal" href="#fig-vm-fig13"><span class="std std-numref">Fig. 14.2</span></a> we see a page table constructed of 3 pages:
 physical pages 00000 (the root directory), 00001, and 00003. Two data
 pages are mapped: 00002 and 00004. Any entries not shown are assumed to
 be null, i.e., the present bit is set to 0. As an example we use this
@@ -759,7 +764,7 @@ page table to translate a read from virtual address 0x0040102C.</p>
 <figure class="align-default" id="fig-vm-fig13">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic13.png"><img alt="../_images/virt-mem-pic13.png" src="../_images/virt-mem-pic13.png" style="width: 45%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 13.2 </span><span class="caption-text">Two-level Page Table Example</span><a class="headerlink" href="#fig-vm-fig13" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 14.2 </span><span class="caption-text">Two-level Page Table Example</span><a class="headerlink" href="#fig-vm-fig13" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The steps involved in translating this address are:</p>
@@ -786,11 +791,11 @@ binary, and the bottom is hex again.)</p>
 offset in the original virtual address is <code class="docutils literal notranslate"><span class="pre">02C</span></code>, so combining the two we
 get the final physical address, <code class="docutils literal notranslate"><span class="pre">0000202C</span></code>.</p>
 <section id="review-questions">
-<h3><span class="section-number">13.2.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">14.2.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
 <figure class="align-default" id="fig-vm-review1">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic16.png"><img alt="../_images/virt-mem-pic16.png" src="../_images/virt-mem-pic16.png" style="width: 45%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 13.3 </span><span class="caption-text">Reference page table for review questions</span><a class="headerlink" href="#fig-vm-review1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 14.3 </span><span class="caption-text">Reference page table for review questions</span><a class="headerlink" href="#fig-vm-review1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="admonition note">
@@ -805,19 +810,19 @@ paged address translation?</p>
 </section>
 </section>
 <section id="page-table-entries">
-<h2><span class="section-number">13.3. </span>Page Table Entries<a class="headerlink" href="#page-table-entries" title="Permalink to this headline">#</a></h2>
-<p>The components of a 32-bit Intel page table entry are shown in <a class="reference internal" href="#fig-vm-pic17"><span class="std std-numref">Fig. 13.4</span></a>; for more information you may wish to refer to
+<h2><span class="section-number">14.3. </span>Page Table Entries<a class="headerlink" href="#page-table-entries" title="Permalink to this headline">#</a></h2>
+<p>The components of a 32-bit Intel page table entry are shown in <a class="reference internal" href="#fig-vm-pic17"><span class="std std-numref">Fig. 14.4</span></a>; for more information you may wish to refer to
 <a class="reference external" href="http://wiki.osdev.org/Paging">http://wiki.osdev.org/Paging</a>.</p>
 <figure class="align-default" id="fig-vm-pic17">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic17.png"><img alt="../_images/virt-mem-pic17.png" src="../_images/virt-mem-pic17.png" style="width: 45%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 13.4 </span><span class="caption-text">32-bit Intel page table entry
+<p><span class="caption-number">Fig. 14.4 </span><span class="caption-text">32-bit Intel page table entry
 (PTE).</span><a class="headerlink" href="#fig-vm-pic17" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="page-permissions-p-w-and-u-bits">
-<h2><span class="section-number">13.4. </span>Page Permissions - P, W, and U bits<a class="headerlink" href="#page-permissions-p-w-and-u-bits" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">14.4. </span>Page Permissions - P, W, and U bits<a class="headerlink" href="#page-permissions-p-w-and-u-bits" title="Permalink to this headline">#</a></h2>
 <p>Page tables allow different permissions to be applied to memory at a
 per-page level of granularity.</p>
 <p><strong>P=0/1</strong> - If the present bit is zero, the entry is ignored entirely by
@@ -838,7 +843,7 @@ space as the current process, but will hide its code and data structures
 from access by user processes by setting U=0 on the OS-only mappings.</p>
 </section>
 <section id="creating-a-page-table">
-<h2><span class="section-number">13.5. </span>Creating a Page Table<a class="headerlink" href="#creating-a-page-table" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">14.5. </span>Creating a Page Table<a class="headerlink" href="#creating-a-page-table" title="Permalink to this headline">#</a></h2>
 <div class="highlight-{#ch2:lst:hello notranslate"><div class="highlight"><pre><span></span>char hello[] = ``hello world\n&#39;&#39;;
 void _start(void)
 {
@@ -893,11 +898,11 @@ entries would of course change if different physical pages were used.)</p>
 <figure class="align-default" id="fig-vm-virt-mem-review2-png">
 <a class="reference internal image-reference" href="../_images/virt-mem-review2.png"><img alt="../_images/virt-mem-review2.png" src="../_images/virt-mem-review2.png" style="width: 45%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 13.5 </span><span class="caption-text">Page Table and PTEs in use.</span><a class="headerlink" href="#fig-vm-virt-mem-review2-png" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 14.5 </span><span class="caption-text">Page Table and PTEs in use.</span><a class="headerlink" href="#fig-vm-virt-mem-review2-png" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="id1">
-<h3><span class="section-number">13.5.1. </span>Review questions<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">14.5.1. </span>Review questions<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
@@ -936,13 +941,13 @@ entries would of course change if different physical pages were used.)</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">12. </span>Paging</p>
+            <p class="prev-next-title"><span class="section-number">13. </span>Paging</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="reclamation.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>Memory reclaiming algorithms.</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Memory reclaiming algorithms.</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
