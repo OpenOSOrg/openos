@@ -22,8 +22,7 @@ parts:
   numbered: True
   chapters:
   - file: mm/intro
-  - file: mm/physmem
-  - file: mm/virt-seg
+  - file: mm/phys-and-seg
   - file: mm/virt-paging
   - file: mm/page-tables
   - file: mm/reclamation
