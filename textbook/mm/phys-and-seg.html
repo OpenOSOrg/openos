@@ -1,0 +1,913 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>11. Memory management before paged virtual memory &#8212; Introduction to Operating Systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12. Paging" href="virt-paging.html" />
+    <link rel="prev" title="10. Introduction" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/pref.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/purpose.html">
+   2. Purpose of operating systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/structure.html">
+   3. Operating System Structure &amp; Unix/Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/abstractions.html">
+   4. Operating System Abstractions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/tools.html">
+   5. Tools
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Processor
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/intro.html">
+   6. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/process.html">
+   7. Virtualizing a CPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/scheduling.html">
+   8. Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/real_sched.html">
+   9. A Look at the Linux Scheduler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Memory
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   10. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   11. Memory management before paged virtual memory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="virt-paging.html">
+   12. Paging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="page-tables.html">
+   13. Page Tables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reclamation.html">
+   14. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="page-size.html">
+   15. Page Sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="misc.html">
+   16. Other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="buffer-cache.html">
+   17. Buffer Cache
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pagefaults.html">
+   18. Memory Management Dynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="realworld.html">
+   19. Memory management in the real world
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concl.html">
+   20. Conclusion
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/intro.html">
+   21. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/interface.html">
+   22. Interface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
+   23. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/kernelimp.html">
+   24. Kernel implementation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sync.html">
+   25. Intro Concurrency Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   26. Cooperating Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locking.html">
+   27. Synchronization Primitives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/deadlock.html">
+   28. Deadlocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   29. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   30. Locking in the Linux Kernel
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/OtherInro.html">
+   31. Overview of other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../virt/virt.html">
+   32. Virtualization and Cloud computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/other.html">
+   33. Other OS structures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/howto.html">
+   34. How to read this book
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   35. Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/bib.html">
+   36. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/mm/phys-and-seg.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/mm/phys-and-seg.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/okrieg/openos"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fmm/phys-and-seg.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/edit/main/content/mm/phys-and-seg.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/mm/phys-and-seg.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-physical-memory-management">
+   11.1. Simple physical memory management.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#segmentation-virtual-memory">
+   11.2. Segmentation - Virtual Memory
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aka-base-and-bounds-translation">
+     11.2.1. AKA Base and Bounds translation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#segmentation-aka-base-and-bounds-translation">
+   11.3. Segmentation(AKA base and bounds translation).
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#single-segments-per-address-space">
+     11.3.1. Single segments per address space
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiple-segments-per-address-space">
+     11.3.2. Multiple segments per address space.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#private-versus-global-segments">
+     11.3.3. Private versus Global segments.
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#compaction">
+       11.3.3.1. Compaction.
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#limitations-of-segmentation">
+       11.3.3.2. Limitations of segmentation.
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Memory management before paged virtual memory</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-physical-memory-management">
+   11.1. Simple physical memory management.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#segmentation-virtual-memory">
+   11.2. Segmentation - Virtual Memory
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aka-base-and-bounds-translation">
+     11.2.1. AKA Base and Bounds translation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#segmentation-aka-base-and-bounds-translation">
+   11.3. Segmentation(AKA base and bounds translation).
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#single-segments-per-address-space">
+     11.3.1. Single segments per address space
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiple-segments-per-address-space">
+     11.3.2. Multiple segments per address space.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#private-versus-global-segments">
+     11.3.3. Private versus Global segments.
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#compaction">
+       11.3.3.1. Compaction.
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#limitations-of-segmentation">
+       11.3.3.2. Limitations of segmentation.
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="memory-management-before-paged-virtual-memory">
+<span id="cont-mm-beforepaging"></span><h1><span class="section-number">11. </span>Memory management before paged virtual memory<a class="headerlink" href="#memory-management-before-paged-virtual-memory" title="Permalink to this headline">#</a></h1>
+<section id="simple-physical-memory-management">
+<span id="cont-mm-overview-simple"></span><h2><span class="section-number">11.1. </span>Simple physical memory management.<a class="headerlink" href="#simple-physical-memory-management" title="Permalink to this headline">#</a></h2>
+<p>From a hardware perspective, the simplest memory management model is to have processes just use the physical address space; where instructions executed on the processor directly reference physical memory addresses.  For example, if the application wants to load a register, from location <code class="docutils literal notranslate"><span class="pre">0x1234</span></code> it would get the data stored at physical memory location <code class="docutils literal notranslate"><span class="pre">0x1234</span></code>.   For example, the original Microsoft DOS operating system, supported exactly this model.</p>
+<p>As shown in <a class="reference internal" href="#mem-pys-mem-fig"><span class="std std-numref">Fig. 11.1</span></a>, the operating system needs to be loaded into one part of the memory, and each program that you would want to run needs to be loaded into different physical memory at different addresses.</p>
+<figure class="align-default" id="mem-pys-mem-fig">
+<a class="reference internal image-reference" href="../_images/physmem.drawio.png"><img alt="../_images/physmem.drawio.png" src="../_images/physmem.drawio.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11.1 </span><span class="caption-text">Operating system is loaded at address 0, program 1 is loaded at address <code class="docutils literal notranslate"><span class="pre">0x2000</span></code> and program 2 is loaded at address <code class="docutils literal notranslate"><span class="pre">0x8000</span></code></span><a class="headerlink" href="#mem-pys-mem-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="segment-ex1">
+<a class="reference internal image-reference" href="../_images/segment_ex1.png"><img alt="../_images/segment_ex1.png" src="../_images/segment_ex1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11.2 </span><span class="caption-text">bogus caption</span><a class="headerlink" href="#segment-ex1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>There are two major problems with physical memory management.  First, there is no protection between the different programs.  A bug in program 1 may cause program 2 to be modified, or even modify the operating system.</p>
+<p>Second, programs need to be re-located when they are loaded.  If we are going to run multiple programs, we can’t know a-priori the location where the program will be loaded.  However, when the program is compiled and linked into object code specific addresses, for example for branches needed to be specified in the program.</p>
+<p>For this reason programs are usually linked as relocatable.  Relocatable programs have a table of all addresses within the program image that must be changed at load time before it can be run.   See <a class="reference internal" href="#prog-pys-mem-fig"><span class="std std-numref">Fig. 11.3</span></a>, where the jump instruction at address <code class="docutils literal notranslate"><span class="pre">0x0000</span></code> needs to be modified by adding the address of where the program is being loaded, i.e., <code class="docutils literal notranslate"><span class="pre">JMP</span> <span class="pre">0x1000</span></code> is modified to <code class="docutils literal notranslate"><span class="pre">JMP</span> <span class="pre">0x3000</span></code>.</p>
+<figure class="align-default" id="prog-pys-mem-fig">
+<a class="reference internal image-reference" href="../_images/prog_phys.drawio.png"><img alt="../_images/prog_phys.drawio.png" src="../_images/prog_phys.drawio.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11.3 </span><span class="caption-text">Changes to program 1 to load it at address <code class="docutils literal notranslate"><span class="pre">0x2000</span></code></span><a class="headerlink" href="#prog-pys-mem-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>While we don’t need relocation to solve this problem with paged virtual memory, as we will discuss layer, relocation is still used today for shared libraries and for address space randomization.</p>
+</section>
+<section id="segmentation-virtual-memory">
+<span id="cont-mm-virt-seg"></span><h2><span class="section-number">11.2. </span>Segmentation - Virtual Memory<a class="headerlink" href="#segmentation-virtual-memory" title="Permalink to this headline">#</a></h2>
+<p>So physical memory managment has the problem that there is no isolation and you need to relocate programs to wherever they are loaded.  What we want is <em>virtual memory</em> where every process  appears to be loaded at <code class="docutils literal notranslate"><span class="pre">0x0000</span></code> and</p>
+<section id="aka-base-and-bounds-translation">
+<h3><span class="section-number">11.2.1. </span>AKA Base and Bounds translation<a class="headerlink" href="#aka-base-and-bounds-translation" title="Permalink to this headline">#</a></h3>
+<figure class="align-default" id="mm-base-bound">
+<a class="reference internal image-reference" href="../_images/virt-mem-base-bounds.png"><img alt="../_images/virt-mem-base-bounds.png" src="../_images/virt-mem-base-bounds.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11.4 </span><span class="caption-text">Base-bound registers for translation</span><a class="headerlink" href="#mm-base-bound" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="multiple-virtual-address-spaces">
+<a class="reference internal image-reference" href="../_images/programs_seg.png"><img alt="../_images/programs_seg.png" src="../_images/programs_seg.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11.5 </span><span class="caption-text">Multiple virtual address spaces using segmentation</span><a class="headerlink" href="#multiple-virtual-address-spaces" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We first looked at direct physical addressing, where no matter which
+process is executing, the same address (e.g. 0x1000) refers to the same
+memory location. In addition we reviewed a very simple form of address
+translation, shown here in <a class="reference internal" href="#mm-base-bound"><span class="std std-numref">Fig. 11.4</span></a></p>
+<p>where base and bounds registers are used to
+relocate a section of the <em>virtual address space</em>—the addresses seen
+by the program, corresponding to values in the CPU registers—to
+somewhere else in the physical address space. By changing these
+translations the operating system can create multiple virtual address
+spaces, one per process; however there is still only one physical
+address space, uniquely identifying each byte in each memory chip. In
+this chapter we introduce <em>paged address translation</em>, a more complex
+address translation mechanism used by most modern CPUs, and present the
+32-bit Intel implementation as an example.</p>
+</section>
+</section>
+<section id="segmentation-aka-base-and-bounds-translation">
+<h2><span class="section-number">11.3. </span>Segmentation(AKA base and bounds translation).<a class="headerlink" href="#segmentation-aka-base-and-bounds-translation" title="Permalink to this headline">#</a></h2>
+<p>In the simplest form of segmentation the hardware provides 2 registers that are loaded each time a process acquire the CPU, a base register and a limit register.  For a given process the base register contains the physical address that the program was loaded at and the limit register contains the size of the program that was loaded into memory.  Every process has a virtual address space starting at zero and a size determined by the actual program size that the process is running.  The process specific base and limit registers which are loaded every time a process acquires the CPU establishes the bounds of the virtual address space for every process.  For each and every memory reference the hardware adds the virtual address to the base register to determine a physical address and insures that the physical address is between the base register and base register plus the limit register.  If it is outside those bounds the program is terminated with an illegal virtual memory reference error.  Segmentation solves both the lack of protection and the mandatory relocation requirements of physical addressing.  Segmentation has little or no performance overhead because the hardware performs the virtual to physical translation or the addition of the virtual address and the base register to determine every physical address.</p>
+<section id="single-segments-per-address-space">
+<h3><span class="section-number">11.3.1. </span>Single segments per address space<a class="headerlink" href="#single-segments-per-address-space" title="Permalink to this headline">#</a></h3>
+<p>So far we discussed a segmentation implementation that provides one base register and one limit register in hardware and one of each of those process specific values that gets loaded into those registers when context switching to a given process.  Since there is only one of each register, the entire process virtual address space must be physically contiguous and all text, data and stack must be within that single memory region.  While this is a huge improvement over a physical memory model it limits the size of the virtual address space to being static and not expandable.  There is no way to dynamically increase the size of the text, data or stack regions of a process at run-time, everything must be allocated in advance.  This requires allocating physical memory that might never be used.</p>
+</section>
+<section id="multiple-segments-per-address-space">
+<h3><span class="section-number">11.3.2. </span>Multiple segments per address space.<a class="headerlink" href="#multiple-segments-per-address-space" title="Permalink to this headline">#</a></h3>
+<p>As mentioned earlier a single base and limit segment register implies that an entire process virtual address space is a one physically contiguous region of physical memory mapped into one virtually contiguous virtual region of virtual memory.  This means that the text, data and stack regions must be packed tightly together in both physical and virtual memory unless we are willing to waste both physical and virtual memory.  Also, with only one segment register its not possible to offer different types of protections for the various regions of the virtual address space.  In other words all of virtual memory must be readable, writable and executable since data must be both readable and writable and text must be executable.  It would be nice to prevent data regions from being executable and text regions from being readable and writable for security and debug optimizations.</p>
+<p>This can be achieved by the hardware implementing multiple segment and limit registers with only specified permissions for text, data and stack regions and having the operating system use those registers when context switching to a process.  When mapping the text into a virtual region the operating system can specify an execute only region that does not have to be adjacent to other non-executable regions.  When mapping data into virtual memory the operating system can specify read/write only thereby preventing execution of data regions.  Finally the stack can also be non-executable but also the operating system can move the virtual memory stack region away from any other region making it easier to debug common programming problems like stack overflows.  Finally multiple segment registers eliminates the necessity for the text, data and stack regions to be physically contiguous.  This allows a program to be split up into multiple smaller regions both physically and virtually making it much easier to hold more programs in physical memory at the same time.</p>
+</section>
+<section id="private-versus-global-segments">
+<h3><span class="section-number">11.3.3. </span>Private versus Global segments.<a class="headerlink" href="#private-versus-global-segments" title="Permalink to this headline">#</a></h3>
+<p>Every process virtual address space consists of 2 types of regions, Private and Global.  The private regions for a process are the program specific text, data and stack regions that the process is running.  The global regions include the operating system that is and must be mapped into every process address space.  As we discussed earlier in this course the operating system consists of all the software that executes on behalf of the currently running program as well as basic system overhead that runs on behalf of the system.  This includes all the system calls the operating system supports.  Since every process must map the operating system kernel it is shared between every running process rather than each process containing a separate copy.  The global segment registers are used to map the shared kernel text, data and kernel stack area in every process and at the same virtual addresses.  When a context switch occurs only the private segments registers are changed for the newly running process, there is no need to change the global segment registers since they are identical for every process.</p>
+<section id="compaction">
+<h4><span class="section-number">11.3.3.1. </span>Compaction.<a class="headerlink" href="#compaction" title="Permalink to this headline">#</a></h4>
+<p>When a new process is created and a program runs the kernel reads the program text, data and stack memory into the available or free physical memory locations.  From there the private segment registers are use to map that physical memory into the private virtual address space of the process, allowing the process to run the program.  When a process exits, the physical memory regions that the process consumed is made available or freed onto a physical memory free list.  Over time as processes are created, run and exit the physical memory becomes more and more fragmented.  After a while as processes come and go its likely that the sum of available physical memory is large enough to satisfy a request but there is no physically contiguous free memory region large enough to hold the request.  When this happens the operating system must move or coalesce the used memory regions together thereby creating a large contiguous available or free region.  Now one or more requests can be satisfied.  This is all made possible because the base registers of the processes that map these moved regions can be updated to the new locations of the physical memory and because the operating system has the ability to relocate programs in physical memory as we discussed in the physical memory management model.</p>
+</section>
+<section id="limitations-of-segmentation">
+<h4><span class="section-number">11.3.3.2. </span>Limitations of segmentation.<a class="headerlink" href="#limitations-of-segmentation" title="Permalink to this headline">#</a></h4>
+<p>Segmentation, especially with multiple segment registers along with private and global segment registers provides a huge benefit over a physical memory management model.  We can now support many processes running at the same time with protection between processes and even protection within a process.  However that is still one major weakness with segmentation, the virtual address size can never exceed the physical address size with segmentation.  It would be very convenient to be able to allocate a very large sparse region of virtual memory and only actually use a small subset of it.  Imagine allocating an array of fixed size records for every possible student at Boston University and indexing that array by the student’s social security number.  There are 10^9 or 1 Billion social security numbers but only several thousand students.  Such a large sparse array could not be implemented with segmentation unless the system actually had all the necessary physical memory for every possible social security number.  Imagine being able to map millions of files in a virtual address space on a system that didn’t have all that much physical memory.</p>
+<p>Another limitation of segmentation is that it requires a contiguous memory region for each process(especially with only one segment register). If memory is allocated and de-allocated in chunks of different sizes and at different times, then it can  become <em>fragmented</em> so that even if large amounts of memory are free, it will be divided into smaller fragments, separated by longer-lived small allocations, as seen in (#fig:vm:fig2).</p>
+<p>Start: 32 locations, all free</p>
+<figure class="align-default" id="mm-virt-mem-frag-1">
+<a class="reference internal image-reference" href="../_images/virt-mem-frag-1.png"><img alt="../_images/virt-mem-frag-1.png" src="../_images/virt-mem-frag-1.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11.6 </span><span class="caption-text">Everything is free</span><a class="headerlink" href="#mm-virt-mem-frag-1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Step 1, 2: a = alloc(10), b = alloc(1)</p>
+<figure class="align-default" id="mm-virt-mem-frag-2">
+<a class="reference internal image-reference" href="../_images/virt-mem-frag-2.png"><img alt="../_images/virt-mem-frag-2.png" src="../_images/virt-mem-frag-2.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11.7 </span><span class="caption-text">Buffer A allocates 10 and Buffer B allocates 1</span><a class="headerlink" href="#mm-virt-mem-frag-2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Step 3, 4, 5: c = alloc(10), d = alloc(1), e = alloc(10)</p>
+<figure class="align-default" id="mm-virt-mem-frag-3">
+<a class="reference internal image-reference" href="../_images/virt-mem-frag-3.png"><img alt="../_images/virt-mem-frag-3.png" src="../_images/virt-mem-frag-3.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11.8 </span><span class="caption-text">Buffer C allocates 10, Buffer D allocates 1 and Buffer E allocates 10</span><a class="headerlink" href="#mm-virt-mem-frag-3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Step 6, 7, 8: free(a), free( c ), free(e)</p>
+<figure class="align-default" id="mm-virt-mem-frag-4">
+<a class="reference internal image-reference" href="../_images/virt-mem-frag-4.png"><img alt="../_images/virt-mem-frag-4.png" src="../_images/virt-mem-frag-4.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11.9 </span><span class="caption-text">Buffer A frees 10, Buffer C frees 1 and Buffer E frees 10</span><a class="headerlink" href="#mm-virt-mem-frag-4" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In the last line, you can see that only 2 units of memory (out of 32)
+remain allocated, but the largest amount that can be allocated at one
+time is 10 units. If all allocation requests are small, this might not
+be a problem; however, in an operating system it is common to have one
+or two very large processes (e.g., a web browser and word processing
+software), and many small, long-running processes (e.g., the on-screen
+battery display or wifi signal strength indicator). In this case, large
+memory allocations may fail, even when there is enough total memory
+free, because long-lived small allocations fragment the available
+contiguous memory into smaller pieces.</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./mm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">10. </span>Introduction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="virt-paging.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Paging</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By (see contributing chapter book)<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

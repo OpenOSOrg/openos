@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="11. Memory management without translation" href="physmem.html" />
+    <link rel="next" title="11. Memory management before paged virtual memory" href="phys-and-seg.html" />
     <link rel="prev" title="9. A Look at the Linux Scheduler" href="../scheduling/real_sched.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -187,58 +187,53 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="physmem.html">
-   11. Memory management without translation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="virt-seg.html">
-   12. Segmentation
+  <a class="reference internal" href="phys-and-seg.html">
+   11. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-paging.html">
-   13. Paging
+   12. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-tables.html">
-   14. Page Tables
+   13. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="reclamation.html">
-   15. Memory reclaiming algorithms.
+   14. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-size.html">
-   16. Page Sizes
+   15. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="misc.html">
-   17. Other topics
+   16. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="buffer-cache.html">
-   18. Buffer Cache
+   17. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pagefaults.html">
-   19. Memory Management Dynamics
+   18. Memory Management Dynamics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="realworld.html">
-   20. Memory management in the real world
+   19. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concl.html">
-   21. Conclusion
+   20. Conclusion
   </a>
  </li>
 </ul>
@@ -250,22 +245,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   22. Introduction
+   21. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   23. Interface
+   22. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   24. File System Layout
+   23. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   25. Kernel implementation
+   24. Kernel implementation
   </a>
  </li>
 </ul>
@@ -277,32 +272,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   26. Intro Concurrency Synchronization and Deadlock
+   25. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   27. Cooperating Processes
+   26. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   28. Synchronization Primitives
+   27. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   29. Deadlocks
+   28. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   30. Challenges of Modern Hardware
+   29. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   31. Locking in the Linux Kernel
+   30. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -314,17 +309,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   32. Overview of other topics
+   31. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   33. Virtualization and Cloud computing
+   32. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   34. Other OS structures
+   33. Other OS structures
   </a>
  </li>
 </ul>
@@ -336,17 +331,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   35. How to read this book
+   34. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   36. Contributing
+   35. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   37. Bibliography
+   36. Bibliography
   </a>
  </li>
 </ul>
@@ -719,10 +714,10 @@ title="Print to PDF"
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <span id="cont-mm-intro"></span><h1><span class="section-number">10. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
-<p>Intro  should talk about each of these</p>
+<p>To paraphrase <a class="reference external" href="https://en.wikipedia.org/wiki/Parkinson%27s_law">Parkinson’s law</a> programs expand to fill the memory available to hold them, and home computers have millions times more memory than they had when Larry was young.  As discussed in the introduction memory is fast but small and expensive compared to storage, but it is volatile, all changes are lost after a reboot.  Memory management is the part of the operating system that allocates, frees and tracks the usage of memory.  It manages the virtual memory of each process, and all the physical memory of the system; making it available to different processes through virtual memory depending on their demand.</p>
+<p>Today, most machines support paged virtual memory, but before we get into that, we motivate today’s memory management by discussing <a class="reference internal" href="phys-and-seg.html#cont-mm-beforepaging"><span class="std std-ref">systems without virtual memory and with segmented virtual memory</span></a>.  The next chapter describes…</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="physmem.html#cont-mm-physmem"><span class="std std-ref">physmem</span></a></p></li>
-<li><p><a class="reference internal" href="virt-seg.html#cont-mm-virt-seg"><span class="std std-ref">virt-seg</span></a></p></li>
+<li><p><a class="reference internal" href="phys-and-seg.html#cont-mm-virt-seg"><span class="std std-ref">virt-seg</span></a></p></li>
 <li><p><a class="reference internal" href="virt-paging.html#cont-mm-virt-paging"><span class="std std-ref">virt-paging</span></a></p></li>
 <li><p><a class="reference internal" href="page-tables.html#cont-mm-page-tables"><span class="std std-ref">page-tables</span></a></p></li>
 <li><p><a class="reference internal" href="reclamation.html#cont-mm-reclamation"><span class="std std-ref">reclamation</span></a></p></li>
@@ -769,10 +764,10 @@ title="Print to PDF"
             <p class="prev-next-title"><span class="section-number">9. </span>A Look at the Linux Scheduler</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="physmem.html" title="next page">
+    <a class='right-next' id="next-link" href="phys-and-seg.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">11. </span>Memory management without translation</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Memory management before paged virtual memory</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

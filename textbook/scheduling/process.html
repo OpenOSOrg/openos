@@ -187,58 +187,53 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../mm/physmem.html">
-   11. Memory management without translation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/virt-seg.html">
-   12. Segmentation
+  <a class="reference internal" href="../mm/phys-and-seg.html">
+   11. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   13. Paging
+   12. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   14. Page Tables
+   13. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   15. Memory reclaiming algorithms.
+   14. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   16. Page Sizes
+   15. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   17. Other topics
+   16. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   18. Buffer Cache
+   17. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   19. Memory Management Dynamics
+   18. Memory Management Dynamics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   20. Memory management in the real world
+   19. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   21. Conclusion
+   20. Conclusion
   </a>
  </li>
 </ul>
@@ -250,22 +245,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   22. Introduction
+   21. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   23. Interface
+   22. Interface
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   24. File System Layout
+   23. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   25. Kernel implementation
+   24. Kernel implementation
   </a>
  </li>
 </ul>
@@ -277,32 +272,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   26. Intro Concurrency Synchronization and Deadlock
+   25. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   27. Cooperating Processes
+   26. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   28. Synchronization Primitives
+   27. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   29. Deadlocks
+   28. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   30. Challenges of Modern Hardware
+   29. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   31. Locking in the Linux Kernel
+   30. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -314,17 +309,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   32. Overview of other topics
+   31. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   33. Virtualization and Cloud computing
+   32. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   34. Other OS structures
+   33. Other OS structures
   </a>
  </li>
 </ul>
@@ -336,17 +331,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   35. How to read this book
+   34. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   36. Contributing
+   35. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   37. Bibliography
+   36. Bibliography
   </a>
  </li>
 </ul>
@@ -666,9 +661,19 @@ title="Print to PDF"
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>The actual <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> is quite a bit larger, but for our simplified explanation, these two fields are the ones we care about. The <code class="docutils literal notranslate"><span class="pre">mm_struct</span></code> contains the view of memory for this process and the <code class="docutils literal notranslate"><span class="pre">thread_struct</span></code> contains space to save register values when a process is paused for scheduling. So when the OS decides that a process needs to be removed from the CPU and replaced with another, waiting process it uses these fields to save process state and uses the fields from another task to populate the CPU registers and view of memory before resuming its execution. The relationship is shown in figure <code class="xref std std-numref docutils literal notranslate"><span class="pre">process</span></code>.</p>
+<p>The actual <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> is quite a bit larger, but for our simplified explanation, these two fields are the ones we care about. The <code class="docutils literal notranslate"><span class="pre">mm_struct</span></code> contains the view of memory for this process and the <code class="docutils literal notranslate"><span class="pre">thread_struct</span></code> contains space to save register values when a process is paused for scheduling. So when the OS decides that a process needs to be removed from the CPU and replaced with another, waiting process it uses these fields to save process state and uses the fields from another task to populate the CPU registers and view of memory before resuming its execution. The relationship is shown in figure <a class="reference internal" href="#process"><span class="std std-numref">Fig. 7.1</span></a>.</p>
 <figure class="align-default" id="process">
 <img alt="../_images/Process.png" src="../_images/Process.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.1 </span><span class="caption-text">A visual representation of a process</span><a class="headerlink" href="#process" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To tie this back to our introduction, lets look at this process representation and connect it to our hardware in <a class="reference internal" href="#process-virt"><span class="std std-numref">Fig. 7.2</span></a>.</p>
+<figure class="align-default" id="process-virt">
+<img alt="../_images/process-virt.drawio.png" src="../_images/process-virt.drawio.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.2 </span><span class="caption-text">The process illustration with the relevant parts connected to the hardware that they ‘virtualize’. The registers data structure captures all the necessary state to virtualize the CPU and the address space does the same for memory.</span><a class="headerlink" href="#process-virt" title="Permalink to this image">#</a></p>
+</figcaption>
 </figure>
 </section>
 <section id="creating-a-new-process">
@@ -680,9 +685,12 @@ title="Print to PDF"
 </section>
 <section id="how-are-threads-different">
 <h2><span class="section-number">7.3. </span>How are threads different?<a class="headerlink" href="#how-are-threads-different" title="Permalink to this headline">#</a></h2>
-<p>A core part of the UNIX model is separation of processes, or to be more specific, one running process should not be able to directly interact with the resources (memory, etc.) owned by another process without explicitly being setup to do so. This model is great for simple processes which do not need to utilize multiple CPUs, but it can make writing programs to use multiple CPUs more difficult as memory must be explicitly shared or processes must use another form of communication. A <em>thread</em> is like a process in that it has its own PCB, however, unlike a process it does not have its own address space. Instead threads all belong to a process and share the address space of that process so any changes made to memory by one thread are visible to all the other threads belonging to the same process. From the <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> above, what this means is that the <code class="docutils literal notranslate"><span class="pre">mm</span></code> pointer in the task creating a new thread is used directly in the child thread instead of making a new copy of the structure. Figure <code class="xref std std-numref docutils literal notranslate"><span class="pre">thread</span></code> shows the difference from a forked process.</p>
+<p>A core part of the UNIX model is separation of processes, or to be more specific, one running process should not be able to directly interact with the resources (memory, etc.) owned by another process without explicitly being setup to do so. This model is great for simple processes which do not need to utilize multiple CPUs, but it can make writing programs to use multiple CPUs more difficult as memory must be explicitly shared or processes must use another form of communication. A <em>thread</em> is like a process in that it has its own PCB, however, unlike a process it does not have its own address space. Instead threads all belong to a process and share the address space of that process so any changes made to memory by one thread are visible to all the other threads belonging to the same process. From the <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> above, what this means is that the <code class="docutils literal notranslate"><span class="pre">mm</span></code> pointer in the task creating a new thread is used directly in the child thread instead of making a new copy of the structure. Figure <a class="reference internal" href="#thread"><span class="std std-numref">Fig. 7.3</span></a> shows the difference from a forked process.</p>
 <figure class="align-default" id="thread">
 <img alt="../_images/Threads.png" src="../_images/Threads.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.3 </span><span class="caption-text">How is a thread different from a process?</span><a class="headerlink" href="#thread" title="Permalink to this image">#</a></p>
+</figcaption>
 </figure>
 </section>
 </section>
