@@ -834,7 +834,7 @@ title="Print to PDF"
 </section>
 <section id="shortest-job-first">
 <h3><span class="section-number">8.5.2. </span>Shortest Job First<a class="headerlink" href="#shortest-job-first" title="Permalink to this headline">#</a></h3>
-<p>Instead of using arrival time for selecting the next process, we sort the queue of processes by the amount of time they will take to run and we keep the queue sorted by inserting processes by run time. This algorithm improves turnaround time and throughput over first come, first served but we can construct scenarios where long running jobs are stalled indefinitely but having short job continually arriving on the system.</p>
+<p>Instead of using arrival time for selecting the next process, we sort the queue of processes by the amount of time they will take to run and we keep the queue sorted by inserting processes by run time. This algorithm improves turnaround time and throughput over first come, first served but we can construct scenarios where long running jobs are stalled indefinitely by having short job continually arriving on the system.</p>
 <p>Shortest job first gives excellent throughput and can yield good turnaround time and responsiveness for systems with only short jobs. However, it totally fails on fairness and predictability.</p>
 </section>
 <section id="round-robin">
@@ -847,7 +847,13 @@ title="Print to PDF"
 </section>
 <section id="priority">
 <h3><span class="section-number">8.5.4. </span>Priority<a class="headerlink" href="#priority" title="Permalink to this headline">#</a></h3>
-<p>The core idea behind priority scheduling is that some processes may be more important than others and should be given access to the CPU first. To implement this the OS maintains two or more priority queues which hold processes assigned to that each priority. Runnable processes in a higher priority queue are run before runnable processes in lower priority queues. In general we assign higher priorities to I/O bound processes and lower priorities to CPU bound ones.</p>
+<p>The core idea behind priority scheduling is that some processes may be more important than others and should be given access to the CPU first. To implement this the OS maintains two or more priority queues which hold processes assigned to that each priority. Runnable processes in a higher priority queue are run before runnable processes in lower priority queues. In general we assign higher priorities to I/O bound processes and lower priorities to CPU bound ones. Figure <a class="reference internal" href="#priority-sched"><span class="std std-numref">Fig. 8.2</span></a> shows a simple example of a system with 4 priority queues. In this snap shot, the next process to be given CPU time will be the first process in the priority 4 queue. Assuming no additions, the processes in queue 3 will not run until all of the ones in 4 have completed.</p>
+<figure class="align-default" id="priority-sched">
+<img alt="../_images/priority-sched.png" src="../_images/priority-sched.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 8.2 </span><span class="caption-text">A simple example of a system with 4 priority queues and runnable processes in several of the queues.</span><a class="headerlink" href="#priority-sched" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>It may seem counter-intuitive to assign high priority to I/O bound processes because they often do not make use of their full time slice. We do this because a process that is frequently blocking on I/O is more like to be interactive and therefore have a user who will notice latency when the scheduler ignores the process for several periods.</p>
