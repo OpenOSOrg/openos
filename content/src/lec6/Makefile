@@ -7,7 +7,7 @@ prog = simplefork wo zombie forkoff wo-static
 all: $(prog)
 
 wo-static: wo.c
-	gcc $(CFLAGS) -static  wo.c   -o wo-static
+	gcc -static  wo.c   -o wo-static
 
 .PHONY: clean 
 

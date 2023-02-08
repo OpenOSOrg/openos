@@ -2,14 +2,17 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+#define CHILDREN 10
+
 int main()
 {
   int i;
-  for (i=1;i<=5;i++) {
+  for (i=1;i<=CHILDREN;i++) {
     if (!fork()) {
-      printf("child %d\n", i);
       while(1);
     }
   }
-  sleep(30);
+  sleep(3);
+  exit(0);
 }

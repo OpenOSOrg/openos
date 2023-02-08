@@ -5,7 +5,15 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-int children = 0;
+/*
+ * Goal
+ * - demonstrates a simple sinple handler
+ * - shows how parent and single handler can coordinate through global variables
+ * - style comments constants...
+ * - useful for showing how to debug multiple processes 
+ */
+
+int children = 0;		/* number of children that have not exited */
 void do_something(int signo)
 {
   int status, pid;
@@ -42,8 +50,8 @@ void child_function(int seconds)
   exit(0);
 }
 
-#define SLEEP_TIME 2
-#define CHILDREN 2
+#define SLEEP_TIME 2		/* amount of time children sleep before exiting */
+#define CHILDREN   2		/* number of children to fork */
 
 int main()
 {
