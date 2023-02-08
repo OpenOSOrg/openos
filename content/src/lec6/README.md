@@ -1,10 +1,10 @@
 ## Programs
 - simplefork: parent starts a bunch of children; children start & sleep, parent's signal handler registers them
-- wo - also generates wo-static - shows the sections in a simple program
-  ``` objdump -h wo```: look at sections at the beginning
-  ``` objdump -h wo-static```: look at sections at the beginning
-  ```get PID of wo-static``` and ```cat /proc/PID/maps
-  debug using ```gdb wo -p PID``` and type ```disassemble``` to find the address for the code
+- wo - also generates wo-static - is a simple program that runs forever to let you look at the sections in a simple program and the corresponding regions in the virtual memory
+   - ``` objdump -h wo```: look at sections at the beginning
+   - ``` objdump -h wo-static```: look at sections at the beginning
+   - ``` ps -f``` to get pid of wo-static and ```cat /proc/PID/maps```
+   - debug using ```gdb wo -p PID``` and type ```disassemble``` to find the address for the code
 - zombie - child sleeps for a long time, if you type ps -f, you see it is defunct, but has not been waited for
 - forkoff - starts a whole bunch of children and parent exits
   ```./forkoff & ps -f ; sleep 10 ; ps -f ```: note change in PPID
