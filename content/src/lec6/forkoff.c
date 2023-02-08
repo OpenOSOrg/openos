@@ -8,8 +8,8 @@
 int main()
 {
   int i;
-  for (i=1;i<=CHILDREN;i++) {
-    if (!fork()) {
+  for (i=0;i<=CHILDREN;i++) {
+    if (fork() == 0) {
       while(1);
     }
   }
