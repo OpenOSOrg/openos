@@ -4,7 +4,7 @@
 #include <stdlib.h>
 int main()
 {
-  if (fork()) {
+  if (fork() !=0) {
     printf("parent\n");
     sleep(100);
     exit(0);
