@@ -40,6 +40,7 @@ parts:
   numbered: True
   chapters:
   - file: fs/intro
+  - file: fs/diskhw
   - file: fs/interface
   - file: fs/disklayout
   - file: fs/kernelimp
