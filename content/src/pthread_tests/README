@@ -1,0 +1,3 @@
+- lets look at some simple tests
+- pthread create - child exits successfull
+- mutex - one mutex basic operations

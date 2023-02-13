@@ -1,0 +1,5 @@
+- walk through simple example, fcopy
+  - do a stat on the file - turns out my default mode is rw me, and r group, how do I get that the same
+- then say if instead we want to get mode
+- add statbuf
+- debug, print /o statbuf to show what the current mode was
