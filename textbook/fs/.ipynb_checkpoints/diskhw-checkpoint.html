@@ -622,29 +622,73 @@ data from a disk (or writing to it) requires the following steps:</p>
 <p>If, on the other hand, the file system always transferred a <span class="math notranslate nohighlight">\(5\)</span>MB block, it would require <span class="math notranslate nohighlight">\(8 + 4 + 25 = 37 ms\)</span> for an average throughput of <span class="math notranslate nohighlight">\(134\)</span> MB/s.</p>
 <p>So, when designing a file system,  for performance you want to read relatively big disks blocks, 2) you want to have data frequently accessed together on the same tracks/cylinder, since seeking to nearby tracks is much faster.</p>
 <p>Most files are 4KB, and most of the storage space is used by small number of very big files.</p>
-<div class="cell tag_remove-input docutils container">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x_kb_in_block</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">lables_x_axis</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;512B&#39;</span><span class="p">,</span> <span class="s1">&#39;1KB&#39;</span><span class="p">,</span> <span class="s1">&#39;4KB&#39;</span><span class="p">,</span><span class="s1">&#39;8KB&#39;</span><span class="p">,</span> <span class="s1">&#39;12KB&#39;</span><span class="p">,</span> <span class="s1">&#39;16KB&#39;</span><span class="p">]</span>
+<span class="n">tras_in_kbper_msec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="mf">200.0</span><span class="p">)</span>
+
+<span class="c1"># time to transfer a block is KB </span>
+<span class="n">transfer</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_kb_in_block</span><span class="o">/</span><span class="n">tras_in_kbper_msec</span><span class="p">)</span>
+
+<span class="n">time_per_block</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">transfer</span>
+<span class="n">kb_per_sec</span> <span class="o">=</span> <span class="n">x_kb_in_block</span><span class="o">/</span><span class="n">time_per_block</span> <span class="o">*</span><span class="mi">1000</span>
+<span class="c1">#print(kb_per_sec)</span>
+
+<span class="n">default_x_ticks</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_kb_in_block</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Block size&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;KB per second&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x_kb_in_block</span><span class="p">,</span> <span class="n">lables_x_axis</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_kb_in_block</span><span class="p">,</span> <span class="n">kb_per_sec</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function matplotlib.pyplot.show(close=None, block=None)&gt;
 </pre></div>
 </div>
-<img alt="../_images/diskhw_3_1.png" src="../_images/diskhw_3_1.png" />
+<img alt="../_images/diskhw_1_1.png" src="../_images/diskhw_1_1.png" />
 </div>
 </div>
-<div class="cell tag_remove-input docutils container">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x_kb_in_block</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">1096</span> <span class="p">])</span>
+<span class="n">lables_x_axis</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;1KB&#39;</span><span class="p">,</span> <span class="s1">&#39;4KB&#39;</span><span class="p">,</span> <span class="s1">&#39;16KB&#39;</span><span class="p">,</span> <span class="s1">&#39;64KB&#39;</span><span class="p">,</span> <span class="s1">&#39;256KB&#39;</span><span class="p">,</span> <span class="s1">&#39;1MB&#39;</span><span class="p">]</span>
+<span class="n">tras_in_kbper_msec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="mf">200.0</span><span class="p">)</span>
+
+<span class="c1"># time to transfer a block is KB </span>
+<span class="n">transfer</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_kb_in_block</span><span class="o">/</span><span class="n">tras_in_kbper_msec</span><span class="p">)</span>
+
+<span class="n">time_per_block</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">transfer</span>
+<span class="n">MB_per_sec</span> <span class="o">=</span> <span class="n">x_kb_in_block</span><span class="o">/</span><span class="n">time_per_block</span>
+
+<span class="n">default_x_ticks</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_kb_in_block</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Block size&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;MB per second&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x_kb_in_block</span><span class="p">,</span> <span class="n">lables_x_axis</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_kb_in_block</span><span class="p">,</span> <span class="n">MB_per_sec</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function matplotlib.pyplot.show(close=None, block=None)&gt;
 </pre></div>
 </div>
-<img alt="../_images/diskhw_4_1.png" src="../_images/diskhw_4_1.png" />
+<img alt="../_images/diskhw_2_1.png" src="../_images/diskhw_2_1.png" />
 </div>
 </div>
 </section>
-
-
-<script type="application/vnd.jupyter.widget-state+json">
-{"state": {"aca4bc4fa72b4ee8be21d39d5ae74f20": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d60dd229833e489687a3cd5ba71f2aa7": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_aca4bc4fa72b4ee8be21d39d5ae74f20", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     [[ -a myfile ]] && rm myfile\r\n$     [[ -a errors ]] && rm errors \r\n$     [[ -a mydate ]] && rm mydate\r\n$     [[ -a mynewdir ]] && rm -rf mynewdir\r\n$     [[ -a anotherfile ]] && rm anotherfile\r\n$     [[ -a mybin ]] && rm -rf  mybin\r\n$     [[ -a myinfo ]] && rm myinfo\r\n$ "}]}}}, "version_major": 2, "version_minor": 0}
-</script>
-
 
     <script type="text/x-thebe-config">
     {
