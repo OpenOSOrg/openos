@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>23. Interface &#8212; Introduction to Operating Systems</title>
+    <title>11. File System Abstraction &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="24. File System Layout" href="disklayout.html" />
-    <link rel="prev" title="22. A bit about Disks" href="diskhw.html" />
+    <link rel="next" title="12. A bit about Disks" href="diskhw.html" />
+    <link rel="prev" title="10. Introduction" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -177,95 +177,125 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Virtual Memory
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/intro.html">
-   10. Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/phys-and-seg.html">
-   11. Memory management before paged virtual memory
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/virt-paging.html">
-   12. Paging
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/page-tables.html">
-   13. Page Tables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/reclamation.html">
-   14. Memory reclaiming algorithms.
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/page-size.html">
-   15. Page Sizes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/misc.html">
-   16. Other topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/buffer-cache.html">
-   17. Buffer Cache
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/pagefaults.html">
-   18. Memory Management Dynamics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/realworld.html">
-   19. Memory management in the real world
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/concl.html">
-   20. Conclusion
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
   File Systems
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   21. Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="diskhw.html">
-   22. A bit about Disks
+   10. Introduction
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   23. Interface
+   11. File System Abstraction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="diskhw.html">
+   12. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="disklayout.html">
-   24. File System Layout
+   13. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl_track_free.html">
+   14. Disk Layout:Tracking Free Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl_track_used.html">
+   15. Disk Layout:Tracking Used Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl_name.html">
+   16. Disk Layout:Implementing Name Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl_blocksize.html">
+   17. Disk Layout:What’s the right block size?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl_failures.html">
+   18. Disk Layout:Dealing with Failures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl_ex_exx.html">
+   19. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="kernelimp.html">
-   25. Kernel implementation
+   20. Kernel implementation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Memory
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/intro.html">
+   21. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/phys-and-seg.html">
+   22. Memory management before paged virtual memory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/virt-paging.html">
+   23. Paging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/page-tables.html">
+   24. Page Tables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/reclamation.html">
+   25. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/page-size.html">
+   26. Page Sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/misc.html">
+   27. Other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/buffer-cache.html">
+   28. Buffer Cache
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/pagefaults.html">
+   29. Memory Management Dynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/realworld.html">
+   30. Memory management in the real world
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/concl.html">
+   31. Conclusion
   </a>
  </li>
 </ul>
@@ -277,32 +307,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   26. Intro Concurrency Synchronization and Deadlock
+   32. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   27. Cooperating Processes
+   33. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   28. Synchronization Primitives
+   34. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   29. Deadlocks
+   35. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   30. Challenges of Modern Hardware
+   36. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   31. Locking in the Linux Kernel
+   37. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -314,17 +344,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   32. Overview of other topics
+   38. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   33. Virtualization and Cloud computing
+   39. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   34. Other OS structures
+   40. Other OS structures
   </a>
  </li>
 </ul>
@@ -336,17 +366,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   35. How to read this book
+   41. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   36. Contributing
+   42. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   37. Bibliography
+   43. Bibliography
   </a>
  </li>
 </ul>
@@ -591,57 +621,57 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#naming">
+   11.1. Naming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#objects">
-   23.1. Objects
+   11.2. Objects
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hierarchical-namespace">
-     23.1.1. Hierarchical namespace
+    <a class="reference internal nav-link" href="#files">
+     11.2.1. Files
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#file">
-     23.1.2. File
+    <a class="reference internal nav-link" href="#directory">
+     11.2.2. Directory
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#unix-file-name-translation">
-     23.1.3. Unix file name translation
+    <a class="reference internal nav-link" href="#symbolic-links">
+     11.2.3. Symbolic links
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#file-system-operations">
-   23.2. File System Operations:
+   11.3. File System Operations:
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#open-close">
-     23.2.1. Open/close
+     11.3.1. Open/close
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#read-write-operations">
-     23.2.2. Read/Write operations
+     11.3.2. Read/Write operations
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#naming-and-directories">
-     23.2.3. Naming and Directories
+     11.3.3. Naming and Directories
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#symbolic-links">
-   23.3. Symbolic links
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#some-examples">
-   23.4. Some examples
+   11.4. Some examples
   </a>
  </li>
 </ul>
@@ -653,7 +683,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Interface</h1>
+                <h1>File System Abstraction</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -664,57 +694,57 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#naming">
+   11.1. Naming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#objects">
-   23.1. Objects
+   11.2. Objects
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hierarchical-namespace">
-     23.1.1. Hierarchical namespace
+    <a class="reference internal nav-link" href="#files">
+     11.2.1. Files
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#file">
-     23.1.2. File
+    <a class="reference internal nav-link" href="#directory">
+     11.2.2. Directory
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#unix-file-name-translation">
-     23.1.3. Unix file name translation
+    <a class="reference internal nav-link" href="#symbolic-links">
+     11.2.3. Symbolic links
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#file-system-operations">
-   23.2. File System Operations:
+   11.3. File System Operations:
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#open-close">
-     23.2.1. Open/close
+     11.3.1. Open/close
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#read-write-operations">
-     23.2.2. Read/Write operations
+     11.3.2. Read/Write operations
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#naming-and-directories">
-     23.2.3. Naming and Directories
+     11.3.3. Naming and Directories
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#symbolic-links">
-   23.3. Symbolic links
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#some-examples">
-   23.4. Some examples
+   11.4. Some examples
   </a>
  </li>
 </ul>
@@ -729,23 +759,19 @@ title="Print to PDF"
                 
   <div class="cell tag_remove-input tag_hide-output docutils container">
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="interface">
-<span id="cont-fs-interface"></span><h1><span class="section-number">23. </span>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">#</a></h1>
-<section id="objects">
-<h2><span class="section-number">23.1. </span>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">#</a></h2>
-<p>General-purpose operating systems typically provide access to block
-storage (i.e. disks) via a <em>file system</em>, which provides a much more
-application- and user-friendly interface to storage. From the point of
-view of the user, a file system contains the following elements:</p>
+<section class="tex2jax_ignore mathjax_ignore" id="file-system-abstraction">
+<span id="cont-fs-interface"></span><h1><span class="section-number">11. </span>File System Abstraction<a class="headerlink" href="#file-system-abstraction" title="Permalink to this headline">#</a></h1>
+<p>From a user perspective, file systems support:</p>
 <ul class="simple">
-<li><p>a <em>name space</em>, the set of names identifying objects;</p></li>
+<li><p>a <em>name space</em>, the set of names that identify objects;</p></li>
 <li><p><em>objects</em> such as the files themselves as well as directories and other supporting objects;</p></li>
 <li><p><em>operations</em> on these objects.</p></li>
 </ul>
-<section id="hierarchical-namespace">
-<h3><span class="section-number">23.1.1. </span>Hierarchical namespace<a class="headerlink" href="#hierarchical-namespace" title="Permalink to this headline">#</a></h3>
-<p>File systems have traditionally used a
-tree-structured namespace<a class="footnote-reference brackets" href="#hier" id="id1">1</a>, as shown in <a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 23.1</span></a>.
+<p>We first describe how naming works in a Unix file system, then some of the core objects and how they are identified, and then the operations a process can perform on those objects.</p>
+<section id="naming">
+<h2><span class="section-number">11.1. </span>Naming<a class="headerlink" href="#naming" title="Permalink to this headline">#</a></h2>
+<p>Most file systems today support a
+tree-structured namespace<a class="footnote-reference brackets" href="#hier" id="id1">1</a>, as shown in <a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 11.1</span></a>.
 This tree is constructed via the use of
 <em>directories</em>, or objects in the namespace which map strings to further
 file system objects. A full filename thus specifies a <em>path</em> from the
@@ -753,31 +779,92 @@ root, through the tree, to the object (a file or directory) itself.
 (Hence the use of the term “path” to mean “filename” in Unix
 documentation)</p>
 <figure class="align-default" id="fs-tree-logical">
-<a class="reference internal image-reference" href="../_images/filesys-tree.png"><img alt="../_images/filesys-tree.png" src="../_images/filesys-tree.png" style="width: 45%;" /></a>
+<a class="reference internal image-reference" href="../_images/filesys-tree.png"><img alt="../_images/filesys-tree.png" src="../_images/filesys-tree.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 23.1 </span><span class="caption-text">Logical view: hierarchical file system name space</span><a class="headerlink" href="#fs-tree-logical" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 11.1 </span><span class="caption-text">Logical view: hierarchical file system name space</span><a class="headerlink" href="#fs-tree-logical" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+<p>Each process has an associated <em>current directory</em>, which may be changed via the <code class="docutils literal notranslate"><span class="pre">chdir</span></code> system call. File names beginning in ‘<code class="docutils literal notranslate"><span class="pre">/</span></code>’ are termed <em>absolute</em> names, and are interpreted relative to the root of the naming tree, while <em>relative</em> names are
+interpreted beginning at the current directory. Thus in the file system in
+<a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 11.1</span></a>, if the current directory were <code class="docutils literal notranslate"><span class="pre">/home</span></code>,
+the the paths <code class="docutils literal notranslate"><span class="pre">pjd/.profile</span></code> and <code class="docutils literal notranslate"><span class="pre">/home/pjd/.profile</span></code> refer to the same
+file, and <code class="docutils literal notranslate"><span class="pre">../bin/cat</span></code> and <code class="docutils literal notranslate"><span class="pre">/bin/cat</span></code> refer to the same file.</p>
+<p>Each directory also contains two special files <code class="docutils literal notranslate"><span class="pre">.</span></code> and <code class="docutils literal notranslate"><span class="pre">..</span></code>, where <code class="docutils literal notranslate"><span class="pre">d/..</span></code>  identifies the parent directory of <code class="docutils literal notranslate"><span class="pre">d</span></code>, and <code class="docutils literal notranslate"><span class="pre">d/.</span></code> identifies <code class="docutils literal notranslate"><span class="pre">d</span></code>
+itself.</p>
+<p>A typical system may provide access to
+several file systems at once, e.g. a local disk and an external USB
+drive or network volume. In order to unambiguously specify a file we
+thus need to both identify the file within possibly nested directories
+in a single file system, as well as identifying the file system itself.
+Unix enables a file system to be <em>mounted</em> onto a directory in
+another file system, giving a single uniform namespace.  For example, on the systems you are using, there is an <em>ext4</em> file system mounted in the root file system at <code class="docutils literal notranslate"><span class="pre">/opt/app-root/src</span></code>, which you can see if you use the mount command to list all the file systems mounted on this computer.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "d5a0b5cb312f46709a845b9f632c7368", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>The actual implementation of mounting in Linux and other Unix-like
+systems is implemented via a <em>mount table</em>, a small table in the kernel
+mapping directories to directories on other file systems. As the
+kernel translates a pathname it checks each directory in this table; if
+found, it substitutes the mapped file system and directory before
+searching for an entry. Thus before searching “/opt/app-root/src” on  for the entry “foo”, the kernel will substitute the
+top-level directory on the mounted ext4 files system then search for “foo”.</p>
+<p>For a more thorough explanation of path translation in Linux and other
+Unix systems see the <code class="docutils literal notranslate"><span class="pre">path_resolution(7)</span></code> man page, i.e. type <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">path_resolution</span></code>.</p>
 </section>
-<section id="file">
-<h3><span class="section-number">23.1.2. </span>File<a class="headerlink" href="#file" title="Permalink to this headline">#</a></h3>
-<p>Early operating systems supported many different file
-types—binary executables, text files, and record-structured files, and
-others. The Unix operating system is the earliest I know of that
-restricted files to sequences of 8-bit bytes; it is probably not a
-coincidence that Unix arrived at the same time as computers which dealt
-only with multiples of 8-bit bytes (e.g. 16 and 32-bit words), replacing
-older systems which frequently used odd word sizes such as 36 bits.
-(Note that a machine with 36-bit instructions already needs two
-incompatible types of files, one for text and one for executable code)</p>
-<figure class="align-default" id="fs-tree-imp">
-<a class="reference internal image-reference" href="../_images/filesys-tree2.png"><img alt="../_images/filesys-tree2.png" src="../_images/filesys-tree2.png" style="width: 40%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 23.2 </span><span class="caption-text">Implementation view: hierarchical file system name space. Gray blocks are directories that contain entries that point to files.</span><a class="headerlink" href="#fs-tree-imp" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Modern operating systems follow the UNIX model, which imposes no
-structure on a file—a file is merely a sequence of bytes.<a class="footnote-reference brackets" href="#simple" id="id2">2</a> Any
+<section id="objects">
+<h2><span class="section-number">11.2. </span>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">#</a></h2>
+<p>Once you use a pathname to find an object in the file system, you need to find out what kind of an object you have found.  Each file is identified in the file system by a unique <strong>inode number</strong> that references an <strong>inode</strong><a class="footnote-reference brackets" href="#inode" id="id2">2</a> that maintains all kind of information, or <em>meta-data</em> about the file (try <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">inode</span></code> for more information).  The types of objects that can be referenced by inode are show in <a class="reference internal" href="#file-types"><span class="std std-numref">Table 11.1</span></a>.</p>
+<table class="colwidths-given table" id="file-types">
+<caption><span class="caption-number">Table 11.1 </span><span class="caption-text">Types of objects in a file system. </span><a class="headerlink" href="#file-types" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 24%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>regular file</p></td>
+<td><p>S_IFREG</p></td>
+<td><p>A regular file normally used to store</p></td>
+</tr>
+<tr class="row-odd"><td><p>directory</p></td>
+<td><p>S_IFDIR</p></td>
+<td><p>A special file used to</p></td>
+</tr>
+<tr class="row-even"><td><p>symbolic link</p></td>
+<td><p>S_IFLNK</p></td>
+<td><p>A kind of “file” that is essentially a pointer to another file name</p></td>
+</tr>
+<tr class="row-odd"><td><p>block device</p></td>
+<td><p>S_IFBLK</p></td>
+<td><p>A device that like a disk that is accessed by reading and writing blocks</p></td>
+</tr>
+<tr class="row-even"><td><p>character device</p></td>
+<td><p>S_IFCHR</p></td>
+<td><p>A charter device like a <code class="docutils literal notranslate"><span class="pre">tty</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>FIFO</p></td>
+<td><p>S_IFIFO</p></td>
+<td><p>A pipe</p></td>
+</tr>
+<tr class="row-even"><td><p>socket</p></td>
+<td><p>S_IFSOCK</p></td>
+<td><p>A socket used for networking</p></td>
+</tr>
+</tbody>
+</table>
+<p>The last four are special files that you can connect into a file system.  The first three are core objects for all file systems.</p>
+<section id="files">
+<h3><span class="section-number">11.2.1. </span>Files<a class="headerlink" href="#files" title="Permalink to this headline">#</a></h3>
+<p>In keeping with the idea that everything is a file, Unix made all files just a sequence of 8-bit bytes<a class="footnote-reference brackets" href="#eff" id="id3">6</a><a class="footnote-reference brackets" href="#simple" id="id4">7</a> Any
 structure to the file (such as a JPEG image, an executable program, or a
 database) is the responsibility of applications which read and write the
 file. The file format is commonly indicated by a file extension like
@@ -796,29 +883,77 @@ However, it can’t be “moved” from one offset to another: if you use a
 text editor to add or delete text in the middle of a file, the editor
 must re-write the entire file (or at least from the modified part to the
 end).</p>
+<figure class="align-default" id="fs-tree-imp">
+<a class="reference internal image-reference" href="../_images/filesys-tree2.png"><img alt="../_images/filesys-tree2.png" src="../_images/filesys-tree2.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11.2 </span><span class="caption-text">Implementation view: hierarchical file system name space. Gray blocks are directories that contain entries with strings and corresponding inode numbers that identify the files.</span><a class="headerlink" href="#fs-tree-imp" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
-<section id="unix-file-name-translation">
-<h3><span class="section-number">23.1.3. </span>Unix file name translation<a class="headerlink" href="#unix-file-name-translation" title="Permalink to this headline">#</a></h3>
-<p>Eeach process has an associated <em>current
-directory</em>, which may be changed via the <code class="docutils literal notranslate"><span class="pre">chdir</span></code> system call. File names
-beginning in ‘<code class="docutils literal notranslate"><span class="pre">/</span></code>’ are termed <em>absolute</em> names, and are interpreted
-relative to the root of the naming tree, while <em>relative</em> names are
-interpreted beginning at the current directory. (In addition, <code class="docutils literal notranslate"><span class="pre">d/..</span></code>
-always points to the parent directory of <code class="docutils literal notranslate"><span class="pre">d</span></code>, and <code class="docutils literal notranslate"><span class="pre">d/.</span></code> points to <code class="docutils literal notranslate"><span class="pre">d</span></code>
-itself.) Thus in the file system in
-<a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 23.1</span></a>, if the current directory were <code class="docutils literal notranslate"><span class="pre">/home</span></code>,
-the the paths <code class="docutils literal notranslate"><span class="pre">pjd/.profile</span></code> and <code class="docutils literal notranslate"><span class="pre">/home/pjd/.profile</span></code> refer to the same
-file, and <code class="docutils literal notranslate"><span class="pre">../bin/cat</span></code> and <code class="docutils literal notranslate"><span class="pre">/bin/cat</span></code> refer to the same file.</p>
+<section id="directory">
+<h3><span class="section-number">11.2.2. </span>Directory<a class="headerlink" href="#directory" title="Permalink to this headline">#</a></h3>
+<p>As shown in <a class="reference internal" href="#fs-tree-imp"><span class="std std-numref">Fig. 11.2</span></a>, a directory contains entries with strings that identify objects contained in the directory, and for each the inode numbers that can then be used to find out more information about the corresponding object.   The same inode can be referenced by multiple directories, with potentially different names.  For example, <code class="docutils literal notranslate"><span class="pre">..</span></code> is a hard link to the parent directory, as we can see by creating a directory <code class="docutils literal notranslate"><span class="pre">/tmp/foo</span></code> the reference count (second entry) for <code class="docutils literal notranslate"><span class="pre">.</span></code> is 2 before we create a subdirectory bar in it, and 3 after.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "77e2ea4d54334b21a9d288917b6df231", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</section>
+<section id="symbolic-links">
+<h3><span class="section-number">11.2.3. </span>Symbolic links<a class="headerlink" href="#symbolic-links" title="Permalink to this headline">#</a></h3>
+<p>The third file system object is a
+<em>symbolic link</em>. This holds a text string which is interpreted as a
+“pointer” to another location in the file system. When the kernel is
+searching for a file and encounters a symbolic link, it substitutes this
+text into the current portion of the path, and continues the translation
+process.</p>
+<p>This can be very useful</p>
+<pre>
+directory: /usr/program-1.0.1
+  file:      /usr/program-1.0.1/file.txt
+  sym link:  /usr/program-current -> "program-1.0.1"
+</pre>
+<p>and if the OS is looking up the file <code class="docutils literal notranslate"><span class="pre">/usr/program-current/file.txt</span></code>, it
+will:</p>
+<ol class="simple">
+<li><p>look up <code class="docutils literal notranslate"><span class="pre">usr</span></code> in the root directory, finding a pointer to the <code class="docutils literal notranslate"><span class="pre">/usr</span></code>
+directory</p></li>
+<li><p>look up <code class="docutils literal notranslate"><span class="pre">program-current</span></code> in <code class="docutils literal notranslate"><span class="pre">/usr</span></code>, finding the link with contents
+<code class="docutils literal notranslate"><span class="pre">program-1.0.1</span></code></p></li>
+<li><p>look up <code class="docutils literal notranslate"><span class="pre">program-1.0.1</span></code> and use this result instead of the result from
+looking up <code class="docutils literal notranslate"><span class="pre">program-current</span></code>, getting a pointer to the
+<code class="docutils literal notranslate"><span class="pre">/usr/program-1.0.1</span></code> directory.</p></li>
+<li><p>look up <code class="docutils literal notranslate"><span class="pre">file.txt</span></code> in this directory, and find it.</p></li>
+</ol>
+<p>Note that unlike hard links, a symbolic link may be “broken”—i.e. if
+the file it points to does not exist. This can happen if the link was
+created in error, or the file or directory it points to is deleted
+later. In that case path translation will fail with an error:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "411201a57e2d47c3999736e69e239f2b", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>Finally, to prevent loops there is a limit on how many levels of
+symbolic link may be traversed in a single path translation:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "9da9b6bb325d4861a813d1d88ded4cad", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
 </section>
 </section>
 <section id="file-system-operations">
-<h2><span class="section-number">23.2. </span>File System Operations:<a class="headerlink" href="#file-system-operations" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">11.3. </span>File System Operations:<a class="headerlink" href="#file-system-operations" title="Permalink to this headline">#</a></h2>
 <p>There are several common types of file operations supported by Linux
 (and with slight differences, Windows). They can be classified into
 three main categories: open/close, read/write, and naming and
 directories.</p>
 <section id="open-close">
-<h3><span class="section-number">23.2.1. </span>Open/close<a class="headerlink" href="#open-close" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">11.3.1. </span>Open/close<a class="headerlink" href="#open-close" title="Permalink to this headline">#</a></h3>
 <p>In order to access a file in Linux (or most operating
 systems) you first need to open the file, passing the file name and
 other parameters and receiving a <em>handle</em> (called a <em>file descriptor</em> in
@@ -840,7 +975,7 @@ access files, but instead use higher-level frameworks, ranging from Unix
 Standard I/O to high-level application frameworks.</p>
 </section>
 <section id="read-write-operations">
-<h3><span class="section-number">23.2.2. </span>Read/Write operations<a class="headerlink" href="#read-write-operations" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">11.3.2. </span>Read/Write operations<a class="headerlink" href="#read-write-operations" title="Permalink to this headline">#</a></h3>
 <p>To get a file with data in it, you need to
 write it; to use that data you need to read it. To allow reading and
 writing in units of less than an entire file, or tedius calculations of
@@ -867,7 +1002,7 @@ relative to the beginning, end, or current position in the file.</p></li>
 </ul>
 <p>Note that in the basic Unix interface (unlike e.g. Windows) there is no
 way to specify a particular location in a file to read or write
-from<a class="footnote-reference brackets" href="#id7" id="id3">3</a>. Programs like databases (e.g. SQLite, MySQL) which need to
+from<a class="footnote-reference brackets" href="#id8" id="id5">3</a>. Programs like databases (e.g. SQLite, MySQL) which need to
 write to and read from arbitrary file locations must instead move the
 current position by using <code class="docutils literal notranslate"><span class="pre">lseek</span></code> before a read or write. However most
 programs either read or write a file from the beginning to the end
@@ -879,7 +1014,7 @@ programming—read from or write to a terminal, a network connection, a
 file, or a pipe from or to another program.</p>
 </section>
 <section id="naming-and-directories">
-<h3><span class="section-number">23.2.3. </span>Naming and Directories<a class="headerlink" href="#naming-and-directories" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">11.3.3. </span>Naming and Directories<a class="headerlink" href="#naming-and-directories" title="Permalink to this headline">#</a></h3>
 <p>In Unix there is a difference between a name
 (a directory entry) and the object (file or directory) that the name
 points to. The naming and directories operations are:</p>
@@ -888,8 +1023,8 @@ points to. The naming and directories operations are:</p>
 either changing the name in its directory entry (if the destination is
 in the same directory) or creating a new entry and deleting the old one
 (if moving into a new directory).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">link(path1,</span> <span class="pre">path2)</span></code>: Add a <em>hard link</em> to a file<a class="footnote-reference brackets" href="#id8" id="id4">4</a>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">unlink(path)</span></code>: Delete a file.<a class="footnote-reference brackets" href="#id9" id="id5">5</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">link(path1,</span> <span class="pre">path2)</span></code>: Add a <em>hard link</em> to a file<a class="footnote-reference brackets" href="#id9" id="id6">4</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unlink(path)</span></code>: Delete a file.<a class="footnote-reference brackets" href="#id10" id="id7">5</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">desc</span> <span class="pre">=</span> <span class="pre">opendir(path)</span></code>, <code class="docutils literal notranslate"><span class="pre">readdir(desc,</span> <span class="pre">dirent*),</span> <span class="pre">dirent=(name,type,length)</span></code>: This interface
 allows a program to enumerate names in a directory, and determine their
 type. (i.e. file, directory, symbolic link, or special-purpose file)</p></li>
@@ -905,87 +1040,8 @@ delete an empty directory.</p></li>
 </ul>
 </section>
 </section>
-<section id="symbolic-links">
-<h2><span class="section-number">23.3. </span>Symbolic links<a class="headerlink" href="#symbolic-links" title="Permalink to this headline">#</a></h2>
-<p>An alternative to hard links to allow multiple names for a file is a
-third file system object (in addition to files and directories), a
-<em>symbolic link</em>. This holds a text string which is interpreted as a
-“pointer” to another location in the file system. When the kernel is
-searching for a file and encounters a symbolic link, it substitutes this
-text into the current portion of the path, and continues the translation
-process.</p>
-<p>Thus if we have:</p>
-<pre>
-directory: /usr/program-1.0.1
-  file:      /usr/program-1.0.1/file.txt
-  sym link:  /usr/program-current -> "program-1.0.1"
-</pre>
-<p>and if the OS is looking up the file <code class="docutils literal notranslate"><span class="pre">/usr/program-current/file.txt</span></code>, it
-will:</p>
-<ol class="simple">
-<li><p>look up <code class="docutils literal notranslate"><span class="pre">usr</span></code> in the root directory, finding a pointer to the <code class="docutils literal notranslate"><span class="pre">/usr</span></code>
-directory</p></li>
-<li><p>look up <code class="docutils literal notranslate"><span class="pre">program-current</span></code> in <code class="docutils literal notranslate"><span class="pre">/usr</span></code>, finding the link with contents
-<code class="docutils literal notranslate"><span class="pre">program-1.0.1</span></code></p></li>
-<li><p>look up <code class="docutils literal notranslate"><span class="pre">program-1.0.1</span></code> and use this result instead of the result from
-looking up <code class="docutils literal notranslate"><span class="pre">program-current</span></code>, getting a pointer to the
-<code class="docutils literal notranslate"><span class="pre">/usr/program-1.0.1</span></code> directory.</p></li>
-<li><p>look up <code class="docutils literal notranslate"><span class="pre">file.txt</span></code> in this directory, and find it.</p></li>
-</ol>
-<p>Note that unlike hard links, a symbolic link may be “broken”—i.e. if
-the file it points to does not exist. This can happen if the link was
-created in error, or the file or directory it points to is deleted
-later. In that case path translation will fail with an error:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "5965bbb1611847719b18fd6252b44e9f", "version_major": 2, "version_minor": 0}
-</script></div>
-</div>
-<p>Finally, to prevent loops there is a limit on how many levels of
-symbolic link may be traversed in a single path translation:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "5878380f14e9427782cf0cb35afccb75", "version_major": 2, "version_minor": 0}
-</script></div>
-</div>
-<p>In early versions of Linux (pre-2.6.18) the link translation code was
-recursive, and this limit was set to 5 to avoid stack overflow. Current
-versions use an iterative algorithm, and the limit is set to 40.</p>
-<p><strong>Device Names vs. Mounting</strong>: A typical system may provide access to
-several file systems at once, e.g. a local disk and an external USB
-drive or network volume. In order to unambiguously specify a file we
-thus need to both identify the file within possibly nested directories
-in a single file system, as well as identifying the file system itself.
-(in Unix this name is called an <em>absolute pathname</em>, providing an
-unambiguous “path” to the file.) There are two common approaches to
-identifying file systems:</p>
-<ol class="simple">
-<li><p>Explicitly: each file system is given a name, so that a full pathname
-looks like e.g. <code class="docutils literal notranslate"><span class="pre">C:``\``MyDirectory``\``file.txt</span></code> (Windows<a class="footnote-reference brackets" href="#id10" id="id6">6</a>) or
-<code class="docutils literal notranslate"><span class="pre">DISK1:[MYDIR]file.txt</span></code> (VMS).</p></li>
-<li><p>Implicitly: a file system is transparently <em>mounted</em> onto a directory in
-another file system, giving a single uniform namespace; thus on a Linux
-system with a separate disk for user directories, the file “/etc/passwd”
-would be on one file system (e.g. “disk1”), while “/home/pjd/file.txt”
-would be on another (e.g. “disk2”).</p></li>
-</ol>
-<p>The actual implementation of mounting in Linux and other Unix-like
-systems is implemented via a <em>mount table</em>, a small table in the kernel
-mapping directories to directories on other file systems. In the example
-above, one entry would map “/home” on disk1 to (“disk2”, “/”). As the
-kernel translates a pathname it checks each directory in this table; if
-found, it substitutes the mapped file system and directory before
-searching for an entry. Thus before searching “/home” on disk1 (which is
-probably empty) for the entry “pjd”, the kernel will substitute the
-top-level directory on disk2,and then search for “pjd”.</p>
-<p>For a more thorough explanation of path translation in Linux and other
-Unix systems see the <code class="docutils literal notranslate"><span class="pre">path_resolution(7)</span></code> man page, which may be
-accessed with the command <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">path_resolution</span></code>.</p>
-</section>
 <section id="some-examples">
-<h2><span class="section-number">23.4. </span>Some examples<a class="headerlink" href="#some-examples" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">11.4. </span>Some examples<a class="headerlink" href="#some-examples" title="Permalink to this headline">#</a></h2>
 <p>Consider the following file that copies one file to another.  After opening the input file (line 25) we stat the input file to get the permissions (i.e., the mode), create a file with that mode (line 36), and then go into a loop reading data from the input file into a buffer, and then writing the buffer to the output file.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1052,14 +1108,14 @@ accessed with the command <code class="docutils literal notranslate"><span class
 </div>
 </div>
 </font><script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "83cfab7e3a874f51ae6fb000ab607123", "version_major": 2, "version_minor": 0}
+{"model_id": "6602e840ada34a628c498dc6c49ba2a9", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <p>To prove these are the same, lets append a string to the end (i.e., echo “Hello class”&gt; rm2) and use the diff program to compare them. We can see that there is no diff on the first</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "01d4c0fda12a4ebbb4fb20e329265168", "version_major": 2, "version_minor": 0}
+{"model_id": "5bbf3e36de3640d0ba3ffe68f599d11b", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <hr class="footnotes docutils" />
@@ -1067,15 +1123,27 @@ accessed with the command <code class="docutils literal notranslate"><span class
 <dt class="label" id="hier"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>Very early file systems sometimes had a single flat directory per user, or like MS-DOS 1.0, a single directory per floppy disk</p>
 </dd>
-<dt class="label" id="simple"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>Almost. Apple OSX uses resource forks to store information associated with a file (HFS and HFS+ file systems only), Windows NTFS provides for multiple data streams in single file, although they were never put to use, and several file systems support file attributes, small tags associated with a file.</p>
+<dt class="label" id="inode"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>So, why is it called an inode, Dennis Ritchie, who was one of the authors of Unix gave this enlightened answer to the Linux kernel mailing list in <a class="reference external" href="https://lkml.indiana.edu/hypermail/linux/kernel/0207.2/1182.html">2002</a>
+In truth, I don’t know either. It was just a term that we started to use. “Index” is my best guess, because of the slightly unusual file system structure that stored the access information of files as a flat array on the disk, with all the hierarchical directory information living aside from this. Thus the i-number is an index in this array, the i-node is the selected element of the array.</p>
 </dd>
-<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dt class="label" id="eff"><span class="brackets"><a class="fn-backref" href="#id3">6</a></span></dt>
+<dd><p>it is probably not a
+coincidence that Unix arrived at the same time as computers which dealt
+only with multiples of 8-bit bytes (e.g. 16 and 32-bit words), replacing
+older systems which frequently used odd word sizes such as 36 bits.
+(Note that a machine with 36-bit instructions already needs two
+incompatible types of files, one for text and one for executable code)</p>
+</dd>
+<dt class="label" id="simple"><span class="brackets"><a class="fn-backref" href="#id4">7</a></span></dt>
+<dd><p>This is the case for almost all operating systems today, but… of course there are exceptions.  Apple OSX uses resource forks to store information associated with a file (HFS and HFS+ file systems only), Windows NTFS provides for multiple data streams in single file, although they were never put to use, and several file systems support file attributes, small tags associated with a file.</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id5">3</a></span></dt>
 <dd><p>On Linux the <code class="docutils literal notranslate"><span class="pre">pread</span></code> and <code class="docutils literal notranslate"><span class="pre">pwrite</span></code> system calls allow specifying an
 offset for the read or write; other UNIX-derived operating systems
 have their own extensions for this purpose.</p>
 </dd>
-<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id6">4</a></span></dt>
 <dd><p>A hard link is an additional directory entry pointing to the same
 file, giving the file two (or more) names. Hard links are peculiar
 to Unix, and in modern systems have mostly been replaced with
@@ -1083,7 +1151,7 @@ symbolic links (covered next); however Apple’s Time Machine makes
 very good use of them: multiple backups can point to the same single
 copy of an un-modified file using hard links.</p>
 </dd>
-<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id5">5</a></span></dt>
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id7">5</a></span></dt>
 <dd><p>Sort of. If there are multiple hard links to a file, then this
 just removes one of them; the file isn’t deleted until the last link
 is removed. Even then it might not be removed yet - on Unix, if you
@@ -1093,18 +1161,13 @@ while Unix solves the problem by deferring the actual delete,
 Windows solves it by protecting open files so that they cannot be
 deleted</p>
 </dd>
-<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id6">6</a></span></dt>
-<dd><p>Modern Windows systems actually use a mount-like naming convention
-internally; e.g. the <code class="docutils literal notranslate"><span class="pre">C:</span></code> drive actually corresponds to the name
-<code class="docutils literal notranslate"><span class="pre">\``DosDevices``\``C:</span></code> in this internal namespace.</p>
-</dd>
 </dl>
 </section>
 </section>
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"01d4c0fda12a4ebbb4fb20e329265168": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_9ed00a17e5714231adbe0b4e09249660", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ echo \"diff 1\" ;  diff README.md rm2 ; echo \"Hello class\" >> rm2 ; echo \"diff 2\"; diff README.md rm2\n\ndiff 1\r\ndiff 2\r\n5a6\r\n> Hello class\r\n$ "}]}}, "0aef3e6dd54f44b8901a3b8d9823b00f": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "3b8af46aa0b141ec9568ba449a3f13e6": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_b86dc61989f14c7fa0d94ec2497d412d", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "\ngcc -Werror -Wall -std=gnu99 -O0 -g  -I.    fcopy2.c   -o fcopy2\r\n"}]}}, "5249b8b309f840f79a17583951813719": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_bbb33f3715e747e3b29ea7d8a23a3acd", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ls \ndiskhw.ipynb  disklayout.ipynb  interface.ipynb  intro.ipynb  kernelimp.ipynb\r\n$ "}]}}, "5878380f14e9427782cf0cb35afccb75": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_f7e2a6f1455e49eeba621de86de1dd6f", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ln -s loopy loopy\r\nln: failed to create symbolic link 'loopy': File exists\r\n$ ls -l loopy\r\nlrwxrwxrwx. 1 jovyan root 5 Feb 11 19:12 \u001b[0m\u001b[40;31;01mloopy\u001b[0m -> \u001b[40;31;01mloopy\u001b[0m\r\n$ cat loopy\r\ncat: loopy: Too many levels of symbolic links\r\n$ "}]}}, "5965bbb1611847719b18fd6252b44e9f": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_0aef3e6dd54f44b8901a3b8d9823b00f", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ln -s /bad/file/name bad-link\r\nln: failed to create symbolic link 'bad-link': File exists\r\n$ ls -l bad-link\r\nlrwxrwxrwx. 1 jovyan root 14 Feb 11 19:12 \u001b[0m\u001b[40;31;01mbad-link\u001b[0m -> \u001b[40;31;01m/bad/file/name\u001b[0m\r\n$ cat bad-link\r\ncat: bad-link: No such file or directory\r\n$ "}]}}, "6117ded7b4104ccaa0a595144d6306b2": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_7ea5165daee34aa394c9d3e206fc4fae", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     [[ -a myfile ]] && rm myfile\r\n$     [[ -a errors ]] && rm errors \r\n$     [[ -a mydate ]] && rm mydate\r\n$     [[ -a mynewdir ]] && rm -rf mynewdir\r\n$     [[ -a anotherfile ]] && rm anotherfile\r\n$     [[ -a mybin ]] && rm -rf  mybin\r\n$     [[ -a myinfo ]] && rm myinfo\r\n$ "}]}}, "7ea5165daee34aa394c9d3e206fc4fae": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "83cfab7e3a874f51ae6fb000ab607123": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_914e2c1c133e455595bc6a3374de6bab", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ./fcopy2 README.md rm2\n$ "}]}}, "914e2c1c133e455595bc6a3374de6bab": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9ed00a17e5714231adbe0b4e09249660": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b86dc61989f14c7fa0d94ec2497d412d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "bbb33f3715e747e3b29ea7d8a23a3acd": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "f7e2a6f1455e49eeba621de86de1dd6f": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+{"state": {"411201a57e2d47c3999736e69e239f2b": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_42e3c1cd2f59460fa9d140010b7ed599", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ln -s /bad/file/name bad-link\r\nln: failed to create symbolic link 'bad-link': File exists\r\n$ ls -l bad-link\r\nlrwxrwxrwx. 1 jovyan root 14 Feb 19 03:27 \u001b[0m\u001b[40;31;01mbad-link\u001b[0m -> \u001b[40;31;01m/bad/file/name\u001b[0m\r\n$ cat bad-link\r\ncat: bad-link: No such file or directory\r\n$ "}]}}, "42e3c1cd2f59460fa9d140010b7ed599": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "5bbf3e36de3640d0ba3ffe68f599d11b": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_ae1b0c1de1e640da8019814f22892aa2", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ echo \"diff 1\" ;  diff README.md rm2 ; echo \"Hello class\" >> rm2 ; echo \"diff 2\"; diff README.md rm2\n\ndiff 1\r\ndiff 2\r\n5a6\r\n> Hello class\r\n$ "}]}}, "6602e840ada34a628c498dc6c49ba2a9": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_c1ab715fcaa04078a370cd8a07eaa815", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ./fcopy2 README.md rm2\n$ "}]}}, "727f9ada91ef4760833baa30d8c96e9b": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "77e2ea4d54334b21a9d288917b6df231": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_d00a47612788457e9963cd7d29af5847", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ mkdir /tmp/foo; ls -al /tmp/foo; mkdir /tmp/foo/bar ; ls -al /tmp/foo\r\ntotal 0\r\ndrwxr-xr-x. 2 jovyan root  6 Feb 19 05:13 \u001b[0m\u001b[01;34m.\u001b[0m\r\ndrwxrwxrwt. 1 root   root 81 Feb 19 05:13 \u001b[30;42m..\u001b[0m\r\ntotal 0\r\ndrwxr-xr-x. 3 jovyan root 17 Feb 19 05:13 \u001b[0m\u001b[01;34m.\u001b[0m\r\ndrwxrwxrwt. 1 root   root 81 Feb 19 05:13 \u001b[30;42m..\u001b[0m\r\ndrwxr-xr-x. 2 jovyan root  6 Feb 19 05:13 \u001b[01;34mbar\u001b[0m\r\n$ "}]}}, "8626032e84dc42608058ee0efbdbd5e2": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_f23d56b455f742538e775e340534db17", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ls \ndiskhw.ipynb        dl_ex_exx.ipynb    dl_track_free.ipynb  interface.ipynb\r\ndisklayout.ipynb    dl_failures.ipynb  dl_track_used.ipynb  intro.ipynb\r\ndl_blocksize.ipynb  dl_name.ipynb      gorp                 kernelimp.ipynb\r\n$ "}]}}, "9153f410fc744bd3a2408c11b51e3175": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9da9b6bb325d4861a813d1d88ded4cad": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_af3991d81c924b9a827d5b70c7fd6074", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ln -s loopy loopy\r\nln: failed to create symbolic link 'loopy': File exists\r\n$ ls -l loopy\r\nlrwxrwxrwx. 1 jovyan root 5 Feb 19 03:27 \u001b[0m\u001b[40;31;01mloopy\u001b[0m -> \u001b[40;31;01mloopy\u001b[0m\r\n$ cat loopy\r\ncat: loopy: Too many levels of symbolic links\r\n$ "}]}}, "ae1b0c1de1e640da8019814f22892aa2": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "af3991d81c924b9a827d5b70c7fd6074": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "c131a5768f7e4fe8b4c2f668cd679070": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_727f9ada91ef4760833baa30d8c96e9b", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "\ngcc -Werror -Wall -std=gnu99 -O0 -g  -I.    fcopy2.c   -o fcopy2\r\n"}]}}, "c1ab715fcaa04078a370cd8a07eaa815": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d00a47612788457e9963cd7d29af5847": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d5a0b5cb312f46709a845b9f632c7368": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_e6bcce6e0c87445294a9d0c37af56b8d", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ mount | grep ext4\r\n/dev/nvme1n1 on /opt/app-root/src type \u001b[01;31m\u001b[Kext4\u001b[m\u001b[K (rw,relatime,seclabel)\r\n$ "}]}}, "e3429ff863e7400a8f26a723aa026468": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_9153f410fc744bd3a2408c11b51e3175", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     [[ -a /tmp/foo ]] && rm -rf /tmp/foo\r\n$     [[ -a errors ]] && rm errors \r\n$     [[ -a mydate ]] && rm mydate\r\n$     [[ -a mynewdir ]] && rm -rf mynewdir\r\n$     [[ -a anotherfile ]] && rm anotherfile\r\n$     [[ -a mybin ]] && rm -rf  mybin\r\n$     [[ -a myinfo ]] && rm myinfo\r\n$ "}]}}, "e6bcce6e0c87445294a9d0c37af56b8d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "f23d56b455f742538e775e340534db17": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 
@@ -1135,17 +1198,17 @@ internally; e.g. the <code class="docutils literal notranslate"><span class="pre
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="diskhw.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">22. </span>A bit about Disks</p>
+            <p class="prev-next-title"><span class="section-number">10. </span>Introduction</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="disklayout.html" title="next page">
+    <a class='right-next' id="next-link" href="diskhw.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">24. </span>File System Layout</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>A bit about Disks</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
