@@ -18,6 +18,20 @@ parts:
   - file: scheduling/process
   - file: scheduling/scheduling
   - file: scheduling/real_sched
+- caption: 'File Systems'
+  numbered: True
+  chapters:
+  - file: fs/intro
+  - file: fs/interface
+  - file: fs/diskhw
+  - file: fs/disklayout
+  - file: fs/dl_track_free
+  - file: fs/dl_track_used
+  - file: fs/dl_name
+  - file: fs/dl_blocksize
+  - file: fs/dl_failures
+  - file: fs/dl_ex_exx
+  - file: fs/kernelimp
 - caption: 'Virtual Memory'
   numbered: True
   chapters:
@@ -36,14 +50,6 @@ parts:
 #  - file: mm/mm
 #  - file: mm/Overview
 #  - file: mm/peter-mm
-- caption: 'File Systems'
-  numbered: True
-  chapters:
-  - file: fs/intro
-  - file: fs/diskhw
-  - file: fs/interface
-  - file: fs/disklayout
-  - file: fs/kernelimp
 - caption: 'Concurrency'
   numbered: True
   chapters:
