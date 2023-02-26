@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>34. Synchronization Primitives &#8212; Introduction to Operating Systems</title>
+    <title>33. Synchronization Primitives &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="35. Deadlocks" href="deadlock.html" />
-    <link rel="prev" title="33. Cooperating Processes" href="sharing.html" />
+    <link rel="next" title="34. Deadlocks" href="deadlock.html" />
+    <link rel="prev" title="32. Cooperating Processes" href="sharing.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -202,13 +202,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../fs/dl_track_free.html">
-   14. Disk Layout:Tracking Free Space
+  <a class="reference internal" href="../fs/dl_track_used.html">
+   14. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../fs/dl_track_used.html">
-   15. Disk Layout:Tracking Used Space
+  <a class="reference internal" href="../fs/dl_track_free.html">
+   15. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1">
@@ -217,23 +217,18 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../fs/dl_blocksize.html">
-   17. Disk Layout:What’s the right block size?
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_failures.html">
-   18. Disk Layout:Dealing with Failures
+   17. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_ex_exx.html">
-   19. Disk Layout:Examples of Real World File Systems
+   18. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   20. Kernel implementation
+   19. Kernel implementation
   </a>
  </li>
 </ul>
@@ -245,57 +240,57 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   21. Introduction
+   20. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/phys-and-seg.html">
-   22. Memory management before paged virtual memory
+   21. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   23. Paging
+   22. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   24. Page Tables
+   23. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   25. Memory reclaiming algorithms.
+   24. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   26. Page Sizes
+   25. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   27. Other topics
+   26. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   28. Buffer Cache
+   27. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   29. Memory Management Dynamics
+   28. Memory Management Dynamics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   30. Memory management in the real world
+   29. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   31. Conclusion
+   30. Conclusion
   </a>
  </li>
 </ul>
@@ -307,32 +302,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="sync.html">
-   32. Intro Concurrency Synchronization and Deadlock
+   31. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="sharing.html">
-   33. Cooperating Processes
+   32. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   34. Synchronization Primitives
+   33. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="deadlock.html">
-   35. Deadlocks
+   34. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hardware_challenges.html">
-   36. Challenges of Modern Hardware
+   35. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linux_locking.html">
-   37. Locking in the Linux Kernel
+   36. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -344,17 +339,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   38. Overview of other topics
+   37. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   39. Virtualization and Cloud computing
+   38. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   40. Other OS structures
+   39. Other OS structures
   </a>
  </li>
 </ul>
@@ -366,17 +361,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   41. How to read this book
+   40. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   42. Contributing
+   41. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   43. Bibliography
+   42. Bibliography
   </a>
  </li>
 </ul>
@@ -623,7 +618,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="synchronization-primitives">
-<span id="cont-sync-locking"></span><h1><span class="section-number">34. </span>Synchronization Primitives<a class="headerlink" href="#synchronization-primitives" title="Permalink to this headline">#</a></h1>
+<span id="cont-sync-locking"></span><h1><span class="section-number">33. </span>Synchronization Primitives<a class="headerlink" href="#synchronization-primitives" title="Permalink to this headline">#</a></h1>
 <p>Introduce various solutions to the critical section problem here.</p>
 <ol class="simple">
 <li><p>Locks (Mutex)</p>
@@ -675,13 +670,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">33. </span>Cooperating Processes</p>
+            <p class="prev-next-title"><span class="section-number">32. </span>Cooperating Processes</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="deadlock.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">35. </span>Deadlocks</p>
+        <p class="prev-next-title"><span class="section-number">34. </span>Deadlocks</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
