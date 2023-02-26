@@ -25,10 +25,9 @@ parts:
   - file: fs/interface
   - file: fs/diskhw
   - file: fs/disklayout
-  - file: fs/dl_track_free
   - file: fs/dl_track_used
+  - file: fs/dl_track_free
   - file: fs/dl_name
-  - file: fs/dl_blocksize
   - file: fs/dl_failures
   - file: fs/dl_ex_exx
   - file: fs/kernelimp

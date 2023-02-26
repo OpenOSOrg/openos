@@ -3,6 +3,9 @@ CC = gcc
 
 prog = fcopy fcopy2
 
+fcopy : fcopy.c
+	$(CC) -Werror -Wall  -O0 -g fcopy.c -o fcopy
+
 all: $(prog)
 
 .PHONY: clean 
