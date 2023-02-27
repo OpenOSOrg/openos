@@ -635,7 +635,7 @@ title="Print to PDF"
 <p><span class="caption-number">Fig. 15.2 </span><span class="caption-text">Free blocks recorded as bits</span><a class="headerlink" href="#fs-free-bv" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As computers got faster and users started noticing that seek times where killing performance, file systems started using an <em>allocation bitmap</em> as shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">fs:fs:free:ll</span></code>. It
+<p>As computers got faster and users started noticing that seek times where killing performance, file systems started using an <em>allocation bitmap</em> as shown in <a class="reference internal" href="#fs-free-bv"><span class="std std-numref">Fig. 15.2</span></a>. It
 keeeps a boolean array with one bit for each disk block; if the block is
 allocated the corresponding bit is set to ‘1’, and cleared to ‘0’ if it
 is freed. To allocate a block you read a portion of this bitmap into

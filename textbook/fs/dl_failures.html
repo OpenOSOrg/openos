@@ -593,12 +593,46 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#consistency-and-journaling">
+   17.1. Consistency and Journaling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#journaling">
+   17.2. Journaling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#log-structured-file-systems">
+   17.3. Log-Structured File Systems
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -610,6 +644,29 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#consistency-and-journaling">
+   17.1. Consistency and Journaling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#journaling">
+   17.2. Journaling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#log-structured-file-systems">
+   17.3. Log-Structured File Systems
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -619,6 +676,292 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="disk-layout-dealing-with-failures">
 <span id="fs-dl-failures"></span><h1><span class="section-number">17. </span>Disk Layout:Dealing with Failures<a class="headerlink" href="#disk-layout-dealing-with-failures" title="Permalink to this headline">#</a></h1>
+<section id="consistency-and-journaling">
+<h2><span class="section-number">17.1. </span>Consistency and Journaling<a class="headerlink" href="#consistency-and-journaling" title="Permalink to this headline">#</a></h2>
+<p>Unlike in-memory structures, data structures on disk must survive system
+crashes, whether due to hardware reasons (e.g. power failure) or
+software failures. This is a different problem than the consistency
+issues we dealt with for in-memory structures, where data corruption
+could only occur due to the action of other threads, and could be
+prevented by the proper use of mutexes and similar mechanisms.
+Unfortunately there is no mutex which will prevent a system from
+crashing before the mutex is unlocked, or file system designers would
+use it liberally. The problem is compounded by the fact that operating
+systems typically cache reads and writes to increase performance, so
+that writes to the disk may occur in a much different order than that in
+which they were issued by the file system code.</p>
+<p>In its simplest form the problem is that file system operations often
+involve writing to multiple disk blocks—for example, moving a file
+from one directory to another requires writing to blocks in the source
+and destination directories, while creating a file writes to the block
+and inode allocation bitmaps, the new inode, the directory block, and
+the file data block or blocks<a class="footnote-reference brackets" href="#id3" id="id1">13</a>. If some but not all of
+these writes occur before a crash, the file system may become
+<em>inconsistent</em>—i.e. in a state not achievable through any legal
+sequence of file system operations, where some operations may return
+improper data or cause data loss.</p>
+<figure class="align-right" id="fig-delete-vicious">
+<a class="reference internal image-reference" href="../_images/files-corruption.png"><img alt="../_images/files-corruption.png" src="../_images/files-corruption.png" style="width: 200pt;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17.1 </span><span class="caption-text">File, directory, bitmap</span><a class="headerlink" href="#fig-delete-vicious" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>For a particularly vicious example, consider deleting the file <code class="docutils literal notranslate"><span class="pre">/a/b</span></code> as
+shown in
+<a class="reference internal" href="#fig-delete-vicious"><span class="std std-numref">Fig. 17.1</span></a>, which requires the following actions:</p>
+<ol class="simple">
+<li><p>Clear the directory entry for /a/b. This is done by marking the entry as
+unused and writing its block back to the directory.</p></li>
+<li><p>Free the file data block, by clearing the corresponding entry in the
+block allocation bitmap</p></li>
+</ol>
+<figure class="align-right" id="id5">
+<a class="reference internal image-reference" href="../_images/files-failure-case1.png"><img alt="../_images/files-failure-case1.png" src="../_images/files-failure-case1.png" style="width: 200pt;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17.2 </span><span class="caption-text">Directory block written before crash</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>This results in two disk blocks being modified and written back to disk;
+if the blocks are cached and written back at a later point in time they
+may be written to disk in any order. (this doesn’t matter for running
+programs, as when they access the file system the OS will check cached
+data before going to disk)</p>
+<p>If the system crashes (e.g. due to a power failure) after one of these
+blocks has been written to disk, but not the other, two case are
+possible:</p>
+<ol class="simple">
+<li><p>The directory block is written, but not the bitmap. The file is no
+longer accessible, but the block is still marked as in use. This is a
+disk space leak (like a memory leak), resulting in a small loss of disk
+space but no serious problems.</p></li>
+<li><p>The bitmap block is written, but not the directory. Applications are
+still able to find the file, open it, and write to it, but the block is
+also available to be allocated to a new file or directory. This is much
+more serious.</p></li>
+</ol>
+<p>If the same block is now re-allocated for a new file (<code class="docutils literal notranslate"><span class="pre">/a/c</span></code> in this
+case) we now have two files sharing the same data block, which is
+obviously a problem. If an application writes to <code class="docutils literal notranslate"><span class="pre">/a/b</span></code> it will also
+overwrite any data in <code class="docutils literal notranslate"><span class="pre">/a/c</span></code>, and vice versa. If <code class="docutils literal notranslate"><span class="pre">/a/c</span></code> is a directory
+rather than a file things are even worse - a write to <code class="docutils literal notranslate"><span class="pre">/a/b</span></code> will wipe
+out directory entries, causing files pointed to by those entries to be
+lost. (The files themselves won’t be erased, but without directory entries pointing to them there won’t be any way for a
+program to access them.)</p>
+<figure class="align-right" id="fig-delete-vicious2">
+<a class="reference internal image-reference" href="../_images/files-failure-case2.png"><img alt="../_images/files-failure-case2.png" src="../_images/files-failure-case2.png" style="width: 200pt;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17.3 </span><span class="caption-text">Bitmap block written before crash</span><a class="headerlink" href="#fig-delete-vicious2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>This can be prevented by writing blocks in a specific order—for
+instance in this case the directory entry could always be cleared before
+the block is marked as free, so that in the worst case a crash might
+cause a few data blocks to become unusable. Unfortunately this is very
+slow, as these writes must be done synchronously, waiting for each write
+to complete before issuing the next one.</p>
+<p><strong>Fsck / chkdsk</strong>: One way to prevent this is to run a disk checking
+routine every time the system boots after a crash. The dirty flag in the
+file system superblock was described in the section above; when a
+machine boots, if the file system is marked dirty, (<code class="docutils literal notranslate"><span class="pre">fsck</span></code>, or <code class="docutils literal notranslate"><span class="pre">chkdsk</span></code>
+in Windows) is run to repair any problems.</p>
+<p>In particular, the Unix file system checker performs the following
+checks and corrections:</p>
+<ol class="simple">
+<li><p>Blocks and sizes. Each allocated inode is checked to see that (a) the
+number of blocks reachable through direct and indirect pointers is
+consistent with the file size in the inode, (b) all block pointers are
+within the valid range for the volume, and (c) no blocks are referenced
+by more than one inode.</p></li>
+<li><p>Pathnames. The directory tree is traversed from the root, and each entry
+is checked to make sure that it points to a valid inode of the same type
+(directory / file / device) as indicated in the entry.</p></li>
+<li><p>Connectivity. Verifies that all directory inodes are reachable from the
+root.</p></li>
+<li><p>Reference counts. Each inode holds a count of how many directory entries
+(hard links) are pointing to it. This step validates that count against
+the count determined by traversing the directory tree, and fixes it if
+necessary.</p></li>
+<li><p>“Cylinder Groups” The block and inode bitmaps are checked for
+consistency. In particular, are all blocks and inodes reachable from the
+root marked in use, and all unreachable ones marked free?</p></li>
+<li><p>“Salvage Cylinder Groups” Free inode and block bitmaps are updated to
+fix any discrepancies.</p></li>
+</ol>
+<p>This is a lot of work, and involves a huge number of disk seeks. On a
+large volume it can take hours to run. Note that full recovery may
+involve a lot of manual work; for instance, if fsck finds any files
+without matching directory entries, it puts them into a <code class="docutils literal notranslate"><span class="pre">lost+found</span></code>
+directory with numeric names, leaving a human (i.e. you) to figure out
+what they are and where they belong.</p>
+<p>Checking disks at startup worked fine when disks were small, but as they
+got larger (and seek times didn’t get faster) it started taking longer
+and longer to check a file system after a crash. Uninterruptible power
+supplies help, but not completely, since many crashes are due to
+software faults in the operating system. The corruption problem you saw
+was due to inconsistency in the on-disk file system state. In this
+example, the free space bitmap did not agree with the directory entry
+and inode. If the file system can ensure that the on-disk data is always
+in a consistent state, then it should be possible to prevent losing any
+data except that being written at the exact moment of the crash.</p>
+<p>Performing disk operations synchronously (and carefully ordering them in
+the code) will prevent inconsistency, but as described above imposes
+excessive performance costs. Instead a newer generation of file systems,
+termed <em>journaling</em> file systems, has incorporated mechanisms which add
+additional information which can be used for recovery, allowing caching
+and efficient use of the disk, while maintaining a consistent on-disk
+state.</p>
+<figure class="align-default" id="fig-syncwrites">
+<a class="reference internal image-reference" href="../_images/files-syncwrite.png"><img alt="../_images/files-syncwrite.png" src="../_images/files-syncwrite.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17.4 </span><span class="caption-text">Synchronous disk writes for ext2 consistency.</span><a class="headerlink" href="#fig-syncwrites" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="journaling">
+<h2><span class="section-number">17.2. </span>Journaling<a class="headerlink" href="#journaling" title="Permalink to this headline">#</a></h2>
+<p>Most modern file systems (NTFS, ext3, ext4, and various others) use
+<em>journaling</em>, a variant of the database technique of <em>write-ahead
+logging</em>. The idea is to keep a log which records the changes that are
+going to be made to the file system, <em>before those changes are made</em>.
+After an entry is written to the log, the changes can be written back in
+any order; after they are all written, the section of log recording
+those changes can be freed.</p>
+<p>When recovering from a crash, the OS goes through the log and checks
+that all the changes recorded there have been performed on the file
+system itself<a class="footnote-reference brackets" href="#id4" id="id2">14</a>. Some thought should convince you that if a log entry
+is written, then the modification is guaranteed to happen, either before
+or after a crash; if the log entry isn’t written completely then the
+modification never happened. (There are several ways to detect a
+half-written log entry, including using an explicit end marker or a
+checksum; we’ll just assume that it’s possible.)</p>
+<figure class="align-right" id="id6">
+<a class="reference internal image-reference" href="../_images/files-logging.png"><img alt="../_images/files-logging.png" src="../_images/files-logging.png" style="width: 200pt;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17.5 </span><span class="caption-text">Step 1: record action in log</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-right" id="id7">
+<a class="reference internal image-reference" href="../_images/files-corruption2.png"><img alt="../_images/files-corruption2.png" src="../_images/files-corruption2.png" style="width: 200pt;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17.6 </span><span class="caption-text">Step 2: write blocks in any order</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Ext3 Journaling</strong>: The ext3 file system uses physical block logging:
+each log entry contains a header identifying the disk blocks which are
+modified (in the example you saw earlier, the bitmap and the directory
+entry) and a copy of the disk blocks themselves. After a crash the log
+is replayed by writing each block from the log to the location where it
+belongs. If a block is written multiple times in the log, it will get
+overwritten multiple times during replay, and after the last over-write
+it will have the correct value.</p>
+<p>To avoid synchronous journal writes for every file operation, ext3 uses
+<em>batch commit</em>: journal writes are deferred, and multiple writes are
+combined into a single transaction. The log entries for the entire batch
+are written to the log in a single sequential write, called a
+<em>checkpoint</em>. In the event of a crash, any modifications since the last
+checkpoint will be lost, but since checkpoints are performed at least
+every few seconds, this typically isn’t a problem. (If your program
+needs a guarantee that data is written to a file <em>right now</em>, you need
+to use the <code class="docutils literal notranslate"><span class="pre">fsync</span></code> system call to flush data to disk.)</p>
+<p>Ext3 supports three different journaling modes:</p>
+<ul class="simple">
+<li><p><em>Journaled</em>: In this mode, all changes (to file data, directories,
+inodes and bitmaps) are written to the log before any modifications are
+made to the main file system.</p></li>
+<li><p><em>Ordered</em>: Here, data blocks are flushed to the main file system before
+a journal entry for any metadata changes (directories, free space
+bitmaps, inodes) is written to the log, after which the metadata changes
+may be made in the file system. This provides the same consistency
+guarantees as journaled mode, but is usually faster.</p></li>
+<li><p><em>Writeback</em>: In this mode, metadata changes are always written to the
+log before being applied to the main file system, but data may be
+written at any time. It is faster than the other two modes, and will
+prevent the file system itself from becoming corrupted, but data within
+a file may be lost.</p></li>
+</ul>
+</section>
+<section id="log-structured-file-systems">
+<h2><span class="section-number">17.3. </span>Log-Structured File Systems<a class="headerlink" href="#log-structured-file-systems" title="Permalink to this headline">#</a></h2>
+<p>Log-structured file systems (like LFS in NetBSD, or NetApp WAFL) are an
+extreme version of a journaled file system: the journal is the entire
+file system. Data is never over-written; instead a form of copy-on-write
+is used: modified data is written sequentially to new locations in the
+log. This gives very high write speeds because all writes (even random
+ones) are written sequentially to the disk.</p>
+<p><a class="reference internal" href="#fig-fs-lfs"><span class="std std-numref">Fig. 17.7</span></a> compares LFS to ext2, showing a simple file
+system with two directories (dir1, dir2) and two files (/dir1/file1,
+/dir2/file2). In ext2 the root directory inode is found in a fixed
+location, and its data blocks do not move after being allocated; in LFS
+both inode and data blocks move around—as they are modified, the new
+blocks get written to the head of the log rather than overwriting the
+old ones. The result can be seen graphically in the figure—in the LFS
+image, pointers only point to the left, pointing to data that is older
+than the block holding a pointer.</p>
+<figure class="align-default" id="fig-fs-lfs">
+<a class="reference internal image-reference" href="../_images/files-lfs.png"><img alt="../_images/files-lfs.png" src="../_images/files-lfs.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17.7 </span><span class="caption-text">Ext2 vs Log-structured file system
+layout</span><a class="headerlink" href="#fig-fs-lfs" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Unlike ext2 there is no fixed location to find the root directory; this
+is solved by periodically storing its location in a small checkpoint
+record in a fixed location in the superblock. (This checkpoint is not
+shown in the figure, and would be the only arrow pointing to the right.)</p>
+<p>When a data block is re-written, a new block with a new address is used.
+This means that the inode (or indirect block) pointing to the data block
+must be modified, which means that its address changes.</p>
+<p>LFS uses a table mapping inodes to locations on disk, which is updated
+with the new inode address to complete the process; this table is itself
+stored as a file. (The astute reader may wonder why this update doesn’t
+in fact trigger another update to the inode file, leading to an infinite
+loop. This is solved by buffering blocks in memory before they are
+written, so that multiple changes can be made.)</p>
+<figure class="align-right" id="fig-fs-waflbef">
+<a class="reference internal image-reference" href="../_images/files-wafl1.png"><img alt="../_images/files-wafl1.png" src="../_images/files-wafl1.png" style="width: 200pt;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17.8 </span><span class="caption-text">WAFL tree before update</span><a class="headerlink" href="#fig-fs-waflbef" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-right" id="fig-fs-waflaft">
+<a class="reference internal image-reference" href="../_images/files-wafl2.png"><img alt="../_images/files-wafl2.png" src="../_images/files-wafl2.png" style="width: 200pt;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17.9 </span><span class="caption-text">WAFL tree after update</span><a class="headerlink" href="#fig-fs-waflaft" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In WAFL these changes percolate all the way up through directory
+entries, directory inodes, etc., to the root of the file system,
+potentially causing a large number of writes for a small modification.
+(although they’ll still be fairly fast since it’s a single sequential
+write) To avoid this overhead, WAFL buffers a large number of changes
+before writing to disk; thus although any single write will modify the
+root directory, only a single modified copy of the root directory has to
+be written in each batch.</p>
+<p>In <a class="reference internal" href="#fig-fs-waflbef"><span class="std std-numref">Fig. 17.8</span></a> and <a class="reference internal" href="#fig-fs-waflaft"><span class="std std-numref">Fig. 17.9</span></a> a WAFL directory tree is shown before and after
+modifying /dir1/file2, with the out-of-date blocks shown in grey. If we
+keep a pointer to the old root node, then you can access a copy of the
+file system as it was at that point in time. When the disk fills up
+these out-of-date blocks are collected by a garbage collection process,
+and made available for new writes.</p>
+<p>One of the advantages of a log-structured file system is the ability to
+easily keep snapshots of file system state—a pointer to an old version
+of the inode table or root directory will give you access to a copy of
+the file system at the point in time corresponding to that version.
+(e.g. look in your .snapshot directory on <code class="docutils literal notranslate"><span class="pre">login.ccs.neu.edu</span></code> - this
+data is stored on a NetApp filer using WAFL and its snapshot
+functionality.)</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">13</a></span></dt>
+<dd><p>These steps ignore inode writes to update file or directory
+modification times.</p>
+</dd>
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">14</a></span></dt>
+<dd><p>Actually it doesn’t check, but rather “replays” all the changes
+recorded in the log.</p>
+</dd>
+</dl>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
