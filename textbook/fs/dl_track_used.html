@@ -628,8 +628,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#index-blocks">
-   14.3. Index blocks
+  <a class="reference internal nav-link" href="#inode">
+   14.3. Inode
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extents">
+   14.4. Extents
   </a>
  </li>
 </ul>
@@ -662,8 +667,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#index-blocks">
-   14.3. Index blocks
+  <a class="reference internal nav-link" href="#inode">
+   14.3. Inode
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extents">
+   14.4. Extents
   </a>
  </li>
 </ul>
@@ -725,20 +735,21 @@ frequently used they may be cached; random access to a file.  However, if a file
 long, and on average each I/O will require searching halfway through the
 list.</p>
 </section>
-<section id="index-blocks">
-<h2><span class="section-number">14.3. </span>Index blocks<a class="headerlink" href="#index-blocks" title="Permalink to this headline">#</a></h2>
+<section id="inode">
+<h2><span class="section-number">14.3. </span>Inode<a class="headerlink" href="#inode" title="Permalink to this headline">#</a></h2>
 <p>File systems derived from the original Unix file system use a per-file structure called an inode to not only keep track of attributes, but also block locations. The inode uses an asymmetric tree, or actually a series of
 trees of increasing height with the root of each tree stored in the
-inode. As seen in <a class="reference internal" href="#filesys-inode"><span class="std std-numref">Fig. 14.3</span></a> the inode contains N <em>direct</em> block
+inode.</p>
+<p>As seen in <a class="reference internal" href="#filesys-inode"><span class="std std-numref">Fig. 14.3</span></a> the inode contains N <em>direct</em> block
 pointers (12 in ext2/ext3), so that files of N blocks or less need no
 indirect blocks. A single <em>indirect pointer</em> specifies an <em>indirect
 block</em>, holding pointers to blocks <span class="math notranslate nohighlight">\(N, N+1, ... N+N_1-1\)</span> where <span class="math notranslate nohighlight">\(N_1\)</span> is
 the number of block numbers that fit in a file system block (1024 for
-ext2 with a 4 KB blocksize). If necessary, the <em>double-indirect pointer</em>
-specifies a block holding pointers to <span class="math notranslate nohighlight">\(N_1\)</span> indirect blocks, which in
-turn hold pointers to blocks <span class="math notranslate nohighlight">\(N+N_1 ... N+N_1+N_1^2-1\)</span>—i.e. an
+ext2 with a 4 KB blocksize).</p>
+<p>If necessary, the <em>double-indirect pointer</em> specifies a block holding pointers to <span class="math notranslate nohighlight">\(N_1\)</span> indirect blocks, which in turn hold pointers to blocks <span class="math notranslate nohighlight">\(N+N_1 ... N+N_1+N_1^2-1\)</span>—i.e. an
 <span class="math notranslate nohighlight">\(N_1\)</span>-ary tree of height 2; a triple indirect block in turn points to a
-tree of height 3. For ext2 with 4-byte block numbers, if we use 4K
+tree of height 3.</p>
+<p>For ext2 with 4-byte block numbers, if we use 4K
 blocks this gives a maximum file size of <span class="math notranslate nohighlight">\((4096/4)^3\)</span> 4 KiB[^11] blocks,
 or 4.004 TiB. This organization allows random access within a file with
 overhead <span class="math notranslate nohighlight">\(O(logN)\)</span> where <span class="math notranslate nohighlight">\(N\)</span> is the file size, which is vastly better
@@ -750,11 +761,44 @@ than the <span class="math notranslate nohighlight">\(O(N)\)</span> overhead of 
 Linux ext2, ext3)</span><a class="headerlink" href="#filesys-inode" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>(a) low overhead for small files, in terms of both disk seeks and
-allocated blocks[^10], (b) ability to represent sufficiently large files
-without excessive storage space or performance overhead, and (c) crash
-resiliency—crashing while the file is growing should not endanger
-existing data.</p>
+<p>Inode structures are a reasonable compromise, they have (a) low overhead for small files, in terms of both disk seeks and allocated blocks, (b) ability to represent sufficiently large files
+without excessive storage space or performance overhead.</p>
+<figure class="align-right" id="fig-fs-ext2layout">
+<a class="reference internal image-reference" href="../_images/files-pointers.png"><img alt="../_images/files-pointers.png" src="../_images/files-pointers.png" style="width: 200pt;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14.4 </span><span class="caption-text">File structure—pointers</span><a class="headerlink" href="#fig-fs-ext2layout" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="extents">
+<h2><span class="section-number">14.4. </span>Extents<a class="headerlink" href="#extents" title="Permalink to this headline">#</a></h2>
+<p>The ext2 and MS-DOS file systems use separate pointers to every data
+block in a file, located in inodes and indirect blocks in the case of
+ext2, and in the file allocation table in MS-DOS. However, a well designed file system will attempt to allocate blocks to files sequentially to avoid disk seeks —if the
+first block in a file is block 100, it’s highly likely that the second
+will be 101, the third 102, etc.</p>
+<figure class="align-left" id="fig-filesys-extent">
+<a class="reference internal image-reference" href="../_images/files-extent.png"><img alt="../_images/files-extent.png" src="../_images/files-extent.png" style="width: 200pt;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14.5 </span><span class="caption-text">File structure— extents</span><a class="headerlink" href="#fig-filesys-extent" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We can take advantage of this to greatly compress the information needed
+to identify the blocks in a file - rather than having separate pointers
+to blocks 100,101,…120 we just need to identify the starting block
+(100) and the length (21 blocks). This is shown in <a class="reference internal" href="#fig-filesys-extent"><span class="std std-numref">Fig. 14.5</span></a>, where five data blocks are identified
+by inodes or indirect block pointers; to the right, the same five data
+blocks are identified by a single extent. Why would we want to compress
+the information needed to organize the blocks in a file? Mostly for
+performance—although the code is more complicated, it will require
+fewer disk seeks to read from disk.</p>
+<p>This organization is the basis of <em>extent-based</em> file systems, where
+blocks in a file are identified via one or more <em>extents</em>, or
+(start,length) pairs. The inode (or equivalent) can contain space for a
+small number of extents; if the file grows too big, then you add the
+equivalent of indirect blocks - extents pointing to blocks holding more
+extents. Both Microsoft NTFS and Linux ext4 use this sort of extent
+structure.</p>
 </section>
 </section>
 
