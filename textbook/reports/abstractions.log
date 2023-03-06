@@ -17,30 +17,24 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-display(Markdown('<font size="1.2rem">' + FileCodeBox(
-    file=appdir + "/testfork.c",  
-    number=True,
-    title="<b>C: testfork.c",
-    h="100%", 
-    w="100%"
-) + '</font>'))
-TermShellCmd("[[ -a testfork ]] && rm testfork;make testfork", cwd=appdir, prompt='', noposttext=True)
-TermShellCmd("./testfork", cwd=appdir, noposttext=True)
+file = appdir + "/pipe.c"
+text_file = open(file, "r")
+data = text_file.read()
+data = numberLines(data)
+text_file.close()                                                                                             
+md_text = '''                                                                                                                        
+``` ''' + "c" + '''                                                                                                                     
+''' + data + '''                                                                                                                         
+```                                                                                                                                      
+'''
+dtext= + md_text + '</font>'
+display (Markdown('<font size=".5rem">' dtext))
 ------------------
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mTypeError[0m                                 Traceback (most recent call last)
-Input [0;32mIn [12][0m, in [0;36m<cell line: 1>[0;34m()[0m
-[0;32m----> 1[0m display(Markdown([38;5;124m'[39m[38;5;124m<font size=[39m[38;5;124m"[39m[38;5;124m1.2rem[39m[38;5;124m"[39m[38;5;124m>[39m[38;5;124m'[39m [38;5;241m+[39m [43mFileCodeBox[49m[43m([49m
-[1;32m      2[0m [43m    [49m[43mfile[49m[38;5;241;43m=[39;49m[43mappdir[49m[43m [49m[38;5;241;43m+[39;49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43m/testfork.c[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m  [49m
-[1;32m      3[0m [43m    [49m[43mnumber[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m
-[1;32m      4[0m [43m    [49m[43mtitle[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43m<b>C: testfork.c[39;49m[38;5;124;43m"[39;49m[43m,[49m
-[1;32m      5[0m [43m    [49m[43mh[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43m100[39;49m[38;5;124;43m%[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m
-[1;32m      6[0m [43m    [49m[43mw[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43m100[39;49m[38;5;124;43m%[39;49m[38;5;124;43m"[39;49m
-[1;32m      7[0m [43m)[49m [38;5;241m+[39m [38;5;124m'[39m[38;5;124m</font>[39m[38;5;124m'[39m))
-[1;32m      8[0m TermShellCmd([38;5;124m"[39m[38;5;124m[[ -a testfork ]] && rm testfork;make testfork[39m[38;5;124m"[39m, cwd[38;5;241m=[39mappdir, prompt[38;5;241m=[39m[38;5;124m'[39m[38;5;124m'[39m, noposttext[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
-[1;32m      9[0m TermShellCmd([38;5;124m"[39m[38;5;124m./testfork[39m[38;5;124m"[39m, cwd[38;5;241m=[39mappdir, noposttext[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[0;36m  Input [0;32mIn [16][0;36m[0m
+[0;31m    display (Markdown('<font size=".5rem">' dtext))[0m
+[0m                      ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax. Perhaps you forgot a comma?
 
-[0;31mTypeError[0m: FileCodeBox() missing 1 required positional argument: 'lang'
-TypeError: FileCodeBox() missing 1 required positional argument: 'lang'
+SyntaxError: invalid syntax. Perhaps you forgot a comma? (2072823251.py, line 12)
 

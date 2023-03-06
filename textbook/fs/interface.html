@@ -886,7 +886,7 @@ end).</p>
 </figure>
 </section>
 <section id="directory">
-<h3><span class="section-number">11.2.2. </span>Directory<a class="headerlink" href="#directory" title="Permalink to this headline">#</a></h3>
+<span id="cont-fs-interface-dir"></span><h3><span class="section-number">11.2.2. </span>Directory<a class="headerlink" href="#directory" title="Permalink to this headline">#</a></h3>
 <p>As shown in <a class="reference internal" href="#fs-tree-imp"><span class="std std-numref">Fig. 11.2</span></a>, a directory contains entries with strings that identify objects contained in the directory, and for each the inode numbers that can then be used to find out more information about the corresponding object.   The same inode can be referenced by multiple directories, with potentially different names.  For example, <code class="docutils literal notranslate"><span class="pre">..</span></code> is a hard link to the parent directory, as we can see by creating a directory <code class="docutils literal notranslate"><span class="pre">/tmp/foo</span></code> the reference count (second entry) for <code class="docutils literal notranslate"><span class="pre">.</span></code> is 2 before we create a subdirectory bar in it, and 3 after.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">

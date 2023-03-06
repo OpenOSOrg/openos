@@ -53,6 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="17. Disk Layout:Dealing with Failures" href="dl_failures.html" />
@@ -593,12 +595,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#smarter-directories">
+   16.1. Smarter Directories
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -610,6 +636,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#smarter-directories">
+   16.1. Smarter Directories
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -619,6 +658,73 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="disk-layout-implementing-name-space">
 <span id="fs-dl-name"></span><h1><span class="section-number">16. </span>Disk Layout:Implementing Name Space<a class="headerlink" href="#disk-layout-implementing-name-space" title="Permalink to this headline">#</a></h1>
+<p>As we discussed in the <a class="reference internal" href="interface.html#cont-fs-interface-dir"><span class="std std-ref">file system abstractions</span></a>, the name space is created by having directories, where a directory as show in <a class="reference internal" href="#fs-tree-imp-rep"><span class="std std-numref">Fig. 16.1</span></a>, is just another file that has strings and information about the files those strings represent.</p>
+<figure class="align-default" id="fs-tree-imp-rep">
+<a class="reference internal image-reference" href="../_images/filesys-tree2.png"><img alt="../_images/filesys-tree2.png" src="../_images/filesys-tree2.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Implementation view: hierarchical file system name space. Gray blocks are directories that contain entries with strings and corresponding inode numbers that identify the files.</span><a class="headerlink" href="#fs-tree-imp-rep" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>A simple way to implement such a directory (<a class="reference internal" href="#directory1"><span class="std std-numref">Fig. 16.2</span></a>a), is to have a fixed array of data structures, where each entry has room for a fixed sized string, and the attributes of the file such as permissions, owner, and location of file on disk.  This approach is used in the MS-DOS, and CDROM file systems described earlier.  With these file systems, there is only one name for each file, and attributes identify if an entry is valid or not.</p>
+<p>For unix file systems, the directory typically does not contain the attributes, but instead contains an inode number (<a class="reference internal" href="#directory1"><span class="std std-numref">Fig. 16.2</span></a>b) that identifies the inode that contains those attributes; enabling multiple directory entries to reference the same file.  The separation of name (i.e. directory entry) and attributes (the inode and the blocks it points to) allows files to have multiple names, which for historical reasons are called hard links.</p>
+<figure class="align-default" id="directory1">
+<a class="reference internal image-reference" href="../_images/directory1.png"><img alt="../_images/directory1.png" src="../_images/directory1.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Structure of a simplified directory with fixed sized file names where attributes are stored in the directory or in an external inode</span><a class="headerlink" href="#directory1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The directory structure above could be implemented with the following data structure:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">dentry</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// inode number</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">inode</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// file name, max 252 chars</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[</span><span class="mi">252</span><span class="p">];</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Supporting files with string names that can be up to 252 characters, and a directory entry, assuming 4 byte integers, that is 256 characters.  When searching for a file,  the directory block(s) are memory and a linear search through the entries is used to locate the file.  The alignment to 256 characters (i.e., the somewhat strange lenght of the string name) ensures that when the entry is loaded into memory, the 4 byte inode is aligned to 4 bytes; so the processor can load it with a single memory load.
+A simple fixed sized data structure like this is easy to manage, a new file is added by searching for an entry with an invalid attribute, and deleting a file just sets the attribute to invalid.</p>
+<p>With the above data structure, all files are limited to at most 252 characters, and more importantly, you are wasting a great deal of space for most files that have small names.  More sophisticated file systems, use structures like the ext2 file system shown below:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">ext2_dir_entry</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// inode number</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w">   </span><span class="n">inode</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// directory entry length</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="n">rec_len</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// name length</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w">  </span><span class="n">name_len</span><span class="p">;</span><span class="w">  </span>
+<span class="w">    </span><span class="c1">// file type</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w">  </span><span class="n">file_type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// file name, max 255 chars</span>
+<span class="w">    </span><span class="kt">char</span><span class="w">           </span><span class="n">name</span><span class="p">[];</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In this case, the name of the file is variable length, with the length of the spring specified by <code class="docutils literal notranslate"><span class="pre">name_len</span></code>.  The <code class="docutils literal notranslate"><span class="pre">rec_len</span></code> describes how big the record is.  The <code class="docutils literal notranslate"><span class="pre">rec_len</span></code> may include padding to ensure that entries are aligned to 4 byte boundaries. The last entry’s <code class="docutils literal notranslate"><span class="pre">rec_len</span></code> can be set to the remainder of the size of the directory block, and if a file is unlinked from a directory, the previous entry’s <code class="docutils literal notranslate"><span class="pre">rec_len</span></code> can be padded by the size of the record being removed.  This enables the file system to add a new file to the directory by comparing the <code class="docutils literal notranslate"><span class="pre">rec_len</span></code> and the <code class="docutils literal notranslate"><span class="pre">name_len</span></code> to identify if there is enough unused space between the used part of a directory entry and the next to insert the file.</p>
+<section id="smarter-directories">
+<h2><span class="section-number">16.1. </span>Smarter Directories<a class="headerlink" href="#smarter-directories" title="Permalink to this headline">#</a></h2>
+<p>From your data structures class you should realize that linear search
+isn’t an optimal data structure for searching, but it’s simple, robust,
+and fast enough for small directories, where the primary cost is
+retrieving a block of data from the disk. As an example, a local machine of the author has   has 94944 directories that use a single 4KB block, another 957
+that use 2 to 5 blocks, and only 125 larger than 5 blocks. In other
+words, for the 99% of the directories that fit within a single 4 KB
+block, a more complex algorithm would not reduce the amount of data read
+from disk, and the difference between <span class="math notranslate nohighlight">\(O(N)\)</span> and <span class="math notranslate nohighlight">\(O(logN)\)</span> algorithms
+when searching a single block is negligible.</p>
+<p>However the largest directories are actually quite big: the largest on
+this machine, for example, has 13,748 entries; another system containing about 64,000 files with long file
+names, or roughly 4000 blocks (16 MB) of directory data. Since
+directories tend to grow slowly, these blocks were probably allocated a
+few at a time, resulting in hundreds or thousands of disk seeks to read
+the entire directory into memory. At 15 ms per seek, this could require
+10-30 seconds or more, and once the data was cached in memory, linear
+search in a 16 MB array will probably take a millisecond or two.</p>
+<p>To allow directories with tens of thousands of files or more, modern
+file systems tend to use more advanced data structures for their
+directories. NTFS and Btrfs use B-trees, a form of a balanced
+tree. Other file systems, like Sun ZFS, use hash tables for their
+directories, while ext4 uses a hybrid hash/tree structure.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
