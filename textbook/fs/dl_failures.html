@@ -680,13 +680,7 @@ title="Print to PDF"
 <h2><span class="section-number">17.1. </span>Consistency and Journaling<a class="headerlink" href="#consistency-and-journaling" title="Permalink to this headline">#</a></h2>
 <p>Unlike in-memory structures, data structures on disk must survive system
 crashes, whether due to hardware reasons (e.g. power failure) or
-software failures. This is a different problem than the consistency
-issues we dealt with for in-memory structures, where data corruption
-could only occur due to the action of other threads, and could be
-prevented by the proper use of mutexes and similar mechanisms.
-Unfortunately there is no mutex which will prevent a system from
-crashing before the mutex is unlocked, or file system designers would
-use it liberally. The problem is compounded by the fact that operating
+software failures. The problem is compounded by the fact that operating
 systems typically cache reads and writes to increase performance, so
 that writes to the disk may occur in a much different order than that in
 which they were issued by the file system code.</p>

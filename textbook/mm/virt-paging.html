@@ -803,19 +803,10 @@ of free physical pages, and allocate them as needed. Because any
 combination of physical pages may be used for an allocation request,
 there is no external fragmentation, and a request will not fail as long
 as there are enough free physical pages to fulfill it.</p>
-<p>Instead, modern CPUs use <em>paged address translation</em>, which divides the
-physical and virtual memory spaces into fixed-sized pages, typically
-4KB, and provides a flexible mapping between virtual and physical pages,
-as shown in <a class="reference external" href="#fig:vm:fig3">[fig:vm:fig3]</a>{reference-type=”autoref”
-reference=”fig:vm:fig3”}. The operating system can then maintain a list
-of free physical pages, and allocate them as needed. Because any
-combination of physical pages may be used for an allocation request,
-there is no external fragmentation, and a request will not fail as long
-as there are enough free physical pages to fulfill it.</p>
 <section id="internal-fragmentation">
 <h3><span class="section-number">22.3.1. </span>Internal Fragmentation<a class="headerlink" href="#internal-fragmentation" title="Permalink to this headline">#</a></h3>
-<p>Paging solves the problem of external fragmentation, but it suffers from
-another issue, <em>internal fragmentation</em>, because space may be wasted
+<p>Paging solves the problem of external fragmentation, there is no wasted space between pages of virtual memory.  However, paging does suffer from
+another issue, <em>internal fragmentation</em>, space may be wasted
 <em>inside</em> the allocated pages. E.g. if 10 KB of memory is allocated in
 4KB pages, 3 pages (a total of 12 KB) are allocated, and 2KB is wasted.
 To allocate hundreds of KB in pages of 4KB this is a minor overhead:
