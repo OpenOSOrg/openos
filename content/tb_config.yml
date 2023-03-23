@@ -58,7 +58,8 @@ parse:
     - linkify
     - substitution
     - html_admonition
-
+    - deflist
+    
 numbering:
   code: true
 
