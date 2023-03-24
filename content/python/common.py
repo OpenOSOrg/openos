@@ -52,11 +52,16 @@ def MDBox(contents, title="", w="100%", h="100%",
 '''
     return md_text
 
+# demke - modified to start line numbering at 1, not 0, 
+#         to match myst code-block line numbering
 def numberLines(data):
     lines = ''
-    i=0
-    for l in data.splitlines():
-        lines += str(i) + ": " + l + "\n"
+    i=1
+    for l in data.splitlines(keepends=True):
+        if i < 10:
+            lines += " " +  str(i) + ": " + l
+        else:
+            lines += str(i) + ": " + l
         i=i+1
     return lines
 
