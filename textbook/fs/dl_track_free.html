@@ -627,10 +627,10 @@ title="Print to PDF"
 <p><span class="caption-number">Fig. 15.1 </span><span class="caption-text">Free list as a linked list of blocks</span><a class="headerlink" href="#fs-free-ll" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The original Unix file system used a free list to store a list of unused blocks (see <code class="xref std std-numref docutils literal notranslate"><span class="pre">fs:fs:free:ll</span></code>);  blocks were allocated from the head of this list for new files, and returned to the head when freed. Implementing this results in a large initialization cost; if you have a 1TB drive, it means you will start off by having 4M 4KB blocks to hold the free list to start off with, however, it compresses to a small number of blocks for the free list when the disk becomes full.</p>
+<p>The original Unix file system used a free list to store a list of unused blocks (see <a class="reference internal" href="#fs-free-ll"><span class="std std-numref">Fig. 15.1</span></a>);  blocks were allocated from the head of this list for new files, and returned to the head when freed. Implementing this results in a large initialization cost; if you have a 1TB drive, it means you will start off by having 4M 4KB blocks to hold the free list to start off with, however, it compresses to a small number of blocks for the free list when the disk becomes full.</p>
 <p>The bigger disadvantage of this approach is that, as files were created and deleted this list became randomized, so that blocks allocated for a file are rarely sequential and disk seeks were needed for nearly every block read from or written to disk. Originally this wasn’t a significant problem, because early Unix systems ran on machines with fast disks and excruciatingly slow CPUs.</p>
 <figure class="align-default" id="fs-free-bv">
-<a class="reference internal image-reference" href="../_images/free_bitvector.png"><img alt="../_images/free_bitvector.png" src="../_images/free_bitvector.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="../_images/free_bitvector.png"><img alt="../_images/free_bitvector.png" src="../_images/free_bitvector.png" style="width: 60%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 15.2 </span><span class="caption-text">Free blocks recorded as bits</span><a class="headerlink" href="#fs-free-bv" title="Permalink to this image">#</a></p>
 </figcaption>
