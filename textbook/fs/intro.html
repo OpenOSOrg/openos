@@ -617,64 +617,12 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This portion of the book is under construction, not ready to be read</p>
-</div>
-<div class="toggle docutils container">
-<p>Outline</p>
-<ul class="simple">
-<li><p>intro</p>
-<ul>
-<li><p>goal FS,</p></li>
-</ul>
-</li>
-<li><p>Disk HW</p>
-<ul>
-<li><p>short description to understand key constraints FS designed under</p></li>
-</ul>
-</li>
-<li><p>Interface</p>
-<ul>
-<li><p>keep what have then talk through example</p></li>
-</ul>
-</li>
-<li><p>On disk implementation</p>
-<ul>
-<li><p>overview of next few chapters</p></li>
-</ul>
-</li>
-<li><p>Tracking free space</p></li>
-<li><p>Used blocks in a file</p></li>
-<li><p>Directory/naming</p></li>
-<li><p>Dealing with failures</p></li>
-<li><p>Example EXT2/3/4</p></li>
-<li><p>Example</p></li>
-<li><p>Kernel functionality (next two)</p></li>
-<li><p>VFS</p></li>
-<li><p>Buffer cache</p></li>
-</ul>
-<p>The next X chapters describe various</p>
-<p>their <a class="reference internal" href="disklayout.html#cont-fs-layout"><span class="std std-ref">on disk</span></a> layout</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="dl_track_used.html#fs-dl-track-used"><span class="std std-ref">fs:dl_track_used</span></a></p></li>
-<li><p><a class="reference internal" href="dl_track_free.html#fs-dl-track-free"><span class="std std-ref">fs:dl_track_free</span></a></p></li>
-<li><p><a class="reference internal" href="dl_name.html#fs-dl-name"><span class="std std-ref">fs:dl_name</span></a>                                                                                      - <a class="reference internal" href="dl_failures.html#fs-dl-failures"><span class="std std-ref">fs:dl_failures</span></a></p></li>
-<li><p><a class="reference internal" href="dl_ex_exx.html#fs-dl-ex-exx"><span class="std std-ref">fs:dl_ex_exx</span></a></p></li>
-</ul>
-<p>, and then <a class="reference internal" href="kernelimp.html#cont-fs-kernel"><span class="std std-ref">kernel implementation issues</span></a>.</p>
-</div>
-<section class="tex2jax_ignore mathjax_ignore" id="introduction">
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <span id="cont-fs-intro"></span><h1><span class="section-number">10. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
 <p>The power of Unix comes from the fundamental idea that <a class="reference internal" href="../intro/abstractions.html#cont-gs-abstractions-file"><span class="std std-ref">everything is a file</span></a> or really more accurately a stream.  However, in many cases we want to store data persistent on disks and in that case file systems provide that abstraction, and, as we will see, a richer set of abstractions.</p>
 <p>We first describe this <a class="reference internal" href="interface.html#cont-fs-interface"><span class="std std-ref">rich interface</span></a> Unix (and many similar systems) require of file systems.  We then discuss the <a class="reference internal" href="diskhw.html#cont-fs-disks"><span class="std std-ref">ugly hardware</span></a> abstractions that needs to be transformed by file systems into this interface.</p>
-<p>After describing how you get to the file system <a class="reference internal" href="disklayout.html#cont-fs-layout"><span class="std std-ref">on disk</span></a>, the next four chapters describe key file system design issues, namely how to:</p>
-<ol class="simple">
-<li><p><a class="reference internal" href="dl_track_used.html#fs-dl-track-used"><span class="std std-ref">keep track of the blocks used in a file</span></a></p></li>
-<li><p><a class="reference internal" href="dl_track_free.html#fs-dl-track-free"><span class="std std-ref">keep track of the free blocks</span></a></p></li>
-<li><p><a class="reference internal" href="dl_name.html#fs-dl-name"><span class="std std-ref">maintain the name space</span></a></p></li>
-<li><p><a class="reference internal" href="dl_failures.html#fs-dl-failures"><span class="std std-ref">deal with failures</span></a></p></li>
-</ol>
+<p>After describing how you get to the file system <a class="reference internal" href="disklayout.html#cont-fs-layout"><span class="std std-ref">on disk</span></a>, the next four chapters describe key file system design issues, namely how to: 1)<a class="reference internal" href="dl_track_used.html#fs-dl-track-used"><span class="std std-ref">keep track of the blocks used in a file</span></a>, 2)<a class="reference internal" href="dl_track_free.html#fs-dl-track-free"><span class="std std-ref">keep track of the free blocks</span></a>, 3) <a class="reference internal" href="dl_name.html#fs-dl-name"><span class="std std-ref">maintain the name space</span></a>, and 4) <a class="reference internal" href="dl_failures.html#fs-dl-failures"><span class="std std-ref">deal with failures</span></a>.</p>
+<p>The final two chapters <a class="reference internal" href="dl_ex_exx.html#fs-dl-ex-exx"><span class="std std-ref">provide examples of real file systems</span></a> and <a class="reference internal" href="kernelimp.html#cont-fs-kernel"><span class="std std-ref">discuss what runs in the kernel, and the VFS layer unix file systems have</span></a>.</p>
 </section>
 
     <script type="text/x-thebe-config">

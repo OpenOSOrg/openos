@@ -53,6 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="16. Disk Layout:Implementing Name Space" href="dl_name.html" />
@@ -644,7 +646,7 @@ When you extend a file you begin the search at the bit corresponding to
 the last block in the file; in this way if a sequential block is
 available it will be allocated. This method results in files being
 allocated in a mostly sequential fashion, reducing disk seeks and
-greatly improving performance. Note, when disk is fragmented, each block may have just a few bits available, so this approach becomes expensive to find a block.  However, since a single page of 4096 bytes can represent 132MB ($4096<em>8</em>4096), you can efficiently cache these blocks in memory.</p>
+greatly improving performance. Note, when disk is fragmented, each block may have just a few bits available, so this approach becomes expensive to find a block.  However, since a single page of 4096 bytes can represent 132MB (<span class="math notranslate nohighlight">\(4096*8*4096\)</span>), you can efficiently cache these blocks in memory.</p>
 </section>
 
     <script type="text/x-thebe-config">
