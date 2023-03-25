@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>13. File System Layout &#8212; Introduction to Operating Systems</title>
+    <title>34. Deadlocks &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="14. Disk Layout:Tracking Used Space" href="dl_track_used.html" />
-    <link rel="prev" title="12. A bit about Disks" href="diskhw.html" />
+    <link rel="next" title="35. Challenges of Modern Hardware" href="hardware_challenges.html" />
+    <link rel="prev" title="33. Synchronization Primitives" href="locking.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -180,54 +180,54 @@ const thebe_selector_output = ".output, .cell_output"
   File Systems
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
+  <a class="reference internal" href="../fs/intro.html">
    10. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="interface.html">
+  <a class="reference internal" href="../fs/interface.html">
    11. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="diskhw.html">
+  <a class="reference internal" href="../fs/diskhw.html">
    12. A bit about Disks
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
    13. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="dl_track_used.html">
+  <a class="reference internal" href="../fs/dl_track_used.html">
    14. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="dl_track_free.html">
+  <a class="reference internal" href="../fs/dl_track_free.html">
    15. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="dl_name.html">
+  <a class="reference internal" href="../fs/dl_name.html">
    16. Disk Layout:Implementing Name Space
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="dl_failures.html">
+  <a class="reference internal" href="../fs/dl_failures.html">
    17. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="dl_ex_exx.html">
+  <a class="reference internal" href="../fs/dl_ex_exx.html">
    18. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="kernelimp.html">
+  <a class="reference internal" href="../fs/kernelimp.html">
    19. Kernel implementation
   </a>
  </li>
@@ -299,34 +299,34 @@ const thebe_selector_output = ".output, .cell_output"
   Concurrency
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../sync/sync.html">
+  <a class="reference internal" href="sync.html">
    31. Intro Concurrency Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../sync/sharing.html">
+  <a class="reference internal" href="sharing.html">
    32. Cooperating Processes
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../sync/locking.html">
+  <a class="reference internal" href="locking.html">
    33. Synchronization Primitives
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/deadlock.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    34. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../sync/hardware_challenges.html">
+  <a class="reference internal" href="hardware_challenges.html">
    35. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../sync/linux_locking.html">
+  <a class="reference internal" href="linux_locking.html">
    36. Locking in the Linux Kernel
   </a>
  </li>
@@ -433,7 +433,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/fs/disklayout.ipynb"
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/sync/deadlock.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -451,7 +451,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/fs/disklayout.ipynb&branch=main"
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/sync/deadlock.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -511,7 +511,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Ffs/disklayout.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fsync/deadlock.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -528,7 +528,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/edit/main/content/fs/disklayout.ipynb"
+        <a href="https://github.com/okrieg/openos/edit/main/content/sync/deadlock.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -556,7 +556,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/fs/disklayout.ipynb"
+        <a href="../_sources/sync/deadlock.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -605,7 +605,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>File System Layout</h1>
+                <h1>Deadlocks</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -617,49 +617,14 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="file-system-layout">
-<span id="cont-fs-layout"></span><h1><span class="section-number">13. </span>File System Layout<a class="headerlink" href="#file-system-layout" title="Permalink to this headline">#</a></h1>
-<p>To store a file system on a real disk, the high-level objects (directories, files, symbolic links) must be translated into read and write operations on disk blocks identified by logical block addresses. How do we do that?  How do we even know what file system should be used to understand the blocks on the disk? How do we load the operating system in the first place off of the disk?</p>
-<figure class="align-default" id="fs-disklayout">
-<a class="reference internal image-reference" href="../_images/disklayout-partitions.png"><img alt="../_images/disklayout-partitions.png" src="../_images/disklayout-partitions.png" style="width: 70%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 13.1 </span><span class="caption-text">Base disk layout with partition table</span><a class="headerlink" href="#fs-disklayout" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>As shown in <a class="reference internal" href="#fs-disklayout"><span class="std std-numref">Fig. 13.1</span></a> the operating system normally writes a partition table at the beginning of the disk that can be used to divide the disk into <em>partitions</em>, each potentially containing a different file system. For each partition, the table indicates the range of blocks in it, whether the partition contains an operating system that could be executed, and the type of file system that should be used to interpret the blocks.</p>
-<p>When a system starts up, the firmware will read the partition table, look at which partitions contain operating systems, and decide which one to boot (potentially asking the user).  It then reads the boot block of that partition, and starts executing code from that block that will in turn read other blocks…</p>
-<figure class="align-default" id="fs-disklayout-withfs">
-<a class="reference internal image-reference" href="../_images/disklayout-withexfs.png"><img alt="../_images/disklayout-withexfs.png" src="../_images/disklayout-withexfs.png" style="width: 70%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 13.2 </span><span class="caption-text">Example of a file system that might be in a partition.</span><a class="headerlink" href="#fs-disklayout-withfs" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p><a class="reference internal" href="#fs-disklayout-withfs"><span class="std std-numref">Fig. 13.2</span></a> shows example contents of a partition.  After the boot block, all the information is specific to the particular file system on that partition.  Once the operating system kernel is started, it will use the file system type information from the partition table to figure out if it understands that kind of file system.
-Recall, there are hundreds and hundreds of file systems, and operating systems like Linux have file system code specific to each one.  When we talked about <a class="reference internal" href="../intro/structure.html#cont-gs-structure-struc"><span class="std std-ref">operating system structure</span></a> we talked about how the file system code is normally dynamically loaded (see <a class="reference internal" href="../intro/structure.html#os-struc-services"><span class="std std-numref">Fig. 3.3</span></a>); if the operating system had all the file systems it could possibly understand loaded, it would be huge.</p>
-<p>While every file system does it differently, <a class="reference internal" href="#fs-disklayout-withfs"><span class="std std-numref">Fig. 13.2</span></a> shows on example organization for a simple file system. Key elements on disk are:</p>
-<ul class="simple">
-<li><p><strong>Superblock</strong>: describes the overall file system, including where the inodes are, where free block information is kept, the block size, the inode number for the root directory, … and all kinds of information for how to recover the file system if failures occur.</p></li>
-<li><p><strong>Free info</strong>: some data structure to describe which blocks in the partition or disk are free.</p></li>
-<li><p><strong>Inodes</strong>: an array of inode information indexed by inode number.</p></li>
-</ul>
-<p>The remainder of the partition is just disk blocks, which are used by the file system to store files and directories.</p>
-<aside class="sidebar">
-<p>Note that instead of 512-byte sectors, file systems traditionally use
-<em>disk blocks</em>, which are some small power-of-two multiple of the sector
-size, typically 1KB, 2KB, or 4KB. Reading and writing is performed in
-units of complete blocks, and file system addresses are stored as disk block numbers
-rather than LBAs. These disk block numbers must be multiplied by the appropriate value
-before being passed to the disk. Since modern disk drives have an
-internal sector size of 4 KB (despite pretending to support 512-byte
-sectors) and the virtual memory page size is 4 KB on most systems today,
-that has become a very common file system block size.</p>
-</aside>
-<p>the next four chapters describe key file system design decisions, namely how to:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="deadlocks">
+<span id="cont-sync-deadlock"></span><h1><span class="section-number">34. </span>Deadlocks<a class="headerlink" href="#deadlocks" title="Permalink to this headline">#</a></h1>
+<p>Describe deadlocks.</p>
 <ol class="simple">
-<li><p><a class="reference internal" href="dl_track_used.html#fs-dl-track-used"><span class="std std-ref">keep track of the blocks used in a file</span></a></p></li>
-<li><p><a class="reference internal" href="dl_track_free.html#fs-dl-track-free"><span class="std std-ref">keep track of the free blocks</span></a></p></li>
-<li><p><a class="reference internal" href="dl_name.html#fs-dl-name"><span class="std std-ref">maintain the name space</span></a></p></li>
-<li><p><a class="reference internal" href="dl_failures.html#fs-dl-failures"><span class="std std-ref">deal with failures</span></a></p></li>
+<li><p>Conditions for deadlock</p></li>
+<li><p>Deadlock prevention</p></li>
+<li><p>Deadlock avoidance</p></li>
+<li><p>Deadlock detection and recovery</p></li>
 </ol>
 </section>
 
@@ -676,7 +641,7 @@ that has become a very common file system block size.</p>
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./fs"
+            path: "./sync"
         },
         predefinedOutput: true
     }
@@ -690,17 +655,17 @@ that has become a very common file system block size.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="diskhw.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="locking.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">12. </span>A bit about Disks</p>
+            <p class="prev-next-title"><span class="section-number">33. </span>Synchronization Primitives</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="dl_track_used.html" title="next page">
+    <a class='right-next' id="next-link" href="hardware_challenges.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>Disk Layout:Tracking Used Space</p>
+        <p class="prev-next-title"><span class="section-number">35. </span>Challenges of Modern Hardware</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

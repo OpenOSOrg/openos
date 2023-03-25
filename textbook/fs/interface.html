@@ -651,15 +651,17 @@ title="Print to PDF"
     <a class="reference internal nav-link" href="#open-close">
      11.3.1. Open/close
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#read-write-operations">
-     11.3.2. Read/Write operations
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#read-write-operations">
+       11.3.1.1. Read/Write operations
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#naming-and-directories">
-     11.3.3. Naming and Directories
+     11.3.2. Naming and Directories
     </a>
    </li>
   </ul>
@@ -724,15 +726,17 @@ title="Print to PDF"
     <a class="reference internal nav-link" href="#open-close">
      11.3.1. Open/close
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#read-write-operations">
-     11.3.2. Read/Write operations
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#read-write-operations">
+       11.3.1.1. Read/Write operations
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#naming-and-directories">
-     11.3.3. Naming and Directories
+     11.3.2. Naming and Directories
     </a>
    </li>
   </ul>
@@ -772,14 +776,14 @@ This tree is constructed via the use of
 file system objects. A full filename thus specifies a <em>path</em> from the
 root, through the tree, to the object (a file or directory) itself.
 (Hence the use of the term “path” to mean “filename” in Unix
-documentation)</p>
+documentation.)</p>
 <figure class="align-default" id="fs-tree-logical">
 <a class="reference internal image-reference" href="../_images/filesys-tree.png"><img alt="../_images/filesys-tree.png" src="../_images/filesys-tree.png" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 11.1 </span><span class="caption-text">Logical view: hierarchical file system name space</span><a class="headerlink" href="#fs-tree-logical" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Each process has an associated <em>current directory</em>, which may be changed via the <code class="docutils literal notranslate"><span class="pre">chdir</span></code> system call. File names beginning in ‘<code class="docutils literal notranslate"><span class="pre">/</span></code>’ are termed <em>absolute</em> names, and are interpreted relative to the root of the naming tree, while <em>relative</em> names are
+<p>Each process has an associated <em>current directory</em>, which may be changed via the <code class="docutils literal notranslate"><span class="pre">chdir</span></code> system call. File names beginning with ‘<code class="docutils literal notranslate"><span class="pre">/</span></code>’ are termed <em>absolute</em> names, and are interpreted relative to the root of the naming tree, while <em>relative</em> names are
 interpreted beginning at the current directory. Thus in the file system in
 <a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 11.1</span></a>, if the current directory were <code class="docutils literal notranslate"><span class="pre">/home</span></code>,
 the the paths <code class="docutils literal notranslate"><span class="pre">pjd/.profile</span></code> and <code class="docutils literal notranslate"><span class="pre">/home/pjd/.profile</span></code> refer to the same
@@ -787,7 +791,7 @@ file, and <code class="docutils literal notranslate"><span class="pre">../bin/ca
 <p>Each directory also contains two special files <code class="docutils literal notranslate"><span class="pre">.</span></code> and <code class="docutils literal notranslate"><span class="pre">..</span></code>, where <code class="docutils literal notranslate"><span class="pre">d/..</span></code>  identifies the parent directory of <code class="docutils literal notranslate"><span class="pre">d</span></code>, and <code class="docutils literal notranslate"><span class="pre">d/.</span></code> identifies <code class="docutils literal notranslate"><span class="pre">d</span></code>
 itself.</p>
 <p>A typical system may provide access to
-several file systems at once, e.g. a local disk and an external USB
+several file systems at once, e.g., a local disk and an external USB
 drive or network volume. In order to unambiguously specify a file we
 thus need to both identify the file within possibly nested directories
 in a single file system, as well as identifying the file system itself.
@@ -796,7 +800,7 @@ another file system, giving a single uniform namespace.  For example, on the sys
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "97b2120e77174e168fc5c55b6543e15b", "version_major": 2, "version_minor": 0}
+{"model_id": "c1ee056d6f2043039b8150ed213c8dc0", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <p>The actual implementation of mounting in Linux and other Unix-like
@@ -811,7 +815,14 @@ Unix systems see the <code class="docutils literal notranslate"><span class="pre
 </section>
 <section id="objects">
 <h2><span class="section-number">11.2. </span>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">#</a></h2>
-<p>Once you use a pathname to find an object in the file system, you need to find out what kind of an object you have found.  Each file is identified in the file system by a unique <strong>inode number</strong> that references an <strong>inode</strong><a class="footnote-reference brackets" href="#inode" id="id2">2</a> that maintains all kind of information, or <em>meta-data</em> about the file (try <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">inode</span></code> for more information).   While the inode itself is internal to the file system, and contains additional information, generic information can be obtained for any file as described <a class="reference internal" href="#cont-fs-calls-naming"><span class="std std-ref">below</span></a>.  The types of objects that can be referenced by inode are show in <a class="reference internal" href="#file-types"><span class="std std-numref">Table 11.1</span></a>.</p>
+<aside class="sidebar">
+<p class="sidebar-title">So, why is it called an inode? Dennis Ritchie, who was one of the authors of UNIX, gave this enlightened answer to the Linux kernel mailing list in 2002:</p>
+<blockquote>
+<div><p>In truth, I don’t know either. It was just a term that we started to use. “Index” is my best guess, because of the slightly unusual file system structure that stored the access information of files as a flat array on the disk, with all the hierarchical directory information living aside from this. Thus the i-number is an index in this array, the i-node is the selected element of the array.</p>
+</div></blockquote>
+<p style='text-align: right;'> ---Dennis Ritchie, <a href='https://lkml.indiana.edu/hypermail/linux/kernel/0207.2/1182.html'>[LKML 2002]</a></p>
+</aside>
+<p>Once you use a pathname to find an object in the file system, you need to find out what kind of an object you have found.  Each file is identified in the file system by a unique <strong>inode number</strong> that references an <strong>inode</strong> data structure that maintains all kinds of information, or <em>meta-data</em> about the file (try <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">inode</span></code> for more information).   While the inode itself is internal to the file system, and contains additional information, generic information can be obtained for any file as described <a class="reference internal" href="#cont-fs-calls-naming"><span class="std std-ref">below</span></a>.  One of the fields in an inode identifies the type of object that the inode refers to. The types of objects that can be referenced by inode are show in <a class="reference internal" href="#file-types"><span class="std std-numref">Table 11.1</span></a>.</p>
 <table class="colwidths-given table" id="file-types">
 <caption><span class="caption-number">Table 11.1 </span><span class="caption-text">Types of objects in a file system. </span><a class="headerlink" href="#file-types" title="Permalink to this table">#</a></caption>
 <colgroup>
@@ -859,20 +870,20 @@ Unix systems see the <code class="docutils literal notranslate"><span class="pre
 <p>The last four are special files that you can connect into a file system.  The first three are core objects for all file systems.</p>
 <section id="files">
 <h3><span class="section-number">11.2.1. </span>Files<a class="headerlink" href="#files" title="Permalink to this headline">#</a></h3>
-<p>In keeping with the idea that everything is a file, Unix made all files just a sequence of 8-bit bytes<a class="footnote-reference brackets" href="#eff" id="id3">5</a><a class="footnote-reference brackets" href="#simple" id="id4">6</a> Any
+<p>In keeping with the idea that everything is a file, Unix made all files just a sequence of 8-bit bytes<a class="footnote-reference brackets" href="#eff" id="id2">2</a><a class="footnote-reference brackets" href="#simple" id="id3">3</a>. Any
 structure to the file (such as a JPEG image, an executable program, or a
 database) is the responsibility of applications which read and write the
 file. The file format is commonly indicated by a file extension like
 .jpg or .xml, but this is just a convention followed by applications and
 users. You can do things like rename file.pdf to file.jpg, which will
-confuse some applications and users, but have no effect on the file
+confuse some applications and users, but it will have no effect on the file
 contents.</p>
 <p>Data in a byte-sequence file is identified by the combination of the
 file and its offset (in bytes) within the file. Unlike in-memory objects
 in an application, where a reference (pointer) to a component of an
 object may be passed around independently, a portion of a file cannot be
 named without identifying the file it is contained in. Data in a file
-can be created by a write which appends more data to the end of a
+can be created by a <code class="docutils literal notranslate"><span class="pre">write</span></code> which appends more data to the end of a
 shorter file, and modified by over-writing in the middle of a file.
 However, it can’t be “moved” from one offset to another: if you use a
 text editor to add or delete text in the middle of a file, the editor
@@ -887,13 +898,15 @@ end).</p>
 </section>
 <section id="directory">
 <span id="cont-fs-interface-dir"></span><h3><span class="section-number">11.2.2. </span>Directory<a class="headerlink" href="#directory" title="Permalink to this headline">#</a></h3>
-<p>As shown in <a class="reference internal" href="#fs-tree-imp"><span class="std std-numref">Fig. 11.2</span></a>, a directory contains entries with strings that identify objects contained in the directory, and for each the inode numbers that can then be used to find out more information about the corresponding object.   The same inode can be referenced by multiple directories, with potentially different names.  For example, <code class="docutils literal notranslate"><span class="pre">..</span></code> is a hard link to the parent directory, as we can see by creating a directory <code class="docutils literal notranslate"><span class="pre">/tmp/foo</span></code> the reference count (second entry) for <code class="docutils literal notranslate"><span class="pre">.</span></code> is 2 before we create a subdirectory bar in it, and 3 after.</p>
+<p>As shown in <a class="reference internal" href="#fs-tree-imp"><span class="std std-numref">Fig. 11.2</span></a>, a directory contains entries with strings that identify objects contained in the directory, and for each the inode numbers that can then be used to find out more information about the corresponding object.   The same inode can be referenced by multiple directories, with potentially different names. Each directory entry that maps a name to an inode number is called a <em>hard link</em> to the inode, and another field in the inode structure records the number of hard links to that inode.  For example, the entry named <code class="docutils literal notranslate"><span class="pre">..</span></code> in any directory is a hard link to the parent directory. To illustrate this point, let’s create a directory named <code class="docutils literal notranslate"><span class="pre">foo</span></code> in the <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> directory and see how the link count for <code class="docutils literal notranslate"><span class="pre">foo</span></code> changes when we create a subdirectory <code class="docutils literal notranslate"><span class="pre">bar</span></code> inside foo.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "5996ea18a26a427ab3fa3a37f8310272", "version_major": 2, "version_minor": 0}
+{"model_id": "2279715e13b9434ab79d5ab2ae41c1b4", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
+<p>As we can see, after creating a directory <code class="docutils literal notranslate"><span class="pre">/tmp/foo</span></code> the reference count (second entry in the output above) for the <code class="docutils literal notranslate"><span class="pre">.</span></code> in <code class="docutils literal notranslate"><span class="pre">foo</span></code> is 2 before we create a subdirectory  <code class="docutils literal notranslate"><span class="pre">bar</span></code> in it, and 3 after. The initial two links come from the parent directory’s entry named <code class="docutils literal notranslate"><span class="pre">foo</span></code>, and the <code class="docutils literal notranslate"><span class="pre">.</span></code> entry in <code class="docutils literal notranslate"><span class="pre">foo</span></code> itself. After the creation of <code class="docutils literal notranslate"><span class="pre">bar</span></code>, there is a third link to the inode for <code class="docutils literal notranslate"><span class="pre">foo</span></code> due to the <code class="docutils literal notranslate"><span class="pre">..</span></code> entry in <code class="docutils literal notranslate"><span class="pre">bar</span></code>, which refers to its parent directory.</p>
+<p>The link count in an inode ensures that the object the inode refers to (file or directory) will not be deleted as long as there is at least one hard link to the inode. When you issue a delete command for a filename (e.g., ‘rm somefile’), the file system removes the entry for the filename from a directory and decrements the link count on the inode that entry referred to. Only when the last hard link is removed will the file object really be freed.</p>
 </section>
 <section id="symbolic-links">
 <h3><span class="section-number">11.2.3. </span>Symbolic links<a class="headerlink" href="#symbolic-links" title="Permalink to this headline">#</a></h3>
@@ -921,14 +934,14 @@ looking up <code class="docutils literal notranslate"><span class="pre">program-
 <code class="docutils literal notranslate"><span class="pre">/usr/program-1.0.1</span></code> directory.</p></li>
 <li><p>look up <code class="docutils literal notranslate"><span class="pre">file.txt</span></code> in this directory, and find it.</p></li>
 </ol>
-<p>Note that unlike hard links, a symbolic link may be “broken”—i.e. if
+<p>Note that unlike hard links, a symbolic link does not increase the link count in the inode that it refers to. As a result, a symbolic link may be “broken”—i.e., if
 the file it points to does not exist. This can happen if the link was
 created in error, or the file or directory it points to is deleted
 later. In that case path translation will fail with an error:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "b7fcb2590a3a4935bbd7752cdd8db665", "version_major": 2, "version_minor": 0}
+{"model_id": "2906bac488544d7da427691e94d15a9d", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <p>Finally, to prevent loops there is a limit on how many levels of
@@ -936,7 +949,7 @@ symbolic link may be traversed in a single path translation:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "340a98466c164b49b2ccbd2c95ddd0e4", "version_major": 2, "version_minor": 0}
+{"model_id": "206a297ac80b41a982ed5435ad486dc2", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 </section>
@@ -968,18 +981,17 @@ allocated for it.</p></li>
 <p>Note that application programs rarely use the system calls themselves to
 access files, but instead use higher-level frameworks, ranging from Unix
 Standard I/O to high-level application frameworks.</p>
-</section>
 <section id="read-write-operations">
-<h3><span class="section-number">11.3.2. </span>Read/Write operations<a class="headerlink" href="#read-write-operations" title="Permalink to this headline">#</a></h3>
+<h4><span class="section-number">11.3.1.1. </span>Read/Write operations<a class="headerlink" href="#read-write-operations" title="Permalink to this headline">#</a></h4>
 <p>To get a file with data in it, you need to write it; to use that data you need to read it. To enable files to be accessed as a <em>stream</em> just like from a terminal or pipe, UNIX uses the concept of a <em>current position</em>
 associated with a file descriptor. When you read 100 bytes (i.e. bytes 0
-to 99) from a file this pointer advances by 100 bytes, so that the next
+to 99) from a file, this pointer advances by 100 bytes, so that the next
 read will start at byte 100, and similarly for write. When a file is
 opened for reading the pointer starts at 0; when open for writing the
 application writer can choose to start at the beginning (default) and
 overwrite old data, or start at the end (<code class="docutils literal notranslate"><span class="pre">O_APPEND</span></code> flag) to append new
 data to the file.</p>
-<p>The read and write routines are the same we described before, but, for , they:</p>
+<p>The read and write routines are the same ones we described before, but, for ease of reference, they are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">read(desc,</span> <span class="pre">buffer,</span> <span class="pre">max)</span></code>: Read <code class="docutils literal notranslate"><span class="pre">max</span></code> bytes (or fewer if the end of
 the file is reached) into <code class="docutils literal notranslate"><span class="pre">buffer</span></code>, starting at the current position,
@@ -994,9 +1006,9 @@ relative to the beginning, end, or current position in the file.</p></li>
 </ul>
 <p>Note that in the basic Unix interface (unlike e.g. Windows) there is no
 way to specify a particular location in a file to read or write
-from<a class="footnote-reference brackets" href="#id7" id="id5">3</a>. Programs like databases (e.g. SQLite, MySQL) which need to
+from<a class="footnote-reference brackets" href="#pread" id="id4">4</a>. Programs like databases (e.g. SQLite, MySQL) which need to
 write to and read from arbitrary file locations must instead move the
-current position by using <code class="docutils literal notranslate"><span class="pre">lseek</span></code> before a read or write. However most
+current position by using <code class="docutils literal notranslate"><span class="pre">lseek</span></code> before a read or write. However, most
 programs either read or write a file from the beginning to the end
 (especially when written for an OS that makes it easier to do things
 that way), and thus don’t really need to perform seeks. Because most
@@ -1005,19 +1017,20 @@ re-directed so that the same program can—without any special
 programming—read from or write to a terminal, a network connection, a
 file, or a pipe from or to another program.</p>
 </section>
+</section>
 <section id="naming-and-directories">
-<span id="cont-fs-calls-naming"></span><h3><span class="section-number">11.3.3. </span>Naming and Directories<a class="headerlink" href="#naming-and-directories" title="Permalink to this headline">#</a></h3>
+<span id="cont-fs-calls-naming"></span><h3><span class="section-number">11.3.2. </span>Naming and Directories<a class="headerlink" href="#naming-and-directories" title="Permalink to this headline">#</a></h3>
 <p>In Unix there is a difference between a name
 (a directory entry) and the object (file or directory) that the name
 points to. The naming and directories operations are:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">rename(path1,</span> <span class="pre">path2)</span></code> - Rename an object (i.e. file or directory) by
+<li><p><code class="docutils literal notranslate"><span class="pre">rename(path1,</span> <span class="pre">path2)</span></code> - Rename an object (i.e., a file or directory) by
 either changing the name in its directory entry (if the destination is
 in the same directory) or creating a new entry and deleting the old one
 (if moving into a new directory).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">link(path1,</span> <span class="pre">path2)</span></code>: Add a <em>hard link</em> to a file<a class="footnote-reference brackets" href="#id8" id="id6">4</a>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">unlink(path)</span></code>: Decrement the reference count to a file, if it goes to zero, delete the file.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">desc</span> <span class="pre">=</span> <span class="pre">opendir(path)</span></code>, <code class="docutils literal notranslate"><span class="pre">readdir(desc,</span> <span class="pre">dirent*),</span> <span class="pre">dirent=(name,type,length)</span></code>: This interface allows a program to enumerate names in a directory, and determine their type. (i.e. file, directory, symbolic link, or special-purpose file)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">link(path1,</span> <span class="pre">path2)</span></code>: Add a <em>hard link</em> to a file<a class="footnote-reference brackets" href="#hardlink" id="id5">5</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unlink(path)</span></code>: Decrement the reference count to a file, if it goes to zero, delete the file<a class="footnote-reference brackets" href="#unlink" id="id6">6</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">desc</span> <span class="pre">=</span> <span class="pre">opendir(path)</span></code>, <code class="docutils literal notranslate"><span class="pre">readdir(desc,</span> <span class="pre">dirent*),</span> <span class="pre">dirent=(name,type,length)</span></code>: This interface allows a program to enumerate names in a directory, and determine their type (i.e., file, directory, symbolic link, or special-purpose file).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stat(file,</span> <span class="pre">statbuf)</span></code>, <code class="docutils literal notranslate"><span class="pre">fstat(desc,</span> <span class="pre">statbuf)</span></code>:  returns information about the file such as  size, owner, permissions, modification time, etc. These are attributes of the file itself, residing in the inode and returned in the following structure.</p></li>
 </ul>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">stat</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -1044,108 +1057,111 @@ in the same directory) or creating a new entry and deleting the old one
 </section>
 <section id="some-examples">
 <h2><span class="section-number">11.4. </span>Some examples<a class="headerlink" href="#some-examples" title="Permalink to this headline">#</a></h2>
-<p>Consider the following file that copies one file to another.  After opening the input file (line 25) we stat the input file to get the permissions (i.e., the mode), create a file with that mode (line 36), and then go into a loop reading data from the input file into a buffer, and then writing the buffer to the output file.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<p><font size="1.2rem"><b> An example program that copies one file to another: fcopy2.c </b></p>
-<div style="width:100%; height:100%; font-size:inherit; overflow: auto;" >
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">:</span> <span class="o">//</span> <span class="n">simple</span> <span class="n">program</span> <span class="n">to</span> <span class="n">copy</span> <span class="n">a</span> <span class="n">file</span>
-<span class="mi">1</span><span class="p">:</span> 
-<span class="mi">2</span><span class="p">:</span> <span class="c1">#include &lt;sys/types.h&gt;</span>
-<span class="mi">3</span><span class="p">:</span> <span class="c1">#include &lt;fcntl.h&gt;</span>
-<span class="mi">4</span><span class="p">:</span> <span class="c1">#include &lt;stdlib.h&gt;</span>
-<span class="mi">5</span><span class="p">:</span> <span class="c1">#include &lt;unistd.h&gt;</span>
-<span class="mi">6</span><span class="p">:</span> <span class="c1">#include &lt;stdio.h&gt;</span>
-<span class="mi">7</span><span class="p">:</span> <span class="c1">#include &lt;assert.h&gt;</span>
-<span class="mi">8</span><span class="p">:</span> <span class="c1">#include &lt;sys/stat.h&gt;</span>
-<span class="mi">9</span><span class="p">:</span> 
-<span class="mi">10</span><span class="p">:</span> <span class="c1">#define BUF_SIZE 4096</span>
-<span class="mi">11</span><span class="p">:</span> <span class="o">//</span> <span class="n">user</span> <span class="n">has</span> <span class="n">read</span> <span class="ow">and</span> <span class="n">write</span> <span class="n">permission</span>
-<span class="mi">12</span><span class="p">:</span> 
-<span class="mi">13</span><span class="p">:</span> <span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
-<span class="mi">14</span><span class="p">:</span> <span class="p">{</span>
-<span class="mi">15</span><span class="p">:</span> 	<span class="nb">int</span> <span class="n">in_fd</span><span class="p">,</span> <span class="n">out_fd</span><span class="p">,</span> <span class="n">rd_count</span><span class="p">,</span> <span class="n">wt_count</span><span class="p">,</span> <span class="n">rc</span><span class="p">;</span>
-<span class="mi">16</span><span class="p">:</span> 	<span class="n">mode_t</span> <span class="n">md</span><span class="p">;</span> 
-<span class="mi">17</span><span class="p">:</span> 	<span class="n">struct</span> <span class="n">stat</span> <span class="n">statbuf</span><span class="p">;</span>	
-<span class="mi">18</span><span class="p">:</span> 	<span class="n">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUF_SIZE</span><span class="p">];</span>
-<span class="mi">19</span><span class="p">:</span> 
-<span class="mi">20</span><span class="p">:</span> 	<span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-<span class="mi">21</span><span class="p">:</span> 		<span class="n">perror</span><span class="p">(</span><span class="s2">&quot;Can&#39;t open input file</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
-<span class="mi">22</span><span class="p">:</span> 		<span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-<span class="mi">23</span><span class="p">:</span> 	<span class="p">}</span>
-<span class="mi">24</span><span class="p">:</span> 
-<span class="mi">25</span><span class="p">:</span> 	<span class="n">in_fd</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">O_RDONLY</span><span class="p">);</span>
-<span class="mi">26</span><span class="p">:</span> 	<span class="k">if</span> <span class="p">(</span><span class="n">in_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-<span class="mi">27</span><span class="p">:</span> 		<span class="n">perror</span><span class="p">(</span><span class="s2">&quot;Can&#39;t creat output file</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
-<span class="mi">28</span><span class="p">:</span> 		<span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-<span class="mi">29</span><span class="p">:</span> 	<span class="p">}</span>
-<span class="mi">30</span><span class="p">:</span> 	<span class="k">if</span> <span class="p">((</span><span class="n">rc</span> <span class="o">=</span> <span class="n">fstat</span><span class="p">(</span><span class="n">in_fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">statbuf</span><span class="p">))</span> <span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-<span class="mi">31</span><span class="p">:</span> 		<span class="n">perror</span><span class="p">(</span><span class="s2">&quot;fstat failed</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
-<span class="mi">32</span><span class="p">:</span> 		<span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-<span class="mi">33</span><span class="p">:</span> 	<span class="p">}</span>
-<span class="mi">34</span><span class="p">:</span> 	<span class="n">md</span> <span class="o">=</span> <span class="n">statbuf</span><span class="o">.</span><span class="n">st_mode</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">S_IRWXU</span><span class="o">|</span><span class="n">S_IRWXG</span><span class="o">|</span><span class="n">S_IRWXO</span><span class="p">);</span>
-<span class="mi">35</span><span class="p">:</span> 
-<span class="mi">36</span><span class="p">:</span> 	<span class="n">out_fd</span> <span class="o">=</span> <span class="n">creat</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">md</span><span class="p">);</span>
-<span class="mi">37</span><span class="p">:</span> 	<span class="k">if</span> <span class="p">(</span><span class="n">out_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-<span class="mi">38</span><span class="p">:</span> 		<span class="n">perror</span><span class="p">(</span><span class="s2">&quot;Can&#39;t creat output file</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
-<span class="mi">39</span><span class="p">:</span> 		<span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-<span class="mi">40</span><span class="p">:</span> 	<span class="p">}</span>
-<span class="mi">41</span><span class="p">:</span> 
-<span class="mi">42</span><span class="p">:</span> 	<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-<span class="mi">43</span><span class="p">:</span> 		<span class="n">rd_count</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">in_fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">BUF_SIZE</span><span class="p">);</span>
-<span class="mi">44</span><span class="p">:</span> 		<span class="k">if</span> <span class="p">(</span><span class="n">rd_count</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="o">//</span> <span class="n">done</span>
-<span class="mi">45</span><span class="p">:</span> 			<span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<span class="mi">46</span><span class="p">:</span> 		<span class="p">}</span>
-<span class="mi">47</span><span class="p">:</span> 		<span class="k">assert</span><span class="p">(</span><span class="n">rd_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
-<span class="mi">48</span><span class="p">:</span> 
-<span class="mi">49</span><span class="p">:</span> 			
-<span class="mi">50</span><span class="p">:</span> 		<span class="n">wt_count</span> <span class="o">=</span> <span class="n">write</span><span class="p">(</span><span class="n">out_fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">rd_count</span><span class="p">);</span>
-<span class="mi">51</span><span class="p">:</span> 		<span class="k">assert</span><span class="p">(</span><span class="n">wt_count</span> <span class="o">==</span> <span class="n">rd_count</span><span class="p">);</span>
-<span class="mi">52</span><span class="p">:</span> 	<span class="p">}</span>
-<span class="mi">53</span><span class="p">:</span> 	<span class="n">close</span><span class="p">(</span><span class="n">in_fd</span><span class="p">);</span>
-<span class="mi">54</span><span class="p">:</span> 	<span class="n">close</span><span class="p">(</span><span class="n">out_fd</span><span class="p">);</span>
-<span class="mi">55</span><span class="p">:</span> <span class="p">}</span>
-
+<p>Consider the following program in <a class="reference internal" href="#filecopy-listing"><span class="std std-numref">Listing 11.1</span></a>, which copies one file to another.  After opening the input file (line 26) we stat the input file to get the permissions (i.e., the mode), create a file with that mode (line 37), and then go into a loop reading data from the input file into a buffer, and then writing the buffer to the output file.</p>
+<div class="literal-block-wrapper docutils container" id="filecopy-listing">
+<div class="code-block-caption"><span class="caption-number">Listing 11.1 </span><span class="caption-text">fcopy2.c - An example program that copies one file to another using the file system interface.</span><a class="headerlink" href="#filecopy-listing" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="o">//</span> <span class="n">simple</span> <span class="n">program</span> <span class="n">to</span> <span class="n">copy</span> <span class="n">a</span> <span class="n">file</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1">#include &lt;sys/types.h&gt;</span>
+<span class="linenos"> 4</span><span class="c1">#include &lt;fcntl.h&gt;</span>
+<span class="linenos"> 5</span><span class="c1">#include &lt;stdlib.h&gt;</span>
+<span class="linenos"> 6</span><span class="c1">#include &lt;unistd.h&gt;</span>
+<span class="linenos"> 7</span><span class="c1">#include &lt;stdio.h&gt;</span>
+<span class="linenos"> 8</span><span class="c1">#include &lt;assert.h&gt;</span>
+<span class="linenos"> 9</span><span class="c1">#include &lt;sys/stat.h&gt;</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="c1">#define BUF_SIZE 4096</span>
+<span class="linenos">12</span><span class="o">//</span> <span class="n">user</span> <span class="n">has</span> <span class="n">read</span> <span class="ow">and</span> <span class="n">write</span> <span class="n">permission</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="linenos">15</span><span class="p">{</span>
+<span class="linenos">16</span>	<span class="nb">int</span> <span class="n">in_fd</span><span class="p">,</span> <span class="n">out_fd</span><span class="p">,</span> <span class="n">rd_count</span><span class="p">,</span> <span class="n">wt_count</span><span class="p">,</span> <span class="n">rc</span><span class="p">;</span>
+<span class="linenos">17</span>	<span class="n">mode_t</span> <span class="n">md</span><span class="p">;</span> 
+<span class="linenos">18</span>	<span class="n">struct</span> <span class="n">stat</span> <span class="n">statbuf</span><span class="p">;</span>	
+<span class="linenos">19</span>	<span class="n">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUF_SIZE</span><span class="p">];</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>	<span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">22</span>		<span class="n">perror</span><span class="p">(</span><span class="s2">&quot;Can&#39;t open input file</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="linenos">23</span>		<span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="linenos">24</span>	<span class="p">}</span>
+<span class="linenos">25</span>
+<span class="hll"><span class="linenos">26</span>	<span class="n">in_fd</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+</span><span class="linenos">27</span>	<span class="k">if</span> <span class="p">(</span><span class="n">in_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">28</span>		<span class="n">perror</span><span class="p">(</span><span class="s2">&quot;Can&#39;t creat output file</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="linenos">29</span>		<span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="linenos">30</span>	<span class="p">}</span>
+<span class="linenos">31</span>	<span class="k">if</span> <span class="p">((</span><span class="n">rc</span> <span class="o">=</span> <span class="n">fstat</span><span class="p">(</span><span class="n">in_fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">statbuf</span><span class="p">))</span> <span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">32</span>		<span class="n">perror</span><span class="p">(</span><span class="s2">&quot;fstat failed</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="linenos">33</span>		<span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="linenos">34</span>	<span class="p">}</span>
+<span class="linenos">35</span>	<span class="n">md</span> <span class="o">=</span> <span class="n">statbuf</span><span class="o">.</span><span class="n">st_mode</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">S_IRWXU</span><span class="o">|</span><span class="n">S_IRWXG</span><span class="o">|</span><span class="n">S_IRWXO</span><span class="p">);</span>
+<span class="linenos">36</span>
+<span class="hll"><span class="linenos">37</span>	<span class="n">out_fd</span> <span class="o">=</span> <span class="n">creat</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">md</span><span class="p">);</span>
+</span><span class="linenos">38</span>	<span class="k">if</span> <span class="p">(</span><span class="n">out_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">39</span>		<span class="n">perror</span><span class="p">(</span><span class="s2">&quot;Can&#39;t creat output file</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="linenos">40</span>		<span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="linenos">41</span>	<span class="p">}</span>
+<span class="linenos">42</span>
+<span class="hll"><span class="linenos">43</span>	<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll"><span class="linenos">44</span>		<span class="n">rd_count</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">in_fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">BUF_SIZE</span><span class="p">);</span>
+</span><span class="linenos">45</span>		<span class="k">if</span> <span class="p">(</span><span class="n">rd_count</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="o">//</span> <span class="n">done</span>
+<span class="linenos">46</span>			<span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="linenos">47</span>		<span class="p">}</span>
+<span class="linenos">48</span>		<span class="k">assert</span><span class="p">(</span><span class="n">rd_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+<span class="linenos">49</span>
+<span class="linenos">50</span>			
+<span class="hll"><span class="linenos">51</span>		<span class="n">wt_count</span> <span class="o">=</span> <span class="n">write</span><span class="p">(</span><span class="n">out_fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">rd_count</span><span class="p">);</span>
+</span><span class="linenos">52</span>		<span class="k">assert</span><span class="p">(</span><span class="n">wt_count</span> <span class="o">==</span> <span class="n">rd_count</span><span class="p">);</span>
+<span class="linenos">53</span>	<span class="p">}</span>
+<span class="linenos">54</span>	<span class="n">close</span><span class="p">(</span><span class="n">in_fd</span><span class="p">);</span>
+<span class="linenos">55</span>	<span class="n">close</span><span class="p">(</span><span class="n">out_fd</span><span class="p">);</span>
+<span class="linenos">56</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
-</font><script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "4b341ee15de046a4aeb526d5c3c0e6e4", "version_major": 2, "version_minor": 0}
-</script></div>
-</div>
-<p>To prove these are the same, lets append a string to the end (i.e., echo “Hello class”&gt; rm2) and use the diff program to compare them. We can see that there is no diff on the first</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "e16f4bea7a1f4091907e39a1620e284b", "version_major": 2, "version_minor": 0}
+{"model_id": "2096284a9d8f45dbbba49e82c8d04940", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
+<p>To prove these are the same, let’s first use the <code class="docutils literal notranslate"><span class="pre">diff</span></code> program to compare them:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "5d91d83c4f744373bfae5eb566623e48", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>We can see that there is no difference between the files, since <code class="docutils literal notranslate"><span class="pre">diff</span></code> produces no output. But just to be sure, let’s append a string to the end of the copy (i.e., echo “Hello class” &gt;&gt; rm2) and use the <code class="docutils literal notranslate"><span class="pre">diff</span></code> program to compare them again.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "68cab0cc004f4482b23ca060df25e090", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>And here we see that the only difference is the line we just appended to the copy of the original <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file.</p>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="hier"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>Very early file systems sometimes had a single flat directory per user, or like MS-DOS 1.0, a single directory per floppy disk</p>
 </dd>
-<dt class="label" id="inode"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>So, why is it called an inode, Dennis Ritchie, who was one of the authors of Unix gave this enlightened answer to the Linux kernel mailing list in <a class="reference external" href="https://lkml.indiana.edu/hypermail/linux/kernel/0207.2/1182.html">2002</a>
-In truth, I don’t know either. It was just a term that we started to use. “Index” is my best guess, because of the slightly unusual file system structure that stored the access information of files as a flat array on the disk, with all the hierarchical directory information living aside from this. Thus the i-number is an index in this array, the i-node is the selected element of the array.</p>
-</dd>
-<dt class="label" id="eff"><span class="brackets"><a class="fn-backref" href="#id3">5</a></span></dt>
+<dt class="label" id="eff"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
 <dd><p>it is probably not a
 coincidence that Unix arrived at the same time as computers which dealt
 only with multiples of 8-bit bytes (e.g. 16 and 32-bit words), replacing
 older systems which frequently used odd word sizes such as 36 bits.
 (Note that a machine with 36-bit instructions already needs two
-incompatible types of files, one for text and one for executable code)</p>
+incompatible types of files, one for text and one for executable code.)</p>
 </dd>
-<dt class="label" id="simple"><span class="brackets"><a class="fn-backref" href="#id4">6</a></span></dt>
-<dd><p>This is the case for almost all operating systems today, but… of course there are exceptions.  Apple OSX uses resource forks to store information associated with a file (HFS and HFS+ file systems only), Windows NTFS provides for multiple data streams in single file, although they were never put to use, and several file systems support file attributes, small tags associated with a file.</p>
+<dt class="label" id="simple"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>This is the case for almost all operating systems today, but… of course there are exceptions.  Apple OSX uses resource forks to store information associated with a file (HFS and HFS+ file systems only), Windows NTFS provides for multiple data streams in single file, although they were never put to use, and several file systems support file attributes, which are small tags associated with a file.</p>
 </dd>
-<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id5">3</a></span></dt>
+<dt class="label" id="pread"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
 <dd><p>On Linux the <code class="docutils literal notranslate"><span class="pre">pread</span></code> and <code class="docutils literal notranslate"><span class="pre">pwrite</span></code> system calls allow specifying an
 offset for the read or write; other UNIX-derived operating systems
 have their own extensions for this purpose.</p>
 </dd>
-<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id6">4</a></span></dt>
+<dt class="label" id="hardlink"><span class="brackets"><a class="fn-backref" href="#id5">5</a></span></dt>
 <dd><p>A hard link is an additional directory entry pointing to the same
 file, giving the file two (or more) names. Hard links are peculiar
 to Unix, and in modern systems have mostly been replaced with
@@ -1153,13 +1169,21 @@ symbolic links (covered above); however Apple’s Time Machine makes
 very good use of them: multiple backups can point to the same single
 copy of an un-modified file using hard links.</p>
 </dd>
+<dt class="label" id="unlink"><span class="brackets"><a class="fn-backref" href="#id6">6</a></span></dt>
+<dd><p>Even when the reference count goes to zero, the file might not be removed yet - on Unix, if you
+delete an open file it won’t actually be removed until all open file
+handles are closed.. In general, deleting open files is a problem:
+while Unix solves the problem by deferring the actual delete,
+Windows solves it by protecting open files so that they cannot be
+deleted.</p>
+</dd>
 </dl>
 </section>
 </section>
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"1c25ad8477e74373b740dfa121bac127": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "25408549e8a148d39aa925976ef54747": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_4a92c81919a64469bc357556a1d21ef6", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     [[ -a /tmp/foo ]] && rm -rf /tmp/foo\r\n$     [[ -a errors ]] && rm errors \r\n$     [[ -a mydate ]] && rm mydate\r\n$     [[ -a mynewdir ]] && rm -rf mynewdir\r\n$     [[ -a anotherfile ]] && rm anotherfile\r\n$     [[ -a mybin ]] && rm -rf  mybin\r\n$     [[ -a myinfo ]] && rm myinfo\r\n$ "}]}}, "2f1f2bebb82d4b5d9e41088013fc3874": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_c507d4bd16c24b0aade641b55d2b4964", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "\ngcc -Werror -Wall -std=gnu99 -O0 -g  -I.    fcopy2.c   -o fcopy2\r\n"}]}}, "340a98466c164b49b2ccbd2c95ddd0e4": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_1c25ad8477e74373b740dfa121bac127", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ln -s loopy loopy\r\nln: failed to create symbolic link 'loopy': File exists\r\n$ ls -l loopy\r\nlrwxrwxrwx. 1 jovyan root 5 Feb 20 17:20 \u001b[0m\u001b[40;31;01mloopy\u001b[0m -> \u001b[40;31;01mloopy\u001b[0m\r\n$ cat loopy\r\ncat: loopy: Too many levels of symbolic links\r\n$ "}]}}, "4a92c81919a64469bc357556a1d21ef6": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "4b341ee15de046a4aeb526d5c3c0e6e4": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_c666f53e06434ae588c323a0c65533fd", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ./fcopy2 README.md rm2\n$ "}]}}, "5996ea18a26a427ab3fa3a37f8310272": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_f6a677d2aa374ae78fb207f08e618075", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ mkdir /tmp/foo; ls -al /tmp/foo; mkdir /tmp/foo/bar ; ls -al /tmp/foo\r\ntotal 0\r\ndrwxr-xr-x. 2 jovyan root  6 Feb 20 17:22 \u001b[0m\u001b[01;34m.\u001b[0m\r\ndrwxrwxrwt. 1 root   root 81 Feb 20 17:22 \u001b[30;42m..\u001b[0m\r\ntotal 0\r\ndrwxr-xr-x. 3 jovyan root 17 Feb 20 17:22 \u001b[0m\u001b[01;34m.\u001b[0m\r\ndrwxrwxrwt. 1 root   root 81 Feb 20 17:22 \u001b[30;42m..\u001b[0m\r\ndrwxr-xr-x. 2 jovyan root  6 Feb 20 17:22 \u001b[01;34mbar\u001b[0m\r\n$ "}]}}, "92ce09d06ad5448883941cfdcd290ef1": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "97b2120e77174e168fc5c55b6543e15b": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_cf8fcfcae2214610b8637c68317a2f15", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ mount | grep ext4\r\n/dev/nvme1n1 on /opt/app-root/src type \u001b[01;31m\u001b[Kext4\u001b[m\u001b[K (rw,relatime,seclabel)\r\n$ "}]}}, "b7fcb2590a3a4935bbd7752cdd8db665": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_dc14d397c9f247f4a8607d98ef384427", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ln -s /bad/file/name bad-link\r\nln: failed to create symbolic link 'bad-link': File exists\r\n$ ls -l bad-link\r\nlrwxrwxrwx. 1 jovyan root 14 Feb 20 17:20 \u001b[0m\u001b[40;31;01mbad-link\u001b[0m -> \u001b[40;31;01m/bad/file/name\u001b[0m\r\n$ cat bad-link\r\ncat: bad-link: No such file or directory\r\n$ "}]}}, "c507d4bd16c24b0aade641b55d2b4964": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "c666f53e06434ae588c323a0c65533fd": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "cf8fcfcae2214610b8637c68317a2f15": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d2b4176f814647beb7631c71656afc2d": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_92ce09d06ad5448883941cfdcd290ef1", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ls \ndiskhw.ipynb        dl_ex_exx.ipynb    dl_track_free.ipynb  intro.ipynb\r\ndisklayout.ipynb    dl_failures.ipynb  dl_track_used.ipynb  kernelimp.ipynb\r\ndl_blocksize.ipynb  dl_name.ipynb      interface.ipynb\r\n$ "}]}}, "dc14d397c9f247f4a8607d98ef384427": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "e16f4bea7a1f4091907e39a1620e284b": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_ff11769901694d548a536ee308eb2bfe", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ echo \"diff 1\" ;  diff README.md rm2 ; echo \"Hello class\" >> rm2 ; echo \"diff 2\"; diff README.md rm2\n\ndiff 1\r\ndiff 2\r\n5a6\r\n> Hello class\r\n$ "}]}}, "f6a677d2aa374ae78fb207f08e618075": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ff11769901694d548a536ee308eb2bfe": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+{"state": {"206a297ac80b41a982ed5435ad486dc2": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_c8db03a6c323415dad97b229d1af99d8", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ln -s loopy loopy\r\n$ ls -l loopy\r\nlrwxrwxrwx. 1 jovyan root 5 Mar 25 17:18 \u001b[0m\u001b[40;31;01mloopy\u001b[0m -> \u001b[40;31;01mloopy\u001b[0m\r\n$ cat loopy\r\ncat: loopy: Too many levels of symbolic links\r\n$ "}]}}, "2096284a9d8f45dbbba49e82c8d04940": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_2dda78b330304badb952d07e7c511d5a", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ./fcopy2 README.md rm2\r\n$ "}]}}, "2279715e13b9434ab79d5ab2ae41c1b4": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_957714800ffb499484967c1dd8d422a1", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ mkdir /tmp/foo; ls -al /tmp/foo; mkdir /tmp/foo/bar ; ls -al /tmp/foo\r\ntotal 0\r\ndrwxr-xr-x. 2 jovyan root  6 Mar 25 17:18 \u001b[0m\u001b[01;34m.\u001b[0m\r\ndrwxrwxrwt. 1 root   root 81 Mar 25 17:18 \u001b[30;42m..\u001b[0m\r\ntotal 0\r\ndrwxr-xr-x. 3 jovyan root 17 Mar 25 17:18 \u001b[0m\u001b[01;34m.\u001b[0m\r\ndrwxrwxrwt. 1 root   root 81 Mar 25 17:18 \u001b[30;42m..\u001b[0m\r\ndrwxr-xr-x. 2 jovyan root  6 Mar 25 17:18 \u001b[01;34mbar\u001b[0m\r\n$ "}]}}, "253698bf83ae4740ab2d7a6b44c0d39c": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_6ced52f9422f43908b14bfef71415d82", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     [[ -a /tmp/foo ]] && rm -rf /tmp/foo\r\n$     [[ -a errors ]] && rm errors \r\n$     [[ -a mydate ]] && rm mydate\r\n$     [[ -a mynewdir ]] && rm -rf mynewdir\r\n$     [[ -a anotherfile ]] && rm anotherfile\r\n$     [[ -a mybin ]] && rm -rf  mybin\r\n$     [[ -a myinfo ]] && rm myinfo\r\n$ "}]}}, "2906bac488544d7da427691e94d15a9d": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_94b54b4093464e5897fe4412ce7d3828", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ln -s /bad/file/name bad-link\r\n$ ls -l bad-link\r\nlrwxrwxrwx. 1 jovyan root 14 Mar 25 17:18 \u001b[0m\u001b[40;31;01mbad-link\u001b[0m -> \u001b[40;31;01m/bad/file/name\u001b[0m\r\n$ cat bad-link\r\ncat: bad-link: No such file or directory\r\n$ "}]}}, "2dda78b330304badb952d07e7c511d5a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "5908ff6e8f2a44ce946afeef6b03bb59": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "5d91d83c4f744373bfae5eb566623e48": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_5908ff6e8f2a44ce946afeef6b03bb59", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ echo \"diff 1\" ;  diff README.md rm2\r\ndiff 1\r\n$ "}]}}, "68cab0cc004f4482b23ca060df25e090": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_8e105d42f9c94fed9224d00462e9b9f5", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ echo \"Hello class\" >> rm2 ; echo \"diff 2\"; diff README.md rm2\r\ndiff 2\r\n5a6\r\n> Hello class\r\n$ "}]}}, "6ced52f9422f43908b14bfef71415d82": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "74df083bc3ad4808af054ac8c7fc125b": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "8e105d42f9c94fed9224d00462e9b9f5": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "94b54b4093464e5897fe4412ce7d3828": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "957714800ffb499484967c1dd8d422a1": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "c1ee056d6f2043039b8150ed213c8dc0": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_d5a4c55433b84de1a492a81957241865", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ mount | grep ext4\r\n/dev/nvme1n1 on /opt/app-root/src type \u001b[01;31m\u001b[Kext4\u001b[m\u001b[K (rw,relatime,seclabel)\r\n$ "}]}}, "c8db03a6c323415dad97b229d1af99d8": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d5a4c55433b84de1a492a81957241865": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "fdc48368344942a2b725c0383d2ad513": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_74df083bc3ad4808af054ac8c7fc125b", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ls \ndiskhw.ipynb                  dl_ex_exx.ipynb      dl_track_used.ipynb\r\ndisklayout.ipynb              dl_failures.ipynb    interface.ipynb\r\ndisklayout-saved-peter.ipynb  dl_name.ipynb        intro.ipynb\r\ndl_blocksize.ipynb            dl_track_free.ipynb  kernelimp.ipynb\r\n$ "}]}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 

@@ -778,7 +778,8 @@ allocates a location in “swap space” on disk: typically a dedicated swap
 partition in Linux, and the <code class="docutils literal notranslate"><span class="pre">PAGEFILE.sys</span></code> and <code class="docutils literal notranslate"><span class="pre">/var/vm/swapfile</span></code> files
 in Windows and OSX respectively. The data must first be written out to
 that location, then the OS can store the page-to-location mapping and
-release the memory page.</p>
+release the memory page.  Linux uses page table entries to store the location
+swapped out pages.</p>
 <p><img alt="Page Table Entry with D (dirty)bit" src="../_images/virt-mem-pic106.png" />{#fig:vm:pic106 width=”\textwidth”}</p>
 </section>
 </section>

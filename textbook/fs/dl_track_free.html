@@ -622,31 +622,31 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="disk-layout-tracking-free-space">
 <span id="fs-dl-track-free"></span><h1><span class="section-number">15. </span>Disk Layout:Tracking Free Space<a class="headerlink" href="#disk-layout-tracking-free-space" title="Permalink to this headline">#</a></h1>
 <p>So, we know how to keep track of blocks used in a file, how do we represent blocks that are free?</p>
-<p>If you recall the approach used in <a class="reference internal" href="dl_track_used.html#fs-dl-track-used-ll"><span class="std std-ref">FAT file system</span></a> to represent used blocks, the same data structure was also used to represent used blocks.  When allocating a block the file system needed to search through the linked list until it found an entry marked as free; an extreemly inefficient approach.</p>
+<p>If you recall the approach used in <a class="reference internal" href="dl_track_used.html#fs-dl-track-used-ll"><span class="std std-ref">FAT file system</span></a> to represent used blocks, the same data structure was also used to represent free blocks.  When allocating a block, the file system needed to search through the table until it found an entry marked as free—an extremely inefficient approach.</p>
 <figure class="align-default" id="fs-free-ll">
 <a class="reference internal image-reference" href="../_images/free_linkedlist.png"><img alt="../_images/free_linkedlist.png" src="../_images/free_linkedlist.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 15.1 </span><span class="caption-text">Free list as a linked list of blocks</span><a class="headerlink" href="#fs-free-ll" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The original Unix file system used a free list to store a list of unused blocks (see <a class="reference internal" href="#fs-free-ll"><span class="std std-numref">Fig. 15.1</span></a>);  blocks were allocated from the head of this list for new files, and returned to the head when freed. Implementing this results in a large initialization cost; if you have a 1TB drive, it means you will start off by having 4M 4KB blocks to hold the free list to start off with, however, it compresses to a small number of blocks for the free list when the disk becomes full.</p>
-<p>The bigger disadvantage of this approach is that, as files were created and deleted this list became randomized, so that blocks allocated for a file are rarely sequential and disk seeks were needed for nearly every block read from or written to disk. Originally this wasn’t a significant problem, because early Unix systems ran on machines with fast disks and excruciatingly slow CPUs.</p>
+<p>The original Unix file system used a free list to store a list of unused blocks (see <a class="reference internal" href="#fs-free-ll"><span class="std std-numref">Fig. 15.1</span></a>). Each block on the list was filled with free disk block numbers, so that a large number of free blocks could be found by reading a single block of the free list into memory. Blocks were allocated from the head of this list for new files, and returned to the head when freed. Implementing this idea results in a large initialization cost. If you have a 1 TB drive with 4 KB blocks, it means you will start off with 256 M blocks on the free list. Each 4 KB block can hold a list of 1024 32-bit free block numbers, so we will need 256 K blocks to hold the initial free list. However, it compresses to a small number of blocks for the free list when the disk becomes full.</p>
+<p>The bigger disadvantage of this approach was that, as files were created and deleted this list became randomized, so that blocks allocated for a file were rarely sequential and disk seeks were needed for nearly every block read from or written to disk. Originally this wasn’t a significant problem, because early Unix systems ran on machines with fast disks and excruciatingly slow CPUs.</p>
 <figure class="align-default" id="fs-free-bv">
-<a class="reference internal image-reference" href="../_images/free_bitvector.png"><img alt="../_images/free_bitvector.png" src="../_images/free_bitvector.png" style="width: 60%;" /></a>
+<a class="reference internal image-reference" href="../_images/free_bitvector.png"><img alt="../_images/free_bitvector.png" src="../_images/free_bitvector.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 15.2 </span><span class="caption-text">Free blocks recorded as bits</span><a class="headerlink" href="#fs-free-bv" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As computers got faster and users started noticing that seek times where killing performance, file systems started using an <em>allocation bitmap</em> as shown in <a class="reference internal" href="#fs-free-bv"><span class="std std-numref">Fig. 15.2</span></a>. It
-keeeps a boolean array with one bit for each disk block; if the block is
+<p>As computers got faster and users started noticing that seek times were killing performance, file systems started using an <em>allocation bitmap</em> as shown in <a class="reference internal" href="#fs-free-bv"><span class="std std-numref">Fig. 15.2</span></a>. It
+keeps a boolean array with one bit for each disk block; if the block is
 allocated the corresponding bit is set to ‘1’, and cleared to ‘0’ if it
-is freed. To allocate a block you read a portion of this bitmap into
-memory and scan for a ‘0’ bit, changing it to ‘1’ and writing it back.
+is freed. To allocate a block, you read a portion of this bitmap into
+memory and scan for a ‘0’ bit, changing it to ‘1’ and writing the modified block of the bitmap back to disk.
 When you extend a file you begin the search at the bit corresponding to
 the last block in the file; in this way if a sequential block is
 available it will be allocated. This method results in files being
 allocated in a mostly sequential fashion, reducing disk seeks and
-greatly improving performance. Note, when disk is fragmented, each block may have just a few bits available, so this approach becomes expensive to find a block.  However, since a single page of 4096 bytes can represent 132MB (<span class="math notranslate nohighlight">\(4096*8*4096\)</span>), you can efficiently cache these blocks in memory.</p>
+greatly improving performance. Note, when disk is fragmented, each block of the bitmap may have just a few bits available, so this approach becomes expensive to find a free block.  However, since a single page of 4096 bytes can represent 132 MB (<span class="math notranslate nohighlight">\(4096*8*4096\)</span>), you can efficiently cache these blocks in memory.</p>
 </section>
 
     <script type="text/x-thebe-config">

@@ -697,10 +697,10 @@ to reads, writes, and allocations of complete disk blocks.</p></li>
 <p>Path translation is a straightforward tree search - starting at the root
 directory, search for an entry for the first path component, find the
 location for that file or directory, and repeat until the last component
-of the list has been found, or an error has occurred. (not counting
+of the list has been found, or an error has occurred. (Not counting
 permissions, there are two possible errors here—either an entry of the
 path was not found, or a non-final component was found but was a file
-rather than a directory)</p>
+rather than a directory.)</p>
 <p>Reading requires finding the blocks which must be read, reading them in,
 and copying the requested data (which may not be all the data in the
 blocks, if the request does not start or end on a block boundary) to the
@@ -769,7 +769,7 @@ directory entries) which holds frequently-used translations, such as
 root directory entries.</p>
 <p>The directory entry cache differs from e.g. a CPU cache in that it holds
 both normal entries (e.g. directory+name to inode) and negative entries,
-indicating that directory+name does not exist<a class="footnote-reference brackets" href="#id2" id="id1">15</a>. If no entry is found
+indicating that directory+name does not exist<a class="footnote-reference brackets" href="#neg" id="id1">1</a>. If no entry is found
 the directory is searched, and the results added to the dentry cache.</p>
 <p><strong>Block caching:</strong> To accelerate reads of frequently-accessed blocks,
 rather than directly reading from the disk the OS can maintain a <em>block
@@ -780,7 +780,7 @@ returned. When data is modified it can be written to this cache and
 written back later to the disk.</p>
 <p>Among other things, this allows small reads (smaller than a disk block)
 and small writes to be more efficient. The first small read will cause
-the block to be read into cache, while following reads from the same
+the block to be read from disk into cache, while following reads from the same
 block will come from cache. Small writes will modify the same block in
 cache, and if a block is not flushed immediately to disk, it can be
 modified multiple times while only resulting in a single write.</p>
@@ -793,21 +793,21 @@ complicated, and is not covered in this class.</p>
 <p>In order to support multiple file systems such as Ext3, CD-ROMs, and
 others at the same time, Linux and other Unix variants use an interface
 called VFS, or the Virtual File System interface. (Windows uses a much
-different interface with the same purpose) The core of the OS does not
+different interface with the same purpose.) The core of the OS does not
 know how to interpret individual file systems; instead it knows how to
 make requests across the VFS interface. Each file system registers an
 interface with VFS, and the methods in this interface implement the file
-system by talking to e.g. a disk or a network server.</p>
+system by talking to e.g., a disk or a network server.</p>
 <p>VFS objects all exist in memory; any association between these
 structures and data on disk is the responsibility of the file system
 code. The important objects and methods in this interface are:</p>
 <p><code class="docutils literal notranslate"><span class="pre">superblock</span></code>. Not to be confused with the superblock on disk, this
 object corresponds to a mounted file system; in particular, the system
-<em>mount table</em> holds pointers to superblock structures. The important
+<em>mount table</em> holds pointers to superblock structures. The most important
 field in the superblock object is a pointer to the root directory
 <code class="docutils literal notranslate"><span class="pre">inode</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">inode</span></code> - this corresponds to a file or directory. Its methods allow
-attributes (owner, timestamp, etc.) to be modified; in addition if the
+attributes (owner, timestamp, etc.) to be modified; in addition, if the
 object corresponds to a directory, other methods allow creating,
 deleting, and renaming entries, as well as looking up a string to return
 a directory entry.</p>
@@ -825,13 +825,7 @@ object’s open method.</p>
 <p><strong>FUSE</strong> (File system in User Space) is a file system type in Linux
 which does not actually implement a file system itself, but instead
 forwards VFS requests to a user-space process, and then takes the
-responses from that process and passes them back to the kernel. This is
-seen in <a class="reference external" href="#fig:fs:fuse">[fig:fs:fuse]</a>{reference-type=”autoref”
-reference=”fig:fs:fuse”}, where a read call from the application results
-in kernel requests through VFS to FUSE, which are forwarded to a
-user-space file system process.</p>
-<p>You will use FUSE to implement a file system in Homework 4, storing the
-file system in an image file accessed by the file system process.</p>
+responses from that process and passes them back to the kernel.</p>
 <p>Like VFS, the FUSE interface consists of a series of methods which you
 must implement, and if you implement them correctly and return
 consistent results, the kernel (and applications running on top of it)
@@ -856,26 +850,23 @@ the kernel (not the file system) handles file positions.</p></li>
 <h2><span class="section-number">19.3. </span>Network File Systems<a class="headerlink" href="#network-file-systems" title="Permalink to this headline">#</a></h2>
 <p>The file systems discussed so far are local file systems, where data is
 stored on local disk and is only directly accessible from the computer
-attached to that disk. Network file systems are used when we want to
-access to data from multiple machines - for instance, if you log in to a
-machine in the CCIS lab in room 102, your home directory will be the
-same on every machine, and is in fact stored on a NetApp file server in
-a machine room upstairs.</p>
+attached to that disk. Network file systems are used when we want
+access to data from multiple machines.</p>
 <p>The two network file systems in most common use today are Unix NFS
 (Network File System) and Windows SMB (also known as CIFS). Each
 protocol provides operations somewhat similar to those in VFS (quite
 similar in the case of NFS, as the original VFS was designed for it),
 allowing the kernel to traverse and list directories, create and delete
 files, and read and write arbitrary offsets within a file.</p>
-<p>The primary differences between the NFS (up through v3 - v4 is more
+<p>The primary differences between the NFS (up through v3 at least, v4 is more
 complicated) and SMB are:</p>
 <ul class="simple">
 <li><p>State - NFS is designed to be stateless for reliability. Once you have
 obtained a file’s unique ID (from the directory entry) you can just read
 from or write to a location in it, without opening the file. Operations
 are idempotent, which means they can be repeated multiple times without
-error. (e.g. writing page P to offset x can be repeated, while appending
-page P to the end of the file can’t.) In contrast SMB is
+error (e.g., writing page P to offset x can be repeated, while appending
+page P to the end of the file can’t). In contrast SMB is
 connection-oriented, and requires files and directories to be opened
 before they can be operated on. NFS tolerates server crashes and
 restarts more gracefully, but does not have some of the
@@ -883,14 +874,14 @@ connection-related features in SMB such as authentication, described
 below.</p></li>
 <li><p>Identity - NFS acts like a local file system, trusting the client to
 authenticate users and pass numeric user IDs to the server. SMB handles
-authentication on the server side - each connection to the server begins
+authentication on the server side—each connection to the server begins
 with a handshake that authenticates to the server with a specific
 username, and all operations within that connection are done as that
 user.</p></li>
 </ul>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">15</a></span></dt>
+<dt class="label" id="neg"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>To be a bit formal about it, a CPU cache maps a <em>dense</em> address
 space, where every key has a value, while the translation cache maps
 a <em>sparse</em> address space.</p>
