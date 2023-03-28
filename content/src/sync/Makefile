@@ -20,4 +20,4 @@ counter: counter.s
 .PHONY: clean 
 
 clean:
-	rm -f *.o *.s *~ $(prog)
+	rm -f *.o *~ $(prog)
