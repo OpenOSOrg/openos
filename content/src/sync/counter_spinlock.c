@@ -4,14 +4,18 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include "spinlock.h"
 
+spinlock_t splock;
 volatile long shared_counter;
 
 static void *increment_thread(void *arg)
 {
     long niters = (long)arg;
-    for (long i = 0; i < niters; i++) {
+    for (int i = 0; i < niters; i++) {
+        spinlock_acquire(&splock);
         shared_counter++;
+        spinlock_release(&splock);
     }
 
     return (void *)0;
@@ -21,8 +25,10 @@ static void *decrement_thread(void *arg)
 {
     long niters = (long)arg;
 
-    for (long i = 0; i < niters; i++) {
+    for (int i = 0; i < niters; i++) {
+        spinlock_acquire(&splock);
         shared_counter--;
+        spinlock_release(&splock);
     }
 
     return (void *)0;
@@ -32,7 +38,7 @@ int main(int argc, char **argv)
 {
     pthread_t *tids;
     long niters;
-    int nthreads;
+    int nthreads, i;
     
     if (argc != 3) {
         fprintf(stderr,"Usage: %s <num_threads> <num_iters>\n",argv[0]);
@@ -42,6 +48,7 @@ int main(int argc, char **argv)
     nthreads = atoi(argv[1]);
     niters = atoi(argv[2]);
     shared_counter = 0;
+    spinlock_init( &splock );
     
     printf("Main thread: Beginning test with %d threads\n", nthreads);
     
@@ -51,13 +58,13 @@ int main(int argc, char **argv)
      * When all threads have completed, we expect the final value of the shared counter to be the same as its
      * initial value (i.e., 0).
      */
-    for (int i = 0; i < nthreads/2; i++) {
+    for (i = 0; i < nthreads/2; i++) {
         (void)pthread_create(&tids[i], NULL, increment_thread, (void *)niters );
         (void)pthread_create(&tids[i+1], NULL, decrement_thread, (void *)niters );
     }
     
     /* Wait for child threads to finish */
-    for (int i = 0; i < nthreads/2; i++) {
+    for (i = 0; i < nthreads/2; i++) {
         pthread_join(tids[i], NULL);
         pthread_join(tids[i+1], NULL);
     }

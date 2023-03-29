@@ -1,23 +1,20 @@
-CC = gcc
+CC = gcc -O2
+CFLAGS = -O2 -Wall -Wno-unused-result
+LDFLAGS = -lpthread
 
-prog = output_example bank_deposit counter
+prog = output_example bank_deposit counter counter.s counter_mutex counter_spinlock
 
 
 all: $(prog)
 
-output_example: output_example.c 
-	$(CC) -o $@ $< -lpthread
-
-bank_deposit: bank_deposit.c
-	$(CC) -o $@ $< -lpthread
-
-counter.s:counter.c
-	$(CC) -S $<
+%: %.c
+	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
     
-counter: counter.s
-	$(CC) -o $@ $< -lpthread
+counter.s: counter.c
+	$(CC) -S $(CFLAGS) $<
+    
 
-.PHONY: clean 
+#.PHONY: clean 
 
 clean:
 	rm -f *.o *~ $(prog)

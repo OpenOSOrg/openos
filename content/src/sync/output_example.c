@@ -52,7 +52,7 @@ int main(int argc, char **argv)
     pthread_join(tid1, NULL);
     pthread_join(tid2, NULL);
 
-    write(STDOUT_FILENO, "\n", 1);    
+    (void)write(STDOUT_FILENO, "\n", 1);    
     return 0;
 }
 
