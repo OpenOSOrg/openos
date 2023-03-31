@@ -17,4 +17,3 @@ inline void spinlock_release(spinlock_t *l)
 {
     atomic_flag_clear( &l->locked );
 }
-

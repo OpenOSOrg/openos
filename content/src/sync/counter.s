@@ -66,27 +66,22 @@ main:
 .LFB64:
 	.cfi_startproc
 	endbr64
-	pushq	%r15
-	.cfi_def_cfa_offset 16
-	.cfi_offset 15, -16
 	pushq	%r14
-	.cfi_def_cfa_offset 24
-	.cfi_offset 14, -24
+	.cfi_def_cfa_offset 16
+	.cfi_offset 14, -16
 	pushq	%r13
-	.cfi_def_cfa_offset 32
-	.cfi_offset 13, -32
+	.cfi_def_cfa_offset 24
+	.cfi_offset 13, -24
 	pushq	%r12
-	.cfi_def_cfa_offset 40
-	.cfi_offset 12, -40
+	.cfi_def_cfa_offset 32
+	.cfi_offset 12, -32
 	pushq	%rbp
-	.cfi_def_cfa_offset 48
-	.cfi_offset 6, -48
+	.cfi_def_cfa_offset 40
+	.cfi_offset 6, -40
 	pushq	%rbx
-	.cfi_def_cfa_offset 56
-	.cfi_offset 3, -56
+	.cfi_def_cfa_offset 48
+	.cfi_offset 3, -48
 	movq	%rsi, %rbx
-	subq	$24, %rsp
-	.cfi_def_cfa_offset 80
 	cmpl	$3, %edi
 	je	.L11
 	movq	(%rsi), %rcx
@@ -97,20 +92,16 @@ main:
 	call	__fprintf_chk@PLT
 	movl	$1, %eax
 .L10:
-	addq	$24, %rsp
-	.cfi_remember_state
-	.cfi_def_cfa_offset 56
 	popq	%rbx
-	.cfi_def_cfa_offset 48
-	popq	%rbp
+	.cfi_remember_state
 	.cfi_def_cfa_offset 40
-	popq	%r12
+	popq	%rbp
 	.cfi_def_cfa_offset 32
-	popq	%r13
+	popq	%r12
 	.cfi_def_cfa_offset 24
-	popq	%r14
+	popq	%r13
 	.cfi_def_cfa_offset 16
-	popq	%r15
+	popq	%r14
 	.cfi_def_cfa_offset 8
 	ret
 .L11:
@@ -118,64 +109,59 @@ main:
 	movq	8(%rsi), %rdi
 	movl	$10, %edx
 	xorl	%esi, %esi
-	xorl	%r15d, %r15d
 	call	strtol@PLT
 	movq	16(%rbx), %rdi
 	xorl	%esi, %esi
 	movl	$10, %edx
-	movq	%rax, %r14
+	movq	%rax, %rbp
 	call	strtol@PLT
-	movl	%r14d, %edx
 	movl	$1, %edi
+	movl	%ebp, %edx
 	leaq	.LC1(%rip), %rsi
 	movq	$0, shared_counter(%rip)
 	movslq	%eax, %r12
 	xorl	%eax, %eax
 	call	__printf_chk@PLT
-	movq	%r14, 8(%rsp)
-	movslq	8(%rsp), %rdi
+	movslq	%ebp, %rdi
 	salq	$3, %rdi
 	call	malloc@PLT
-	movl	$2, %ecx
-	movq	%rax, %rbp
-	movl	%r14d, %eax
-	leaq	increment_thread(%rip), %r14
-	cltd
-	movq	%rbp, %rbx
-	idivl	%ecx
-	cmpl	$1, 8(%rsp)
-	movl	%eax, %r13d
+	testl	%ebp, %ebp
 	jle	.L16
+	subl	$1, %ebp
+	movq	%rax, %rbx
+	leaq	increment_thread(%rip), %r14
+	shrl	%ebp
+	salq	$4, %rbp
+	leaq	16(%rax,%rbp), %r13
+	movq	%rax, %rbp
 	.p2align 4,,10
 	.p2align 3
 .L14:
-	movq	%rbx, %rdi
+	movq	%rbp, %rdi
 	movq	%r12, %rcx
 	movq	%r14, %rdx
 	xorl	%esi, %esi
 	call	pthread_create@PLT
-	addq	$8, %rbx
+	leaq	8(%rbp), %rdi
 	movq	%r12, %rcx
 	xorl	%esi, %esi
 	leaq	decrement_thread(%rip), %rdx
-	movq	%rbx, %rdi
-	addl	$1, %r15d
+	addq	$16, %rbp
 	call	pthread_create@PLT
-	cmpl	%r13d, %r15d
-	jl	.L14
-	xorl	%ebx, %ebx
+	cmpq	%r13, %rbp
+	jne	.L14
 	.p2align 4,,10
 	.p2align 3
 .L15:
-	movq	0(%rbp,%rbx,8), %rdi
+	movq	(%rbx), %rdi
+	xorl	%esi, %esi
+	addq	$16, %rbx
+	call	pthread_join@PLT
+	movq	-8(%rbx), %rdi
 	xorl	%esi, %esi
 	call	pthread_join@PLT
-	movq	8(%rbp,%rbx,8), %rdi
-	xorl	%esi, %esi
-	addq	$1, %rbx
-	call	pthread_join@PLT
-	cmpl	%ebx, %r13d
-	jg	.L15
+	cmpq	%r13, %rbx
+	jne	.L15
 .L16:
 	movq	shared_counter(%rip), %rdx
 	leaq	.LC2(%rip), %rsi

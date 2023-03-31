@@ -56,13 +56,13 @@ int main(int argc, char **argv)
      * When all threads have completed, we expect the final value of the shared counter to be the same as its
      * initial value (i.e., 0).
      */
-    for (i = 0; i < nthreads/2; i++) {
+    for (i = 0; i < nthreads; i+=2) {
         (void)pthread_create(&tids[i], NULL, increment_thread, (void *)niters );
         (void)pthread_create(&tids[i+1], NULL, decrement_thread, (void *)niters );
     }
     
     /* Wait for child threads to finish */
-    for (i = 0; i < nthreads/2; i++) {
+    for (i = 0; i < nthreads; i+=2) {
         pthread_join(tids[i], NULL);
         pthread_join(tids[i+1], NULL);
     }

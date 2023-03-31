@@ -1,11 +1,10 @@
-CC = gcc -O2
+CC = gcc 
 CFLAGS = -O2 -Wall -Wno-unused-result
 LDFLAGS = -lpthread
 
-prog = output_example bank_deposit counter counter.s counter_mutex counter_spinlock
+prog = output_example bank_deposit counter counter_mutex counter_spinlock
 
-
-all: $(prog)
+all: $(prog) 
 
 %: %.c
 	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
