@@ -54,6 +54,8 @@ parts:
   chapters:
   - file: sync/sync
   - file: sync/sharing
+  - file: sync/criticalsection
+  - file: sync/locks
   - file: sync/locking
   - file: sync/deadlock
   - file: sync/hardware_challenges
