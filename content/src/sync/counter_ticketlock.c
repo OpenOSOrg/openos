@@ -4,18 +4,18 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
-#include "spinlock.h"
+#include "ticketlock.h"
 
-spinlock_t splock;
+ticketlock_t tktlock;
 volatile long shared_counter;
 
 static void *increment_thread(void *arg)
 {
     long niters = (long)arg;
     for (int i = 0; i < niters; i++) {
-        spinlock_acquire(&splock);
+        ticketlock_acquire(&tktlock);
         shared_counter++;
-        spinlock_release(&splock);
+        ticketlock_release(&tktlock);
     }
 
     return (void *)0;
@@ -26,9 +26,9 @@ static void *decrement_thread(void *arg)
     long niters = (long)arg;
 
     for (int i = 0; i < niters; i++) {
-        spinlock_acquire(&splock);
+        ticketlock_acquire(&tktlock);
         shared_counter--;
-        spinlock_release(&splock);
+        ticketlock_release(&tktlock);
     }
 
     return (void *)0;
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
     nthreads = atoi(argv[1]);
     niters = atoi(argv[2]);
     shared_counter = 0;
-    spinlock_init( &splock );
+    ticketlock_init( &tktlock );
     
     printf("Main thread: Beginning test with %d threads\n", nthreads);
     

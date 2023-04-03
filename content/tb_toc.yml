@@ -56,7 +56,7 @@ parts:
   - file: sync/sharing
   - file: sync/criticalsection
   - file: sync/locks
-  - file: sync/locking
+  - file: sync/ordering
   - file: sync/deadlock
   - file: sync/hardware_challenges
   - file: sync/linux_locking
