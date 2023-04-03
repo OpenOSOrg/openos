@@ -302,32 +302,42 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   31. Intro Concurrency Synchronization and Deadlock
+   31. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   32. Cooperating Processes
+   32. Cooperating Processes and Inter-process Communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/criticalsection.html">
+   33. The Critical Section Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locks.html">
+   34. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   33. Synchronization Primitives
+   35. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   34. Deadlocks
+   36. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   35. Challenges of Modern Hardware
+   37. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   36. Locking in the Linux Kernel
+   38. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -339,17 +349,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   37. Overview of other topics
+   39. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   38. Virtualization and Cloud computing
+   40. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   39. Other OS structures
+   41. Other OS structures
   </a>
  </li>
 </ul>
@@ -361,17 +371,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   40. How to read this book
+   42. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   41. Contributing
+   43. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   42. Bibliography
+   44. Bibliography
   </a>
  </li>
 </ul>
@@ -779,8 +789,7 @@ additional faults.</p></li>
 internal memory map for a process. We’ve talked briefly about process
 memory maps earlier, but now we will look in more detail at a specific
 one, from a fairly recent (kernel 2.6 or 3.0) 32-bit Linux system. A
-more thorough description of the Linux memory layout can be found at<br />
-<a class="reference external" href="http://duartes.org/gustavo/blog/post/anatomy-of-a-program-in-memory">http://duartes.org/gustavo/blog/post/anatomy-of-a-program-in-memory</a></p>
+more thorough description of the Linux memory layout can be found <a class="reference external" href="http://duartes.org/gustavo/blog/post/anatomy-of-a-program-in-memory">here</a>.</p>
 <figure class="align-default" id="fig-vm-fig100">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic100.png"><img alt="../_images/virt-mem-pic100.png" src="../_images/virt-mem-pic100.png" style="width: 25%;" /></a>
 <figcaption>
@@ -805,6 +814,12 @@ system code and data, user processes are prevented from modifying the OS
 or viewing protected data.</p>
 <p>Here is the memory map of a very simple process[^9], as reported in
 <code class="docutils literal notranslate"><span class="pre">/proc/&lt;pid&gt;/maps</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">08048000</span><span class="o">-</span><span class="mi">08049000</span> <span class="n">r</span><span class="o">-</span><span class="n">xp</span> <span class="mi">00000000</span> <span class="mi">08</span><span class="p">:</span><span class="mi">03</span> <span class="mi">4072226</span>    <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">a</span><span class="o">.</span><span class="n">out</span>
+<span class="mi">08049000</span><span class="o">-</span><span class="mi">0804</span><span class="n">a000</span> <span class="n">rw</span><span class="o">-</span><span class="n">p</span> <span class="mi">00000000</span> <span class="mi">08</span><span class="p">:</span><span class="mi">03</span> <span class="mi">4072226</span>    <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">a</span><span class="o">.</span><span class="n">out</span>
+<span class="mi">0804</span><span class="n">a000</span><span class="o">-</span><span class="mi">0804</span><span class="n">b000</span> <span class="n">rw</span><span class="o">-</span><span class="n">p</span> <span class="mi">00000000</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="mi">0</span>          <span class="p">[</span><span class="n">anon</span><span class="p">]</span>
+<span class="n">bffd5000</span><span class="o">-</span><span class="n">bfff6000</span> <span class="n">rw</span><span class="o">-</span><span class="n">p</span> <span class="mi">00000000</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="mi">0</span>          <span class="p">[</span><span class="n">stack</span><span class="p">]</span>
+</pre></div>
+</div>
 <p>The memory space has four segments:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">**</span><span class="mi">08048000</span><span class="o">**</span> <span class="p">(</span><span class="n">one</span> <span class="n">page</span><span class="p">)</span> <span class="o">-</span> <span class="n">read</span><span class="o">-</span><span class="n">only</span><span class="p">,</span> <span class="n">executable</span><span class="p">,</span> <span class="n">mapped</span> <span class="kn">from</span> <span class="nn">file</span> <span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">out</span><span class="o">*</span>
 <span class="o">**</span><span class="mi">08049000</span><span class="o">**</span> <span class="p">(</span><span class="n">one</span> <span class="n">page</span><span class="p">)</span> <span class="o">-</span> <span class="n">read</span><span class="o">/</span><span class="n">write</span><span class="p">,</span> <span class="n">mapped</span> <span class="kn">from</span> <span class="nn">file</span> <span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">out</span><span class="o">*</span>
@@ -844,9 +859,11 @@ following sections can be seen:</p>
 </pre></div>
 </div>
 <hr class="docutils" />
-<p>The BSS section <a class="footnote-reference brackets" href="#id2" id="id1">10</a> corresponds to global variables initialized to
-zero; since the BSS section is initialized to all zeros, there is no
-need to store its initial contents in the executable file.</p>
+<p>The BSS section corresponds to global variables initialized to
+zero.  Since the BSS section is initialized to all zeros, there is no
+need to store its initial contents in the executable file.  Instead,
+the exec() system call allocate anonymous memory for any BSS sections
+thereby reducing the actual size of executable files on storage.</p>
 <section id="executable-file-and-process-address-space">
 <h4><span class="section-number">28.1.2.1. </span>Executable file and process address space<a class="headerlink" href="#executable-file-and-process-address-space" title="Permalink to this headline">#</a></h4>
 <p>Here you can see the relationship between the structure of the
@@ -865,12 +882,10 @@ structure</span><a class="headerlink" href="#vm-pic101" title="Permalink to this
 </section>
 <section id="page-faults-in-the-kernel">
 <h3><span class="section-number">28.1.3. </span>Page Faults in the Kernel<a class="headerlink" href="#page-faults-in-the-kernel" title="Permalink to this headline">#</a></h3>
-<div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>Although common in the past, modern Windows and Linux systems rarely
+<p>Although common in the past, modern Windows and Linux systems rarely
 seem to crash due to driver problems. (Although my Mac panics every
 month or two.) If you ever develop kernel drivers, however, you will
-become very familiar with them.
-</pre></div>
-</div>
+become very familiar with them during the debug phase of development.</p>
 <p>What happens if there is a page fault while the CPU is running kernel
 code in supervisor mode? It depends.</p>
 <p>If the error is due to a bug in kernel-mode code, then in most operating
@@ -926,8 +941,9 @@ space where virtual addresses mapped directly to physical addresses, and
 so these functions actually interpreted the page tables to translate
 virtual addresses to physical (i.e. kernel virtual) addresses, which was
 slow but made it easy to return an error if an address was bad. Newer
-Linux versions map the kernel and its data structures into each process
-virtual address space, making these functions much faster but more
+Linux versions map the kernel and its data structures into a predefined
+region of each each process virtual address space, making these functions
+much faster but more
 complicated. The speedup is because there is no longer any need to
 translate page tables in software; instead the two
 <span class="xref myst">copy_*_user</span>{.uri} functions just perform a few checks
@@ -949,17 +965,14 @@ resulting in an error message such as the one shown in
 <a class="reference external" href="#lst:vm:oops">[lst:vm:oops]</a>{reference-type=”autoref”
 reference=”lst:vm:oops”}. If the kernel was running in a process context
 (e.g. executing system call code) then the currently-running process
-will be killed, while if this occurs during an interrupt the system will
-crash. The equivalent in Windows is called a Blue Screen of Death
+will be killed.  This behavior is really not safe because its likely some
+corruption of kernel data structures and not likely cause be the process
+itself. However, it does prevent the whole system from crashing.<br />
+If this occurs during an interrupt the system will crash.
+The equivalent in Windows is called a Blue Screen of Death
 (although they changed the color several versions back); since almost
 all Windows kernel code executes in interrupt context, these errors
 always result in a system crash.</p>
-<hr class="footnotes docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">10</a></span></dt>
-<dd><p>LARRY!  Please fix this footnote</p>
-</dd>
-</dl>
 </section>
 </section>
 </section>

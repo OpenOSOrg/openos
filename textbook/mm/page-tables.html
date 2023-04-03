@@ -304,32 +304,42 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   31. Intro Concurrency Synchronization and Deadlock
+   31. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   32. Cooperating Processes
+   32. Cooperating Processes and Inter-process Communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/criticalsection.html">
+   33. The Critical Section Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locks.html">
+   34. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   33. Synchronization Primitives
+   35. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   34. Deadlocks
+   36. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   35. Challenges of Modern Hardware
+   37. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   36. Locking in the Linux Kernel
+   38. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -341,17 +351,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   37. Overview of other topics
+   39. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   38. Virtualization and Cloud computing
+   40. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   39. Other OS structures
+   41. Other OS structures
   </a>
  </li>
 </ul>
@@ -363,17 +373,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   40. How to read this book
+   42. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   41. Contributing
+   43. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   42. Bibliography
+   44. Bibliography
   </a>
  </li>
 </ul>
@@ -635,8 +645,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#page-table-entries">
-   23.3. Page Table Entries
+  <a class="reference internal nav-link" href="#page-table-entries-pte">
+   23.3. Page Table Entries(PTE)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -645,16 +655,14 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-a-page-table">
-   23.5. Creating a Page Table
+  <a class="reference internal nav-link" href="#page-access-accessed-and-dirty-bits">
+   23.5. Page Access - Accessed and Dirty bits
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     23.5.1. Review questions
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-a-page-table">
+   23.6. Creating a Page Table
+  </a>
  </li>
 </ul>
 
@@ -693,8 +701,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#page-table-entries">
-   23.3. Page Table Entries
+  <a class="reference internal nav-link" href="#page-table-entries-pte">
+   23.3. Page Table Entries(PTE)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -703,16 +711,14 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-a-page-table">
-   23.5. Creating a Page Table
+  <a class="reference internal nav-link" href="#page-access-accessed-and-dirty-bits">
+   23.5. Page Access - Accessed and Dirty bits
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     23.5.1. Review questions
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-a-page-table">
+   23.6. Creating a Page Table
+  </a>
  </li>
 </ul>
 
@@ -795,10 +801,10 @@ solve.</p>
 </figcaption>
 </figure>
 <p>In order to support a virtual address space larger than 32 bits more levels of page tables are required.</p>
-<figure class="align-default" id="id1">
+<figure class="align-default" id="fig-multilevel3">
 <a class="reference internal image-reference" href="../_images/3level.png"><img alt="../_images/3level.png" src="../_images/3level.png" style="width: 95%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 23.4 </span><span class="caption-text">3-level 64-bit page table</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 23.4 </span><span class="caption-text">3-level 64-bit page table</span><a class="headerlink" href="#fig-multilevel3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In <a class="reference internal" href="#fig-vm-fig13"><span class="std std-numref">Fig. 23.5</span></a> we see a page table constructed of 3 pages:
@@ -855,12 +861,12 @@ paged address translation?</p>
 </div>
 </section>
 </section>
-<section id="page-table-entries">
-<h2><span class="section-number">23.3. </span>Page Table Entries<a class="headerlink" href="#page-table-entries" title="Permalink to this headline">#</a></h2>
+<section id="page-table-entries-pte">
+<h2><span class="section-number">23.3. </span>Page Table Entries(PTE)<a class="headerlink" href="#page-table-entries-pte" title="Permalink to this headline">#</a></h2>
 <p>The components of a 32-bit Intel page table entry are shown in <a class="reference internal" href="#fig-vm-pic17"><span class="std std-numref">Fig. 23.7</span></a>; for more information you may wish to refer to
 <a class="reference external" href="http://wiki.osdev.org/Paging">http://wiki.osdev.org/Paging</a>.</p>
 <figure class="align-default" id="fig-vm-pic17">
-<a class="reference internal image-reference" href="../_images/virt-mem-pic17.png"><img alt="../_images/virt-mem-pic17.png" src="../_images/virt-mem-pic17.png" style="width: 45%;" /></a>
+<a class="reference internal image-reference" href="../_images/virt-mem-pic17.png"><img alt="../_images/virt-mem-pic17.png" src="../_images/virt-mem-pic17.png" style="width: 75%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 23.7 </span><span class="caption-text">32-bit Intel page table entry
 (PTE).</span><a class="headerlink" href="#fig-vm-pic17" title="Permalink to this image">#</a></p>
@@ -870,10 +876,11 @@ paged address translation?</p>
 <section id="page-permissions-p-w-and-u-bits">
 <h2><span class="section-number">23.4. </span>Page Permissions - P, W, and U bits<a class="headerlink" href="#page-permissions-p-w-and-u-bits" title="Permalink to this headline">#</a></h2>
 <p>Page tables allow different permissions to be applied to memory at a
-per-page level of granularity.</p>
+per-page level of granularity.  The page permission bits are set by software
+and read by the hardware to prevent illegal access to a page.</p>
 <p><strong>P=0/1</strong> - If the present bit is zero, the entry is ignored entirely by
 the MMU, thus preventing any form of access to the corresponding virtual
-page.</p>
+page.  When the present bit is zero the entire PTE can be used by software.</p>
 <p><strong>W = 0/1</strong> - Write permission. If the W bit is zero, then read accesses
 to this page will be allowed, but any attempt to write will cause a
 fault. By setting the W bit to zero, pages that should not be modified
@@ -888,8 +895,23 @@ Typically the OS kernel will “live” in a portion of the same address
 space as the current process, but will hide its code and data structures
 from access by user processes by setting U=0 on the OS-only mappings.</p>
 </section>
+<section id="page-access-accessed-and-dirty-bits">
+<h2><span class="section-number">23.5. </span>Page Access - Accessed and Dirty bits<a class="headerlink" href="#page-access-accessed-and-dirty-bits" title="Permalink to this headline">#</a></h2>
+<p>Page tables convey whether or not pages have been accessed and/or modified.<br />
+These bits are set by hardware and read by software to determine how
+frequently a page is being accessed and whether or not its in a modified state.</p>
+<p><strong>A=0/1</strong> - If the accessed bit is set the page has been referenced since the
+last time the bit was cleared.  This aids the kernel in determining how active a
+page is.  If the active bit is frequently being set then the page is being
+referenced frequently and probably not a good candidate for reclaiming.</p>
+<p><strong>D-0/1</strong> - If the dirty bit is set the page frame associated with the PFN
+is dirty or modified and must be written to storage before it can be reclaimed
+for correctness.  Subsequent access to the associated virtual page will result
+in a page fault so its contents can be restored as long as the present bit was
+cleared when the page was reclaimed.</p>
+</section>
 <section id="creating-a-page-table">
-<h2><span class="section-number">23.5. </span>Creating a Page Table<a class="headerlink" href="#creating-a-page-table" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">23.6. </span>Creating a Page Table<a class="headerlink" href="#creating-a-page-table" title="Permalink to this headline">#</a></h2>
 <div class="highlight-{#ch2:lst:hello notranslate"><div class="highlight"><pre><span></span>char hello[] = ``hello world\n&#39;&#39;;
 void _start(void)
 {
@@ -947,12 +969,6 @@ entries would of course change if different physical pages were used.)</p>
 <p><span class="caption-number">Fig. 23.8 </span><span class="caption-text">Page Table and PTEs in use.</span><a class="headerlink" href="#fig-vm-virt-mem-review2-png" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<section id="id2">
-<h3><span class="section-number">23.5.1. </span>Review questions<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
-<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</section>
 </section>
 </section>
 

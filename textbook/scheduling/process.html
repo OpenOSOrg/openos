@@ -302,32 +302,42 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   31. Intro Concurrency Synchronization and Deadlock
+   31. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   32. Cooperating Processes
+   32. Cooperating Processes and Inter-process Communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/criticalsection.html">
+   33. The Critical Section Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locks.html">
+   34. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   33. Synchronization Primitives
+   35. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   34. Deadlocks
+   36. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   35. Challenges of Modern Hardware
+   37. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   36. Locking in the Linux Kernel
+   38. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -339,17 +349,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   37. Overview of other topics
+   39. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   38. Virtualization and Cloud computing
+   40. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   39. Other OS structures
+   41. Other OS structures
   </a>
  </li>
 </ul>
@@ -361,17 +371,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   40. How to read this book
+   42. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   41. Contributing
+   43. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   42. Bibliography
+   44. Bibliography
   </a>
  </li>
 </ul>
@@ -714,7 +724,7 @@ title="Print to PDF"
 </figure>
 </section>
 <section id="how-are-threads-different">
-<h2><span class="section-number">7.3. </span>How are threads different?<a class="headerlink" href="#how-are-threads-different" title="Permalink to this headline">#</a></h2>
+<span id="cont-scheduling-process-threads"></span><h2><span class="section-number">7.3. </span>How are threads different?<a class="headerlink" href="#how-are-threads-different" title="Permalink to this headline">#</a></h2>
 <p>A core part of the UNIX model is separation of processes, or to be more specific, one running process should not be able to directly interact with the resources (memory, etc.) owned by another process without explicitly being setup to do so. This model is great for simple processes which do not need to utilize multiple CPUs, but it can make writing programs to use multiple CPUs more difficult as memory must be explicitly shared or processes must use another form of communication. A <em>thread</em> is like a process in that it has its own PCB, however, unlike a process it does not have its own address space. Instead threads all belong to a process and share the address space of that process so any changes made to memory by one thread are visible to all the other threads belonging to the same process. From the <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> above, what this means is that the <code class="docutils literal notranslate"><span class="pre">mm</span></code> pointer in the task creating a new thread is used directly in the child thread instead of making a new copy of the structure. Figure <a class="reference internal" href="#thread"><span class="std std-numref">Fig. 7.3</span></a> shows the difference from a forked process.</p>
 <figure class="align-default" id="thread">
 <img alt="../_images/Threads.png" src="../_images/Threads.png" />

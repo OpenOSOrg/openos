@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>36. Locking in the Linux Kernel &#8212; Introduction to Operating Systems</title>
+    <title>38. Locking in the Linux Kernel &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="37. Overview of other topics" href="../misc/OtherInro.html" />
-    <link rel="prev" title="35. Challenges of Modern Hardware" href="hardware_challenges.html" />
+    <link rel="next" title="39. Overview of other topics" href="../misc/OtherInro.html" />
+    <link rel="prev" title="37. Challenges of Modern Hardware" href="hardware_challenges.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -302,32 +302,42 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="sync.html">
-   31. Intro Concurrency Synchronization and Deadlock
+   31. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="sharing.html">
-   32. Cooperating Processes
+   32. Cooperating Processes and Inter-process Communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="criticalsection.html">
+   33. The Critical Section Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="locks.html">
+   34. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="locking.html">
-   33. Synchronization Primitives
+   35. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="deadlock.html">
-   34. Deadlocks
+   36. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hardware_challenges.html">
-   35. Challenges of Modern Hardware
+   37. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   36. Locking in the Linux Kernel
+   38. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -339,17 +349,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   37. Overview of other topics
+   39. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   38. Virtualization and Cloud computing
+   40. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   39. Other OS structures
+   41. Other OS structures
   </a>
  </li>
 </ul>
@@ -361,17 +371,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   40. How to read this book
+   42. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   41. Contributing
+   43. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   42. Bibliography
+   44. Bibliography
   </a>
  </li>
 </ul>
@@ -618,7 +628,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="locking-in-the-linux-kernel">
-<span id="cont-sync-linux-locking"></span><h1><span class="section-number">36. </span>Locking in the Linux Kernel<a class="headerlink" href="#locking-in-the-linux-kernel" title="Permalink to this headline">#</a></h1>
+<span id="cont-sync-linux-locking"></span><h1><span class="section-number">38. </span>Locking in the Linux Kernel<a class="headerlink" href="#locking-in-the-linux-kernel" title="Permalink to this headline">#</a></h1>
 <p>Deep dive into synchronization primitives used in the Linux kernel.</p>
 <ol class="simple">
 <li><p>queueing locks</p></li>
@@ -658,13 +668,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">35. </span>Challenges of Modern Hardware</p>
+            <p class="prev-next-title"><span class="section-number">37. </span>Challenges of Modern Hardware</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../misc/OtherInro.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">37. </span>Overview of other topics</p>
+        <p class="prev-next-title"><span class="section-number">39. </span>Overview of other topics</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

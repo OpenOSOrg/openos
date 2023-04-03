@@ -1,0 +1,1135 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>34. Implementing Locks &#8212; Introduction to Operating Systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="35. Synchronization Primitives" href="locking.html" />
+    <link rel="prev" title="33. The Critical Section Problem" href="criticalsection.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/pref.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/purpose.html">
+   2. Purpose of operating systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/structure.html">
+   3. Operating System Structure &amp; Unix/Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/abstractions.html">
+   4. Operating System Abstractions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/tools.html">
+   5. Tools
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Processor
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/intro.html">
+   6. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/process.html">
+   7. Virtualizing a CPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/scheduling.html">
+   8. Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/real_sched.html">
+   9. A Look at the Linux Scheduler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/intro.html">
+   10. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/interface.html">
+   11. File System Abstraction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/diskhw.html">
+   12. A bit about Disks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
+   13. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_track_used.html">
+   14. Disk Layout:Tracking Used Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_track_free.html">
+   15. Disk Layout:Tracking Free Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_name.html">
+   16. Disk Layout:Implementing Name Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_failures.html">
+   17. Disk Layout:Dealing with Failures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_ex_exx.html">
+   18. Disk Layout:Examples of Real World File Systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/kernelimp.html">
+   19. Kernel implementation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Memory
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/intro.html">
+   20. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/phys-and-seg.html">
+   21. Memory management before paged virtual memory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/virt-paging.html">
+   22. Paging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/page-tables.html">
+   23. Page Tables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/reclamation.html">
+   24. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/page-size.html">
+   25. Page Sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/misc.html">
+   26. Other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/buffer-cache.html">
+   27. Buffer Cache
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/pagefaults.html">
+   28. Memory Management Dynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/realworld.html">
+   29. Memory management in the real world
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/concl.html">
+   30. Conclusion
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="sync.html">
+   31. Introduction to Concurrency, Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sharing.html">
+   32. Cooperating Processes and Inter-process Communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="criticalsection.html">
+   33. The Critical Section Problem
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   34. Implementing Locks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="locking.html">
+   35. Synchronization Primitives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlock.html">
+   36. Deadlocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hardware_challenges.html">
+   37. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linux_locking.html">
+   38. Locking in the Linux Kernel
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/OtherInro.html">
+   39. Overview of other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../virt/virt.html">
+   40. Virtualization and Cloud computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/other.html">
+   41. Other OS structures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/howto.html">
+   42. How to read this book
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   43. Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/bib.html">
+   44. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/sync/locks.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/sync/locks.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/okrieg/openos"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fsync/locks.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/edit/main/content/sync/locks.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/sync/locks.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-oldest-trick-in-the-book-disable-interrupts">
+   34.1. The Oldest Trick in the Book - Disable Interrupts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lock-implementation-attempts-with-ordinary-machine-instructions">
+   34.2. Lock Implementation Attempts with Ordinary Machine Instructions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#broken-lock-implementation-attempt-1-check-a-flag">
+     34.2.1. (Broken) Lock Implementation Attempt #1 - Check a Flag
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lock-implementation-attempt-2-take-turns">
+     34.2.2. Lock Implementation Attempt #2 - Take Turns
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lock-implementation-attempt-3-peterson-s-algorithm">
+     34.2.3. Lock Implementation Attempt #3 - Peterson’s Algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#discussion">
+     34.2.4. Discussion
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#atomic-instructions-for-synchonization">
+   34.3. Atomic Instructions for Synchonization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-and-set-tas">
+     34.3.1. Test-and-Set (TAS)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#compare-and-swap-cas">
+     34.3.2. Compare-and-Swap (CAS)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#are-the-requirements-met">
+     34.3.3. Are the Requirements Met?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#atomic-instructions-and-portability">
+     34.3.4. Atomic Instructions and Portability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sleep-and-wakeup">
+   34.4. Sleep and Wakeup
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Implementing Locks</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-oldest-trick-in-the-book-disable-interrupts">
+   34.1. The Oldest Trick in the Book - Disable Interrupts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lock-implementation-attempts-with-ordinary-machine-instructions">
+   34.2. Lock Implementation Attempts with Ordinary Machine Instructions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#broken-lock-implementation-attempt-1-check-a-flag">
+     34.2.1. (Broken) Lock Implementation Attempt #1 - Check a Flag
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lock-implementation-attempt-2-take-turns">
+     34.2.2. Lock Implementation Attempt #2 - Take Turns
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lock-implementation-attempt-3-peterson-s-algorithm">
+     34.2.3. Lock Implementation Attempt #3 - Peterson’s Algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#discussion">
+     34.2.4. Discussion
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#atomic-instructions-for-synchonization">
+   34.3. Atomic Instructions for Synchonization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-and-set-tas">
+     34.3.1. Test-and-Set (TAS)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#compare-and-swap-cas">
+     34.3.2. Compare-and-Swap (CAS)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#are-the-requirements-met">
+     34.3.3. Are the Requirements Met?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#atomic-instructions-and-portability">
+     34.3.4. Atomic Instructions and Portability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sleep-and-wakeup">
+   34.4. Sleep and Wakeup
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell tag_remove-input docutils container">
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="implementing-locks">
+<span id="cont-sync-locks"></span><h1><span class="section-number">34. </span>Implementing Locks<a class="headerlink" href="#implementing-locks" title="Permalink to this headline">#</a></h1>
+<p>Now let’s try to implement the lock data type. In the following examples, we will use C/C++-like pseudo-code, rather than actual C, to make the key points more clearly. We will also consider the special case of two concurrent threads first, before the general case of N concurrent threads.</p>
+<section id="the-oldest-trick-in-the-book-disable-interrupts">
+<span id="cont-sync-locks-interrupt-soln"></span><h2><span class="section-number">34.1. </span>The Oldest Trick in the Book - Disable Interrupts<a class="headerlink" href="#the-oldest-trick-in-the-book-disable-interrupts" title="Permalink to this headline">#</a></h2>
+<p><a class="reference internal" href="sharing.html#cont-sync-sharing-issues"><span class="std std-ref">Earlier</span></a>, we blamed interrupts for causing untimely context switches that allowed thread operations to be interleaved arbitrarily. So, if we disable interrupts in the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function before the critical section, the currently executing thread cannot be kicked off the CPU until it enables interrupts in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function. Alas, this enticingly simple solution won’t work in most cases. First, user-level processes are not allowed to disable interrupts, so this solution is only available to operating system code. Second, leaving interrupts disabled for a long period of time can cause other problems, so even in the OS, it can only be used for short critical sections that do not cause blocking.
+Third, we can’t have different locks protecting different shared data objects if locks are implemented by disabling interrupts, since this approach will prevent other threads from running at all, regardless of what data they might want to access. Finally, and perhaps most importantly, disabling interrupts offers no protection against concurrent accesses from a thread running on another CPU, so this solution can only be applied on a uniprocessor. Historically, disabling interrupts was used to protect short critical sections in OS code, but in the multicore era, this idea has very limited uses.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-cs-interrupts">
+<div class="code-block-caption"><span class="caption-number">Listing 34.1 </span><span class="caption-text">Lock implementation using using interrupt disabling; C++-like definition.</span><a class="headerlink" href="#listing-sync-cs-interrupts" title="Permalink to this code">#</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">acquire</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">disable_interrupts</span><span class="p">();</span><span class="w"> </span><span class="c1">// cli on x86</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">release</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">enable_interrupts</span><span class="p">();</span><span class="w"> </span><span class="c1">// sti on x86</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>We now consider more general solutions that can be used in either user-level programs, or the operating system, without relying on any special hardware assistance.</p>
+</section>
+<section id="lock-implementation-attempts-with-ordinary-machine-instructions">
+<span id="cont-sync-locks-sw-solns"></span><h2><span class="section-number">34.2. </span>Lock Implementation Attempts with Ordinary Machine Instructions<a class="headerlink" href="#lock-implementation-attempts-with-ordinary-machine-instructions" title="Permalink to this headline">#</a></h2>
+<p>In this section, we will show you several attempts at implementing the lock functions that encapsulate the critical section entry and exit protocols. All of these solutions (or solution attempts) use only ordinary machine instructions (load, store, cmp, jmp, add, etc.).</p>
+<section id="broken-lock-implementation-attempt-1-check-a-flag">
+<span id="cont-sync-locks-flag-soln"></span><h3><span class="section-number">34.2.1. </span>(Broken) Lock Implementation Attempt #1 - Check a Flag<a class="headerlink" href="#broken-lock-implementation-attempt-1-check-a-flag" title="Permalink to this headline">#</a></h3>
+<p>Suppose we introduce a shared boolean variable to check if the critical section is currently in use, as shown in <a class="reference internal" href="#listing-sync-lockflag"><span class="std std-numref">Listing 34.2</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-lockflag">
+<div class="code-block-caption"><span class="caption-number">Listing 34.2 </span><span class="caption-text">Lock implementation using a flag; C++-like definition.</span><a class="headerlink" href="#listing-sync-lockflag" title="Permalink to this code">#</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock_s</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">locked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">acquire</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="n">locked</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// empty loop body, just spins</span>
+<span class="w">        </span><span class="n">locked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">release</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">locked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>Each thread will check the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag repeatedly in the <code class="docutils literal notranslate"><span class="pre">while()</span></code> loop of the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function until it finds the critical section is free. When a thread breaks out of the loop, it sets the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag to true, preventing other threads from accessing the critical section until it is done. On exit, it sets the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag to false again in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function so that another thread can enter.</p>
+<aside class="sidebar">
+<p>This is called a <em>spinlock</em> because threads spin around the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop until they can gain entry to the critical section. Since a thread keeps the CPU busy while it is waiting for entry, this spinning is called <em>busy waiting</em>.</p>
+</aside>
+<p>Alas, this does not meet the mutual exclusion requirement. We have just replaced one race with another. Consider two concurrent threads, T0 and T1, attempting to enter their critical sections concurrently by calling <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> on the same lock object. Each thread tests the value of <code class="docutils literal notranslate"><span class="pre">locked</span></code>, sees that is is <code class="docutils literal notranslate"><span class="pre">false</span></code>, and breaks out of their respective <code class="docutils literal notranslate"><span class="pre">while</span></code> loops. Both T0 and T1 then set <code class="docutils literal notranslate"><span class="pre">locked=true</span></code> and proceed to enter their critical sections concurrently.  The mutual exclusion requirement is violated, so we will have to try again.</p>
+<p>The heart of the problem with this non-solution is that our threads’ operations can interleave so that the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag can change between the time when a thread tests if it is safe to proceed and the time when the thread sets the flag to prevent others from also entering the critical section. If we could make the TEST and the SET an indivisible atomic operation, this problem would go away. Indeed, today’s processor architectures give us an instruction with the properties we need. But, the processors of the Djikstra’s era did not, and it is instructive to consider how we can implement the critical section entry and exit protocols without special assistance from the hardware. We will then see how some hardware support simplifies matters considerably.</p>
+</section>
+<section id="lock-implementation-attempt-2-take-turns">
+<span id="cont-sync-locks-turn-soln"></span><h3><span class="section-number">34.2.2. </span>Lock Implementation Attempt #2 - Take Turns<a class="headerlink" href="#lock-implementation-attempt-2-take-turns" title="Permalink to this headline">#</a></h3>
+<p>Let’s try replacing the boolean <code class="docutils literal notranslate"><span class="pre">flag</span></code> with a <code class="docutils literal notranslate"><span class="pre">turn</span></code> variable to indicate which thread is allowed to use the critical section. Each thread will wait for <code class="docutils literal notranslate"><span class="pre">turn</span></code> to be set to its own thread id (tid) in the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function before entering, and will set <code class="docutils literal notranslate"><span class="pre">turn</span></code> to the other thread’s id in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function when it is done using the critical section, as shown in <a class="reference internal" href="#listing-sync-turn"><span class="std std-numref">Listing 34.3</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-turn">
+<div class="code-block-caption"><span class="caption-number">Listing 34.3 </span><span class="caption-text">Lock implementation for two threads using turns; C++-like definition.</span><a class="headerlink" href="#listing-sync-turn" title="Permalink to this code">#</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock_s</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">turn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">acquire</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getTid</span><span class="p">();</span><span class="w"> </span><span class="c1">// which thread is running this function? Threads are numbered 0 or 1.</span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="n">turn</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">me</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// empty loop body, just spins</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">release</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getTid</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">turn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">me</span><span class="p">;</span><span class="w"> </span><span class="c1">// set turn to other thread (if me == 0, turn = 1; if me == 1, turn = 0)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>Does this meet our requirements? Let’s examine them one by one.</p>
+<dl class="simple myst">
+<dt>Mutual exclusion</dt><dd><p>The value of <code class="docutils literal notranslate"><span class="pre">turn</span></code> can only be 0 or 1 at any instant in time, and only the thread whose id matches <code class="docutils literal notranslate"><span class="pre">turn</span></code> is allowed entry to the critical section. So mutual exclusion is satisfied.</p>
+</dd>
+<dt>Progress</dt><dd><p>This requirement has two parts. The first part says that we can’t delay the decision of which thread next gets to enter the critical section forever. That part is fine — we decide on the next thread in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function by flipping the <code class="docutils literal notranslate"><span class="pre">turn</span></code> variable. The second part of the progress requirement says that threads in their <em>remainder</em> code can’t delay threads that want to use the critical section, and here lies the problem. This solution requires a strict alternation of threads in the critical section. In <a class="reference internal" href="#listing-sync-turn"><span class="std std-numref">Listing 34.3</span></a> we initialized <code class="docutils literal notranslate"><span class="pre">turn</span></code> so that T0 must go first, but T0 and T1 could have different tasks and run at different relative speeds. If T1 reaches its critical section first, it is still blocked until T0 goes through its critical section and flips <code class="docutils literal notranslate"><span class="pre">turn</span></code> to 1. Similarly, if one thread has less work to do, and needs fewer trips through the critical section, it could leave the other thread waiting indefinitely for another turn.</p>
+</dd>
+<dt>Bounded waiting</dt><dd><p>Strangely, this does satisfy bounded waiting, since there is a bound on the number of times other threads can use the critical section after a thread has started the entry protocol (i.e., after a thread has invoked the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function). Threads take turns, so T0 can use the critical section at most once after T1 calls the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function and before T1 gains entry. It is irrelevant though because we don’t have Progress.</p>
+</dd>
+</dl>
+<p>The issue with this “solution” is that a thread must wait its turn, even when the other thread has no interest in entering its critical section.</p>
+<p>We could go on for quite some time showing you attempts at solutions that do not quite work. In his classic 1965 paper on “Cooperating Sequential Processes” <span id="id1">[<a class="reference internal" href="../misc/bib.html#id4">Dij65</a>]</span>, Djikstra lays out several other broken alternatives and admits that “people that had played with the problem started to doubt whether it could be solved at all.” He gives credit to Dutch mathematication T. J. Dekker for coming up with the first correct solution for two threads (in 1959!). The main idea is to combine the notion of turns with an expression of interest from a thread when it wants to enter its critical section. You can read all about [Dekker’s Algorithm]<code class="docutils literal notranslate"><span class="pre">https://en.wikipedia.org/wiki/Dekker%27s_algorithm</span></code> elsewhere, but suffice to say that it was fairly complex and doesn’t generalize to more than two threads.
+A simpler solution that can generalize to more than 2 threads, built on the same ideas of combining turns with expressions of interest, was published by Gary L. Peterson in 1981 <span id="id2">[<a class="reference internal" href="../misc/bib.html#id5" title="Gary L. Peterson. Myths about the mutual exclusion problem. Information Processing Letters, 12:115-116, 1981.">Pet81</a>]</span>.</p>
+</section>
+<section id="lock-implementation-attempt-3-peterson-s-algorithm">
+<span id="cont-sync-locks-peterson-soln"></span><h3><span class="section-number">34.2.3. </span>Lock Implementation Attempt #3 - Peterson’s Algorithm<a class="headerlink" href="#lock-implementation-attempt-3-peterson-s-algorithm" title="Permalink to this headline">#</a></h3>
+<p>The code for Peterson’s Algorithm is shown in <a class="reference internal" href="#listing-sync-lock-peterson"><span class="std std-numref">Listing 34.4</span></a>. We have added an array of boolean flags, <code class="docutils literal notranslate"><span class="pre">interested</span></code> where each thread can indicate its interest in entering its critical section, and initially both flags are set to <code class="docutils literal notranslate"><span class="pre">false</span></code>. Each thread will only write to its own <code class="docutils literal notranslate"><span class="pre">interested</span></code> flag, and read from the other thread’s <code class="docutils literal notranslate"><span class="pre">interested</span></code> flag. To gain entry to its critical section, a thread first sets its <code class="docutils literal notranslate"><span class="pre">interested</span></code> flag to <code class="docutils literal notranslate"><span class="pre">true</span></code> so that the other thread can see that it wants to enter. Then, it will politely set the turn to the other thread, and busy wait until it sees that either the other thread is not interested, or the other thread has given back the turn. To leave the critical section, a thread simply sets its <code class="docutils literal notranslate"><span class="pre">interested</span></code> flag to false.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-lock-peterson">
+<div class="code-block-caption"><span class="caption-number">Listing 34.4 </span><span class="caption-text">Lock implementation for two threads using Peterson’s Algorithm; C++-like definition.</span><a class="headerlink" href="#listing-sync-lock-peterson" title="Permalink to this code">#</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock_s</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">turn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">interested</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nb">false</span><span class="p">;</span><span class="w"> </span><span class="nb">false</span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">acquire</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getTid</span><span class="p">();</span><span class="w"> </span><span class="c1">// which thread is running this function? Threads are numbered 0 or 1.</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">me</span><span class="p">;</span><span class="w"> </span><span class="c1">// other thread&#39;s id</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="n">interested</span><span class="p">[</span><span class="n">me</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// this thread wants to enter the critical section</span>
+<span class="w">        </span><span class="n">turn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">;</span><span class="w">          </span><span class="c1">// but is giving the other thread a chance to go first</span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="n">interested</span><span class="p">[</span><span class="n">other</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">turn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// empty loop body, just spins</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">release</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getTid</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">interested</span><span class="p">[</span><span class="n">me</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>Let’s see if this solution meets all of our requirements.</p>
+<dl class="simple myst">
+<dt>Mutual Exclusion</dt><dd><p>The combination of <code class="docutils literal notranslate"><span class="pre">interested</span></code> and <code class="docutils literal notranslate"><span class="pre">turn</span></code> variables ensure that only one thread can be in the critical section at a time. Suppose both T0 and T1 try to enter their critical sections at nearly the same time by calling <code class="docutils literal notranslate"><span class="pre">acquire()</span></code>. Both set their <code class="docutils literal notranslate"><span class="pre">interested</span></code> flags to <code class="docutils literal notranslate"><span class="pre">true</span></code>, so now both threads can see that the other thread is trying to enter. Now, both threads set <code class="docutils literal notranslate"><span class="pre">turn</span></code> to the other thread’s id—either T0 setting <code class="docutils literal notranslate"><span class="pre">turn</span> <span class="pre">=</span> <span class="pre">1</span></code> takes effect first and is overwritten by T1 setting <code class="docutils literal notranslate"><span class="pre">turn</span> <span class="pre">=</span> <span class="pre">0</span></code>, or vice versa. Only one thread will be able to exit the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop, because <code class="docutils literal notranslate"><span class="pre">turn</span></code> must be either 0 or 1. Suppose T0 is already in the critical section when T1 calls <code class="docutils literal notranslate"><span class="pre">acquire()</span></code>, then <code class="docutils literal notranslate"><span class="pre">interested[0]</span> <span class="pre">==</span> <span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">turn</span> <span class="pre">==</span> <span class="pre">1</span></code>, and T1 must wait in the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop until <code class="docutils literal notranslate"><span class="pre">interested[0]</span></code> becomes <code class="docutils literal notranslate"><span class="pre">false</span></code>, which only happens when T0 leaves the critical section by calling <code class="docutils literal notranslate"><span class="pre">release()</span></code>.</p>
+</dd>
+<dt>Progress</dt><dd><p>The second part of the progress requirement (threads in their <em>remainder</em> code do not delay threads that want to enter the critical section) is satisfied because the <code class="docutils literal notranslate"><span class="pre">interested</span></code> flag is false for any thread in the <em>remainder</em> code, and a thread can enter when <code class="docutils literal notranslate"><span class="pre">interested[other]</span> <span class="pre">==</span> <span class="pre">false</span></code>. The first part of the progress requirement (threads that want to enter can eventually do so) is satisfied because once a thread <span class="math notranslate nohighlight">\(T_i\)</span> calls <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> it will eventually return. There are only three possibilities. (1) if the other thread, <span class="math notranslate nohighlight">\(T_j\)</span>, is not interested in using the critical section, then <code class="docutils literal notranslate"><span class="pre">interested[other]</span> <span class="pre">==</span> <span class="pre">false</span></code> and <span class="math notranslate nohighlight">\(T_i\)</span> can exit the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop immediately and enter the critical section. (2) if the other thread, <span class="math notranslate nohighlight">\(T_j\)</span>, is already in its critical section, then <code class="docutils literal notranslate"><span class="pre">interested[other]</span></code> will eventually become <code class="docutils literal notranslate"><span class="pre">false</span></code> when <span class="math notranslate nohighlight">\(T_j\)</span> leaves its critical section, and <span class="math notranslate nohighlight">\(T_i\)</span> can exit its <code class="docutils literal notranslate"><span class="pre">while</span></code> loop and enter. (3) The other thread, <span class="math notranslate nohighlight">\(T_j\)</span> is also requesting entry to its critical section, and must set <code class="docutils literal notranslate"><span class="pre">turn</span></code> to <span class="math notranslate nohighlight">\(T_i\)</span> after setting its own interested flag; <span class="math notranslate nohighlight">\(T_i\)</span> will exit its <code class="docutils literal notranslate"><span class="pre">while</span></code> loop because <code class="docutils literal notranslate"><span class="pre">turn</span> <span class="pre">==</span> <span class="pre">other</span></code> is now false, and <span class="math notranslate nohighlight">\(T_i\)</span> can enter the critical section.</p>
+</dd>
+<dt>Bounded Waiting</dt><dd><p>Once a thread <span class="math notranslate nohighlight">\(T_i\)</span> has indicated interest in entering the critical section, the other thread <span class="math notranslate nohighlight">\(T_j\)</span> can enter at most once before <span class="math notranslate nohighlight">\(T_i\)</span>
+is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</span> must set <code class="docutils literal notranslate"><span class="pre">turn</span></code> to <span class="math notranslate nohighlight">\(T_i\)</span> when it tries to enter again.</p>
+</dd>
+</dl>
+<p>We have made an informal argument that Peterson’s Algorithm satisfies the requirements. You should be skeptical of such arguments, because the history of synchronization teaches us that informal correctness arguments about concurrency are often wrong. The interested reader can find formal proofs of the correctness of Peterson’s algorithm <span id="id3">[<a class="reference internal" href="../misc/bib.html#id6">Sch97</a>]</span>, or you can take our word for it.</p>
+</section>
+<section id="discussion">
+<h3><span class="section-number">34.2.4. </span>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h3>
+<p>Over the years, <em>many</em> other algorithms were developed to solve the critical section problem, relying only on ordinary machine instructions. However, simpler solutions exist if we take advantage of special <em>atomic</em> machine instructions that are provided by all modern processor architectures. In addition, modern CPUs may re-order instructions on-the-fly during execution, and allow threads running on different CPUs to observe the effects of memory operations in different orders (this is called a <em>relaxed memory consistency model</em> but it can cause a lot of stress for programmers!). To make the solutions in this section work on modern hardware, additional instructions called <em>fences</em> have to be added to ensure correctness. We might as well use atomic instructions in the first place.</p>
+</section>
+</section>
+<section id="atomic-instructions-for-synchonization">
+<h2><span class="section-number">34.3. </span>Atomic Instructions for Synchonization<a class="headerlink" href="#atomic-instructions-for-synchonization" title="Permalink to this headline">#</a></h2>
+<p>Recall that we ran into trouble with our first lock implementation in  <a class="reference internal" href="#cont-sync-locks-flag-soln"><span class="std std-numref">Section 34.2.1</span></a>, because threads could have their execution interrupted and interleaved with another thread also running the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function between testing the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag and setting it to true. In this section we will look briefly at the semantics of some atomic machine instructions that can help us solve this problem.</p>
+<section id="test-and-set-tas">
+<h3><span class="section-number">34.3.1. </span>Test-and-Set (TAS)<a class="headerlink" href="#test-and-set-tas" title="Permalink to this headline">#</a></h3>
+<p>Some CPU architectures provide an atomic <code class="docutils literal notranslate"><span class="pre">test-and-set</span></code> instruction with the behavior shown in <a class="reference internal" href="#listing-sync-test-and-set"><span class="std std-numref">Listing 34.5</span></a>. Keep in mind that this code is just to show the effect of the test-and-set instruction — it is really a single operation that executes atomically.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-test-and-set">
+<div class="code-block-caption"><span class="caption-number">Listing 34.5 </span><span class="caption-text">Semantics of the test-and-set atomic instruction.</span><a class="headerlink" href="#listing-sync-test-and-set" title="Permalink to this code">#</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">test</span><span class="o">-</span><span class="n">and</span><span class="o">-</span><span class="n">set</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">old</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">old</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="o">*</span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">    </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">old</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>Notice that the value stored at <code class="docutils literal notranslate"><span class="pre">location</span></code> is always true after executing <code class="docutils literal notranslate"><span class="pre">test-and-set</span></code> — either it was already true at the start, or it was initially false, the test succeeded, and it was set to true. By examining the old value, we can tell which case occurred. Actual implementations may make the test implicit and just unconditionally set <code class="docutils literal notranslate"><span class="pre">*location</span> <span class="pre">=</span> <span class="pre">true</span></code>, as shown in <a class="reference internal" href="#listing-sync-test-and-set-opt"><span class="std std-numref">Listing 34.6</span></a>:</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-test-and-set-opt">
+<div class="code-block-caption"><span class="caption-number">Listing 34.6 </span><span class="caption-text">Semantics of the test-and-set atomic instruction, alternate implementation.</span><a class="headerlink" href="#listing-sync-test-and-set-opt" title="Permalink to this code">#</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">test</span><span class="o">-</span><span class="n">and</span><span class="o">-</span><span class="n">set</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">old</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="o">*</span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">    </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">old</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>Armed with a test-and-set instruction, implementing a lock is very easy.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-locktas">
+<div class="code-block-caption"><span class="caption-number">Listing 34.7 </span><span class="caption-text">Lock implementation using test-and-set; C++-like definition.</span><a class="headerlink" href="#listing-sync-locktas" title="Permalink to this code">#</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">locked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">acquire</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="n">test</span><span class="o">-</span><span class="n">and</span><span class="o">-</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">locked</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// empty loop body, just spins</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">release</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">locked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>In the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function, a thread will atomically check the state of the <code class="docutils literal notranslate"><span class="pre">locked</span></code> variable and set it to <code class="docutils literal notranslate"><span class="pre">true</span></code>. If the critical section is already in use by another thread, then <code class="docutils literal notranslate"><span class="pre">locked</span></code> will be <code class="docutils literal notranslate"><span class="pre">true</span></code> already, <code class="docutils literal notranslate"><span class="pre">test-and-set</span></code> will return <code class="docutils literal notranslate"><span class="pre">true</span></code> and the thread will stay in the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop and try again. Eventually, the other thread will leave the critical section and call <code class="docutils literal notranslate"><span class="pre">release()</span></code>, setting <code class="docutils literal notranslate"><span class="pre">locked</span></code> to false. The next test-and-set will return <code class="docutils literal notranslate"><span class="pre">false</span></code> as the old value of <code class="docutils literal notranslate"><span class="pre">locked</span></code> (and will set <code class="docutils literal notranslate"><span class="pre">locked</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>), and the thread will leave the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop and enter the critical section. But what if <code class="docutils literal notranslate"><span class="pre">locked</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code> and two threads try to enter the critical section at the same time? Because test-and-set is atomic, one of the thread’s will execute the instruction first and succeed in setting <code class="docutils literal notranslate"><span class="pre">locked</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>, while the other thread will fail and be forced to retry. Thus, the mutual exclusion requirement is met.</p>
+</section>
+<section id="compare-and-swap-cas">
+<h3><span class="section-number">34.3.2. </span>Compare-and-Swap (CAS)<a class="headerlink" href="#compare-and-swap-cas" title="Permalink to this headline">#</a></h3>
+<p>Another common atomic instruction is compare-and-swap, or CAS, which has the semantics shown in <a class="reference internal" href="#listing-sync-cas"><span class="std std-numref">Listing 34.8</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-cas">
+<div class="code-block-caption"><span class="caption-number">Listing 34.8 </span><span class="caption-text">Semantics of the compare-and-swap instruction.</span><a class="headerlink" href="#listing-sync-cas" title="Permalink to this code">#</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">compare</span><span class="o">-</span><span class="n">and</span><span class="o">-</span><span class="n">swap</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">expected</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">newval</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">location</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">expected</span><span class="p">)</span><span class="w"> </span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span>
+<span class="w">    </span><span class="o">*</span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newval</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>We can also implement locks using the compare-and-swap atomic operation.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-lockcas">
+<div class="code-block-caption"><span class="caption-number">Listing 34.9 </span><span class="caption-text">Lock implementation using compare-and-swap; C++-like definition.</span><a class="headerlink" href="#listing-sync-lockcas" title="Permalink to this code">#</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">locked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">acquire</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">compare</span><span class="o">-</span><span class="n">and</span><span class="o">-</span><span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">locked</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// empty loop body, just spins</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">release</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">locked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>This is essentially the same as the version using test-and-set. A thread wanting to enter the critical section atomically compares the current value of <code class="docutils literal notranslate"><span class="pre">locked</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code>. As long as the critical section is unavailable, this comparison will fail, compare-and-swap returns false, and the thread has to stay in the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop trying again.</p>
+</section>
+<section id="are-the-requirements-met">
+<h3><span class="section-number">34.3.3. </span>Are the Requirements Met?<a class="headerlink" href="#are-the-requirements-met" title="Permalink to this headline">#</a></h3>
+<p>We have already argued that these spinlocks using atomic test-and-set or compare-and-swap meet the Mutual Exclusion requirement. It should be clear that the Progress requirement is also met, since some thread can successfully enter the critical section as soon as the lock is released, and no <em>remainder</em> code can have any influence over this, since the value of the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag is only accessed inside the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> and <code class="docutils literal notranslate"><span class="pre">release()</span></code> functions. But what about Bounded Waiting? Unfortunately, an “unlucky” thread might always try its test-and-set at an instant when the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag has been set to <code class="docutils literal notranslate"><span class="pre">true</span></code> by another thread, continually retrying while other threads enter and leave the critical section an unlimited number of times, so we don’t have Bounded Waiting with these lock implementations. We show this unfortunate possibility in <a class="reference internal" href="#fig-sync-locks-unlucky"><span class="std std-numref">Fig. 34.1</span></a>.</p>
+<figure class="align-default" id="fig-sync-locks-unlucky">
+<a class="reference internal image-reference" href="../_images/unlucky_tas.drawio.png"><img alt="../_images/unlucky_tas.drawio.png" src="../_images/unlucky_tas.drawio.png" style="width: 95%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 34.1 </span><span class="caption-text">Starvation is possible with simple test-and-set spinlocks.</span><a class="headerlink" href="#fig-sync-locks-unlucky" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="atomic-instructions-and-portability">
+<h3><span class="section-number">34.3.4. </span>Atomic Instructions and Portability<a class="headerlink" href="#atomic-instructions-and-portability" title="Permalink to this headline">#</a></h3>
+<p>Different processor architectures provide different atomic instructions, making our lock implementations non-portable. However, the machine-dependent code can be hidden by library implementations. We also simplified the implementations that we showed you in <a class="reference internal" href="#listing-sync-locktas"><span class="std std-numref">Listing 34.7</span></a> and <a class="reference internal" href="#listing-sync-lockcas"><span class="std std-numref">Listing 34.9</span></a> by ignoring the need for fences in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function. And, we ignored the fact that C compilers can optimize accesses to plain variables, like <code class="docutils literal notranslate"><span class="pre">locked</span></code>, in ways that break correctness in the face of multi-threading.</p>
+<p>It wasn’t until C11/C++11 that the C programming language got a memory consistency model and standard, language-level support for atomic operations. Now, it is possible to write portable versions of the lock functions, with the C compiler translating the atomic operations into the correct machine instructions for the target architecture. We show a portable C11 implementation of a spinlock using test-and-set in <a class="reference internal" href="#listing-sync-spinlock"><span class="std std-numref">Listing 34.10</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are also atomic versions of simple arithmetic instructions, like add, which we would prefer to use for a simple operation like incrementing the shared counter. Most critical sections in real code are much more complex (we will see a few examples soon).</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="listing-sync-spinlock">
+<div class="code-block-caption"><span class="caption-number">Listing 34.10 </span><span class="caption-text">spinlock.h - Basic spinlock using C11 atomics.</span><a class="headerlink" href="#listing-sync-spinlock" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#include &lt;stdatomic.h&gt;</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="n">typedef</span> <span class="n">struct</span> <span class="n">spinlock_s</span> <span class="p">{</span>
+<span class="linenos"> 4</span>    <span class="n">atomic_flag</span> <span class="n">locked</span><span class="p">;</span>
+<span class="linenos"> 5</span><span class="p">}</span> <span class="n">spinlock_t</span><span class="p">;</span> 
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="n">inline</span> <span class="n">void</span> <span class="n">spinlock_init</span><span class="p">(</span><span class="n">spinlock_t</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 8</span>    <span class="n">atomic_flag_clear</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">locked</span> <span class="p">);</span>
+<span class="linenos"> 9</span><span class="p">}</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="n">inline</span> <span class="n">void</span> <span class="n">spinlock_acquire</span><span class="p">(</span><span class="n">spinlock_t</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span>
+<span class="linenos">12</span><span class="p">{</span>
+<span class="linenos">13</span>    <span class="k">while</span><span class="p">(</span><span class="n">atomic_flag_test_and_set</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">locked</span> <span class="p">))</span> <span class="p">{</span> <span class="p">};</span>
+<span class="linenos">14</span><span class="p">}</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="n">inline</span> <span class="n">void</span> <span class="n">spinlock_release</span><span class="p">(</span><span class="n">spinlock_t</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span>
+<span class="linenos">17</span><span class="p">{</span>
+<span class="linenos">18</span>    <span class="n">atomic_flag_clear</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">locked</span> <span class="p">);</span>
+<span class="linenos">19</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>=(cont:sync:locks:sleep_wakeup</p>
+</section>
+</section>
+<section id="sleep-and-wakeup">
+<h2><span class="section-number">34.4. </span>Sleep and Wakeup<a class="headerlink" href="#sleep-and-wakeup" title="Permalink to this headline">#</a></h2>
+<p>We can build better spinlocks that are more efficient and satisfy the bounded waiting requirement, but we can’t get away from the fundamental problem of busy waiting. On a uniprocessor, busy waiting wastes precious CPU time. If a lock is not available the first time a thread tries to acquire it, the lock can’t possibly become available until the thread holding the lock gets a chance to run. So, the waiting thread will spin through its timeslice until the scheduler preempts it and switches to another thread. But what alternative do we have? One option is for the waiting thread to voluntarily yield the remainder of its timeslice when it can’t acquire a lock (e.g., via the <code class="docutils literal notranslate"><span class="pre">sched_yield()</span></code> system call). This helps, but can still have unnecessary overhead if the thread holding the lock is blocked (e.g., waiting for terminal input). In such cases, the scheduler will keep switching back to the thread trying to acquire the lock, which will keep yielding, until eventually the lock holder can run and release the lock. What we really want is a way to block a thread that is trying to acquire a lock until there a chance that the lock is available, and then unblock a waiting thread when the lock is released. To that end, we introduce the following operations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sleep(wait_queue)</span></code>: blocks the calling thread; thread is added to <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> and another thread is selected to run.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wakeup(wait_queue)</span></code>: removes a thread from <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> and adds it to the scheduler Ready queue.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wakeup_all(wait_queue)</span></code>: moves <em>all</em> threads from <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> to the the scheduler Ready queue.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> is simply a data structure that can keep track of the blocked threads. A simple implementation might be a linked list of thread ids that can be used to look up the corresponding thread. We will assume the list is kept in FIFO order, so that the thread that has been waiting the longest will be the first to wake up.</p>
+<p>Unfortunately, this solution to the busy waiting problem just introduced another shared data structure (the <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code>) and the steps to add or remove threads from the wait_queue are themselves another critical section. It looks like we’ve circled back to the same problem we started with.</p>
+</section>
+</section>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"2e995f769fc64b66854137a57cf431e0": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_90c2397238b94f708ffb4d0e1fa74da1", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     #\r\n$ "}]}}, "90c2397238b94f708ffb4d0e1fa74da1": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+</script>
+
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./sync"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="criticalsection.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">33. </span>The Critical Section Problem</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="locking.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">35. </span>Synchronization Primitives</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By (see contributing chapter book)<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

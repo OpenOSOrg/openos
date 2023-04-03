@@ -302,32 +302,42 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   31. Intro Concurrency Synchronization and Deadlock
+   31. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   32. Cooperating Processes
+   32. Cooperating Processes and Inter-process Communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/criticalsection.html">
+   33. The Critical Section Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locks.html">
+   34. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   33. Synchronization Primitives
+   35. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   34. Deadlocks
+   36. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   35. Challenges of Modern Hardware
+   37. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   36. Locking in the Linux Kernel
+   38. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -339,17 +349,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   37. Overview of other topics
+   39. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   38. Virtualization and Cloud computing
+   40. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   39. Other OS structures
+   41. Other OS structures
   </a>
  </li>
 </ul>
@@ -361,17 +371,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   40. How to read this book
+   42. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   41. Contributing
+   43. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   42. Bibliography
+   44. Bibliography
   </a>
  </li>
 </ul>
@@ -763,7 +773,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="scheduling">
-<h1><span class="section-number">8. </span>Scheduling<a class="headerlink" href="#scheduling" title="Permalink to this headline">#</a></h1>
+<span id="cont-scheduling-scheduling"></span><h1><span class="section-number">8. </span>Scheduling<a class="headerlink" href="#scheduling" title="Permalink to this headline">#</a></h1>
 <p>The scheduler is responsible for managing the entirety of the process life cycle and for selecting the next process to run. In the next few sections we will describe the process life cycle and several methods for ordering runnable processes. Before we discuss details, we need to define a few new terms. Earlier we described how we virtualize the CPU, by allowing a process to run for some amount of time and then switching to another process, and then repeating these steps as long as there are processes that need to run. We allot a bounded amount of time for a process to run in a given turn and this bounded time is called a <em>time slice</em>. In <em>batch scheduling</em>, this time slice is the entire time needed to execute the job, while in <em>preemptive scheduling</em> the time slice is typically much shorter than the time to run a process to completion (though not necessarily static, as we will see). We need a mechanism for changing what the active process on a CPU is, we call this mechanism a <em>context switch</em>. We also need policies for deciding how long a process should be allowed to run and policies for choosing the next process to run from a set of runnable processes. With these definitions, let’s first understand the <a class="reference internal" href="#cont-scheduling-scheduling-lifecycle"><span class="std std-ref">process life cycle</span></a>, before jumping into the <a class="reference internal" href="#cont-scheduling-scheduling-switch"><span class="std std-ref">context switch mechanism</span></a> and exploring <a class="reference internal" href="#cont-scheduling-scheduling-factors"><span class="std std-ref">considerations for scheduling policies</span></a>. We conclude this chapter with a look at several <a class="reference internal" href="#cont-scheduling-scheduling-policies"><span class="std std-ref">example scheduling policies</span></a>.</p>
 <section id="the-process-life-cycle">
 <span id="cont-scheduling-scheduling-lifecycle"></span><h2><span class="section-number">8.1. </span>The Process Life Cycle<a class="headerlink" href="#the-process-life-cycle" title="Permalink to this headline">#</a></h2>

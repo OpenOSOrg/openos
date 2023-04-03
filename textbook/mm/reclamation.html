@@ -304,32 +304,42 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   31. Intro Concurrency Synchronization and Deadlock
+   31. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   32. Cooperating Processes
+   32. Cooperating Processes and Inter-process Communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/criticalsection.html">
+   33. The Critical Section Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locks.html">
+   34. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locking.html">
-   33. Synchronization Primitives
+   35. Synchronization Primitives
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/deadlock.html">
-   34. Deadlocks
+   36. Deadlocks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   35. Challenges of Modern Hardware
+   37. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   36. Locking in the Linux Kernel
+   38. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -341,17 +351,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/OtherInro.html">
-   37. Overview of other topics
+   39. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   38. Virtualization and Cloud computing
+   40. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   39. Other OS structures
+   41. Other OS structures
   </a>
  </li>
 </ul>
@@ -363,17 +373,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   40. How to read this book
+   42. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   41. Contributing
+   43. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   42. Bibliography
+   44. Bibliography
   </a>
  </li>
 </ul>
@@ -621,13 +631,6 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#the-memory-hierarchy">
    24.1. The Memory Hierarchy
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#review-questions">
-     24.1.1. Review questions
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dirty-and-clean-pages">
@@ -694,13 +697,6 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#the-memory-hierarchy">
    24.1. The Memory Hierarchy
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#review-questions">
-     24.1.1. Review questions
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dirty-and-clean-pages">
@@ -782,14 +778,12 @@ the traditional memory hierarchy, as shown in
 </figcaption>
 </figure>
 <p>To access address A:</p>
-<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>If it&#39;s not in the cache, then the old cache line is evicted, and A is
-loaded into the resulting empty cache line. This is done in hardware.
-
-If it&#39;s not in memory, then the old page is evicted, and the page
-containing A is loaded into the resulting empty page. This is done in
-software.
-</pre></div>
-</div>
+<p>1.) If it’s not in the cache, then the old cache line is evicted, and A is
+loaded into the resulting empty cache line, this is done in hardware.</p>
+<p>2.) If it’s not in memory, then the old page is evicted, and the page
+containing A is loaded into the resulting empty page, this is done in software.</p>
+<p>3.) This page is mapped into the faulting virtual page via the page table entry,
+this is done in software.</p>
 <p>In general, this works because of <em>locality</em>: when a cache line is
 brought in from memory, a page is loaded into in memory from disk, etc.,
 it tends to get accessed multiple times before eviction.</p>
@@ -804,12 +798,6 @@ Chrome or Microsoft Word idle for half an hour while you use another
 memory-hungry program, memory will be released from the idle process and
 given to the active one; if you switch back, the original program will
 run slowly for a while as it swaps these pages back in.</p>
-<section id="review-questions">
-<h3><span class="section-number">24.1.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
-<div class="highlight-enumerate notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</section>
 </section>
 <section id="dirty-and-clean-pages">
 <h2><span class="section-number">24.2. </span>Dirty and Clean Pages<a class="headerlink" href="#dirty-and-clean-pages" title="Permalink to this headline">#</a></h2>
@@ -862,49 +850,42 @@ Page replacement in virtual memory
 </div>
 <p>The page replacement problem can be stated in abstract form:</p>
 <p>Given the following:</p>
-<div class="highlight-compactenum notranslate"><div class="highlight"><pre><span></span>A disk holding $d$ (virtual) pages, with virtual addresses
-$0,\ldots d-1$;
-
-A memory ${M}$ consisting of $m$ (physical) pages, where each page is
-either empty or holds one of the $d$ virtual pages, and
-
-An access pattern $a_1, a_2, a_3, \cdots$ where each $a_i$ is a virtual
-address in the range $(0,d-1)$:
-</pre></div>
-</div>
+<ul class="simple">
+<li><p>A disk holding <span class="math notranslate nohighlight">\(d\)</span> (virtual) pages, with virtual addresses
+<span class="math notranslate nohighlight">\(0,\ldots d-1\)</span>;</p></li>
+<li><p>A memory <span class="math notranslate nohighlight">\({M}\)</span> consisting of <span class="math notranslate nohighlight">\(m\)</span> (physical) pages, where each page is
+either empty or holds one of the <span class="math notranslate nohighlight">\(d\)</span> virtual pages, and</p></li>
+<li><p>An access pattern <span class="math notranslate nohighlight">\(a_1, a_2, a_3, \cdots\)</span> where each <span class="math notranslate nohighlight">\(a_i\)</span> is a virtual
+address in the range <span class="math notranslate nohighlight">\((0,d-1)\)</span>:</p></li>
+</ul>
 <p>a demand-paging strategy is an algorithm which for each access <span class="math notranslate nohighlight">\(a_i\)</span>
 does the following:</p>
-<div class="highlight-compactitem notranslate"><div class="highlight"><pre><span></span>If $a_i$ is already in one of the $m$ physical pages in ${M}$ (i.e. a
-*hit*): do nothing
-
-Otherwise (a miss) it must:
-
-Select a physical page $j$ in ${M}$ (holding some virtual address $M_j$)
-and evict it, then
-
-Fetch virtual page $a_i$ from disk into physical page $j$
-</pre></div>
-</div>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(a_i\)</span> is already in one of the <span class="math notranslate nohighlight">\(m\)</span> physical pages in <span class="math notranslate nohighlight">\({M}\)</span> (i.e. a
+<em>hit</em>): do nothing</p></li>
+<li><p>Otherwise (a miss) it must:</p></li>
+<li><p>Select a physical page <span class="math notranslate nohighlight">\(j\)</span> in <span class="math notranslate nohighlight">\({M}\)</span> (holding some virtual address <span class="math notranslate nohighlight">\(M_j\)</span>)
+and evict it, then</p></li>
+<li><p>Fetch virtual page <span class="math notranslate nohighlight">\(a_i\)</span> from disk into physical page <span class="math notranslate nohighlight">\(j\)</span></p></li>
+</ul>
 <p>In other words it only fetches page <span class="math notranslate nohighlight">\(j\)</span> <em>on demand</em>—i.e. in response
 to a request for it.</p>
 </section>
 <section id="page-replacement-strategies">
 <h2><span class="section-number">24.4. </span>Page Replacement Strategies<a class="headerlink" href="#page-replacement-strategies" title="Permalink to this headline">#</a></h2>
 <p>In this class we consider the following page replacement strategies:</p>
-<div class="highlight-itemize* notranslate"><div class="highlight"><pre><span></span>FIFO: *first-in first-out*. The page evicted from memory is the first
-page to have been fetched into memory.
-
-LRU: *least-recently used*. Here, accesses to each page are tracked
+<ul class="simple">
+<li><p>FIFO: <em>first-in first-out</em>. The page evicted from memory is the first
+page to have been fetched into memory.</p></li>
+<li><p>LRU: <em>least-recently used</em>. Here, accesses to each page are tracked
 after it has been loaded into memory, and the least-recently-used page
-is evicted (unsurprisingly, given the name of the strategy).
-
-OPT: this is the optimal demand-paged strategy, which is simple but
-impossible to implement, since it requires knowledge of the future. It&#39;s
+is evicted (unsurprisingly, given the name of the strategy).</p></li>
+<li><p>OPT: this is the optimal demand-paged strategy, which is simple but
+impossible to implement, since it requires knowledge of the future. It’s
 examined because it provides a way of telling how well a real
-replacement strategy is performing---is it close to OPT, or is it far
-worse?
-</pre></div>
-</div>
+replacement strategy is performing—is it close to OPT, or is it far
+worse?</p></li>
+</ul>
 <section id="fifo">
 <h3><span class="section-number">24.4.1. </span>FIFO<a class="headerlink" href="#fifo" title="Permalink to this headline">#</a></h3>
 <p><img alt="FIFO cleaning" src="../_images/virt-mem-pic107.png" />{#fig:vm:pic107 width=”100%”}</p>
