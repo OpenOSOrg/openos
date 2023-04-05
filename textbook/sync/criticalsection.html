@@ -321,8 +321,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="locking.html">
-   35. Synchronization Primitives
+  <a class="reference internal" href="ordering.html">
+   35. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
@@ -730,13 +730,99 @@ title="Print to PDF"
 Encapsulating critical section entry and exit with operations on a lock object.</span><a class="headerlink" href="#fig-sync-criticalsection-withlock" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Now all we need is an implementation for the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> and <code class="docutils literal notranslate"><span class="pre">release()</span></code> functions, which is the topic of the next chapter.</p>
+<p>The pthreads specification includes the <code class="docutils literal notranslate"><span class="pre">pthread_mutex_t</span></code> data type, and operations <code class="docutils literal notranslate"><span class="pre">pthread_mutex_lock(mutex)</span></code> and <code class="docutils literal notranslate"><span class="pre">pthread_mutex_unlock(mutex)</span></code> to acquire and release the mutex, respectively. The code in <a class="reference internal" href="#listing-sync-pthread-mutex"><span class="std std-numref">Listing 33.1</span></a> shows how we use the pthreads mutex to protect access to the shared counter variable.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-pthread-mutex">
+<div class="code-block-caption"><span class="caption-number">Listing 33.1 </span><span class="caption-text">Protecting access to the shared counter using a pthread mutex.</span><a class="headerlink" href="#listing-sync-pthread-mutex" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#include &lt;pthread.h&gt;</span>
+<span class="linenos"> 2</span><span class="c1">#include &lt;stdlib.h&gt;</span>
+<span class="linenos"> 3</span><span class="c1">#include &lt;sys/types.h&gt;</span>
+<span class="linenos"> 4</span><span class="c1">#include &lt;unistd.h&gt;</span>
+<span class="linenos"> 5</span><span class="c1">#include &lt;string.h&gt;</span>
+<span class="linenos"> 6</span><span class="c1">#include &lt;stdio.h&gt;</span>
+<span class="linenos"> 7</span>
+<span class="hll"><span class="linenos"> 8</span><span class="n">pthread_mutex_t</span> <span class="n">mutex</span> <span class="o">=</span> <span class="n">PTHREAD_MUTEX_INITIALIZER</span><span class="p">;</span>
+</span><span class="linenos"> 9</span><span class="n">volatile</span> <span class="n">long</span> <span class="n">shared_counter</span><span class="p">;</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="n">static</span> <span class="n">void</span> <span class="o">*</span><span class="n">increment_thread</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="linenos">12</span><span class="p">{</span>
+<span class="linenos">13</span>    <span class="n">long</span> <span class="n">niters</span> <span class="o">=</span> <span class="p">(</span><span class="n">long</span><span class="p">)</span><span class="n">arg</span><span class="p">;</span>
+<span class="linenos">14</span>    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">niters</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="hll"><span class="linenos">15</span>        <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutex</span><span class="p">);</span>
+</span><span class="linenos">16</span>        <span class="n">shared_counter</span><span class="o">++</span><span class="p">;</span>
+<span class="hll"><span class="linenos">17</span>        <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutex</span><span class="p">);</span>
+</span><span class="linenos">18</span>    <span class="p">}</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span>    <span class="k">return</span> <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">21</span><span class="p">}</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="n">static</span> <span class="n">void</span> <span class="o">*</span><span class="n">decrement_thread</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="linenos">24</span><span class="p">{</span>
+<span class="linenos">25</span>    <span class="n">long</span> <span class="n">niters</span> <span class="o">=</span> <span class="p">(</span><span class="n">long</span><span class="p">)</span><span class="n">arg</span><span class="p">;</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">niters</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="hll"><span class="linenos">28</span>        <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutex</span><span class="p">);</span>
+</span><span class="linenos">29</span>        <span class="n">shared_counter</span><span class="o">--</span><span class="p">;</span>
+<span class="hll"><span class="linenos">30</span>        <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutex</span><span class="p">);</span>
+</span><span class="linenos">31</span>    <span class="p">}</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span>    <span class="k">return</span> <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">34</span><span class="p">}</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="linenos">37</span><span class="p">{</span>
+<span class="linenos">38</span>    <span class="n">pthread_t</span> <span class="o">*</span><span class="n">tids</span><span class="p">;</span>
+<span class="linenos">39</span>    <span class="n">long</span> <span class="n">niters</span><span class="p">;</span>
+<span class="linenos">40</span>    <span class="nb">int</span> <span class="n">nthreads</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+<span class="linenos">41</span>    
+<span class="linenos">42</span>    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">43</span>        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s2">&quot;Usage: </span><span class="si">%s</span><span class="s2"> &lt;num_threads&gt; &lt;num_iters&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="linenos">44</span>        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="linenos">45</span>    <span class="p">}</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span>    <span class="n">nthreads</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="linenos">48</span>    <span class="n">niters</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="linenos">49</span>    <span class="n">shared_counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">50</span>    
+<span class="linenos">51</span>    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Main thread: Beginning test with </span><span class="si">%d</span><span class="s2"> threads</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">nthreads</span><span class="p">);</span>
+<span class="linenos">52</span>    
+<span class="linenos">53</span>    <span class="n">tids</span> <span class="o">=</span> <span class="p">(</span><span class="n">pthread_t</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">nthreads</span> <span class="o">*</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">pthread_t</span><span class="p">));</span>
+<span class="linenos">54</span>    
+<span class="linenos">55</span>    <span class="o">/*</span> <span class="n">We</span> <span class="n">create</span> <span class="n">the</span> <span class="n">same</span> <span class="n">number</span> <span class="n">of</span> <span class="n">increment</span> <span class="ow">and</span> <span class="n">decrement</span> <span class="n">threads</span><span class="p">,</span> <span class="n">each</span> <span class="n">doing</span> <span class="n">the</span> <span class="n">same</span> <span class="n">number</span> <span class="n">of</span> <span class="n">iterations</span><span class="o">.</span> 
+<span class="linenos">56</span>     <span class="o">*</span> <span class="n">When</span> <span class="nb">all</span> <span class="n">threads</span> <span class="n">have</span> <span class="n">completed</span><span class="p">,</span> <span class="n">we</span> <span class="n">expect</span> <span class="n">the</span> <span class="n">final</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="n">shared</span> <span class="n">counter</span> <span class="n">to</span> <span class="n">be</span> <span class="n">the</span> <span class="n">same</span> <span class="k">as</span> <span class="n">its</span>
+<span class="linenos">57</span>     <span class="o">*</span> <span class="n">initial</span> <span class="n">value</span> <span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span>
+<span class="linenos">58</span>     <span class="o">*/</span>
+<span class="linenos">59</span>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nthreads</span><span class="p">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">60</span>        <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tids</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">increment_thread</span><span class="p">,</span> <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span><span class="n">niters</span> <span class="p">);</span>
+<span class="linenos">61</span>        <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tids</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">decrement_thread</span><span class="p">,</span> <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span><span class="n">niters</span> <span class="p">);</span>
+<span class="linenos">62</span>    <span class="p">}</span>
+<span class="linenos">63</span>    
+<span class="linenos">64</span>    <span class="o">/*</span> <span class="n">Wait</span> <span class="k">for</span> <span class="n">child</span> <span class="n">threads</span> <span class="n">to</span> <span class="n">finish</span> <span class="o">*/</span>
+<span class="linenos">65</span>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nthreads</span><span class="p">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">66</span>        <span class="n">pthread_join</span><span class="p">(</span><span class="n">tids</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">NULL</span><span class="p">);</span>
+<span class="linenos">67</span>        <span class="n">pthread_join</span><span class="p">(</span><span class="n">tids</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">NULL</span><span class="p">);</span>
+<span class="linenos">68</span>    <span class="p">}</span>
+<span class="linenos">69</span>    
+<span class="linenos">70</span>    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Main thread: Final value of shared counter is </span><span class="si">%ld</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">shared_counter</span><span class="p">);</span>
+<span class="linenos">71</span>
+<span class="linenos">72</span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">73</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Now, let’s try running this code and see if we get the expected final counter value, 0.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "bfa4c1ea764f49aab7c702f307ba1dc3", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>That looks a lot better! So, armed with a lock abstraction (called mutex in the pthreads library), we have a working solution to the critical section problem. In the next chapter, we will explore the internal implementation of the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> and <code class="docutils literal notranslate"><span class="pre">release()</span></code> functions.</p>
 </section>
 </section>
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"6f97ee80f846411bb55e15321f82a998": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_ca26027089cf4999850f64b1625949ab", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     #\r\n$ "}]}}, "ca26027089cf4999850f64b1625949ab": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+{"state": {"04fd903850004c61b850fc7b8114d9ab": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "bc3bfcc7fbc24d2aba6130119b4cd3c0": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "bfa4c1ea764f49aab7c702f307ba1dc3": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_04fd903850004c61b850fc7b8114d9ab", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ./counter_mutex 2 20000\r\nMain thread: Beginning test with 2 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_mutex 2 100000\r\nMain thread: Beginning test with 2 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_mutex 4 100000\r\nMain thread: Beginning test with 4 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_mutex 4 100000\r\nMain thread: Beginning test with 4 threads\r\nMain thread: Final value of shared counter is 0\r\n$ "}]}}, "d1289953c9004ea58130165105a1eb86": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_bc3bfcc7fbc24d2aba6130119b4cd3c0", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     #\r\n$ "}]}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 

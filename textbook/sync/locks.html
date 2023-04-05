@@ -57,7 +57,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="35. Synchronization Primitives" href="locking.html" />
+    <link rel="next" title="35. Ordering Thread Events" href="ordering.html" />
     <link rel="prev" title="33. The Critical Section Problem" href="criticalsection.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -323,8 +323,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="locking.html">
-   35. Synchronization Primitives
+  <a class="reference internal" href="ordering.html">
+   35. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
@@ -643,8 +643,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lock-implementation-attempt-2-take-turns">
-     34.2.2. Lock Implementation Attempt #2 - Take Turns
+    <a class="reference internal nav-link" href="#broked-lock-implementation-attempt-2-take-turns">
+     34.2.2. (Broked) Lock Implementation Attempt #2 - Take Turns
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -660,8 +660,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#atomic-instructions-for-synchonization">
-   34.3. Atomic Instructions for Synchonization
+  <a class="reference internal nav-link" href="#atomic-instructions-for-synchronization">
+   34.3. Atomic Instructions for Synchronization
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -682,6 +682,16 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#atomic-instructions-and-portability">
      34.3.4. Atomic Instructions and Portability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ticket-locks">
+     34.3.5. Ticket Locks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparing-lock-implementations">
+     34.3.6. Comparing Lock Implementations
     </a>
    </li>
   </ul>
@@ -726,8 +736,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lock-implementation-attempt-2-take-turns">
-     34.2.2. Lock Implementation Attempt #2 - Take Turns
+    <a class="reference internal nav-link" href="#broked-lock-implementation-attempt-2-take-turns">
+     34.2.2. (Broked) Lock Implementation Attempt #2 - Take Turns
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -743,8 +753,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#atomic-instructions-for-synchonization">
-   34.3. Atomic Instructions for Synchonization
+  <a class="reference internal nav-link" href="#atomic-instructions-for-synchronization">
+   34.3. Atomic Instructions for Synchronization
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -765,6 +775,16 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#atomic-instructions-and-portability">
      34.3.4. Atomic Instructions and Portability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ticket-locks">
+     34.3.5. Ticket Locks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparing-lock-implementations">
+     34.3.6. Comparing Lock Implementations
     </a>
    </li>
   </ul>
@@ -840,8 +860,8 @@ Third, we can’t have different locks protecting different shared data objects 
 <p>Alas, this does not meet the mutual exclusion requirement. We have just replaced one race with another. Consider two concurrent threads, T0 and T1, attempting to enter their critical sections concurrently by calling <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> on the same lock object. Each thread tests the value of <code class="docutils literal notranslate"><span class="pre">locked</span></code>, sees that is is <code class="docutils literal notranslate"><span class="pre">false</span></code>, and breaks out of their respective <code class="docutils literal notranslate"><span class="pre">while</span></code> loops. Both T0 and T1 then set <code class="docutils literal notranslate"><span class="pre">locked=true</span></code> and proceed to enter their critical sections concurrently.  The mutual exclusion requirement is violated, so we will have to try again.</p>
 <p>The heart of the problem with this non-solution is that our threads’ operations can interleave so that the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag can change between the time when a thread tests if it is safe to proceed and the time when the thread sets the flag to prevent others from also entering the critical section. If we could make the TEST and the SET an indivisible atomic operation, this problem would go away. Indeed, today’s processor architectures give us an instruction with the properties we need. But, the processors of the Djikstra’s era did not, and it is instructive to consider how we can implement the critical section entry and exit protocols without special assistance from the hardware. We will then see how some hardware support simplifies matters considerably.</p>
 </section>
-<section id="lock-implementation-attempt-2-take-turns">
-<span id="cont-sync-locks-turn-soln"></span><h3><span class="section-number">34.2.2. </span>Lock Implementation Attempt #2 - Take Turns<a class="headerlink" href="#lock-implementation-attempt-2-take-turns" title="Permalink to this headline">#</a></h3>
+<section id="broked-lock-implementation-attempt-2-take-turns">
+<span id="cont-sync-locks-turn-soln"></span><h3><span class="section-number">34.2.2. </span>(Broked) Lock Implementation Attempt #2 - Take Turns<a class="headerlink" href="#broked-lock-implementation-attempt-2-take-turns" title="Permalink to this headline">#</a></h3>
 <p>Let’s try replacing the boolean <code class="docutils literal notranslate"><span class="pre">flag</span></code> with a <code class="docutils literal notranslate"><span class="pre">turn</span></code> variable to indicate which thread is allowed to use the critical section. Each thread will wait for <code class="docutils literal notranslate"><span class="pre">turn</span></code> to be set to its own thread id (tid) in the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function before entering, and will set <code class="docutils literal notranslate"><span class="pre">turn</span></code> to the other thread’s id in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function when it is done using the critical section, as shown in <a class="reference internal" href="#listing-sync-turn"><span class="std std-numref">Listing 34.3</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-turn">
 <div class="code-block-caption"><span class="caption-number">Listing 34.3 </span><span class="caption-text">Lock implementation for two threads using turns; C++-like definition.</span><a class="headerlink" href="#listing-sync-turn" title="Permalink to this code">#</a></div>
@@ -918,8 +938,8 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 <p>Over the years, <em>many</em> other algorithms were developed to solve the critical section problem, relying only on ordinary machine instructions. However, simpler solutions exist if we take advantage of special <em>atomic</em> machine instructions that are provided by all modern processor architectures. In addition, modern CPUs may re-order instructions on-the-fly during execution, and allow threads running on different CPUs to observe the effects of memory operations in different orders (this is called a <em>relaxed memory consistency model</em> but it can cause a lot of stress for programmers!). To make the solutions in this section work on modern hardware, additional instructions called <em>fences</em> have to be added to ensure correctness. We might as well use atomic instructions in the first place.</p>
 </section>
 </section>
-<section id="atomic-instructions-for-synchonization">
-<h2><span class="section-number">34.3. </span>Atomic Instructions for Synchonization<a class="headerlink" href="#atomic-instructions-for-synchonization" title="Permalink to this headline">#</a></h2>
+<section id="atomic-instructions-for-synchronization">
+<h2><span class="section-number">34.3. </span>Atomic Instructions for Synchronization<a class="headerlink" href="#atomic-instructions-for-synchronization" title="Permalink to this headline">#</a></h2>
 <p>Recall that we ran into trouble with our first lock implementation in  <a class="reference internal" href="#cont-sync-locks-flag-soln"><span class="std std-numref">Section 34.2.1</span></a>, because threads could have their execution interrupted and interleaved with another thread also running the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function between testing the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag and setting it to true. In this section we will look briefly at the semantics of some atomic machine instructions that can help us solve this problem.</p>
 <section id="test-and-set-tas">
 <h3><span class="section-number">34.3.1. </span>Test-and-Set (TAS)<a class="headerlink" href="#test-and-set-tas" title="Permalink to this headline">#</a></h3>
@@ -1011,6 +1031,7 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 <p><span class="caption-number">Fig. 34.1 </span><span class="caption-text">Starvation is possible with simple test-and-set spinlocks.</span><a class="headerlink" href="#fig-sync-locks-unlucky" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+<p>Although we have illustrated the issue using test-and-set, exactly the same problem can arise when spinlocks are implemented using compare-and-swap.</p>
 </section>
 <section id="atomic-instructions-and-portability">
 <h3><span class="section-number">34.3.4. </span>Atomic Instructions and Portability<a class="headerlink" href="#atomic-instructions-and-portability" title="Permalink to this headline">#</a></h3>
@@ -1028,41 +1049,415 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 <span class="linenos"> 4</span>    <span class="n">atomic_flag</span> <span class="n">locked</span><span class="p">;</span>
 <span class="linenos"> 5</span><span class="p">}</span> <span class="n">spinlock_t</span><span class="p">;</span> 
 <span class="linenos"> 6</span>
-<span class="linenos"> 7</span><span class="n">inline</span> <span class="n">void</span> <span class="n">spinlock_init</span><span class="p">(</span><span class="n">spinlock_t</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 7</span><span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">spinlock_init</span><span class="p">(</span><span class="n">spinlock_t</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span> <span class="p">{</span>
 <span class="linenos"> 8</span>    <span class="n">atomic_flag_clear</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">locked</span> <span class="p">);</span>
 <span class="linenos"> 9</span><span class="p">}</span>
 <span class="linenos">10</span>
-<span class="linenos">11</span><span class="n">inline</span> <span class="n">void</span> <span class="n">spinlock_acquire</span><span class="p">(</span><span class="n">spinlock_t</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span>
+<span class="linenos">11</span><span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">spinlock_acquire</span><span class="p">(</span><span class="n">spinlock_t</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span>
 <span class="linenos">12</span><span class="p">{</span>
 <span class="linenos">13</span>    <span class="k">while</span><span class="p">(</span><span class="n">atomic_flag_test_and_set</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">locked</span> <span class="p">))</span> <span class="p">{</span> <span class="p">};</span>
 <span class="linenos">14</span><span class="p">}</span>
 <span class="linenos">15</span>
-<span class="linenos">16</span><span class="n">inline</span> <span class="n">void</span> <span class="n">spinlock_release</span><span class="p">(</span><span class="n">spinlock_t</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span>
+<span class="linenos">16</span><span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">spinlock_release</span><span class="p">(</span><span class="n">spinlock_t</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span>
 <span class="linenos">17</span><span class="p">{</span>
 <span class="linenos">18</span>    <span class="n">atomic_flag_clear</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">locked</span> <span class="p">);</span>
 <span class="linenos">19</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<p>=(cont:sync:locks:sleep_wakeup</p>
+<p>We argued earlier that a test-and-set spinlock ensures mutual exclusion and progress. Now, let’s see it in action by replacing the pthread_mutex in our shared counter example program with this spinlock implementatioin. The code is shown in <a class="reference internal" href="#listing-sync-counter-spin"><span class="std std-numref">Listing 34.11</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-counter-spin">
+<div class="code-block-caption"><span class="caption-number">Listing 34.11 </span><span class="caption-text">counter_spinlock.c - shared counter example using test-and-set spinlock to protect access to counter variable.</span><a class="headerlink" href="#listing-sync-counter-spin" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#include &lt;pthread.h&gt;</span>
+<span class="linenos"> 2</span><span class="c1">#include &lt;stdlib.h&gt;</span>
+<span class="linenos"> 3</span><span class="c1">#include &lt;sys/types.h&gt;</span>
+<span class="linenos"> 4</span><span class="c1">#include &lt;unistd.h&gt;</span>
+<span class="linenos"> 5</span><span class="c1">#include &lt;string.h&gt;</span>
+<span class="linenos"> 6</span><span class="c1">#include &lt;stdio.h&gt;</span>
+<span class="hll"><span class="linenos"> 7</span><span class="c1">#include &quot;spinlock.h&quot;</span>
+</span><span class="linenos"> 8</span>
+<span class="hll"><span class="linenos"> 9</span><span class="n">spinlock_t</span> <span class="n">splock</span><span class="p">;</span>
+</span><span class="linenos">10</span><span class="n">volatile</span> <span class="n">long</span> <span class="n">shared_counter</span><span class="p">;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">static</span> <span class="n">void</span> <span class="o">*</span><span class="n">increment_thread</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="linenos">13</span><span class="p">{</span>
+<span class="linenos">14</span>    <span class="n">long</span> <span class="n">niters</span> <span class="o">=</span> <span class="p">(</span><span class="n">long</span><span class="p">)</span><span class="n">arg</span><span class="p">;</span>
+<span class="linenos">15</span>    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">niters</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="hll"><span class="linenos">16</span>        <span class="n">spinlock_acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">splock</span><span class="p">);</span>
+</span><span class="linenos">17</span>        <span class="n">shared_counter</span><span class="o">++</span><span class="p">;</span>
+<span class="hll"><span class="linenos">18</span>        <span class="n">spinlock_release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">splock</span><span class="p">);</span>
+</span><span class="linenos">19</span>    <span class="p">}</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="k">return</span> <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">22</span><span class="p">}</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="n">static</span> <span class="n">void</span> <span class="o">*</span><span class="n">decrement_thread</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="linenos">25</span><span class="p">{</span>
+<span class="linenos">26</span>    <span class="n">long</span> <span class="n">niters</span> <span class="o">=</span> <span class="p">(</span><span class="n">long</span><span class="p">)</span><span class="n">arg</span><span class="p">;</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span>    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">niters</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="hll"><span class="linenos">29</span>        <span class="n">spinlock_acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">splock</span><span class="p">);</span>
+</span><span class="linenos">30</span>        <span class="n">shared_counter</span><span class="o">--</span><span class="p">;</span>
+<span class="hll"><span class="linenos">31</span>        <span class="n">spinlock_release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">splock</span><span class="p">);</span>
+</span><span class="linenos">32</span>    <span class="p">}</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span>    <span class="k">return</span> <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">35</span><span class="p">}</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="linenos">38</span><span class="p">{</span>
+<span class="linenos">39</span>    <span class="n">pthread_t</span> <span class="o">*</span><span class="n">tids</span><span class="p">;</span>
+<span class="linenos">40</span>    <span class="n">long</span> <span class="n">niters</span><span class="p">;</span>
+<span class="linenos">41</span>    <span class="nb">int</span> <span class="n">nthreads</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+<span class="linenos">42</span>    
+<span class="linenos">43</span>    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">44</span>        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s2">&quot;Usage: </span><span class="si">%s</span><span class="s2"> &lt;num_threads&gt; &lt;num_iters&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="linenos">45</span>        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="linenos">46</span>    <span class="p">}</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span>    <span class="n">nthreads</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="linenos">49</span>    <span class="n">niters</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="linenos">50</span>    <span class="n">shared_counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="hll"><span class="linenos">51</span>    <span class="n">spinlock_init</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">splock</span> <span class="p">);</span>
+</span><span class="linenos">52</span>    
+<span class="linenos">53</span>    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Main thread: Beginning test with </span><span class="si">%d</span><span class="s2"> threads</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">nthreads</span><span class="p">);</span>
+<span class="linenos">54</span>    
+<span class="linenos">55</span>    <span class="n">tids</span> <span class="o">=</span> <span class="p">(</span><span class="n">pthread_t</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">nthreads</span> <span class="o">*</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">pthread_t</span><span class="p">));</span>
+<span class="linenos">56</span>    
+<span class="linenos">57</span>    <span class="o">/*</span> <span class="n">We</span> <span class="n">create</span> <span class="n">the</span> <span class="n">same</span> <span class="n">number</span> <span class="n">of</span> <span class="n">increment</span> <span class="ow">and</span> <span class="n">decrement</span> <span class="n">threads</span><span class="p">,</span> <span class="n">each</span> <span class="n">doing</span> <span class="n">the</span> <span class="n">same</span> <span class="n">number</span> <span class="n">of</span> <span class="n">iterations</span><span class="o">.</span> 
+<span class="linenos">58</span>     <span class="o">*</span> <span class="n">When</span> <span class="nb">all</span> <span class="n">threads</span> <span class="n">have</span> <span class="n">completed</span><span class="p">,</span> <span class="n">we</span> <span class="n">expect</span> <span class="n">the</span> <span class="n">final</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="n">shared</span> <span class="n">counter</span> <span class="n">to</span> <span class="n">be</span> <span class="n">the</span> <span class="n">same</span> <span class="k">as</span> <span class="n">its</span>
+<span class="linenos">59</span>     <span class="o">*</span> <span class="n">initial</span> <span class="n">value</span> <span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span>
+<span class="linenos">60</span>     <span class="o">*/</span>
+<span class="linenos">61</span>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nthreads</span><span class="p">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">62</span>        <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tids</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">increment_thread</span><span class="p">,</span> <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span><span class="n">niters</span> <span class="p">);</span>
+<span class="linenos">63</span>        <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tids</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">decrement_thread</span><span class="p">,</span> <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span><span class="n">niters</span> <span class="p">);</span>
+<span class="linenos">64</span>    <span class="p">}</span>
+<span class="linenos">65</span>    
+<span class="linenos">66</span>    <span class="o">/*</span> <span class="n">Wait</span> <span class="k">for</span> <span class="n">child</span> <span class="n">threads</span> <span class="n">to</span> <span class="n">finish</span> <span class="o">*/</span>
+<span class="linenos">67</span>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nthreads</span><span class="p">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">68</span>        <span class="n">pthread_join</span><span class="p">(</span><span class="n">tids</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">NULL</span><span class="p">);</span>
+<span class="linenos">69</span>        <span class="n">pthread_join</span><span class="p">(</span><span class="n">tids</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">NULL</span><span class="p">);</span>
+<span class="linenos">70</span>    <span class="p">}</span>
+<span class="linenos">71</span>    
+<span class="linenos">72</span>    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Main thread: Final value of shared counter is </span><span class="si">%ld</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">shared_counter</span><span class="p">);</span>
+<span class="linenos">73</span>
+<span class="linenos">74</span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">75</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "ee912f7604f04063b372651a5ba3a0d5", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>As you can see, the final value of the shared counter is always 0, as expected. (This kind of testing can’t prove that our implementation is correct, but it can reveal when our implementation is incorrect.)</p>
+<p>Next, we turn our attention to the final requirement, bounded waiting. This can also be expressed as a fairness requirement—every thread should have an equal chance to acquire a lock and enter its critical section.</p>
+</section>
+<section id="ticket-locks">
+<span id="cont-sync-locks-ticket"></span><h3><span class="section-number">34.3.5. </span>Ticket Locks<a class="headerlink" href="#ticket-locks" title="Permalink to this headline">#</a></h3>
+<aside class="sidebar">
+<p class="sidebar-title">How unfair are plain spinlocks? </p>
+<p>It turns out they can be quite unfair indeed. When ticket locks were introduced to the Linux kernel, the patch description included this motivation for them:</p>
+<blockquote>
+<div><p>On an 8 core (2 socket) Opteron, spinlock unfairness is extremely noticable, with a userspace test having a difference of up to 2x runtime per thread, and some threads are starved or “unfairly” granted the lock up to 1 000 000 (!) times. After this patch, all threads appear to finish at exactly the same time.</p>
+</div></blockquote>
+<p style='text-align: right;'> ---Nick Piggin, <a href='https://lkml.org/lkml/2007/11/1/125'>[LKML 2007]</a></p>
+</aside>
+<p>Mellor-Crummey and Scott introduced <em>ticket locks</em> as a simple way to achieve bounded waiting using an atomic fetch-and-add (FAA) machine instruction <span id="id4">[<a class="reference internal" href="../misc/bib.html#id7" title="John M. Mellor-Crummey and Michael L. Scott. Algorithms for scalable synchronization on shared-memory multiprocessors. ACM Trans. Comput. Syst., 9(1):21–65, feb 1991. URL: https://doi.org/10.1145/103727.103729, doi:10.1145/103727.103729.">MCS91</a>]</span>. (The fetch-and-add instruction has the semantics shown in <a class="reference internal" href="#listing-sync-faa"><span class="std std-numref">Listing 34.12</span></a>.) They observed that ticket locks could be viewed as an optimization of Lamport’s classic Bakery Algorithm <span id="id5">[<a class="reference internal" href="../misc/bib.html#id8" title="Leslie Lamport. A new solution of dijkstra's concurrent programming problem. Commun. ACM, 17(8):453–455, aug 1974. URL: https://doi.org/10.1145/361082.361093, doi:10.1145/361082.361093.">Lam74</a>]</span>. To understand how ticket locks work, imagine a bakery with a ticket dispenser and a display behind the counter showing the ticket number of the next customer to be served. Customers take a ticket when they come into the bakery, and wait until the display shows their number. Customers are served in the order they claim their tickets, so we can guarantee no starvation.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-faa">
+<div class="code-block-caption"><span class="caption-number">Listing 34.12 </span><span class="caption-text">Semantics of the fetch-and-add atomic instruction; atomically increments the contents of a memory location by a specified value, returning the previous contents of the memory location.</span><a class="headerlink" href="#listing-sync-faa" title="Permalink to this code">#</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">fetch_and_add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="o">*</span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>To use this idea in a lock data type, we need two counters, <code class="docutils literal notranslate"><span class="pre">next_ticket</span></code> and <code class="docutils literal notranslate"><span class="pre">now_serving</span></code>. To acquire the lock, a thread first gets a ticket and increments the <code class="docutils literal notranslate"><span class="pre">next_ticket</span></code> variable, using the atomic fetch-and-add instruction. Because fetch-and-add is an indivisible machine instruction, each thread is guaranteed a unique ticket number. To wait for its turn, a thread simply spins testing to see if the <code class="docutils literal notranslate"><span class="pre">now_serving</span></code> variable matches its ticket. When that happens, the thread breaks out of the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop, and enters its critical section. To release the lock, a thread simply increments the <code class="docutils literal notranslate"><span class="pre">now_serving</span></code> variable, which will allow exactly one thread (the one holding the next ticket number) to acquire the lock next. We show an example of this implementation in <a class="reference internal" href="#listing-sync-ticketlock"><span class="std std-numref">Listing 34.13</span></a>. Note that we do not need to use the fetch-and-add atomic instruction to increment <code class="docutils literal notranslate"><span class="pre">now_serving</span></code> in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function, because only the thread that acquired the lock can release it, and we don’t care about the previous value. On any real processor, however, we do need to worry about instruction reordering so we would need a memory <em>fence</em> in the <code class="docutils literal notranslate"><span class="pre">release</span></code> function.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-ticketlock">
+<div class="code-block-caption"><span class="caption-number">Listing 34.13 </span><span class="caption-text">Ticket lock implementation; C++-like definition.</span><a class="headerlink" href="#listing-sync-ticketlock" title="Permalink to this code">#</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">next_ticket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">now_serving</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">acquire</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">my_ticket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch_and_increment</span><span class="p">(</span><span class="o">&amp;</span><span class="n">next_ticket</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="n">my_ticket</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">now_serving</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// empty loop body, just spins</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">release</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">now_serving</span><span class="o">++</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>In <a class="reference internal" href="#listing-sync-ticketlock-c11"><span class="std std-numref">Listing 34.14</span></a>, we show a portable, C11 implementation of a ticket lock.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-ticketlock-c11">
+<div class="code-block-caption"><span class="caption-number">Listing 34.14 </span><span class="caption-text">C11 implementation of a ticket lock</span><a class="headerlink" href="#listing-sync-ticketlock-c11" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#include &lt;stdatomic.h&gt;</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="n">typedef</span> <span class="n">struct</span> <span class="n">ticketlock_s</span> <span class="p">{</span>
+<span class="linenos"> 4</span>    <span class="n">atomic_ulong</span> <span class="n">next_ticket</span><span class="p">;</span>
+<span class="linenos"> 5</span>    <span class="n">atomic_ulong</span> <span class="n">now_serving</span><span class="p">;</span>
+<span class="linenos"> 6</span><span class="p">}</span> <span class="n">ticketlock_t</span><span class="p">;</span> 
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">ticketlock_init</span><span class="p">(</span><span class="n">ticketlock_t</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 9</span>    <span class="n">l</span><span class="o">-&gt;</span><span class="n">next_ticket</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">10</span>    <span class="n">l</span><span class="o">-&gt;</span><span class="n">now_serving</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">11</span><span class="p">}</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">ticketlock_acquire</span><span class="p">(</span><span class="n">ticketlock_t</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span>
+<span class="linenos">14</span><span class="p">{</span>
+<span class="linenos">15</span>    <span class="n">unsigned</span> <span class="n">long</span> <span class="n">my_ticket</span> <span class="o">=</span> <span class="n">atomic_fetch_add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">next_ticket</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="linenos">16</span>    <span class="k">while</span><span class="p">(</span><span class="n">my_ticket</span> <span class="o">!=</span> <span class="n">l</span><span class="o">-&gt;</span><span class="n">now_serving</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span>
+<span class="linenos">17</span><span class="p">}</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">ticketlock_release</span><span class="p">(</span><span class="n">ticketlock_t</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span>
+<span class="linenos">20</span><span class="p">{</span>
+<span class="linenos">21</span>    <span class="n">l</span><span class="o">-&gt;</span><span class="n">now_serving</span><span class="o">++</span><span class="p">;</span>
+<span class="linenos">22</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Now, let’s see the ticket lock in action by replacing the previous spinlock in our shared counter example program with this ticketlock implementatioin. The code is shown in <a class="reference internal" href="#listing-sync-counter-ticket"><span class="std std-numref">Listing 34.15</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-counter-ticket">
+<div class="code-block-caption"><span class="caption-number">Listing 34.15 </span><span class="caption-text">counter_ticketlock.c - shared counter example using ticket lock to protect access to counter variable.</span><a class="headerlink" href="#listing-sync-counter-ticket" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#include &lt;pthread.h&gt;</span>
+<span class="linenos"> 2</span><span class="c1">#include &lt;stdlib.h&gt;</span>
+<span class="linenos"> 3</span><span class="c1">#include &lt;sys/types.h&gt;</span>
+<span class="linenos"> 4</span><span class="c1">#include &lt;unistd.h&gt;</span>
+<span class="linenos"> 5</span><span class="c1">#include &lt;string.h&gt;</span>
+<span class="linenos"> 6</span><span class="c1">#include &lt;stdio.h&gt;</span>
+<span class="hll"><span class="linenos"> 7</span><span class="c1">#include &quot;ticketlock.h&quot;</span>
+</span><span class="linenos"> 8</span>
+<span class="hll"><span class="linenos"> 9</span><span class="n">ticketlock_t</span> <span class="n">tktlock</span><span class="p">;</span>
+</span><span class="linenos">10</span><span class="n">volatile</span> <span class="n">long</span> <span class="n">shared_counter</span><span class="p">;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">static</span> <span class="n">void</span> <span class="o">*</span><span class="n">increment_thread</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="linenos">13</span><span class="p">{</span>
+<span class="linenos">14</span>    <span class="n">long</span> <span class="n">niters</span> <span class="o">=</span> <span class="p">(</span><span class="n">long</span><span class="p">)</span><span class="n">arg</span><span class="p">;</span>
+<span class="linenos">15</span>    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">niters</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="hll"><span class="linenos">16</span>        <span class="n">ticketlock_acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tktlock</span><span class="p">);</span>
+</span><span class="linenos">17</span>        <span class="n">shared_counter</span><span class="o">++</span><span class="p">;</span>
+<span class="hll"><span class="linenos">18</span>        <span class="n">ticketlock_release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tktlock</span><span class="p">);</span>
+</span><span class="linenos">19</span>    <span class="p">}</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="k">return</span> <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">22</span><span class="p">}</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="n">static</span> <span class="n">void</span> <span class="o">*</span><span class="n">decrement_thread</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="linenos">25</span><span class="p">{</span>
+<span class="linenos">26</span>    <span class="n">long</span> <span class="n">niters</span> <span class="o">=</span> <span class="p">(</span><span class="n">long</span><span class="p">)</span><span class="n">arg</span><span class="p">;</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span>    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">niters</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="hll"><span class="linenos">29</span>        <span class="n">ticketlock_acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tktlock</span><span class="p">);</span>
+</span><span class="linenos">30</span>        <span class="n">shared_counter</span><span class="o">--</span><span class="p">;</span>
+<span class="hll"><span class="linenos">31</span>        <span class="n">ticketlock_release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tktlock</span><span class="p">);</span>
+</span><span class="linenos">32</span>    <span class="p">}</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span>    <span class="k">return</span> <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">35</span><span class="p">}</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="linenos">38</span><span class="p">{</span>
+<span class="linenos">39</span>    <span class="n">pthread_t</span> <span class="o">*</span><span class="n">tids</span><span class="p">;</span>
+<span class="linenos">40</span>    <span class="n">long</span> <span class="n">niters</span><span class="p">;</span>
+<span class="linenos">41</span>    <span class="nb">int</span> <span class="n">nthreads</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+<span class="linenos">42</span>    
+<span class="linenos">43</span>    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">44</span>        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s2">&quot;Usage: </span><span class="si">%s</span><span class="s2"> &lt;num_threads&gt; &lt;num_iters&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="linenos">45</span>        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="linenos">46</span>    <span class="p">}</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span>    <span class="n">nthreads</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="linenos">49</span>    <span class="n">niters</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="linenos">50</span>    <span class="n">shared_counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="hll"><span class="linenos">51</span>    <span class="n">ticketlock_init</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">tktlock</span> <span class="p">);</span>
+</span><span class="linenos">52</span>    
+<span class="linenos">53</span>    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Main thread: Beginning test with </span><span class="si">%d</span><span class="s2"> threads</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">nthreads</span><span class="p">);</span>
+<span class="linenos">54</span>    
+<span class="linenos">55</span>    <span class="n">tids</span> <span class="o">=</span> <span class="p">(</span><span class="n">pthread_t</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">nthreads</span> <span class="o">*</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">pthread_t</span><span class="p">));</span>
+<span class="linenos">56</span>    
+<span class="linenos">57</span>    <span class="o">/*</span> <span class="n">We</span> <span class="n">create</span> <span class="n">the</span> <span class="n">same</span> <span class="n">number</span> <span class="n">of</span> <span class="n">increment</span> <span class="ow">and</span> <span class="n">decrement</span> <span class="n">threads</span><span class="p">,</span> <span class="n">each</span> <span class="n">doing</span> <span class="n">the</span> <span class="n">same</span> <span class="n">number</span> <span class="n">of</span> <span class="n">iterations</span><span class="o">.</span> 
+<span class="linenos">58</span>     <span class="o">*</span> <span class="n">When</span> <span class="nb">all</span> <span class="n">threads</span> <span class="n">have</span> <span class="n">completed</span><span class="p">,</span> <span class="n">we</span> <span class="n">expect</span> <span class="n">the</span> <span class="n">final</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="n">shared</span> <span class="n">counter</span> <span class="n">to</span> <span class="n">be</span> <span class="n">the</span> <span class="n">same</span> <span class="k">as</span> <span class="n">its</span>
+<span class="linenos">59</span>     <span class="o">*</span> <span class="n">initial</span> <span class="n">value</span> <span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span>
+<span class="linenos">60</span>     <span class="o">*/</span>
+<span class="linenos">61</span>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nthreads</span><span class="p">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">62</span>        <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tids</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">increment_thread</span><span class="p">,</span> <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span><span class="n">niters</span> <span class="p">);</span>
+<span class="linenos">63</span>        <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tids</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">decrement_thread</span><span class="p">,</span> <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span><span class="n">niters</span> <span class="p">);</span>
+<span class="linenos">64</span>    <span class="p">}</span>
+<span class="linenos">65</span>    
+<span class="linenos">66</span>    <span class="o">/*</span> <span class="n">Wait</span> <span class="k">for</span> <span class="n">child</span> <span class="n">threads</span> <span class="n">to</span> <span class="n">finish</span> <span class="o">*/</span>
+<span class="linenos">67</span>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nthreads</span><span class="p">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">68</span>        <span class="n">pthread_join</span><span class="p">(</span><span class="n">tids</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">NULL</span><span class="p">);</span>
+<span class="linenos">69</span>        <span class="n">pthread_join</span><span class="p">(</span><span class="n">tids</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">NULL</span><span class="p">);</span>
+<span class="linenos">70</span>    <span class="p">}</span>
+<span class="linenos">71</span>    
+<span class="linenos">72</span>    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Main thread: Final value of shared counter is </span><span class="si">%ld</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">shared_counter</span><span class="p">);</span>
+<span class="linenos">73</span>
+<span class="linenos">74</span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">75</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "608654b519cd4f06bf49e6a1870fe074", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</section>
+<section id="comparing-lock-implementations">
+<h3><span class="section-number">34.3.6. </span>Comparing Lock Implementations<a class="headerlink" href="#comparing-lock-implementations" title="Permalink to this headline">#</a></h3>
+<p>Test-and-set spinlocks, ticket locks, or the mutex from the pthreads library (<code class="docutils literal notranslate"><span class="pre">pthread_mutex_t</span></code>) can all provide mutual exclusion and ensure progress, but ticket locks can guarantee fairness, unlike test-and-set spinlocks. On the other hand, you can see that more work is required to acquire and release a ticket lock. To see how these implementations stack up, we have a very simple test program that creates some number of threads and has each thread count the number of times it can acquire and release the lock in a fixed amount of time. The parent thread sets a global flag to allow the children to start counting after all the threads have been created, sleeps for some amount of time, and then sets another global flag to tell the children to stop. Once all the child threads are done, the parent reports on the total number of iterations completed by all children, and the difference between the most and least productive thread. This program for the test-and-set spinlock is shown in <a class="reference internal" href="#listing-sync-check-spinlock-fairness"><span class="std std-numref">Listing 34.16</span></a>; we also have versions that replace the spinlock with a ticket lock, and with a pthread mutex.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-check-spinlock-fairness">
+<div class="code-block-caption"><span class="caption-number">Listing 34.16 </span><span class="caption-text">check_spinlock_fairness.c - Sample program to show fairness and efficiency of test-and-set spinlock implementation.</span><a class="headerlink" href="#listing-sync-check-spinlock-fairness" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>#include &lt;pthread.h&gt;
+<span class="linenos"> 2</span>#include &lt;stdlib.h&gt;
+<span class="linenos"> 3</span>#include &lt;sys/types.h&gt;
+<span class="linenos"> 4</span>#include &lt;unistd.h&gt;
+<span class="linenos"> 5</span>#include &lt;string.h&gt;
+<span class="linenos"> 6</span>#include &lt;stdio.h&gt;
+<span class="linenos"> 7</span>#include &lt;stdbool.h&gt;
+<span class="linenos"> 8</span>#include &lt;limits.h&gt;
+<span class="linenos"> 9</span>#include &quot;spinlock.h&quot;
+<span class="linenos">10</span>
+<span class="linenos">11</span>spinlock_t splock;
+<span class="linenos">12</span>atomic_bool start;
+<span class="linenos">13</span>atomic_bool done;
+<span class="linenos">14</span>
+<span class="linenos">15</span>struct thread_info {
+<span class="linenos">16</span>    pthread_t tid;
+<span class="linenos">17</span>    unsigned iters_done;
+<span class="linenos">18</span>};
+<span class="linenos">19</span>
+<span class="linenos">20</span>static void *thread_func(void *arg)
+<span class="linenos">21</span>{
+<span class="linenos">22</span>    struct thread_info *my_info = (struct thread_info *)arg;
+<span class="linenos">23</span>    unsigned i = 0;
+<span class="linenos">24</span>    
+<span class="linenos">25</span>    while(!start) {} ; /* Wait until parent flags that all threads have been created */ 
+<span class="linenos">26</span>    
+<span class="linenos">27</span>    while (!done) {
+<span class="linenos">28</span>        spinlock_acquire(&amp;splock);
+<span class="linenos">29</span>        i++;
+<span class="linenos">30</span>        spinlock_release(&amp;splock);
+<span class="linenos">31</span>    }
+<span class="linenos">32</span>
+<span class="linenos">33</span>    my_info-&gt;iters_done = i;
+<span class="linenos">34</span>    return (void *)0;
+<span class="linenos">35</span>}
+<span class="linenos">36</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span>int main(int argc, char **argv)
+<span class="linenos">40</span>{
+<span class="linenos">41</span>    struct thread_info *tinfo;
+<span class="linenos">42</span>    int duration;
+<span class="linenos">43</span>    int nthreads, i;
+<span class="linenos">44</span>    
+<span class="linenos">45</span>    if (argc != 3) {
+<span class="linenos">46</span>        fprintf(stderr,&quot;Usage: %s &lt;num_threads&gt; &lt;duration&gt;\n\t where duration is the number of seconds for threads to run.\n&quot;,argv[0]);
+<span class="linenos">47</span>        return 1;
+<span class="linenos">48</span>    }
+<span class="linenos">49</span>
+<span class="linenos">50</span>    start = false;
+<span class="linenos">51</span>    done = false;
+<span class="linenos">52</span>    nthreads = atoi(argv[1]);
+<span class="linenos">53</span>    duration = atoi(argv[2]);
+<span class="linenos">54</span>    spinlock_init( &amp;splock );
+<span class="linenos">55</span>    
+<span class="linenos">56</span>    printf(&quot;Main thread: Beginning test with %d threads, running for %d seconds\n&quot;, nthreads, duration);
+<span class="linenos">57</span>    
+<span class="linenos">58</span>    tinfo = (struct thread_info *)calloc(nthreads, sizeof(struct thread_info));
+<span class="linenos">59</span>
+<span class="linenos">60</span>    /* We create the requested number of threads, all doing the same work */
+<span class="linenos">61</span>    for (i = 0; i &lt; nthreads; i++) {
+<span class="linenos">62</span>        (void)pthread_create(&amp;tinfo[i].tid, NULL, thread_func, (void *)&amp;tinfo[i] );
+<span class="linenos">63</span>    }
+<span class="linenos">64</span>    
+<span class="linenos">65</span>    /* All threads created. Let them run concurrently for requested duration. */
+<span class="linenos">66</span>    start = true;
+<span class="linenos">67</span>    sleep(duration);
+<span class="linenos">68</span>    done = true;
+<span class="linenos">69</span>    
+<span class="linenos">70</span>    /* Wait for child threads to finish */
+<span class="linenos">71</span>    for (i = 0; i &lt; nthreads; i++) {
+<span class="linenos">72</span>        pthread_join(tinfo[i].tid, NULL);
+<span class="linenos">73</span>    }
+<span class="linenos">74</span>
+<span class="linenos">75</span>    unsigned min_iters = UINT_MAX;
+<span class="linenos">76</span>    unsigned max_iters = 0; 
+<span class="linenos">77</span>    unsigned tot_iters = 0;
+<span class="linenos">78</span>    for (i = 0; i &lt; nthreads; i++) {
+<span class="linenos">79</span>        tot_iters += tinfo[i].iters_done;
+<span class="linenos">80</span>        if (tinfo[i].iters_done &lt; min_iters) {
+<span class="linenos">81</span>            min_iters = tinfo[i].iters_done;
+<span class="linenos">82</span>        }
+<span class="linenos">83</span>        if (tinfo[i].iters_done &gt; max_iters) {
+<span class="linenos">84</span>            max_iters = tinfo[i].iters_done;
+<span class="linenos">85</span>        }
+<span class="linenos">86</span>        printf(&quot;Thread %d completed %u iters\n&quot;, i, tinfo[i].iters_done);
+<span class="linenos">87</span>    }
+<span class="linenos">88</span>    
+<span class="linenos">89</span>    unsigned diff = max_iters - min_iters;
+<span class="linenos">90</span>    printf(&quot;\nTOTAL: %u iterations completed.\n&quot;, tot_iters);
+<span class="linenos">91</span>    printf(&quot;Unfairness: Most productive thread completed %u iters, least productive thread completed %u iters\n&quot;, max_iters, min_iters);
+<span class="linenos">92</span>    printf(&quot;Difference is %u iters\n&quot;, diff); 
+<span class="linenos">93</span>
+<span class="linenos">94</span>    return 0;
+<span class="linenos">95</span>}
+</pre></div>
+</div>
+</div>
+<p>Let’s compare the result of running the <code class="docutils literal notranslate"><span class="pre">check_spinlock_fairness</span></code>, <code class="docutils literal notranslate"><span class="pre">check_ticketlock_fairness</span></code> and <code class="docutils literal notranslate"><span class="pre">check_mutex</span></code> fairness programs on the container used to build this book. In each case, we start six threads and let them run for 5 seconds.</p>
+<p>We’ll start with the test-and-set spinlock:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "272271e7ef6f46199c560e3b4015bef2", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>Actual numbers will vary from one trial to the next, but you should see somewhere around 12 million total iterations (~2 million iterations per thread on average), with a difference of a few hundred thousand iterations between the thread that did the most iterations, and the one that did the fewest. We often see the “fastest” thread performing 1.5x the work of the “slowest” thread.</p>
+<p>Now, let’s look at the ticket lock:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "b7c69220193348d2abd810a3dc32a8b1", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>You should see that the total number of iterations completed is somewhat smaller than with the test-and-set spinlock, reflecting the higher overhead of acquiring and releasing a ticket lock, with each thread completing around 1.9 million iteration on average. In exchange for this higher overhead, however, we get greater fairness, with a difference of less than 5,000 iterations between the “fastest” and “slowest” threads.</p>
+<p>Finally, let’s see how the pthread library’s mutex implementation compares:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "7bcc4149eba549e9bbc73d5371970cae", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>Two things should be readily apparent from these results. First, the pthreads mutex is <em>much</em> more efficient than our simple lock implementations, completing nearly twice as many iterations, with an average of nearly 4 million iterations per thread. Second, the pthreads mutex is fairer than the test-and-set spinlock, but less fair than the ticket lock, with the “fastest” thread completing ~1.15x more iterations than the “slowest” thread.</p>
 </section>
 </section>
 <section id="sleep-and-wakeup">
-<h2><span class="section-number">34.4. </span>Sleep and Wakeup<a class="headerlink" href="#sleep-and-wakeup" title="Permalink to this headline">#</a></h2>
-<p>We can build better spinlocks that are more efficient and satisfy the bounded waiting requirement, but we can’t get away from the fundamental problem of busy waiting. On a uniprocessor, busy waiting wastes precious CPU time. If a lock is not available the first time a thread tries to acquire it, the lock can’t possibly become available until the thread holding the lock gets a chance to run. So, the waiting thread will spin through its timeslice until the scheduler preempts it and switches to another thread. But what alternative do we have? One option is for the waiting thread to voluntarily yield the remainder of its timeslice when it can’t acquire a lock (e.g., via the <code class="docutils literal notranslate"><span class="pre">sched_yield()</span></code> system call). This helps, but can still have unnecessary overhead if the thread holding the lock is blocked (e.g., waiting for terminal input). In such cases, the scheduler will keep switching back to the thread trying to acquire the lock, which will keep yielding, until eventually the lock holder can run and release the lock. What we really want is a way to block a thread that is trying to acquire a lock until there a chance that the lock is available, and then unblock a waiting thread when the lock is released. To that end, we introduce the following operations:</p>
+<span id="cont-sync-locks-sleep-wakeup"></span><h2><span class="section-number">34.4. </span>Sleep and Wakeup<a class="headerlink" href="#sleep-and-wakeup" title="Permalink to this headline">#</a></h2>
+<p>We can build better spinlocks that are more efficient than the simple implementations we have shown and still satisfy the bounded waiting requirement, but we can’t get away from the fundamental problem of busy waiting. On a uniprocessor, busy waiting wastes precious CPU time. If a lock is not available the first time a thread tries to acquire it, the lock can’t possibly become available until the thread holding the lock gets a chance to run. So, the waiting thread will spin through its timeslice until the scheduler preempts it and switches to another thread. On a multiprocessor, it might be acceptable to spin while waiting for a lock if critical sections are short, since the lock could be released by a thread running on another CPU. Even on a multiprocessor, however, spinning can waste a lot of CPU time when critical sections are long, or when many threads are competing to acquire the lock. But what alternative do we have? One option is for the waiting thread to voluntarily yield the remainder of its timeslice when it can’t acquire a lock (e.g., via the <code class="docutils literal notranslate"><span class="pre">sched_yield()</span></code> system call). This helps, but can still have unnecessary overhead if the thread holding the lock is blocked (e.g., waiting for terminal input). In such cases, the scheduler will keep switching back to the thread trying to acquire the lock, which will keep yielding, until eventually the lock holder can run and release the lock. What we really want is a way to block a thread that is trying to acquire a lock until there is a chance that the lock is available, and then unblock a waiting thread when the lock is released. To that end, we introduce the following operations:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sleep(wait_queue)</span></code>: blocks the calling thread; thread is added to <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> and another thread is selected to run.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">wakeup(wait_queue)</span></code>: removes a thread from <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> and adds it to the scheduler Ready queue.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">wakeup_all(wait_queue)</span></code>: moves <em>all</em> threads from <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> to the the scheduler Ready queue.</p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> is simply a data structure that can keep track of the blocked threads. A simple implementation might be a linked list of thread ids that can be used to look up the corresponding thread. We will assume the list is kept in FIFO order, so that the thread that has been waiting the longest will be the first to wake up.</p>
-<p>Unfortunately, this solution to the busy waiting problem just introduced another shared data structure (the <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code>) and the steps to add or remove threads from the wait_queue are themselves another critical section. It looks like we’ve circled back to the same problem we started with.</p>
+<p>Unfortunately, this solution to the busy waiting problem just introduced another shared data structure (the <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code>) and the steps to add or remove threads from the wait_queue are themselves critical sections. It looks like we’ve circled back to the same problem we started with. Fortunately, the operations to add or remove threads from a queue are short, so we can fall back on a spinlock to protect the wait_queue data structure and implement a sleep lock.</p>
 </section>
 </section>
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"2e995f769fc64b66854137a57cf431e0": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_90c2397238b94f708ffb4d0e1fa74da1", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     #\r\n$ "}]}}, "90c2397238b94f708ffb4d0e1fa74da1": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+{"state": {"08ab4f4f66514c70a1be6c983a1c764a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "1ccf2eb9801f4099a7a21a1a4964f791": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "272271e7ef6f46199c560e3b4015bef2": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_bb96e341beb3488fb2a73a2dd6018f71", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ./check_spinlock_fairness 6 5\r\nMain thread: Beginning test with 6 threads, running for 5 seconds\r\nThread 0 completed 2476462 iters\r\nThread 1 completed 2115305 iters\r\nThread 2 completed 2034806 iters\r\nThread 3 completed 2061378 iters\r\nThread 4 completed 2278271 iters\r\nThread 5 completed 2295173 iters\r\n\r\nTOTAL: 13261395 iterations completed.\r\nUnfairness: Most productive thread completed 2476462 iters, least productive thread completed 2034806 iters\r\nDifference is 441656 iters\r\n$ "}]}}, "27429cbb8f5b44378d30717dcfb3a70b": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "608654b519cd4f06bf49e6a1870fe074": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_27429cbb8f5b44378d30717dcfb3a70b", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ./counter_ticketlock 2 20000\r\nMain thread: Beginning test with 2 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_ticketlock 2 100000\r\nMain thread: Beginning test with 2 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_ticketlock 4 100000\r\nMain thread: Beginning test with 4 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_ticketlock 4 100000\r\nMain thread: Beginning test with 4 threads\r\nMain thread: Final value of shared counter is 0\r\n$ "}]}}, "7bcc4149eba549e9bbc73d5371970cae": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_8edd2b7dc05a4e109cc4118f4a4b7037", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ./check_mutex_fairness 6 5\r\nMain thread: Beginning test with 6 threads, running for 5 seconds\r\nThread 0 completed 3358759 iters\r\nThread 1 completed 4040364 iters\r\nThread 2 completed 3652663 iters\r\nThread 3 completed 3879181 iters\r\nThread 4 completed 3725275 iters\r\nThread 5 completed 3502127 iters\r\n\r\nTOTAL: 22158369 iterations completed.\r\nMost productive thread completed 4040364 iterations, least productive thread completed 3358759 iterations\r\nDifference is 681605 iters\r\n$ "}]}}, "8edd2b7dc05a4e109cc4118f4a4b7037": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "aac466fc989c47e59e249a6e1c55f7b8": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_ab5634a54af74c34a553aeb6d21325fe", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     #\r\n$ "}]}}, "ab5634a54af74c34a553aeb6d21325fe": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b7c69220193348d2abd810a3dc32a8b1": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_1ccf2eb9801f4099a7a21a1a4964f791", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ./check_ticketlock_fairness 6 5\r\nMain thread: Beginning test with 6 threads, running for 5 seconds\r\nThread 0 completed 1816979 iters\r\nThread 1 completed 1816505 iters\r\nThread 2 completed 1818123 iters\r\nThread 3 completed 1816898 iters\r\nThread 4 completed 1817740 iters\r\nThread 5 completed 1817489 iters\r\n\r\nTOTAL: 10903734 iterations completed.\r\nMost productive thread completed 1818123 iterations, least productive thread completed 1816505 iterations\r\nDifference is 1618 iters\r\n$ "}]}}, "bb96e341beb3488fb2a73a2dd6018f71": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ee912f7604f04063b372651a5ba3a0d5": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_08ab4f4f66514c70a1be6c983a1c764a", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ./counter_spinlock 2 20000\r\nMain thread: Beginning test with 2 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_spinlock 2 100000\r\nMain thread: Beginning test with 2 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_spinlock 4 100000\r\nMain thread: Beginning test with 4 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_spinlock 4 100000\r\nMain thread: Beginning test with 4 threads\r\nMain thread: Final value of shared counter is 0\r\n$ "}]}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 
@@ -1100,10 +1495,10 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
             <p class="prev-next-title"><span class="section-number">33. </span>The Critical Section Problem</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="locking.html" title="next page">
+    <a class='right-next' id="next-link" href="ordering.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">35. </span>Synchronization Primitives</p>
+        <p class="prev-next-title"><span class="section-number">35. </span>Ordering Thread Events</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
