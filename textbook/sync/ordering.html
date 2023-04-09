@@ -626,8 +626,18 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sleep-and-wakeup-revisited">
-   35.1. Sleep and Wakeup Revisited
+  <a class="reference internal nav-link" href="#the-bounded-buffer-problem">
+   35.1. The Bounded Buffer Problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#semaphores">
+   35.2. Semaphores
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#condition-variables">
+   35.3. Condition Variables
   </a>
  </li>
 </ul>
@@ -650,8 +660,18 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sleep-and-wakeup-revisited">
-   35.1. Sleep and Wakeup Revisited
+  <a class="reference internal nav-link" href="#the-bounded-buffer-problem">
+   35.1. The Bounded Buffer Problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#semaphores">
+   35.2. Semaphores
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#condition-variables">
+   35.3. Condition Variables
   </a>
  </li>
 </ul>
@@ -669,21 +689,489 @@ title="Print to PDF"
 <section class="tex2jax_ignore mathjax_ignore" id="ordering-thread-events">
 <span id="cont-sync-ordering"></span><h1><span class="section-number">35. </span>Ordering Thread Events<a class="headerlink" href="#ordering-thread-events" title="Permalink to this headline">#</a></h1>
 <p>=(cont:sync:ordering:sleep_wakeup</p>
-<section id="sleep-and-wakeup-revisited">
-<h2><span class="section-number">35.1. </span>Sleep and Wakeup Revisited<a class="headerlink" href="#sleep-and-wakeup-revisited" title="Permalink to this headline">#</a></h2>
-<p>As we saw in <a class="reference internal" href="locks.html#cont-sync-locks-sleep-wakeup"><span class="std std-numref">Section 34.4</span></a>, the <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> data structure provides a way for threads to avoid wasting CPU time while they are waiting for something to happen. Waiting for a lock to be released is just one possible reason that a thread might need to wait. We saw another example in the code of <a class="reference internal" href="locks.html#listing-sync-check-spinlock-fairness"><span class="std std-numref">Listing 34.16</span></a>, where each child thread spins waiting for the parent to finish creating all the other children.</p>
+<p>As we saw in <a class="reference internal" href="locks.html#cont-sync-locks-sleep-wakeup"><span class="std std-numref">Section 34.4</span></a>, the <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> data structure provides a way for threads to avoid wasting CPU time while they are waiting for something to happen. The mechanics of atomically putting a thread to sleep on a wait_queue must be handled carefully, and require some interaction with the CPU scheduler. Different operating systems have different ways of doing this, and we will revisit this issue when we discuss locking in the Linux kernel. For now, we will simply use these abstractions to explore other synchronization problems and build some higher-level synchronization primitives.</p>
 <p>As a reminder, here are the operations on a <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sleep(wait_queue)</span></code>: blocks the calling thread; thread is added to <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> and another thread is selected to run.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">wakeup(wait_queue)</span></code>: removes a thread from <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> and adds it to the scheduler Ready queue.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">wakeup_all(wait_queue)</span></code>: moves <em>all</em> threads from <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> to the the scheduler Ready queue.</p></li>
 </ul>
+<p>Waiting for a lock to be released is just one possible reason that a thread might need to wait. We saw another example in the code of <a class="reference internal" href="locks.html#listing-sync-check-spinlock-fairness"><span class="std std-numref">Listing 34.16</span></a>, where each child thread spins waiting for the parent to finish creating all the other children. The <code class="docutils literal notranslate"><span class="pre">wakeup_all()</span></code> operation is handy in a case like this where we want to allow all the waiting threads to resume activity.</p>
+<p>There are many examples where we need to control the order in which threads can execute. In the remainder of this chapter, we will consider some of these problems.</p>
+<section id="the-bounded-buffer-problem">
+<h2><span class="section-number">35.1. </span>The Bounded Buffer Problem<a class="headerlink" href="#the-bounded-buffer-problem" title="Permalink to this headline">#</a></h2>
+<p>Let’s look at one classic example, known as the Bounded Buffer problem (also called the Producer/Consumer problem). In this problem, a set of threads communicate through a shared circular buffer that can hold N items. We maintain a count of the number of items currently in the buffer. Producer threads generate new items and add them to the buffer; consumer threads remove items from the buffer.  The items could be an arbitrary structure, or just bytes of data. We will begin by considering the special case of a single producer and a single consumer. This problem is essentially a simplified version of the <a class="reference internal" href="../intro/abstractions.html#cont-gs-abstractions-pipes"><span class="std std-ref">pipe abstraction</span></a>.</p>
+<figure class="align-default" id="fig-sync-ordering-bbuf-setup">
+<a class="reference internal image-reference" href="../_images/bbuf_setup.drawio.png"><img alt="../_images/bbuf_setup.drawio.png" src="../_images/bbuf_setup.drawio.png" style="width: 75%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 35.1 </span><span class="caption-text">The bounded buffer problem. Producers continually add items to the buffer and consumers continually remove items.</span><a class="headerlink" href="#fig-sync-ordering-bbuf-setup" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We illustrate this problem setup in <a class="reference internal" href="#fig-sync-ordering-bbuf-setup"><span class="std std-numref">Fig. 35.1</span></a>. We have declared a <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">bounded_buffer</span></code> data type to encapsulate the properties of the bounded buffer, and we have declared the <code class="docutils literal notranslate"><span class="pre">count</span></code> member as an <code class="docutils literal notranslate"><span class="pre">atomic_int</span></code> so that simple increment and decrement operations on <code class="docutils literal notranslate"><span class="pre">count</span></code> will be performed atomically; we use ordinary int types for the <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> members since <code class="docutils literal notranslate"><span class="pre">in</span></code> is only used the the producer, and <code class="docutils literal notranslate"><span class="pre">out</span></code> is only used by the consumer. In the code snippets, however, there is no coordination (or <em>synchronization</em>) between the producer thread and the consumer thread. The producer blindly stuffs items into the buffer, possibly over-writing previous items that the consumer has not had a chance to remove yet. Similarly, the consumer blindly grabs items out of the buffer, without regard for whether the producer has actually filled those buffer slots or not. Clearly, this will not lead to correct results, even if the count is correct! We must introduce some synchronization constraints: the producer must wait if the buffer is full (i.e., if <code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">==</span> <span class="pre">N</span></code>); the consumer must wait if the buffer is empty (i.e., if <code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">==</span> <span class="pre">0</span></code>). In addition, we require the producer to wake up a waiting consumer when the first item is added to the buffer (i.e., when the buffer becomes non-empty), and for the consumer to wake up a waiting producer when an item is removed from a full buffer (i.e., when the buffer becomes non-full).</p>
+<p>Let’s try using the <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> and <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> operations to synchronize our threads, as shown in <a class="reference internal" href="#listing-sync-ordering-bbuf-wq"><span class="std std-numref">Listing 35.1</span></a>. (Note that this code example is incomplete, and is provided for illustration purposes only. The <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> function here is our assumed wait_queue sleep operation, and not the C library <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>.)</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-ordering-bbuf-wq">
+<div class="code-block-caption"><span class="caption-number">Listing 35.1 </span><span class="caption-text">Bounded buffer with sleep() and wakeup()</span><a class="headerlink" href="#listing-sync-ordering-bbuf-wq" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">For</span> <span class="n">illustration</span> <span class="n">purposes</span> <span class="n">only</span><span class="o">.</span> 
+ <span class="o">*</span> <span class="n">This</span> <span class="n">code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">complete</span> <span class="ow">and</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">compiled</span> <span class="n">into</span> <span class="n">an</span> <span class="n">executable</span><span class="o">.</span>
+ <span class="o">*/</span>
+<span class="c1">#include &lt;stdatomic.h&gt;</span>
+<span class="c1">#include &lt;stdbool.h&gt;</span>
+<span class="c1">#include &quot;waitqueue.h&quot;</span>
+
+<span class="n">extern</span> <span class="n">char</span> <span class="n">produce_item</span><span class="p">();</span>
+<span class="n">extern</span> <span class="n">void</span> <span class="n">consume_item</span><span class="p">(</span><span class="n">char</span> <span class="n">item</span><span class="p">);</span>
+
+<span class="c1">#define N 2</span>
+
+<span class="n">struct</span> <span class="n">bounded_buffer</span> <span class="p">{</span>
+	<span class="n">char</span> <span class="n">data</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>   <span class="o">/*</span> <span class="s1">&#39;items&#39;</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">example</span> <span class="n">are</span> <span class="n">just</span> <span class="nb">bytes</span> <span class="o">*/</span>
+	<span class="nb">int</span> <span class="ow">in</span><span class="p">;</span>     <span class="o">/*</span> <span class="n">index</span> <span class="n">where</span> <span class="n">producer</span> <span class="n">inserts</span> <span class="n">items</span><span class="p">,</span> <span class="n">initially</span> <span class="mi">0</span> <span class="o">*/</span>
+	<span class="nb">int</span> <span class="n">out</span><span class="p">;</span>    <span class="o">/*</span> <span class="n">index</span> <span class="n">where</span> <span class="n">consumer</span> <span class="n">removes</span> <span class="n">items</span><span class="p">,</span> <span class="n">initially</span> <span class="mi">0</span> <span class="o">*/</span>
+	<span class="n">atomic_int</span> <span class="n">count</span><span class="p">;</span>  <span class="o">/*</span> <span class="n">number</span> <span class="n">of</span> <span class="n">items</span> <span class="n">currently</span> <span class="ow">in</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">initially</span> <span class="mi">0</span> <span class="o">*/</span>
+	<span class="n">struct</span> <span class="n">wait_queue</span> <span class="n">waitq</span><span class="p">;</span> <span class="o">/*</span> <span class="n">keep</span> <span class="n">track</span> <span class="n">of</span> <span class="n">waiting</span> <span class="n">threads</span> <span class="o">*/</span>
+<span class="p">};</span>
+
+<span class="n">struct</span> <span class="n">bounded_buffer</span> <span class="n">bb</span><span class="p">;</span>
+
+<span class="n">void</span> <span class="o">*</span><span class="n">producer</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">char</span> <span class="n">item</span> <span class="o">=</span> <span class="n">produce_item</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="n">N</span><span class="p">)</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">waitq</span><span class="p">);</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">bb</span><span class="o">.</span><span class="ow">in</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="p">;</span>
+        <span class="n">bb</span><span class="o">.</span><span class="ow">in</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="ow">in</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span><span class="p">;</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> 
+            <span class="n">wakeup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">waitq</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="o">*</span><span class="n">consumer</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> 
+            <span class="n">sleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">waitq</span><span class="p">);</span>
+        <span class="n">char</span> <span class="n">item</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">bb</span><span class="o">.</span><span class="n">out</span><span class="p">];</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="n">out</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span><span class="p">;</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">count</span><span class="o">--</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
+            <span class="n">wakeup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">waitq</span><span class="p">);</span>
+        <span class="n">consume_item</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Does this solve the problem? Alas, you may have noticed that both the producer and the consumer make decisions based on the value of <code class="docutils literal notranslate"><span class="pre">count</span></code>, and even if the <code class="docutils literal notranslate"><span class="pre">count</span></code> variable is updated atomically there is still a race condition. A thread, T1, can be interrupted after it has tested the value of <code class="docutils literal notranslate"><span class="pre">count</span></code> and decided that it needs call <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>, but before the <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> has actually executed. If the other thread, T2, calls <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> at this point, it will have no effect since there is not a waiting thread to wake up. When T1 runs again, it will proceed with the <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> and can be blocked forever. This is known as the <code class="docutils literal notranslate"><span class="pre">lost</span> <span class="pre">wakeup</span></code> problem, and is illustrated in <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig:sync:ording:lost_wakeup</span></code>. In the figure, we show the interleaved thread execution on the left with the actual values of buffer variables substituted into the code statements. On the right, we show the buffer variables as they are updated by the threads.</p>
+<figure class="align-default" id="fig-sync-ordering-lost-wakeup">
+<a class="reference internal image-reference" href="../_images/lost_wakeup_short.drawio.png"><img alt="../_images/lost_wakeup_short.drawio.png" src="../_images/lost_wakeup_short.drawio.png" style="width: 75%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 35.2 </span><span class="caption-text">The lost wakeup problem.</span><a class="headerlink" href="#fig-sync-ordering-lost-wakeup" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The producer thread has started to add the first item to the buffer, but has not updated the <code class="docutils literal notranslate"><span class="pre">count</span></code> before it is preempted. The consumer thread runs, sees that the buffer is empty and decides to sleep, but is preempted before it calls <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>. The producer then updates <code class="docutils literal notranslate"><span class="pre">count</span></code> and calls <code class="docutils literal notranslate"><span class="pre">wakeup</span></code>, which has no effect. When the consumer runs again, it calls <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> and blocks awaiting the <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> which has, unfortunately, already happened. Since the consumer is blocked, the producer runs, adds a second item to the buffer, and then generates a third item to add to the buffer. Now, the producer finds that the buffer is full, so it also calls <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>, waiting for the consumer to remove something from the buffer and make space for the third item to be added. At this point, we are completely stuck—both threads are sleeping and waiting for the other thread to do something and wake them up. This is called <em>deadlock</em>. We will examine the deadlock problem in more detail later.</p>
+<p>Before describing synchronization primitives that are described to solve this problem, let’s consider some non-solutions.</p>
+<p>You might be tempted to think that we can avoid the lost wakeup by simply having the producer and consumer call <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> on <em>every</em> iteration after adding or removing an item, rather than only doing so when the buffer becomes non-empty or non-full. That mostly works in this particular instance, where the producer and consumer are both in an infinite loop, and there is enough space in the buffer for the producer to add a second item. It could still leave the consumer waiting longer than it should, while the producer goes about generating another item to add to the buffer. It is also a brittle solution—if we had only a single slot in the buffer (N==1), then the producer would be stuck after adding the first item and losing the first <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> to the consumer would be fatal. Or if the producer stopped after adding a finite number of items, an unlucky consumer could be stranded forever with an item still left in the buffer.</p>
+<p>Now, you might observe that testing the value of <code class="docutils literal notranslate"><span class="pre">count</span></code> and taking some action based on the result is a critical section of code that should execute atomically, and locks were our solution to critical section problems. So, what if we added a lock to our bounded buffer structure, and had threads acquire the lock before checking <code class="docutils literal notranslate"><span class="pre">count</span></code> and either going to sleep or issuing a wake up? This also doesn’t work. If we allow a thread to hold the lock when it calls <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>, then the other thread will be blocked forever trying to obtain the lock so that it can issue a <code class="docutils literal notranslate"><span class="pre">wakeup</span></code>. On the other hand, if we release the lock prior to calling <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>, then we right back where we started—a thread could be preempted right after releasing the lock, and before calling <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>, once again missing the <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code>.</p>
+</section>
+<section id="semaphores">
+<span id="cont-sync-ordering-sema"></span><h2><span class="section-number">35.2. </span>Semaphores<a class="headerlink" href="#semaphores" title="Permalink to this headline">#</a></h2>
+<p>We can observe that the <em>lost wakeup</em> problem occurs because a <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> has no effect when no one is waiting yet. Perhaps we could avoid the problem if we kept track of the <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> and allowed a thread the return immediately from <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> if a <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> had already been sent. This is the key idea behind the <em>semaphore</em> synchronization primitive introduced by Djikstra <span id="id1">[<a class="reference internal" href="../misc/bib.html#id4">Dij65</a>]</span>. A semaphore has private data consisting of a non-negative integer count and a queue of waiting threads, which can only be accessed by two <strong>atomic operations</strong>, <code class="docutils literal notranslate"><span class="pre">sem_wait()</span></code> and <code class="docutils literal notranslate"><span class="pre">sem_post()</span></code>. There is also a <code class="docutils literal notranslate"><span class="pre">sem_init()</span></code> operation that sets the semaphore count to some initial value.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are using the POSIX names for the semaphore operations. The original names of the semaphore operations used by Djikstra were <code class="docutils literal notranslate"><span class="pre">P()</span></code> and <code class="docutils literal notranslate"><span class="pre">V()</span></code>. In other literature they are variously called <code class="docutils literal notranslate"><span class="pre">down</span></code> and <code class="docutils literal notranslate"><span class="pre">up</span></code>, <code class="docutils literal notranslate"><span class="pre">wait</span></code> and <code class="docutils literal notranslate"><span class="pre">signal</span></code>, <code class="docutils literal notranslate"><span class="pre">await</span></code> and <code class="docutils literal notranslate"><span class="pre">notify</span></code>, and even <code class="docutils literal notranslate"><span class="pre">acquire</span></code> and <code class="docutils literal notranslate"><span class="pre">release</span></code>.</p>
+</div>
+<p>The semaphore operations are defined as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sem_init(sem_t</span> <span class="pre">*sem,</span> <span class="pre">int</span> <span class="pre">pshared,</span> <span class="pre">unsigned</span> <span class="pre">int</span> <span class="pre">value)</span></code> - initializes the semaphore pointed to by sem with the initial value <code class="docutils literal notranslate"><span class="pre">value</span></code>. (The pshared argument should be 0 for semaphores shared by threads in the same process.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sem_wait(sem_t</span> <span class="pre">*sem)</span></code> - decrements the internal count of the semaphore pointed to by <code class="docutils literal notranslate"><span class="pre">sem</span></code>.  If the semaphore’s value is greater than zero, then the decrement proceeds, and the function returns, immediately.  If the semaphore currently has the value zero, then the call blocks until it becomes possible to perform  the  decrement  (i.e.,  the  semaphore value rises above zero).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sem_post(sem_t</span> <span class="pre">*sem)</span></code> - increments the internal count of the semaphore pointed to by <code class="docutils literal notranslate"><span class="pre">sem</span></code>.  If the semaphore’s value consequently becomes greater than zero, then another process or thread blocked in a <code class="docutils literal notranslate"><span class="pre">sem_wait()</span></code> call will be woken up.</p></li>
+</ul>
+<p>It is important that the <code class="docutils literal notranslate"><span class="pre">sem_wait()</span></code> and <code class="docutils literal notranslate"><span class="pre">sem_post()</span></code> calls are atomic, meaning that once a thread starts one of these operations, it cannot be interleaved with the execution of another operation on the same semaphore. For user-level implementations, this generally requires a system call since we may need to change the state of a thread from running to blocked, or from blocked to runnable. In the operating system, we need to ensure that checking the semaphore count and putting a thread to sleep is atomic, either by disabling interrupts on a uniprocessor, or by using a spinlock on a multiprocessor. Once the thread has been enqueued on the semaphore’s wait list, the lock can be released before yielding the CPU to another thread.</p>
+<p>How does the semaphore synchronization primitive help us solve the bounded buffer problem? Instead of a single count of items in the buffer, we start by breaking apart the conditions that producers and consumers must wait upon. The producer thread can proceed as long as there are empty slots in the buffer to put items into. We can represent this using a semaphore called <code class="docutils literal notranslate"><span class="pre">sem_empty</span></code> with initial value N. The consumer can proceed as long as there are filled slots in the buffer to remove items from. We can represent this using a semaphore called <code class="docutils literal notranslate"><span class="pre">sem_filled</span></code>.  Prior to adding an item, the producer must perform a <code class="docutils literal notranslate"><span class="pre">sem_wait(&amp;sem_empty)</span></code>, which will decrement the semaphore’s count and return immediately as long as there is space in the buffer. Once the semaphore’s value is 0, the producer will block awaiting a <code class="docutils literal notranslate"><span class="pre">sem_post(&amp;sem_empty)</span></code> from the consumer to indicate that an item has been removed an an empty slot is now available. Each time an item is added to the buffer, the producer must issue a <code class="docutils literal notranslate"><span class="pre">sem_post(&amp;sem_filled)</span></code> to let the consumer know that a slot has been filled and an item is ready to be removed from the buffer. The code for a single producer and consumer using semaphores is shown in <a class="reference internal" href="#listing-sync-ordering-bbuf-sem"><span class="std std-numref">Listing 35.2</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-ordering-bbuf-sem">
+<div class="code-block-caption"><span class="caption-number">Listing 35.2 </span><span class="caption-text">Bounded buffer with semaphores</span><a class="headerlink" href="#listing-sync-ordering-bbuf-sem" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">For</span> <span class="n">illustration</span> <span class="n">purposes</span> <span class="n">only</span><span class="o">.</span> 
+ <span class="o">*</span> <span class="n">This</span> <span class="n">code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">complete</span> <span class="ow">and</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">compiled</span> <span class="n">into</span> <span class="n">an</span> <span class="n">executable</span><span class="o">.</span>
+ <span class="o">*/</span>
+<span class="c1">#include &lt;semaphore.h&gt;</span>
+<span class="c1">#include &lt;stdbool.h&gt;</span>
+
+<span class="n">extern</span> <span class="n">char</span> <span class="n">produce_item</span><span class="p">();</span>
+<span class="n">extern</span> <span class="n">void</span> <span class="n">consume_item</span><span class="p">(</span><span class="n">char</span> <span class="n">item</span><span class="p">);</span>
+
+<span class="c1">#define N 2</span>
+
+<span class="n">struct</span> <span class="n">bounded_buffer</span> <span class="p">{</span>
+	<span class="n">char</span> <span class="n">data</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>   <span class="o">/*</span> <span class="s1">&#39;items&#39;</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">example</span> <span class="n">are</span> <span class="n">just</span> <span class="nb">bytes</span> <span class="o">*/</span>
+	<span class="nb">int</span> <span class="ow">in</span><span class="p">;</span>     <span class="o">/*</span> <span class="n">index</span> <span class="n">where</span> <span class="n">producer</span> <span class="n">inserts</span> <span class="n">items</span><span class="p">,</span> <span class="n">initially</span> <span class="mi">0</span> <span class="o">*/</span>
+	<span class="nb">int</span> <span class="n">out</span><span class="p">;</span>    <span class="o">/*</span> <span class="n">index</span> <span class="n">where</span> <span class="n">consumer</span> <span class="n">removes</span> <span class="n">items</span><span class="p">,</span> <span class="n">initially</span> <span class="mi">0</span> <span class="o">*/</span>
+    <span class="n">sem_t</span> <span class="n">sem_empty</span><span class="p">;</span>
+    <span class="n">sem_t</span> <span class="n">sem_filled</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">struct</span> <span class="n">bounded_buffer</span> <span class="n">bb</span><span class="p">;</span>
+
+<span class="n">void</span> <span class="o">*</span><span class="n">producer</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">char</span> <span class="n">item</span> <span class="o">=</span> <span class="n">produce_item</span><span class="p">();</span>
+        <span class="n">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_empty</span><span class="p">);</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">bb</span><span class="o">.</span><span class="ow">in</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="p">;</span>
+        <span class="n">bb</span><span class="o">.</span><span class="ow">in</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="ow">in</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span><span class="p">;</span>
+        <span class="n">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_filled</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="o">*</span><span class="n">consumer</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_filled</span><span class="p">);</span>
+        <span class="n">char</span> <span class="n">item</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">bb</span><span class="o">.</span><span class="n">out</span><span class="p">];</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="n">out</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span><span class="p">;</span>
+        <span class="n">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_empty</span><span class="p">);</span>
+        <span class="n">consume_item</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_empty</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">);</span>
+    <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_filled</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    
+    <span class="o">/***</span> <span class="n">Thread</span> <span class="n">creation</span> <span class="n">stuff</span> <span class="n">here</span> <span class="o">***/</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>As you can see, the code is simplified by the semaphore primitives. The producer waits for a slot in the buffer to be available, add the new item, and then posts a notice that a slot has been filled. The consumer waits for a slot to be filled, takes an item out of the buffer, and posts a notice that an empty slot is now available. Because the semaphores are internally keeping track of the number of empty and filled slots in the buffer, we have removed the <code class="docutils literal notranslate"><span class="pre">count</span></code> from the buffer data structure.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sem_empty</span></code> and <code class="docutils literal notranslate"><span class="pre">sem_filled</span></code> variables are examples of <em>counting semaphores</em> (also called <em>general semaphores</em>), where the semaphore value can be any non-negative integer. We also see a common semaphore usage pattern here, where the <code class="docutils literal notranslate"><span class="pre">sem_wait()</span></code> is performed by one thread, and the <code class="docutils literal notranslate"><span class="pre">sem_post()</span></code> is performed by a different thread. It is also possible to create a <em>binary</em> semaphore, where the semaphore value should only be 0 or 1, and use it for mutual exclusion. For example, suppose we wanted to solve a more general producer/consumer problem where we have multiple producer threads and multiple consumer threads. Now, we also need to coordinate among the producers, so that they each insert to a different buffer slot, and among the consumers so that they each remove an item from a different slot. We can add another semaphore, <code class="docutils literal notranslate"><span class="pre">sem_mutex</span></code>, with initial value 1, and use it to protect access to the other members of the bounded buffer. Example code is showin in <a class="reference internal" href="#listing-sync-ordering-bbuf-sem-multi"><span class="std std-numref">Listing 35.3</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-ordering-bbuf-sem-multi">
+<div class="code-block-caption"><span class="caption-number">Listing 35.3 </span><span class="caption-text">Bounded buffer with semaphores for multiple producers and consumers.</span><a class="headerlink" href="#listing-sync-ordering-bbuf-sem-multi" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">For</span> <span class="n">illustration</span> <span class="n">purposes</span> <span class="n">only</span><span class="o">.</span> 
+ <span class="o">*</span> <span class="n">This</span> <span class="n">code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">complete</span> <span class="ow">and</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">compiled</span> <span class="n">into</span> <span class="n">an</span> <span class="n">executable</span><span class="o">.</span>
+ <span class="o">*/</span>
+<span class="c1">#include &lt;semaphore.h&gt;</span>
+<span class="c1">#include &lt;stdbool.h&gt;</span>
+
+<span class="n">extern</span> <span class="n">char</span> <span class="n">produce_item</span><span class="p">();</span>
+<span class="n">extern</span> <span class="n">void</span> <span class="n">consume_item</span><span class="p">(</span><span class="n">char</span> <span class="n">item</span><span class="p">);</span>
+
+<span class="c1">#define N 2</span>
+
+<span class="n">struct</span> <span class="n">bounded_buffer</span> <span class="p">{</span>
+	<span class="n">char</span> <span class="n">data</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>   <span class="o">/*</span> <span class="s1">&#39;items&#39;</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">example</span> <span class="n">are</span> <span class="n">just</span> <span class="nb">bytes</span> <span class="o">*/</span>
+	<span class="nb">int</span> <span class="ow">in</span><span class="p">;</span>     <span class="o">/*</span> <span class="n">index</span> <span class="n">where</span> <span class="n">producer</span> <span class="n">inserts</span> <span class="n">items</span><span class="p">,</span> <span class="n">initially</span> <span class="mi">0</span> <span class="o">*/</span>
+	<span class="nb">int</span> <span class="n">out</span><span class="p">;</span>    <span class="o">/*</span> <span class="n">index</span> <span class="n">where</span> <span class="n">consumer</span> <span class="n">removes</span> <span class="n">items</span><span class="p">,</span> <span class="n">initially</span> <span class="mi">0</span> <span class="o">*/</span>
+    <span class="n">sem_t</span> <span class="n">sem_empty</span><span class="p">;</span>
+    <span class="n">sem_t</span> <span class="n">sem_filled</span><span class="p">;</span>
+    <span class="n">sem_t</span> <span class="n">sem_mutex</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">struct</span> <span class="n">bounded_buffer</span> <span class="n">bb</span><span class="p">;</span>
+
+<span class="n">void</span> <span class="o">*</span><span class="n">producer</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">char</span> <span class="n">item</span> <span class="o">=</span> <span class="n">produce_item</span><span class="p">();</span>
+        <span class="n">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_empty</span><span class="p">);</span>
+        <span class="n">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_mutex</span><span class="p">);</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">bb</span><span class="o">.</span><span class="ow">in</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="p">;</span>
+        <span class="n">bb</span><span class="o">.</span><span class="ow">in</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="ow">in</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span><span class="p">;</span>
+        <span class="n">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_mutex</span><span class="p">);</span>
+        <span class="n">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_filled</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="o">*</span><span class="n">consumer</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_filled</span><span class="p">);</span>
+        <span class="n">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_mutex</span><span class="p">);</span>
+        <span class="n">char</span> <span class="n">item</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">bb</span><span class="o">.</span><span class="n">out</span><span class="p">];</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="n">out</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span><span class="p">;</span>
+        <span class="n">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_mutex</span><span class="p">);</span>
+        <span class="n">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_empty</span><span class="p">);</span>
+        <span class="n">consume_item</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_empty</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">);</span>
+    <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_filled</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_mutex</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    
+    <span class="o">/***</span> <span class="n">Thread</span> <span class="n">creation</span> <span class="n">stuff</span> <span class="n">here</span> <span class="o">***/</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># demke:</span>
+<span class="c1"># </span>
+<span class="c1"># This cell is removed in the html, but displays the code in the Jupyter notebook.</span>
+<span class="c1">#</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="s1">&#39;&lt;font size=&quot;1.2rem&quot;&gt;&#39;</span> <span class="o">+</span> <span class="n">FileCodeBox</span><span class="p">(</span>
+    <span class="n">file</span><span class="o">=</span><span class="n">appdir</span> <span class="o">+</span> <span class="s2">&quot;/bounded_buffer_sem_multi.c&quot;</span><span class="p">,</span> 
+    <span class="n">lang</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> 
+    <span class="n">number</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&lt;b&gt;Bounded buffer with semaphores for multiple producers and consumers.&lt;/b&gt;&quot;</span><span class="p">,</span>
+    <span class="n">h</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="p">,</span> 
+    <span class="n">w</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span>
+<span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&lt;/font&gt;&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<p><font size="1.2rem"><b>Bounded buffer with semaphores for multiple producers and consumers.</b></p>
+<div style="width:100%; height:100%; font-size:inherit; overflow: auto;" >
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="mi">1</span><span class="p">:</span> <span class="o">/*</span> <span class="n">For</span> <span class="n">illustration</span> <span class="n">purposes</span> <span class="n">only</span><span class="o">.</span> 
+ <span class="mi">2</span><span class="p">:</span>  <span class="o">*</span> <span class="n">This</span> <span class="n">code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">complete</span> <span class="ow">and</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">compiled</span> <span class="n">into</span> <span class="n">an</span> <span class="n">executable</span><span class="o">.</span>
+ <span class="mi">3</span><span class="p">:</span>  <span class="o">*/</span>
+ <span class="mi">4</span><span class="p">:</span> <span class="c1">#include &lt;semaphore.h&gt;</span>
+ <span class="mi">5</span><span class="p">:</span> <span class="c1">#include &lt;stdbool.h&gt;</span>
+ <span class="mi">6</span><span class="p">:</span> 
+ <span class="mi">7</span><span class="p">:</span> <span class="n">extern</span> <span class="n">char</span> <span class="n">produce_item</span><span class="p">();</span>
+ <span class="mi">8</span><span class="p">:</span> <span class="n">extern</span> <span class="n">void</span> <span class="n">consume_item</span><span class="p">(</span><span class="n">char</span> <span class="n">item</span><span class="p">);</span>
+ <span class="mi">9</span><span class="p">:</span> 
+<span class="mi">10</span><span class="p">:</span> <span class="c1">#define N 2</span>
+<span class="mi">11</span><span class="p">:</span> 
+<span class="mi">12</span><span class="p">:</span> <span class="n">struct</span> <span class="n">bounded_buffer</span> <span class="p">{</span>
+<span class="mi">13</span><span class="p">:</span> 	<span class="n">char</span> <span class="n">data</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>   <span class="o">/*</span> <span class="s1">&#39;items&#39;</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">example</span> <span class="n">are</span> <span class="n">just</span> <span class="nb">bytes</span> <span class="o">*/</span>
+<span class="mi">14</span><span class="p">:</span> 	<span class="nb">int</span> <span class="ow">in</span><span class="p">;</span>     <span class="o">/*</span> <span class="n">index</span> <span class="n">where</span> <span class="n">producer</span> <span class="n">inserts</span> <span class="n">items</span><span class="p">,</span> <span class="n">initially</span> <span class="mi">0</span> <span class="o">*/</span>
+<span class="mi">15</span><span class="p">:</span> 	<span class="nb">int</span> <span class="n">out</span><span class="p">;</span>    <span class="o">/*</span> <span class="n">index</span> <span class="n">where</span> <span class="n">consumer</span> <span class="n">removes</span> <span class="n">items</span><span class="p">,</span> <span class="n">initially</span> <span class="mi">0</span> <span class="o">*/</span>
+<span class="mi">16</span><span class="p">:</span>     <span class="n">sem_t</span> <span class="n">sem_empty</span><span class="p">;</span>
+<span class="mi">17</span><span class="p">:</span>     <span class="n">sem_t</span> <span class="n">sem_filled</span><span class="p">;</span>
+<span class="mi">18</span><span class="p">:</span>     <span class="n">sem_t</span> <span class="n">sem_mutex</span><span class="p">;</span>
+<span class="mi">19</span><span class="p">:</span> <span class="p">};</span>
+<span class="mi">20</span><span class="p">:</span> 
+<span class="mi">21</span><span class="p">:</span> <span class="n">struct</span> <span class="n">bounded_buffer</span> <span class="n">bb</span><span class="p">;</span>
+<span class="mi">22</span><span class="p">:</span> 
+<span class="mi">23</span><span class="p">:</span> <span class="n">void</span> <span class="o">*</span><span class="n">producer</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">24</span><span class="p">:</span>     <span class="k">while</span><span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">25</span><span class="p">:</span>         <span class="n">char</span> <span class="n">item</span> <span class="o">=</span> <span class="n">produce_item</span><span class="p">();</span>
+<span class="mi">26</span><span class="p">:</span>         <span class="n">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_empty</span><span class="p">);</span>
+<span class="mi">27</span><span class="p">:</span>         <span class="n">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_mutex</span><span class="p">);</span>
+<span class="mi">28</span><span class="p">:</span>         <span class="n">bb</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">bb</span><span class="o">.</span><span class="ow">in</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="p">;</span>
+<span class="mi">29</span><span class="p">:</span>         <span class="n">bb</span><span class="o">.</span><span class="ow">in</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="ow">in</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span><span class="p">;</span>
+<span class="mi">30</span><span class="p">:</span>         <span class="n">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_mutex</span><span class="p">);</span>
+<span class="mi">31</span><span class="p">:</span>         <span class="n">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_filled</span><span class="p">);</span>
+<span class="mi">32</span><span class="p">:</span>     <span class="p">}</span>
+<span class="mi">33</span><span class="p">:</span> <span class="p">}</span>
+<span class="mi">34</span><span class="p">:</span> 
+<span class="mi">35</span><span class="p">:</span> <span class="n">void</span> <span class="o">*</span><span class="n">consumer</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">36</span><span class="p">:</span>     <span class="k">while</span><span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">37</span><span class="p">:</span>         <span class="n">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_filled</span><span class="p">);</span>
+<span class="mi">38</span><span class="p">:</span>         <span class="n">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_mutex</span><span class="p">);</span>
+<span class="mi">39</span><span class="p">:</span>         <span class="n">char</span> <span class="n">item</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">bb</span><span class="o">.</span><span class="n">out</span><span class="p">];</span>
+<span class="mi">40</span><span class="p">:</span>         <span class="n">bb</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="n">out</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span><span class="p">;</span>
+<span class="mi">41</span><span class="p">:</span>         <span class="n">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_mutex</span><span class="p">);</span>
+<span class="mi">42</span><span class="p">:</span>         <span class="n">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_empty</span><span class="p">);</span>
+<span class="mi">43</span><span class="p">:</span>         <span class="n">consume_item</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="mi">44</span><span class="p">:</span>     <span class="p">}</span>
+<span class="mi">45</span><span class="p">:</span> <span class="p">}</span>
+<span class="mi">46</span><span class="p">:</span> 
+<span class="mi">47</span><span class="p">:</span> <span class="nb">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="mi">48</span><span class="p">:</span> <span class="p">{</span>
+<span class="mi">49</span><span class="p">:</span>     <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_empty</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">);</span>
+<span class="mi">50</span><span class="p">:</span>     <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_filled</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="mi">51</span><span class="p">:</span>     <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_mutex</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="mi">52</span><span class="p">:</span>     
+<span class="mi">53</span><span class="p">:</span>     <span class="o">/***</span> <span class="n">Thread</span> <span class="n">creation</span> <span class="n">stuff</span> <span class="n">here</span> <span class="o">***/</span>
+<span class="mi">54</span><span class="p">:</span>     
+<span class="mi">55</span><span class="p">:</span>     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="mi">56</span><span class="p">:</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</font></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">sem_mutex</span></code> is used exactly like a lock to protect the <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> shared variables that are used by producers and consumers when accessing slots in the buffer. Is it better to use a binary semaphore or a lock in such cases? There really is no functional difference—both provide mutual exclusion. However, there is a semantic difference. Logically, a lock is “held” by the thread that has successfully completed the most recent <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> and should only be <code class="docutils literal notranslate"><span class="pre">release()</span></code>d by the thread that holds it. Some lock implementations will track lock ownership and enforce this rule, raising an error if a lock is incorrectly released by a thread that did not acquire it first. These errors can be an invaluable debugging tool, which are not available if you use semaphores for mutual exclusion.</p>
+</section>
+<section id="condition-variables">
+<span id="cont-sync-ordering-cv"></span><h2><span class="section-number">35.3. </span>Condition Variables<a class="headerlink" href="#condition-variables" title="Permalink to this headline">#</a></h2>
+<p>One challenge with using semaphores is that we must encode the state that a thread is waiting upon as a single counter. This worked nicely for the bounded buffer problem with producers using a semaphore to count the number of empty slots, and consumers using another semaphore to count the number of filled slots. For example, suppose we had two types of producer threads, one that produced ‘a’s and another that produced ‘b’s, and we wanted to ensure that the buffer was never more than 75% full of either a’s or b’s. The ‘a’-producer would need a check something like the code shown below before it could add another ‘a’ to the buffer (and similarly for the ‘b’-producer).</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">...</span><span class="w"></span>
+<span class="linenos">2</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">a_count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b_count</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">a_count</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="linenos">3</span><span class="w">    </span><span class="n">sleep</span><span class="p">()</span><span class="w"></span>
+<span class="linenos">4</span><span class="p">...</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The consumer threads also need to check whether they have just removed an ‘a’ or a ‘b’ from the buffer, and notify the ‘a’ or ‘b’ producers that more space is available. Expressing this set of conditions using semaphores is tricky (although it can be done), and it is easy to make mistakes. Instead, we would like to separate the checking of the conditions from the act of atomically putting a thread to sleep. However, we saw earlier that we need to hold a lock while testing the shared variables that are involved in deciding whether to sleep or not, and we need to release the lock before we put the thread to sleep. To solve that problem we introduce another synchronization primitive called a <em>condition variable</em>.  This is, admittedly, a terrible name since the boolean condition that a thread checks is not actually part of the <em>condition variable</em> object at all. A condition variable consists of an internal list of waiting threads, and thred operations, <code class="docutils literal notranslate"><span class="pre">wait</span></code>, <code class="docutils literal notranslate"><span class="pre">signal</span></code> and <code class="docutils literal notranslate"><span class="pre">broadcast</span></code>. For concreteness, we will use the POSIX pthread names for the condition variable type, <code class="docutils literal notranslate"><span class="pre">pthread_cond_t</span></code>, and operations, <code class="docutils literal notranslate"><span class="pre">pthread_cond_wait</span></code>, <code class="docutils literal notranslate"><span class="pre">pthread_cond_signal</span></code> and <code class="docutils literal notranslate"><span class="pre">pthread_cond_broadcast</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pthread_cond_wait(pthread_cond_t</span> <span class="pre">*cond,</span> <span class="pre">pthread_mutex_t</span> <span class="pre">*mutex)</span></code> : atomically release the <code class="docutils literal notranslate"><span class="pre">mutex</span></code> and put the calling thread to sleep on the condition variable <code class="docutils literal notranslate"><span class="pre">cond</span></code>; upon waking up, the <code class="docutils literal notranslate"><span class="pre">mutex</span></code> is re-acquired before returning. Must be called with <code class="docutils literal notranslate"><span class="pre">mutex</span></code> held by the calling thread.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pthread_cond_signal(pthread_cond_t</span> <span class="pre">*cond)</span></code> : Wake up one thread waiting on condition variable <code class="docutils literal notranslate"><span class="pre">cond</span></code>. Has no effect if no threads are waiting.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pthread_cond_broadcast(pthread_cond_t</span> <span class="pre">*cond)</span></code> : Wake up all threads waiting on condition variable <code class="docutils literal notranslate"><span class="pre">cond</span></code>. Has no effect if no threads are waiting.</p></li>
+</ul>
+<p>Note that locks and condition variables must always be used together. The lock protects the shared data, so that a thread can examine the state of a structure, make decisions about what to do next, and modify the shared data without interference from other threads. The condition variable provides the mechanism to atomically release the lock and put a thread to sleep until it becomes possible for that thread to make progress again.</p>
+<p>Let’s look first at how we would implement a solution to our original bounded buffer problem using a lock together with condition variables.</p>
+<div class="literal-block-wrapper docutils container" id="listing-sync-ordering-bbuf-cv">
+<div class="code-block-caption"><span class="caption-number">Listing 35.4 </span><span class="caption-text">Bounded buffer with condition variables for multiple producers and consumers.</span><a class="headerlink" href="#listing-sync-ordering-bbuf-cv" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">For</span> <span class="n">illustration</span> <span class="n">purposes</span> <span class="n">only</span><span class="o">.</span> 
+ <span class="o">*</span> <span class="n">This</span> <span class="n">code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">complete</span> <span class="ow">and</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">compiled</span> <span class="n">into</span> <span class="n">an</span> <span class="n">executable</span><span class="o">.</span>
+ <span class="o">*/</span>
+<span class="c1">#include &lt;semaphore.h&gt;</span>
+<span class="c1">#include &lt;stdbool.h&gt;</span>
+
+<span class="n">extern</span> <span class="n">char</span> <span class="n">produce_item</span><span class="p">();</span>
+<span class="n">extern</span> <span class="n">void</span> <span class="n">consume_item</span><span class="p">(</span><span class="n">char</span> <span class="n">item</span><span class="p">);</span>
+
+<span class="c1">#define N 2</span>
+
+<span class="n">struct</span> <span class="n">bounded_buffer</span> <span class="p">{</span>
+	<span class="n">char</span> <span class="n">data</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>   <span class="o">/*</span> <span class="s1">&#39;items&#39;</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">example</span> <span class="n">are</span> <span class="n">just</span> <span class="nb">bytes</span> <span class="o">*/</span>
+	<span class="nb">int</span> <span class="ow">in</span><span class="p">;</span>     <span class="o">/*</span> <span class="n">index</span> <span class="n">where</span> <span class="n">producer</span> <span class="n">inserts</span> <span class="n">items</span><span class="p">,</span> <span class="n">initially</span> <span class="mi">0</span> <span class="o">*/</span>
+	<span class="nb">int</span> <span class="n">out</span><span class="p">;</span>    <span class="o">/*</span> <span class="n">index</span> <span class="n">where</span> <span class="n">consumer</span> <span class="n">removes</span> <span class="n">items</span><span class="p">,</span> <span class="n">initially</span> <span class="mi">0</span> <span class="o">*/</span>
+    <span class="nb">int</span> <span class="n">count</span><span class="p">;</span>
+    <span class="n">pthread_mutex_t</span> <span class="n">buflock</span><span class="p">;</span>
+    <span class="n">pthread_cond_t</span> <span class="n">not_full</span><span class="p">;</span>
+    <span class="n">pthread_cond_t</span> <span class="n">not_empty</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">struct</span> <span class="n">bounded_buffer</span> <span class="n">bb</span><span class="p">;</span>
+
+<span class="n">void</span> <span class="o">*</span><span class="n">producer</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">char</span> <span class="n">item</span> <span class="o">=</span> <span class="n">produce_item</span><span class="p">();</span>
+        <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">buflock</span><span class="p">);</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">pthread_cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">notfull</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">buflock</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">bb</span><span class="o">.</span><span class="ow">in</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="p">;</span>
+        <span class="n">bb</span><span class="o">.</span><span class="ow">in</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="ow">in</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span><span class="p">;</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">pthread_cond_signal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">notempty</span><span class="p">);</span>
+        <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">buflock</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="o">*</span><span class="n">consumer</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">buflock</span><span class="p">);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">pthread_cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">notempty</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">char</span> <span class="n">item</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">bb</span><span class="o">.</span><span class="n">out</span><span class="p">];</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="n">out</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span><span class="p">;</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">count</span><span class="o">--</span><span class="p">;</span>
+        <span class="n">pthread_cond_signal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">notfull</span><span class="p">);</span>
+        <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">buflock</span><span class="p">);</span>
+
+        <span class="n">consume_item</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_empty</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">);</span>
+    <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_filled</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_mutex</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    
+    <span class="o">/***</span> <span class="n">Thread</span> <span class="n">creation</span> <span class="n">stuff</span> <span class="n">here</span> <span class="o">***/</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># demke:</span>
+<span class="c1"># </span>
+<span class="c1"># This cell is removed in the html, but displays the code in the Jupyter notebook.</span>
+<span class="c1">#</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="s1">&#39;&lt;font size=&quot;1.2rem&quot;&gt;&#39;</span> <span class="o">+</span> <span class="n">FileCodeBox</span><span class="p">(</span>
+    <span class="n">file</span><span class="o">=</span><span class="n">appdir</span> <span class="o">+</span> <span class="s2">&quot;/bounded_buffer_cv.c&quot;</span><span class="p">,</span> 
+    <span class="n">lang</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> 
+    <span class="n">number</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&lt;b&gt;Bounded buffer with condition variables for multiple producers and consumers.&lt;/b&gt;&quot;</span><span class="p">,</span>
+    <span class="n">h</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="p">,</span> 
+    <span class="n">w</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span>
+<span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&lt;/font&gt;&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<p><font size="1.2rem"><b>Bounded buffer with condition variables for multiple producers and consumers.</b></p>
+<div style="width:100%; height:100%; font-size:inherit; overflow: auto;" >
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="mi">1</span><span class="p">:</span> <span class="o">/*</span> <span class="n">For</span> <span class="n">illustration</span> <span class="n">purposes</span> <span class="n">only</span><span class="o">.</span> 
+ <span class="mi">2</span><span class="p">:</span>  <span class="o">*</span> <span class="n">This</span> <span class="n">code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">complete</span> <span class="ow">and</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">compiled</span> <span class="n">into</span> <span class="n">an</span> <span class="n">executable</span><span class="o">.</span>
+ <span class="mi">3</span><span class="p">:</span>  <span class="o">*/</span>
+ <span class="mi">4</span><span class="p">:</span> <span class="c1">#include &lt;semaphore.h&gt;</span>
+ <span class="mi">5</span><span class="p">:</span> <span class="c1">#include &lt;stdbool.h&gt;</span>
+ <span class="mi">6</span><span class="p">:</span> 
+ <span class="mi">7</span><span class="p">:</span> <span class="n">extern</span> <span class="n">char</span> <span class="n">produce_item</span><span class="p">();</span>
+ <span class="mi">8</span><span class="p">:</span> <span class="n">extern</span> <span class="n">void</span> <span class="n">consume_item</span><span class="p">(</span><span class="n">char</span> <span class="n">item</span><span class="p">);</span>
+ <span class="mi">9</span><span class="p">:</span> 
+<span class="mi">10</span><span class="p">:</span> <span class="c1">#define N 2</span>
+<span class="mi">11</span><span class="p">:</span> 
+<span class="mi">12</span><span class="p">:</span> <span class="n">struct</span> <span class="n">bounded_buffer</span> <span class="p">{</span>
+<span class="mi">13</span><span class="p">:</span> 	<span class="n">char</span> <span class="n">data</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>   <span class="o">/*</span> <span class="s1">&#39;items&#39;</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">example</span> <span class="n">are</span> <span class="n">just</span> <span class="nb">bytes</span> <span class="o">*/</span>
+<span class="mi">14</span><span class="p">:</span> 	<span class="nb">int</span> <span class="ow">in</span><span class="p">;</span>     <span class="o">/*</span> <span class="n">index</span> <span class="n">where</span> <span class="n">producer</span> <span class="n">inserts</span> <span class="n">items</span><span class="p">,</span> <span class="n">initially</span> <span class="mi">0</span> <span class="o">*/</span>
+<span class="mi">15</span><span class="p">:</span> 	<span class="nb">int</span> <span class="n">out</span><span class="p">;</span>    <span class="o">/*</span> <span class="n">index</span> <span class="n">where</span> <span class="n">consumer</span> <span class="n">removes</span> <span class="n">items</span><span class="p">,</span> <span class="n">initially</span> <span class="mi">0</span> <span class="o">*/</span>
+<span class="mi">16</span><span class="p">:</span>     <span class="nb">int</span> <span class="n">count</span><span class="p">;</span>
+<span class="mi">17</span><span class="p">:</span>     <span class="n">pthread_mutex_t</span> <span class="n">buflock</span><span class="p">;</span>
+<span class="mi">18</span><span class="p">:</span>     <span class="n">pthread_cond_t</span> <span class="n">not_full</span><span class="p">;</span>
+<span class="mi">19</span><span class="p">:</span>     <span class="n">pthread_cond_t</span> <span class="n">not_empty</span><span class="p">;</span>
+<span class="mi">20</span><span class="p">:</span> <span class="p">};</span>
+<span class="mi">21</span><span class="p">:</span> 
+<span class="mi">22</span><span class="p">:</span> <span class="n">struct</span> <span class="n">bounded_buffer</span> <span class="n">bb</span><span class="p">;</span>
+<span class="mi">23</span><span class="p">:</span> 
+<span class="mi">24</span><span class="p">:</span> <span class="n">void</span> <span class="o">*</span><span class="n">producer</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">25</span><span class="p">:</span>     <span class="k">while</span><span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">26</span><span class="p">:</span>         <span class="n">char</span> <span class="n">item</span> <span class="o">=</span> <span class="n">produce_item</span><span class="p">();</span>
+<span class="mi">27</span><span class="p">:</span>         <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">buflock</span><span class="p">);</span>
+<span class="mi">28</span><span class="p">:</span>         <span class="k">while</span><span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">29</span><span class="p">:</span>             <span class="n">pthread_cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">notfull</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">buflock</span><span class="p">);</span>
+<span class="mi">30</span><span class="p">:</span>         <span class="p">}</span>
+<span class="mi">31</span><span class="p">:</span>         <span class="n">bb</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">bb</span><span class="o">.</span><span class="ow">in</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="p">;</span>
+<span class="mi">32</span><span class="p">:</span>         <span class="n">bb</span><span class="o">.</span><span class="ow">in</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="ow">in</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span><span class="p">;</span>
+<span class="mi">33</span><span class="p">:</span>         <span class="n">bb</span><span class="o">.</span><span class="n">count</span><span class="o">++</span><span class="p">;</span>
+<span class="mi">34</span><span class="p">:</span>         <span class="n">pthread_cond_signal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">notempty</span><span class="p">);</span>
+<span class="mi">35</span><span class="p">:</span>         <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">buflock</span><span class="p">);</span>
+<span class="mi">36</span><span class="p">:</span>     <span class="p">}</span>
+<span class="mi">37</span><span class="p">:</span> <span class="p">}</span>
+<span class="mi">38</span><span class="p">:</span> 
+<span class="mi">39</span><span class="p">:</span> <span class="n">void</span> <span class="o">*</span><span class="n">consumer</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">40</span><span class="p">:</span>     <span class="k">while</span><span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">41</span><span class="p">:</span>         <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">buflock</span><span class="p">);</span>
+<span class="mi">42</span><span class="p">:</span>         <span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">43</span><span class="p">:</span>             <span class="n">pthread_cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">notempty</span><span class="p">);</span>
+<span class="mi">44</span><span class="p">:</span>         <span class="p">}</span>
+<span class="mi">45</span><span class="p">:</span>         <span class="n">char</span> <span class="n">item</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">bb</span><span class="o">.</span><span class="n">out</span><span class="p">];</span>
+<span class="mi">46</span><span class="p">:</span>         <span class="n">bb</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="n">out</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span><span class="p">;</span>
+<span class="mi">47</span><span class="p">:</span>         <span class="n">bb</span><span class="o">.</span><span class="n">count</span><span class="o">--</span><span class="p">;</span>
+<span class="mi">48</span><span class="p">:</span>         <span class="n">pthread_cond_signal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">notfull</span><span class="p">);</span>
+<span class="mi">49</span><span class="p">:</span>         <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">buflock</span><span class="p">);</span>
+<span class="mi">50</span><span class="p">:</span> 
+<span class="mi">51</span><span class="p">:</span>         <span class="n">consume_item</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="mi">52</span><span class="p">:</span>     <span class="p">}</span>
+<span class="mi">53</span><span class="p">:</span> <span class="p">}</span>
+<span class="mi">54</span><span class="p">:</span> 
+<span class="mi">55</span><span class="p">:</span> <span class="nb">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="mi">56</span><span class="p">:</span> <span class="p">{</span>
+<span class="mi">57</span><span class="p">:</span>     <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_empty</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">);</span>
+<span class="mi">58</span><span class="p">:</span>     <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_filled</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="mi">59</span><span class="p">:</span>     <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bb</span><span class="o">.</span><span class="n">sem_mutex</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="mi">60</span><span class="p">:</span>     
+<span class="mi">61</span><span class="p">:</span>     <span class="o">/***</span> <span class="n">Thread</span> <span class="n">creation</span> <span class="n">stuff</span> <span class="n">here</span> <span class="o">***/</span>
+<span class="mi">62</span><span class="p">:</span>     
+<span class="mi">63</span><span class="p">:</span>     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="mi">64</span><span class="p">:</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</font></div>
+</div>
 </section>
 </section>
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"6f97ee80f846411bb55e15321f82a998": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_ca26027089cf4999850f64b1625949ab", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     #\r\n$ "}]}}, "ca26027089cf4999850f64b1625949ab": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+{"state": {"0d28c15b84224830afbf3c49afc231c7": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d60620728c4e481d9fa39724797dcbd2": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_0d28c15b84224830afbf3c49afc231c7", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     #\r\n$ "}]}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 
