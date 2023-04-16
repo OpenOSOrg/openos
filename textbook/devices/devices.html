@@ -1,0 +1,1039 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>40. I/O, Drivers, and DMA &#8212; Introduction to Operating Systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="41. Virtualization and Cloud computing" href="../virt/virt.html" />
+    <link rel="prev" title="39. Overview of other topics" href="../misc/OtherInro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/pref.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/purpose.html">
+   2. Purpose of operating systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/structure.html">
+   3. Operating System Structure &amp; Unix/Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/abstractions.html">
+   4. Operating System Abstractions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/tools.html">
+   5. Tools
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Processor
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/intro.html">
+   6. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/process.html">
+   7. Virtualizing a CPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/scheduling.html">
+   8. Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/real_sched.html">
+   9. A Look at the Linux Scheduler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/intro.html">
+   10. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/interface.html">
+   11. File System Abstraction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/diskhw.html">
+   12. A bit about Disks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
+   13. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_track_used.html">
+   14. Disk Layout:Tracking Used Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_track_free.html">
+   15. Disk Layout:Tracking Free Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_name.html">
+   16. Disk Layout:Implementing Name Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_failures.html">
+   17. Disk Layout:Dealing with Failures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_ex_exx.html">
+   18. Disk Layout:Examples of Real World File Systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/kernelimp.html">
+   19. Kernel implementation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Memory
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/intro.html">
+   20. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/phys-and-seg.html">
+   21. Memory management before paged virtual memory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/virt-paging.html">
+   22. Paging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/page-tables.html">
+   23. Page Tables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/reclamation.html">
+   24. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/page-size.html">
+   25. Page Sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/misc.html">
+   26. Other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/buffer-cache.html">
+   27. Buffer Cache
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/pagefaults.html">
+   28. Memory Management Dynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/realworld.html">
+   29. Memory management in the real world
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/concl.html">
+   30. Conclusion
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sync.html">
+   31. Introduction to Concurrency, Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   32. Cooperating Processes and Inter-process Communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/criticalsection.html">
+   33. The Critical Section Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locks.html">
+   34. Implementing Locks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/ordering.html">
+   35. Ordering Thread Events
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/deadlock.html">
+   36. Deadlocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   37. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   38. Locking in the Linux Kernel
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/OtherInro.html">
+   39. Overview of other topics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   40. I/O, Drivers, and DMA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../virt/virt.html">
+   41. Virtualization and Cloud computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/other.html">
+   42. Other OS structures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/howto.html">
+   43. How to read this book
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   44. Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/bib.html">
+   45. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/devices/devices.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/devices/devices.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/okrieg/openos"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fdevices/devices.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/okrieg/openos/edit/main/content/devices/devices.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/devices/devices.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pc-architecture-and-buses">
+   40.1. PC architecture and buses
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-i-o-bus-and-devices">
+     40.1.1. Simple I/O bus and devices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polled-vs-interrupt-driven-i-o">
+     40.1.2. Polled vs. Interrupt-driven I/O
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#latency-and-programmed-i-o">
+     40.1.3. Latency and Programmed I/O
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-pcie-bus-and-direct-memory-access-dma">
+     40.1.4. The PCIe Bus and Direct Memory Access (DMA)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dma-descriptors">
+     40.1.5. DMA Descriptors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#device-driver-architecture">
+     40.1.6. Device Driver Architecture
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>I/O, Drivers, and DMA</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pc-architecture-and-buses">
+   40.1. PC architecture and buses
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-i-o-bus-and-devices">
+     40.1.1. Simple I/O bus and devices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polled-vs-interrupt-driven-i-o">
+     40.1.2. Polled vs. Interrupt-driven I/O
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#latency-and-programmed-i-o">
+     40.1.3. Latency and Programmed I/O
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-pcie-bus-and-direct-memory-access-dma">
+     40.1.4. The PCIe Bus and Direct Memory Access (DMA)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dma-descriptors">
+     40.1.5. DMA Descriptors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#device-driver-architecture">
+     40.1.6. Device Driver Architecture
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="i-o-drivers-and-dma">
+<span id="cont-other-devices"></span><h1><span class="section-number">40. </span>I/O, Drivers, and DMA<a class="headerlink" href="#i-o-drivers-and-dma" title="Permalink to this headline">#</a></h1>
+<p>This chapter covers (a) the memory and I/O bus architecture of modern
+computers, (b) programmed I/O and direct-memory access, (c) disk drive
+components and how they influence performance, and (d) logical block
+addressing and the SATA and SCSI buses.</p>
+<p>Input/Output (I/O) devices are crucial to the operation of a computer.
+The data that a program processes — as well as the program binary
+itself — must be loaded into memory from some I/O device such as a
+disk, network, or keyboard. Similarly, without a way to output the
+results of a computation to the user or to storage, those results would
+be lost. One of the primary functions of the operating system is to
+manage these I/O devices. It should control access to them, as well as
+providing a consistent programming interface across a wide range of
+hardware devices with similar functionality but differing details. This
+chapter describes how I/O devices fit within the architecture of modern
+computer systems, and the role of programmed I/O, interrupts, direct
+memory access (DMA), and device drivers in interacting with them. In
+addition, you will examine one device, the hard disk drive and its
+corresponding controller, which is the source and destination of most
+I/O on typical systems.</p>
+<figure class="align-default" id="fig-iobus-1">
+<a class="reference internal image-reference" href="../_images/iobus-fig1.png"><img alt="../_images/iobus-fig1.png" src="../_images/iobus-fig1.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 40.1 </span><span class="caption-text">A standard Intel PC Architecture from a few years ago.</span><a class="headerlink" href="#fig-iobus-1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="pc-architecture-and-buses">
+<h2><span class="section-number">40.1. </span>PC architecture and buses<a class="headerlink" href="#pc-architecture-and-buses" title="Permalink to this headline">#</a></h2>
+<p>In <a class="reference internal" href="#fig-iobus-1"><span class="std std-numref">Fig. 40.1</span></a> you see the architecture of a typical
+Intel-architecture computer from a few years ago. Different parts of the
+system are connected by buses, or communication channels, operating at
+various speeds. The Front-Side Bus carries all memory transactions which
+miss in L1 and L2 cache, and the North Bridge directs these transactions
+to memory (DDR2 bus) or I/O devices (PCIe bus) based on their address.
+The PCI Express (PCIe) is somewhat slower than the front-side bus, but
+can be extended farther; it connects all the I/O devices on the system.
+In some cases (like USB and SATA), a controller connected to the PCIe
+bus (although typically located on the motherboard itself) may interface
+to a yet slower external interface. Finally, the ISA bus is a vestige of
+the original IBM PC; for some reason, they’ve never moved some crucial
+system functions off of it, so it’s still needed.[^1]</p>
+<section id="simple-i-o-bus-and-devices">
+<h3><span class="section-number">40.1.1. </span>Simple I/O bus and devices<a class="headerlink" href="#simple-i-o-bus-and-devices" title="Permalink to this headline">#</a></h3>
+<p>The fictional computer system described in earlier chapters included a
+number of memory-mapped I/O devices, which are accessible at particular
+physical memory addresses. On early computers such as the Apple II and
+the original IBM PC this was done via a simple I/O bus as shown in
+<a class="reference internal" href="#fig-iobus-2"><span class="std std-numref">Fig. 40.2</span></a> and
+<a class="reference internal" href="#fig-iobus-3"><span class="std std-numref">Fig. 40.3</span></a>. Address and data lines were extended across a
+series of connectors, allowing hardware on a card plugged into one of
+these slots to respond to read and write requests in much the same way
+as memory chips on the motherboard would. (This required each card to
+respond to a different address, no matter what combination of cards were
+plugged in, typically requiring the user to manually configure card
+addresses with DIP switches.)</p>
+<p>The term “bus” was taken from electrical engineering; in high-power
+electric systems a <em>bus bar</em> is a copper bar used to distribute power to
+multiple pieces of equipment. A simple bus like this one distributes
+address and data signals in much the same way.</p>
+<figure class="align-default" id="fig-iobus-2">
+<a class="reference internal image-reference" href="../_images/io-bus.png"><img alt="../_images/io-bus.png" src="../_images/io-bus.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 40.2 </span><span class="caption-text">Simple memory/IO bus using shared address and data lines</span><a class="headerlink" href="#fig-iobus-2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-iobus-3">
+<a class="reference internal image-reference" href="../_images/iobus-fig2.png"><img alt="../_images/iobus-fig2.png" src="../_images/iobus-fig2.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 40.3 </span><span class="caption-text">Simple memory/IO bus with extension cards</span><a class="headerlink" href="#fig-iobus-3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>I/O vs. memory-mapped access</strong>: Certain CPUs, including Intel
+architecture, contain support for a secondary I/O bus, with a smaller
+address width and accessed via special instructions. (e.g. “IN 0x100” to
+read a byte from I/O location 0x100, which has nothing to do with
+reading a byte from memory location 0x100)</p>
+<p><strong>Memory-mapped I/O:</strong> like in our fictional computer, devices can be
+mapped in the physical memory space and accessed via standard load and
+store instructions. In either case, I/O devices will have access to an
+interrupt line, allowing interrupts to be raised for events like I/O
+completion.</p>
+<p><strong>Device selection:</strong> Depending on the system architecture, the device
+may be responsible for decoding the full address and determining when it
+has been selected, or a select signal may indicate when a particular
+slot on the bus is being accessed. Almost all computers today use a
+version of the PCI bus, which uses memory-mapped access, and at boot
+time, assigns each I/O device a physical address range to which it
+should respond.</p>
+<figure class="align-right" id="fig-iobus-polled">
+<a class="reference internal image-reference" href="../_images/iobus-polled.png"><img alt="../_images/iobus-polled.png" src="../_images/iobus-polled.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 40.4 </span><span class="caption-text">Polled I/O</span><a class="headerlink" href="#fig-iobus-polled" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="polled-vs-interrupt-driven-i-o">
+<h3><span class="section-number">40.1.2. </span>Polled vs. Interrupt-driven I/O<a class="headerlink" href="#polled-vs-interrupt-driven-i-o" title="Permalink to this headline">#</a></h3>
+<p>The
+simplest way to control an I/O device is for the CPU to issue commands
+and then wait, polling a device status register until the operation is
+complete. In <a class="reference internal" href="#fig-iobus-polled"><span class="std std-numref">Fig. 40.4</span></a> (a) an application requests I/O via e.g. a
+<code class="docutils literal notranslate"><span class="pre">read</span></code> system call; the OS (step 1) then writes to the device command
+register to start an operation, after which (step 2) it begins to poll
+the status register to detect completion. Meanwhile (step 3) the device
+carries out the operation, after which (step 4) polling by the OS
+detects that it is complete, and finally (step 5) the original request
+(e.g. <code class="docutils literal notranslate"><span class="pre">read</span></code>) can return to the application.</p>
+<figure class="align-right" id="fig-iobus-inter">
+<a class="reference internal image-reference" href="../_images/iobus-irq.png"><img alt="../_images/iobus-irq.png" src="../_images/iobus-irq.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 40.5 </span><span class="caption-text">Interrupt-driven I/O</span><a class="headerlink" href="#fig-iobus-inter" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The alternate is interrupt-driven I/O, as
+shown in
+<a class="reference internal" href="#fig-iobus-inter"><span class="std std-numref">Fig. 40.5</span></a> (b). After (step 1) issuing a request to
+the hardware, the OS (step 2) puts the calling process to sleep and
+switches to another process while (step 3) the hardware handles the
+request. When the I/O is complete, the device (step 4) raises an
+interrupt. The interrupt handler then finishes the request. In the
+illustrated example, the interrupt handler (step 5) reads data that has
+become available, and then (step 6) wakes the waiting process, which
+returns from the I/O call (step 7) and continues.</p>
+</section>
+<section id="latency-and-programmed-i-o">
+<h3><span class="section-number">40.1.3. </span>Latency and Programmed I/O<a class="headerlink" href="#latency-and-programmed-i-o" title="Permalink to this headline">#</a></h3>
+<p>On our fictional computer the CPU is responsible for copying data
+between I/O devices and memory, using normal memory load and store
+instructions. Such an approach works well on computers such as the Apple
+II or the original IBM PC which run at a few MHz, where the address and
+data buses can be extended at full speed to external I/O cards. A modern
+CPU runs at over 3 GHz, however; during a single clock cycle light can
+only travel about 4 inches, and electrical signals even less.
+<a class="reference external" href="#fig:iobus:latency">[fig:iobus:latency]</a>{reference-type=”autoref”
+reference=”fig:iobus:latency”} shows example latencies for a modern CPU
+(in this case an Intel i5, with L3 cache omitted) to read a data value
+from L1 and L2 cache, a random location in memory (sequential access is
+faster), and a register on a device on the PCIe bus. (e.g. the disk or
+ethernet controller) In such a system, reading data from a device in
+4-byte words would result in a throughput of 5 words every microsecond,
+or 20MB/s — far slower than a modern network adapter or disk
+controller.</p>
+<p><img alt="DMA access for high-speed datatransfer" src="../_images/iobus-latency.png" />{#fig:iobus:dma width=”90%”}</p>
+<p><img alt="DMA access for high-speed datatransfer" src="../_images/iobus-dma.png" />{#fig:iobus:dma width=”\textwidth”}</p>
+<div class="highlight-gbar notranslate"><div class="highlight"><pre><span></span>As CPU speeds have become faster and faster, RAM and I/O devices have
+only slowly increased in speed. The strategies for coping with the high
+relative latency of RAM and I/O are very different, however---caching
+works quite well with RAM, which stores data generated by the CPU, while
+I/O (at least the input side) involves reading new data; here latency is
+overcome by pipelining, instead.
+</pre></div>
+</div>
+</section>
+<section id="the-pcie-bus-and-direct-memory-access-dma">
+<h3><span class="section-number">40.1.4. </span>The PCIe Bus and Direct Memory Access (DMA)<a class="headerlink" href="#the-pcie-bus-and-direct-memory-access-dma" title="Permalink to this headline">#</a></h3>
+<p>Almost all computers today use the PCIe bus. Transactions on the PCIe
+bus require a negotiation stage, when the CPU (or a device) requests
+access to bus resources, and then is able to perform a transaction after
+being granted access. In addition to basic read and write requests, the
+bus also supports Direct Memory Access (DMA), where I/O devices are able
+to read or write memory directly without CPU intervention.
+<a class="reference external" href="#fig:iobus:dma">[fig:iobus:dma]</a>{reference-type=”autoref”
+reference=”fig:iobus:dma”} shows a single programmed-I/O read (top)
+compared to a DMA burst transfer (bottom). While the read request
+requires a round trip to read each and every 4-byte word, once the DMA
+transfer is started it is able to transfer data at a rate limited by the
+maximum bus speed. (For an 8 or 16-lane PCIe card this limit is many
+GB/s)</p>
+</section>
+<section id="dma-descriptors">
+<h3><span class="section-number">40.1.5. </span>DMA Descriptors<a class="headerlink" href="#dma-descriptors" title="Permalink to this headline">#</a></h3>
+<p>A device typically requires multiple parameters to perform an operation
+and transfer the data to or from memory. In the case of a disk
+controller, for instance, these parameters would include the type of
+access (read or write), the disk locations to be accessed, and the
+memory address where data will be stored or retrieved from. Rather than
+writing each of these parameters individually to device registers, the
+parameters are typically combined in memory in what is called a <em>DMA
+descriptor</em>, such as the one shown in
+<a class="reference external" href="#fig:iobus:desc">[fig:iobus:desc]</a>{reference-type=”autoref”
+reference=”fig:iobus:desc”}. A single write is then used to tell the
+device the address of this descriptor, and the device can read the
+entire descriptor in a single DMA read burst. In addition to being more
+efficient than multiple programmed I/O writes, this approach also allows
+multiple requests to be queued for a device. (In the case of queued disk
+commands, the device may even process multiple such requests
+simultaneously.) When an I/O completes, the device notifies the CPU via
+an interrupt, and writes status information (such as success/failure)
+into a</p>
+<div class="highlight-gsidebar notranslate"><div class="highlight"><pre><span></span>**Cache-coherent I/O:** The PCIe bus is *cache-consistent*; many earlier
+I/O buses weren&#39;t. Consider what would happen if the CPU wrote a value
+to location 1000 (say that&#39;s the command/status field of a DMA
+descriptor), then the device wrote a new value to that same location,
+and finally the CPU tried to read it back?
+</pre></div>
+</div>
+<p>field in the DMA descriptor. (or sometimes in a device register, for
+simple devices which do not allow multiple outstanding requests.) The
+interrupt handler can then determine which operations have completed,
+free their DMA descriptors, and notify any waiting processes.</p>
+<p><img alt="List of typical DMAdescriptors" src="../_images/iobus-desc.png" />{#fig:iobus:desc width=”85%”}</p>
+</section>
+<section id="device-driver-architecture">
+<h3><span class="section-number">40.1.6. </span>Device Driver Architecture<a class="headerlink" href="#device-driver-architecture" title="Permalink to this headline">#</a></h3>
+<p><a class="reference external" href="#fig:iobus:driver">[fig:iobus:driver]</a>{reference-type=”autoref”
+reference=”fig:iobus:driver”} illustrates the I/O process for a typical
+device from user-space application request through the driver, hardware
+I/O operation, interrupt, and finally back to user space.</p>
+<p><img alt="Driver Architecture" src="../_images/iobus-driver.png" />{#fig:iobus:driver
+width=”80%”}</p>
+<p>In more detail:</p>
+<ul class="simple">
+<li><p>The user process executes a <code class="docutils literal notranslate"><span class="pre">read</span></code> system call, which in turn invokes
+the driver <code class="docutils literal notranslate"><span class="pre">read</span></code> operation, found via the <code class="docutils literal notranslate"><span class="pre">read</span></code> method of the file
+operations structure.</p></li>
+<li><p>The driver fills in a DMA descriptor (in motherboard RAM), writes the
+physical address of the descriptor to a device register (generating a
+Memory Write operation across the PCIe bus), and then goes to sleep.</p></li>
+<li><p>The device issues a PCIe Memory Read Multiple command to read the DMA
+descriptor from RAM.</p></li>
+<li><p>The device does some sort of I/O. (e.g. read from a disk, or receive a
+network packet)</p></li>
+<li><p>A Memory Write and Invalidate operation is used to write the received
+data back across the PCIe bus to the motherboard RAM, and to tell the
+CPU to invalidate any cached copies of those addresses.</p></li>
+<li><p>A hardware interrupt from the device causes the device driver interrupt
+handler to run.</p></li>
+<li><p>The interrupt handler wakes up the original process, which is currently
+in kernel space in the device driver read method, in a call to something
+like <code class="docutils literal notranslate"><span class="pre">interruptible_sleep_on</span></code>. After waking up, the read method copies
+the data to the user buffer and returns.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./devices"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../misc/OtherInro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">39. </span>Overview of other topics</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../virt/virt.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">41. </span>Virtualization and Cloud computing</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By (see contributing chapter book)<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
