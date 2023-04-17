@@ -793,16 +793,18 @@ addresses with DIP switches.)</p>
 electric systems a <em>bus bar</em> is a copper bar used to distribute power to
 multiple pieces of equipment. A simple bus like this one distributes
 address and data signals in much the same way.</p>
-<figure class="align-default" id="fig-iobus-2">
-<a class="reference internal image-reference" href="../_images/io-bus.png"><img alt="../_images/io-bus.png" src="../_images/io-bus.png" style="width: 70%;" /></a>
+<figure class="align-right" id="fig-iobus-2">
+<a class="reference internal image-reference" href="../_images/io-bus.png"><img alt="../_images/io-bus.png" src="../_images/io-bus.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.2 </span><span class="caption-text">Simple memory/IO bus using shared address and data lines</span><a class="headerlink" href="#fig-iobus-2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 40.2 </span><span class="caption-text">Simple memory/IO bus using<br />
+shared address and data lines</span><a class="headerlink" href="#fig-iobus-2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="fig-iobus-3">
-<a class="reference internal image-reference" href="../_images/iobus-fig2.png"><img alt="../_images/iobus-fig2.png" src="../_images/iobus-fig2.png" style="width: 70%;" /></a>
+<figure class="align-right" id="fig-iobus-3">
+<a class="reference internal image-reference" href="../_images/iobus-fig2.png"><img alt="../_images/iobus-fig2.png" src="../_images/iobus-fig2.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.3 </span><span class="caption-text">Simple memory/IO bus with extension cards</span><a class="headerlink" href="#fig-iobus-3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 40.3 </span><span class="caption-text">Simple memory/IO bus with<br />
+extension cards</span><a class="headerlink" href="#fig-iobus-3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p><strong>I/O vs. memory-mapped access</strong>: Certain CPUs, including Intel
@@ -822,15 +824,15 @@ slot on the bus is being accessed. Almost all computers today use a
 version of the PCI bus, which uses memory-mapped access, and at boot
 time, assigns each I/O device a physical address range to which it
 should respond.</p>
+</section>
+<section id="polled-vs-interrupt-driven-i-o">
+<h3><span class="section-number">40.1.2. </span>Polled vs. Interrupt-driven I/O<a class="headerlink" href="#polled-vs-interrupt-driven-i-o" title="Permalink to this headline">#</a></h3>
 <figure class="align-right" id="fig-iobus-polled">
-<a class="reference internal image-reference" href="../_images/iobus-polled.png"><img alt="../_images/iobus-polled.png" src="../_images/iobus-polled.png" style="width: 40%;" /></a>
+<a class="reference internal image-reference" href="../_images/iobus-polled.png"><img alt="../_images/iobus-polled.png" src="../_images/iobus-polled.png" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 40.4 </span><span class="caption-text">Polled I/O</span><a class="headerlink" href="#fig-iobus-polled" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-</section>
-<section id="polled-vs-interrupt-driven-i-o">
-<h3><span class="section-number">40.1.2. </span>Polled vs. Interrupt-driven I/O<a class="headerlink" href="#polled-vs-interrupt-driven-i-o" title="Permalink to this headline">#</a></h3>
 <p>The
 simplest way to control an I/O device is for the CPU to issue commands
 and then wait, polling a device status register until the operation is
@@ -842,9 +844,10 @@ carries out the operation, after which (step 4) polling by the OS
 detects that it is complete, and finally (step 5) the original request
 (e.g. <code class="docutils literal notranslate"><span class="pre">read</span></code>) can return to the application.</p>
 <figure class="align-right" id="fig-iobus-inter">
-<a class="reference internal image-reference" href="../_images/iobus-irq.png"><img alt="../_images/iobus-irq.png" src="../_images/iobus-irq.png" style="width: 40%;" /></a>
+<a class="reference internal image-reference" href="../_images/iobus-irq.png"><img alt="../_images/iobus-irq.png" src="../_images/iobus-irq.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.5 </span><span class="caption-text">Interrupt-driven I/O</span><a class="headerlink" href="#fig-iobus-inter" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 40.5 </span><span class="caption-text">Interrupt<br />
+driven I/O</span><a class="headerlink" href="#fig-iobus-inter" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The alternate is interrupt-driven I/O, as
@@ -876,16 +879,26 @@ ethernet controller) In such a system, reading data from a device in
 4-byte words would result in a throughput of 5 words every microsecond,
 or 20MB/s — far slower than a modern network adapter or disk
 controller.</p>
-<p><img alt="DMA access for high-speed datatransfer" src="../_images/iobus-latency.png" />{#fig:iobus:dma width=”90%”}</p>
-<p><img alt="DMA access for high-speed datatransfer" src="../_images/iobus-dma.png" />{#fig:iobus:dma width=”\textwidth”}</p>
-<div class="highlight-gbar notranslate"><div class="highlight"><pre><span></span>As CPU speeds have become faster and faster, RAM and I/O devices have
+<figure class="align-default" id="fig-iobus-dma">
+<a class="reference internal image-reference" href="../_images/iobus-latency.png"><img alt="../_images/iobus-latency.png" src="../_images/iobus-latency.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 40.6 </span><span class="caption-text">DMA access for high-speed data transfer</span><a class="headerlink" href="#fig-iobus-dma" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/iobus-dma.png"><img alt="../_images/iobus-dma.png" src="../_images/iobus-dma.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 40.7 </span><span class="caption-text">DMA access for high-speed data transfer</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<aside class="sidebar">
+<p>As CPU speeds have become faster and faster, RAM and I/O devices have
 only slowly increased in speed. The strategies for coping with the high
-relative latency of RAM and I/O are very different, however---caching
+relative latency of RAM and I/O are very different, however—caching
 works quite well with RAM, which stores data generated by the CPU, while
 I/O (at least the input side) involves reading new data; here latency is
-overcome by pipelining, instead.
-</pre></div>
-</div>
+overcome by pipelining, instead.</p>
+</aside>
 </section>
 <section id="the-pcie-bus-and-direct-memory-access-dma">
 <h3><span class="section-number">40.1.4. </span>The PCIe Bus and Direct Memory Access (DMA)<a class="headerlink" href="#the-pcie-bus-and-direct-memory-access-dma" title="Permalink to this headline">#</a></h3>
@@ -923,13 +936,13 @@ commands, the device may even process multiple such requests
 simultaneously.) When an I/O completes, the device notifies the CPU via
 an interrupt, and writes status information (such as success/failure)
 into a</p>
-<div class="highlight-gsidebar notranslate"><div class="highlight"><pre><span></span>**Cache-coherent I/O:** The PCIe bus is *cache-consistent*; many earlier
-I/O buses weren&#39;t. Consider what would happen if the CPU wrote a value
-to location 1000 (say that&#39;s the command/status field of a DMA
+<aside class="sidebar">
+<p><strong>Cache-coherent I/O:</strong> The PCIe bus is <em>cache-consistent</em>; many earlier
+I/O buses weren’t. Consider what would happen if the CPU wrote a value
+to location 1000 (say that’s the command/status field of a DMA
 descriptor), then the device wrote a new value to that same location,
-and finally the CPU tried to read it back?
-</pre></div>
-</div>
+and finally the CPU tried to read it back?</p>
+</aside>
 <p>field in the DMA descriptor. (or sometimes in a device register, for
 simple devices which do not allow multiple outstanding requests.) The
 interrupt handler can then determine which operations have completed,
