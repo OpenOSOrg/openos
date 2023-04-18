@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>39. Overview of other topics &#8212; Introduction to Operating Systems</title>
+    <title>42. Device Driver Architecture &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="40. Input and Output" href="../devices/devices.html" />
-    <link rel="prev" title="38. Locking in the Linux Kernel" href="../sync/linux_locking.html" />
+    <link rel="next" title="43. Virtualization and Cloud computing" href="../virt/virt.html" />
+    <link rel="prev" title="41. IO Hardware" href="IOHW.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -347,24 +347,34 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/OtherInro.html">
    39. Overview of other topics
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../devices/devices.html">
+  <a class="reference internal" href="devices.html">
    40. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="IOHW.html">
+   41. IO Hardware
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   42. Device Driver Architecture
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   41. Virtualization and Cloud computing
+   43. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   42. Other OS structures
+   44. Other OS structures
   </a>
  </li>
 </ul>
@@ -375,18 +385,18 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="howto.html">
-   43. How to read this book
+  <a class="reference internal" href="../misc/howto.html">
+   45. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   44. Contributing
+   46. Contributing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="bib.html">
-   45. Bibliography
+  <a class="reference internal" href="../misc/bib.html">
+   47. Bibliography
   </a>
  </li>
 </ul>
@@ -448,7 +458,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/misc/OtherInro.ipynb"
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/devices/IOSW.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -466,7 +476,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/misc/OtherInro.ipynb&branch=main"
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/devices/IOSW.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -526,7 +536,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fmisc/OtherInro.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fdevices/IOSW.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -543,7 +553,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/edit/main/content/misc/OtherInro.ipynb"
+        <a href="https://github.com/okrieg/openos/edit/main/content/devices/IOSW.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -571,7 +581,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/misc/OtherInro.ipynb"
+        <a href="../_sources/devices/IOSW.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -620,7 +630,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Overview of other topics</h1>
+                <h1>Device Driver Architecture</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -632,13 +642,39 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This portion of the book is under construction, not ready to be read</p>
-</div>
-<section class="tex2jax_ignore mathjax_ignore" id="overview-of-other-topics">
-<span id="cont-other-intro"></span><h1><span class="section-number">39. </span>Overview of other topics<a class="headerlink" href="#overview-of-other-topics" title="Permalink to this headline">#</a></h1>
-<p>This part of the book discusses various topics that we want to at least introduce to the student.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="device-driver-architecture">
+<h1><span class="section-number">42. </span>Device Driver Architecture<a class="headerlink" href="#device-driver-architecture" title="Permalink to this headline">#</a></h1>
+<p><a class="reference internal" href="#fig-iobus-driver"><span class="std std-numref">Fig. 42.1</span></a> illustrates the I/O process for a typical
+device from user-space application request through the driver, hardware
+I/O operation, interrupt, and finally back to user space.</p>
+<figure class="align-default" id="fig-iobus-driver">
+<a class="reference internal image-reference" href="../_images/iobus-driver.png"><img alt="../_images/iobus-driver.png" src="../_images/iobus-driver.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 42.1 </span><span class="caption-text">Driver Architecture</span><a class="headerlink" href="#fig-iobus-driver" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In more detail:</p>
+<ul class="simple">
+<li><p>The user process executes a <code class="docutils literal notranslate"><span class="pre">read</span></code> system call, which in turn invokes
+the driver <code class="docutils literal notranslate"><span class="pre">read</span></code> operation, found via the <code class="docutils literal notranslate"><span class="pre">read</span></code> method of the file
+operations structure.</p></li>
+<li><p>The driver fills in a DMA descriptor (in motherboard RAM), writes the
+physical address of the descriptor to a device register (generating a
+Memory Write operation across the PCIe bus), and then goes to sleep.</p></li>
+<li><p>The device issues a PCIe Memory Read Multiple command to read the DMA
+descriptor from RAM.</p></li>
+<li><p>The device does some sort of I/O. (e.g. read from a disk, or receive a
+network packet)</p></li>
+<li><p>A Memory Write and Invalidate operation is used to write the received
+data back across the PCIe bus to the motherboard RAM, and to tell the
+CPU to invalidate any cached copies of those addresses.</p></li>
+<li><p>A hardware interrupt from the device causes the device driver interrupt
+handler to run.</p></li>
+<li><p>The interrupt handler wakes up the original process, which is currently
+in kernel space in the device driver read method, in a call to something
+like <code class="docutils literal notranslate"><span class="pre">interruptible_sleep_on</span></code>. After waking up, the read method copies
+the data to the user buffer and returns.</p></li>
+</ul>
 </section>
 
     <script type="text/x-thebe-config">
@@ -654,7 +690,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./misc"
+            path: "./devices"
         },
         predefinedOutput: true
     }
@@ -668,17 +704,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../sync/linux_locking.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="IOHW.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">38. </span>Locking in the Linux Kernel</p>
+            <p class="prev-next-title"><span class="section-number">41. </span>IO Hardware</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../devices/devices.html" title="next page">
+    <a class='right-next' id="next-link" href="../virt/virt.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">40. </span>Input and Output</p>
+        <p class="prev-next-title"><span class="section-number">43. </span>Virtualization and Cloud computing</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

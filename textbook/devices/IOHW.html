@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>40. Input and Output &#8212; Introduction to Operating Systems</title>
+    <title>41. IO Hardware &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="41. Virtualization and Cloud computing" href="../virt/virt.html" />
-    <link rel="prev" title="39. Overview of other topics" href="../misc/OtherInro.html" />
+    <link rel="next" title="42. Device Driver Architecture" href="IOSW.html" />
+    <link rel="prev" title="40. Input and Output" href="devices.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -352,19 +352,29 @@ const thebe_selector_output = ".output, .cell_output"
    39. Overview of other topics
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="devices.html">
+   40. Input and Output
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   40. Input and Output
+   41. IO Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="IOSW.html">
+   42. Device Driver Architecture
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   41. Virtualization and Cloud computing
+   43. Virtualization and Cloud computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/other.html">
-   42. Other OS structures
+   44. Other OS structures
   </a>
  </li>
 </ul>
@@ -376,17 +386,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   43. How to read this book
+   45. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   44. Contributing
+   46. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   45. Bibliography
+   47. Bibliography
   </a>
  </li>
 </ul>
@@ -448,7 +458,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/devices/devices.ipynb"
+        <a href="https://mybinder.org/v2/gh/okrieg/openos/main?urlpath=lab/tree/content/devices/IOHW.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -466,7 +476,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/devices/devices.ipynb&branch=main"
+        <a href="https://jupyterhub-redhat-ods-applications.apps.buaws-dev.idu6.p1.openshiftapps.com/hub/user-redirect/git-pull?repo=https%3A//github.com/okrieg/openos&urlpath=lab/tree/openos/content/devices/IOHW.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -526,7 +536,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fdevices/devices.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/okrieg/openos/issues/new?title=Issue%20on%20page%20%2Fdevices/IOHW.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -543,7 +553,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/okrieg/openos/edit/main/content/devices/devices.ipynb"
+        <a href="https://github.com/okrieg/openos/edit/main/content/devices/IOHW.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -571,7 +581,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/devices/devices.ipynb"
+        <a href="../_sources/devices/IOHW.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -631,57 +641,33 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#io-hardware">
-   40.1. IO Hardware
+  <a class="reference internal nav-link" href="#structure-of-a-computer">
+   41.1. Structure of a computer
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#structure-of-a-computer">
-     40.1.1. Structure of a computer
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#controllers">
-     40.1.2. Controllers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#accessing-the-controller">
-     40.1.3. Accessing the controller
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#polled-vs-interrupt-driven-i-o">
-     40.1.4. Polled vs. Interrupt-driven I/O
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interrupts">
-     40.1.5. Interrupts
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#direct-memory-access-dma">
-     40.1.6. Direct Memory Access (DMA)
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#i-o-software-and-device-drivers">
-   40.2. I/O Software and Device Drivers
+  <a class="reference internal nav-link" href="#controllers">
+   41.2. Controllers
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fundamental-goals">
-     40.2.1. Fundamental Goals
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#putting-it-all-together">
-   40.3. Putting it all together
+  <a class="reference internal nav-link" href="#accessing-the-controller">
+   41.3. Accessing the controller
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polled-vs-interrupt-driven-i-o">
+   41.4. Polled vs. Interrupt-driven I/O
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interrupts">
+   41.5. Interrupts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#direct-memory-access-dma">
+   41.6. Direct Memory Access (DMA)
   </a>
  </li>
 </ul>
@@ -693,7 +679,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Input and Output</h1>
+                <h1>IO Hardware</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -704,57 +690,33 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#io-hardware">
-   40.1. IO Hardware
+  <a class="reference internal nav-link" href="#structure-of-a-computer">
+   41.1. Structure of a computer
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#structure-of-a-computer">
-     40.1.1. Structure of a computer
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#controllers">
-     40.1.2. Controllers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#accessing-the-controller">
-     40.1.3. Accessing the controller
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#polled-vs-interrupt-driven-i-o">
-     40.1.4. Polled vs. Interrupt-driven I/O
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interrupts">
-     40.1.5. Interrupts
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#direct-memory-access-dma">
-     40.1.6. Direct Memory Access (DMA)
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#i-o-software-and-device-drivers">
-   40.2. I/O Software and Device Drivers
+  <a class="reference internal nav-link" href="#controllers">
+   41.2. Controllers
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fundamental-goals">
-     40.2.1. Fundamental Goals
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#putting-it-all-together">
-   40.3. Putting it all together
+  <a class="reference internal nav-link" href="#accessing-the-controller">
+   41.3. Accessing the controller
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polled-vs-interrupt-driven-i-o">
+   41.4. Polled vs. Interrupt-driven I/O
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interrupts">
+   41.5. Interrupts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#direct-memory-access-dma">
+   41.6. Direct Memory Access (DMA)
   </a>
  </li>
 </ul>
@@ -767,38 +729,19 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="input-and-output">
-<span id="cont-other-devices"></span><h1><span class="section-number">40. </span>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">#</a></h1>
-<p>Input/Output (I/O) devices are crucial to the operation of a computer.
-The data that a program processes — as well as the program binary
-itself — must be loaded into memory from some I/O device such as a
-disks, networks, or keyboard. Similarly, without a way to output the
-results of a computation to the monitors or to storage, those results would
-be lost.</p>
-<p>One of the primary functions of the operating system is to
-manage these I/O devices. It should control access to them, as well as
-providing a consistent programming interface across a wide range of
-hardware devices with similar functionality but differing details.</p>
-<figure class="align-right" id="devs-fig-rep">
-<a class="reference internal image-reference" href="../_images/purpose-OS-source-12.drawio.png"><img alt="../_images/purpose-OS-source-12.drawio.png" src="../_images/purpose-OS-source-12.drawio.png" style="width: 300pt;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 40.1 </span><span class="caption-text">Supporting devices</span><a class="headerlink" href="#devs-fig-rep" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>We first describe the characteristics of device hardware, and then how the OS interacts with that hardware.</p>
-<section id="io-hardware">
-<h2><span class="section-number">40.1. </span>IO Hardware<a class="headerlink" href="#io-hardware" title="Permalink to this headline">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="io-hardware">
+<h1><span class="section-number">41. </span>IO Hardware<a class="headerlink" href="#io-hardware" title="Permalink to this headline">#</a></h1>
 <p>We outline structure of a standard computer, device controllers, how the OS interacts with the controller using port and memory mapped I/O, how interrupts work, and conclude with a discussion of Direct Memory Access (DMA).</p>
 <figure class="align-right" id="simplecomputer-fig2">
 <a class="reference internal image-reference" href="../_images/hardware.png"><img alt="../_images/hardware.png" src="../_images/hardware.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.2 </span><span class="caption-text">An abstract model of a computer.</span><a class="headerlink" href="#simplecomputer-fig2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.1 </span><span class="caption-text">An abstract model of a computer.</span><a class="headerlink" href="#simplecomputer-fig2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="structure-of-a-computer">
-<h3><span class="section-number">40.1.1. </span>Structure of a computer<a class="headerlink" href="#structure-of-a-computer" title="Permalink to this headline">#</a></h3>
-<p>At the start of the course, we <a class="reference internal" href="../intro/purpose.html#cont-gs-purpose-hw"><span class="std std-ref">presented</span></a> a simple model of hardware (<a class="reference internal" href="#simplecomputer-fig2"><span class="std std-numref">Fig. 40.2</span></a>) was discussed. The CPU is connected to high speed memory, and through a lower speed bus to a network controller and disk controller that are in turn connected to a network (ethernet in this case) and a disk.</p>
-<p><a class="reference internal" href="#fig-iobus-1"><span class="std std-numref">Fig. 40.3</span></a> shows the more complicated architecture of a relatively modern
+<h2><span class="section-number">41.1. </span>Structure of a computer<a class="headerlink" href="#structure-of-a-computer" title="Permalink to this headline">#</a></h2>
+<p>At the start of the course, we <a class="reference internal" href="../intro/purpose.html#cont-gs-purpose-hw"><span class="std std-ref">presented</span></a> a simple model of hardware (<a class="reference internal" href="#simplecomputer-fig2"><span class="std std-numref">Fig. 41.1</span></a>) was discussed. The CPU is connected to high speed memory, and through a lower speed bus to a network controller and disk controller that are in turn connected to a network (ethernet in this case) and a disk.</p>
+<p><a class="reference internal" href="#fig-iobus-1"><span class="std std-numref">Fig. 41.2</span></a> shows the more complicated architecture of a relatively modern
 Intel-architecture. Different parts of the
 system are connected by buses, or communication channels, operating at
 various speeds. The Front-Side Bus carries all memory transactions which
@@ -814,7 +757,7 @@ system functions off of it, so it’s still needed.<a class="footnote-reference 
 <figure class="align-default" id="fig-iobus-1">
 <a class="reference internal image-reference" href="../_images/iobus-fig1.png"><img alt="../_images/iobus-fig1.png" src="../_images/iobus-fig1.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.3 </span><span class="caption-text">A standard Intel PC Architecture</span><a class="headerlink" href="#fig-iobus-1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.2 </span><span class="caption-text">A standard Intel PC Architecture</span><a class="headerlink" href="#fig-iobus-1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <aside class="sidebar">
@@ -825,18 +768,18 @@ address and data signals in much the same way.</p>
 </aside>
 </section>
 <section id="controllers">
-<h3><span class="section-number">40.1.2. </span>Controllers<a class="headerlink" href="#controllers" title="Permalink to this headline">#</a></h3>
+<h2><span class="section-number">41.2. </span>Controllers<a class="headerlink" href="#controllers" title="Permalink to this headline">#</a></h2>
 <p>I/O devices typically connected as PCI/ISA cards installed on the mother board have, in additional to their mechanical components, controllers that manage the device. The task of this controller is to convert from the operations on the bus to device specific operations.  The processor interacts with these controllers by reading and writing controller registers.</p>
 <figure class="align-default" id="fig-intelnic">
 <a class="reference internal image-reference" href="../_images/modernnic-regs.png"><img alt="../_images/modernnic-regs.png" src="../_images/modernnic-regs.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.4 </span><span class="caption-text">Registers of an Intel network interface card.  It contains around 5600 32-bit registers broken down as shown. Note that complex OSes, like Linux, only initialize around 1000 of these registers.</span><a class="headerlink" href="#fig-intelnic" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.3 </span><span class="caption-text">Registers of an Intel network interface card.  It contains around 5600 32-bit registers broken down as shown. Note that complex OSes, like Linux, only initialize around 1000 of these registers.</span><a class="headerlink" href="#fig-intelnic" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>To understand how complex modern devices can be, consider <a class="reference internal" href="#fig-intelnic"><span class="std std-numref">Fig. 40.4</span></a> that shows the breakdown of registers of a modern Intel NIC.  There are over 5600 32 bit registers, providing enormous complexity in how the OS can configure and interact with the device.  As a result, these controllers often have a general purpose CPU, a fair amount of RAM to buffer data going to/from the device, and often some permanent flash storage.  The software that used on these processors, typically referred to as firmware is complex enough that it must be regularly upgraded to deal with bugs.  This turns out to be a massive attack surface in today’s computers. For example the following <a class="reference external" href="https://www.vice.com/en/article/ypwkwk/the-nsas-undetectable-hard-drive-hack-was-first-demonstrated-a-year-ago">story</a> describes one technique that has been used by the NSA to embed undetectable spyware on disks.</p>
+<p>To understand how complex modern devices can be, consider <a class="reference internal" href="#fig-intelnic"><span class="std std-numref">Fig. 41.3</span></a> that shows the breakdown of registers of a modern Intel NIC.  There are over 5600 32 bit registers, providing enormous complexity in how the OS can configure and interact with the device.  As a result, these controllers often have a general purpose CPU, a fair amount of RAM to buffer data going to/from the device, and often some permanent flash storage.  The software that used on these processors, typically referred to as firmware is complex enough that it must be regularly upgraded to deal with bugs.  This turns out to be a massive attack surface in today’s computers. For example the following <a class="reference external" href="https://www.vice.com/en/article/ypwkwk/the-nsas-undetectable-hard-drive-hack-was-first-demonstrated-a-year-ago">story</a> describes one technique that has been used by the NSA to embed undetectable spyware on disks.</p>
 </section>
 <section id="accessing-the-controller">
-<h3><span class="section-number">40.1.3. </span>Accessing the controller<a class="headerlink" href="#accessing-the-controller" title="Permalink to this headline">#</a></h3>
+<h2><span class="section-number">41.3. </span>Accessing the controller<a class="headerlink" href="#accessing-the-controller" title="Permalink to this headline">#</a></h2>
 <p>The OS talks with the controller by reading and writing registers of the device and by reading and writing data that is buffered by the controller.  Certain CPUs, including Intel
 architecture, contain support for a secondary I/O bus, with a smaller
 address width and accessed via special instructions. (e.g. “IN 0x100” to
@@ -854,17 +797,17 @@ time, assigns each I/O device a physical address range to which it
 should respond.</p>
 </section>
 <section id="polled-vs-interrupt-driven-i-o">
-<h3><span class="section-number">40.1.4. </span>Polled vs. Interrupt-driven I/O<a class="headerlink" href="#polled-vs-interrupt-driven-i-o" title="Permalink to this headline">#</a></h3>
+<h2><span class="section-number">41.4. </span>Polled vs. Interrupt-driven I/O<a class="headerlink" href="#polled-vs-interrupt-driven-i-o" title="Permalink to this headline">#</a></h2>
 <figure class="align-right" id="fig-iobus-polled">
 <a class="reference internal image-reference" href="../_images/iobus-polled.png"><img alt="../_images/iobus-polled.png" src="../_images/iobus-polled.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.5 </span><span class="caption-text">Polled I/O</span><a class="headerlink" href="#fig-iobus-polled" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.4 </span><span class="caption-text">Polled I/O</span><a class="headerlink" href="#fig-iobus-polled" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The
 simplest way to control an I/O device is for the CPU to issue commands
 and then wait, polling a device status register until the operation is
-complete. In <a class="reference internal" href="#fig-iobus-polled"><span class="std std-numref">Fig. 40.5</span></a> (a) an application requests I/O via e.g. a
+complete. In <a class="reference internal" href="#fig-iobus-polled"><span class="std std-numref">Fig. 41.4</span></a> (a) an application requests I/O via e.g. a
 <code class="docutils literal notranslate"><span class="pre">read</span></code> system call; the OS (step 1) then writes to the device command
 register to start an operation, after which (step 2) it begins to poll
 the status register to detect completion. Meanwhile (step 3) the device
@@ -874,13 +817,13 @@ detects that it is complete, and finally (step 5) the original request
 <figure class="align-right" id="fig-iobus-inter">
 <a class="reference internal image-reference" href="../_images/iobus-irq.png"><img alt="../_images/iobus-irq.png" src="../_images/iobus-irq.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.6 </span><span class="caption-text">Interrupt<br />
+<p><span class="caption-number">Fig. 41.5 </span><span class="caption-text">Interrupt<br />
 driven I/O</span><a class="headerlink" href="#fig-iobus-inter" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The alternate is interrupt-driven I/O, as
 shown in
-<a class="reference internal" href="#fig-iobus-inter"><span class="std std-numref">Fig. 40.6</span></a> (b). After (step 1) issuing a request to
+<a class="reference internal" href="#fig-iobus-inter"><span class="std std-numref">Fig. 41.5</span></a> (b). After (step 1) issuing a request to
 the hardware, the OS (step 2) puts the calling process to sleep and
 switches to another process while (step 3) the hardware handles the
 request. When the I/O is complete, the device (step 4) raises an
@@ -890,7 +833,7 @@ become available, and then (step 6) wakes the waiting process, which
 returns from the I/O call (step 7) and continues.</p>
 </section>
 <section id="interrupts">
-<h3><span class="section-number">40.1.5. </span>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">#</a></h3>
+<h2><span class="section-number">41.5. </span>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">#</a></h2>
 <p>We have already mentioned Interrupts many times, but nows a good time to flesh them out in a bit more detail.
 To handle asynchronous I/O events, CPUs provide an <em>interrupt</em>
 mechanism. In response to a signal from an I/O device the CPU executes
@@ -953,14 +896,14 @@ keystrokes and save them, making them available to the program the next
 time it checks for input.</p>
 </section>
 <section id="direct-memory-access-dma">
-<h3><span class="section-number">40.1.6. </span>Direct Memory Access (DMA)<a class="headerlink" href="#direct-memory-access-dma" title="Permalink to this headline">#</a></h3>
+<h2><span class="section-number">41.6. </span>Direct Memory Access (DMA)<a class="headerlink" href="#direct-memory-access-dma" title="Permalink to this headline">#</a></h2>
 <p>The CPU could copying data
 between I/O devices and memory using normal memory load and store
 instructions. Such an approach works well on computers such as the Apple
 II or the original IBM PC which run at a few MHz, where the address and
 data buses can be extended at full speed to external I/O cards. A modern
 CPU runs at over 3 GHz, however; during a single clock cycle light can
-only travel about 4 inches, and electrical signals even less. <a class="reference internal" href="#fig-iobus-latency"><span class="std std-numref">Fig. 40.7</span></a>
+only travel about 4 inches, and electrical signals even less. <a class="reference internal" href="#fig-iobus-latency"><span class="std std-numref">Fig. 41.6</span></a>
 shows example latencies for a modern CPU
 (in this case an Intel i5, with L3 cache omitted) to read a data value
 from L1 and L2 cache, a random location in memory (sequential access is
@@ -972,13 +915,13 @@ controller.</p>
 <figure class="align-default" id="fig-iobus-latency">
 <a class="reference internal image-reference" href="../_images/iobus-latency.png"><img alt="../_images/iobus-latency.png" src="../_images/iobus-latency.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.7 </span><span class="caption-text">Latency between CPU and various levels of memory/IO hierarchy</span><a class="headerlink" href="#fig-iobus-latency" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.6 </span><span class="caption-text">Latency between CPU and various levels of memory/IO hierarchy</span><a class="headerlink" href="#fig-iobus-latency" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-iobus-dma">
 <a class="reference internal image-reference" href="../_images/iobus-dma.png"><img alt="../_images/iobus-dma.png" src="../_images/iobus-dma.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.8 </span><span class="caption-text">DMA access for high-speed data transfer</span><a class="headerlink" href="#fig-iobus-dma" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.7 </span><span class="caption-text">DMA access for high-speed data transfer</span><a class="headerlink" href="#fig-iobus-dma" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <aside class="sidebar">
@@ -995,7 +938,7 @@ access to bus resources, and then is able to perform a transaction after
 being granted access. In addition to basic read and write requests, the
 bus also supports Direct Memory Access (DMA), where I/O devices are able
 to read or write memory directly without CPU intervention.
-<a class="reference internal" href="#fig-iobus-dma"><span class="std std-numref">Fig. 40.8</span></a> shows a single programmed-I/O read (top)
+<a class="reference internal" href="#fig-iobus-dma"><span class="std std-numref">Fig. 41.7</span></a> shows a single programmed-I/O read (top)
 compared to a DMA burst transfer (bottom). While the read request
 requires a round trip to read each and every 4-byte word, once the DMA
 transfer is started it is able to transfer data at a rate limited by the
@@ -1008,7 +951,7 @@ access (read or write), the disk locations to be accessed, and the
 memory address where data will be stored or retrieved from. Rather than
 writing each of these parameters individually to device registers, the
 parameters are typically combined in memory in what is called a <em>DMA
-descriptor</em>, such as the one shown in  <a class="reference internal" href="#fig-iobus-desc"><span class="std std-numref">Fig. 40.9</span></a>. A single write is then used to tell the
+descriptor</em>, such as the one shown in  <a class="reference internal" href="#fig-iobus-desc"><span class="std std-numref">Fig. 41.8</span></a>. A single write is then used to tell the
 device the address of this descriptor, and the device can read the
 entire descriptor in a single DMA read burst. In addition to being more
 efficient than multiple programmed I/O writes, this approach also allows
@@ -1030,81 +973,9 @@ and finally the CPU tried to read it back?</p>
 <figure class="align-default" id="fig-iobus-desc">
 <a class="reference internal image-reference" href="../_images/iobus-desc.png"><img alt="../_images/iobus-desc.png" src="../_images/iobus-desc.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.9 </span><span class="caption-text">List of typical DMA descriptors</span><a class="headerlink" href="#fig-iobus-desc" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.8 </span><span class="caption-text">List of typical DMA descriptors</span><a class="headerlink" href="#fig-iobus-desc" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-</section>
-</section>
-<section id="i-o-software-and-device-drivers">
-<h2><span class="section-number">40.2. </span>I/O Software and Device Drivers<a class="headerlink" href="#i-o-software-and-device-drivers" title="Permalink to this headline">#</a></h2>
-<section id="fundamental-goals">
-<h3><span class="section-number">40.2.1. </span>Fundamental Goals<a class="headerlink" href="#fundamental-goals" title="Permalink to this headline">#</a></h3>
-<p>The operating system software that interacts with devices must:</p>
-<ul class="simple">
-<li><p><strong>Provide Device Independence:</strong> Programs should be able to access any similar device without worrying about the specific device available.  For example, you should be able to read data from a floppy, hard drive, or CD-ROM without caring which device is available.  As another example, your <em>vim</em> editor should be able to work if you are connecting a dumb terminal to your computer, or if you are using an emulated terminal provided by our course staff.</p></li>
-<li><p><strong>Handle Errors:</strong> Many errors are transient, and we want to handle them as close to the hardware as possible.  For example, if a network is unavailable for a brief period of time, we don’t want to close all the connections.  If we get an error reading a disk block, the OS might try re-reading assuming that there was a transient failure, or correct the error using some form of error correcting code.</p></li>
-<li><p><strong>Support synchronous interfaces:</strong> In reality, all devices interact with the OS asynchronously, where some character appears from a terminal when a user hits a key, or a network packet arrives when clients make new requests to a server.  On the other hand, generally the programming interfaces users have are synchronous, for example, using a <code class="docutils literal notranslate"><span class="pre">read</span></code> to a network socket or file system.  The OS keeps translates between the blocking calls by applications and the innate events that come in from devices.</p></li>
-<li><p><strong>Buffering:</strong> Related to asynchronous interactions, the operating system normally manages buffers to enable data to be transferred to and from the devices to match the performance needs of the device.  We have already seen how memory management creates a massive buffer cache to buffer millions of blocks in memory.  On the other hand, if a program is dumping huge files to a slow character device, the OS needs to buffer the data, and feed it to the device at the rate that the device can handle.</p></li>
-</ul>
-<figure class="align-default" id="fig-dev-layers">
-<a class="reference internal image-reference" href="../_images/dev-layers.png"><img alt="../_images/dev-layers.png" src="../_images/dev-layers.png" style="width: 70%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 40.10 </span><span class="caption-text">OS layers</span><a class="headerlink" href="#fig-dev-layers" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>To perform this functionality, much like when we discussed the VFS layer in file systems, as shown in <a class="reference internal" href="#fig-dev-layers"><span class="std std-numref">Fig. 40.10</span></a> there is generic I/O code that provides services like buffering, generalized error reporting, and enables a set of standardized device interfaces. The three kind of standard device types are:</p>
-<ol class="simple">
-<li><p>Block devices: e.g. SSDs, Hard drives, CDROMs</p></li>
-<li><p>Character devices: ttys, pipes, …</p></li>
-<li><p>Network devices: ethernet, token ring,…</p></li>
-</ol>
-<p>There are many many devices drivers of each type. In fact, over 60% of Linux source code today with device drivers involving 10s of millions of LOC. Much of this code is provided by device manufacturers, and is the most buggy part of the OS.</p>
-<p>Drivers responsibilities include:</p>
-<ul class="simple">
-<li><p>Device initialization</p></li>
-<li><p>Accept read-write request from the OS: i.e., take commands from higher levels in the OS and translate them into hardware requests</p></li>
-<li><p>Start the device if necessary (e.g., start spinning the CD-ROM)</p></li>
-<li><p>Check if device is available: if not, wait</p></li>
-<li><p>Wait for results; typically blocking client request until interrupt occurs</p></li>
-<li><p>Check for possible errors</p></li>
-<li><p>Return results, and finally</p></li>
-<li><p>Power management – put the device to sleep when it’s not being used</p></li>
-</ul>
-</section>
-</section>
-<section id="putting-it-all-together">
-<h2><span class="section-number">40.3. </span>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">#</a></h2>
-<p><a class="reference internal" href="#fig-iobus-driver"><span class="std std-numref">Fig. 40.11</span></a> illustrates the I/O process for a typical
-device from user-space application request through the driver, hardware
-I/O operation, interrupt, and finally back to user space.</p>
-<figure class="align-default" id="fig-iobus-driver">
-<a class="reference internal image-reference" href="../_images/iobus-driver.png"><img alt="../_images/iobus-driver.png" src="../_images/iobus-driver.png" style="width: 70%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 40.11 </span><span class="caption-text">Putting it together</span><a class="headerlink" href="#fig-iobus-driver" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>In more detail:</p>
-<ul class="simple">
-<li><p>The user process executes a <code class="docutils literal notranslate"><span class="pre">read</span></code> system call, which in turn invokes
-the driver <code class="docutils literal notranslate"><span class="pre">read</span></code> operation, found via the <code class="docutils literal notranslate"><span class="pre">read</span></code> method of the file
-operations structure.</p></li>
-<li><p>The driver fills in a DMA descriptor (in motherboard RAM), writes the
-physical address of the descriptor to a device register (generating a
-Memory Write operation across the PCIe bus), and then goes to sleep.</p></li>
-<li><p>The device issues a PCIe Memory Read Multiple command to read the DMA
-descriptor from RAM.</p></li>
-<li><p>The device does some sort of I/O. (e.g. read from a disk, or receive a
-network packet)</p></li>
-<li><p>A Memory Write and Invalidate operation is used to write the received
-data back across the PCIe bus to the motherboard RAM, and to tell the
-CPU to invalidate any cached copies of those addresses.</p></li>
-<li><p>A hardware interrupt from the device causes the device driver interrupt
-handler to run.</p></li>
-<li><p>The interrupt handler wakes up the original process, which is currently
-in kernel space in the device driver read method, in a call to something
-like <code class="docutils literal notranslate"><span class="pre">interruptible_sleep_on</span></code>. After waking up, the read method copies
-the data to the user buffer and returns.</p></li>
-</ul>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
@@ -1144,17 +1015,17 @@ bus.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../misc/OtherInro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="devices.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">39. </span>Overview of other topics</p>
+            <p class="prev-next-title"><span class="section-number">40. </span>Input and Output</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../virt/virt.html" title="next page">
+    <a class='right-next' id="next-link" href="IOSW.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">41. </span>Virtualization and Cloud computing</p>
+        <p class="prev-next-title"><span class="section-number">42. </span>Device Driver Architecture</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
