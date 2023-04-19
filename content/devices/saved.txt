@@ -1,0 +1,23 @@
+
+```{figure} ../images/pb-figures/devs/io-bus.png
+---
+width: 50% 
+name: fig:iobus:2
+align: right
+---
+Simple memory/IO bus using   
+shared address and data lines 
+```
+
+
+
+```{figure} ../images/pb-figures/devs/iobus-fig2.png
+---
+width: 50% 
+name: fig:iobus:3
+align: right
+---
+Simple memory/IO bus with   
+extension cards  
+```
+
