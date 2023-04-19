@@ -91,3 +91,121 @@ pages = {453–455},
 numpages = {3},
 keywords = {concurrent programming, semaphores, multiprocessing, critical section}
 }
+
+@inproceedings{10.1145/1346281.1346323,
+author = {Lu, Shan and Park, Soyeon and Seo, Eunsoo and Zhou, Yuanyuan},
+title = {Learning from Mistakes: A Comprehensive Study on Real World Concurrency Bug Characteristics},
+year = {2008},
+isbn = {9781595939586},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/1346281.1346323},
+doi = {10.1145/1346281.1346323},
+abstract = {The reality of multi-core hardware has made concurrent programs pervasive. Unfortunately, writing correct concurrent programs is difficult. Addressing this challenge requires advances in multiple directions, including concurrency bug detection, concurrent program testing, concurrent programming model design, etc. Designing effective techniques in all these directions will significantly benefit from a deep understanding of real world concurrency bug characteristics.This paper provides the first (to the best of our knowledge) comprehensive real world concurrency bug characteristic study. Specifically, we have carefully examined concurrency bug patterns, manifestation, and fix strategies of 105 randomly selected real world concurrency bugs from 4 representative server and client open-source applications (MySQL, Apache, Mozilla and OpenOffice). Our study reveals several interesting findings and provides useful guidance for concurrency bug detection, testing, and concurrent programming language design.Some of our findings are as follows: (1) Around one third of the examined non-deadlock concurrency bugs are caused by violation to programmers' order intentions, which may not be easily expressed via synchronization primitives like locks and transactional memories; (2) Around 34% of the examined non-deadlock concurrency bugs involve multiple variables, which are not well addressed by existing bug detection tools; (3) About 92% of the examined concurrency bugs canbe reliably triggered by enforcing certain orders among no more than 4 memory accesses. This indicates that testing concurrent programs can target at exploring possible orders among every small groups of memory accesses, instead of among all memory accesses; (4) About 73% of the examinednon-deadlock concurrency bugs were not fixed by simply adding or changing locks, and many of the fixes were not correct at the first try, indicating the difficulty of reasoning concurrent execution by programmers.},
+booktitle = {Proceedings of the 13th International Conference on Architectural Support for Programming Languages and Operating Systems},
+pages = {329–339},
+numpages = {11},
+keywords = {concurrency bug, bug characteristics, concurrent program},
+location = {Seattle, WA, USA},
+series = {ASPLOS XIII}
+}
+
+@article{10.1145/356586.356588,
+author = {Coffman, E. G. and Elphick, M. and Shoshani, A.},
+title = {System Deadlocks},
+year = {1971},
+issue_date = {June 1971},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {3},
+number = {2},
+issn = {0360-0300},
+url = {https://doi.org/10.1145/356586.356588},
+doi = {10.1145/356586.356588},
+abstract = {A problem of increasing importance in the design of large multiprogramming systems is the, so-called, deadlock or deadly-embrace problem. In this article we survey the work that has been done on the treatment of deadlocks from both the theoretical and practical points of view.},
+journal = {ACM Comput. Surv.},
+month = {jun},
+pages = {67–78},
+numpages = {12}
+}
+
+@article{10.1145/356603.356607,
+author = {Holt, Richard C.},
+title = {Some Deadlock Properties of Computer Systems},
+year = {1972},
+issue_date = {Sept. 1972},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {4},
+number = {3},
+issn = {0360-0300},
+url = {https://doi.org/10.1145/356603.356607},
+doi = {10.1145/356603.356607},
+journal = {ACM Comput. Surv.},
+month = {sep},
+pages = {179–196},
+numpages = {18}
+}
+
+
+
+@inproceedings{10.1145/99163.99185,
+author = {Herlihy, M.},
+title = {A Methodology for Implementing Highly Concurrent Data Structures},
+year = {1990},
+isbn = {0897913507},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/99163.99185},
+doi = {10.1145/99163.99185},
+abstract = {A concurrent object is a data structure shared by concurrent processes. Conventional techniques for implementing concurrent objects typically rely on critical sections: ensuring that only one process at a time can operate on the object. Nevertheless, critical sections are poorly suited for asynchronous systems: if one process is halted or delayed in a critical section, other, non-faulty processes will be unable to progress. By contrast, a concurrent object implementation is non-blocking if it always guarantees that some process will complete an operation in a finite number of steps, and it is wait-free if it guarantees that each process will complete an operation in a finite number of steps. This paper proposes a new methodology for constructing non-blocking and wait-free implementations of concurrent objects. The object's representation and operations are written as stylized sequential programs, with no explicit synchronization. Each sequential operation is automatically transformed into a non-blocking or wait-free operation using novel synchronization and memory management algorithms. These algorithms are presented for a multiple instruction/multiple data (MIMD) architecture in which n processes communicate by applying read, write, and compare&swap operations to a shared memory.},
+booktitle = {Proceedings of the Second ACM SIGPLAN Symposium on Principles & Practice of Parallel Programming},
+pages = {197–206},
+numpages = {10},
+location = {Seattle, Washington, USA},
+series = {PPOPP '90}
+}
+
+@article{10.1145/161468.161469,
+author = {Herlihy, Maurice},
+title = {A Methodology for Implementing Highly Concurrent Data Objects},
+year = {1993},
+issue_date = {Nov. 1993},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {15},
+number = {5},
+issn = {0164-0925},
+url = {https://doi.org/10.1145/161468.161469},
+doi = {10.1145/161468.161469},
+abstract = {A concurrent object is a data structure shared by concurrent processes. Conventional techniques for implementing concurrent objects typically rely on critical sections; ensuring that only one process at a time can operate on the object. Nevertheless, critical sections are poorly suited for asynchronous systems: if one process is halted or delayed in a critical section, other, nonfaulty processes will be unable to progress. By contrast, a concurrent object implementation is lock free if it always guarantees that some process will complete an operation in a finite number of steps, and it is wait free if it guarantees that each process will complete an operation in a finite number of steps. This paper proposes a new methodology for constructing lock-free and wait-free implementations of concurrent objects. The object's representation and operations are written as stylized sequential programs, with no explicit synchronization. Each sequential operation is atutomatically transformed into a lock-free or wait-free operation using novel synchronization and memory management algorithms. These algorithms are presented for a multiple instruction/multiple data (MIMD) architecture in which n processes communicate by applying atomic read, write, load_linked, and store_conditional operations to a shared memory.},
+journal = {ACM Trans. Program. Lang. Syst.},
+month = {nov},
+pages = {745–770},
+numpages = {26}
+}
+
+@book{10.5555/2655363,
+author = {Tanenbaum, Andrew S. and Bos, Herbert},
+title = {Modern Operating Systems},
+year = {2014},
+isbn = {013359162X},
+publisher = {Prentice Hall Press},
+address = {USA},
+edition = {4th},
+abstract = {Modern Operating Systems, Fourth Edition, is intended for introductory courses in Operating Systems in Computer Science, Computer Engineering, and Electrical Engineering programs. It also serves as a useful reference for OS professionals The widely anticipated revision of this worldwide best-seller incorporates the latest developments in operating systems (OS) technologies. The Fourth Edition includes up-to-date materials on relevantOS. Tanenbaum also provides information on current research based on his experience as an operating systems researcher. Modern Operating Systems, Third Editionwas the recipient of the 2010 McGuffey Longevity Award. The McGuffey Longevity Award recognizes textbooks whose excellence has been demonstrated over time.http://taaonline.net/index.html Teaching and Learning Experience This program will provide a better teaching and learning experiencefor you and your students. It will help: Provide Practical Detail on the Big Picture Concepts: A clear and entertaining writing style outlines the concepts every OS designer needs to master. Keep Your Course Current: This edition includes information on the latest OS technologies and developments Enhance Learning with Student and Instructor Resources: Students will gain hands-on experience using the simulation exercises and lab experiments.}
+}
+
+@article{10.1186/s13174-017-0055-2,
+author = {Abbaspour Asadollah, S., and Sundmark, D., and Eldh, S., and Hansson, Hans},
+title = {Concurrency bugs in open source software: a case study},
+journal = {Journal of Internet Services and Applications},
+number = {4},
+volume = {8},
+year = {2017},
+month = {apr},
+pages = {1-15},
+issn = {1869-0238},
+url = {https://doi.org/10.1186/s13174-017-0055-2},
+doi = {10.1186/s13174-017-0055-2}
+}

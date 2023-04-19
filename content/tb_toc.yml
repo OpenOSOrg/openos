@@ -57,7 +57,8 @@ parts:
   - file: sync/criticalsection
   - file: sync/locks
   - file: sync/ordering
-  - file: sync/deadlock
+  - file: sync/concurrency_bugs
+#  - file: sync/deadlock
   - file: sync/hardware_challenges
   - file: sync/linux_locking
 # materials to be integrated from peter's book
