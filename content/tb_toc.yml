@@ -66,6 +66,9 @@ parts:
   numbered: True
   chapters:
   - file: misc/OtherInro
+  - file: devices/devices
+#  - file: devices/IOHW
+#  - file: devices/IOSW
 # security right now is broken
 #  - file: sec/sec
   - file: virt/virt
