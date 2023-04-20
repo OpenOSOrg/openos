@@ -10,9 +10,9 @@ extern void consume_item(char item);
 #define N 2
 
 struct bounded_buffer {
-	char data[N];   /* 'items' in this example are just bytes */
-	int in;     /* index where producer inserts items, initially 0 */
-	int out;    /* index where consumer removes items, initially 0 */
+    char data[N];   /* 'items' in this example are just bytes */
+    int in;     /* index where producer inserts items, initially 0 */
+    int out;    /* index where consumer removes items, initially 0 */
     sem_t sem_empty;
     sem_t sem_filled;
 };
