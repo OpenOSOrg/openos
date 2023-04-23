@@ -328,8 +328,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../sync/deadlock.html">
-   36. Deadlocks
+  <a class="reference internal" href="../sync/concurrency_bugs.html">
+   36. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
@@ -633,79 +633,91 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hardware-virtualization">
+   41.1. Hardware virtualization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     41.1.1. Hardware Virtualization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#implementing-hardware-virtualization">
-   41.1. Implementing Hardware Virtualization
+   41.2. Implementing Hardware Virtualization
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#software-emulation">
-     41.1.1. Software emulation
+     41.2.1. Software emulation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#emulation-plus-binary-translation">
-     41.1.2. Emulation plus binary translation
+     41.2.2. Emulation plus binary translation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#trap-and-emulate">
-     41.1.3. Trap and Emulate
+     41.2.3. Trap and Emulate
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#virtualized-memory">
-   41.2. Virtualized memory
+   41.3. Virtualized memory
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review-questions">
-     41.2.1. Review questions
+     41.3.1. Review questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#virtualized-i-o-devices">
-   41.3. Virtualized I/O Devices
+   41.4. Virtualized I/O Devices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hosted-and-bare-metal-hypervisors">
-   41.4. Hosted and “bare-metal” hypervisors
+   41.5. Hosted and “bare-metal” hypervisors
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#non-virtualizable-cpus">
-   41.5. Non-Virtualizable CPUs
+   41.6. Non-Virtualizable CPUs
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paravirtualized-i-o-devices">
-   41.6. Paravirtualized I/O Devices
+   41.7. Paravirtualized I/O Devices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linux-containers-and-docker">
-   41.7. Linux Containers and Docker
+   41.8. Linux Containers and Docker
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#answers-to-review-questions">
-     41.7.1. Answers to Review Questions
+     41.8.1. Answers to Review Questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#containers">
-   41.8. Containers
+   41.9. Containers
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cloud-computing">
-   41.9. Cloud Computing
+   41.10. Cloud Computing
   </a>
  </li>
 </ul>
@@ -728,79 +740,91 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hardware-virtualization">
+   41.1. Hardware virtualization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     41.1.1. Hardware Virtualization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#implementing-hardware-virtualization">
-   41.1. Implementing Hardware Virtualization
+   41.2. Implementing Hardware Virtualization
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#software-emulation">
-     41.1.1. Software emulation
+     41.2.1. Software emulation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#emulation-plus-binary-translation">
-     41.1.2. Emulation plus binary translation
+     41.2.2. Emulation plus binary translation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#trap-and-emulate">
-     41.1.3. Trap and Emulate
+     41.2.3. Trap and Emulate
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#virtualized-memory">
-   41.2. Virtualized memory
+   41.3. Virtualized memory
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review-questions">
-     41.2.1. Review questions
+     41.3.1. Review questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#virtualized-i-o-devices">
-   41.3. Virtualized I/O Devices
+   41.4. Virtualized I/O Devices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hosted-and-bare-metal-hypervisors">
-   41.4. Hosted and “bare-metal” hypervisors
+   41.5. Hosted and “bare-metal” hypervisors
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#non-virtualizable-cpus">
-   41.5. Non-Virtualizable CPUs
+   41.6. Non-Virtualizable CPUs
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paravirtualized-i-o-devices">
-   41.6. Paravirtualized I/O Devices
+   41.7. Paravirtualized I/O Devices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linux-containers-and-docker">
-   41.7. Linux Containers and Docker
+   41.8. Linux Containers and Docker
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#answers-to-review-questions">
-     41.7.1. Answers to Review Questions
+     41.8.1. Answers to Review Questions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#containers">
-   41.8. Containers
+   41.9. Containers
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cloud-computing">
-   41.9. Cloud Computing
+   41.10. Cloud Computing
   </a>
  </li>
 </ul>
@@ -819,11 +843,17 @@ title="Print to PDF"
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="virtualization-and-cloud-computing">
 <span id="cont-virt"></span><h1><span class="section-number">41. </span>Virtualization and Cloud computing<a class="headerlink" href="#virtualization-and-cloud-computing" title="Permalink to this headline">#</a></h1>
+<section id="hardware-virtualization">
+<h2><span class="section-number">41.1. </span>Hardware virtualization<a class="headerlink" href="#hardware-virtualization" title="Permalink to this headline">#</a></h2>
+<section id="id1">
+<h3><span class="section-number">41.1.1. </span>Hardware Virtualization<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>Topics covered in this chapter include:</p>
 <ul class="simple">
 <li><p>Applications of virtualization, including server consolidation</p></li>
-<li><p>Software emulation, full binary translation, and classical virtualization</p></li>
-<li><p>Kernel binary translation, hardware virtualization, and paravirtualization</p></li>
+<li><p>Software emulation, full binary translation, and classical
+virtualization</p></li>
+<li><p>Kernel binary translation, hardware virtualization, and
+paravirtualization</p></li>
 <li><p>Virtual machine migration</p></li>
 <li><p>Hosted vs. “bare-metal” hypervisors</p></li>
 <li><p>Containers and Docker (even though they don’t use HW virtualization)</p></li>
@@ -847,25 +877,23 @@ runs in supervisor mode and uses special instructions and other hardware
 mechanisms to perform its operations. In a virtual machine, as shown in
 <a class="reference external" href="#fig:vma:0">[fig:vma:0]</a>{reference-type=”autoref”
 reference=”fig:vma:0”}, these mechanisms are performed by the
-<em>hypervisor</em> <a class="footnote-reference brackets" href="#id9" id="id1">1</a> which sits “underneath” the operating system.</p>
+<em>hypervisor</em> <a class="footnote-reference brackets" href="#id10" id="id2">1</a> which sits “underneath” the operating system.</p>
 <p><img alt="Virtual machine architecture" src="virt/figures/virt-mach-architecture" />{#fig:vma:0 width=”90%”}</p>
 <p>Running multiple operating system instances on the same physical
 hardware serves a number of purposes:</p>
-<ul class="simple">
-<li><p><strong>Running multiple operating systems:</strong> Many applications are tied to a
+<p><strong>Running multiple operating systems:</strong> Many applications are tied to a
 specific OS or even OS version; by using virtual machines it is possible
 to run instances of these other operating systems and make these
 applications availabe to a user without requiring extra hardware. (As an
 example, the laptop I am typing on runs Apple’s OS X, but I have a
-virtual machine running Ubuntu Linux for Linux development.)</p></li>
-<li><p><strong>Multiple Configurations:</strong> Even applications which run on the same
+virtual machine running Ubuntu Linux for Linux development.)</p>
+<p><strong>Multiple Configurations:</strong> Even applications which run on the same
 operating system may need to run on different machines, rather than just
 in separate processes. This may be because they require different,
 incompatible versions of system libraries, or different configuration
 options. In some cases (e.g. running an old and new version of the same
 application) they may need different versions of the same configuration
-files.</p></li>
-</ul>
+files.</p>
 <p>Supporting multiple configurations is frequently called <em>server
 consolidation</em>, as in the past an enterprise may have needed to use
 multiple physical machines to provide these configurations. Frequently
@@ -898,22 +926,24 @@ using operating system-level protections. (This would of course
 eliminate the need to use any other less perfect operating system.)
 Virtual machines hold another security advantage, however: they have a
 smaller <em>attack surface</em> than general-purpose operating systems.
-Operating systems are very large, with millions of lines of code.<a class="footnote-reference brackets" href="#id10" id="id2">2</a> A
+Operating systems are very large, with millions of lines of code.<a class="footnote-reference brackets" href="#id11" id="id3">2</a> A
 <em>hypervisor</em>, the piece of software responsible for managing virtual
 machines, is typically far smaller in comparison, and has only a small
 number of external interfaces. In theory fewer lines of code (espcially
 the security-critical code which validates user inputs) means fewer bugs
 and thus fewer opportunities for security exploits; experience to date
 seems to support this theory.</p>
+</section>
+</section>
 <section id="implementing-hardware-virtualization">
-<h2><span class="section-number">41.1. </span>Implementing Hardware Virtualization<a class="headerlink" href="#implementing-hardware-virtualization" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">41.2. </span>Implementing Hardware Virtualization<a class="headerlink" href="#implementing-hardware-virtualization" title="Permalink to this headline">#</a></h2>
 <p>If you are used to running VirtualBox or VMware on your laptop, it may
 seem like it’s just another program, maybe using more memory and CPU
 than most. But it isn’t. To understand why, consider trying to run Linux
 (the “guest” operating system) on top of a “host” operating system, e.g.
 Windows. The linux kernel is an executable file, typically found in
 <code class="docutils literal notranslate"><span class="pre">/boot/vmlinux</span></code>, and could be readily translated into a Windows
-executable. However if you tried to do this<a class="footnote-reference brackets" href="#id11" id="id3">3</a> it would crash
+executable. However if you tried to do this<a class="footnote-reference brackets" href="#id12" id="id4">3</a> it would crash
 immediately. Some of the reasons an operating system kernel cannot run
 as a process are:</p>
 <p><strong>Privileged instructions:</strong> One of the first things the kernel does on
@@ -949,10 +979,10 @@ both complexity and performance:</p>
 <li><p>Classical (direct execution + trap-and-emulate) virtualization</p></li>
 <li><p>Direct execution + binary translation</p></li>
 <li><p>Hardware-assisted virtualization</p></li>
-<li><p>Paravirtualization</p></li>
+<li><p>Paravirtualization.</p></li>
 </ul>
 <section id="software-emulation">
-<h3><span class="section-number">41.1.1. </span>Software emulation<a class="headerlink" href="#software-emulation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">41.2.1. </span>Software emulation<a class="headerlink" href="#software-emulation" title="Permalink to this headline">#</a></h3>
 <p>The most straightforward way to run a virtual machine is to emulate it
 entirely in software: in other words, to write a program that behaves
 exactly like the CPU, memory, and I/O devices of the real machine. The
@@ -1002,7 +1032,7 @@ slow. It can be hundreds of times slower than native execution, making
 it unsuited for all but a few applications.</p>
 </section>
 <section id="emulation-plus-binary-translation">
-<h3><span class="section-number">41.1.2. </span>Emulation plus binary translation<a class="headerlink" href="#emulation-plus-binary-translation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">41.2.2. </span>Emulation plus binary translation<a class="headerlink" href="#emulation-plus-binary-translation" title="Permalink to this headline">#</a></h3>
 <aside class="sidebar">
 <p>Other software systems which use binary translation techniques include:</p>
 <p><strong>JVMs:</strong> Almost all Java implementations use JIT compiling for
@@ -1057,7 +1087,7 @@ memory accesses can be reduced to a few instructions which check that an
 access falls within this typical range.</p>
 </section>
 <section id="trap-and-emulate">
-<h3><span class="section-number">41.1.3. </span>Trap and Emulate<a class="headerlink" href="#trap-and-emulate" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">41.2.3. </span>Trap and Emulate<a class="headerlink" href="#trap-and-emulate" title="Permalink to this headline">#</a></h3>
 <p>Even with binary translation, software emulation is still slow—even
 the best binary translation systems incur a slowdown of 3x to 10x
 compared to running directly on the same hardware. This is much better
@@ -1076,7 +1106,7 @@ the first place was because the host OS could not allow a virtual
 machine to directly execute certain privileged instructions, so the goal
 here is to emulate only these privileged instructions while directly
 executing all others.</p>
-<p>This can be done<a class="footnote-reference brackets" href="#id12" id="id4">4</a> using a strategy that can be called
+<p>This can be done<a class="footnote-reference brackets" href="#id13" id="id5">4</a> using a strategy that can be called
 <em>trap-and-emulate</em>. The guest OS is executed directly in user mode; when
 it executes a privileged instruction it causes an exception which is
 handled by a specialized OS called a <em>hypervisor</em> or <em>virtual machine
@@ -1118,7 +1148,7 @@ so many pages in the CPU reference manuals.</p></li>
 <li><p>When the guest exception handler returns, set the emulated supervisor
 bit to 0, restore user registers from the kernel stack, switch to user
 stack, then jump back to direct execution at the instruction where the
-exception occurred<a class="footnote-reference brackets" href="#id13" id="id5">5</a>.</p></li>
+exception occurred<a class="footnote-reference brackets" href="#id14" id="id6">5</a>.</p></li>
 </ol>
 <p>How does it know where to find that exception handler? The hardware CPU
 locates exception handlers via one or more control registers which point
@@ -1135,7 +1165,7 @@ exception handler.</p>
 </section>
 </section>
 <section id="virtualized-memory">
-<h2><span class="section-number">41.2. </span>Virtualized memory<a class="headerlink" href="#virtualized-memory" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">41.3. </span>Virtualized memory<a class="headerlink" href="#virtualized-memory" title="Permalink to this headline">#</a></h2>
 <p>In a full software emulation, guest virtual addresses were translated
 into accesses to “fake” physical memory, e.g. the <code class="docutils literal notranslate"><span class="pre">memory[ ]</span></code> array in
 the example code. However, with trap-and-emulate virtualization, guest
@@ -1173,11 +1203,11 @@ the hypervisor page fault handler uses the following logic:</p>
 </pre></div>
 </div>
 <section id="review-questions">
-<h3><span class="section-number">41.2.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">41.3.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
 </section>
 </section>
 <section id="virtualized-i-o-devices">
-<h2><span class="section-number">41.3. </span>Virtualized I/O Devices<a class="headerlink" href="#virtualized-i-o-devices" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">41.4. </span>Virtualized I/O Devices<a class="headerlink" href="#virtualized-i-o-devices" title="Permalink to this headline">#</a></h2>
 <p>Memory-mapped I/O devices are straightforward to emulate in a
 trap-and-emulate system. When the guest OS maps the physical memory
 addresses of emulated device registers, the hypervisor leaves the
@@ -1187,7 +1217,7 @@ handler handles faults on these pages specially, calling code that
 emulates reading from or writing to the emulated I/O device.</p>
 </section>
 <section id="hosted-and-bare-metal-hypervisors">
-<h2><span class="section-number">41.4. </span>Hosted and “bare-metal” hypervisors<a class="headerlink" href="#hosted-and-bare-metal-hypervisors" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">41.5. </span>Hosted and “bare-metal” hypervisors<a class="headerlink" href="#hosted-and-bare-metal-hypervisors" title="Permalink to this headline">#</a></h2>
 <p>In <a class="reference external" href="#fig:vma:5">[fig:vma:5]</a>{reference-type=”autoref”
 reference=”fig:vma:5”} you can see how this works together. Exceptions
 from user applications (page faults, system calls, etc.) are handled by
@@ -1213,10 +1243,10 @@ a file system, display, and other useful interfaces. A hosted hypervisor
 can take advantage of this, passing I/O requests back to the host OS
 (via a rather complicated route) to be handled through these standard
 interfaces, rather than requiring its own drivers for any hardware it
-uses <a class="footnote-reference brackets" href="#id14" id="id6">6</a>.</p>
+uses <a class="footnote-reference brackets" href="#id15" id="id7">6</a>.</p>
 </section>
 <section id="non-virtualizable-cpus">
-<h2><span class="section-number">41.5. </span>Non-Virtualizable CPUs<a class="headerlink" href="#non-virtualizable-cpus" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">41.6. </span>Non-Virtualizable CPUs<a class="headerlink" href="#non-virtualizable-cpus" title="Permalink to this headline">#</a></h2>
 <p>There is a minor problem with the classic trap-and-emulate
 virtualization mechanism as described above: it doesn’t work. Or rather,
 it doesn’t work on the machines you want it to work on.</p>
@@ -1306,11 +1336,11 @@ types.</p>
 question—putting something (like virtualization support) into hardware
 doesn’t automatically make it faster. State-of-the-art hardware and
 software-based (binary translation) hypervisors can have equivalent
-performance<a class="footnote-reference brackets" href="#id15" id="id7">7</a>, so the choice between them often comes down to
+performance<a class="footnote-reference brackets" href="#id16" id="id8">7</a>, so the choice between them often comes down to
 features.</p>
 </section>
 <section id="paravirtualized-i-o-devices">
-<h2><span class="section-number">41.6. </span>Paravirtualized I/O Devices<a class="headerlink" href="#paravirtualized-i-o-devices" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">41.7. </span>Paravirtualized I/O Devices<a class="headerlink" href="#paravirtualized-i-o-devices" title="Permalink to this headline">#</a></h2>
 <p>It is common for hypervisors to have optional drivers (VMware Tools,
 VirtualBox Guest Additions, etc.) which can be loaded in the guest to
 improve performance. These typically include paravirtualized drivers for
@@ -1325,7 +1355,7 @@ writers don’t typically anticipate the need to support plugging in a
 different type of CPU.</p>
 </section>
 <section id="linux-containers-and-docker">
-<h2><span class="section-number">41.7. </span>Linux Containers and Docker<a class="headerlink" href="#linux-containers-and-docker" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">41.8. </span>Linux Containers and Docker<a class="headerlink" href="#linux-containers-and-docker" title="Permalink to this headline">#</a></h2>
 <p>Running different applications within separate virtual machines provides
 a number of benefits when compared to running them all on the same
 unvirtualized operating system:</p>
@@ -1349,7 +1379,7 @@ CS-5600 virtual machine image you received at the beginning of this
 class)</p></li>
 </ol>
 <p>Note, however, that none of these benefits actually <em>requires</em> hardware
-virtualization<a class="footnote-reference brackets" href="#id16" id="id8">8</a>. If all of the applications are going to be running
+virtualization<a class="footnote-reference brackets" href="#id17" id="id9">8</a>. If all of the applications are going to be running
 on the same operating system, then <em>Operating System Virtualization</em> can
 be used: rather than pretending that a single hardware machine is
 actually multiple virtual machines, we pretend that a single instance of
@@ -1413,50 +1443,50 @@ additional file systems “on top” of it containing installed versions of
 various packages one wishes to use, and a writable file system on top
 for per-instance configuration parameters, application data, etc.</p>
 <section id="answers-to-review-questions">
-<h3><span class="section-number">41.7.1. </span>Answers to Review Questions<a class="headerlink" href="#answers-to-review-questions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">41.8.1. </span>Answers to Review Questions<a class="headerlink" href="#answers-to-review-questions" title="Permalink to this headline">#</a></h3>
 <ol class="simple">
 <li><p>in virtmach:1,virtmach:2,virtmach:3,virtmach:4</p></li>
 </ol>
 </section>
 </section>
 <section id="containers">
-<span id="virt-containers"></span><h2><span class="section-number">41.8. </span>Containers<a class="headerlink" href="#containers" title="Permalink to this headline">#</a></h2>
+<span id="virt-containers"></span><h2><span class="section-number">41.9. </span>Containers<a class="headerlink" href="#containers" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="cloud-computing">
-<span id="virt-cloud"></span><h2><span class="section-number">41.9. </span>Cloud Computing<a class="headerlink" href="#cloud-computing" title="Permalink to this headline">#</a></h2>
+<span id="virt-cloud"></span><h2><span class="section-number">41.10. </span>Cloud Computing<a class="headerlink" href="#cloud-computing" title="Permalink to this headline">#</a></h2>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
-<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
 <dd><p>Early operating systems were often called <em>supervisors</em>; what do
 you call the program which supervises the supervisor? A hypervisor,
 I guess.</p>
 </dd>
-<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
 <dd><p>The <code class="docutils literal notranslate"><span class="pre">kernel/</span></code> and <code class="docutils literal notranslate"><span class="pre">mm/</span></code> directories in the Linux source add up to
 about a third of a million lines of code; support for Intel CPUs in
 <code class="docutils literal notranslate"><span class="pre">arch/x86/</span></code> is another third of a million; the <code class="docutils literal notranslate"><span class="pre">drivers/</span></code> directory
 is over ten million LOC.</p>
 </dd>
-<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
 <dd><p>or, actually, running any OS on top of any OS including itself</p>
 </dd>
-<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id5">4</a></span></dt>
 <dd><p>on the right processors, as described below</p>
 </dd>
-<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id5">5</a></span></dt>
+<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id6">5</a></span></dt>
 <dd><p>Or the immediately following instruction in the case of <em>traps</em>
 such as system calls.</p>
 </dd>
-<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id6">6</a></span></dt>
+<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id7">6</a></span></dt>
 <dd><p>That’s how it works with binary emulation. With hardware
 virtualization support, the CPU has provisions to allow the “root”
 environment to continue to run without virtualization, but it’s
 complicated.</p>
 </dd>
-<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id7">7</a></span></dt>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id8">7</a></span></dt>
 <dd><p>citation here - Ageson</p>
 </dd>
-<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id8">8</a></span></dt>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id9">8</a></span></dt>
 <dd><p>That is, unless you need to run multiple different operating
 systems.</p>
 </dd>

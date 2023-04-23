@@ -1,0 +1,43 @@
+<mxfile host="Electron" modified="2023-04-19T18:14:59.376Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="yeSt5Prz5Af9EGNjr0Af" version="21.1.2" type="device">
+  <diagram name="Page-1" id="_eLTWSYjS1H5vIb4lWUF">
+    <mxGraphModel dx="1098" dy="820" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rEjoPBxKgrPCF_i84KEZ-9" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="406" y="269.5" width="420" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="rEjoPBxKgrPCF_i84KEZ-3" value="void error_monitor_thread() {&lt;br style=&quot;font-size: 18px;&quot;&gt;&amp;nbsp; ...&lt;br style=&quot;font-size: 18px;&quot;&gt;&amp;nbsp; if(&lt;b&gt;lock_wait_time[i]&amp;gt;fatal_timeout)&lt;br&gt;&lt;/b&gt;&amp;nbsp; &amp;nbsp; assert(0, &quot;We crash the server;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;it seems to be hung.&quot;);&lt;br&gt;&amp;nbsp; ...&lt;br style=&quot;font-size: 18px;&quot;&gt;&lt;div style=&quot;font-size: 18px;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 18px;&quot;&gt;}&lt;/span&gt;&lt;/div&gt;" style="rounded=1;html=1;align=left;fontFamily=Courier New;fontSize=18;fillColor=#ffe6cc;strokeColor=#d79b00;spacingLeft=8;whiteSpace=wrap;" vertex="1" parent="rEjoPBxKgrPCF_i84KEZ-9">
+          <mxGeometry y="30" width="420" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="rEjoPBxKgrPCF_i84KEZ-8" value="Monitor Thread" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=24;" vertex="1" parent="rEjoPBxKgrPCF_i84KEZ-9">
+          <mxGeometry x="115" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="rEjoPBxKgrPCF_i84KEZ-11" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="50" y="190" width="310" height="359" as="geometry" />
+        </mxCell>
+        <mxCell id="rEjoPBxKgrPCF_i84KEZ-6" value="" style="group" vertex="1" connectable="0" parent="rEjoPBxKgrPCF_i84KEZ-11">
+          <mxGeometry width="310" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="rEjoPBxKgrPCF_i84KEZ-1" value="void buf_flush_try_page() {&lt;br style=&quot;font-size: 18px;&quot;&gt;&amp;nbsp; ...&lt;br style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;&amp;nbsp; rw_lock(&amp;amp;lock);&lt;br style=&quot;font-size: 18px;&quot;&gt;&lt;/b&gt;&amp;nbsp; ...&lt;br style=&quot;font-size: 18px;&quot;&gt;&lt;div style=&quot;font-size: 18px;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 18px;&quot;&gt;}&lt;/span&gt;&lt;/div&gt;" style="rounded=1;html=1;align=left;fontFamily=Courier New;fontSize=18;fillColor=#d5e8d4;strokeColor=#82b366;spacingLeft=8;" vertex="1" parent="rEjoPBxKgrPCF_i84KEZ-6">
+          <mxGeometry y="30" width="310" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="rEjoPBxKgrPCF_i84KEZ-4" value="Thread 1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=24;" vertex="1" parent="rEjoPBxKgrPCF_i84KEZ-6">
+          <mxGeometry x="95" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="rEjoPBxKgrPCF_i84KEZ-10" value="" style="group" vertex="1" connectable="0" parent="rEjoPBxKgrPCF_i84KEZ-11">
+          <mxGeometry x="30" y="190" width="250" height="169" as="geometry" />
+        </mxCell>
+        <mxCell id="rEjoPBxKgrPCF_i84KEZ-7" value="" style="group" vertex="1" connectable="0" parent="rEjoPBxKgrPCF_i84KEZ-10">
+          <mxGeometry width="250" height="169" as="geometry" />
+        </mxCell>
+        <mxCell id="rEjoPBxKgrPCF_i84KEZ-2" value="...&lt;br style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;rw_lock(&amp;amp;lock);&lt;br style=&quot;font-size: 18px;&quot;&gt;&lt;/b&gt;..." style="rounded=1;html=1;align=left;fontFamily=Courier New;fontSize=18;fillColor=#d5e8d4;strokeColor=#82b366;spacingLeft=8;" vertex="1" parent="rEjoPBxKgrPCF_i84KEZ-7">
+          <mxGeometry x="30" y="29" width="190" height="101" as="geometry" />
+        </mxCell>
+        <mxCell id="rEjoPBxKgrPCF_i84KEZ-5" value="Thread 2 ... Thread N" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=24;" vertex="1" parent="rEjoPBxKgrPCF_i84KEZ-10">
+          <mxGeometry width="250" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
