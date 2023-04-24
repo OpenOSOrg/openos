@@ -347,23 +347,23 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../misc/OtherInro.html">
-   39. Overview of other topics
+  <a class="reference internal" href="../devices/devices.html">
+   39. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../devices/devices.html">
-   40. Input and Output
+  <a class="reference internal" href="../devices/disk2.html">
+   40. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   41. Virtualization and Cloud computing
+   41. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="other.html">
-   42. Other OS structures
+  <a class="reference internal" href="../sec/sec.html">
+   42. Security
   </a>
  </li>
 </ul>
@@ -696,7 +696,7 @@ title="Print to PDF"
 <li><p>Lab materials which will include significant amounts of interactive content.</p></li>
 <li><p>Lecture slides</p></li>
 </ol>
-<p>Right now, we are focused only on the textbook portion of this materials.  It can be largely read statically; and you can even download a PDF.  However, we strongly recommend using it online going back and forth between different materials via the provided links.  We provide a companion container (an OS concept we will <a class="reference internal" href="../virt/virt.html#virt-containers"><span class="std std-ref">discuss</span></a> which we strongly recommend you keep open alongside the material and use to run exercises.  The lab materials are intended to execute in the container.  Moreover, the container has the curated set of tools that we expect you to use for the course, and provides the same environment as the assignments; you are likely to run into problems if you work on the assignments outside of the container environment and don’t expect TAs to help you if you do that.</p>
+<p>Right now, we are focused only on the textbook portion of this materials.  It can be largely read statically; and you can even download a PDF.  However, we strongly recommend using it online going back and forth between different materials via the provided links.  We provide a companion container (an OS concept we will <span class="xref myst">discuss</span> which we strongly recommend you keep open alongside the material and use to run exercises.  The lab materials are intended to execute in the container.  Moreover, the container has the curated set of tools that we expect you to use for the course, and provides the same environment as the assignments; you are likely to run into problems if you work on the assignments outside of the container environment and don’t expect TAs to help you if you do that.</p>
 <p>Please see <a class="reference internal" href="../contributing/Contributing.html#cont-contr-contributors"><span class="std std-ref">here</span></a> for the list of contributors.  This text was originally developed for the Boston University course <a class="reference external" href="https://docs.google.com/document/d/e/2PACX-1vRIAR-uB62ZAr9LdDP-8RylOhQ76W2fL79TU5TJbgrwUraK72gN5VfJde3B8x8gV3ukcP2lwuWC8TOm/pub">EC 440 Operating Systems</a>. You can <a class="reference external" href="https://okrieg.github.io/openos/textbook/intro_tb.html">view this text online</a> or <a class="reference external" href="https://github.com/okrieg/openos">view the source</a>.</p>
 <section id="our-motivation">
 <span id="cont-pref-mot"></span><h2>Our motivation<a class="headerlink" href="#our-motivation" title="Permalink to this headline">#</a></h2>
@@ -722,7 +722,7 @@ title="Print to PDF"
 </section>
 <section id="book-overview">
 <span id="cont-pref-how"></span><h2>Book Overview<a class="headerlink" href="#book-overview" title="Permalink to this headline">#</a></h2>
-<p>For detailed instructions on how to read this book and launch the container associated with it, please refer <a class="reference internal" href="../misc/howto.html#misc-howto"><span class="std std-ref">here</span></a>.  The book is divided into multiple sections, each with small chapters that should hopefully be relatively fast reads.   The first part, <a class="reference internal" href="intro.html#cont-gs-intro"><span class="std std-ref">Getting Started</span></a>, gives an overview of the entire book and the tools operating system developers like you will need to know.  The next three parts describe three of the core services of operating systems, namely <a class="reference internal" href="../scheduling/intro.html#cont-scheduling"><span class="std std-ref">Scheduling</span></a>, <a class="reference internal" href="../mm/intro.html#cont-mm-intro"><span class="std std-ref">Memory Management</span></a>, and <a class="reference internal" href="../fs/intro.html#cont-fs-intro"><span class="std std-ref">file systems</span></a>.  The next part, <a class="reference internal" href="../sync/sync.html#cont-conc-intro"><span class="std std-ref">concurrency</span></a>, introduces some of the most complicated aspects of operating systems to deal with the parallelism of todays platforms, namely threads, synchronization, and deadlock. We have lumped a bunch of <a class="reference internal" href="../misc/OtherInro.html#cont-other-intro"><span class="std std-ref">important topics</span></a> that are typically only covered briefly in an introductory OS book, including security, virtualization, a bit on the history of operating systems and alternative OS structures. Finally the appendices have chapters on how to read and contribute to this book.</p>
+<p>For detailed instructions on how to read this book and launch the container associated with it, please refer <a class="reference internal" href="../misc/howto.html#misc-howto"><span class="std std-ref">here</span></a>.  The book is divided into multiple sections, each with small chapters that should hopefully be relatively fast reads.   The first part, <a class="reference internal" href="intro.html#cont-gs-intro"><span class="std std-ref">Getting Started</span></a>, gives an overview of the entire book and the tools operating system developers like you will need to know.  The next three parts describe three of the core services of operating systems, namely <a class="reference internal" href="../scheduling/intro.html#cont-scheduling"><span class="std std-ref">Scheduling</span></a>, <a class="reference internal" href="../mm/intro.html#cont-mm-intro"><span class="std std-ref">Memory Management</span></a>, and <a class="reference internal" href="../fs/intro.html#cont-fs-intro"><span class="std std-ref">file systems</span></a>.  The next part, <a class="reference internal" href="../sync/sync.html#cont-conc-intro"><span class="std std-ref">concurrency</span></a>, introduces some of the most complicated aspects of operating systems to deal with the parallelism of todays platforms, namely threads, synchronization, and deadlock. We have lumped a bunch of <span class="xref myst">important topics</span> that are typically only covered briefly in an introductory OS book, including security, virtualization, a bit on the history of operating systems and alternative OS structures. Finally the appendices have chapters on how to read and contribute to this book.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This book is a work in progress, most parts are today just scaffolding, and a <a class="reference internal" href="../contributing/Contributing.html#cont-contr-contributors"><span class="std std-ref">community</span></a> is working hard to try to get materials in place as we are actively reading it.  We hope you will consider contributing to this effort by reporting <a class="reference internal" href="../misc/howto.html#misc-howto-issue"><span class="std std-ref">issues</span></a> you find.</p>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>40. Input and Output &#8212; Introduction to Operating Systems</title>
+    <title>39. Input and Output &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,12 +53,10 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="41. Virtualization and Cloud computing" href="../virt/virt.html" />
-    <link rel="prev" title="39. Overview of other topics" href="../misc/OtherInro.html" />
+    <link rel="next" title="40. More on Disks" href="disk2.html" />
+    <link rel="prev" title="38. Locking in the Linux Kernel" href="../sync/linux_locking.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -349,24 +347,24 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../misc/OtherInro.html">
-   39. Overview of other topics
-  </a>
- </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   40. Input and Output
+   39. Input and Output
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="disk2.html">
+   40. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   41. Virtualization and Cloud computing
+   41. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../intro/other.html">
-   42. Other OS structures
+  <a class="reference internal" href="../sec/sec.html">
+   42. Security
   </a>
  </li>
 </ul>
@@ -634,132 +632,56 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#io-hardware">
-   40.1. IO Hardware
+   39.1. IO Hardware
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#structure-of-a-computer">
-     40.1.1. Structure of a computer
+     39.1.1. Structure of a computer
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#controllers">
-     40.1.2. Controllers
+     39.1.2. Controllers
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#accessing-the-controller">
-     40.1.3. Accessing the controller
+     39.1.3. Accessing the controller
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#polled-vs-interrupt-driven-i-o">
-     40.1.4. Polled vs. Interrupt-driven I/O
+     39.1.4. Polled vs. Interrupt-driven I/O
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#interrupts">
-     40.1.5. Interrupts
+     39.1.5. Interrupts
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#direct-memory-access-dma">
-     40.1.6. Direct Memory Access (DMA)
+     39.1.6. Direct Memory Access (DMA)
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#more-on-disks">
-     40.1.7. More on Disks
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#disk-scheduling">
-       40.1.7.1. Disk scheduling
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#primary-disk-scheduling-algorithms">
-         40.1.7.1.1. Primary Disk Scheduling Algorithms
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#implementing-disk-scheduling">
-         40.1.7.1.2. Implementing Disk Scheduling
-        </a>
-       </li>
-      </ul>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#on-disk-cache">
-       40.1.7.2. On-Disk Cache
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#sata-and-scsi">
-       40.1.7.3. SATA and SCSI
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#scsi-over-everything">
-       40.1.7.4. SCSI over everything
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#raid-and-other-remapping">
-       40.1.7.5. RAID and other remapping
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#striping-raid0">
-         40.1.7.5.1. Striping — RAID0
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#mirroring-raid1">
-         40.1.7.5.2. Mirroring — RAID1
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#raid-4">
-         40.1.7.5.3. RAID 4
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#raid-5">
-         40.1.7.5.4. RAID 5
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#raid-6-more-reliability">
-         40.1.7.5.5. RAID 6 - more reliability
-        </a>
-       </li>
-      </ul>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#solid-state-drives">
-       40.1.7.6. Solid State Drives
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#i-o-software-and-device-drivers">
-   40.2. I/O Software and Device Drivers
+   39.2. I/O Software and Device Drivers
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fundamental-goals">
-     40.2.1. Fundamental Goals
+     39.2.1. Fundamental Goals
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#putting-it-all-together">
-   40.3. Putting it all together
+   39.3. Putting it all together
   </a>
  </li>
 </ul>
@@ -783,132 +705,56 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#io-hardware">
-   40.1. IO Hardware
+   39.1. IO Hardware
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#structure-of-a-computer">
-     40.1.1. Structure of a computer
+     39.1.1. Structure of a computer
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#controllers">
-     40.1.2. Controllers
+     39.1.2. Controllers
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#accessing-the-controller">
-     40.1.3. Accessing the controller
+     39.1.3. Accessing the controller
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#polled-vs-interrupt-driven-i-o">
-     40.1.4. Polled vs. Interrupt-driven I/O
+     39.1.4. Polled vs. Interrupt-driven I/O
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#interrupts">
-     40.1.5. Interrupts
+     39.1.5. Interrupts
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#direct-memory-access-dma">
-     40.1.6. Direct Memory Access (DMA)
+     39.1.6. Direct Memory Access (DMA)
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#more-on-disks">
-     40.1.7. More on Disks
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#disk-scheduling">
-       40.1.7.1. Disk scheduling
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#primary-disk-scheduling-algorithms">
-         40.1.7.1.1. Primary Disk Scheduling Algorithms
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#implementing-disk-scheduling">
-         40.1.7.1.2. Implementing Disk Scheduling
-        </a>
-       </li>
-      </ul>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#on-disk-cache">
-       40.1.7.2. On-Disk Cache
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#sata-and-scsi">
-       40.1.7.3. SATA and SCSI
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#scsi-over-everything">
-       40.1.7.4. SCSI over everything
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#raid-and-other-remapping">
-       40.1.7.5. RAID and other remapping
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#striping-raid0">
-         40.1.7.5.1. Striping — RAID0
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#mirroring-raid1">
-         40.1.7.5.2. Mirroring — RAID1
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#raid-4">
-         40.1.7.5.3. RAID 4
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#raid-5">
-         40.1.7.5.4. RAID 5
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#raid-6-more-reliability">
-         40.1.7.5.5. RAID 6 - more reliability
-        </a>
-       </li>
-      </ul>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#solid-state-drives">
-       40.1.7.6. Solid State Drives
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#i-o-software-and-device-drivers">
-   40.2. I/O Software and Device Drivers
+   39.2. I/O Software and Device Drivers
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fundamental-goals">
-     40.2.1. Fundamental Goals
+     39.2.1. Fundamental Goals
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#putting-it-all-together">
-   40.3. Putting it all together
+   39.3. Putting it all together
   </a>
  </li>
 </ul>
@@ -922,7 +768,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="input-and-output">
-<span id="cont-other-devices"></span><h1><span class="section-number">40. </span>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">#</a></h1>
+<span id="cont-other-devices"></span><h1><span class="section-number">39. </span>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">#</a></h1>
 <p>Input/Output (I/O) devices are crucial to the operation of a computer.
 The data that a program processes — as well as the program binary
 itself — must be loaded into memory from some I/O device such as a
@@ -936,23 +782,23 @@ hardware devices with similar functionality but differing details.</p>
 <figure class="align-right" id="devs-fig-rep">
 <a class="reference internal image-reference" href="../_images/purpose-OS-source-12.drawio.png"><img alt="../_images/purpose-OS-source-12.drawio.png" src="../_images/purpose-OS-source-12.drawio.png" style="width: 300pt;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.1 </span><span class="caption-text">Supporting devices</span><a class="headerlink" href="#devs-fig-rep" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 39.1 </span><span class="caption-text">Supporting devices</span><a class="headerlink" href="#devs-fig-rep" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We first describe the characteristics of device hardware, and then how the OS interacts with that hardware.</p>
 <section id="io-hardware">
-<h2><span class="section-number">40.1. </span>IO Hardware<a class="headerlink" href="#io-hardware" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">39.1. </span>IO Hardware<a class="headerlink" href="#io-hardware" title="Permalink to this headline">#</a></h2>
 <p>We outline structure of a standard computer, device controllers, how the OS interacts with the controller using port and memory mapped I/O, how interrupts work, and conclude with a discussion of Direct Memory Access (DMA).</p>
 <figure class="align-right" id="simplecomputer-fig2">
 <a class="reference internal image-reference" href="../_images/hardware.png"><img alt="../_images/hardware.png" src="../_images/hardware.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.2 </span><span class="caption-text">An abstract model of a computer.</span><a class="headerlink" href="#simplecomputer-fig2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 39.2 </span><span class="caption-text">An abstract model of a computer.</span><a class="headerlink" href="#simplecomputer-fig2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="structure-of-a-computer">
-<h3><span class="section-number">40.1.1. </span>Structure of a computer<a class="headerlink" href="#structure-of-a-computer" title="Permalink to this headline">#</a></h3>
-<p>At the start of the course, we <a class="reference internal" href="../intro/purpose.html#cont-gs-purpose-hw"><span class="std std-ref">presented</span></a> a simple model of hardware (<a class="reference internal" href="#simplecomputer-fig2"><span class="std std-numref">Fig. 40.2</span></a>) was discussed. The CPU is connected to high speed memory, and through a lower speed bus to a network controller and disk controller that are in turn connected to a network (ethernet in this case) and a disk.</p>
-<p><a class="reference internal" href="#fig-iobus-1"><span class="std std-numref">Fig. 40.3</span></a> shows the more complicated architecture of a relatively modern
+<h3><span class="section-number">39.1.1. </span>Structure of a computer<a class="headerlink" href="#structure-of-a-computer" title="Permalink to this headline">#</a></h3>
+<p>At the start of the course, we <a class="reference internal" href="../intro/purpose.html#cont-gs-purpose-hw"><span class="std std-ref">presented</span></a> a simple model of hardware (<a class="reference internal" href="#simplecomputer-fig2"><span class="std std-numref">Fig. 39.2</span></a>) was discussed. The CPU is connected to high speed memory, and through a lower speed bus to a network controller and disk controller that are in turn connected to a network (ethernet in this case) and a disk.</p>
+<p><a class="reference internal" href="#fig-iobus-1"><span class="std std-numref">Fig. 39.3</span></a> shows the more complicated architecture of a relatively modern
 Intel-architecture. Different parts of the
 system are connected by buses, or communication channels, operating at
 various speeds. The Front-Side Bus carries all memory transactions which
@@ -968,7 +814,7 @@ system functions off of it, so it’s still needed.<a class="footnote-reference 
 <figure class="align-default" id="fig-iobus-1">
 <a class="reference internal image-reference" href="../_images/iobus-fig1.png"><img alt="../_images/iobus-fig1.png" src="../_images/iobus-fig1.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.3 </span><span class="caption-text">A standard Intel PC Architecture</span><a class="headerlink" href="#fig-iobus-1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 39.3 </span><span class="caption-text">A standard Intel PC Architecture</span><a class="headerlink" href="#fig-iobus-1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <aside class="sidebar">
@@ -979,18 +825,18 @@ address and data signals in much the same way.</p>
 </aside>
 </section>
 <section id="controllers">
-<h3><span class="section-number">40.1.2. </span>Controllers<a class="headerlink" href="#controllers" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">39.1.2. </span>Controllers<a class="headerlink" href="#controllers" title="Permalink to this headline">#</a></h3>
 <p>I/O devices typically connected as PCI/ISA cards installed on the mother board have, in additional to their mechanical components, controllers that manage the device. The task of this controller is to convert from the operations on the bus to device specific operations.  The processor interacts with these controllers by reading and writing controller registers.</p>
 <figure class="align-default" id="fig-intelnic">
 <a class="reference internal image-reference" href="../_images/modernnic-regs.png"><img alt="../_images/modernnic-regs.png" src="../_images/modernnic-regs.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.4 </span><span class="caption-text">Registers of an Intel network interface card.  It contains around 5600 32-bit registers broken down as shown. Note that complex OSes, like Linux, only initialize around 1000 of these registers.</span><a class="headerlink" href="#fig-intelnic" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 39.4 </span><span class="caption-text">Registers of an Intel network interface card.  It contains around 5600 32-bit registers broken down as shown. Note that complex OSes, like Linux, only initialize around 1000 of these registers.</span><a class="headerlink" href="#fig-intelnic" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>To understand how complex modern devices can be, consider <a class="reference internal" href="#fig-intelnic"><span class="std std-numref">Fig. 40.4</span></a> that shows the breakdown of registers of a modern Intel NIC.  There are over 5600 32 bit registers, providing enormous complexity in how the OS can configure and interact with the device.  As a result, these controllers often have a general purpose CPU, a fair amount of RAM to buffer data going to/from the device, and often some permanent flash storage.  The software that used on these processors, typically referred to as firmware is complex enough that it must be regularly upgraded to deal with bugs.  This turns out to be a massive attack surface in today’s computers. For example the following <a class="reference external" href="https://www.vice.com/en/article/ypwkwk/the-nsas-undetectable-hard-drive-hack-was-first-demonstrated-a-year-ago">story</a> describes one technique that has been used by the NSA to embed undetectable spyware on disks.</p>
+<p>To understand how complex modern devices can be, consider <a class="reference internal" href="#fig-intelnic"><span class="std std-numref">Fig. 39.4</span></a> that shows the breakdown of registers of a modern Intel NIC.  There are over 5600 32 bit registers, providing enormous complexity in how the OS can configure and interact with the device.  As a result, these controllers often have a general purpose CPU, a fair amount of RAM to buffer data going to/from the device, and often some permanent flash storage.  The software that used on these processors, typically referred to as firmware is complex enough that it must be regularly upgraded to deal with bugs.  This turns out to be a massive attack surface in today’s computers. For example the following <a class="reference external" href="https://www.vice.com/en/article/ypwkwk/the-nsas-undetectable-hard-drive-hack-was-first-demonstrated-a-year-ago">story</a> describes one technique that has been used by the NSA to embed undetectable spyware on disks.</p>
 </section>
 <section id="accessing-the-controller">
-<h3><span class="section-number">40.1.3. </span>Accessing the controller<a class="headerlink" href="#accessing-the-controller" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">39.1.3. </span>Accessing the controller<a class="headerlink" href="#accessing-the-controller" title="Permalink to this headline">#</a></h3>
 <p>The OS talks with the controller by reading and writing registers of the device and by reading and writing data that is buffered by the controller.  Certain CPUs, including Intel
 architecture, contain support for a secondary I/O bus, with a smaller
 address width and accessed via special instructions. (e.g. “IN 0x100” to
@@ -1008,17 +854,17 @@ time, assigns each I/O device a physical address range to which it
 should respond.</p>
 </section>
 <section id="polled-vs-interrupt-driven-i-o">
-<h3><span class="section-number">40.1.4. </span>Polled vs. Interrupt-driven I/O<a class="headerlink" href="#polled-vs-interrupt-driven-i-o" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">39.1.4. </span>Polled vs. Interrupt-driven I/O<a class="headerlink" href="#polled-vs-interrupt-driven-i-o" title="Permalink to this headline">#</a></h3>
 <figure class="align-right" id="fig-iobus-polled">
 <a class="reference internal image-reference" href="../_images/iobus-polled.png"><img alt="../_images/iobus-polled.png" src="../_images/iobus-polled.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.5 </span><span class="caption-text">Polled I/O</span><a class="headerlink" href="#fig-iobus-polled" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 39.5 </span><span class="caption-text">Polled I/O</span><a class="headerlink" href="#fig-iobus-polled" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The
 simplest way to control an I/O device is for the CPU to issue commands
 and then wait, polling a device status register until the operation is
-complete. In <a class="reference internal" href="#fig-iobus-polled"><span class="std std-numref">Fig. 40.5</span></a> (a) an application requests I/O via e.g. a
+complete. In <a class="reference internal" href="#fig-iobus-polled"><span class="std std-numref">Fig. 39.5</span></a> (a) an application requests I/O via e.g. a
 <code class="docutils literal notranslate"><span class="pre">read</span></code> system call; the OS (step 1) then writes to the device command
 register to start an operation, after which (step 2) it begins to poll
 the status register to detect completion. Meanwhile (step 3) the device
@@ -1028,13 +874,13 @@ detects that it is complete, and finally (step 5) the original request
 <figure class="align-right" id="fig-iobus-inter">
 <a class="reference internal image-reference" href="../_images/iobus-irq.png"><img alt="../_images/iobus-irq.png" src="../_images/iobus-irq.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.6 </span><span class="caption-text">Interrupt<br />
+<p><span class="caption-number">Fig. 39.6 </span><span class="caption-text">Interrupt<br />
 driven I/O</span><a class="headerlink" href="#fig-iobus-inter" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The alternate is interrupt-driven I/O, as
 shown in
-<a class="reference internal" href="#fig-iobus-inter"><span class="std std-numref">Fig. 40.6</span></a> (b). After (step 1) issuing a request to
+<a class="reference internal" href="#fig-iobus-inter"><span class="std std-numref">Fig. 39.6</span></a> (b). After (step 1) issuing a request to
 the hardware, the OS (step 2) puts the calling process to sleep and
 switches to another process while (step 3) the hardware handles the
 request. When the I/O is complete, the device (step 4) raises an
@@ -1044,7 +890,7 @@ become available, and then (step 6) wakes the waiting process, which
 returns from the I/O call (step 7) and continues.</p>
 </section>
 <section id="interrupts">
-<h3><span class="section-number">40.1.5. </span>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">39.1.5. </span>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">#</a></h3>
 <p>We have already mentioned Interrupts many times, but nows a good time to flesh them out in a bit more detail.
 To handle asynchronous I/O events, CPUs provide an <em>interrupt</em>
 mechanism. In response to a signal from an I/O device the CPU executes
@@ -1107,14 +953,14 @@ keystrokes and save them, making them available to the program the next
 time it checks for input.</p>
 </section>
 <section id="direct-memory-access-dma">
-<h3><span class="section-number">40.1.6. </span>Direct Memory Access (DMA)<a class="headerlink" href="#direct-memory-access-dma" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">39.1.6. </span>Direct Memory Access (DMA)<a class="headerlink" href="#direct-memory-access-dma" title="Permalink to this headline">#</a></h3>
 <p>The CPU could copying data
 between I/O devices and memory using normal memory load and store
 instructions. Such an approach works well on computers such as the Apple
 II or the original IBM PC which run at a few MHz, where the address and
 data buses can be extended at full speed to external I/O cards. A modern
 CPU runs at over 3 GHz, however; during a single clock cycle light can
-only travel about 4 inches, and electrical signals even less. <a class="reference internal" href="#fig-iobus-latency"><span class="std std-numref">Fig. 40.7</span></a>
+only travel about 4 inches, and electrical signals even less. <a class="reference internal" href="#fig-iobus-latency"><span class="std std-numref">Fig. 39.7</span></a>
 shows example latencies for a modern CPU
 (in this case an Intel i5, with L3 cache omitted) to read a data value
 from L1 and L2 cache, a random location in memory (sequential access is
@@ -1126,13 +972,13 @@ controller.</p>
 <figure class="align-default" id="fig-iobus-latency">
 <a class="reference internal image-reference" href="../_images/iobus-latency.png"><img alt="../_images/iobus-latency.png" src="../_images/iobus-latency.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.7 </span><span class="caption-text">Latency between CPU and various levels of memory/IO hierarchy</span><a class="headerlink" href="#fig-iobus-latency" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 39.7 </span><span class="caption-text">Latency between CPU and various levels of memory/IO hierarchy</span><a class="headerlink" href="#fig-iobus-latency" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-iobus-dma">
 <a class="reference internal image-reference" href="../_images/iobus-dma.png"><img alt="../_images/iobus-dma.png" src="../_images/iobus-dma.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.8 </span><span class="caption-text">DMA access for high-speed data transfer</span><a class="headerlink" href="#fig-iobus-dma" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 39.8 </span><span class="caption-text">DMA access for high-speed data transfer</span><a class="headerlink" href="#fig-iobus-dma" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <aside class="sidebar">
@@ -1149,7 +995,7 @@ access to bus resources, and then is able to perform a transaction after
 being granted access. In addition to basic read and write requests, the
 bus also supports Direct Memory Access (DMA), where I/O devices are able
 to read or write memory directly without CPU intervention.
-<a class="reference internal" href="#fig-iobus-dma"><span class="std std-numref">Fig. 40.8</span></a> shows a single programmed-I/O read (top)
+<a class="reference internal" href="#fig-iobus-dma"><span class="std std-numref">Fig. 39.8</span></a> shows a single programmed-I/O read (top)
 compared to a DMA burst transfer (bottom). While the read request
 requires a round trip to read each and every 4-byte word, once the DMA
 transfer is started it is able to transfer data at a rate limited by the
@@ -1162,7 +1008,7 @@ access (read or write), the disk locations to be accessed, and the
 memory address where data will be stored or retrieved from. Rather than
 writing each of these parameters individually to device registers, the
 parameters are typically combined in memory in what is called a <em>DMA
-descriptor</em>, such as the one shown in  <a class="reference internal" href="#fig-iobus-desc"><span class="std std-numref">Fig. 40.9</span></a>. A single write is then used to tell the
+descriptor</em>, such as the one shown in  <a class="reference internal" href="#fig-iobus-desc"><span class="std std-numref">Fig. 39.9</span></a>. A single write is then used to tell the
 device the address of this descriptor, and the device can read the
 entire descriptor in a single DMA read burst. In addition to being more
 efficient than multiple programmed I/O writes, this approach also allows
@@ -1184,467 +1030,15 @@ and finally the CPU tried to read it back?</p>
 <figure class="align-default" id="fig-iobus-desc">
 <a class="reference internal image-reference" href="../_images/iobus-desc.png"><img alt="../_images/iobus-desc.png" src="../_images/iobus-desc.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.9 </span><span class="caption-text">List of typical DMA descriptors</span><a class="headerlink" href="#fig-iobus-desc" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 39.9 </span><span class="caption-text">List of typical DMA descriptors</span><a class="headerlink" href="#fig-iobus-desc" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-</section>
-<section id="more-on-disks">
-<h3><span class="section-number">40.1.7. </span>More on Disks<a class="headerlink" href="#more-on-disks" title="Permalink to this headline">#</a></h3>
-<p><a class="reference internal" href="../fs/diskhw.html#cont-fs-disks"><span class="std std-ref">Earlier</span></a> we introduced Disk hardware in sufficient detail to enable us to introduce file systems.  In this section we go deeper discussing how disks are scheduled, cover RAID storage systems, a bit on SSDs, etc…</p>
-<section id="disk-scheduling">
-<h4><span class="section-number">40.1.7.1. </span>Disk scheduling<a class="headerlink" href="#disk-scheduling" title="Permalink to this headline">#</a></h4>
-<p>A number of strategies are used to avoid the full penalties of seek and
-rotational delay in disks. One of these strategies is that of optimizing
-the order in which requests are performed—for instance reading sectors
-10 and 11 on a single track, in that order, would require a seek,
-followed by a rotational delay until sector 10 was available, and then
-two sectors of transfer time. However reading 11 first would require the
-same seek and about the same rotational delay (waiting until sector 11
-was under the head), followed by a full rotation to get from section 12
-all the way back to sector 10.</p>
-<p>Changing the order in which disk reads and writes are performed in order
-to minimize disk rotations is known as <em>disk scheduling</em>, and relies on
-the fact that multitasking operating systems frequently generate
-multiple disk requests in parallel, which do not have to be completed in
-strict order. Although a single process may wait for a read or write to
-complete before continuing, when multiple processes are running they can
-each issue requests and go to sleep, and then be woken in the order that
-requests complete.</p>
-<section id="primary-disk-scheduling-algorithms">
-<h5><span class="section-number">40.1.7.1.1. </span>Primary Disk Scheduling Algorithms<a class="headerlink" href="#primary-disk-scheduling-algorithms" title="Permalink to this headline">#</a></h5>
-<p>The primary algorithms used for disk scheduling are:</p>
-<ul class="simple">
-<li><p><strong>first-come first-served (FCFS):</strong> in other words no scheduling, with
-requests handled in the order that they are received.</p></li>
-<li><p><strong>Shortest seek time first (SSTF):</strong> this is the throughput-optimal
-strategy; however it is prone to starvation, as a stream of requests to
-nearby sections of the disk can prevent another request from being
-serviced for a long time.</p></li>
-<li><p><strong>SCAN:</strong> this (and variants) are what is termed the <em>elevator
-algorithm</em> — pending requests are served from the inside to the
-outside of the disk, then from the outside back in, etc., much like an
-elevator goes from the first floor to the highest requested one before
-going back down again. It is nearly as efficient as SSTF, while avoiding
-starvation. (With SSTF one process can keep sending requests which will
-require less seek time than another waiting request, “starving” the
-waiting one.)</p></li>
-</ul>
-<p>More sophisticated disk head scheduling algorithms exist, and could no
-doubt be found by a scan of the patent literature; however they are
-mostly of interest to hard drive designers.</p>
-</section>
-<section id="implementing-disk-scheduling">
-<h5><span class="section-number">40.1.7.1.2. </span>Implementing Disk Scheduling<a class="headerlink" href="#implementing-disk-scheduling" title="Permalink to this headline">#</a></h5>
-<p>Disk scheduling can be implemented in two ways — in the operating
-system, or in the device itself. OS-level scheduling is performed by
-keeping a queue of requests which can be re-ordered before they are sent
-to the disk. On-disk scheduling requires the ability to send multiple
-commands to the disk before the first one completes, so that the disk is
-given a choice of which to complete first. This is supported as Command
-Queuing in SCSI, and in SATA as Native Command Queuing (NCQ).</p>
-<p>Note that OS-level I/O scheduling is of limited use today for improving
-overall disk performance, as the OS has little or no visibility into the
-internal geometry of a drive. (OS scheduling is still used to merge
-adjacent requests into larger ones and to allocate performance fairly to
-different processes, however.)</p>
-</section>
-</section>
-<section id="on-disk-cache">
-<h4><span class="section-number">40.1.7.2. </span>On-Disk Cache<a class="headerlink" href="#on-disk-cache" title="Permalink to this headline">#</a></h4>
-<p>In addition to scheduling, the other strategy used to improve disk
-performance is caching, which takes two forms—<em>read caching</em> (also
-called track buffering) and <em>write buffering</em>. Disk drives typically
-have a small amount of RAM used for caching data [^3]. Although this is
-very small in comparison the the amount of RAM typically dedicated to
-caching on the host, if used properly it can make a significant
-difference in performance.</p>
-<p>At read time, after seeking to a track it is common practice for the
-disk to store the entire track in the on-disk cache, in case the host
-requests this data in the near future. Consider, for example, the case
-when the host requests sector 10 on a track, then almost (but not quite)
-immediately requests sector 11. Without the track buffer it would have
-missed the chance to read 11, and would have to wait an entire
-revolution for it to come back around; with the track buffer, small
-sequential requests such as this can be handled efficiently.</p>
-<p>Write buffering is a different matter entirely, and refers to a feature
-where a disk drive may acknowledge a write request while the data is
-still in RAM, before it has been written to disk. This can risk loss of
-data, as there is a period of time during which the application thinks
-that data has been safely written, while it would in fact be lost if
-power failed.</p>
-<p>Although in theory most or all of the performance benefit of write
-buffering could be achieved in a safer fashion via proper use of command
-queuing, this feature was not available (or poorly implemented) in
-consumer drives until recently; as a result write buffering is enabled
-in SATA drives by default. Although write buffering can be disabled on a
-per-drive basis, modern file systems typically issue commands[^4] to
-flush the cache when necessary to ensure file system data is not lost.</p>
-</section>
-<section id="sata-and-scsi">
-<h4><span class="section-number">40.1.7.3. </span>SATA and SCSI<a class="headerlink" href="#sata-and-scsi" title="Permalink to this headline">#</a></h4>
-<p>Almost all disk drives today use one of two interfaces: SATA (or its
-precursor, IDE) or SCSI. The SATA and IDE interfaces are derived from an
-ancient disk controller for the PC, the ST-506, introduced in about
-1980. This controller was similar to—but even cruder than—the disk
-interface in our fictional computer, with registers for the command to
-execute (read/write/other) and address (cylinder/head/sector), and a
-single register which the CPU read from or wrote to repeatedly to
-transfer data. What is called the ATA (AT bus-attached) or IDE
-(integrated drive electronics) disk was created by putting this
-controller on the drive itself, and using an extender cable to connect
-it back to the bus, so that the same software could still access the
-control registers. Over the years many extensions were made, including
-DMA support, logical block addressing, and a high-speed serial
-connection instead of a multi-wire cable; however the protocol is still
-based on the idea of the CPU writing to and reading from a set of
-remote, disk-resident registers.</p>
-<aside class="sidebar">
-<p><strong>Logical vs. CHS addressing:</strong> For CHS addressing to work the OS (and
-bootloader, e.g. BIOS) has to know the geometry of the drive, so it can
-tell e.g. whether the sector following (cyl=1,head=1,sector=51) is
-(1,1,52) or (2,1,0). For large computers sold with a small selection of
-vendor-approved disks this was not a problem, but it was a major hassle
-with PCs—you had to read a label on the disk and set BIOS options.
-Then drive manufacturers started using “fake” geometries because there
-weren’t enough bits in the cylinder and sector fields, making drives
-that claimed to have 255 heads, giving the worst features of both
-logical and CHS addressing.</p>
-</aside>
-<p>In contrast, SCSI was developed around 1980 as a high-level,
-device-independent protocol with the following features:</p>
-<ul class="simple">
-<li><p>Packet-based. The initiator (i.e. host) sends a command packet (e.g.
-READ or WRITE) over the bus to the target; DATA packets are then sent in
-the appropriate direction followed by a status indication. SCSI
-specifies these packets over the bus; how the CPU interacts with the
-disk controller to generate them is up to the maker of the disk
-controller. (often called an HBA, or host bus adapter)</p></li>
-<li><p>Logical block addressing. SCSI does not support C/H/S addressing —
-instead the disk sectors are numbered starting from 0, and the disk is
-responsible for translating this logical block address (LBA) into a
-location on a particular platter. In recent years logical addressing has
-been adopted by IDE and SATA, as well.</p></li>
-</ul>
-</section>
-<section id="scsi-over-everything">
-<h4><span class="section-number">40.1.7.4. </span>SCSI over everything<a class="headerlink" href="#scsi-over-everything" title="Permalink to this headline">#</a></h4>
-<p>SCSI (like e.g. TCP/IP) is defined in a way that allows it to be carried
-across many different transport layers. Thus today it is found in:</p>
-<ul class="simple">
-<li><p>USB drives. The USB storage protocol transports SCSI command and data
-packets.</p></li>
-<li><p>CD and DVD drives. The first CD-ROM and CD-R drives were SCSI drives,
-and when IDE CDROM drives were introduced, rather than invent a new set
-of commands for CD-specific functions (e.g. eject) the drive makers
-defined a way to tunnel existing SCSI commands over IDE/ATA (and now
-SATA).</p></li>
-<li><p>Firewire, as used in some Apple systems.</p></li>
-<li><p>Fibre Channel, used in enterprise Storage Area Networks.</p></li>
-<li><p>iSCSI, which carries SCSI over TCP/IP, typically over Ethernet</p></li>
-</ul>
-<p>and no doubt several other protocols as well. By using SCSI instead of
-defining another block protocol, the device makers gained SCSI features
-like the following:</p>
-<ul class="simple">
-<li><p>Standard commands (“Mode pages”) for discovering drive properties and
-parameters.</p></li>
-<li><p>Command queuing, allowing multiple requests to be processed by the drive
-at once. (also offered by SATA, but not earlier IDE drives)</p></li>
-<li><p>Tagged command queuing, which allows a host to place constraints on the
-re-ordering of outstanding requests.</p></li>
-</ul>
-</section>
-<section id="raid-and-other-remapping">
-<h4><span class="section-number">40.1.7.5. </span>RAID and other remapping<a class="headerlink" href="#raid-and-other-remapping" title="Permalink to this headline">#</a></h4>
-<p>There is no need for
-the device on the other end of the SCSI (or SATA) bus to actually <em>be</em> a
-disk drive. (You can do this with C/H/S addressing, as well, but it
-requires creating a fake drive geometry, and then hoping that the
-operating system won’t assume that it’s the real geometry when it
-schedules I/O requests)
-Instead the device on the other end of the wire can be an array of disk
-drives, a solid-state drive, or any other device which stores and
-retrieves blocks of data in response to write and read commands. Such
-disk-like devices are found in many of today’s computer systems, both on
-the desktop and especially in enterprise and data center systems, and
-include:</p>
-<ul class="simple">
-<li><p>Partitions and logical volume management, for flexible division of disk
-space</p></li>
-<li><p>Disk arrays, especially RAID (redundant arrays of inexpensive disks),
-for performance and reliability</p></li>
-<li><p>Solid-state drives, which use flash memory instead of magnetic disks</p></li>
-<li><p>Storage-area networks (SANs)</p></li>
-<li><p>De-duplication, to compress multiple copies of the same data</p></li>
-</ul>
-<p>Almost all of these systems look exactly like a disk to the operating
-system. Their function, however, is typically (at least in the case of
-disk arrays) an attempt to overcome one or more deficiencies of disk
-drives, which include:</p>
-<ul class="simple">
-<li><p>Performance: Disk transfer speed is determined by (a) how small bits can
-be made, and (b) how fast the disk can spin under the head. Rotational
-latency is determined by (b again) how fast the disk spins. Seek time is
-determined by (c) how fast the head assembly can move and settle to a
-final position. For enough money, you can make (b) and (c) about twice
-as fast as in a desktop drive, although you may need to make the tracks
-wider, resulting in a lower-capacity drive. To go any faster requires
-using more disks, or a different technology, like SSDs.</p></li>
-<li><p>Reliability: Although disks are surprisingly reliable, they fail from
-time to time. If your data is worth a lot (like the records from the
-Bank of Lost Funds), you will be willing to pay for a system which
-doesn’t lose data, even if one (or more) of the disks fails.</p></li>
-<li><p>Size: The maximum disk size is determined by the available technology at
-any time—if they could build them bigger for an affordable price, they
-would. If you want to store more data, you need to either wait until
-they can build larger disks, or use more than one. Conversely, in some
-cases (like dual-booting) a single disk may be more than big enough, but
-you may need to split it into multiple logical parts.</p></li>
-</ul>
-<p>We discuss RAID systems and SSDs.</p>
-<section id="striping-raid0">
-<h5><span class="section-number">40.1.7.5.1. </span>Striping — RAID0<a class="headerlink" href="#striping-raid0" title="Permalink to this headline">#</a></h5>
-<aside class="sidebar">
-<p><strong>Isn’t that RAID0?</strong> The term “RAID” was coined in a 1988 paper by
-Paterson, Gibson, and Katz, titled “A case for redundant arrays of
-inexpensive disks (RAID)”, where they defined RAID levels 0 through
-5—it turns out RAID0 and RAID1 were what everyone had been calling
-“striping” and “mirroring” for years, but no one had a name for the
-newer parity-based systems. RAID2 and 3 are weird and obsolete; no one
-talks about them.</p>
-</aside>
-<p>If the file was instead split into small chunks, and each chunk placed
-on a different disk than the chunk before it, it would be possible to
-read and write to all disks in parallel. This is called <em>striping</em>, as
-the data is split into stripes which are spread across the set of
-drives.</p>
-<p>In <a class="reference internal" href="#fig-raid-stripe"><span class="std std-numref">Fig. 40.10</span></a> we see individual <em>strips</em>, or chunks of
-data, layed out in horizontal rows (called <em>stripes</em>) across three
-disks. In the figure, when writing strips 0 through 5, strips 0, 1, and
-2 would be written first at the same time to the three different disks,
-followed by writes to strips 3, 4, and 5. Thus, writing six strips would
-take the same amount of time it takes to write two strips to a single
-disk.</p>
-<figure class="align-default" id="fig-raid-stripe">
-<a class="reference internal image-reference" href="../_images/raid-stripe.png"><img alt="../_images/raid-stripe.png" src="../_images/raid-stripe.png" style="width: 70%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 40.10 </span><span class="caption-text">Striping across three disks</span><a class="headerlink" href="#fig-raid-stripe" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>How big is a strip? It depends, as this value is typically
-configurable—the RAID algorithms work with any strip size, although
-for convenience everyone uses a power of 2. If it’s too small, the large
-number of I/Os may result in overhead for the host (software RAID) or
-for the RAID adapter; if it’s too large, then large I/Os will read or
-write from individual disks one at a time, rather than in parallel.
-Typical values are 16 KB to 512 KB. (the last one is kind of large, but
-it’s the default built into the <code class="docutils literal notranslate"><span class="pre">mdadm</span></code> utility for creating software
-RAID volumes on Linux. And the <code class="docutils literal notranslate"><span class="pre">mdadm</span></code> man page calls them “chunks”
-instead of “strips”, which seems like a much more reasonable name.)</p>
-<p>Striping data across multiple drives requires translating an address
-within the striped volume to an address on one of the physical disks
-making up the volume, using these steps:</p>
-<ul class="simple">
-<li><p>Find the stripe set that the address is located in - this will give the
-stripe number within an individual disk.</p></li>
-<li><p>Calculate the stripe number within that stripe set, which tells you the
-physical disk the stripe is located on.</p></li>
-<li><p>Calculate the address offset within the stripe.</p></li>
-</ul>
-<p>Note that each disk must be of the same size
-for striping to work. (Well, if any disks are bigger than the smallest
-one, that extra space will be wasted.)</p>
-</section>
-<section id="mirroring-raid1">
-<h5><span class="section-number">40.1.7.5.2. </span>Mirroring — RAID1<a class="headerlink" href="#mirroring-raid1" title="Permalink to this headline">#</a></h5>
-<figure class="align-right" id="fig-mirrorfail">
-<a class="reference internal image-reference" href="../_images/raid-mirrorfail.png"><img alt="../_images/raid-mirrorfail.png" src="../_images/raid-mirrorfail.png" style="width: 40%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 40.11 </span><span class="caption-text">Failure of one disk in<br />
-a mirrored volue.</span><a class="headerlink" href="#fig-mirrorfail" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Disks fail, and if you don’t have a copy of the data on that disk, it’s
-lost. A lot of effort has been spent on creating multi-disk systems
-which are more reliable than single-disk ones, by adding
-<em>redundancy</em>—i.e. additional copies of data so that even if one disk
-fails completely there is still a copy of each piece of your data stored
-safely somewhere. (Note that striping is actually a step in the wrong
-direction - if <em>any one</em> of the disks in a striped volume fail, which is
-more likely than failure of a single disk, then you will almost
-certainly lose all the data in that volume.)</p>
-<p>The simplest redundant configuration is <em>mirroring</em>, where two identical
-(“mirror image”) copies of the entire volume are kept on two identical
-disks. In <a class="reference internal" href="#fig-mirrorfail"><span class="std std-numref">Fig. 40.11</span></a> we see a mirrored volume comprising two
-physical disks; writes are sent to both disks, and reads may be sent to
-either one. If one disk fails, reads (and writes) will go to the
-remaining disk, and data is not lost. After the failed disk is replaced,
-the mirrored volume must be rebuilt (sometimes termed “re-silvering”) by
-copying its contents from the other drive. If you wait too long to
-replace the failed drive, you risk having the second drive crash, losing
-your data.</p>
-<p>Address translation in a mirrored volume is trivial: address A in the
-logical volume corresponds to the same address A on each of the physical
-disks. As with striping, both disks must be of the same size. (or any
-extra sectors in the larger drive must be ignored.)</p>
-</section>
-<section id="raid-4">
-<h5><span class="section-number">40.1.7.5.3. </span>RAID 4<a class="headerlink" href="#raid-4" title="Permalink to this headline">#</a></h5>
-<p>Although mirroring are good for constructing highly
-reliable storage systems, sometimes you don’t want reliability bad
-enough to be willing to devote half of your disk space to redundant
-copies of data. This is where RAID 4 (and the related RAID 5) come in.</p>
-<p>For the 8-disk RAID 1+0 volume described previously to fail, somewhere
-between 2 and 5 disks would have to fail (3.66 on average). If you plan
-on replacing disks as soon as they fail, this may be more reliability
-than you need or are willing to pay for. RAID 4 provides a high degree
-of reliability with much less overhead than mirroring.</p>
-<a class="reference internal image-reference" href="../_images/raid-parity.png"><img alt="../_images/raid-parity.png" class="align-right" src="../_images/raid-parity.png" style="width: 40%;" /></a>
-<p>RAID 4 takes N drives and adds a single parity drive, creating an array
-that can tolerate the failure of any single disk without loss of data.
-It does this by using the parity function (also known as exclusive-OR,
-or addition modulo 2), which has the truth table seen in the figure to
-the right. As you can see in the equation, given the parity calculated
-over a set of bits, if one bit is lost, it can be re-created given the
-other bits and the parity. In the case of a disk drive, instead of
-computing parity over N bits, you compute it over N disk blocks, as
-shown here where the parity of two blocks is computed:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>          <span class="mi">001010011101010010001</span> <span class="o">...</span> <span class="mi">001101010101</span> <span class="o">+</span>
-          <span class="mi">011010100111010100100</span> <span class="o">...</span> <span class="mi">011000101010</span>
-
-        <span class="o">=</span> <span class="mi">010000111010000110101</span> <span class="o">...</span> <span class="mi">010101111111</span>
-</pre></div>
-</div>
-<figure class="align-right" id="fig-raid4-org">
-<a class="reference internal image-reference" href="../_images/raid-four.png"><img alt="../_images/raid-four.png" src="../_images/raid-four.png" style="width: 40%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 40.12 </span><span class="caption-text">RAID 4 organization</span><a class="headerlink" href="#fig-raid4-org" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<figure class="align-right" id="fig-raid4-dsk">
-<a class="reference internal image-reference" href="../_images/raid-four2.png"><img alt="../_images/raid-four2.png" src="../_images/raid-four2.png" style="width: 40%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 40.13 </span><span class="caption-text">RAID 4 organization (disk view)</span><a class="headerlink" href="#fig-raid4-dsk" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>RAID 4 is organized almost exactly like a striped (RAID 0) volume, except for the parity drive. We can see this in <a class="reference internal" href="#fig-raid4-org"><span class="std std-numref">Fig. 40.12</span></a> — each data block is located in the same place as in the striped volume, and then the corresponding parity block is located on a separate disk.</p>
-</section>
-<section id="raid-5">
-<h5><span class="section-number">40.1.7.5.4. </span>RAID 5<a class="headerlink" href="#raid-5" title="Permalink to this headline">#</a></h5>
-<p>Small writes to RAID 4 require four operations: one read each for the
-old data and parity, and one write for each of the new data and parity.
-Two of these four operations go to the parity drive, no matter what LBA
-is being written, creating a bottleneck. If one drive can handle 200
-random operations per second, the entire array will be limited to a
-total throughput of 100 random small writes per second, no matter how
-many disks are in the array.</p>
-<p>By distributing the parity across drives in RAID 5, the parity
-bottleneck is eliminated. It still takes four operations to perform a
-single small write, but those operations are distributed evenly across
-all the drives. (Because of the distribution algorithm, it’s technically
-possible for all the writes to go to the same drive; however it’s highly
-unlikely.) In the five-drive case shown here, if a disk can complete 200
-operations a second, the RAID 4 array would be limited to 100 small
-writes per second, while the RAID 5 array could perform 250. (5 disks =
-1000 requests/second, and 4 requests per small write)</p>
-<figure class="align-right" id="fig-raid5">
-<a class="reference internal image-reference" href="../_images/raid-five.png"><img alt="../_images/raid-five.png" src="../_images/raid-five.png" style="width: 70%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 40.14 </span><span class="caption-text">RAID 5</span><a class="headerlink" href="#fig-raid5" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="raid-6-more-reliability">
-<h5><span class="section-number">40.1.7.5.5. </span>RAID 6 - more reliability<a class="headerlink" href="#raid-6-more-reliability" title="Permalink to this headline">#</a></h5>
-<p>RAID level 1, and levels 4 and 5 are designed to
-protect against the total failure of any single disk, assuming that the
-remaining disks operate perfectly. However, there is another failure
-mode known as a <em>latent sector error</em>, in which the disk continues to
-operate but one or more sectors are corrupted and cannot be read back.
-As disks become larger these errors become more problematic: for
-instance, one vendor specifies their current desktop drives to have no
-more than 1 unrecoverable read error per <span class="math notranslate nohighlight">\(10^{14}\)</span> bits of data read, or
-12.5 TB. In other words, there might be in the worst case a 1 in 4
-chance of an unrecoverable read error while reading the entire contents
-of a 3TB disk. (Luckily, actual error rates are typically much lower,
-but not low enough.)</p>
-<p>If a disk in a RAID 5 array fails and is replaced, the “rebuild” process
-requires reading the entire contents of each remaining disk in order to
-reconstruct the contents of the failed disk. If any block in the
-remaining drives is unreadable, data will be lost. (Worse yet, some RAID
-adapters and software will abandon the whole rebuild, causing the entire
-volume to be lost.)</p>
-<p>RAID 6 refers to a number of RAID mechanisms which add additional
-redundancy, using a second parity drive with a more complex
-error-correcting code. If a read failure occurs during a RAID
-rebuild, this additional protection may be used to recover the contents
-of the lost block, preventing data loss. Details of RAID 6
-implementation will not be covered in this class, due to the complexity
-of the codes used.</p>
-</section>
-</section>
-<section id="solid-state-drives">
-<h4><span class="section-number">40.1.7.6. </span>Solid State Drives<a class="headerlink" href="#solid-state-drives" title="Permalink to this headline">#</a></h4>
-<p>Solid-state drives (SSDs) store data on semiconductor-based flash memory
-instead of magnetic disk; however by using the same block-based
-interface (e.g. SATA) to connect to the host they are able to directly
-replace disk drives.</p>
-<p>SSDs rely on flash memory, which stores data electrically: a high
-programming voltage is used to inject a charge onto a circuit element (a
-<em>floating gate</em>—ask your EE friends if you want an explanation) that
-is isolated by insulating layers, and the presence or absence of such a
-stored charge can be detected in order to read the contents of the cell.
-Flash memory has several advantages over magnetic disk, including:</p>
-<ul class="simple">
-<li><p>Random access performance: since flash memory is addressed electrically,
-instead of mechanically, random access can be very fast.</p></li>
-<li><p>Throughput: by using many flash chips in parallel, a consumer SSD (in</p></li>
-</ul>
-<ol class="simple">
-<li><p>can read speeds of 1-2 GB/s, while the fastest disks are limited
-to a bit more than 200MB/s.</p></li>
-</ol>
-<p>Flash is organized in pages of 4KB to 16KB, which must be read or
-written as a unit. These pages may be written only once before they are
-erased in blocks of 128 to 256 pages, making it impossible to directly
-modify a single page. Instead, the same copy-on-write algorithm used in
-LVM snapshots is used internally in an SSD: a new write is written to a
-page in one of a small number of spare blocks, and a map is updated to
-point to the new location; the old page is now invalid and is not
-needed. When not enough spare blocks are left, a garbage collection
-process finds a block with many invalid pages, copies any remaining
-valid pages to another spare block, and erases the block.</p>
-<p>When data is written sequentially, this process will be efficient, as
-the garbage collector will almost always find an entirely invalid block
-which can be erased without any copying. For very random workloads,
-especially on cheap drives with few spare blocks and less sophisticated
-garbage collection, this process can involve huge amounts of copying
-(called write amplification) and run very slowly.</p>
-<p><strong>SSD Wear-out</strong>: Flash can only be written and erased a certain number
-of times before it begins to degrade and will not hold data reliably:
-most flash today is rated for 3000 write/erase operations before it
-becomes unreliable. The internal SSD algorithms distribute writes evenly
-to all blocks in the device, so in theory you can safely write 3000
-times the capacity of a current SSD, or the entire drive capacity every
-day for 8 years. (Note that 3000 refers to <em>internal</em> writes; random
-writes with high write amplification will wear out an SSD more than the
-same volume of sequential writes.)</p>
-<p>For a laptop or desktop this would be an impossibly high workload,
-especially since they are typically used only half the hours in a day or
-less. For some server applications, however, this is a valid concern.
-Special-purpose SSDs are available (using what is called Single-Level
-Cell, or SLC, flash) which are much more expensive but are rated for as
-many as 100,000 write/erase cycles. (This capacity is the equivalent of
-overwriting an entire drive every 30 minutes for 5 years. For a 128GB
-drive, this would require continuously writing at over 70MB/s, 24 hours
-a day.)</p>
-</section>
 </section>
 </section>
 <section id="i-o-software-and-device-drivers">
-<h2><span class="section-number">40.2. </span>I/O Software and Device Drivers<a class="headerlink" href="#i-o-software-and-device-drivers" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">39.2. </span>I/O Software and Device Drivers<a class="headerlink" href="#i-o-software-and-device-drivers" title="Permalink to this headline">#</a></h2>
 <section id="fundamental-goals">
-<h3><span class="section-number">40.2.1. </span>Fundamental Goals<a class="headerlink" href="#fundamental-goals" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">39.2.1. </span>Fundamental Goals<a class="headerlink" href="#fundamental-goals" title="Permalink to this headline">#</a></h3>
 <p>The operating system software that interacts with devices must:</p>
 <ul class="simple">
 <li><p><strong>Provide Device Independence:</strong> Programs should be able to access any similar device without worrying about the specific device available.  For example, you should be able to read data from a floppy, hard drive, or CD-ROM without caring which device is available.  As another example, your <em>vim</em> editor should be able to work if you are connecting a dumb terminal to your computer, or if you are using an emulated terminal provided by our course staff.</p></li>
@@ -1655,10 +1049,10 @@ a day.)</p>
 <figure class="align-default" id="fig-dev-layers">
 <a class="reference internal image-reference" href="../_images/dev-layers.png"><img alt="../_images/dev-layers.png" src="../_images/dev-layers.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.15 </span><span class="caption-text">OS layers</span><a class="headerlink" href="#fig-dev-layers" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 39.10 </span><span class="caption-text">OS layers</span><a class="headerlink" href="#fig-dev-layers" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>To perform this functionality, much like when we discussed the VFS layer in file systems, as shown in <a class="reference internal" href="#fig-dev-layers"><span class="std std-numref">Fig. 40.15</span></a> there is generic I/O code that provides services like buffering, generalized error reporting, and enables a set of standardized device interfaces. The three kind of standard device types are:</p>
+<p>To perform this functionality, much like when we discussed the VFS layer in file systems, as shown in <a class="reference internal" href="#fig-dev-layers"><span class="std std-numref">Fig. 39.10</span></a> there is generic I/O code that provides services like buffering, generalized error reporting, and enables a set of standardized device interfaces. The three kind of standard device types are:</p>
 <ol class="simple">
 <li><p>Block devices: e.g. SSDs, Hard drives, CDROMs</p></li>
 <li><p>Character devices: ttys, pipes, …</p></li>
@@ -1679,14 +1073,14 @@ a day.)</p>
 </section>
 </section>
 <section id="putting-it-all-together">
-<h2><span class="section-number">40.3. </span>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">#</a></h2>
-<p><a class="reference internal" href="#fig-iobus-driver"><span class="std std-numref">Fig. 40.16</span></a> illustrates the I/O process for a typical
+<h2><span class="section-number">39.3. </span>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">#</a></h2>
+<p><a class="reference internal" href="#fig-iobus-driver"><span class="std std-numref">Fig. 39.11</span></a> illustrates the I/O process for a typical
 device from user-space application request through the driver, hardware
 I/O operation, interrupt, and finally back to user space.</p>
 <figure class="align-default" id="fig-iobus-driver">
 <a class="reference internal image-reference" href="../_images/iobus-driver.png"><img alt="../_images/iobus-driver.png" src="../_images/iobus-driver.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40.16 </span><span class="caption-text">Putting it together</span><a class="headerlink" href="#fig-iobus-driver" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 39.11 </span><span class="caption-text">Putting it together</span><a class="headerlink" href="#fig-iobus-driver" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In more detail:</p>
@@ -1750,17 +1144,17 @@ bus.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../misc/OtherInro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../sync/linux_locking.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">39. </span>Overview of other topics</p>
+            <p class="prev-next-title"><span class="section-number">38. </span>Locking in the Linux Kernel</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../virt/virt.html" title="next page">
+    <a class='right-next' id="next-link" href="disk2.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">41. </span>Virtualization and Cloud computing</p>
+        <p class="prev-next-title"><span class="section-number">40. </span>More on Disks</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
