@@ -66,15 +66,13 @@ parts:
 - caption: 'Other Topics'
   numbered: True
   chapters:
-  - file: misc/OtherInro
   - file: devices/devices
+  - file: devices/disk2
 #  - file: devices/IOHW
 #  - file: devices/IOSW
-# security right now is broken
-#  - file: sec/sec
   - file: virt/virt
-  - file: intro/other
-# decide later the extent to which we want to conver block devices
+  - file: sec/sec
+#  - file: intro/other
 #  - file: devices/block-dev
 - caption: 'Appendices'
   numbered: True
