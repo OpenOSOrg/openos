@@ -966,7 +966,7 @@ Translation. The idea is to translate commonly-used fragments of code
 into actual machine code, which can usually run far faster than pure
 emulation. (In part, it eliminates the software-implemented instruction
 fetch and decode for each instruction, which is a significant overhead.)
-An example can be seen in <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig:vma:2</span></code>.</p>
+An example can be seen below.</p>
 <p>The following code:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>       <span class="n">ADD</span>  <span class="n">R1</span><span class="o">+</span><span class="n">R2</span> <span class="o">-&gt;</span> <span class="n">R2</span>
        <span class="n">ADD</span>  <span class="n">R2</span><span class="o">+</span><span class="n">R3</span> <span class="o">-&gt;</span> <span class="n">R3</span>
@@ -1135,7 +1135,7 @@ emulates reading from or writing to the emulated I/O device.</p>
 </section>
 <section id="hosted-and-bare-metal-hypervisors">
 <h2><span class="section-number">41.4. </span>Hosted and “bare-metal” hypervisors<a class="headerlink" href="#hosted-and-bare-metal-hypervisors" title="Permalink to this headline">#</a></h2>
-<p>In <code class="xref std std-numref docutils literal notranslate"><span class="pre">vma:5</span></code> you can see how this works together. Exceptions
+<p>In <a class="reference internal" href="#fig-vma-5"><span class="std std-numref">Fig. 41.3</span></a> you can see how this works together. Exceptions
 from user applications (page faults, system calls, etc.) are handled by
 the hypervisor, which in most cases passes them to the guest OS.
 Interrupts from I/O devices are passed to drivers in the hypervisor,
