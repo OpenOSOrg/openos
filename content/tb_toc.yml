@@ -59,6 +59,7 @@ parts:
   - file: sync/ordering
   - file: sync/concurrency_bugs
 #  - file: sync/deadlock
+  - file: sync/readmostly
   - file: sync/hardware_challenges
   - file: sync/linux_locking
 # materials to be integrated from peter's book

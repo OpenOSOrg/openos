@@ -209,3 +209,43 @@ issn = {1869-0238},
 url = {https://doi.org/10.1186/s13174-017-0055-2},
 doi = {10.1186/s13174-017-0055-2}
 }
+
+@article{10.1145/362759.362813,
+author = {Courtois, P. J. and Heymans, F. and Parnas, D. L.},
+title = {Concurrent Control with “Readers” and “Writers”},
+year = {1971},
+issue_date = {Oct. 1971},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {14},
+number = {10},
+issn = {0001-0782},
+url = {https://doi.org/10.1145/362759.362813},
+doi = {10.1145/362759.362813},
+abstract = {The problem of the mutual exclusion of several independent processes from simultaneous access to a “critical section” is discussed for the case where there are two distinct classes of processes known as “readers” and “writers.” The “readers” may share the section with each other, but the “writers” must have exclusive access. Two solutions are presented: one for the case where we wish minimum delay for the readers; the other for the case where we wish writing to take place as early as possible.},
+journal = {Commun. ACM},
+month = {oct},
+pages = {667–668},
+numpages = {2},
+keywords = {mutual exclusion, shared access to resources, critical section}
+}
+
+@article{10.1016/j.jpdc.2007.04.010,
+author = {Hart, Thomas E. and McKenney, Paul E. and Brown, Angela Demke and Walpole, Jonathan},
+title = {Performance of Memory Reclamation for Lockless Synchronization},
+year = {2007},
+issue_date = {December, 2007},
+publisher = {Academic Press, Inc.},
+address = {USA},
+volume = {67},
+number = {12},
+issn = {0743-7315},
+url = {https://doi.org/10.1016/j.jpdc.2007.04.010},
+doi = {10.1016/j.jpdc.2007.04.010},
+abstract = {Achieving high performance for concurrent applications on modern multiprocessors remains challenging. Many programmers avoid locking to improve performance, while others replace locks with non-blocking synchronization to protect against deadlock, priority inversion, and convoying. In both cases, dynamic data structures that avoid locking require a memory reclamation scheme that reclaims elements once they are no longer in use. The performance of existing memory reclamation schemes has not been thoroughly evaluated. We conduct the first fair and comprehensive comparison of three recent schemes-quiescent-state-based reclamation, epoch-based reclamation, and hazard-pointer-based reclamation-using a flexible microbenchmark. Our results show that there is no globally optimal scheme. When evaluating lockless synchronization, programmers and algorithm designers should thus carefully consider the data structure, the workload, and the execution environment, each of which can dramatically affect the memory reclamation performance. We discuss the consequences of our results for programmers and algorithm designers. Finally, we describe the use of one scheme, quiescent-state-based reclamation, in the context of an OS kernel-an execution environment which is well suited to this scheme.},
+journal = {J. Parallel Distrib. Comput.},
+month = {dec},
+pages = {1270–1285},
+numpages = {16},
+keywords = {Performance, Non-blocking, Concurrency, Synchronization, Hazard pointers, Read-copy update, Memory reclamation, Lockless}
+}
