@@ -331,13 +331,18 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../sync/readmostly.html">
+   37. Read-Dominated Workloads
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   37. Challenges of Modern Hardware
+   38. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   38. Locking in the Linux Kernel
+   39. Locking in the Linux Kernel
   </a>
  </li>
 </ul>
@@ -349,22 +354,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   39. Input and Output
+   40. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   40. More on Disks
+   41. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   41. Virtualization
+   42. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   42. Security
+   43. Security
   </a>
  </li>
 </ul>
@@ -376,17 +381,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   43. How to read this book
+   44. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   44. Contributing
+   45. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   45. Bibliography
+   46. Bibliography
   </a>
  </li>
 </ul>
@@ -837,7 +842,7 @@ Unix systems see the <code class="docutils literal notranslate"><span class="pre
 </div></blockquote>
 <p style='text-align: right;'> ---Dennis Ritchie, <a href='https://lkml.indiana.edu/hypermail/linux/kernel/0207.2/1182.html'>[LKML 2002]</a></p>
 </aside>
-<p>Once you use a pathname to find an object in the file system, you need to find out what kind of an object you have found.  Each file is identified in the file system by a unique <strong>inode number</strong> that references an <strong>inode</strong> data structure that maintains all kinds of information, or <em>meta-data</em> about the file (try <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">inode</span></code> for more information).   While the inode itself is internal to the file system, and contains additional information, generic information can be obtained for any file as described <a class="reference internal" href="#cont-fs-calls-naming"><span class="std std-ref">below</span></a>.  One of the fields in an inode identifies the type of object that the inode refers to. The types of objects that can be referenced by inode are show in <a class="reference internal" href="#file-types"><span class="std std-numref">Table 11.1</span></a>.</p>
+<p>Once you use a pathname to find an object in the file system, you need to find out what kind of an object you have found.  Each file is identified in the file system by a unique <strong>inode number</strong> that references an <strong>inode</strong> data structure that maintains all kinds of information, or <em>meta-data</em> about the file (try <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">inode</span></code> for more information).   While the inode itself is internal to the file system, and contains additional information, generic information can be obtained for any file as described <a class="reference internal" href="#cont-fs-calls-naming"><span class="std std-ref">below</span></a>.  One of the fields in an inode identifies the type of object that the inode refers to. The types of objects that can be referenced by inode are shown in <a class="reference internal" href="#file-types"><span class="std std-numref">Table 11.1</span></a>.</p>
 <table class="colwidths-given table" id="file-types">
 <caption><span class="caption-number">Table 11.1 </span><span class="caption-text">Types of objects in a file system. </span><a class="headerlink" href="#file-types" title="Permalink to this table">#</a></caption>
 <colgroup>
