@@ -144,7 +144,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../intro/tools.html">
-   5. Tools
+   5. What you should know
   </a>
  </li>
 </ul>
@@ -367,11 +367,6 @@ const thebe_selector_output = ".output, .cell_output"
    42. Virtualization
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sec/sec.html">
-   43. Security
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -381,17 +376,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   44. How to read this book
+   43. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   45. Contributing
+   44. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   46. Bibliography
+   45. Bibliography
   </a>
  </li>
 </ul>
@@ -823,7 +818,7 @@ Encapsulating critical section entry and exit with operations on a lock object.<
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "bfa4c1ea764f49aab7c702f307ba1dc3", "version_major": 2, "version_minor": 0}
+{"model_id": "49ee5aff86a24ff09abefe7f6fbcaf41", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <p>That looks a lot better! So, armed with a lock abstraction (called mutex in the pthreads library), we have a working solution to the critical section problem. In the next chapter, we will explore the internal implementation of the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> and <code class="docutils literal notranslate"><span class="pre">release()</span></code> functions.</p>
@@ -832,7 +827,7 @@ Encapsulating critical section entry and exit with operations on a lock object.<
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"04fd903850004c61b850fc7b8114d9ab": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "bc3bfcc7fbc24d2aba6130119b4cd3c0": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "bfa4c1ea764f49aab7c702f307ba1dc3": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_04fd903850004c61b850fc7b8114d9ab", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ./counter_mutex 2 20000\r\nMain thread: Beginning test with 2 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_mutex 2 100000\r\nMain thread: Beginning test with 2 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_mutex 4 100000\r\nMain thread: Beginning test with 4 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_mutex 4 100000\r\nMain thread: Beginning test with 4 threads\r\nMain thread: Final value of shared counter is 0\r\n$ "}]}}, "d1289953c9004ea58130165105a1eb86": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_bc3bfcc7fbc24d2aba6130119b4cd3c0", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     #\r\n$ "}]}}}, "version_major": 2, "version_minor": 0}
+{"state": {"22f6ff7acc0545a4a38318e0f8a5d5ee": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_449ef222236c4654aec738a43d394203", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     #\r\n$ "}]}}, "449ef222236c4654aec738a43d394203": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "49ee5aff86a24ff09abefe7f6fbcaf41": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_eb5fdc658d044dfdbfe0d05e2c74414b", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ./counter_mutex 2 20000\r\nMain thread: Beginning test with 2 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_mutex 2 100000\r\nMain thread: Beginning test with 2 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_mutex 4 100000\r\nMain thread: Beginning test with 4 threads\r\nMain thread: Final value of shared counter is 0\r\n$ ./counter_mutex 4 100000\r\nMain thread: Beginning test with 4 threads\r\nMain thread: Final value of shared counter is 0\r\n$ "}]}}, "eb5fdc658d044dfdbfe0d05e2c74414b": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 

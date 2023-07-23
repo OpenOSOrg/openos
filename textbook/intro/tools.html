@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>5. Tools &#8212; Introduction to Operating Systems</title>
+    <title>5. What you should know &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -144,7 +144,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   5. Tools
+   5. What you should know
   </a>
  </li>
 </ul>
@@ -367,11 +367,6 @@ const thebe_selector_output = ".output, .cell_output"
    42. Virtualization
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sec/sec.html">
-   43. Security
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -381,17 +376,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   44. How to read this book
+   43. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   45. Contributing
+   44. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   46. Bibliography
+   45. Bibliography
   </a>
  </li>
 </ul>
@@ -663,6 +658,19 @@ title="Print to PDF"
          </code>
         </a>
        </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#apropos-keyword">
+         5.1.1.1.2.
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           apropos
+          </span>
+          <span class="pre">
+           &lt;keyword&gt;
+          </span>
+         </code>
+        </a>
+       </li>
       </ul>
      </li>
      <li class="toc-h4 nav-item toc-entry">
@@ -758,6 +766,11 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#emacs-basics">
      5.2.1. EMACS Basics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vim-basics">
+     5.2.2. Vim Basics
     </a>
    </li>
   </ul>
@@ -883,6 +896,18 @@ title="Print to PDF"
     <a class="reference internal nav-link" href="#using-gdb-to-debug">
      5.5.2. Using gdb to debug
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#debugging-threads">
+       5.5.2.1. Debugging threads
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#debugging-signals">
+       5.5.2.2. Debugging signals
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review">
@@ -890,6 +915,16 @@ title="Print to PDF"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-c-programming-language">
+   5.6. The C Programming Language
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unit-tests">
+   5.7. Unit Tests
+  </a>
  </li>
 </ul>
 
@@ -900,7 +935,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Tools</h1>
+                <h1>What you should know</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -938,6 +973,19 @@ title="Print to PDF"
          </code>
         </a>
        </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#apropos-keyword">
+         5.1.1.1.2.
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           apropos
+          </span>
+          <span class="pre">
+           &lt;keyword&gt;
+          </span>
+         </code>
+        </a>
+       </li>
       </ul>
      </li>
      <li class="toc-h4 nav-item toc-entry">
@@ -1033,6 +1081,11 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#emacs-basics">
      5.2.1. EMACS Basics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vim-basics">
+     5.2.2. Vim Basics
     </a>
    </li>
   </ul>
@@ -1158,6 +1211,18 @@ title="Print to PDF"
     <a class="reference internal nav-link" href="#using-gdb-to-debug">
      5.5.2. Using gdb to debug
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#debugging-threads">
+       5.5.2.1. Debugging threads
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#debugging-signals">
+       5.5.2.2. Debugging signals
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#review">
@@ -1165,6 +1230,16 @@ title="Print to PDF"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-c-programming-language">
+   5.6. The C Programming Language
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unit-tests">
+   5.7. Unit Tests
+  </a>
  </li>
 </ul>
 
@@ -1176,24 +1251,51 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="tools">
-<span id="cont-gs-tools"></span><h1><span class="section-number">5. </span>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="what-you-should-know">
+<span id="cont-gs-tools"></span><h1><span class="section-number">5. </span>What you should know<a class="headerlink" href="#what-you-should-know" title="Permalink to this headline">#</a></h1>
+<p>From having taught operating systems for multiple years, we have learned two things: you have learned this material in other courses, and you probably got away without really mastering it. For example, many of you have never really written a proper makefile to automate compilation, and most of you have debugged programs without mastering the debugger.</p>
+<p>Before taking this course, you should have good familiarity with:</p>
 <ol class="simple">
-<li><p>Things you need to know: short cheat sheet description with</p>
+<li><p><a class="reference internal" href="#cont-gs-tools-shell"><span class="std std-ref">Unix shells</span></a></p>
 <ul class="simple">
-<li><p>terminal and shell</p></li>
-<li><p>editors</p></li>
-<li><p>makefile</p></li>
-<li><p>git</p></li>
-<li><p>gdb</p></li>
+<li><p>In this section we will introduce several shell commands that you will see and use very frequently. We encourage you to experiment with all of the commands and examples covered in this section! It is by far the best way to become comfortable with the shell.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#cont-gs-tools-editors"><span class="std std-ref">editors</span></a></p>
+<ul class="simple">
+<li><p>In this section we will introduce two terminal text editors that are frequently used on Unix machines. Learning to write code on these editors are essential without access to modern IDEs with GUIs like Visual Studio Code.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#cont-gs-tools-make"><span class="std std-ref">compiling</span></a></p>
+<ul class="simple">
+<li><p>As the size of your projects increase, the need for automation via Makefiles also increase. You don’t want to be typing the compile commands for all of your files or repeatidly pressing the up arrow for previous compile commands after every change.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#cont-gs-tools-git"><span class="std std-ref">git</span></a></p>
+<ul class="simple">
+<li><p>Version control is important to keep records of long-standing projects and to clearly communicate changes to other developers working on the same project.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#cont-gs-tools-gdb"><span class="std std-ref">GDB debugger</span></a></p>
+<ul class="simple">
+<li><p>Print statements won’t show everything going on in a process. In addition to printing variable values, GDB allows more powerful debugging tools such as changing the value of variables at run time, switching between threads, examining CPU registers, etc.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#cont-gs-tools-c"><span class="std std-ref">C programming language</span></a></p>
+<ul class="simple">
+<li><p>It is the most used programming language for operating systems. By mastering the language, you will reduce the number of syntax errors, and can focus more on debugging the logical errors.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#cont-gs-tools-testing"><span class="std std-ref">unit tests</span></a></p>
+<ul class="simple">
+<li><p>They are not only used to determine whether or not a program runs correctly, but also to test whether or not you understand how the system is supposed to work. They are really helpful for edge cases. Get rid of the “guess and check” mindset and write some tests.</p></li>
 </ul>
 </li>
 </ol>
-<p><strong>Disclaimer:</strong> The focus of this section is to provide enough information about various programs and commands needed for this class to get you started experimenting and developing. We will not go in-depth into discussing any of the tools here, but rest assured you will see many of them in more detail in lecture and can always learn more on your own if interested! We recommend <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/intro.html#operating-systems-and-unix">this book</a> by Jonathan Appavoo as a reference. We will also provide links throughout this page to information about some of the more specific topics covered.</p>
+<p>We can guarantee that you won’t be successful if you do not master your tools because the programming assignments for operating system courses tend to me more demanding. We recommend <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/intro.html#operating-systems-and-unix">this book</a> by Jonathan Appavoo as a more detailed reference on most of what we cover here.</p>
 <section id="shell">
-<h2><span class="section-number">5.1. </span>Shell<a class="headerlink" href="#shell" title="Permalink to this headline">#</a></h2>
+<span id="cont-gs-tools-shell"></span><h2><span class="section-number">5.1. </span>Shell<a class="headerlink" href="#shell" title="Permalink to this headline">#</a></h2>
 <p>The shell is a basic interface that allows users to communicate with the kernel and any installed programs. Whenever you open a terminal, the kernel starts an instance of a shell program, or shell “session”. When most people interact with computers, they do so through graphical user interfaces that they navigate using a mouse or their finger. The shell is completely text-based and designed for programmers. It has its own programming language of special commands to access kernel functionalities. For more information about terminals and shells, please refer to the relevant sections of <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/intro.html#operating-systems-and-unix">the following textbook</a>.</p>
-<p>In this section we will introduce several shell commands that you will see and use very frequently. We encourage you to experiment with all of the commands and examples covered in this section! It is by far the best way to become comfortable with the shell.</p>
 <section id="some-basic-shell-commands">
 <h3><span class="section-number">5.1.1. </span>Some basic shell commands<a class="headerlink" href="#some-basic-shell-commands" title="Permalink to this headline">#</a></h3>
 <section id="help-and-information">
@@ -1201,6 +1303,14 @@ title="Print to PDF"
 <section id="man-command">
 <h5><span class="section-number">5.1.1.1.1. </span><code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">&lt;command&gt;</span></code><a class="headerlink" href="#man-command" title="Permalink to this headline">#</a></h5>
 <p>This is probably the most important command for students new to Linux and interacting with computers via the shell. The <code class="docutils literal notranslate"><span class="pre">man</span></code> command (short for “manual”) allows you to access documentation about all programs installed on a system. For example, to view documentation for the <code class="docutils literal notranslate"><span class="pre">man</span></code> command itself, you simply type <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">man</span></code> to open its man page. You can scroll through man pages using the arrow keys or <code class="docutils literal notranslate"><span class="pre">ctrl+f</span></code> (move forward one page) and <code class="docutils literal notranslate"><span class="pre">ctrl+b</span></code> (move backward one page) and exit back to the command line by typing <code class="docutils literal notranslate"><span class="pre">q</span></code>. For more information about any of the other commands discussed in this chapter (or any chapter for that matter), consult these <strong>man pages</strong>!</p>
+</section>
+<section id="apropos-keyword">
+<h5><span class="section-number">5.1.1.1.2. </span><code class="docutils literal notranslate"><span class="pre">apropos</span> <span class="pre">&lt;keyword&gt;</span></code><a class="headerlink" href="#apropos-keyword" title="Permalink to this headline">#</a></h5>
+<p>This is probably the second most important command for students new to Linux and interacting with computers via the shell. If you type <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">apropos</span></code>, its description is</p>
+<blockquote>
+<div><p>apropos searches a set of database files containing short descriptions of system commands for keywords and displays the result on the standard output.</p>
+</div></blockquote>
+<p>In other words, it searches all <code class="docutils literal notranslate"><span class="pre">man-able</span></code> programs for the <code class="docutils literal notranslate"><span class="pre">keyword</span></code>, and displays it on the screen. This can be useful if you know that a program description has a certain keyword or functionality, but not know the specific name of it.</p>
 </section>
 </section>
 <section id="navigating-your-system-via-the-command-line">
@@ -1287,7 +1397,7 @@ Hello world
 </section>
 </section>
 <section id="editors">
-<h2><span class="section-number">5.2. </span>Editors<a class="headerlink" href="#editors" title="Permalink to this headline">#</a></h2>
+<span id="cont-gs-tools-editors"></span><h2><span class="section-number">5.2. </span>Editors<a class="headerlink" href="#editors" title="Permalink to this headline">#</a></h2>
 <p>Terminal-based text editors allow us to write and edit files when we don’t have access to a GUI (e.g., when we are SSHing into a remote computer). <a class="reference external" href="https://en.wikipedia.org/wiki/Vim_(text_editor)">VIM</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Emacs">EMACS</a> are most common. <strong>We are requiring that students use EMACS for this course, and those who use VIM will be penalized.</strong></p>
 <section id="emacs-basics">
 <h3><span class="section-number">5.2.1. </span>EMACS Basics<a class="headerlink" href="#emacs-basics" title="Permalink to this headline">#</a></h3>
@@ -1306,9 +1416,14 @@ Hello world
 <li><p><strong>C-g</strong>: stop a command that is taking too long to execute</p></li>
 </ul>
 </section>
+<section id="vim-basics">
+<h3><span class="section-number">5.2.2. </span>Vim Basics<a class="headerlink" href="#vim-basics" title="Permalink to this headline">#</a></h3>
+<p>Vim is a “simple to use, hard to master” text editor that is valued by vim enthusiasts for its coding effeciency.</p>
+<p>To open a file in vim, type <code class="docutils literal notranslate"><span class="pre">vim</span> <span class="pre">&lt;filename&gt;</span></code>. When you enter vim, you will automatically be in <code class="docutils literal notranslate"><span class="pre">normal</span> <span class="pre">mode</span></code> where you can navigate your cursor. To insert text, type <code class="docutils literal notranslate"><span class="pre">i</span></code> to enter <code class="docutils literal notranslate"><span class="pre">insert</span> <span class="pre">mode</span></code>. To save a file, first press the <code class="docutils literal notranslate"><span class="pre">esc</span></code> key to enter normal mode, next press <code class="docutils literal notranslate"><span class="pre">:</span></code> to enter <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">mode</span></code>, lastly press <code class="docutils literal notranslate"><span class="pre">w</span></code> and enter to save. To quit, enter command mode and enter <code class="docutils literal notranslate"><span class="pre">q</span></code>.</p>
+</section>
 </section>
 <section id="makefiles">
-<h2><span class="section-number">5.3. </span>Makefiles<a class="headerlink" href="#makefiles" title="Permalink to this headline">#</a></h2>
+<span id="cont-gs-tools-make"></span><h2><span class="section-number">5.3. </span>Makefiles<a class="headerlink" href="#makefiles" title="Permalink to this headline">#</a></h2>
 <p>Hopefully, you are familiar with the process of compiling c files into executables to be run. Usually, this looks something like:</p>
 <p><code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">filename.c</span> <span class="pre">-o</span> <span class="pre">filename</span></code></p>
 <p>This would compile the c file “filename.c” into an executable called “filename”, which we could then run by typing <code class="docutils literal notranslate"><span class="pre">./filename</span></code>.</p>
@@ -1382,7 +1497,7 @@ clean:
 </section>
 </section>
 <section id="git-basics">
-<h2><span class="section-number">5.4. </span>Git Basics<a class="headerlink" href="#git-basics" title="Permalink to this headline">#</a></h2>
+<span id="cont-gs-tools-git"></span><h2><span class="section-number">5.4. </span>Git Basics<a class="headerlink" href="#git-basics" title="Permalink to this headline">#</a></h2>
 <p>Version control is a good idea for any software project. For your work in this class, it will be required. The development environment will periodically wipe your directory, so if you haven’t pushed your changes to a remote repository, you will lose all progress. We recommend committing and pushing your code often to avoid losing your work.</p>
 <p>If you are completely new to GitHub, we recommend <a class="reference external" href="https://docs.github.com/en/get-started/quickstart/hello-world">this guide</a> to help get you started. <a class="reference external" href="https://git-scm.com/docs">This documentation site</a> will also be helpful.</p>
 <p>Since you will not be collaborating on code, much of GitHub’s functionality will be unnecessary. The following five commands should cover everything that you need for making sure you don’t lose your work.</p>
@@ -1408,7 +1523,7 @@ clean:
 </section>
 </section>
 <section id="gdb">
-<h2><span class="section-number">5.5. </span>GDB<a class="headerlink" href="#gdb" title="Permalink to this headline">#</a></h2>
+<span id="cont-gs-tools-gdb"></span><h2><span class="section-number">5.5. </span>GDB<a class="headerlink" href="#gdb" title="Permalink to this headline">#</a></h2>
 <p>gdb is your best friend when it comes to debugging. It allows you to step through a program line by line, examine variable values and the contents of the stack, and much more. For a quick reference, we recommend <a class="reference external" href="https://users.ece.utexas.edu/~adnan/gdb-refcard.pdf">this guide</a>.</p>
 <section id="getting-started">
 <h3><span class="section-number">5.5.1. </span>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">#</a></h3>
@@ -1432,6 +1547,32 @@ clean:
 <p>Once you have set all your desired breakpoints, you need to run the program. To do this, simply type the command <code class="docutils literal notranslate"><span class="pre">run</span></code> into gdb. If the program takes command line arguments, you can provide them the same way as you would in the command line, except you say “run” instead of the program name. Your code will execute up to where you specified your first breakpoint.</p>
 <p>Once you reach your breakpoint, you will probably want to look at the contents of the stack or some variables to make sure that your program is executing as expected. To see the current value of a variable, you can simply type <code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">&lt;variablename&gt;</span></code>.</p>
 <p>To continue running the program after stopping at a break time, you have several options. Typing <code class="docutils literal notranslate"><span class="pre">continue</span></code> will set the program running again until you hit another breakpoint or the process finishes. Typing <code class="docutils literal notranslate"><span class="pre">step</span></code> (or just <code class="docutils literal notranslate"><span class="pre">s</span></code>) will execute the current source line and stop execution before the next source line, If the line that is about to be executed is a function call, then <code class="docutils literal notranslate"><span class="pre">step</span></code> will step into that function. In contrast, moving through execution using the <code class="docutils literal notranslate"><span class="pre">next</span></code> will not “step in” to a called function. It will continue until the next source line in <em>the current function</em>.</p>
+<section id="debugging-threads">
+<h4><span class="section-number">5.5.2.1. </span>Debugging threads<a class="headerlink" href="#debugging-threads" title="Permalink to this headline">#</a></h4>
+<p>Once you learn about pthreads, a very powerful thing you can do is switch between threads and step through in the order you choose.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">threads</span></code>: lists all existing threads.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">thread</span> <span class="pre">&lt;thread_id&gt;</span></code>: selects which thread to switch to.</p></li>
+</ul>
+<p>After you have selected which thread you would like to step through, you can use the basic stepping commands to execute the next instructions. Note that already existing break points exist across all threads.</p>
+</section>
+<section id="debugging-signals">
+<h4><span class="section-number">5.5.2.2. </span>Debugging signals<a class="headerlink" href="#debugging-signals" title="Permalink to this headline">#</a></h4>
+<p>Once you learn about signals, you can use gdb to change its behavior on how to handle those signals.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">signals</span></code> or <code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">signals</span> <span class="pre">&lt;signal&gt;</span></code>: lists all signals (or one signal) and shows how gdb responds to it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">handle</span> <span class="pre">&lt;signal&gt;</span> <span class="pre">&lt;keyword&gt;</span></code>: changes how gdb responds to that signal based on the keyword.</p></li>
+</ul>
+<p>Below is a list of keywords:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nostop</span></code>: gdb should not stop your program when this signal happens.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stop</span></code>: gdb should stop your program when this signal happens.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print</span></code>: gdb should print a message when this signal happens.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">noprint</span></code>: gdb should not mention the occurrence of the signal at all.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ignore</span></code>: gdb should not allow your program to see this signal.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">noignore</span></code>: gdb should allow your program to see this signal.</p></li>
+</ul>
+</section>
 </section>
 <section id="review">
 <h3><span class="section-number">5.5.3. </span>Review<a class="headerlink" href="#review" title="Permalink to this headline">#</a></h3>
@@ -1446,6 +1587,57 @@ clean:
 </ul>
 <p>This is just the beginning of what you can do with gdb, and we will add to this section of the book as the course continues!</p>
 </section>
+</section>
+<section id="the-c-programming-language">
+<span id="cont-gs-tools-c"></span><h2><span class="section-number">5.6. </span>The C Programming Language<a class="headerlink" href="#the-c-programming-language" title="Permalink to this headline">#</a></h2>
+<p>The C programming language is a high level statically typed procedural compiled programming language valued for its accessibility to low level computer memory. You have probably already learned the language in a previous course, but this course will utilize some of its advanced features that have probably not been taught in those introductory courses. To make the learning process easier, we recommend reviewing its syntax and concepts. Here are a few:</p>
+<ul class="simple">
+<li><p>data types and their bits</p></li>
+<li><p>operator precedence</p></li>
+<li><p>control flow (if, for, while, etc)</p></li>
+<li><p>arrays</p></li>
+<li><p>strings</p></li>
+<li><p>pointers</p></li>
+<li><p>dynamic allocation</p></li>
+<li><p>functions</p></li>
+<li><p>preprocessing and compiling</p></li>
+<li><p><a class="reference external" href="https://www.gnu.org/software/libc/">glibc</a> (GNU C Library)</p></li>
+<li><p>algorithms and data structures (hash maps, linked lists, etc)</p></li>
+</ul>
+<p>In addition to reviewing the language, we also encourage you to follow some sort of coding style. <a class="reference external" href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html">This website</a> contains the preferred coding style for the Linux kernel. Although not required, adhering to a style will increase productivity so you and whoever else looks at your code will spend less time trying to understand what you wrote.</p>
+</section>
+<section id="unit-tests">
+<span id="cont-gs-tools-testing"></span><h2><span class="section-number">5.7. </span>Unit Tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">#</a></h2>
+<p>Unit tests are a way to check if your program runs as expected. Combine unit tests with makefiles, then you can automate both the <code class="docutils literal notranslate"><span class="pre">compiling</span></code> <strong>and</strong> <code class="docutils literal notranslate"><span class="pre">testing</span></code> phase of development. We call these tests <strong>unit tests</strong> because they are supposed to test a singular functionality of a component in a system rather than the whole system. You will spend less time debugging unit tests than testing the entire system because you can determine that the problem is with the specific functionality that it is testing.</p>
+<p>Creating your own tests are <strong><code class="docutils literal notranslate"><span class="pre">essential</span></code></strong> to completing the programming assignments.</p>
+<p>As an example, we have 3 functions: <code class="docutils literal notranslate"><span class="pre">foo</span></code>, <code class="docutils literal notranslate"><span class="pre">bar</span></code>, and <code class="docutils literal notranslate"><span class="pre">baz</span></code>. <code class="docutils literal notranslate"><span class="pre">foo</span></code> is a helper function to <code class="docutils literal notranslate"><span class="pre">bar</span></code> and <code class="docutils literal notranslate"><span class="pre">baz</span></code>, and <code class="docutils literal notranslate"><span class="pre">bar</span></code> is a helper function to <code class="docutils literal notranslate"><span class="pre">baz</span></code>.</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">foo</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">bar</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">foo</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">baz</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bar</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">foo</span><span class="p">()</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">foo</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// this is a first level unit test</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">bar</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// this is a second level unit test</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">baz</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// this is a final level unit test aka system test</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>It would be very easy to create a test for <code class="docutils literal notranslate"><span class="pre">baz</span></code> and check the expected outputs, however, there is a possibility that the test passes for the wrong reasons (two wrongs might make a right). In the case that testing <code class="docutils literal notranslate"><span class="pre">baz</span></code> fails, it would be much harder to debug <code class="docutils literal notranslate"><span class="pre">baz</span></code> without first testing if both <code class="docutils literal notranslate"><span class="pre">foo</span></code> and <code class="docutils literal notranslate"><span class="pre">bar</span></code> pass their tests. Although this is a simple example, this idea of creating unit tests from the first level to the last will greatly improve development effeciency, and will train you to think about a complex system in bite sized chunks.</p>
 </section>
 </section>
 

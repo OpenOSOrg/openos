@@ -17,22 +17,16 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-```{image} ../images/intro/purpose-OS-source-01.drawio.png
-:width: 20% 
-:align: right
-name: contrib:fig:dioex1
-```
-
-- structure of simple computer, with processor, memory, storage and communication devices
-- forward reference to concurrency
-- discuss core abstractions of each and fundamental properties slow/fast
-
+from jupyterquiz import display_quiz
+display_quiz("../quizzes/fs.json", colors="fdsp")
 ------------------
 
-[0;36m  Input [0;32mIn [2][0;36m[0m
-[0;31m    ```{image} ../images/intro/purpose-OS-source-01.drawio.png[0m
-[0m                                                   ^[0m
-[0;31mSyntaxError[0m[0;31m:[0m invalid decimal literal
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Input [0;32mIn [1][0m, in [0;36m<cell line: 2>[0;34m()[0m
+[1;32m      1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mjupyterquiz[39;00m [38;5;28;01mimport[39;00m display_quiz
+[0;32m----> 2[0m [43mdisplay_quiz[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43m../quizzes/fs.json[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mcolors[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mfdsp[39;49m[38;5;124;43m"[39;49m[43m)[49m
 
-SyntaxError: invalid decimal literal (1413660242.py, line 1)
+[0;31mTypeError[0m: display_quiz() got an unexpected keyword argument 'colors'
+TypeError: display_quiz() got an unexpected keyword argument 'colors'
 
