@@ -1,0 +1,142 @@
+[
+    {
+        "question": "What is the purpose of synchronization in concurrent programming?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "To restrict the possible interleavings of threads and control how they use shared resources.",
+                "correct": true,
+                "feedback": "Correct! Synchronization is used to control the access and usage of shared resources among threads."
+            },
+            {
+                "answer": "To increase the speed of thread execution.",
+                "correct": false,
+                "feedback": "Incorrect. Synchronization is not primarily about increasing thread execution speed."
+            },
+            {
+                "answer": "To prevent race conditions.",
+                "correct": true,
+                "feedback": "Correct!. Synchronization is used to prevent race conditions."
+            },
+            {
+                "answer": "To create independent execution entities within a process.",
+                "correct": false,
+                "feedback": "Incorrect. Synchronization is focused on coordinating and managing shared resources among threads, rather than creating independent entities."
+            }
+        ]
+    },
+    {
+        "question": "What are the requirements for a solution to the critical section problem?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Mutual Exclusion, Progress, Bounded Waiting, and Performance.",
+                "correct": true,
+                "feedback": "Correct! A solution to the critical section problem must satisfy the requirements of Mutual Exclusion, Progress, Bounded Waiting, and Performance."
+            },
+            {
+                "answer": "Mutual Exclusion, Starvation Avoidance, Synchronization, and Efficiency.",
+                "correct": false,
+                "feedback": "Incorrect. While some of the terms are related, they are not the requirements for a solution to the critical section problem."
+            },
+            {
+                "answer": "Synchronization, Atomicity, Deadlock Prevention, and Fairness.",
+                "correct": false,
+                "feedback": "Incorrect. While some of the terms are important in concurrent programming, they are not the requirements for a solution to the critical section problem."
+            },
+            {
+                "answer": "Concurrency, Deadlock Avoidance, Resource Allocation, and Scalability.",
+                "correct": false,
+                "feedback": "Incorrect. The requirements mentioned are important in the context of concurrency and operating systems, but they are not the requirements for a solution to the critical section problem."
+            }
+        ]
+    },
+    {
+        "question": "How does Peterson's Algorithm differ from other solutions for implementing critical section entry and exit protocols?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Peterson's Algorithm ensures mutual exclusion and progress for two threads.",
+                "correct": true,
+                "feedback": "Correct! Peterson's Algorithm distinguishes itself by providing mutual exclusion and progress specifically for two threads."
+            },
+            {
+                "answer": "Peterson's Algorithm is the simplest and most efficient solution for critical section synchronization.",
+                "correct": false,
+                "feedback": "Incorrect. While Peterson's Algorithm is effective, it can be complex to implement and involves busy waiting in its protocol."
+            },
+            {
+                "answer": "Peterson's Algorithm is a scalable solution that can handle multiple threads and critical sections.",
+                "correct": false,
+                "feedback": "Incorrect. Peterson's Algorithm is designed for two threads and does not easily scale to multiple threads and critical sections."
+            },
+            {
+                "answer": "Peterson's Algorithm guarantees fairness and bounded waiting for all threads.",
+                "correct": false,
+                "feedback": "Incorrect. While Peterson's Algorithm provides mutual exclusion and progress, it does not inherently guarantee fairness or bounded waiting for all threads."
+            }
+        ]
+    },
+    {
+        "question": "Why are atomic instructions important to locks?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Atomic instructions ensure that locks can be acquired and released in an atomic and indivisible manner.",
+                "correct": true,
+                "feedback": "Correct! Atomic instructions are crucial for locks as they guarantee that lock acquisition and release operations are performed atomically and cannot be interrupted or interleaved by other threads."
+            },
+            {
+                "answer": "Atomic instructions simplify the implementation of locks by providing a standardized interface for concurrent access.",
+                "correct": false,
+                "feedback": "Incorrect. While atomic instructions can aid in lock implementations, their importance goes beyond simplifying the implementation."
+            },
+            {
+                "answer": "Atomic instructions improve the performance of locks by reducing contention and allowing for more efficient synchronization.",
+                "correct": false,
+                "feedback": "Incorrect. While atomic instructions can improve lock performance to some extent, it is not their primary importance."
+            },
+            {
+                "answer": "Atomic instructions enable locks to work across different processor architectures and ensure portability.",
+                "correct": false,
+                "feedback": "Incorrect. Atomic instructions do not ensure portability across different processor architectures."
+            }
+        ]
+    },      
+    {
+        "question": "What are the conditions for a deadlock?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "A resource that has been allocated to one thread cannot be used by any other thread",
+                "correct": true,
+                "feedback": "Correct! This is one of the four conditions for a deadlock."
+            },
+            {
+                "answer": "A thread that requires more resources will wait and hold onto what it currently has until it is granted its required resources",
+                "correct": true,
+                "feedback": "Correct! This is one of the four conditions for a deadlock."
+            },
+            {
+                "answer": "A thread's granted resources cannot be forcibly taken away for a different thread",
+                "correct": true,
+                "feedback": "Correct! This is one of the four conditions for a deadlock."
+            },
+            {
+                "answer": "There is a chain of threads where each thread is waiting for the next to give up its resources",
+                "correct": true,
+                "feedback": "Correct! This is one of the four conditions for a deadlock."
+            },
+            {
+                "answer": "A thread exits while holding onto resources",
+                "correct": false,
+                "feedback": "Incorrect. Although this can lead to a deadlock, it is not one of the four conditions,"
+            },
+            {
+                "answer": "All threads require data input at the same time, which makes all threads blocked",
+                "correct": false,
+                "feedback": "Incorrect. Although all threads might temporarily stop, this will not lead to a deadlock."
+            }
+        ]
+    }
+]

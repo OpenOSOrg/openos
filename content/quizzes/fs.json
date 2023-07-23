@@ -1,0 +1,205 @@
+[
+    {
+        "question": "Which one or more of the following scenarios could cause the contents of the 1000th byte in a file to either change or cease to exist?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "The file is renamed",
+                "correct": false,
+                "feedback": "Incorrect. Renaming a file does not directly affect the contents of the file or the specific byte within it."
+            },
+            {
+                "answer": "The file is deleted",
+                "correct": false,
+                "feedback": "Incorrect. Deleting a file removes it from the file system, but it does not affect the contents of the file or the specific byte within it."
+            },
+            {
+                "answer": "Bytes 500 through 600 in the file are over-written",
+                "correct": false,
+                "feedback": "Incorrect. Overwriting bytes in a different range (500-600) does not directly impact the contents of the 1000th byte in the file."
+            },
+            {
+                "answer": "Bytes 900 through 1200 are over-written",
+                "correct": true,
+                "feedback": "Correct! Overwriting bytes in the range of 900-1200 can potentially affect the contents of the 1000th byte in the file if it falls within that range."
+            }
+        ]
+    },
+    {
+        "question": "Creating, modifying, and deleting directories is performed by different system calls than creating and deleting files. Which of the following are possible reasons for this?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "When deleting a directory, the OS must check to be sure that it is empty",
+                "correct": true,
+                "feedback": "Correct! When deleting a directory, the operating system needs to verify that the directory is empty before removing it."
+            },
+            {
+                "answer": "Directories use a different kind of name from files",
+                "correct": false,
+                "feedback": "Incorrect. Directories and files can use the same naming conventions."
+            },
+            {
+                "answer": "To prevent users from modifying directory data which is accessed by kernel code",
+                "correct": true,
+                "feedback": "Correct! By having separate system calls for directory operations, the operating system can control and restrict user access to directory data that is critical for proper system functioning."
+            }
+        ]
+    },
+    {
+        "question": "What is the difference between a symbolic link and a hard link in Unix file systems?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Symbolic links are used for files, while hard links are used for directories.",
+                "correct": false,
+                "feedback": "Incorrect. Symbolic links and hard links can be used for both files and directories."
+            },
+            {
+                "answer": "Symbolic links and hard links are identical and can be used interchangeably in Unix file systems.",
+                "correct": false,
+                "feedback": "Incorrect. Symbolic links and hard links have distinct characteristics and behaviors."
+            },
+            {
+                "answer": "Symbolic links are represented by separate inodes, while hard links share the same inode as the target file.",
+                "correct": true,
+                "feedback": "Correct! This answer highlights an important difference between symbolic links and hard links in terms of inode representation."
+            },
+            {
+                "answer": "Symbolic links allow you to create multiple names for the same file, while hard links provide a direct link to the file's inode.",
+                "correct": true,
+                "feedback": "Correct! This answer effectively summarizes the difference between symbolic links and hard links."
+            }
+        ]
+    },
+    {
+        "question": "What is the purpose of the partition table in storing a file system on a real disk?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "The partition table provides information about the size of the disk and the total number of files stored on it.",
+                "correct": false,
+                "feedback": "Incorrect. The partition table is primarily used for dividing the disk into partitions."
+            },
+            {
+                "answer": "The partition table ensures data integrity by verifying the consistency of the file system structures on the disk.",
+                "correct": false,
+                "feedback": "Incorrect. While data integrity is important, that is not the primare purpose of the partition table."
+            },
+            {
+                "answer": "The partition table stores the file system code required to interpret the blocks on the disk.",
+                "correct": false,
+                "feedback": "Incorrect. The partition table does not store the actual file system code."
+            },
+            {
+                "answer": "The partition table is used to divide the disk into partitions, each potentially containing a different file system.",
+                "correct": true,
+                "feedback": "Correct! The partition table is used to divide the disk into partitions, allowing different file systems to be stored on each partition."
+            }
+        ]
+    },
+    {
+        "question": "How do file systems represent blocks that are free?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "File systems store free block information in a free list, where each block on the list contains free disk block numbers.",
+                "correct": false,
+                "feedback": "Incorrect. While the free list approach was used in some file systems, that is not the most common method."
+            },
+            {
+                "answer": "File systems represent free blocks using an allocation bitmap, where each block is associated with a bit in the bitmap. A '0' bit indicates a free block, and a '1' bit indicates an allocated block.",
+                "correct": true,
+                "feedback": "Correct! File systems use an allocation bitmap to represent free blocks, with '0' indicating a free block and '1' indicating an allocated block."
+            },
+            {
+                "answer": "File systems utilize a linked list structure to maintain the list of free blocks on the disk.",
+                "correct": false,
+                "feedback": "Incorrect. Although linked list structures can be used for other purposes, that is not the most common method."
+            },
+            {
+                "answer": "File systems use a partition table to track the status of blocks, designating certain blocks as free.",
+                "correct": false,
+                "feedback": "Incorrect. The partition table is used for partitioning the disk."
+            }
+        ]
+    },
+    {
+        "question": "What is the advantage of using extent-based file systems over traditional block-based file systems?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Extent-based file systems reduce the amount of metadata required to represent file blocks and improve disk access performance.",
+                "correct": true,
+                "feedback": "Correct! Extent-based file systems reduce metadata overhead and improve disk access performance by representing file blocks using extents."
+            },
+            {
+                "answer": "Extent-based file systems provide better data integrity and reliability compared to traditional block-based file systems.",
+                "correct": false,
+                "feedback": "Incorrect. While data integrity is important, it is not the the primary advantage of using extent-based file systems."
+            },
+            {
+                "answer": "Extent-based file systems simplify file system management and reduce disk fragmentation compared to traditional block-based file systems.",
+                "correct": false,
+                "feedback": "Incorrect. While extent-based file systems may have benefits in file system management and fragmentation, it is not the the primary advantage of using extent-based file systems."
+            },
+            {
+                "answer": "Extent-based file systems allow for greater file size flexibility and support for larger storage devices compared to traditional block-based file systems.",
+                "correct": false,
+                "feedback": "Incorrect. While extent-based file systems may offer advantages in file size flexibility, it is not the the primary advantage of using extent-based file systems."
+            }
+        ]
+    },
+    {
+        "question": "What is the purpose of journaling in file systems?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Journaling helps ensure consistency and recoverability of file systems by recording changes before they are made to the main file system.",
+                "correct": true,
+                "feedback": "Correct! Journaling in file systems involves recording changes to ensure consistency and recoverability by keeping a log of modifications before they are applied to the main file system."
+            },
+            {
+                "answer": "Journaling improves file system performance by optimizing disk reads and writes to reduce seek times.",
+                "correct": false,
+                "feedback": "Incorrect. While journaling may have some performance benefits, it is not the main purpose of journaling in file systems."
+            },
+            {
+                "answer": "Journaling allows for the compression of file system data to save disk space and improve storage efficiency.",
+                "correct": false,
+                "feedback": "Incorrect. Journaling does not directly relate to compression or storage efficiency."
+            },
+            {
+                "answer": "Journaling enables concurrent access to files by multiple users, improving file system scalability and performance.",
+                "correct": false,
+                "feedback": "Incorrect. While journaling may have some impact on concurrent access and scalability, it is not the main purpose of journaling in file systems."
+            }
+        ]
+    },        
+    {
+        "question": "What are the factors that have a major effect on disk performance?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Transfer time and data capacity",
+                "correct": false,
+                "feedback": "Incorrect. While transfer time is involved in disk performance, they are not the factors that have a major effect."
+            },
+            {
+                "answer": "Platter surface and track number",
+                "correct": false,
+                "feedback": "Incorrect. While platter surface and track number are part of the disk's structure, they do not significantly impact disk performance."
+            },
+            {
+                "answer": "Seek time and rotational latency",
+                "correct": true,
+                "feedback": "Correct! Seek time and rotational latency are the factors that have a major effect on disk performance."
+            },
+            {
+                "answer": "Logical Block Addresses (LBAs) and data block size",
+                "correct": false,
+                "feedback": "Incorrect. While LBAs and data block size are relevant to disk organization, they do not significantly impact disk performance."
+            }
+        ]
+    }     
+]

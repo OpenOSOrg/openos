@@ -1,0 +1,142 @@
+[
+    {
+        "question": "What is the purpose of a context switch in an operating system?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "To save the CPU state for a process",
+                "correct": false,
+                "feedback": "Incorrect. While saving the CPU state is part of a context switch, it is not the primary purpose of a context switch."
+            },
+            {
+                "answer": "To capture the process state for later retrieval",
+                "correct": false,
+                "feedback": "Incorrect. Capturing the process state is necessary for a context switch, but not the primary purpose of a context switch."
+            },
+            {
+                "answer": "To add a layer of indirection between the CPU and the user",
+                "correct": false,
+                "feedback": "Incorrect. Adding a layer of indirection is a concept related to virtualizing, but not the primary purpose of a context switch."
+            },
+            {
+                "answer": "To change the active process on a CPU",
+                "correct": true,
+                "feedback": "Correct! A context switch is performed to change the active process on a CPU."
+            }
+        ]
+    },
+    {
+        "question": "Which are NOT valid transitions in the process life cycle?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "ready -> running",
+                "correct": false,
+                "feedback": "Incorrect. A process can transition from ready to running."
+            },
+            {
+                "answer": "ready -> blocked",
+                "correct": true,
+                "feedback": "Correct!. A process cannot transition from ready to blocked."
+            },
+            {
+                "answer": "running -> ready",
+                "correct": false,
+                "feedback": "Incorrect. A process can transition from running to ready."
+            },
+            {
+                "answer": "running -> blocked",
+                "correct": false,
+                "feedback": "Incorrect. A process can transition from running to blocked."
+            },
+            {
+                "answer": "blocked -> ready",
+                "correct": false,
+                "feedback": "Incorrect. A process can transition from blocked to ready."
+            },
+            {
+                "answer": "blocked -> running",
+                "correct": true,
+                "feedback": "Correct!. A process cannot transition from blocked to running."
+            }
+        ]
+    },
+    {
+        "question": "Which are true about processes?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "A child process becomes a zombie when parent process exits before a child process exits",
+                "correct": false,
+                "feedback": "Incorrect. In that case, the child becomes an orphan. A child becomes a zombie when it exits before the parent calls a wait syscall."
+            },
+            {
+                "answer": "A variable change in a child process will be reflected in its parent process",
+                "correct": false,
+                "feedback": "Incorrect. A forked process will have its memory space duplicated, independent to the parent's memory."
+            },
+            {
+                "answer": "The variables and their addresses in a forked process are the same as the ones in the parent process (excluding fork() return value)",
+                "correct": true,
+                "feedback": "Correct! A forked process' virtual address space is an exact copy to its parent's."
+            },
+            {
+                "answer": "Processes cannot communicate with eachother because of their separate address spaces",
+                "correct": false,
+                "feedback": "Incorrect. Process can communicate through pipes and file descriptors."
+            }
+        ]
+    },
+    {
+        "question": "Which are true about threads?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Multithreading independent threads will make the process execute faster",
+                "correct": false,
+                "feedback": "Incorrect. It is actually slower to multithread because of the time used to perform a context switch."
+            },
+            {
+                "answer": "Threads can see other threads' local variables and addresses",
+                "correct": false,
+                "feedback": "Incorrect. Although they share the same address space, their view is still limited to their scope"
+            },
+            {
+                "answer": "A blocked thread is immediately skipped or not considered when it gets scheduled",
+                "correct": true,
+                "feedback": "Correct! A blocked thread is usually waiting to receive data, and will not waste CPU time waiting for that data."
+            },
+            {
+                "answer": "If the main thread exits, the other threads continue until completion",
+                "correct": false,
+                "feedback": "Incorrect. If the main thread exits (main function returns), all other threads exit aswell."
+            }
+        ]
+    },
+    {
+        "question": "Which are true about scheduling?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Assuming all processes are finite, batch scheduling is slower than preemptive scheduling",
+                "correct": false,
+                "feedback": "Incorrect. Although used for early computers, Batch scheduling is faster because time is not used performing as many context switches."
+            },
+            {
+                "answer": "Preemptive scheduling has better turnaround time than batch",
+                "correct": true,
+                "feedback": "Correct! "
+            },
+            {
+                "answer": "Shortest Job First (SJF) and priority scheduling can lead to starvation",
+                "correct": true,
+                "feedback": "Correct! A flury of short jobs and high priority jobs can starve the long jobs and low priority jobs from running."
+            },
+            {
+                "answer": "More frequent scheduling means all processes execute faster",
+                "correct": false,
+                "feedback": "Incorrect. More frequent scheduling means more time is being spent performing a context switch than progressing the task."
+            }
+        ]
+    }
+]

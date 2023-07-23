@@ -18,6 +18,7 @@ parts:
   - file: scheduling/process
   - file: scheduling/scheduling
   - file: scheduling/real_sched
+  - file: scheduling/review
 - caption: 'File Systems'
   numbered: True
   chapters:
@@ -31,6 +32,7 @@ parts:
   - file: fs/dl_failures
   - file: fs/dl_ex_exx
   - file: fs/kernelimp
+  - file: fs/review
 - caption: 'Virtual Memory'
   numbered: True
   chapters:
@@ -45,6 +47,7 @@ parts:
   - file: mm/pagefaults
   - file: mm/realworld
   - file: mm/concl
+  - file: mm/review
 # Below is stuff deleted, but content may still be needed
 #  - file: mm/mm
 #  - file: mm/Overview
@@ -64,6 +67,7 @@ parts:
   - file: sync/linux_locking
 # materials to be integrated from peter's book
 #  - file: sync/peter-syncro
+  - file: sync/review
 - caption: 'Other Topics'
   numbered: True
   chapters:

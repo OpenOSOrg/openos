@@ -1,0 +1,131 @@
+[
+    {
+        "question": "From a hardware perspective, the simplest memory management model is to have processes just use the physical address space. What are the major problems with this model?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Programs need to be re-located when loaded",
+                "correct": true,
+                "feedback": "Correct! In the physical address space model, programs need to be loaded into different physical memory addresses, requiring them to be re-located during the loading process."
+            },
+            {
+                "answer": "Programs use a different kind of name from directories",
+                "correct": false,
+                "feedback": "Incorrect. The issue with physical memory management is not related to the difference in naming conventions between programs and directories."
+            },
+            {
+                "answer": "There is no protection between different programs",
+                "correct": true,
+                "feedback": "Correct! In the physical address space model, there is no isolation between programs, which means a bug in one program can modify or affect other programs."
+            },
+            {
+                "answer": "To prevent users from modifying directory data accessed by kernel code",
+                "correct": false,
+                "feedback": "Incorrect. The problem with physical memory management is not related to preventing user modification of directory data accessed by kernel code."
+            }
+        ]
+    },
+    {
+        "question": "What are the advantages of using virtual memory with paging?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Allows for efficient memory allocation and deallocation",
+                "correct": true,
+                "feedback": "Correct! Virtual memory with paging allows for efficient memory allocation and deallocation by using page-level granularity."
+            },
+            {
+                "answer": "Enables sharing of memory pages between processes",
+                "correct": true,
+                "feedback": "Correct! Virtual memory with paging enables sharing of memory pages between processes, reducing memory usage and improving system performance."
+            },
+            {
+                "answer": "Provides protection between different processes",
+                "correct": true,
+                "feedback": "Correct! Virtual memory with paging provides protection between different processes, preventing one process from accessing the memory of another process."
+            },
+            {
+                "answer": "Eliminates the need for disk swapping",
+                "correct": false,
+                "feedback": "Incorrect. Virtual memory with paging still requires disk swapping to handle memory demands beyond the physical capacity."
+            }
+        ]
+    },
+    {
+        "question": "What causes a segmentation fault?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Trying to access a memory location that has not been allocated in virtual memory",
+                "correct": true
+            },
+            {
+                "answer": "Trying to dereference an uninitialized pointer",
+                "correct": true,
+                "feedback": "Correct! Depending on the system, an uninitialized pointer can have a random address or be NULL. Both of which are addresses not allowed to be accessed."
+            },
+            {
+                "answer": "Trying to allocate more memory than your RAM can contain",
+                "correct": false,
+                "feedback": "Incorrect. Segmentation faults are not caused by allocating memory."
+            },
+            {
+                "answer": "Trying to access the virtual memory in a different process",
+                "correct": true,
+                "feedback": "Correct! "
+            }
+        ]
+    },
+    {
+        "question": "What are the advantages of using paged address translation?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "The virtual address space can be bigger than the physical address space",
+                "correct": true,
+                "feedback": "Correct! Paged address translation allows the virtual address space to be larger than the physical address space by mapping virtual pages to physical pages."
+            },
+            {
+                "answer": "A region of virtual memory does not need to map physical contiguous memory",
+                "correct": true,
+                "feedback": "Correct! Paged address translation allows virtual memory regions to be non-contiguous in physical memory, improving memory utilization."
+            },
+            {
+                "answer": "It reduces internal fragmentation by allocating no additional space than what it needs",
+                "correct": false,
+                "feedback": "Incorrect. Paged address translation an increase internal fragmentation if the memory allocation is small enough."
+            },
+            {
+                "answer": "Additional permissions are needed to access certain pages, increasing security",
+                "correct": true,
+                "feedback": "Correct! Paged address translation allows for fine-grained control of memory permissions, enhancing system security by requiring additional permissions to access certain pages."
+            }
+        ]  
+    },
+    {
+        "question": "Which are true about fragmentation?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "External fragmentation occurs when free memory blocks are scattered throughout the system",
+                "correct": true,
+                "feedback": "Correct! External fragmentation refers to the situation where free memory blocks are scattered throughout the system, making it difficult to allocate contiguous blocks of memory for new processes or data."
+            },
+            {
+                "answer": "Internal fragmentation occurs when allocated memory blocks are smaller than the requested size",
+                "correct": true,
+                "feedback": "Correct! Internal fragmentation occurs when allocated memory blocks are larger than what is required, resulting in wasted memory space within each block."
+            },
+            {
+                "answer": "Fragmentation can be eliminated completely in a dynamic memory allocation system",
+                "correct": false,
+                "feedback": "Incorrect. Fragmentation, either internal or external, cannot be completely eliminated in a dynamic memory allocation system. However, strategies like compaction and memory reorganization can help mitigate its impact."
+            },
+            {
+                "answer": "Fragmentation only affects physical memory and has no impact on virtual memory systems",
+                "correct": false,
+                "feedback": "Incorrect. Fragmentation can affect both physical and virtual memory systems. It can lead to inefficient memory utilization and difficulties in memory allocation in both cases."
+            }
+        ]
+    }
+]
