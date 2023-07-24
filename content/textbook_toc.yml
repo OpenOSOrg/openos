@@ -9,6 +9,14 @@ parts:
   - file: intro/structure
   - file: intro/abstractions
   - file: intro/tools
+    sections: 
+    - file: intro/tools-shell
+    - file: intro/tools-editors
+    - file: intro/tools-make
+    - file: intro/tools-git
+    - file: intro/tools-gdb
+    - file: intro/tools-c
+    - file: intro/tools-testing
 # commenting out other materials for now to be potentially integrated
 #  - file: intro/peter-other
 - caption: 'Virtual Processor'
@@ -78,7 +86,7 @@ parts:
 #  - file: devices/IOSW
   - file: virt/virt
 # need to fix up security chapter, just a start
-#  - file: sec/sec
+  - file: sec/sec
 #  - file: intro/other
 #  - file: devices/block-dev
 - caption: 'Appendices'
