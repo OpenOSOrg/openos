@@ -35,7 +35,7 @@ pub:
 	@./ghp-url.sh ${NAME}
 
 clean: 
-	${RM} -r  ${OUTDIR}
+	${RM} -r  ${OUTDIR}/_build
 
 help:
 # http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
