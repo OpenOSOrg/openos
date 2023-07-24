@@ -1,4 +1,4 @@
 NAME=textbook
-SN=tb
+SN=textbook
 
 include common.mk
