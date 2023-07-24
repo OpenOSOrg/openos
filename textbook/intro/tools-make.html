@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>5. What you should know &#8212; Introduction to Operating Systems</title>
+    <title>5.3. Makefiles &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5.1. Shell" href="tools-shell.html" />
-    <link rel="prev" title="4. Operating System Abstractions" href="abstractions.html" />
+    <link rel="next" title="5.4. Git Basics" href="tools-git.html" />
+    <link rel="prev" title="5.2. Editors" href="tools-editors.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -143,7 +143,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+  <a class="reference internal" href="tools.html">
    5. What you should know
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -151,7 +151,7 @@ const thebe_selector_output = ".output, .cell_output"
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="tools-shell.html">
      5.1. Shell
@@ -162,8 +162,8 @@ const thebe_selector_output = ".output, .cell_output"
      5.2. Editors
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="tools-make.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      5.3. Makefiles
     </a>
    </li>
@@ -495,7 +495,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/intro/tools.ipynb&branch=main"
+        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/intro/tools-make.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -555,7 +555,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fintro/tools.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fintro/tools-make.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -572,7 +572,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/intro/tools.ipynb"
+        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/intro/tools-make.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -600,7 +600,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/intro/tools.ipynb"
+        <a href="../_sources/intro/tools-make.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -637,23 +637,70 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#makefile-basics">
+   5.3.1. Makefile Basics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-example">
+   5.3.2. An Example
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>What you should know</h1>
+                <h1>Makefiles</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#makefile-basics">
+   5.3.1. Makefile Basics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-example">
+   5.3.2. An Example
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -661,22 +708,79 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="what-you-should-know">
-<span id="cont-gs-tools"></span><h1><span class="section-number">5. </span>What you should know<a class="headerlink" href="#what-you-should-know" title="Permalink to this headline">#</a></h1>
-<p>From having taught operating systems for multiple years, we have learned two things: you have learned this material in other courses, and you probably got away without really mastering it. For example, many of you have never really written a proper makefile to automate compilation, and most of you have debugged programs without mastering the debugger.</p>
-<p>Before taking this course, you should have good familiarity with:</p>
-<ol class="simple">
-<li><p><a class="reference internal" href="tools-shell.html#cont-gs-tools-shell"><span class="std std-ref">Unix shells:</span></a> The shell in Unix is the fundamental interface to the operating system, and understanding its capabilities is key to using the operating system, developing software, and most importantly for this course, understanding the core abstractions of operating systems.</p></li>
-<li><p><a class="reference internal" href="tools-editors.html#cont-gs-tools-editors"><span class="std std-ref">Editors:</span></a> In this section we will introduce two terminal text editors that are frequently used on Unix machines. Learning to write code on these editors are essential without access to modern IDEs with GUIs like Visual Studio Code.</p></li>
-<li><p><a class="reference internal" href="tools-make.html#cont-gs-tools-make"><span class="std std-ref">Make:</span></a> As the size of your projects increase, the need for automation via Makefiles also increase. You don’t want to be typing the compile commands for all of your files or repetedly pressing the up arrow for previous compile commands after every change.</p></li>
-<li><p><a class="reference internal" href="tools-git.html#cont-gs-tools-git"><span class="std std-ref">Revision control/git:</span></a> Version control is important to keep records of long-standing projects and to clearly communicate changes to other developers working on the same project.</p></li>
-<li><p><a class="reference internal" href="tools-gdb.html#cont-gs-tools-gdb"><span class="std std-ref">Debuggers/gdb:</span></a> Print statements won’t show everything going on in a process. In addition to printing variable values, GDB allows more powerful debugging tools such as changing the value of variables at run time, switching between threads, examining CPU registers, etc.</p></li>
-<li><p><a class="reference internal" href="tools-c.html#cont-gs-tools-c"><span class="std std-ref">The C programming language:</span></a> It is the most used programming language for operating systems. By mastering the language, you will reduce the number of syntax errors, and can focus more on debugging the logical errors.</p></li>
-<li><p><a class="reference internal" href="tools-testing.html#cont-gs-tools-testing"><span class="std std-ref">How to test your code:</span></a> They are not only used to determine whether or not a program runs correctly, but also to test whether or not you understand how the system is supposed to work. They are really helpful for edge cases. Get rid of the “guess and check” mindset and write some tests.</p></li>
-</ol>
-<p>We can guarantee that you won’t be successful if you do not master your tools because the programming assignments for operating system courses tend to me more demanding. We recommend <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/intro.html#operating-systems-and-unix">this book</a> by Jonathan Appavoo as a more detailed reference on most of what we cover here.</p>
-<div class="toctree-wrapper compound">
+  <section class="tex2jax_ignore mathjax_ignore" id="makefiles">
+<span id="cont-gs-tools-make"></span><h1><span class="section-number">5.3. </span>Makefiles<a class="headerlink" href="#makefiles" title="Permalink to this headline">#</a></h1>
+<p>Hopefully, you are familiar with the process of compiling c files into executables to be run. Usually, this looks something like:</p>
+<p><code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">filename.c</span> <span class="pre">-o</span> <span class="pre">filename</span></code></p>
+<p>This would compile the c file “filename.c” into an executable called “filename”, which we could then run by typing <code class="docutils literal notranslate"><span class="pre">./filename</span></code>.</p>
+<p>This seems easy enough, but having to type out commands like this can quickly become quite cumbersome when we have many different commands we want to run on different combinations of files or a lot of flags we want to use. In these more complex situations, we can use <code class="docutils literal notranslate"><span class="pre">make</span></code>. Make automates running commands on files when they have changed and is commonly used in “building” programs.</p>
+<p>To use <code class="docutils literal notranslate"><span class="pre">make</span></code>, you must write a file called a <code class="docutils literal notranslate"><span class="pre">makefile</span></code> that describes the relationships between the files in your program and provides commands for updating each file. Usually for c programs, the executable file is updated from object files (<code class="docutils literal notranslate"><span class="pre">.o</span></code> files), which are in turn made by compiling source files (<code class="docutils literal notranslate"><span class="pre">.c</span></code> files). Once you have written your makefile, you can just run the shell command <code class="docutils literal notranslate"><span class="pre">make</span></code> and it will perform all necessary recompilations. <code class="docutils literal notranslate"><span class="pre">make</span></code> knows which files need to be updated based on the last-modification times of the files. You can also provide command line arguments to make to specify which files should be recompiled and how.</p>
+<section id="makefile-basics">
+<h2><span class="section-number">5.3.1. </span>Makefile Basics<a class="headerlink" href="#makefile-basics" title="Permalink to this headline">#</a></h2>
+<p>A simple makefile consists of rules with the following syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="o">...</span><span class="p">:</span> <span class="n">prerequisites</span> <span class="o">...</span>
+    <span class="n">recipe</span>
+    <span class="o">...</span>
+    <span class="o">...</span>
+</pre></div>
 </div>
+<p>The <em>target</em> is typically the name of a file that is generated by a program (e.g. an executable or object file). It can also be the name of an action to carry out, like “clean”.</p>
+<p>The <em>prerequisite</em> is a file that is used as input to create the target. It will often be multiple files.</p>
+<p>The <em>recipe</em> is an action that <code class="docutils literal notranslate"><span class="pre">make</span></code> carries out. A recipe may have more than one command. There must be a tab character at the beginning of each recipe line.</p>
+<p><a class="reference external" href="https://www.gnu.org/software/make/manual/html_node/Rules.html">Here</a> is a guide for writing makefile rules.</p>
+</section>
+<section id="an-example">
+<h2><span class="section-number">5.3.2. </span>An Example<a class="headerlink" href="#an-example" title="Permalink to this headline">#</a></h2>
+<p>Here is the incomplete makefile we provide for HW0:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>override CFLAGS := -Wall -Werror -std=gnu99 -O0 -g  $(CFLAGS) -I.
+
+# I generally make the first rule run all the tests
+check: checkprogs
+	/bin/sh run_tests.sh $(test_files)
+
+# rule for making the parser.o  that is needed by all the test programs
+myshell_parser.o: myshell_parser.c myshell_parser.h
+
+# each of the test files depend on their own .c and myshell_parser.h
+#  add another time for each test, e.g., test_simple_pipe.o line below
+test_simple_input.o: test_simple_input.c myshell_parser.h
+test_simple_pipe.o: test_simple_pipe.c myshell_parser.h
+
+# each of the test programs executables are generated by combining the generated .o with the parser.o
+test_simple_input : test_simple_input.o myshell_parser.o
+test_simple_pipe : test_simple_pipe.o myshell_parser.o
+
+# Add any additional tests here, e.g., the commented out test_simple_pipe
+test_files=./test_simple_input # ./test_simple_pipe
+
+.PHONY: clean check checkprogs all
+
+# Build all of the test programs
+checkprogs: $(test_files)
+
+clean:
+	rm -f *~ *.o $(test_files) $(test_o_files)
+</pre></div>
+</div>
+<p>Let’s break down each line and rule.</p>
+<p>In the first line, we specify the flags we want to use to compile C files by assigning a value to CFLAGS (more on implicit variables like CFLAGS <a class="reference external" href="https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html">here</a>). The <code class="docutils literal notranslate"><span class="pre">override</span></code> directive just makes sure you use the assignments in the makefile even if the variable has previously been set with a command argument.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wall</span></code>: turns on many compiler warning flags</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Werror</span></code>: turns warnings into compilation errors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-std=gnu99</span></code>: set c version</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-O0</span></code>: sets optimization level to 0 (faster compilation, better for debugging)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-g</span></code>: adds debugging symbols to executable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$(CFLAGS)</span></code>: include default flags</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-I.</span></code>: specifies directory where header files can be found (in this example, the working directory <code class="docutils literal notranslate"><span class="pre">.</span></code></p></li>
+</ul>
+<p>Following the CFLAGS definition, we see a rule for building the test programs.</p>
+<p>Next, we have a rule for building the parser’s object file, followed by rules to build two test programs.</p>
+<p>Below that, there is an additional line that you can edit to add additional test scripts.</p>
+<p>The rest of the rules in the makefile have phony targets. They are not names for files, rather just names for a recipe to be executed when an explicit request is made. Using a phony target helps avoid conflicts with files of the same name and improves performance.</p>
+<p>The <em>checkprogs</em> rule builds all of the test programs.</p>
+<p>The last rule is the <em>clean</em> rule, which will just remove all object files and test files from the directory.</p>
+<p>For more info on <code class="docutils literal notranslate"><span class="pre">make</span></code>, see <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/lecturenotes/unix/L04.html">this chapter</a> of Jonathan Appavoo’s book. You can also reference the <a class="reference external" href="https://www.gnu.org/software/make/manual/make.html">GNU make manual</a>.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -706,17 +810,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="abstractions.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="tools-editors.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">4. </span>Operating System Abstractions</p>
+            <p class="prev-next-title"><span class="section-number">5.2. </span>Editors</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="tools-shell.html" title="next page">
+    <a class='right-next' id="next-link" href="tools-git.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5.1. </span>Shell</p>
+        <p class="prev-next-title"><span class="section-number">5.4. </span>Git Basics</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
