@@ -1,0 +1,15 @@
+#!/bin/bash
+
+VERSIONS=base/mamba_versions
+
+echo $(while read pkg; do
+   info=$(grep "^${pkg}" $VERSIONS)
+   if [[ -n $info ]]; then	   
+     echo "$info" | while read pkg ver rest; do
+       echo "${pkg}=$ver"
+     done
+   else
+       echo "${pkg}"
+   fi
+done)
+
