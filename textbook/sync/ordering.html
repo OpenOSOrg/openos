@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>35. Ordering Thread Events &#8212; Introduction to Operating Systems</title>
+    <title>38. Ordering Thread Events &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="36. Common Concurrency Bugs" href="concurrency_bugs.html" />
-    <link rel="prev" title="34. Implementing Locks" href="locks.html" />
+    <link rel="next" title="39. Common Concurrency Bugs" href="concurrency_bugs.html" />
+    <link rel="prev" title="37. Implementing Locks" href="locks.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -218,6 +218,11 @@ const thebe_selector_output = ".output, .cell_output"
    9. A Look at the Linux Scheduler
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/review.html">
+   10. Review
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -227,52 +232,57 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   10. Introduction
+   11. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   11. File System Abstraction
+   12. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/diskhw.html">
-   12. A bit about Disks
+   13. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   13. File System Layout
+   14. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_used.html">
-   14. Disk Layout:Tracking Used Space
+   15. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_free.html">
-   15. Disk Layout:Tracking Free Space
+   16. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_name.html">
-   16. Disk Layout:Implementing Name Space
+   17. Disk Layout:Implementing Name Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_failures.html">
-   17. Disk Layout:Dealing with Failures
+   18. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_ex_exx.html">
-   18. Disk Layout:Examples of Real World File Systems
+   19. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   19. Kernel implementation
+   20. Kernel implementation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/review.html">
+   21. Review
   </a>
  </li>
 </ul>
@@ -284,57 +294,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   20. Introduction
+   22. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/phys-and-seg.html">
-   21. Memory management before paged virtual memory
+   23. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   22. Paging
+   24. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   23. Page Tables
+   25. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   24. Memory reclaiming algorithms.
+   26. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   25. Page Sizes
+   27. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   26. Other topics
+   28. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   27. Buffer Cache
+   29. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   28. Memory Management Dynamics
+   30. Memory Management Dynamics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   29. Memory management in the real world
+   31. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   30. Conclusion
+   32. Conclusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/review.html">
+   33. Review
   </a>
  </li>
 </ul>
@@ -346,47 +361,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="sync.html">
-   31. Introduction to Concurrency, Synchronization and Deadlock
+   34. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="sharing.html">
-   32. Cooperating Processes and Inter-process Communication
+   35. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="criticalsection.html">
-   33. The Critical Section Problem
+   36. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="locks.html">
-   34. Implementing Locks
+   37. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   35. Ordering Thread Events
+   38. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concurrency_bugs.html">
-   36. Common Concurrency Bugs
+   39. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="readmostly.html">
-   37. Read-Dominated Workloads
+   40. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hardware_challenges.html">
-   38. Challenges of Modern Hardware
+   41. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linux_locking.html">
-   39. Locking in the Linux Kernel
+   42. Locking in the Linux Kernel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review.html">
+   43. Review
   </a>
  </li>
 </ul>
@@ -398,22 +418,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   40. Input and Output
+   44. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   41. More on Disks
+   45. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   42. Virtualization
+   46. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   43. Security
+   47. Security
   </a>
  </li>
 </ul>
@@ -425,17 +445,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   44. How to read this book
+   48. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   45. Contributing
+   49. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   46. Bibliography
+   50. Bibliography
   </a>
  </li>
 </ul>
@@ -663,17 +683,17 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-bounded-buffer-problem">
-   35.1. The Bounded Buffer Problem
+   38.1. The Bounded Buffer Problem
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#semaphores">
-   35.2. Semaphores
+   38.2. Semaphores
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#condition-variables">
-   35.3. Condition Variables
+   38.3. Condition Variables
   </a>
  </li>
 </ul>
@@ -697,17 +717,17 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-bounded-buffer-problem">
-   35.1. The Bounded Buffer Problem
+   38.1. The Bounded Buffer Problem
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#semaphores">
-   35.2. Semaphores
+   38.2. Semaphores
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#condition-variables">
-   35.3. Condition Variables
+   38.3. Condition Variables
   </a>
  </li>
 </ul>
@@ -723,29 +743,29 @@ title="Print to PDF"
   <div class="cell tag_remove-input docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="ordering-thread-events">
-<span id="cont-sync-ordering"></span><h1><span class="section-number">35. </span>Ordering Thread Events<a class="headerlink" href="#ordering-thread-events" title="Permalink to this headline">#</a></h1>
-<p>As we saw in <a class="reference internal" href="locks.html#cont-sync-locks-sleep-wakeup"><span class="std std-numref">Section 34.4</span></a>, the <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> data structure provides a way for threads to avoid wasting CPU time while they are waiting for something to happen. The mechanics of atomically putting a thread to sleep on a wait_queue must be handled carefully, and require some interaction with the CPU scheduler. Different operating systems have different ways of doing this, and we will revisit this issue when we discuss locking in the Linux kernel. For now, we will simply use these abstractions to explore other synchronization problems and build some higher-level synchronization primitives.</p>
+<span id="cont-sync-ordering"></span><h1><span class="section-number">38. </span>Ordering Thread Events<a class="headerlink" href="#ordering-thread-events" title="Permalink to this headline">#</a></h1>
+<p>As we saw in <a class="reference internal" href="locks.html#cont-sync-locks-sleep-wakeup"><span class="std std-numref">Section 37.4</span></a>, the <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> data structure provides a way for threads to avoid wasting CPU time while they are waiting for something to happen. The mechanics of atomically putting a thread to sleep on a wait_queue must be handled carefully, and require some interaction with the CPU scheduler. Different operating systems have different ways of doing this, and we will revisit this issue when we discuss locking in the Linux kernel. For now, we will simply use these abstractions to explore other synchronization problems and build some higher-level synchronization primitives.</p>
 <p>As a reminder, here are the operations on a <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sleep(wait_queue)</span></code>: blocks the calling thread; thread is added to <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> and another thread is selected to run.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">wakeup(wait_queue)</span></code>: removes a thread from <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> and adds it to the scheduler Ready queue.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">wakeup_all(wait_queue)</span></code>: moves <em>all</em> threads from <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> to the the scheduler Ready queue.</p></li>
 </ul>
-<p>Waiting for a lock to be released is just one possible reason that a thread might need to wait. We saw another example in the code of <a class="reference internal" href="locks.html#listing-sync-check-spinlock-fairness"><span class="std std-numref">Listing 34.16</span></a>, where each child thread spins waiting for the parent to finish creating all the other children. The <code class="docutils literal notranslate"><span class="pre">wakeup_all()</span></code> operation is handy in a case like this where we want to allow all the waiting threads to resume activity.</p>
+<p>Waiting for a lock to be released is just one possible reason that a thread might need to wait. We saw another example in the code of <a class="reference internal" href="locks.html#listing-sync-check-spinlock-fairness"><span class="std std-numref">Listing 37.16</span></a>, where each child thread spins waiting for the parent to finish creating all the other children. The <code class="docutils literal notranslate"><span class="pre">wakeup_all()</span></code> operation is handy in a case like this where we want to allow all the waiting threads to resume activity.</p>
 <p>There are many examples where we need to control the order in which threads can execute. In the remainder of this chapter, we will consider some of these problems.</p>
 <section id="the-bounded-buffer-problem">
-<h2><span class="section-number">35.1. </span>The Bounded Buffer Problem<a class="headerlink" href="#the-bounded-buffer-problem" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">38.1. </span>The Bounded Buffer Problem<a class="headerlink" href="#the-bounded-buffer-problem" title="Permalink to this headline">#</a></h2>
 <p>Let’s look at one classic example, known as the Bounded Buffer problem (also called the Producer/Consumer problem). In this problem, a set of threads communicate through a shared circular buffer that can hold N items. We maintain a count of the number of items currently in the buffer. Producer threads generate new items and add them to the buffer; consumer threads remove items from the buffer.  The items could be an arbitrary structure, or just bytes of data. We will begin by considering the special case of a single producer and a single consumer. This problem is essentially a simplified version of the <a class="reference internal" href="../intro/abstractions.html#cont-gs-abstractions-pipes"><span class="std std-ref">pipe abstraction</span></a>.</p>
 <figure class="align-default" id="fig-sync-ordering-bbuf-setup">
 <a class="reference internal image-reference" href="../_images/bbuf_setup.drawio.png"><img alt="../_images/bbuf_setup.drawio.png" src="../_images/bbuf_setup.drawio.png" style="width: 75%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35.1 </span><span class="caption-text">The bounded buffer problem. Producers continually add items to the buffer and consumers continually remove items.</span><a class="headerlink" href="#fig-sync-ordering-bbuf-setup" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 38.1 </span><span class="caption-text">The bounded buffer problem. Producers continually add items to the buffer and consumers continually remove items.</span><a class="headerlink" href="#fig-sync-ordering-bbuf-setup" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>We illustrate this problem setup in <a class="reference internal" href="#fig-sync-ordering-bbuf-setup"><span class="std std-numref">Fig. 35.1</span></a>. We have declared a <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">bounded_buffer</span></code> data type to encapsulate the properties of the bounded buffer, and we have declared the <code class="docutils literal notranslate"><span class="pre">count</span></code> member as an <code class="docutils literal notranslate"><span class="pre">atomic_int</span></code> so that simple increment and decrement operations on <code class="docutils literal notranslate"><span class="pre">count</span></code> will be performed atomically; we use ordinary int types for the <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> members since <code class="docutils literal notranslate"><span class="pre">in</span></code> is only used the the producer, and <code class="docutils literal notranslate"><span class="pre">out</span></code> is only used by the consumer. In the code snippets, however, there is no coordination (or <em>synchronization</em>) between the producer thread and the consumer thread. The producer blindly stuffs items into the buffer, possibly over-writing previous items that the consumer has not had a chance to remove yet. Similarly, the consumer blindly grabs items out of the buffer, without regard for whether the producer has actually filled those buffer slots or not. Clearly, this will not lead to correct results, even if the count is correct! We must introduce some synchronization constraints: the producer must wait if the buffer is full (i.e., if <code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">==</span> <span class="pre">N</span></code>); the consumer must wait if the buffer is empty (i.e., if <code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">==</span> <span class="pre">0</span></code>). In addition, we require the producer to wake up a waiting consumer when the first item is added to the buffer (i.e., when the buffer becomes non-empty), and for the consumer to wake up a waiting producer when an item is removed from a full buffer (i.e., when the buffer becomes non-full).</p>
-<p>Let’s try using the <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> and <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> operations to synchronize our threads, as shown in <a class="reference internal" href="#listing-sync-ordering-bbuf-wq"><span class="std std-numref">Listing 35.1</span></a>. (Note that this code example is incomplete, and is provided for illustration purposes only. The <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> function here is our assumed wait_queue sleep operation, and not the C library <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>.)</p>
+<p>We illustrate this problem setup in <a class="reference internal" href="#fig-sync-ordering-bbuf-setup"><span class="std std-numref">Fig. 38.1</span></a>. We have declared a <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">bounded_buffer</span></code> data type to encapsulate the properties of the bounded buffer, and we have declared the <code class="docutils literal notranslate"><span class="pre">count</span></code> member as an <code class="docutils literal notranslate"><span class="pre">atomic_int</span></code> so that simple increment and decrement operations on <code class="docutils literal notranslate"><span class="pre">count</span></code> will be performed atomically; we use ordinary int types for the <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> members since <code class="docutils literal notranslate"><span class="pre">in</span></code> is only used the the producer, and <code class="docutils literal notranslate"><span class="pre">out</span></code> is only used by the consumer. In the code snippets, however, there is no coordination (or <em>synchronization</em>) between the producer thread and the consumer thread. The producer blindly stuffs items into the buffer, possibly over-writing previous items that the consumer has not had a chance to remove yet. Similarly, the consumer blindly grabs items out of the buffer, without regard for whether the producer has actually filled those buffer slots or not. Clearly, this will not lead to correct results, even if the count is correct! We must introduce some synchronization constraints: the producer must wait if the buffer is full (i.e., if <code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">==</span> <span class="pre">N</span></code>); the consumer must wait if the buffer is empty (i.e., if <code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">==</span> <span class="pre">0</span></code>). In addition, we require the producer to wake up a waiting consumer when the first item is added to the buffer (i.e., when the buffer becomes non-empty), and for the consumer to wake up a waiting producer when an item is removed from a full buffer (i.e., when the buffer becomes non-full).</p>
+<p>Let’s try using the <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> and <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> operations to synchronize our threads, as shown in <a class="reference internal" href="#listing-sync-ordering-bbuf-wq"><span class="std std-numref">Listing 38.1</span></a>. (Note that this code example is incomplete, and is provided for illustration purposes only. The <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> function here is our assumed wait_queue sleep operation, and not the C library <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>.)</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-ordering-bbuf-wq">
-<div class="code-block-caption"><span class="caption-number">Listing 35.1 </span><span class="caption-text">Bounded buffer with sleep() and wakeup()</span><a class="headerlink" href="#listing-sync-ordering-bbuf-wq" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 38.1 </span><span class="caption-text">Bounded buffer with sleep() and wakeup()</span><a class="headerlink" href="#listing-sync-ordering-bbuf-wq" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">For</span> <span class="n">illustration</span> <span class="n">purposes</span> <span class="n">only</span><span class="o">.</span> 
  <span class="o">*</span> <span class="n">This</span> <span class="n">code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">complete</span> <span class="ow">and</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">compiled</span> <span class="n">into</span> <span class="n">an</span> <span class="n">executable</span><span class="o">.</span>
  <span class="o">*/</span>
@@ -796,11 +816,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<p>Does this solve the problem? Alas, you may have noticed that both the producer and the consumer make decisions based on the value of <code class="docutils literal notranslate"><span class="pre">count</span></code>, and even if the <code class="docutils literal notranslate"><span class="pre">count</span></code> variable is updated atomically there is still a race condition. A thread, T1, can be interrupted after it has tested the value of <code class="docutils literal notranslate"><span class="pre">count</span></code> and decided that it needs call <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>, but before the <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> has actually executed. If the other thread, T2, calls <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> at this point, it will have no effect since there is not a waiting thread to wake up. When T1 runs again, it will proceed with the <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> and can be blocked forever. This is known as the <code class="docutils literal notranslate"><span class="pre">lost</span> <span class="pre">wakeup</span></code> problem, and is illustrated in <a class="reference internal" href="#fig-sync-ordering-lost-wakeup"><span class="std std-numref">Fig. 35.2</span></a>. In the figure, we show the interleaved thread execution on the left with the actual values of buffer variables substituted into the code statements. On the right, we show the buffer variables as they are updated by the threads.</p>
+<p>Does this solve the problem? Alas, you may have noticed that both the producer and the consumer make decisions based on the value of <code class="docutils literal notranslate"><span class="pre">count</span></code>, and even if the <code class="docutils literal notranslate"><span class="pre">count</span></code> variable is updated atomically there is still a race condition. A thread, T1, can be interrupted after it has tested the value of <code class="docutils literal notranslate"><span class="pre">count</span></code> and decided that it needs call <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>, but before the <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> has actually executed. If the other thread, T2, calls <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> at this point, it will have no effect since there is not a waiting thread to wake up. When T1 runs again, it will proceed with the <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> and can be blocked forever. This is known as the <code class="docutils literal notranslate"><span class="pre">lost</span> <span class="pre">wakeup</span></code> problem, and is illustrated in <a class="reference internal" href="#fig-sync-ordering-lost-wakeup"><span class="std std-numref">Fig. 38.2</span></a>. In the figure, we show the interleaved thread execution on the left with the actual values of buffer variables substituted into the code statements. On the right, we show the buffer variables as they are updated by the threads.</p>
 <figure class="align-default" id="fig-sync-ordering-lost-wakeup">
 <a class="reference internal image-reference" href="../_images/lost_wakeup_short.drawio.png"><img alt="../_images/lost_wakeup_short.drawio.png" src="../_images/lost_wakeup_short.drawio.png" style="width: 75%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35.2 </span><span class="caption-text">The lost wakeup problem.</span><a class="headerlink" href="#fig-sync-ordering-lost-wakeup" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 38.2 </span><span class="caption-text">The lost wakeup problem.</span><a class="headerlink" href="#fig-sync-ordering-lost-wakeup" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The producer thread has started to add the first item to the buffer, but has not updated the <code class="docutils literal notranslate"><span class="pre">count</span></code> before it is preempted. The consumer thread runs, sees that the buffer is empty and decides to sleep, but is preempted before it calls <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>. The producer then updates <code class="docutils literal notranslate"><span class="pre">count</span></code> and calls <code class="docutils literal notranslate"><span class="pre">wakeup</span></code>, which has no effect. When the consumer runs again, it calls <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> and blocks awaiting the <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> which has, unfortunately, already happened. Since the consumer is blocked, the producer runs, adds a second item to the buffer, and then generates a third item to add to the buffer. Now, the producer finds that the buffer is full, so it also calls <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>, waiting for the consumer to remove something from the buffer and make space for the third item to be added. At this point, we are completely stuck—both threads are sleeping and waiting for the other thread to do something and wake them up. This is called <em>deadlock</em>. We will examine the deadlock problem in more detail later.</p>
@@ -809,7 +829,7 @@ title="Print to PDF"
 <p>Now, you might observe that testing the value of <code class="docutils literal notranslate"><span class="pre">count</span></code> and taking some action based on the result is a critical section of code that should execute atomically, and locks were our solution to critical section problems. So, what if we added a lock to our bounded buffer structure, and had threads acquire the lock before checking <code class="docutils literal notranslate"><span class="pre">count</span></code> and either going to sleep or issuing a wake up? This also doesn’t work. If we allow a thread to hold the lock when it calls <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>, then the other thread will be blocked forever trying to obtain the lock so that it can issue a <code class="docutils literal notranslate"><span class="pre">wakeup</span></code>. On the other hand, if we release the lock prior to calling <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>, then we right back where we started—a thread could be preempted right after releasing the lock, and before calling <code class="docutils literal notranslate"><span class="pre">sleep()</span></code>, once again missing the <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code>.</p>
 </section>
 <section id="semaphores">
-<span id="cont-sync-ordering-sema"></span><h2><span class="section-number">35.2. </span>Semaphores<a class="headerlink" href="#semaphores" title="Permalink to this headline">#</a></h2>
+<span id="cont-sync-ordering-sema"></span><h2><span class="section-number">38.2. </span>Semaphores<a class="headerlink" href="#semaphores" title="Permalink to this headline">#</a></h2>
 <p>We can observe that the <em>lost wakeup</em> problem occurs because a <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> has no effect when no one is waiting yet. Perhaps we could avoid the problem if we kept track of the <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> and allowed a thread the return immediately from <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> if a <code class="docutils literal notranslate"><span class="pre">wakeup()</span></code> had already been sent. This is the key idea behind the <em>semaphore</em> synchronization primitive introduced by Djikstra <span id="id1">[<a class="reference internal" href="../misc/bib.html#id4">Dij65</a>]</span>. A semaphore has private data consisting of a non-negative integer count and a queue of waiting threads, which can only be accessed by two <strong>atomic operations</strong>, <code class="docutils literal notranslate"><span class="pre">sem_wait()</span></code> and <code class="docutils literal notranslate"><span class="pre">sem_post()</span></code>. There is also a <code class="docutils literal notranslate"><span class="pre">sem_init()</span></code> operation that sets the semaphore count to some initial value.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -822,9 +842,9 @@ title="Print to PDF"
 <li><p><code class="docutils literal notranslate"><span class="pre">sem_post(sem_t</span> <span class="pre">*sem)</span></code> - increments the internal count of the semaphore pointed to by <code class="docutils literal notranslate"><span class="pre">sem</span></code>.  If the semaphore’s value consequently becomes greater than zero, then another process or thread blocked in a <code class="docutils literal notranslate"><span class="pre">sem_wait()</span></code> call will be woken up.</p></li>
 </ul>
 <p>It is important that the <code class="docutils literal notranslate"><span class="pre">sem_wait()</span></code> and <code class="docutils literal notranslate"><span class="pre">sem_post()</span></code> calls are atomic, meaning that once a thread starts one of these operations, it cannot be interleaved with the execution of another operation on the same semaphore. For user-level implementations, this generally requires a system call since we may need to change the state of a thread from running to blocked, or from blocked to runnable. In the operating system, we need to ensure that checking the semaphore count and putting a thread to sleep is atomic, either by disabling interrupts on a uniprocessor, or by using a spinlock on a multiprocessor. Once the thread has been enqueued on the semaphore’s wait list, the lock can be released before yielding the CPU to another thread.</p>
-<p>How does the semaphore synchronization primitive help us solve the bounded buffer problem? Instead of a single count of items in the buffer, we start by breaking apart the conditions that producers and consumers must wait upon. The producer thread can proceed as long as there are empty slots in the buffer to put items into. We can represent this using a semaphore called <code class="docutils literal notranslate"><span class="pre">sem_empty</span></code> with initial value N. The consumer can proceed as long as there are filled slots in the buffer to remove items from. We can represent this using a semaphore called <code class="docutils literal notranslate"><span class="pre">sem_filled</span></code>.  Prior to adding an item, the producer must perform a <code class="docutils literal notranslate"><span class="pre">sem_wait(&amp;sem_empty)</span></code>, which will decrement the semaphore’s count and return immediately as long as there is space in the buffer. Once the semaphore’s value is 0, the producer will block awaiting a <code class="docutils literal notranslate"><span class="pre">sem_post(&amp;sem_empty)</span></code> from the consumer to indicate that an item has been removed an an empty slot is now available. Each time an item is added to the buffer, the producer must issue a <code class="docutils literal notranslate"><span class="pre">sem_post(&amp;sem_filled)</span></code> to let the consumer know that a slot has been filled and an item is ready to be removed from the buffer. The code for a single producer and consumer using semaphores is shown in <a class="reference internal" href="#listing-sync-ordering-bbuf-sem"><span class="std std-numref">Listing 35.2</span></a>.</p>
+<p>How does the semaphore synchronization primitive help us solve the bounded buffer problem? Instead of a single count of items in the buffer, we start by breaking apart the conditions that producers and consumers must wait upon. The producer thread can proceed as long as there are empty slots in the buffer to put items into. We can represent this using a semaphore called <code class="docutils literal notranslate"><span class="pre">sem_empty</span></code> with initial value N. The consumer can proceed as long as there are filled slots in the buffer to remove items from. We can represent this using a semaphore called <code class="docutils literal notranslate"><span class="pre">sem_filled</span></code>.  Prior to adding an item, the producer must perform a <code class="docutils literal notranslate"><span class="pre">sem_wait(&amp;sem_empty)</span></code>, which will decrement the semaphore’s count and return immediately as long as there is space in the buffer. Once the semaphore’s value is 0, the producer will block awaiting a <code class="docutils literal notranslate"><span class="pre">sem_post(&amp;sem_empty)</span></code> from the consumer to indicate that an item has been removed an an empty slot is now available. Each time an item is added to the buffer, the producer must issue a <code class="docutils literal notranslate"><span class="pre">sem_post(&amp;sem_filled)</span></code> to let the consumer know that a slot has been filled and an item is ready to be removed from the buffer. The code for a single producer and consumer using semaphores is shown in <a class="reference internal" href="#listing-sync-ordering-bbuf-sem"><span class="std std-numref">Listing 38.2</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-ordering-bbuf-sem">
-<div class="code-block-caption"><span class="caption-number">Listing 35.2 </span><span class="caption-text">Bounded buffer with semaphores</span><a class="headerlink" href="#listing-sync-ordering-bbuf-sem" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 38.2 </span><span class="caption-text">Bounded buffer with semaphores</span><a class="headerlink" href="#listing-sync-ordering-bbuf-sem" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="o">/*</span> <span class="n">For</span> <span class="n">illustration</span> <span class="n">purposes</span> <span class="n">only</span><span class="o">.</span> 
 <span class="linenos"> 2</span> <span class="o">*</span> <span class="n">This</span> <span class="n">code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">complete</span> <span class="ow">and</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">compiled</span> <span class="n">into</span> <span class="n">an</span> <span class="n">executable</span><span class="o">.</span>
 <span class="linenos"> 3</span> <span class="o">*/</span>
@@ -879,9 +899,9 @@ title="Print to PDF"
 </div>
 </div>
 <p>As you can see, the code is simplified by the semaphore primitives. The producer waits for a slot in the buffer to be available, add the new item, and then posts a notice that a slot has been filled. The consumer waits for a slot to be filled, takes an item out of the buffer, and posts a notice that an empty slot is now available. Because the semaphores are internally keeping track of the number of empty and filled slots in the buffer, we have removed the <code class="docutils literal notranslate"><span class="pre">count</span></code> from the buffer data structure.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">sem_empty</span></code> and <code class="docutils literal notranslate"><span class="pre">sem_filled</span></code> variables are examples of <em>counting semaphores</em> (also called <em>general semaphores</em>), where the semaphore value can be any non-negative integer. We also see a common semaphore usage pattern here, where the <code class="docutils literal notranslate"><span class="pre">sem_wait()</span></code> is performed by one thread, and the <code class="docutils literal notranslate"><span class="pre">sem_post()</span></code> is performed by a different thread. It is also possible to create a <em>binary</em> semaphore, where the semaphore value should only be 0 or 1, and use it for mutual exclusion. For example, suppose we wanted to solve a more general producer/consumer problem where we have multiple producer threads and multiple consumer threads. Now, we also need to coordinate among the producers, so that they each insert to a different buffer slot, and among the consumers so that they each remove an item from a different slot. We can add another semaphore, <code class="docutils literal notranslate"><span class="pre">sem_mutex</span></code>, with initial value 1, and use it to protect access to the other members of the bounded buffer. Example code is showin in <a class="reference internal" href="#listing-sync-ordering-bbuf-sem-multi"><span class="std std-numref">Listing 35.3</span></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sem_empty</span></code> and <code class="docutils literal notranslate"><span class="pre">sem_filled</span></code> variables are examples of <em>counting semaphores</em> (also called <em>general semaphores</em>), where the semaphore value can be any non-negative integer. We also see a common semaphore usage pattern here, where the <code class="docutils literal notranslate"><span class="pre">sem_wait()</span></code> is performed by one thread, and the <code class="docutils literal notranslate"><span class="pre">sem_post()</span></code> is performed by a different thread. It is also possible to create a <em>binary</em> semaphore, where the semaphore value should only be 0 or 1, and use it for mutual exclusion. For example, suppose we wanted to solve a more general producer/consumer problem where we have multiple producer threads and multiple consumer threads. Now, we also need to coordinate among the producers, so that they each insert to a different buffer slot, and among the consumers so that they each remove an item from a different slot. We can add another semaphore, <code class="docutils literal notranslate"><span class="pre">sem_mutex</span></code>, with initial value 1, and use it to protect access to the other members of the bounded buffer. Example code is showin in <a class="reference internal" href="#listing-sync-ordering-bbuf-sem-multi"><span class="std std-numref">Listing 38.3</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-ordering-bbuf-sem-multi">
-<div class="code-block-caption"><span class="caption-number">Listing 35.3 </span><span class="caption-text">Bounded buffer with semaphores for multiple producers and consumers.</span><a class="headerlink" href="#listing-sync-ordering-bbuf-sem-multi" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 38.3 </span><span class="caption-text">Bounded buffer with semaphores for multiple producers and consumers.</span><a class="headerlink" href="#listing-sync-ordering-bbuf-sem-multi" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">For</span> <span class="n">illustration</span> <span class="n">purposes</span> <span class="n">only</span><span class="o">.</span> 
  <span class="o">*</span> <span class="n">This</span> <span class="n">code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">complete</span> <span class="ow">and</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">compiled</span> <span class="n">into</span> <span class="n">an</span> <span class="n">executable</span><span class="o">.</span>
  <span class="o">*/</span>
@@ -944,7 +964,7 @@ title="Print to PDF"
 <p>The <code class="docutils literal notranslate"><span class="pre">sem_mutex</span></code> is used exactly like a lock to protect the <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> shared variables that are used by producers and consumers when accessing slots in the buffer. Is it better to use a binary semaphore or a lock in such cases? There really is no functional difference—both provide mutual exclusion. However, there is a semantic difference. Logically, a lock is “held” by the thread that has successfully completed the most recent <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> and should only be <code class="docutils literal notranslate"><span class="pre">release()</span></code>d by the thread that holds it. Some lock implementations will track lock ownership and enforce this rule, raising an error if a lock is incorrectly released by a thread that did not acquire it first. These errors can be an invaluable debugging tool, which are not available if you use semaphores for mutual exclusion.</p>
 </section>
 <section id="condition-variables">
-<span id="cont-sync-ordering-cv"></span><h2><span class="section-number">35.3. </span>Condition Variables<a class="headerlink" href="#condition-variables" title="Permalink to this headline">#</a></h2>
+<span id="cont-sync-ordering-cv"></span><h2><span class="section-number">38.3. </span>Condition Variables<a class="headerlink" href="#condition-variables" title="Permalink to this headline">#</a></h2>
 <p>One challenge with using semaphores is that we must encode the state that a thread is waiting upon as a single counter. This worked nicely for the bounded buffer problem with producers using a semaphore to count the number of empty slots, and consumers using another semaphore to count the number of filled slots. For example, suppose we had two types of producer threads, one that produced ‘a’s and another that produced ‘b’s, and we wanted to ensure that the buffer was never more than 75% full of either a’s or b’s. The ‘a’-producer would need a check something like the code shown below before it could add another ‘a’ to the buffer (and similarly for the ‘b’-producer).</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">...</span><span class="w"></span>
 <span class="linenos">2</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">a_count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b_count</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">a_count</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
@@ -961,7 +981,7 @@ title="Print to PDF"
 <p>Note that locks and condition variables must always be used together. The lock protects the shared data, so that a thread can examine the state of a structure, make decisions about what to do next, and modify the shared data without interference from other threads. The condition variable provides the mechanism to atomically release the lock and put a thread to sleep until it becomes possible for that thread to make progress again. Upon return from a <code class="docutils literal notranslate"><span class="pre">pthread_cond_wait()</span></code>, a thread is guaranteed to hold the lock again. However, there is no guarantee that a thread awakened by a <code class="docutils literal notranslate"><span class="pre">pthread_cond_signal()</span></code> will be the next thread to acquire the lock—other threads could run first, acquire the lock, change shared variables and invalidate the condition that the thread was waiting for. Hence, a thread should always re-evaluate the boolean expression after returning from <code class="docutils literal notranslate"><span class="pre">pthread_cond_wait()</span></code> to make sure it is ok to proceed. In some cases, a thread may need to wait repeatedly.</p>
 <p>To illustrate these concepts, let’s look first at how we would implement a solution to our original bounded buffer problem using a lock together with condition variables.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-ordering-bbuf-cv">
-<div class="code-block-caption"><span class="caption-number">Listing 35.4 </span><span class="caption-text">Bounded buffer with condition variables for multiple producers and consumers.</span><a class="headerlink" href="#listing-sync-ordering-bbuf-cv" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 38.4 </span><span class="caption-text">Bounded buffer with condition variables for multiple producers and consumers.</span><a class="headerlink" href="#listing-sync-ordering-bbuf-cv" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="o">/*</span> <span class="n">For</span> <span class="n">illustration</span> <span class="n">purposes</span> <span class="n">only</span><span class="o">.</span> 
 <span class="linenos"> 2</span> <span class="o">*</span> <span class="n">This</span> <span class="n">code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">complete</span> <span class="ow">and</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">compiled</span> <span class="n">into</span> <span class="n">an</span> <span class="n">executable</span><span class="o">.</span>
 <span class="linenos"> 3</span> <span class="o">*/</span>
@@ -1038,7 +1058,7 @@ title="Print to PDF"
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"b469ee0911e2422497d8d060ba30e417": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "e7e0f4b0dfe44caba67cc2acaef73050": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_b469ee0911e2422497d8d060ba30e417", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     #\r\n$ "}]}}}, "version_major": 2, "version_minor": 0}
+{"state": {"4a08046ae841410a861d5bc4bee83665": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_86b67a2c4b974a8daf41c5ee522a5138", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     #\r\n$ "}]}}, "86b67a2c4b974a8daf41c5ee522a5138": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 
@@ -1073,13 +1093,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">34. </span>Implementing Locks</p>
+            <p class="prev-next-title"><span class="section-number">37. </span>Implementing Locks</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="concurrency_bugs.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">36. </span>Common Concurrency Bugs</p>
+        <p class="prev-next-title"><span class="section-number">39. </span>Common Concurrency Bugs</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
