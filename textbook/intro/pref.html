@@ -684,11 +684,6 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#philosophy">
-   Philosophy
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#book-overview">
    Book Overview
   </a>
@@ -715,11 +710,6 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#our-motivation">
    Our motivation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#philosophy">
-   Philosophy
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -752,22 +742,6 @@ title="Print to PDF"
 <p>Our motivation to write this book is three fold.  First, our students pay way too much money for textbooks. At one point, students could buy used textbooks, although even then publishers would constantly churn editions to get students to buy new versions. Increasingly, textbooks contain interactive materials, that force students to buy the most recent edition; again its about the money.  Free online books (FOB) provide us the opportunity to address this cost issue, while also enabling frequent revisions and extensive linking between different materials.  The motivation for FOB  for operating systems is described in the excellent <a class="reference external" href="http://from-a-to-remzi.blogspot.com/2014/01/the-case-for-free-online-books-fobs.html">blog</a> by Remzi Arpaci-Dusseau.  Moreover, the  excellent operating system FOB titled “<a class="reference external" href="https://pages.cs.wisc.edu/~remzi/OSTEP/">Operating Systems: Three Easy Pieces</a>” <span id="id1">[<a class="reference internal" href="../misc/bib.html#id2" title="Remzi H Arpaci-Dusseau and Andrea C Arpaci-Dusseau. Operating systems: Three easy pieces. Arpaci-Dusseau Books LLC Boston, 2018. URL: https://pages.cs.wisc.edu/~remzi/OSTEP/.">ADAD18</a>]</span>, is enormously better than our effort today.   So why are we developing another FOB?  That leads to our next two reasons.</p>
 <p>Second, we have found students think in many different ways and repetition  at multiple different levels of detail is incredibly important to understand operating systems.  The Three Easy pieces FOB does a great job of interlinking materials, enabling students to approach the material in multiple ways.  However, with jupyter book and containers we can go much further; enabling dynamic content that is deeply connected to the book.  Our own experience as OS developers and researchers is that we don’t understand anything until we have played with code; we hope that the model we are developing based on Jonathans OPE will enable us to give students more of that experience.  In fact, as Jonathan articulates so well in the talk referenced above, students today have grown up with so many levels of software complexity obscuring the systems they are using that this interactive experience is critical to enable systems to be approached.</p>
 <p>Third, as operating system researchers and developers that have experienced the entire growth of open source; we believe that it can be an enormously powerful tool for educational materials.  While we respect Remzi’s perspective from <span id="id2">[<a class="reference internal" href="../misc/bib.html#id2" title="Remzi H Arpaci-Dusseau and Andrea C Arpaci-Dusseau. Operating systems: Three easy pieces. Arpaci-Dusseau Books LLC Boston, 2018. URL: https://pages.cs.wisc.edu/~remzi/OSTEP/.">ADAD18</a>]</span> that “a book should have a single voice”, at the same time our own frustration of teaching from materials developed by others is that we want others to be able to modify any part of our content to teach operating systems in a way that reflects their background, their community of students, and their own biases.  Feel free to fork our book at make it your own.  We do hope that people will be motivated to offer their changes back to us; and they can do so using the same mechanisms used by community projects like Linux.  Textbooks get out of date soon after they are written; and this is especially the case in operating systems which are one of the most rapidly evolving technical areas.  We believe that only an open source community will be able to create educational materials that evolve as fast as the topics they cover.  Hopefully, we can do a good job and create standards and a community such that the material has a coherent single voice; if not, perhaps someone that is better at it will fork our book and create such a community.</p>
-</section>
-<section id="philosophy">
-<span id="cont-pref-phil"></span><h2>Philosophy<a class="headerlink" href="#philosophy" title="Permalink to this headline">#</a></h2>
-<p>This book is not intended to teach you how to program.  It assumes you have mastered programming skills including data structures, algorithms,  the C programming language, make, git, debuggers, test driven development, how loaders work, shell scripting and other tools.  It is also not intended to teach you computer architecture; you should know what an interrupt is, multiprocessors, caches, page tables, …</p>
-<p>However, long experience teaching the course has demonstrated that our expectation on background is seldom met.  While students have taken programming courses in the past that covered much of the background; it is covered it as a academic material; when writing the fairly simple code for many courses you could get away without properly writing tests, using a debugger, or even writing a proper makefile.  Moreover, often students have been able to get away with using some GUI that tries to hide what is going on from you.</p>
-<p>We have found that students only really understand operating system concepts if they have the experience of writing code that illustrates the concepts and are directly using the low-level programming tools that real system developers use.  This code is complicated, don’t even try to get by without understanding these materials.</p>
-<p>The book <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/intro_tb.html#under-the-covers-the-secret-life-of-software">Under the Covers: The Secret Life of Software</a> is a companion book, and in a perfect world would be used for a system’s course that is a prerequisite for an operating systems course based on this book.  Given that that is not always the case, we will cover some of the same material briefly and refer to the corresponding part of his material for more detail. This includes:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/shellintro.html#the-shell-part-i-having-an-ascii-conversation-with-the-os">details on how the shell works, scripting… </a></p></li>
-<li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/make.html#make">make</a></p></li>
-<li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/gitintro.html#intro-to-git">revision control and git</a></p></li>
-<li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/assembly/intro.html#introduction-assembly-programming">assembly language programming</a></p></li>
-<li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/assembly/Debuggers.html#machine-debuggers-open-process-surgery">debugging and gdb</a></p></li>
-<li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/C/intro.html#introduction">the c programming language</a></p></li>
-</ul>
-<p>Our focus in this book is on operating systems; not on how to be a systems programer.  To succeed in this course, we strongly advice covering the above material in more depth than we can as a small part of this course.</p>
 </section>
 <section id="book-overview">
 <span id="cont-pref-how"></span><h2>Book Overview<a class="headerlink" href="#book-overview" title="Permalink to this headline">#</a></h2>

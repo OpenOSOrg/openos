@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>5.1. Shell &#8212; Introduction to Operating Systems</title>
+    <title>1. Introduction &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5.2. Editors" href="tools-editors.html" />
-    <link rel="prev" title="5. What you should know" href="tools.html" />
+    <link rel="next" title="2. Purpose of operating systems" href="purpose.html" />
+    <link rel="prev" title="Preface" href="pref.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -122,8 +122,8 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    1. Introduction
   </a>
  </li>
@@ -142,18 +142,18 @@ const thebe_selector_output = ".output, .cell_output"
    4. Operating System Abstractions
   </a>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="tools.html">
    5. What you should know
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tools-shell.html">
      5.1. Shell
     </a>
    </li>
@@ -515,7 +515,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/intro/tools-shell.ipynb&branch=main"
+        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/intro/intro.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -575,7 +575,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fintro/tools-shell.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fintro/intro.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -592,7 +592,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/intro/tools-shell.ipynb"
+        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/intro/intro.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -620,7 +620,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/intro/tools-shell.ipynb"
+        <a href="../_sources/intro/intro.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -669,7 +669,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Shell</h1>
+                <h1>Introduction</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -681,90 +681,14 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="shell">
-<span id="cont-gs-tools-shell"></span><h1><span class="section-number">5.1. </span>Shell<a class="headerlink" href="#shell" title="Permalink to this headline">#</a></h1>
-<p>The shell provides an enormously powerful text based interface for programmers to interact with the Unix operating system.  We have <a class="reference internal" href="abstractions.html#cont-gs-abstractions"><span class="std std-ref">already</span></a> discussed many of the key things you should know about the shell, including key unix commands, redirection, piples</p>
-<p><em>fixme</em> just started rew-ritting this, provide a simple example of writting a shell script that will execute a set of test programs.</p>
-<!---
-
-The shell is a basic interface that allows users to communicate with the kernel and any installed programs. Whenever you open a terminal, the kernel starts an instance of a shell program, or shell "session". When most people interact with computers, they do so through graphical user interfaces that they navigate using a mouse or their finger. The shell is completely text-based and designed for programmers. It has its own programming language of special commands to access kernel functionalities. For more information about terminals and shells, please refer to the relevant sections of [the following textbook](https://jappavoo.github.io/UndertheCovers/textbook/unix/intro.html#operating-systems-and-unix).
-
-## Some basic shell commands
-### Help and information
-#### `man <command>`
-This is probably the most important command for students new to Linux and interacting with computers via the shell. The `man` command (short for "manual") allows you to access documentation about all programs installed on a system. For example, to view documentation for the `man` command itself, you simply type `man man` to open its man page. You can scroll through man pages using the arrow keys or `ctrl+f` (move forward one page) and `ctrl+b` (move backward one page) and exit back to the command line by typing `q`. For more information about any of the other commands discussed in this chapter (or any chapter for that matter), consult these **man pages**!
-
-#### `apropos <keyword>`
-This is probably the second most important command for students new to Linux and interacting with computers via the shell. If you type `man apropos`, its description is
-> apropos searches a set of database files containing short descriptions of system commands for keywords and displays the result on the standard output.
-
-In other words, it searches all `man-able` programs for the `keyword`, and displays it on the screen. This can be useful if you know that a program description has a certain keyword or functionality, but not know the specific name of it.
-
-### Navigating your system via the command line 
-The shell provides us with a way to navigate through our machine's file directory. When you open a new terminal in the development environment, you will be in your **home directory**. The directory that you are in at any given time is called the **working directory**. To see what your current working directory is, simply type `pwd` into the command line.
-
-```
-$ pwd 
-/home/username 
-```
-
-There are two ways to reference files and directories in the shell. The first is using **absolute paths**. When referring to directories this way, you have to write the entire path to the desired directory starting at the root `/`. The advantage to this approach is that these references remain static no matter where you are in the system. As long as you don't move a file, it's absolute path remains the same. To change your working directory, you can use the `cd` command:
-```
-$ cd /home
-```
-This command does not print anything to the command line, but if you rerun `pwd` you will see that the working directory has changed!
-
-The other option for referencing files is to use **relative paths**. They are called relative paths because they are written *relative* to your current working directory. Thus, the path to the file of interest depends on your working directory. The advantage to using relative paths is that they are generally much shorter than absolute paths. In addition, there are some nice shortcuts you can use if you aren't trying to move too far away from your current working directory. For example, if I want to move to the parent directory of my working directory, I can simply type `cd ..` instead of writing out the whole path of the parent directory. When moving into the child directory of the current working directory, you can just type `cd child` or `cd child/grandchild` and the shell will know that you are using a relative path since it does not start with a `/`. Typing `cd child` is equivalent to typing `cd ./child`, since `.` is used to denote the current working directory. You can also get to the "grandparent" directory by typing `cd ../..` or one of your parent directory's other children using the command `cd ../sibling`. To go to your home directory, you can type `cd ~`.
-
-You may also want to view the contents of a directory. You can do this using the `ls` command. If you provide it with no arguments, it will simply print the contents of your working directory. 
-```
-$ ls
-file1.txt file2.txt hw1
-```
-The directories will be differentiated from the plain files in the development environment with bold colored text. You can also provide an absolute or relative path as an argument to the `ls` command (e.g., `ls /path/to/directory/`) to see the contents of a different directory. 
-
-#### Recap:
-* All file paths start at the root directory `/` and you can reference them absolutely or using relative paths
-* Your home directory is `~`, the current working directory is `.`, and the parent of the working directory is `..`
-* `pwd`: prints your working directory
-* `cd /some/directory`: move to the specified directory
-* `ls /some/directory`: print the files and directories within the chosen directory
-
-### Creating, viewing, and manipulating files and directories
-* `touch <desiredfilename>`: create a new file. 
-* `cat <filename>`: print contents of a file to the terminal.
-* `mv /path/to/<filename> /desired/path/to/file/`: move a file to a different directory. To move a directory instead of just a single file, use the flag `-r`. 
-* `cp <filename> <filecopyname>`: make a copy of an existing file. 
-* `mdkir <desireddirectoryname>`: create a new directory. 
-* `emacs <filename>`: open the file "filename" in the EMACS editor. More on this in the following section.
-* `wc <filename>`: print newline, word, and byte counts for a file. To see just the word count, add the flag `-w`.
-
-[Commands as files within the path list](https://jappavoo.github.io/UndertheCovers/textbook/unix/shellintro.html#commands-as-files-within-the-path-list): interesting resource to help with understanding of shell commands with an exercise you can follow!
-
-### Miscellaneous
-#### `echo`
-Display a line of text to standard out. 
-```
-$ echo "Hello world"
-Hello world
-```
-#### `ctrl+c`
-This will terminate whatever process/command is currently running in the shell. Great if you think your code may be stuck in an infinite loop or is just taking much longer than you thought it would to finish running. 
-
-#### `ctrl+l`
-This will clear your terminal and move the prompt up to the top of the screen. 
-
-### Symbols
-#### |
-This is known as the "pipe" symbol and is used to redirect the output of one command into the input of a second command. For example, if I type `ls .. | wc -w`, the total number of files/directories in the `..` directory will be printed to the command line. 
-#### >
-This symbol is used to assign a redirect-out to a command. For example, if I type: `echo "Hello world" > hw.txt`, instead of printing "Hello world" to the terminal, the right carrot symbol would direct that output into the file "hw.txt". 
-#### <
-This symbol is used to assign a redirect-in to a command. For example, we can type `cat < file.txt`. In this situation, this is equivalent to `cat file.txt`. 
-#### &
-Typing the ampersand symbol & at the end of a command will result in that command being run in the background. This means that you will immediately see another prompt even if the command you run has not finished running. 
-
---></section>
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<span id="cont-gs-intro"></span><h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
+<p>This part of the book gives an overview of everything you will learn in more detail in the rest of the book.  We start by discussing the <a class="reference internal" href="purpose.html#cont-gs-purpose"><span class="std std-ref">purpose</span></a> of operating systems today, why it is so valuable to understand them, and some of the reasons we expect operating systems to continue to evolve rapidly in coming years. The next chapter describes the fundamental <a class="reference internal" href="structure.html#cont-gs-structure"><span class="std std-ref">structure</span></a> of today’s monolithic operating systems, and how applications and devices interact with the OS. We then discuss some of the <a class="reference internal" href="abstractions.html#cont-gs-abstractions"><span class="std std-ref">core abstractions</span></a> of operating systems and of Unix/Linux in particular.  The final chapter on <a class="reference internal" href="tools.html#cont-gs-tools"><span class="std std-ref">tools</span></a> reviews the fundamental tools that we expect you to master on using Unix to develop system software.</p>
+<aside class="sidebar">
+<p class="sidebar-title">Abbreviations, Definitions and Notation: </p>
+<p>It is common to abbreviate “operating system” as “OS” and “operating systems” as “OSs”.</p>
+</aside>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -793,17 +717,17 @@ Typing the ampersand symbol & at the end of a command will result in that comman
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="tools.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="pref.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">5. </span>What you should know</p>
+            <p class="prev-next-title">Preface</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="tools-editors.html" title="next page">
+    <a class='right-next' id="next-link" href="purpose.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5.2. </span>Editors</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Purpose of operating systems</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
