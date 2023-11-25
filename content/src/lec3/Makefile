@@ -6,6 +6,10 @@ prog = testfork testforkexec pipe
 
 all: $(prog)
 
+check: $(prog)
+	chmod +x run_tests.sh
+	./run_tests.sh $(prog)
+
 doforke.o: doforke.c doforke.h
 testforkexec: testforkexec.c doforke.o doforke.h
 
