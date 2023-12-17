@@ -681,90 +681,55 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="shell">
+  <div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This portion of the book is under construction, not ready to be read</p>
+</div>
+<div class="cell tag_remove-input docutils container">
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="shell">
 <span id="cont-gs-tools-shell"></span><h1><span class="section-number">5.1. </span>Shell<a class="headerlink" href="#shell" title="Permalink to this headline">#</a></h1>
-<p>The shell provides an enormously powerful text based interface for programmers to interact with the Unix operating system.  We have <a class="reference internal" href="abstractions.html#cont-gs-abstractions"><span class="std std-ref">already</span></a> discussed many of the key things you should know about the shell, including key unix commands, redirection, piples</p>
-<p><em>fixme</em> just started rew-ritting this, provide a simple example of writting a shell script that will execute a set of test programs.</p>
-<!---
+<p>The shell provides an enormously powerful text based interface for programmers to interact with the Unix operating system.  We have <a class="reference internal" href="abstractions.html#cont-gs-abstractions"><span class="std std-ref">already</span></a> discussed many of the key things you should know about the shell, including key unix commands, redirection, pipes, process tree, etc… For more information about terminals and shells, please refer to the relevant sections of <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/intro.html#operating-systems-and-unix">the following textbook</a>.For more information about terminals and shells, please refer to the relevant sections of <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/intro.html#operating-systems-and-unix">the following textbook</a>.</p>
+<p>One very useful feature we have not touched on yet is shell scripts.  For a very simple example  look at the following script  in <a class="reference internal" href="#run-tests"><span class="std std-numref">Listing 5.1</span></a>:</p>
+<div class="literal-block-wrapper docutils container" id="run-tests">
+<div class="code-block-caption"><span class="caption-number">Listing 5.1 </span><span class="caption-text">A simple Shell script that runs a bunch of test programs.</span><a class="headerlink" href="#run-tests" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>#!/bin/bash
+<span class="linenos"> 2</span>TIMEOUT_SECONDS=5
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>all_tests=( &quot;$@&quot; )
+<span class="linenos"> 5</span>test_count=$#
+<span class="linenos"> 6</span>fail_count=0
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>for test_file in &quot;${all_tests[@]}&quot;
+<span class="linenos"> 9</span>do
+<span class="linenos">10</span>	printf &quot;===== %s =====\n&quot; &quot;${test_file}&quot;
+<span class="linenos">11</span>	timeout ${TIMEOUT_SECONDS} ./&quot;${test_file}&quot;
+<span class="linenos">12</span>	rc=$?
+<span class="linenos">13</span>	if [ ${rc} -eq 0 ]
+<span class="linenos">14</span>	then
+<span class="linenos">15</span>		printf &quot;PASS\n&quot;
+<span class="linenos">16</span>	elif [ ${rc} -eq 124 ]
+<span class="linenos">17</span>	then
+<span class="linenos">18</span>		printf &quot;FAIL (%d second timeout)\n&quot; &quot;${TIMEOUT_SECONDS}&quot;
+<span class="linenos">19</span>		fail_count=$((fail_count + 1))
+<span class="linenos">20</span>	else
+<span class="linenos">21</span>		printf &quot;FAIL (rc = %d)\n&quot; &quot;${rc}&quot;
+<span class="linenos">22</span>		fail_count=$((fail_count + 1))
+<span class="linenos">23</span>	fi
+<span class="linenos">24</span>done
+<span class="linenos">25</span>
+<span class="linenos">26</span>printf &quot;\n%d out of %d tests failed.\n&quot; &quot;${fail_count}&quot; &quot;${test_count}&quot;
+</pre></div>
+</div>
+</div>
+<p>The first line in the file tells the OS to run this using the bash shell.  Line 3 gets the list of tests to run.  For each test, it prints the name of the test, runs the test (line 10) with a timeout value specified on line 1.  Lines 12-21 prints out for each test if the program ran correctly, and if not accumulates the number of failed tests.   This is just a simple example of the kind of automation you can do with shell scripts.  For more detail on all the special variables… please run “man bash”, and there are many wonderful tutorials on cheat sheets online.</p>
+</section>
 
-The shell is a basic interface that allows users to communicate with the kernel and any installed programs. Whenever you open a terminal, the kernel starts an instance of a shell program, or shell "session". When most people interact with computers, they do so through graphical user interfaces that they navigate using a mouse or their finger. The shell is completely text-based and designed for programmers. It has its own programming language of special commands to access kernel functionalities. For more information about terminals and shells, please refer to the relevant sections of [the following textbook](https://jappavoo.github.io/UndertheCovers/textbook/unix/intro.html#operating-systems-and-unix).
 
-## Some basic shell commands
-### Help and information
-#### `man <command>`
-This is probably the most important command for students new to Linux and interacting with computers via the shell. The `man` command (short for "manual") allows you to access documentation about all programs installed on a system. For example, to view documentation for the `man` command itself, you simply type `man man` to open its man page. You can scroll through man pages using the arrow keys or `ctrl+f` (move forward one page) and `ctrl+b` (move backward one page) and exit back to the command line by typing `q`. For more information about any of the other commands discussed in this chapter (or any chapter for that matter), consult these **man pages**!
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"052612da854a4badbe873f2ca9a97242": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_9e2662f09c344617b9be432d1d32527a", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     [[ -a myfile ]] && rm myfile\r\n$     [[ -a errors ]] && rm errors \r\n$     [[ -a mydate ]] && rm mydate\r\n$     [[ -a mynewdir ]] && rm -rf mynewdir\r\n$     [[ -a anotherfile ]] && rm anotherfile\r\n$     [[ -a mybin ]] && rm -rf  mybin\r\n$     [[ -a myinfo ]] && rm myinfo\r\n$ "}]}}, "0ec73a0491c34df49efdd9c4b57f58ee": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "27fe09e158af4152bf27037d01fae5a9": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_0ec73a0491c34df49efdd9c4b57f58ee", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ls \nOS-L01.css          intro.ipynb        structure.ipynb      tools-make.ipynb\r\nOS-L01.ipynb        other.ipynb        tools-c.ipynb        tools-shell.ipynb\r\nabstractions.ipynb  peter-other.ipynb  tools-editors.ipynb  tools-testing.ipynb\r\ncommon.ipynb        pref.ipynb         tools-gdb.ipynb      tools.ipynb\r\nhistory.ipynb       purpose.ipynb      tools-git.ipynb\r\n$ "}]}}, "9e2662f09c344617b9be432d1d32527a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+</script>
 
-#### `apropos <keyword>`
-This is probably the second most important command for students new to Linux and interacting with computers via the shell. If you type `man apropos`, its description is
-> apropos searches a set of database files containing short descriptions of system commands for keywords and displays the result on the standard output.
-
-In other words, it searches all `man-able` programs for the `keyword`, and displays it on the screen. This can be useful if you know that a program description has a certain keyword or functionality, but not know the specific name of it.
-
-### Navigating your system via the command line 
-The shell provides us with a way to navigate through our machine's file directory. When you open a new terminal in the development environment, you will be in your **home directory**. The directory that you are in at any given time is called the **working directory**. To see what your current working directory is, simply type `pwd` into the command line.
-
-```
-$ pwd 
-/home/username 
-```
-
-There are two ways to reference files and directories in the shell. The first is using **absolute paths**. When referring to directories this way, you have to write the entire path to the desired directory starting at the root `/`. The advantage to this approach is that these references remain static no matter where you are in the system. As long as you don't move a file, it's absolute path remains the same. To change your working directory, you can use the `cd` command:
-```
-$ cd /home
-```
-This command does not print anything to the command line, but if you rerun `pwd` you will see that the working directory has changed!
-
-The other option for referencing files is to use **relative paths**. They are called relative paths because they are written *relative* to your current working directory. Thus, the path to the file of interest depends on your working directory. The advantage to using relative paths is that they are generally much shorter than absolute paths. In addition, there are some nice shortcuts you can use if you aren't trying to move too far away from your current working directory. For example, if I want to move to the parent directory of my working directory, I can simply type `cd ..` instead of writing out the whole path of the parent directory. When moving into the child directory of the current working directory, you can just type `cd child` or `cd child/grandchild` and the shell will know that you are using a relative path since it does not start with a `/`. Typing `cd child` is equivalent to typing `cd ./child`, since `.` is used to denote the current working directory. You can also get to the "grandparent" directory by typing `cd ../..` or one of your parent directory's other children using the command `cd ../sibling`. To go to your home directory, you can type `cd ~`.
-
-You may also want to view the contents of a directory. You can do this using the `ls` command. If you provide it with no arguments, it will simply print the contents of your working directory. 
-```
-$ ls
-file1.txt file2.txt hw1
-```
-The directories will be differentiated from the plain files in the development environment with bold colored text. You can also provide an absolute or relative path as an argument to the `ls` command (e.g., `ls /path/to/directory/`) to see the contents of a different directory. 
-
-#### Recap:
-* All file paths start at the root directory `/` and you can reference them absolutely or using relative paths
-* Your home directory is `~`, the current working directory is `.`, and the parent of the working directory is `..`
-* `pwd`: prints your working directory
-* `cd /some/directory`: move to the specified directory
-* `ls /some/directory`: print the files and directories within the chosen directory
-
-### Creating, viewing, and manipulating files and directories
-* `touch <desiredfilename>`: create a new file. 
-* `cat <filename>`: print contents of a file to the terminal.
-* `mv /path/to/<filename> /desired/path/to/file/`: move a file to a different directory. To move a directory instead of just a single file, use the flag `-r`. 
-* `cp <filename> <filecopyname>`: make a copy of an existing file. 
-* `mdkir <desireddirectoryname>`: create a new directory. 
-* `emacs <filename>`: open the file "filename" in the EMACS editor. More on this in the following section.
-* `wc <filename>`: print newline, word, and byte counts for a file. To see just the word count, add the flag `-w`.
-
-[Commands as files within the path list](https://jappavoo.github.io/UndertheCovers/textbook/unix/shellintro.html#commands-as-files-within-the-path-list): interesting resource to help with understanding of shell commands with an exercise you can follow!
-
-### Miscellaneous
-#### `echo`
-Display a line of text to standard out. 
-```
-$ echo "Hello world"
-Hello world
-```
-#### `ctrl+c`
-This will terminate whatever process/command is currently running in the shell. Great if you think your code may be stuck in an infinite loop or is just taking much longer than you thought it would to finish running. 
-
-#### `ctrl+l`
-This will clear your terminal and move the prompt up to the top of the screen. 
-
-### Symbols
-#### |
-This is known as the "pipe" symbol and is used to redirect the output of one command into the input of a second command. For example, if I type `ls .. | wc -w`, the total number of files/directories in the `..` directory will be printed to the command line. 
-#### >
-This symbol is used to assign a redirect-out to a command. For example, if I type: `echo "Hello world" > hw.txt`, instead of printing "Hello world" to the terminal, the right carrot symbol would direct that output into the file "hw.txt". 
-#### <
-This symbol is used to assign a redirect-in to a command. For example, we can type `cat < file.txt`. In this situation, this is equivalent to `cat file.txt`. 
-#### &
-Typing the ampersand symbol & at the end of a command will result in that command being run in the background. This means that you will immediately see another prompt even if the command you run has not finished running. 
-
---></section>
 
     <script type="text/x-thebe-config">
     {
