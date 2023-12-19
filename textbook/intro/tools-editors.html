@@ -657,41 +657,12 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#emacs-basics">
-   5.2.1. EMACS Basics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#vim-basics">
-   5.2.2. Vim Basics
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
@@ -703,24 +674,6 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#emacs-basics">
-   5.2.1. EMACS Basics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#vim-basics">
-   5.2.2. Vim Basics
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -730,29 +683,57 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="editors">
 <span id="cont-gs-tools-editors"></span><h1><span class="section-number">5.2. </span>Editors<a class="headerlink" href="#editors" title="Permalink to this headline">#</a></h1>
-<p>Terminal-based text editors allow us to write and edit files when we don’t have access to a GUI (e.g., when we are SSHing into a remote computer). <a class="reference external" href="https://en.wikipedia.org/wiki/Vim_(text_editor)">VIM</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Emacs">EMACS</a> are most common. <strong>We are requiring that students use EMACS for this course, and those who use VIM will be penalized.</strong></p>
-<section id="emacs-basics">
-<h2><span class="section-number">5.2.1. </span>EMACS Basics<a class="headerlink" href="#emacs-basics" title="Permalink to this headline">#</a></h2>
-<p>EMACS is a slightly more familiar-looking text editor that is valued for its extensibility. It is extremely configurable with a lot of tools and packages available.</p>
-<p>To open a file in EMACS, type <code class="docutils literal notranslate"><span class="pre">emacs</span> <span class="pre">&lt;filename&gt;</span></code>. Unlike in VIM, you will immediately be able to write in/edit thew file. Once you are finished editing, you type <code class="docutils literal notranslate"><span class="pre">ctrl+x</span></code> followed by <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to save and exit. It will prompt you to confirm that you want to save and quit. Typing <code class="docutils literal notranslate"><span class="pre">y</span></code> and then enter will return you to the terminal.</p>
-<p>EMACS has a built-in tutorial you can follow. Simply type <code class="docutils literal notranslate"><span class="pre">emacs</span></code> in the terminal and then scroll down to the tutorial using the arrow keys and press enter. This will take you through EMACS basics.</p>
-<p>Here are some navigation commands you might find useful (where C- denotes ctrl+):</p>
+<p>The vast majority of OS developers use text based editors, that can be accessed from a terminal, by using ssh to get to a machine, and over a wide variety of connections.  The two most popular options are <a class="reference external" href="https://en.wikipedia.org/wiki/Vim_(text_editor)">vim</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Emacs">emacs</a>, which are both available in the container image made available with this book.
+The choice of which is better is arguably <a class="reference external" href="https://slate.com/technology/2014/05/oldest-software-rivalry-emacs-and-vi-two-text-editors-used-by-programmers.html">the oldest rivalry in computing</a><a class="footnote-reference brackets" href="#googlesearch" id="id1">1</a>.
+Thankfully, the editor of this chapter of the book can reveal the truth that your grade on this course is likely to be higher if you master emacs, and the other authors know that their life is in danger if they try to modify this chapter.</p>
+<p>With vim, most users use it to modify a file, and then exit vim when they want to compile, debug or run their programs. To open a file, type <code class="docutils literal notranslate"><span class="pre">vim</span> <span class="pre">&lt;filename&gt;</span></code>. When you enter vim, you will automatically be in <code class="docutils literal notranslate"><span class="pre">normal</span> <span class="pre">mode</span></code> where you can navigate using your cursor. To insert text, type <code class="docutils literal notranslate"><span class="pre">i</span></code> to enter <code class="docutils literal notranslate"><span class="pre">insert</span> <span class="pre">mode</span></code>. or ‘a’ to enter ‘append mode’. when you are done changes, press the <code class="docutils literal notranslate"><span class="pre">esc</span></code> key to enter normal mode, next press <code class="docutils literal notranslate"><span class="pre">:</span></code> to enter <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">mode</span></code>, lastly press <code class="docutils literal notranslate"><span class="pre">w</span></code> (for write) and enter to save. To quit, enter command mode and <code class="docutils literal notranslate"><span class="pre">q</span></code> (quit).  There is also an incredibly arcane command set that enables members of the “cult of vi” to do very complex operations with a few key strokes.</p>
+<p>Now that we have discussed everything you ever need to know about vim, lets talk about the better alternative.
+While you could use emacs to just edit files, power users live in emacs and use to to compile, debug, and run their programs.  To open a file in emacs, type <code class="docutils literal notranslate"><span class="pre">emacs</span> <span class="pre">&lt;filename&gt;</span></code>, or if you are in emacs already (which you should always be) type <code class="docutils literal notranslate"><span class="pre">&lt;ctrl&gt;-x</span> <span class="pre">&lt;ctrl&gt;-f</span></code> to open a file.  Unlike in VIM, you will immediately be able to write in/edit the file. Once you are finished editing, type <code class="docutils literal notranslate"><span class="pre">&lt;ctrl&gt;-s</span></code> to save the file.  When you want to leave (which you never should) you type <code class="docutils literal notranslate"><span class="pre">&lt;ctrl&gt;-x</span></code> followed by <code class="docutils literal notranslate"><span class="pre">&lt;ctrl&gt;-c</span></code> to exit. There are many control and escape sequences to do powerful things and a really good reference card is available <a class="reference external" href="https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf">here</a>.</p>
+<aside class="sidebar">
+<p class="sidebar-title">Modes, key bindings, and help:</p>
+<p>Depending on the type of file you are editing, emacs goes into a file specific <em>mode</em> and will also have special bindings for that file that you can find out about by typing <code class="docutils literal notranslate"><span class="pre">&lt;ctrl&gt;-h</span> <span class="pre">m</span></code> for help on the mode or <code class="docutils literal notranslate"><span class="pre">&lt;ctrl&gt;-h</span> <span class="pre">b</span></code> for help on the bindings; here control h is a prefix for help, and control m is for the current mode.  There is a ton of help inside emacs, e.g., <code class="docutils literal notranslate"><span class="pre">&lt;ctrl&gt;-h</span> <span class="pre">?</span></code> gives you all the options, and <code class="docutils literal notranslate"><span class="pre">&lt;ctrl&gt;-h</span> <span class="pre">t</span></code> starts an emacs tutorial.</p>
+</aside>
+<p>A few of the more powerful features that you should take advance of in emacs are:</p>
 <ul class="simple">
-<li><p><strong>C-v</strong>: go forward one page</p></li>
-<li><p><strong>C-f</strong>: move forward one character</p></li>
-<li><p><strong>C-b</strong>: move backward one character</p></li>
-<li><p><strong>C-n</strong>: move to next line</p></li>
-<li><p><strong>C-p</strong>: move to previous line</p></li>
-<li><p><strong>C-a</strong>: move to the beginning of a line</p></li>
-<li><p><strong>C-e</strong>: move to the end of a line</p></li>
-<li><p><strong>C-g</strong>: stop a command that is taking too long to execute</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">&lt;ctrl&gt;-x</span> <span class="pre">&lt;ctrl&gt;-f</span></code> to open a directory, where emacs will let you move around the filesystem while staying in the editor.</p></li>
+<li><p>Starting up a <a class="reference external" href="https://www.gnu.org/software/emacs/manual/html_node/efaq-w32/Using-shell.html#:~:text=You%20can%20start%20an%20interactive,to%20use%20as%20the%20shell.">shell</a> which enables you to copy content easily from other buffers in emacs to the shell, and run programs directly there.</p></li>
+<li><p>Running make from <a class="reference external" href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Compilation.html">within emacs</a>.  When you do this emacs parses the error messages, and hitting <code class="docutils literal notranslate"><span class="pre">&lt;ctrl&gt;-x</span> <span class="pre">&lt;backquote&gt;</span></code> will automatically pop you into the right file on the line where the compiler emitted an error.</p></li>
+<li><p>Run debugger from within emacs (<code class="docutils literal notranslate"><span class="pre">&lt;esc&gt;-x</span> <span class="pre">gdb</span></code>).  When you do this, emacs parses the output of gdb, and automatically pops you into the correct source code file where the code you are debugging lives.</p></li>
+<li><p>Run grep in emacs (<code class="docutils literal notranslate"><span class="pre">&lt;esc&gt;-x</span> <span class="pre">grep</span></code>) where emacs parses the result, and hitting <code class="docutils literal notranslate"><span class="pre">&lt;ctrl&gt;-x</span> <span class="pre">&lt;backquote&gt;</span></code> will automatically pop you into the right file on the line where grep returned a result.</p></li>
 </ul>
-</section>
-<section id="vim-basics">
-<h2><span class="section-number">5.2.2. </span>Vim Basics<a class="headerlink" href="#vim-basics" title="Permalink to this headline">#</a></h2>
-<p>Vim is a “simple to use, hard to master” text editor that is valued by vim enthusiasts for its coding effeciency.</p>
-<p>To open a file in vim, type <code class="docutils literal notranslate"><span class="pre">vim</span> <span class="pre">&lt;filename&gt;</span></code>. When you enter vim, you will automatically be in <code class="docutils literal notranslate"><span class="pre">normal</span> <span class="pre">mode</span></code> where you can navigate your cursor. To insert text, type <code class="docutils literal notranslate"><span class="pre">i</span></code> to enter <code class="docutils literal notranslate"><span class="pre">insert</span> <span class="pre">mode</span></code>. To save a file, first press the <code class="docutils literal notranslate"><span class="pre">esc</span></code> key to enter normal mode, next press <code class="docutils literal notranslate"><span class="pre">:</span></code> to enter <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">mode</span></code>, lastly press <code class="docutils literal notranslate"><span class="pre">w</span></code> and enter to save. To quit, enter command mode and enter <code class="docutils literal notranslate"><span class="pre">q</span></code>.</p>
-</section>
+<p>These are just a few of the very powerful ways that emacs will improve your life as a software developer.  While it is a steep learning curve, you will find after a while that your fingers know all the common keystrokes, and you productivity will increase exponentially.   Note, all real emacs users rebind the caps locks key to be the control key; this dramatically reduces your chance of repetitive strain injury.</p>
+<!---
+
+**We are requiring that students use EMACS for this course, and those who use VIM will be penalized.**
+
+## EMACS Basics
+EMACS is a slightly more familiar-looking text editor that is valued for its extensibility. It is extremely configurable with a lot of tools and packages available. 
+
+To open a file in EMACS, type `emacs <filename>`. Unlike in VIM, you will immediately be able to write in/edit thew file. Once you are finished editing, you type `ctrl+x` followed by `ctrl+c` to save and exit. It will prompt you to confirm that you want to save and quit. Typing `y` and then enter will return you to the terminal.
+
+EMACS has a built-in tutorial you can follow. Simply type `emacs` in the terminal and then scroll down to the tutorial using the arrow keys and press enter. This will take you through EMACS basics. 
+
+Here are some navigation commands you might find useful (where C- denotes ctrl+):
+* **C-v**: go forward one page
+* **C-f**: move forward one character
+* **C-b**: move backward one character
+* **C-n**: move to next line
+* **C-p**: move to previous line
+* **C-a**: move to the beginning of a line
+* **C-e**: move to the end of a line
+* **C-g**: stop a command that is taking too long to execute
+
+## Vim Basics
+Vim is a "simple to use, hard to master" text editor that is valued by vim enthusiasts for its coding effeciency.
+
+To open a file in vim, type `vim <filename>`. When you enter vim, you will automatically be in `normal mode` where you can navigate your cursor. To insert text, type `i` to enter `insert mode`. To save a file, first press the `esc` key to enter normal mode, next press `:` to enter `command mode`, lastly press `w` and enter to save. To quit, enter command mode and enter `q`.
+
+---!><hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="googlesearch"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>The church of emacs refers to vi (the predecessor to vim) as the editor of the beast (vi-vi-vi being 666 in roman numerals), and the cult of vi Try doing a google search for <code class="docutils literal notranslate"><span class="pre">emacs</span></code> and then do one for <code class="docutils literal notranslate"><span class="pre">vi</span></code>.</p>
+</dd>
+</dl>
 </section>
 
     <script type="text/x-thebe-config">
