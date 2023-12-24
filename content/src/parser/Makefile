@@ -1,5 +1,5 @@
 override CFLAGS := -std=gnu99 -O0 -Wall -Werror -g  -fsanitize=undefined $(CFLAGS) -I.
-override LDFLAGS := -fsanitize=undefined $(CFLAGS) 
+override LDFLAGS := -fsanitize=undefined -fsanitize=leak $(LDLAGS)  
 CC = gcc
 
 # I generally make the first rule run all the tests
