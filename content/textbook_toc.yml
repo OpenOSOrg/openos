@@ -10,13 +10,13 @@ parts:
   - file: intro/abstractions
   - file: intro/tools
     sections: 
+    - file: intro/tools-c
     - file: intro/tools-shell
     - file: intro/tools-editors
     - file: intro/tools-make
+    - file: intro/tools-testing
     - file: intro/tools-git
     - file: intro/tools-gdb
-    - file: intro/tools-c
-    - file: intro/tools-testing
 # commenting out other materials for now to be potentially integrated
 #  - file: intro/peter-other
 - caption: 'Virtual Processor'
