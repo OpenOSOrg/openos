@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>5.6. The C Programming Language &#8212; Introduction to Operating Systems</title>
+    <title>5.1. The C Programming Language &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5.7. Unit Tests" href="tools-testing.html" />
-    <link rel="prev" title="5.5. GDB" href="tools-gdb.html" />
+    <link rel="next" title="5.2. Shell" href="tools-shell.html" />
+    <link rel="prev" title="5. What you should know" href="tools.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -152,39 +152,39 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5.1. The C Programming Language
+    </a>
+   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="tools-shell.html">
-     5.1. Shell
+     5.2. Shell
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="tools-editors.html">
-     5.2. Editors
+     5.3. Editors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="tools-make.html">
-     5.3. Makefiles
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="tools-git.html">
-     5.4. Git Basics
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="tools-gdb.html">
-     5.5. GDB
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     5.6. The C Programming Language
+     5.4. Make
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="tools-testing.html">
-     5.7. Unit Tests
+     5.5. Unit Tests
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tools-git.html">
+     5.6. Git Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tools-gdb.html">
+     5.7. GDB
     </a>
    </li>
   </ul>
@@ -682,22 +682,29 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="the-c-programming-language">
-<span id="cont-gs-tools-c"></span><h1><span class="section-number">5.6. </span>The C Programming Language<a class="headerlink" href="#the-c-programming-language" title="Permalink to this headline">#</a></h1>
-<p>The C programming language is a high level statically typed procedural compiled programming language valued for its accessibility to low level computer memory. You have probably already learned the language in a previous course, but this course will utilize some of its advanced features that have probably not been taught in those introductory courses. To make the learning process easier, we recommend reviewing its syntax and concepts. Here are a few:</p>
+<span id="cont-gs-tools-c"></span><h1><span class="section-number">5.1. </span>The C Programming Language<a class="headerlink" href="#the-c-programming-language" title="Permalink to this headline">#</a></h1>
+<p>The C programming language is a high level statically typed procedural compiled programming language valued for its accessibility to low level computer memory. You have probably already learned the language in a previous course, but this course will utilize some of its advanced features that have probably not been taught in those introductory courses.</p>
+<p>We don’t expect you to memorize the advanced features of he language; instead you should reference <a class="reference external" href="https://en.cppreference.com/w/c/language">this</a> searchable documentation as you need to, or if you prefer the famous K&amp;R <a class="reference external" href="https://archive.org/details/cprogramminglang00denn">book</a> that can be downloaded for free.  Make sure you have at least a basic understanding of:</p>
 <ul class="simple">
-<li><p>data types and their bits</p></li>
-<li><p>operator precedence</p></li>
-<li><p>control flow (if, for, while, etc)</p></li>
-<li><p>arrays</p></li>
-<li><p>strings</p></li>
-<li><p>pointers</p></li>
-<li><p>dynamic allocation</p></li>
-<li><p>functions</p></li>
-<li><p>preprocessing and compiling</p></li>
-<li><p><a class="reference external" href="https://www.gnu.org/software/libc/">glibc</a> (GNU C Library)</p></li>
-<li><p>algorithms and data structures (hash maps, linked lists, etc)</p></li>
+<li><p>Functions: declarations and definitions</p></li>
+<li><p>Variables: definitions, usage</p></li>
+<li><p>Data types and conversion between them</p></li>
+<li><p>What operators are available</p></li>
+<li><p>Control flow (if statements, loops)</p></li>
+<li><p>Arrays and strings, array-to-pointer decay</p></li>
+<li><p>Pointers and pointer arithmetic</p></li>
+<li><p>Memory management (malloc, free, etc.)</p></li>
+<li><p>Structs and unions</p></li>
+<li><p>Pre-processor directives</p></li>
 </ul>
-<p>In addition to reviewing the language, we also encourage you to follow some sort of coding style. <a class="reference external" href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html">This website</a> contains the preferred coding style for the Linux kernel. Although not required, adhering to a style will increase productivity so you and whoever else looks at your code will spend less time trying to understand what you wrote.</p>
+<p>One thing that you should be aware of is that the C programming language, by giving absolute control to the programmer, makes it really easy to shoot yourself in the foot.  We strongly recommend using a set of tools and techniques that will give you some degree of foot armor:</p>
+<ul class="simple">
+<li><p>Use some form of coding style, e.g., <a class="reference external" href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html">this website</a> contains the preferred coding style for the Linux kernel. Adhering to a style will increase productivity so you and whoever else looks at your code will spend less time trying to understand what you wrote.</p></li>
+<li><p>As described <a class="reference internal" href="tools-make.html#cont-gs-tools-make"><span class="std std-ref">here</span></a> always compile your programs with <code class="docutils literal notranslate"><span class="pre">-Wall</span></code> and -Werror` to enable the compiler to catch many bugs.</p></li>
+<li><p>Use <a class="reference internal" href="tools-gdb.html#cont-gs-tools-gdb"><span class="std std-ref">debuggers</span></a> rather than print to debug your program.</p></li>
+<li><p>Use tools like <a class="reference external" href="https://valgrind.org/">valgrind</a> to catch memory leaks.</p></li>
+</ul>
+<p>Most of all, write extensive unit and integration <a class="reference internal" href="tools-testing.html#cont-gs-tools-testing"><span class="std std-ref">tests</span></a> as you develop your code.  You will be shocked how many times you will avoid debugging the same problem repeatedly by doing this.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -727,17 +734,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="tools-gdb.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="tools.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">5.5. </span>GDB</p>
+            <p class="prev-next-title"><span class="section-number">5. </span>What you should know</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="tools-testing.html" title="next page">
+    <a class='right-next' id="next-link" href="tools-shell.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5.7. </span>Unit Tests</p>
+        <p class="prev-next-title"><span class="section-number">5.2. </span>Shell</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

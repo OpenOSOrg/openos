@@ -1,0 +1,1094 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>14. Page Tables &#8212; Introduction to Operating Systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="15. Memory reclaiming algorithms." href="reclamation.html" />
+    <link rel="prev" title="13. Paging" href="virt-paging.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/pref.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/purpose.html">
+   2. Purpose of operating systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/structure.html">
+   3. Operating System Structure &amp; Unix/Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/abstractions.html">
+   4. Operating System Abstractions
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/tools.html">
+   5. What you should know
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-shell.html">
+     5.1. Shell
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-editors.html">
+     5.2. Editors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-make.html">
+     5.3. Make and gcc
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-git.html">
+     5.4. Git Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-gdb.html">
+     5.5. GDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-c.html">
+     5.6. The C Programming Language
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-testing.html">
+     5.7. Unit Tests
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Processor
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/intro.html">
+   6. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/process.html">
+   7. Virtualizing a CPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/scheduling.html">
+   8. Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/real_sched.html">
+   9. A Look at the Linux Scheduler
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/review.html">
+   10. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Memory
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   11. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="phys-and-seg.html">
+   12. Memory management before paged virtual memory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="virt-paging.html">
+   13. Paging
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   14. Page Tables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reclamation.html">
+   15. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="page-size.html">
+   16. Page Sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="misc.html">
+   17. Other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="buffer-cache.html">
+   18. Buffer Cache
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pagefaults.html">
+   19. Memory Management Dynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="realworld.html">
+   20. Memory management in the real world
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concl.html">
+   21. Conclusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review.html">
+   22. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/intro.html">
+   23. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/interface.html">
+   24. File System Abstraction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/diskhw.html">
+   25. A bit about Disks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
+   26. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_track_used.html">
+   27. Disk Layout:Tracking Used Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_track_free.html">
+   28. Disk Layout:Tracking Free Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_name.html">
+   29. Disk Layout:Implementing Name Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_failures.html">
+   30. Disk Layout:Dealing with Failures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_ex_exx.html">
+   31. Disk Layout:Examples of Real World File Systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/kernelimp.html">
+   32. Kernel implementation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/review.html">
+   33. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sync.html">
+   34. Introduction to Concurrency, Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   35. Cooperating Processes and Inter-process Communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/criticalsection.html">
+   36. The Critical Section Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locks.html">
+   37. Implementing Locks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/ordering.html">
+   38. Ordering Thread Events
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/concurrency_bugs.html">
+   39. Common Concurrency Bugs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/readmostly.html">
+   40. Read-Dominated Workloads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   41. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   42. Locking in the Linux Kernel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/review.html">
+   43. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../devices/devices.html">
+   44. Input and Output
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../devices/disk2.html">
+   45. More on Disks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../virt/virt.html">
+   46. Virtualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sec/sec.html">
+   47. Security
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/howto.html">
+   48. How to read this book
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   49. Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/bib.html">
+   50. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/mm/page-tables.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/OpenOSOrg/openos"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fmm/page-tables.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/mm/page-tables.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/mm/page-tables.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#single-level-page-table">
+   14.1. Single-level Page Table
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-level-page-tables">
+   14.2. Multi-Level Page Tables
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#review-questions">
+     14.2.1. Review questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-table-entries-pte">
+   14.3. Page Table Entries(PTE)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-permissions-p-w-and-u-bits">
+   14.4. Page Permissions - P, W, and U bits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-access-accessed-and-dirty-bits">
+   14.5. Page Access - Accessed and Dirty bits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-a-page-table">
+   14.6. Creating a Page Table
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Page Tables</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#single-level-page-table">
+   14.1. Single-level Page Table
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-level-page-tables">
+   14.2. Multi-Level Page Tables
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#review-questions">
+     14.2.1. Review questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-table-entries-pte">
+   14.3. Page Table Entries(PTE)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-permissions-p-w-and-u-bits">
+   14.4. Page Permissions - P, W, and U bits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-access-accessed-and-dirty-bits">
+   14.5. Page Access - Accessed and Dirty bits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-a-page-table">
+   14.6. Creating a Page Table
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="page-tables">
+<span id="cont-mm-page-tables"></span><h1><span class="section-number">14. </span>Page Tables<a class="headerlink" href="#page-tables" title="Permalink to this headline">#</a></h1>
+<section id="single-level-page-table">
+<h2><span class="section-number">14.1. </span>Single-level Page Table<a class="headerlink" href="#single-level-page-table" title="Permalink to this headline">#</a></h2>
+<p>One of the simplest ways to structure a page table for mapping 20-bit
+page numbers is as a simple array with <span class="math notranslate nohighlight">\(2^{20}\)</span> entries. With this
+configuration, each virtual page has an entry, and the value in that
+entry is the corresponding physical page number, as seen in <a class="reference internal" href="#fig-vm-fig11"><span class="std std-numref">Fig. 14.2</span></a>. This single-level table is located in
+physical memory, and the MMU is given a pointer to this table, which is
+stored in an MMU register. (On Intel-compatible CPUs, the page table
+pointer is Control Register 3, or CR3.) This is shown in <a class="reference internal" href="#fig-vm-fig11"><span class="std std-numref">Fig. 14.2</span></a>, where we see the first two entries in a
+<span class="math notranslate nohighlight">\(2^{20}\)</span> or 1048576-entry mapping table.</p>
+<figure class="align-default" id="fig-singlelevel">
+<a class="reference internal image-reference" href="../_images/singlelevel.png"><img alt="../_images/singlelevel.png" src="../_images/singlelevel.png" style="width: 95%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14.1 </span><span class="caption-text">Single-level 32-bit page table</span><a class="headerlink" href="#fig-singlelevel" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In addition to the translated
+page number, each entry contains a <em>P</em> bit to indicate whether or not
+the entry is “present,” i.e., valid. Unlike in C or Java we can’t use a
+special null pointer, because 0 is a perfectly valid page number[^3].</p>
+<figure class="align-default" id="fig-vm-fig11">
+<a class="reference internal image-reference" href="../_images/virt-mem-pic11.png"><img alt="../_images/virt-mem-pic11.png" src="../_images/virt-mem-pic11.png" style="width: 85%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14.2 </span><span class="caption-text">Single-level 32-bit page table</span><a class="headerlink" href="#fig-vm-fig11" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Below we see pseudo-code for the translation
+algorithm implemented in an MMU using a single-level table; VA and PA
+stand for virtual and physical addresses, and VPN and PPN are the
+virtual and physical page numbers.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PA</span> <span class="o">=</span> <span class="n">translate</span><span class="p">(</span><span class="n">VA</span><span class="p">):</span>
+            <span class="n">VPN</span><span class="p">,</span> <span class="n">offset</span> <span class="o">=</span> <span class="n">split</span><span class="p">[</span><span class="mi">20</span> <span class="n">bits</span><span class="p">,</span> <span class="mi">12</span> <span class="n">bits</span><span class="p">](</span><span class="n">VA</span><span class="p">)</span>
+            <span class="n">PTE</span> <span class="o">=</span> <span class="n">physical_read</span><span class="p">(</span><span class="n">CR3</span> <span class="o">+</span> <span class="n">VPN</span><span class="o">*</span><span class="n">sizeof</span><span class="p">(</span><span class="n">PTE</span><span class="p">),</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">PTE</span><span class="p">))</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">PTE</span><span class="o">.</span><span class="n">present</span><span class="p">:</span>
+                <span class="n">fault</span>
+            <span class="k">return</span> <span class="n">PTE</span><span class="o">.</span><span class="n">PPN</span> <span class="o">+</span> <span class="n">offset</span>
+</pre></div>
+</div>
+<p>Note that this means that every memory operation performed by the CPU
+now requires two physical memory operations: one to translate the
+virtual address, and a second one to perform the actual operation. If
+this seems inefficient, it is, and it will get worse. However, in a page
+or two we’ll discuss the <em>translation lookaside buffer</em> or TLB, which
+caches these translations to eliminate most of the overhead.</p>
+<p>The single-level page table handles the problem of encoding the
+virtual-to-physical page map, but causes another: it uses 4 MB of memory
+per map. Years ago (e.g. in the mid-80s when the first Intel CPUs using
+this paging structure were introduced) this was entirely out of the
+question, as a single computer might have a total of 4 MB of memory or
+less. Even today, it remains problematic. As an example, when these
+notes were first written (2013), the most heavily-used machine in the
+CCIS lab (<a class="reference external" href="http://login.ccs.neu.edu">login.ccs.neu.edu</a>) had 4 GB of memory, and when I checked it
+had 640 running processes. With 4 MB page tables and one table per
+process, this would require 2.5GB of memory just for page tables, or
+most of the machine’s memory. Worse yet, each table would require a
+contiguous 4MB region of memory, running into the same problem of
+external fragmentation that paged address translation was supposed to
+solve.</p>
+</section>
+<section id="multi-level-page-tables">
+<h2><span class="section-number">14.2. </span>Multi-Level Page Tables<a class="headerlink" href="#multi-level-page-tables" title="Permalink to this headline">#</a></h2>
+<p>In order to solve the large physically contiguous page table problem and the very large page table memory requirements multi-level page tables are used.  For example a 2-level page tables is comprised of one first level page or page directory page and several second level or page table pages that map the actual page frames mapped into the virtual address space.</p>
+<figure class="align-default" id="fig-multilevel">
+<a class="reference internal image-reference" href="../_images/multilevel.png"><img alt="../_images/multilevel.png" src="../_images/multilevel.png" style="width: 95%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14.3 </span><span class="caption-text">2-level 32-bit page table</span><a class="headerlink" href="#fig-multilevel" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In order to support a virtual address space larger than 32 bits more levels of page tables are required.</p>
+<figure class="align-default" id="fig-multilevel3">
+<a class="reference internal image-reference" href="../_images/3level.png"><img alt="../_images/3level.png" src="../_images/3level.png" style="width: 95%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14.4 </span><span class="caption-text">3-level 64-bit page table</span><a class="headerlink" href="#fig-multilevel3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In <a class="reference internal" href="#fig-vm-fig13"><span class="std std-numref">Fig. 14.5</span></a> we see a page table constructed of 3 pages:
+physical pages 00000 (the root directory), 00001, and 00003. Two data
+pages are mapped: 00002 and 00004. Any entries not shown are assumed to
+be null, i.e., the present bit is set to 0. As an example we use this
+page table to translate a read from virtual address 0x0040102C.</p>
+<figure class="align-default" id="fig-vm-fig13">
+<a class="reference internal image-reference" href="../_images/virt-mem-pic13.png"><img alt="../_images/virt-mem-pic13.png" src="../_images/virt-mem-pic13.png" style="width: 90%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14.5 </span><span class="caption-text">Two-level Page Table Example</span><a class="headerlink" href="#fig-vm-fig13" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The steps involved in translating this address are:</p>
+<p>1) Split the address into page number and offset</p>
+<a class="reference internal image-reference" href="../_images/virt-mem-pic14.png"><img alt="../_images/virt-mem-pic14.png" class="align-center" src="../_images/virt-mem-pic14.png" style="width: 50%;" /></a>
+<p>2) Split the page number into top and bottom 10 bits, giving <code class="docutils literal notranslate"><span class="pre">0x001</span></code>
+and <code class="docutils literal notranslate"><span class="pre">0x001</span></code>. (in the figure the top row is hex, the middle two rows are
+binary, and the bottom is hex again.)</p>
+<a class="reference internal image-reference" href="../_images/virt-mem-pic15.png"><img alt="../_images/virt-mem-pic15.png" class="align-center" src="../_images/virt-mem-pic15.png" style="width: 60%;" /></a>
+<p>3) Read entry <code class="docutils literal notranslate"><span class="pre">[001]</span></code> from the top-level page directory (physical page
+<code class="docutils literal notranslate"><span class="pre">00000</span></code>) (note sizeof(entry) is 4 bytes):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">address</span> <span class="o">=</span> <span class="n">start</span> <span class="p">[</span><span class="mi">00000000</span><span class="p">]</span> <span class="o">+</span> <span class="n">index</span> <span class="p">[</span><span class="mi">001</span><span class="p">]</span> <span class="o">*</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+<span class="n">read</span> <span class="mi">4</span> <span class="nb">bytes</span> <span class="kn">from</span> <span class="nn">physical</span> <span class="n">address</span> <span class="mi">00000004</span> <span class="p">(</span><span class="n">page</span> <span class="mi">00000</span><span class="p">,</span> <span class="n">offset</span> <span class="mi">004</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pgnum</span> <span class="o">=</span> <span class="mi">00001</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>4) Read entry <code class="docutils literal notranslate"><span class="pre">[001]</span></code> from the page table in physical page <code class="docutils literal notranslate"><span class="pre">00001</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">address</span> <span class="o">=</span> <span class="mi">00001000</span> <span class="o">+</span> <span class="mi">001</span><span class="o">*</span><span class="mi">4</span> <span class="o">=</span> <span class="mi">00001004</span>
+<span class="n">read</span> <span class="mi">4</span> <span class="nb">bytes</span> <span class="kn">from</span> <span class="nn">physical</span> <span class="n">address</span> <span class="mi">00001004</span>
+<span class="p">:</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pgnum</span> <span class="o">=</span> <span class="mi">00002</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This means that the translated physical page number is <code class="docutils literal notranslate"><span class="pre">00002</span></code>. The
+offset in the original virtual address is <code class="docutils literal notranslate"><span class="pre">02C</span></code>, so combining the two we
+get the final physical address, <code class="docutils literal notranslate"><span class="pre">0000202C</span></code>.</p>
+<section id="review-questions">
+<h3><span class="section-number">14.2.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h3>
+<figure class="align-default" id="fig-vm-review1">
+<a class="reference internal image-reference" href="../_images/virt-mem-pic16.png"><img alt="../_images/virt-mem-pic16.png" src="../_images/virt-mem-pic16.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14.6 </span><span class="caption-text">Reference page table for review questions</span><a class="headerlink" href="#fig-vm-review1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>13 A famous computer science quote attributed to David Wheeler is: “All
+problems in computer science can be solved by another level of
+indirection,” to which some add “except the performance problems caused
+by indirection.” A corollary to this is that most performance problems
+can be solved by adding caching. How are these quotes applicable to
+paged address translation?</p>
+</div>
+</section>
+</section>
+<section id="page-table-entries-pte">
+<h2><span class="section-number">14.3. </span>Page Table Entries(PTE)<a class="headerlink" href="#page-table-entries-pte" title="Permalink to this headline">#</a></h2>
+<p>The components of a 32-bit Intel page table entry are shown in <a class="reference internal" href="#fig-vm-pic17"><span class="std std-numref">Fig. 14.7</span></a>; for more information you may wish to refer to
+<a class="reference external" href="http://wiki.osdev.org/Paging">http://wiki.osdev.org/Paging</a>.</p>
+<figure class="align-default" id="fig-vm-pic17">
+<a class="reference internal image-reference" href="../_images/virt-mem-pic17.png"><img alt="../_images/virt-mem-pic17.png" src="../_images/virt-mem-pic17.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14.7 </span><span class="caption-text">32-bit Intel page table entry
+(PTE).</span><a class="headerlink" href="#fig-vm-pic17" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="page-permissions-p-w-and-u-bits">
+<h2><span class="section-number">14.4. </span>Page Permissions - P, W, and U bits<a class="headerlink" href="#page-permissions-p-w-and-u-bits" title="Permalink to this headline">#</a></h2>
+<p>Page tables allow different permissions to be applied to memory at a
+per-page level of granularity.  The page permission bits are set by software
+and read by the hardware to prevent illegal access to a page.</p>
+<p><strong>P=0/1</strong> - If the present bit is zero, the entry is ignored entirely by
+the MMU, thus preventing any form of access to the corresponding virtual
+page.  When the present bit is zero the entire PTE can be used by software.</p>
+<p><strong>W = 0/1</strong> - Write permission. If the W bit is zero, then read accesses
+to this page will be allowed, but any attempt to write will cause a
+fault. By setting the W bit to zero, pages that should not be modified
+(i.e., program instructions) can be protected. Since
+correctly-functioning programs in most languages do not change the code
+generated by the compiler, any attempt to write to such a page must be a
+bug, and stopping the program earlier rather than later may reduce the
+amount of damage caused.</p>
+<p><strong>U = 0/1</strong> - User permission. If the U bit is zero, then accesses to
+this page will fail unless the CPU is running in supervisor mode.
+Typically the OS kernel will “live” in a portion of the same address
+space as the current process, but will hide its code and data structures
+from access by user processes by setting U=0 on the OS-only mappings.</p>
+</section>
+<section id="page-access-accessed-and-dirty-bits">
+<h2><span class="section-number">14.5. </span>Page Access - Accessed and Dirty bits<a class="headerlink" href="#page-access-accessed-and-dirty-bits" title="Permalink to this headline">#</a></h2>
+<p>Page tables convey whether or not pages have been accessed and/or modified.<br />
+These bits are set by hardware and read by software to determine how
+frequently a page is being accessed and whether or not its in a modified state.</p>
+<p><strong>A=0/1</strong> - If the accessed bit is set the page has been referenced since the
+last time the bit was cleared.  This aids the kernel in determining how active a
+page is.  If the active bit is frequently being set then the page is being
+referenced frequently and probably not a good candidate for reclaiming.</p>
+<p><strong>D-0/1</strong> - If the dirty bit is set the page frame associated with the PFN
+is dirty or modified and must be written to storage before it can be reclaimed
+for correctness.  Subsequent access to the associated virtual page will result
+in a page fault so its contents can be restored as long as the present bit was
+cleared when the page was reclaimed.</p>
+</section>
+<section id="creating-a-page-table">
+<h2><span class="section-number">14.6. </span>Creating a Page Table<a class="headerlink" href="#creating-a-page-table" title="Permalink to this headline">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">char</span> <span class="n">hello</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">&#39;hello world</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
+<span class="n">void</span> <span class="n">_start</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">syscall</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hello</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span> <span class="o">/*</span> <span class="n">syscall</span> <span class="mi">4</span> <span class="o">=</span> <span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="n">buf</span><span class="p">,</span><span class="nb">len</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="n">syscall</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>               <span class="o">/*</span> <span class="n">syscall</span> <span class="mi">1</span> <span class="o">=</span> <span class="n">exit</span><span class="p">()</span> <span class="o">*/</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To see how a page table is created, we start by examining the virtual
+memory map of perhaps the simplest possible Linux program, shown above.
+This program doesn’t use any libraries, but
+rather uses direct system calls to write to standard output (always file
+descriptor 1 in Unix) and to exit. In Linux, _start is the point at
+which execution of a program begins; normally the _start function is
+part of the standard library, which performs initialization before
+calling main.</p>
+<p>When this program runs and its memory map is examined (using the <code class="docutils literal notranslate"><span class="pre">pmap</span></code>
+command) you see the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">00110000</span>    <span class="mi">4</span><span class="n">K</span> <span class="n">r</span><span class="o">-</span><span class="n">x</span><span class="o">--</span>    <span class="p">[</span> <span class="n">anon</span> <span class="p">]</span>      <span class="o">&lt;-</span> <span class="n">file</span> <span class="n">header</span> <span class="o">-</span> <span class="n">used</span> <span class="n">by</span> <span class="n">OS</span>
+<span class="mi">08048000</span>    <span class="mi">4</span><span class="n">K</span> <span class="n">r</span><span class="o">-</span><span class="n">x</span><span class="o">--</span>    <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">hello</span>    <span class="o">&lt;-</span> <span class="o">.</span><span class="n">text</span> <span class="n">segment</span> <span class="p">(</span><span class="n">code</span><span class="p">)</span>
+<span class="mi">08049000</span>    <span class="mi">4</span><span class="n">K</span> <span class="n">rwx</span><span class="o">--</span>    <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">hello</span>    <span class="o">&lt;-</span> <span class="o">.</span><span class="n">data</span> <span class="n">segment</span>
+<span class="n">bffdf000</span>    <span class="mi">128</span><span class="n">K</span> <span class="n">rwx</span><span class="o">--</span>  <span class="p">[</span> <span class="n">stack</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>The address space is constructed of a series of contiguous <em>segments</em>,
+each a multiple of the 4 KB page size (although most are the minimum
+4 KB here), with different permissions for each. (realistic programs
+will have many more segments; as an example, the address space for the
+Nautilus file manager process on my Ubuntu 15.10 system has more than
+800 segments.) To create a page table for this program, the first step
+is splitting the page numbers into top and bottom halves (all numbers
+given in hex or binary), as shown below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">VPN</span> <span class="mi">00110</span> <span class="o">=</span> <span class="mi">0000</span> <span class="mi">0000</span> <span class="mi">00</span> <span class="mi">01</span> <span class="mi">0001</span> <span class="mi">0000</span>
+    <span class="n">top10</span> <span class="o">=</span> <span class="mi">000</span>  <span class="n">bottom10</span> <span class="o">=</span> <span class="mi">110</span>
+<span class="n">VPN</span> <span class="mi">08048</span> <span class="o">=</span> <span class="mi">0000</span> <span class="mi">1000</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">0100</span> <span class="mi">1000</span>
+<span class="n">top10</span> <span class="o">=</span> <span class="mi">020</span>  <span class="n">bottom10</span> <span class="o">=</span> <span class="mi">048</span>
+<span class="n">VPN</span> <span class="mi">08049</span> <span class="o">=</span> <span class="mi">0000</span> <span class="mi">1000</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">0100</span> <span class="mi">1001</span>
+<span class="n">top10</span> <span class="o">=</span> <span class="mi">020</span>  <span class="n">bottom10</span> <span class="o">=</span> <span class="mi">049</span>
+<span class="n">VPN</span> <span class="n">BFFDF</span> <span class="o">=</span> <span class="mi">1011</span> <span class="mi">1111</span> <span class="mi">11</span> <span class="mi">11</span> <span class="mi">1101</span> <span class="mi">1111</span>
+<span class="n">top10</span> <span class="o">=</span> <span class="mi">2</span><span class="n">FF</span>  <span class="n">bottom10</span> <span class="o">=</span> <span class="mi">3</span><span class="n">DF</span>
+</pre></div>
+</div>
+<p>The first three segments are one page long; note that the last segment
+is 32 pages (128 KB), so it uses entries 0x3DF to 0x3FF in the
+second-level page table.</p>
+<p>The program needs four physical pages for the table; assume that pages
+0000, 0001, 0002, and 0003 are used for the table, and pages 00004 and
+up for data/code pages.  The actual page table and associated PTEs may
+be seen in <a class="reference internal" href="#fig-vm-virt-mem-review2-png"><span class="std std-numref">Fig. 14.8</span></a>. (note that the choice of physical pages is
+arbitrary; the page numbers within the page directory and page table
+entries would of course change if different physical pages were used.)</p>
+<figure class="align-default" id="fig-vm-virt-mem-review2-png">
+<a class="reference internal image-reference" href="../_images/virt-mem-review2.png"><img alt="../_images/virt-mem-review2.png" src="../_images/virt-mem-review2.png" style="width: 45%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14.8 </span><span class="caption-text">Page Table and PTEs in use.</span><a class="headerlink" href="#fig-vm-virt-mem-review2-png" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./mm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="virt-paging.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">13. </span>Paging</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="reclamation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Memory reclaiming algorithms.</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By (see contributing chapter book)<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

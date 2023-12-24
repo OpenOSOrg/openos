@@ -1,0 +1,975 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>13. Paging &#8212; Introduction to Operating Systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="14. Page Tables" href="page-tables.html" />
+    <link rel="prev" title="12. Memory management before paged virtual memory" href="phys-and-seg.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/pref.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/purpose.html">
+   2. Purpose of operating systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/structure.html">
+   3. Operating System Structure &amp; Unix/Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/abstractions.html">
+   4. Operating System Abstractions
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/tools.html">
+   5. What you should know
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-shell.html">
+     5.1. Shell
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-editors.html">
+     5.2. Editors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-make.html">
+     5.3. Make and gcc
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-git.html">
+     5.4. Git Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-gdb.html">
+     5.5. GDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-c.html">
+     5.6. The C Programming Language
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-testing.html">
+     5.7. Unit Tests
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Processor
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/intro.html">
+   6. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/process.html">
+   7. Virtualizing a CPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/scheduling.html">
+   8. Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/real_sched.html">
+   9. A Look at the Linux Scheduler
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/review.html">
+   10. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Memory
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   11. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="phys-and-seg.html">
+   12. Memory management before paged virtual memory
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   13. Paging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="page-tables.html">
+   14. Page Tables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reclamation.html">
+   15. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="page-size.html">
+   16. Page Sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="misc.html">
+   17. Other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="buffer-cache.html">
+   18. Buffer Cache
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pagefaults.html">
+   19. Memory Management Dynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="realworld.html">
+   20. Memory management in the real world
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concl.html">
+   21. Conclusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review.html">
+   22. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/intro.html">
+   23. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/interface.html">
+   24. File System Abstraction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/diskhw.html">
+   25. A bit about Disks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
+   26. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_track_used.html">
+   27. Disk Layout:Tracking Used Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_track_free.html">
+   28. Disk Layout:Tracking Free Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_name.html">
+   29. Disk Layout:Implementing Name Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_failures.html">
+   30. Disk Layout:Dealing with Failures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_ex_exx.html">
+   31. Disk Layout:Examples of Real World File Systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/kernelimp.html">
+   32. Kernel implementation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/review.html">
+   33. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sync.html">
+   34. Introduction to Concurrency, Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   35. Cooperating Processes and Inter-process Communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/criticalsection.html">
+   36. The Critical Section Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locks.html">
+   37. Implementing Locks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/ordering.html">
+   38. Ordering Thread Events
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/concurrency_bugs.html">
+   39. Common Concurrency Bugs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/readmostly.html">
+   40. Read-Dominated Workloads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   41. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   42. Locking in the Linux Kernel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/review.html">
+   43. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../devices/devices.html">
+   44. Input and Output
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../devices/disk2.html">
+   45. More on Disks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../virt/virt.html">
+   46. Virtualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sec/sec.html">
+   47. Security
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/howto.html">
+   48. How to read this book
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   49. Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/bib.html">
+   50. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/mm/virt-paging.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/OpenOSOrg/openos"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fmm/virt-paging.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/mm/virt-paging.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/mm/virt-paging.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paged-address-translation">
+   13.1. Paged Address Translation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mmu-memory-management-unit">
+   13.2. MMU Memory Management Unit
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#memory-over-commitment-and-paging">
+     13.2.1. Memory Over-Commitment and Paging
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paging-avoiding-fragmentation">
+   13.3. Paging - Avoiding Fragmentation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#internal-fragmentation">
+     13.3.1. Internal Fragmentation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Paging</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paged-address-translation">
+   13.1. Paged Address Translation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mmu-memory-management-unit">
+   13.2. MMU Memory Management Unit
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#memory-over-commitment-and-paging">
+     13.2.1. Memory Over-Commitment and Paging
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paging-avoiding-fragmentation">
+   13.3. Paging - Avoiding Fragmentation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#internal-fragmentation">
+     13.3.1. Internal Fragmentation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="paging">
+<span id="cont-mm-virt-paging"></span><h1><span class="section-number">13. </span>Paging<a class="headerlink" href="#paging" title="Permalink to this headline">#</a></h1>
+<section id="paged-address-translation">
+<h2><span class="section-number">13.1. </span>Paged Address Translation<a class="headerlink" href="#paged-address-translation" title="Permalink to this headline">#</a></h2>
+<p>Most systems today use paged address translation or paging.  A paged virtual memory system divides both virtual memory and physical memory into fixed size chunks or pieces.  They are known as virtual pages or just pages in the virtual address space and page frames in physical memory.  Each page of virtual memory that is being used maps to a page frame.</p>
+<figure class="align-default" id="paged-memory">
+<a class="reference internal image-reference" href="../_images/pagedmem.png"><img alt="../_images/pagedmem.png" src="../_images/pagedmem.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 13.1 </span><span class="caption-text">Paged virtual memory example</span><a class="headerlink" href="#paged-memory" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>One benefit of paging over segmentation is that the virtual address space can be much larger than physical memory.  In the segmentation memory model its not possible to run a program that’s requires more memory than the system has.  This means a program may run on a system with a large amount of memory and not be able to run on a system with a smaller amount of memory.  On a paged memory system every process has exactly the same size virtual address space typically gigabytes, terabytes or even petabytes on modern systems but only uses a small portion in most cases.  The physical memory is typically much smaller than a single virtual address space, megabytes or gigabytes, and there can be hundreds or even thousands of processes running on a system.  As a process runs on a paged memory system only the virtual pages needed at any moment are required to be in physical memory which is a small subset of the entire amount of physical memory.  The memory management system takes care of insuring that the necessary virtual to physical mappings are in place.  A large program running on a small memory system just runs slower rather than not at all on a paged memory system.</p>
+<p>Another benefit of paging over segmentation is that a region of virtual memory or memory segment does not need to map physically contiguous memory.  Since the virtual address space is divided into small fixed size pages a virtually contiguous region of memory can map to page frames that are randomly scattered throughout the entire physical memory.  This completely eliminates external fragmentation and therefore the need to perform compaction.  The only fragmentation issue encountered in a page virtual memory system is internal fragmentation of the unused portion of a page at the end of a region of virtual memory.</p>
+</section>
+<section id="mmu-memory-management-unit">
+<h2><span class="section-number">13.2. </span>MMU Memory Management Unit<a class="headerlink" href="#mmu-memory-management-unit" title="Permalink to this headline">#</a></h2>
+<p>On paged systems the CPU includes special hardware that maintains the virtual to physical page mappings known as the MMU or Memory Management Unit.  Every time a virtual address is referenced the MMU translates that virtual address to a physical address before presenting it to the memory address bus hardware.</p>
+<p>We examine a single model of address translation in detail: the one used
+by the original Pentium, and by any Intel-compatible CPU running in
+32-bit mode. It uses 32-bit virtual addresses, 32-bit physical
+addresses, and a page size of 4096 bytes. Since pages are <span class="math notranslate nohighlight">\(2^{12}\)</span> bytes
+each, addresses can be divided into 20-bit page numbers and 12-bit
+offsets within each page, as shown in <a class="reference internal" href="#fig-vm-fig5"><span class="std std-numref">Fig. 13.3</span></a>.</p>
+<figure class="align-default" id="fig-vm-fig6">
+<a class="reference internal image-reference" href="../_images/virt-mem-pic10.png"><img alt="../_images/virt-mem-pic10.png" src="../_images/virt-mem-pic10.png" style="height: 5.5cm;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 13.2 </span><span class="caption-text">Example of virtual address mapping to physical address</span><a class="headerlink" href="#fig-vm-fig6" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The Memory Management Unit (MMU) maps a 20-bit virtual page number to a
+20-bit physical page number; the offset can pass through unchanged, as
+shown in <a class="reference internal" href="#fig-vm-fig6"><span class="std std-numref">Fig. 13.2</span></a>, giving the physical address the CPU should
+access.</p>
+<figure class="align-default" id="fig-vm-fig5">
+<a class="reference internal image-reference" href="../_images/virt-mem-pic9.png"><img alt="../_images/virt-mem-pic9.png" src="../_images/virt-mem-pic9.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 13.3 </span><span class="caption-text">Page number and offset in 32-bit paged translation with 4KB pages</span><a class="headerlink" href="#fig-vm-fig5" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Although paged address translation is far more flexible than base and
+bounds registers, it requires much more information. Base and bounds
+translation only requires two values, which can easily be held in
+registers in the MMU. In contrast, paged translation must be able to
+handle a separate mapping value for each of over a million virtual
+pages. (although most programs will only map a fraction of those pages)
+The only possible place to store the amount of information required by
+paged address translation is in memory itself, so the MMU uses page
+tables in memory to specify virtual-to-physical mappings.</p>
+<section id="memory-over-commitment-and-paging">
+<h3><span class="section-number">13.2.1. </span>Memory Over-Commitment and Paging<a class="headerlink" href="#memory-over-commitment-and-paging" title="Permalink to this headline">#</a></h3>
+<p>Page faults allow data to be dynamically fetched into memory when it is
+needed, in the same way that the CPU dynamically fetches data from
+memory into the cache. This allows the operating system to over-commit
+memory: the sum of all process address spaces can add up to more memory
+than is available, although the total amount of memory mapped at any
+point in time must fit into RAM. This means that when a page fault
+occurs and a page is allocated to a process, another page (from that or
+another process) may need to be evicted from memory.</p>
+<p>There are two types of regions in a user a user’s virtual address space:
+file-backed and anonymous.</p>
+<p>File-backed regions are contiguous portions of a file on storage that is mapped into a user’s virtual address space.  For example the exec()system call mmap()’s the text and data section of an executable file into a users address space at predetermined virtual addresses.  The majority of the page frames mapped into file backed regions are read-only mappings and therefore are never modified so never need to be flushed or written back to storage.  When a process exits and munmap()s its file-backed regions nothing is deleted.  Everything is from some file that exist on some storage device.</p>
+<p>Anonymous memory regions do not correspond to a file.  Instead, they are the data, heap and stack regions of the user’s virtual address space.  Unlike file-backed regions the page frames mapped into anonymous regions are almost always modified.  Consider what would be the sense of allocating from a heap and only reading from it?
+For this reason all page frames mapped into anonymous regions must be written to some storage location if it is to be reclaimed.  Also unlike file-backed regions all the page frames mapped into anonymous regions are deleted and therefor immediately freed. The data, heap and stack contents of a process that is exiting is on no value to any other process and therefor can be eliminated</p>
+<p>Evicting a read-only page mapped from a file is simple: just forget the
+mapping and free the page; if a fault for that page occurs later, the
+page can be read back from disk. Occasionally pages are mapped
+read/write from a file, when a program explicitly requests it with
+<code class="docutils literal notranslate"><span class="pre">mmap</span></code>—in that case the OS can write any modified data back to the
+file and then evict the page; again it can be paged back from disk if
+needed again.</p>
+<p>Anonymous segments such as stack and heap are typically created in
+memory and do not need to be swapped; however if the system runs low on
+memory it may evict anonymous pages owned by idle processes, in order to
+give more memory to the currently-running ones. To do this the OS
+allocates a location in “swap space” on disk: typically a dedicated swap
+partition in Linux, and the <code class="docutils literal notranslate"><span class="pre">PAGEFILE.sys</span></code> and <code class="docutils literal notranslate"><span class="pre">/var/vm/swapfile</span></code> files
+in Windows and OSX respectively. The data must first be written out to
+that location, then the OS can store the page-to-location mapping and
+release the memory page.</p>
+<p>Hint: Linux uses/borrows the page table entry to store the location of
+a swapped out page.<br />
+As long as the PTE present bit is not set the MMU hardware
+will not attempt to translate, instead it will cause a page fault.
+The entire PTE can be used by software when the present bit is not set.</p>
+<figure class="align-default" id="fig-vm-pic106">
+<a class="reference internal image-reference" href="../_images/virt-mem-pic106.png"><img alt="../_images/virt-mem-pic106.png" src="../_images/virt-mem-pic106.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 13.4 </span><span class="caption-text">Page table entry with D (dirty) bit</span><a class="headerlink" href="#fig-vm-pic106" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="paging-avoiding-fragmentation">
+<h2><span class="section-number">13.3. </span>Paging - Avoiding Fragmentation<a class="headerlink" href="#paging-avoiding-fragmentation" title="Permalink to this headline">#</a></h2>
+<p>The fragmentation in <a class="reference internal" href="phys-and-seg.html#mm-virt-mem-frag-4"><span class="std std-numref">Fig. 12.13</span></a> is termed <em>external fragmentation</em>, because the
+memory wasted is <em>external</em> to the regions allocated. This situation can
+be avoided by <em>compacting</em> memory—moving existing allocations around,
+thereby consolidating multiple blocks of free memory into a single large
+chunk. This is a slow process, requiring processes to be paused, large
+amounts of memory to be copied, and base+bounds registers modified to
+point to new locations[^2].</p>
+<figure class="align-default" id="fig-vm-fig3">
+<a class="reference internal image-reference" href="../_images/virt-mem-map.png"><img alt="../_images/virt-mem-map.png" src="../_images/virt-mem-map.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 13.5 </span><span class="caption-text">A mapping between virtual pages and physical pages</span><a class="headerlink" href="#fig-vm-fig3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Instead, modern CPUs use <em>paged address translation</em>, which divides the
+physical and virtual memory spaces into fixed-sized pages, typically
+4KB, and provides a flexible mapping between virtual and physical pages,
+as shown in <a class="reference internal" href="#fig-vm-fig3"><span class="std std-numref">Fig. 13.5</span></a>. The operating system can then maintain a list
+of free physical pages, and allocate them as needed. Because any
+combination of physical pages may be used for an allocation request,
+there is no external fragmentation, and a request will not fail as long
+as there are enough free physical pages to fulfill it.</p>
+<section id="internal-fragmentation">
+<h3><span class="section-number">13.3.1. </span>Internal Fragmentation<a class="headerlink" href="#internal-fragmentation" title="Permalink to this headline">#</a></h3>
+<p>Paging solves the problem of external fragmentation, there is no wasted space between pages of virtual memory.  However, paging does suffer from
+another issue, <em>internal fragmentation</em>, space may be wasted
+<em>inside</em> the allocated pages. E.g. if 10 KB of memory is allocated in
+4KB pages, 3 pages (a total of 12 KB) are allocated, and 2KB is wasted.
+To allocate hundreds of KB in pages of 4KB this is a minor overhead:
+about <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> a page, or 2 KB, wasted per allocation. But internal
+fragmentation makes this approach inefficient for very small allocations
+(e.g. the <code class="docutils literal notranslate"><span class="pre">new</span></code> operator in C++), as shown in <a class="reference internal" href="#fig-vm-fig4"><span class="std std-numref">Fig. 13.6</span></a>.
+(It is also one reason why even though most
+CPUs support multi-megabyte or even multi-gigabyte “huge” pages, which
+are slightly more efficient than 4 KB pages, they are rarely used.)</p>
+<figure class="align-default" id="fig-vm-fig4">
+<a class="reference internal image-reference" href="../_images/virt-mem-pic7.png"><img alt="../_images/virt-mem-pic7.png" src="../_images/virt-mem-pic7.png" style="width: 90%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 13.6 </span><span class="caption-text">Example of internal fragmentation</span><a class="headerlink" href="#fig-vm-fig4" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./mm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="phys-and-seg.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">12. </span>Memory management before paged virtual memory</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="page-tables.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Page Tables</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By (see contributing chapter book)<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

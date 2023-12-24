@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>5.3. Makefiles &#8212; Introduction to Operating Systems</title>
+    <title>5.4. Make &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5.4. Git Basics" href="tools-git.html" />
-    <link rel="prev" title="5.2. Editors" href="tools-editors.html" />
+    <link rel="next" title="5.5. Unit Tests" href="tools-testing.html" />
+    <link rel="prev" title="5.3. Editors" href="tools-editors.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -153,38 +153,38 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul class="current">
    <li class="toctree-l2">
+    <a class="reference internal" href="tools-c.html">
+     5.1. The C Programming Language
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="tools-shell.html">
-     5.1. Shell
+     5.2. Shell
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="tools-editors.html">
-     5.2. Editors
+     5.3. Editors
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     5.3. Makefiles
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="tools-git.html">
-     5.4. Git Basics
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="tools-gdb.html">
-     5.5. GDB
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="tools-c.html">
-     5.6. The C Programming Language
+     5.4. Make
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="tools-testing.html">
-     5.7. Unit Tests
+     5.5. Unit Tests
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tools-git.html">
+     5.6. Git Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tools-gdb.html">
+     5.7. GDB
     </a>
    </li>
   </ul>
@@ -680,13 +680,18 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#makefile-basics">
-   5.3.1. Makefile Basics
+  <a class="reference internal nav-link" href="#motivation">
+   5.4.1. Motivation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#an-example">
-   5.3.2. An Example
+  <a class="reference internal nav-link" href="#a-simple-example">
+   5.4.2. A simple example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   5.4.3. Summary
   </a>
  </li>
 </ul>
@@ -698,7 +703,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Makefiles</h1>
+                <h1>Make</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -709,13 +714,18 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#makefile-basics">
-   5.3.1. Makefile Basics
+  <a class="reference internal nav-link" href="#motivation">
+   5.4.1. Motivation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#an-example">
-   5.3.2. An Example
+  <a class="reference internal nav-link" href="#a-simple-example">
+   5.4.2. A simple example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   5.4.3. Summary
   </a>
  </li>
 </ul>
@@ -728,80 +738,142 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="makefiles">
-<span id="cont-gs-tools-make"></span><h1><span class="section-number">5.3. </span>Makefiles<a class="headerlink" href="#makefiles" title="Permalink to this headline">#</a></h1>
-<p>Hopefully, you are familiar with the process of compiling c files into executables to be run. Usually, this looks something like:</p>
+  <div class="cell tag_remove-input docutils container">
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="make">
+<span id="cont-gs-tools-make"></span><h1><span class="section-number">5.4. </span>Make<a class="headerlink" href="#make" title="Permalink to this headline">#</a></h1>
+<p>Make is a critical tool to let developers automate compiling complicated programs.  After motivating why you want to do master it, we provide an example makefile and demonstrate a bit of the power of this tool.</p>
+<section id="motivation">
+<h2><span class="section-number">5.4.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>For very simple programs, you can use <a class="reference internal" href="tools-editors.html#cont-gs-tools-editors"><span class="std std-ref">emacs</span></a> to write them in a single file and can compile them into executables to be run using, for example, the GNU C compiler gcc:</p>
 <p><code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">filename.c</span> <span class="pre">-o</span> <span class="pre">filename</span></code></p>
-<p>This would compile the c file “filename.c” into an executable called “filename”, which we could then run by typing <code class="docutils literal notranslate"><span class="pre">./filename</span></code>.</p>
-<p>This seems easy enough, but having to type out commands like this can quickly become quite cumbersome when we have many different commands we want to run on different combinations of files or a lot of flags we want to use. In these more complex situations, we can use <code class="docutils literal notranslate"><span class="pre">make</span></code>. Make automates running commands on files when they have changed and is commonly used in “building” programs.</p>
-<p>To use <code class="docutils literal notranslate"><span class="pre">make</span></code>, you must write a file called a <code class="docutils literal notranslate"><span class="pre">makefile</span></code> that describes the relationships between the files in your program and provides commands for updating each file. Usually for c programs, the executable file is updated from object files (<code class="docutils literal notranslate"><span class="pre">.o</span></code> files), which are in turn made by compiling source files (<code class="docutils literal notranslate"><span class="pre">.c</span></code> files). Once you have written your makefile, you can just run the shell command <code class="docutils literal notranslate"><span class="pre">make</span></code> and it will perform all necessary recompilations. <code class="docutils literal notranslate"><span class="pre">make</span></code> knows which files need to be updated based on the last-modification times of the files. You can also provide command line arguments to make to specify which files should be recompiled and how.</p>
-<section id="makefile-basics">
-<h2><span class="section-number">5.3.1. </span>Makefile Basics<a class="headerlink" href="#makefile-basics" title="Permalink to this headline">#</a></h2>
-<p>A simple makefile consists of rules with the following syntax:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="o">...</span><span class="p">:</span> <span class="n">prerequisites</span> <span class="o">...</span>
-    <span class="n">recipe</span>
-    <span class="o">...</span>
-    <span class="o">...</span>
-</pre></div>
-</div>
-<p>The <em>target</em> is typically the name of a file that is generated by a program (e.g. an executable or object file). It can also be the name of an action to carry out, like “clean”.</p>
-<p>The <em>prerequisite</em> is a file that is used as input to create the target. It will often be multiple files.</p>
-<p>The <em>recipe</em> is an action that <code class="docutils literal notranslate"><span class="pre">make</span></code> carries out. A recipe may have more than one command. There must be a tab character at the beginning of each recipe line.</p>
-<p><a class="reference external" href="https://www.gnu.org/software/make/manual/html_node/Rules.html">Here</a> is a guide for writing makefile rules.</p>
-</section>
-<section id="an-example">
-<h2><span class="section-number">5.3.2. </span>An Example<a class="headerlink" href="#an-example" title="Permalink to this headline">#</a></h2>
-<p>Here is the incomplete makefile we provide for HW0:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>override CFLAGS := -Wall -Werror -std=gnu99 -O0 -g  $(CFLAGS) -I.
-
-# I generally make the first rule run all the tests
-check: checkprogs
-	/bin/sh run_tests.sh $(test_files)
-
-# rule for making the parser.o  that is needed by all the test programs
-myshell_parser.o: myshell_parser.c myshell_parser.h
-
-# each of the test files depend on their own .c and myshell_parser.h
-#  add another time for each test, e.g., test_simple_pipe.o line below
-test_simple_input.o: test_simple_input.c myshell_parser.h
-test_simple_pipe.o: test_simple_pipe.c myshell_parser.h
-
-# each of the test programs executables are generated by combining the generated .o with the parser.o
-test_simple_input : test_simple_input.o myshell_parser.o
-test_simple_pipe : test_simple_pipe.o myshell_parser.o
-
-# Add any additional tests here, e.g., the commented out test_simple_pipe
-test_files=./test_simple_input # ./test_simple_pipe
-
-.PHONY: clean check checkprogs all
-
-# Build all of the test programs
-checkprogs: $(test_files)
-
-clean:
-	rm -f *~ *.o $(test_files) $(test_o_files)
-</pre></div>
-</div>
-<p>Let’s break down each line and rule.</p>
-<p>In the first line, we specify the flags we want to use to compile C files by assigning a value to CFLAGS (more on implicit variables like CFLAGS <a class="reference external" href="https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html">here</a>). The <code class="docutils literal notranslate"><span class="pre">override</span></code> directive just makes sure you use the assignments in the makefile even if the variable has previously been set with a command argument.</p>
+<p>That’s fine for little programs, although even there, there are lots of flags that you will want to use to compile a program that are not the default with gcc.   For example, we would recommend that you always use the following flags:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-Wall</span></code>: turns on many compiler warning flags</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-Werror</span></code>: turns warnings into compilation errors</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-std=gnu99</span></code>: set c version</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-O0</span></code>: sets optimization level to 0 (faster compilation, better for debugging)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-g</span></code>: adds debugging symbols to executable</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">$(CFLAGS)</span></code>: include default flags</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-I.</span></code>: specifies directory where header files can be found (in this example, the working directory <code class="docutils literal notranslate"><span class="pre">.</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wall</span></code>: turns on many compiler warning flags; about 90% of the simple bugs that students make are caught by gcc at compile time which emits warnings to ask you if you <strong>really</strong> want to shoot yourself in the foot.  Please believe us, if there is a warning, it is much faster to fix it instead of finding the bug at run time later.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Werror</span></code>: turns warnings into compilation errors.  This is super valuable so that you don’t miss the warning; again don’t come to a TF for help unless your program compiles with -Wall and -Werror.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-std=gnu99</span></code>: this isn’t super critical, but gcc supports a variety of standard variants of the c programming language, so you might as well use a standard that will ensure that your program is compilable by other compielrs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-O0</span></code>: sets optimization level to 0.  The compiler supports a wide set of <a class="reference external" href="https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html">optimizations</a> for size, for performance… and for the final program, you might want to specify something different.  However, optimizations re-arrange the code, copying functions into other functions.  If you want to debug the program you wrote, use <code class="docutils literal notranslate"><span class="pre">-O0</span></code>, if you want to debug a program that is logically the same, but doesn’t really look like the software you wrote, use something else.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-g</span></code>: adds debugging symbols to executable.  Without this, you are pretty much out of luck if you want to use a <a class="reference internal" href="tools-gdb.html#cont-gs-tools-gdb"><span class="std std-ref">debugger</span></a>, and if you are not using a debugger, then you might as well give up on the projects associated with this course.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-I.</span></code>: specifies directory where header files can be found (in this example, the working directory <code class="docutils literal notranslate"><span class="pre">.</span></code>).  You should always seperate key information that describe the interfaces of your program and constants that you might want to change into header files. This flag tells the compiler where those header files are.</p></li>
 </ul>
-<p>Following the CFLAGS definition, we see a rule for building the test programs.</p>
-<p>Next, we have a rule for building the parser’s object file, followed by rules to build two test programs.</p>
-<p>Below that, there is an additional line that you can edit to add additional test scripts.</p>
-<p>The rest of the rules in the makefile have phony targets. They are not names for files, rather just names for a recipe to be executed when an explicit request is made. Using a phony target helps avoid conflicts with files of the same name and improves performance.</p>
-<p>The <em>checkprogs</em> rule builds all of the test programs.</p>
-<p>The last rule is the <em>clean</em> rule, which will just remove all object files and test files from the directory.</p>
-<p>For more info on <code class="docutils literal notranslate"><span class="pre">make</span></code>, see <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/lecturenotes/unix/L04.html">this chapter</a> of Jonathan Appavoo’s book. You can also reference the <a class="reference external" href="https://www.gnu.org/software/make/manual/make.html">GNU make manual</a>.</p>
+<p>Okay, so now, to compiler your simple program, you will type:</p>
+<p><code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">-Wall</span> <span class="pre">-Werror</span> <span class="pre">-std=gnu99</span> <span class="pre">-O0</span> <span class="pre">-g</span> <span class="pre">-I.</span> <span class="pre">filename.c</span> <span class="pre">-o</span> <span class="pre">filename</span></code></p>
+<p>That’s a bit of a pain.  How do you know if you remembered to do all that?  How do you know how you compiled the program if you come back a day later, or prove to the TF of the course that you used the right flags.  More importantly, what happens when you have more than a toy program that can be written in a single file?  You won’t write any programs for this course that could be written in a single file.  How do you remember which files you modified that need to be re-compiled?  If you have a header file which 10 <code class="docutils literal notranslate"><span class="pre">.c</span></code> files depend on, how to you make sure that all 10 <code class="docutils literal notranslate"><span class="pre">.c</span></code> files are re-compiled?</p>
+<aside class="sidebar">
+<p class="sidebar-title">Make and Tab; a sad story:</p>
+<p>Make was originally written by <a class="reference external" href="https://en.wikipedia.org/wiki/Stuart_Feldman">Stuart Feldman</a>, a researcher at bell labs who worked with the team that developed the first version of Unix.  One of the painful features of Make is that it uses <TAB> before each line that specifies an action; a constant source of error since in a text editor it is hard to see the difference between a <code class="docutils literal notranslate"><span class="pre">&lt;TAB&gt;</span></code> and a set of spaces.  From personal conversation, the reason for this is that Stu hacked together the first version over a weekend and had problems getting other patterns to work with <a class="reference external" href="https://en.wikipedia.org/wiki/Lex_(software)"><code class="docutils literal notranslate"><span class="pre">lex</span></code></a> which was new at the time.  Make was so useful that within a few weeks Stu had 12 users, and even though he knew that <code class="docutils literal notranslate"><span class="pre">&lt;tab&gt;</span></code> in column 1 was a bad idea, he didn’t want to disrupt his user base.  Stu formally apologized when he was honored by ACM as the author of Make for the tens of millions of developers this decision has caused pain to over the years.</p>
+</aside>
+<p>That’s where make comes in.  You create a <code class="docutils literal notranslate"><span class="pre">makefile</span></code> that describes the relationships between the files in your program and provides commands for updating each file. Usually for c programs, the executable file is updated from object files (<code class="docutils literal notranslate"><span class="pre">.o</span></code> files), which are in turn made by compiling source files (<code class="docutils literal notranslate"><span class="pre">.c</span></code> files). Once you have written your makefile, you can just run the shell command <code class="docutils literal notranslate"><span class="pre">make</span></code> and it will perform all necessary recompilations. <code class="docutils literal notranslate"><span class="pre">make</span></code> knows which files need to be updated based on the last-modification times of the files. You can also provide command line arguments to make to specify which files should be recompiled and how.  We provide the GNU variant of make in the container image provided by this program. And you can find extensive details <a class="reference external" href="https://www.gnu.org/software/make/manual/html_node/Rules.html">here</a> to write makefile rules.</p>
+<p>We expect you to have at least a basic understanding of how Make works in order to be successful in any OS project. The version of make we provide you with, has many rich features and default rules; for example, it understands that if you want to generate a <code class="docutils literal notranslate"><span class="pre">.o</span></code> file from a <code class="docutils literal notranslate"><span class="pre">.c</span></code> file, it should use the compiler.</p>
+</section>
+<section id="a-simple-example">
+<h2><span class="section-number">5.4.2. </span>A simple example<a class="headerlink" href="#a-simple-example" title="Permalink to this headline">#</a></h2>
+<p>Here is a simple example that you should understand that is used for a parser that will for many of you be the first assignment of this course.</p>
+<div class="literal-block-wrapper docutils container" id="make-parser">
+<div class="code-block-caption"><span class="caption-number">Listing 5.2 </span><span class="caption-text">A Makefile to build a parser</span><a class="headerlink" href="#make-parser" title="Permalink to this code">#</a></div>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nf">override CFLAGS </span><span class="o">:</span>= -<span class="n">std</span>=<span class="n">gnu</span>99 -<span class="n">O</span>0 -<span class="n">Wall</span> -<span class="n">Werror</span> -<span class="n">g</span>  -<span class="n">fsanitize</span>=<span class="n">undefined</span> <span class="k">$(</span><span class="nv">CFLAGS</span><span class="k">)</span> -<span class="n">I</span>.
+<span class="linenos"> 2</span><span class="nf">override LDFLAGS </span><span class="o">:</span>= -<span class="n">fsanitize</span>=<span class="n">undefined</span> -<span class="n">fsanitize</span>=<span class="n">leak</span> <span class="k">$(</span><span class="nv">CFLAGS</span><span class="k">)</span>  
+<span class="linenos"> 3</span><span class="nv">CC</span> <span class="o">=</span> gcc
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="c"># I generally make the first rule run all the tests</span>
+<span class="linenos"> 6</span><span class="nf">all</span><span class="o">:</span> <span class="n">check</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="c"># rule for making the parser.o  that is needed by all the test programs</span>
+<span class="linenos"> 9</span><span class="nf">myshell_parser.o</span><span class="o">:</span> <span class="n">myshell_parser</span>.<span class="n">c</span> <span class="n">myshell_parser</span>.<span class="n">h</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="c"># each of the test files depend on their own .c and myshell_parser.h</span>
+<span class="linenos">12</span><span class="c">#  add another time for each test, e.g., test_simple_pipe.o line below</span>
+<span class="linenos">13</span><span class="nf">test_simple_input.o</span><span class="o">:</span> <span class="n">test_simple_input</span>.<span class="n">c</span> <span class="n">myshell_parser</span>.<span class="n">h</span>
+<span class="linenos">14</span><span class="nf">test_simple_pipe.o</span><span class="o">:</span> <span class="n">test_simple_pipe</span>.<span class="n">c</span> <span class="n">myshell_parser</span>.<span class="n">h</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c"># each of the test programs executables are generated by combining the generated .o with the parser.o</span>
+<span class="linenos">17</span><span class="nf">test_simple_input </span><span class="o">:</span> <span class="n">test_simple_input</span>.<span class="n">o</span> <span class="n">myshell_parser</span>.<span class="n">o</span>
+<span class="linenos">18</span><span class="nf">test_simple_pipe </span><span class="o">:</span> <span class="n">test_simple_pipe</span>.<span class="n">o</span> <span class="n">myshell_parser</span>.<span class="n">o</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="c"># Add any additional tests here</span>
+<span class="linenos">21</span><span class="nv">test_files</span><span class="o">=</span>./test_simple_input ./test_simple_pipe
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span> <span class="n">check</span> <span class="n">checkprogs</span> <span class="n">all</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="c"># Build all of the test program</span>
+<span class="linenos">26</span><span class="nf">checkprogs</span><span class="o">:</span> <span class="k">$(</span><span class="nv">test_files</span><span class="k">)</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="nf">check</span><span class="o">:</span> <span class="n">checkprogs</span>
+<span class="linenos">29</span>	/bin/bash run_tests.sh <span class="k">$(</span>test_files<span class="k">)</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="nf">clean</span><span class="o">:</span>
+<span class="linenos">32</span>	rm -f *~ *.o <span class="k">$(</span>test_files<span class="k">)</span> <span class="k">$(</span>test_o_files<span class="k">)</span>
+</pre></div>
+</div>
+</div>
+<p>This makefile is used to generate and run a set of <a class="reference internal" href="tools-testing.html#cont-gs-tools-testing"><span class="std std-ref">unit tests</span></a> against a parser who’s implementation is in <code class="docutils literal notranslate"><span class="pre">myshell_parser.c</span></code> where functions implemented by that parser are defined in <code class="docutils literal notranslate"><span class="pre">myshell_parser.h</span></code>.</p>
+<p>Let’s break down each line and rule. In the first line, we specify the flags we want to use to compile C files by assigning a value to CFLAGS (more on implicit variables like CFLAGS <a class="reference external" href="https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html">here</a>). The <code class="docutils literal notranslate"><span class="pre">override</span></code> directive just makes sure you use the assignments in the makefile even if the variable has previously been set with a command argument.  The argument <code class="docutils literal notranslate"><span class="pre">-fsanitize=undefined</span></code> to the compiler (CFLAGS) and linker (LDFLAGS) tells gcc to add additional sanitizer run time checks for undefined behavior.</p>
+<p>The third line tells Make to use <code class="docutils literal notranslate"><span class="pre">gcc</span></code> as the compiler.  The first rule <code class="docutils literal notranslate"><span class="pre">all</span></code> in this case is run by default.  Here we are telling Make to run the rule <code class="docutils literal notranslate"><span class="pre">check</span></code> whenever make is run without any arguments.  If, on the other hand, you type <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> it will run the rule on line 30 that will remove all the generated files.</p>
+<p>Line 9 defines the rule to create the <code class="docutils literal notranslate"><span class="pre">myshell_parser.o</span></code> file that will be linked into all the test programs.  It tells make that it should regenerate <code class="docutils literal notranslate"><span class="pre">myshell_parser.o</span></code> if either the corresponding <code class="docutils literal notranslate"><span class="pre">.c</span></code> file or <code class="docutils literal notranslate"><span class="pre">.h</span></code> file changes. Make has a set of implicit rules, where if no recipe is specified, Make understands that it needs to run a compiler to create a <code class="docutils literal notranslate"><span class="pre">.o</span></code> file from a <code class="docutils literal notranslate"><span class="pre">.c</span></code> file.  There are many of these implicit rules as described <a class="reference external" href="https://www.gnu.org/software/make/manual/html_node/Catalogue-of-Rules.html#Catalogue-of-Rules">here</a>.</p>
+<p>Lines 13 and 14 similarly indicates that the test programs depend not only on the corresponding <code class="docutils literal notranslate"><span class="pre">.c</span></code> file, but also on <code class="docutils literal notranslate"><span class="pre">myshell_parser.h</span></code>.  That way, if you edit <code class="docutils literal notranslate"><span class="pre">myshell_parser.h</span></code> all the test programs that depend on a prototype you define in that header file will be recompiled.  Lines 16 and 17 tell make that the test file depend on both the corresponding <code class="docutils literal notranslate"><span class="pre">.c</span></code> file and <code class="docutils literal notranslate"><span class="pre">myshell_parser.o</span></code>, and Make knows that it needs to link both <code class="docutils literal notranslate"><span class="pre">.o</span></code> files together to create an executable.</p>
+<p>Line 20 specifies the list of test programs you are generated, which is used in line 24 that defines the rule checkprogs to generate those test programs, and Line 26 that defines the rule to run the run_tests script we showed before (<a class="reference internal" href="tools-shell.html#run-tests"><span class="std std-numref">Listing 5.1</span></a>) to run all the tests.
+Line 22, which is not strictly necessary, tells Make that it is really not creating files called clean, check, checkprogs and all.</p>
+<p>Note, this makefile could be greatly simplified by using a set of built-in variables Make supports.  For example:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$+</span></code> inserts all dependencies of the rule</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$&#64;</span></code> inserts the rule’s target</p></li>
+</ul>
+<p>You can find more <a class="reference external" href="https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html">here</a></p>
+<p>If you type <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> and then <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">checkprogs</span></code>  {numref}`make_parser is:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "1565f4fe1c1a4ce188a2ea7b5adcd912", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>If you type <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">checkprogs</span></code> again, since nothing changed, you get:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "3b01358bbc1d45088b6ffab10d54b7b1", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>If modify <code class="docutils literal notranslate"><span class="pre">test_simple_input.c</span></code> e.g. by using the shell command <code class="docutils literal notranslate"><span class="pre">touch</span></code> to change its modification time, Make understands that it needs to recompile that file and recreate the corresponding executable.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "dedb8d0f3a9f460688f9221491ae6415", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>If on the other hand we modify <code class="docutils literal notranslate"><span class="pre">myshell_parser.c</span></code> Make understands it needs to re-compile that file and all the executables that link to it.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "19574fbde1fd47c08e60aea8503637b6", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>And if <code class="docutils literal notranslate"><span class="pre">myshell_parser.h</span></code> is modified, everything that relies on it needs to be re-generated.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "3e8be0d93f7c4aa7adc64abe8f5fabba", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>Finally, to actually recompile everything that needs to be recompiled, and then run all your test programs, you can just type make, which will execute the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule which in turn runs the <code class="docutils literal notranslate"><span class="pre">check</span></code> rule…</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "108946aad5354bb6a0a6f04d3098aa9b", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</section>
+<section id="summary">
+<h2><span class="section-number">5.4.3. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
+<p>If you are writing complicated programs, composed of many files, you need to master make.  The example we showed above showed how this one tool enables you to ensure that you always specify the right flags, and ensure that if a file has changed, everything that relies on it will automatically be regenerated.  Finally, we have shown how you can automatically run a set of tests everytime you change anything; something we will talk more about <a class="reference internal" href="tools-testing.html#cont-gs-tools-testing"><span class="std std-ref">here</span></a>.
+For more info on <code class="docutils literal notranslate"><span class="pre">make</span></code>, see the <a class="reference external" href="https://www.gnu.org/software/make/manual/make.html">GNU make manual</a>.</p>
 </section>
 </section>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"108946aad5354bb6a0a6f04d3098aa9b": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_f9eaebb20b774776b08821b98f9128b0", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ make\r\nmake[1]: Entering directory '/home/jovyan/parser'\r\n/bin/bash run_tests.sh ./test_simple_input ./test_simple_pipe\r\n===== ./test_simple_input =====\r\ntest_simple_input.c:20: Assertion (my_pipeline != NULL) failed!\r\ntimeout: the monitored command dumped core\r\nrun_tests.sh: line 8:  7017 Aborted                 timeout ${TIMEOUT_SECONDS} ${test_file}\r\nFAIL (rc = 134)\r\n===== ./test_simple_pipe =====\r\ntest_simple_pipe.c:22: Assertion (my_pipeline != NULL) failed!\r\ntimeout: the monitored command dumped core\r\nrun_tests.sh: line 8:  7020 Aborted                 timeout ${TIMEOUT_SECONDS} ${test_file}\r\nFAIL (rc = 134)\r\n2 out of 2 tests failed.\r\nmake[1]: Leaving directory '/home/jovyan/parser'\r\n$ "}]}}, "1565f4fe1c1a4ce188a2ea7b5adcd912": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_9b3294b0b9a948dfb34bad94a23be21d", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ make checkprogs\r\nmake[1]: Entering directory '/home/jovyan/parser'\r\ngcc -Wall -Werror -std=gnu99 -O0 -g   -I.   -c -o test_simple_input.o test_simple_input.c\r\ngcc -Wall -Werror -std=gnu99 -O0 -g   -I.   -c -o myshell_parser.o myshell_parser.c\r\ngcc   test_simple_input.o myshell_parser.o   -o test_simple_input\r\ngcc -Wall -Werror -std=gnu99 -O0 -g   -I.   -c -o test_simple_pipe.o test_simple_pipe.c\r\ngcc   test_simple_pipe.o myshell_parser.o   -o test_simple_pipe\r\nmake[1]: Leaving directory '/home/jovyan/parser'\r\n$ "}]}}, "15fb80a5282545deb8b72d6ecb09a8dc": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "162defaa18874e7c9ba7d2f449a40041": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "19574fbde1fd47c08e60aea8503637b6": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_f68a5f61a76548a4b859ed12200b7852", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ touch myshell_parser.c ; make checkprogs\r\nmake[1]: Entering directory '/home/jovyan/parser'\r\ngcc -Wall -Werror -std=gnu99 -O0 -g   -I.   -c -o myshell_parser.o myshell_parser.c\r\ngcc   test_simple_input.o myshell_parser.o   -o test_simple_input\r\ngcc   test_simple_pipe.o myshell_parser.o   -o test_simple_pipe\r\nmake[1]: Leaving directory '/home/jovyan/parser'\r\n$ "}]}}, "1e7f683d5a5f41a3b0040ff64094b314": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "299f76d664994ca78464435e9d8e9920": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_c33cface4b034431b11b59b7a85d9e3d", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d lec3 ]] && rm -rf mydir\r\n$     [[ -a myinfo ]] && rm myinfo\r\n$ "}]}}, "3981f96fc88c4d03b9248795cb145d26": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_1e7f683d5a5f41a3b0040ff64094b314", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ make clean\r\nmake[1]: Entering directory '/home/jovyan/parser'\r\nrm -f *~ *.o ./test_simple_input ./test_simple_pipe \r\nmake[1]: Leaving directory '/home/jovyan/parser'\r\n$ "}]}}, "3b01358bbc1d45088b6ffab10d54b7b1": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_6c7d92697297436c96415dac1e4a34ac", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ make checkprogs\r\nmake[1]: Entering directory '/home/jovyan/parser'\r\nmake[1]: Nothing to be done for 'checkprogs'.\r\nmake[1]: Leaving directory '/home/jovyan/parser'\r\n$ "}]}}, "3e8be0d93f7c4aa7adc64abe8f5fabba": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_15fb80a5282545deb8b72d6ecb09a8dc", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ touch myshell_parser.h ; make checkprogs\r\nmake[1]: Entering directory '/home/jovyan/parser'\r\ngcc -Wall -Werror -std=gnu99 -O0 -g   -I.   -c -o test_simple_input.o test_simple_input.c\r\ngcc -Wall -Werror -std=gnu99 -O0 -g   -I.   -c -o myshell_parser.o myshell_parser.c\r\ngcc   test_simple_input.o myshell_parser.o   -o test_simple_input\r\ngcc -Wall -Werror -std=gnu99 -O0 -g   -I.   -c -o test_simple_pipe.o test_simple_pipe.c\r\ngcc   test_simple_pipe.o myshell_parser.o   -o test_simple_pipe\r\nmake[1]: Leaving directory '/home/jovyan/parser'\r\n$ "}]}}, "6c7d92697297436c96415dac1e4a34ac": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9b3294b0b9a948dfb34bad94a23be21d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "c33cface4b034431b11b59b7a85d9e3d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "dedb8d0f3a9f460688f9221491ae6415": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_e0433e11f4674425afa720e7f7d14417", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ touch test_simple_input.c ; make checkprogs\r\nmake[1]: Entering directory '/home/jovyan/parser'\r\ngcc -Wall -Werror -std=gnu99 -O0 -g   -I.   -c -o test_simple_input.o test_simple_input.c\r\ngcc   test_simple_input.o myshell_parser.o   -o test_simple_input\r\nmake[1]: Leaving directory '/home/jovyan/parser'\r\n$ "}]}}, "e0433e11f4674425afa720e7f7d14417": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "e5e13d411c50402c8dd68886896682c2": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_162defaa18874e7c9ba7d2f449a40041", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ls \nOS-L01.css          intro.ipynb        structure.ipynb      tools-make.ipynb\r\nOS-L01.ipynb        other.ipynb        tools-c.ipynb        tools-shell.ipynb\r\nabstractions.ipynb  peter-other.ipynb  tools-editors.ipynb  tools-testing.ipynb\r\ncommon.ipynb        pref.ipynb         tools-gdb.ipynb      tools.ipynb\r\nhistory.ipynb       purpose.ipynb      tools-git.ipynb\r\n$ "}]}}, "f68a5f61a76548a4b859ed12200b7852": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "f9eaebb20b774776b08821b98f9128b0": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+</script>
+
 
     <script type="text/x-thebe-config">
     {
@@ -834,13 +906,13 @@ clean:
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">5.2. </span>Editors</p>
+            <p class="prev-next-title"><span class="section-number">5.3. </span>Editors</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="tools-git.html" title="next page">
+    <a class='right-next' id="next-link" href="tools-testing.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5.4. </span>Git Basics</p>
+        <p class="prev-next-title"><span class="section-number">5.5. </span>Unit Tests</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -153,38 +153,38 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-c.html">
+     5.1. The C Programming Language
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../intro/tools-shell.html">
-     5.1. Shell
+     5.2. Shell
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../intro/tools-editors.html">
-     5.2. Editors
+     5.3. Editors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../intro/tools-make.html">
-     5.3. Makefiles
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro/tools-git.html">
-     5.4. Git Basics
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro/tools-gdb.html">
-     5.5. GDB
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro/tools-c.html">
-     5.6. The C Programming Language
+     5.4. Make
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../intro/tools-testing.html">
-     5.7. Unit Tests
+     5.5. Unit Tests
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-git.html">
+     5.6. Git Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-gdb.html">
+     5.7. GDB
     </a>
    </li>
   </ul>
@@ -657,12 +657,53 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#physical-memory-no-virtual-memory">
+   11.1. Physical Memory/No Virtual Memory
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#virtual-memory">
+   11.2. Virtual Memory
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#segmented-virtual-memory">
+     11.2.1. Segmented Virtual Memory
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#paged-virtual-memory">
+     11.2.2. Paged Virtual Memory
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -674,6 +715,36 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#physical-memory-no-virtual-memory">
+   11.1. Physical Memory/No Virtual Memory
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#virtual-memory">
+   11.2. Virtual Memory
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#segmented-virtual-memory">
+     11.2.1. Segmented Virtual Memory
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#paged-virtual-memory">
+     11.2.2. Paged Virtual Memory
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -808,8 +879,34 @@ title="Print to PDF"
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <span id="cont-mm-intro"></span><h1><span class="section-number">11. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
-<p>To paraphrase <a class="reference external" href="https://en.wikipedia.org/wiki/Parkinson%27s_law">Parkinson’s law</a> programs expand to fill the memory available to hold them, and home computers have millions times more memory than they had when Larry was young.  As discussed in the introduction memory is fast but small and expensive compared to storage, but it is volatile, all changes are lost after a reboot.  Memory management is the part of the operating system that allocates, frees and tracks the usage of memory.  It manages the virtual memory of each process, and all the physical memory of the system; making it available to different processes through virtual memory depending on their demand.</p>
-<p>Today, most machines support paged virtual memory, but before we get into that, we motivate today’s memory management by discussing <a class="reference internal" href="phys-and-seg.html#cont-mm-beforepaging"><span class="std std-ref">systems without virtual memory and with segmented virtual memory</span></a>.  The next chapter describes…</p>
+<p>To paraphrase <a class="reference external" href="https://en.wikipedia.org/wiki/Parkinson%27s_law">Parkinson’s law</a> programs expand to fill the memory available to hold them, and home computers have millions times more memory than they had when Larry was young.  As discussed in the overall introduction memory is fast but small and expensive compared to storage, but it is volatile, all changes are lost after a reboot.  Memory management is the part of the operating system that provides a useful virtual memory interface and that allocates, frees and tracks the usage of the actual physical memory or RAM.  It manages a virtual address space for each process it manages and all the physical memory of the system, making it available to different processes through virtual memory depending on their demand.</p>
+<p>Today, most computers support paged virtual memory, but before we get into that, we motivate today’s memory management by discussing systems without any virtual memory and with segmented virtual memory.</p>
+<section id="physical-memory-no-virtual-memory">
+<h2><span class="section-number">11.1. </span>Physical Memory/No Virtual Memory<a class="headerlink" href="#physical-memory-no-virtual-memory" title="Permalink to this headline">#</a></h2>
+<p>On a system without virtual memory there is one physical address space and programs are loaded into physical memory, allocate physical memory as needed and directly access those physical memory locations or addresses.  If more than one program is running at the same time they are simply loaded into a different physical address and allocate different physical addresses.  This means every program must either know the physical address that it is running or it must be relocated when it is loaded.</p>
+</section>
+<section id="virtual-memory">
+<h2><span class="section-number">11.2. </span>Virtual Memory<a class="headerlink" href="#virtual-memory" title="Permalink to this headline">#</a></h2>
+<p>What is most desirable and usable is a virtual memory model where every program would run in a process that has a unique but identical virtual address space.  A virtual address space would ideally start at address zero and extend up to some very large address.  Since every process appears to have the same virtual address space programs can be loaded at the same virtual address and therefore do not need to to be relocated.  There are 2 basic virtual memory models: Segmented Virtual Memory and Paged Virtual Memory.</p>
+<section id="segmented-virtual-memory">
+<h3><span class="section-number">11.2.1. </span>Segmented Virtual Memory<a class="headerlink" href="#segmented-virtual-memory" title="Permalink to this headline">#</a></h3>
+<p>A simple segmented virtual address space starts at location zero and extend up to some upper limit. Its implemented in hardware using base and offset registers.  Every memory reference is virtual and is translated to a physical address in hardware by adding the base register to the virtual address and qualified by insuring the result is less than the offset register.</p>
+</section>
+<section id="paged-virtual-memory">
+<h3><span class="section-number">11.2.2. </span>Paged Virtual Memory<a class="headerlink" href="#paged-virtual-memory" title="Permalink to this headline">#</a></h3>
+<p>A paged virtual memory model splits both the virtual address space and physical memory into fixed size pieces knows as virtual pages and physical page frames respectively.  The mapping of virtual pages to physical page frames is accomplished via an array of page frame numbers known as a page table.  There is one page table entry for each virtual page and only then pages that are being used contain valid page table entries and therefore map physical page frames.</p>
+<p>Paged virtual memory aka paging introduces the possibility of several additional highly desirable features to the memory management system but also introduces several additional challenges.</p>
+<ul class="simple">
+<li><p>Several huge virtual address spaces can be much larger than physical memory via over-committing physical memory.</p></li>
+<li><p>Total isolation of each virtual address space from all others.</p></li>
+<li><p>Sharing of selective regions of memory between different virtual address spaces is easy.</p></li>
+<li><p>Use of memory pages to cache file system data and meta-data is possible.</p></li>
+<li><p>Very large and sparse virtual address space requires page fault logic that maps physical memory on-demand.</p></li>
+<li><p>Over-committing physical memory requires sophisticated page reclaim logic.</p></li>
+<li><p>Supporting multiple page sizes on different architectures complicates an already complex memory management system.</p></li>
+<li><p>Very large virtual address space requires large and complex multi-level page table design.</p></li>
+</ul>
+<p>The next chapter describes…</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="phys-and-seg.html#cont-mm-virt-seg"><span class="std std-ref">virt-seg</span></a></p></li>
 <li><p><a class="reference internal" href="virt-paging.html#cont-mm-virt-paging"><span class="std std-ref">virt-paging</span></a></p></li>
@@ -822,6 +919,8 @@ title="Print to PDF"
 <li><p><a class="reference internal" href="realworld.html#cont-mm-realworld"><span class="std std-ref">realworld</span></a></p></li>
 <li><p><a class="reference internal" href="concl.html#cont-mm-concl"><span class="std std-ref">concl</span></a></p></li>
 </ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

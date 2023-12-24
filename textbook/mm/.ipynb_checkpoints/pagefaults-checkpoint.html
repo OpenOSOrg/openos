@@ -1,0 +1,1096 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>19. Memory Management Dynamics &#8212; Introduction to Operating Systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="20. Memory management in the real world" href="realworld.html" />
+    <link rel="prev" title="18. Buffer Cache" href="buffer-cache.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/pref.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/purpose.html">
+   2. Purpose of operating systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/structure.html">
+   3. Operating System Structure &amp; Unix/Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/abstractions.html">
+   4. Operating System Abstractions
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/tools.html">
+   5. What you should know
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-shell.html">
+     5.1. Shell
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-editors.html">
+     5.2. Editors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-make.html">
+     5.3. Make and gcc
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-git.html">
+     5.4. Git Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-gdb.html">
+     5.5. GDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-c.html">
+     5.6. The C Programming Language
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-testing.html">
+     5.7. Unit Tests
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Processor
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/intro.html">
+   6. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/process.html">
+   7. Virtualizing a CPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/scheduling.html">
+   8. Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/real_sched.html">
+   9. A Look at the Linux Scheduler
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/review.html">
+   10. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Memory
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   11. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="phys-and-seg.html">
+   12. Memory management before paged virtual memory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="virt-paging.html">
+   13. Paging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="page-tables.html">
+   14. Page Tables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reclamation.html">
+   15. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="page-size.html">
+   16. Page Sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="misc.html">
+   17. Other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="buffer-cache.html">
+   18. Buffer Cache
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   19. Memory Management Dynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="realworld.html">
+   20. Memory management in the real world
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concl.html">
+   21. Conclusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review.html">
+   22. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/intro.html">
+   23. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/interface.html">
+   24. File System Abstraction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/diskhw.html">
+   25. A bit about Disks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
+   26. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_track_used.html">
+   27. Disk Layout:Tracking Used Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_track_free.html">
+   28. Disk Layout:Tracking Free Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_name.html">
+   29. Disk Layout:Implementing Name Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_failures.html">
+   30. Disk Layout:Dealing with Failures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_ex_exx.html">
+   31. Disk Layout:Examples of Real World File Systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/kernelimp.html">
+   32. Kernel implementation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/review.html">
+   33. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sync.html">
+   34. Introduction to Concurrency, Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   35. Cooperating Processes and Inter-process Communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/criticalsection.html">
+   36. The Critical Section Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locks.html">
+   37. Implementing Locks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/ordering.html">
+   38. Ordering Thread Events
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/concurrency_bugs.html">
+   39. Common Concurrency Bugs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/readmostly.html">
+   40. Read-Dominated Workloads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   41. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   42. Locking in the Linux Kernel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/review.html">
+   43. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../devices/devices.html">
+   44. Input and Output
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../devices/disk2.html">
+   45. More on Disks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../virt/virt.html">
+   46. Virtualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sec/sec.html">
+   47. Security
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/howto.html">
+   48. How to read this book
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   49. Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/bib.html">
+   50. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/mm/pagefaults.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/OpenOSOrg/openos"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fmm/pagefaults.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/mm/pagefaults.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/mm/pagefaults.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-faulting">
+   19.1. Page Faulting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-faults">
+     19.1.1. Page Faults
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#process-address-space-revisited">
+     19.1.2. Process Address Space, Revisited
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#executable-file-and-process-address-space">
+       19.1.2.1. Executable file and process address space
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-faults-in-the-kernel">
+     19.1.3. Page Faults in the Kernel
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Memory Management Dynamics</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#page-faulting">
+   19.1. Page Faulting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-faults">
+     19.1.1. Page Faults
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#process-address-space-revisited">
+     19.1.2. Process Address Space, Revisited
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#executable-file-and-process-address-space">
+       19.1.2.1. Executable file and process address space
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#page-faults-in-the-kernel">
+     19.1.3. Page Faults in the Kernel
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="memory-management-dynamics">
+<span id="cont-mm-mmdyn"></span><h1><span class="section-number">19. </span>Memory Management Dynamics<a class="headerlink" href="#memory-management-dynamics" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>File backed page faults</p></li>
+<li><p>Anonymous page faults</p></li>
+<li><p>Copy On Write page faults</p></li>
+</ul>
+<section id="page-faulting">
+<h2><span class="section-number">19.1. </span>Page Faulting<a class="headerlink" href="#page-faulting" title="Permalink to this headline">#</a></h2>
+<p>In the previous section you saw how the MMU in a Pentium-like CPU
+determines whether a memory access will succeed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">the</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">entry</span> <span class="n">has</span> <span class="n">P</span><span class="o">=</span><span class="mi">1</span>
+   <span class="ow">and</span> <span class="ow">is</span><span class="p">(</span><span class="n">read</span><span class="p">)</span> <span class="ow">or</span> <span class="n">W</span><span class="o">=</span><span class="mi">1</span>
+   <span class="ow">and</span> <span class="ow">is</span><span class="p">(</span><span class="n">supervisor</span><span class="p">)</span> <span class="ow">or</span> <span class="n">U</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span>
+
+   <span class="k">if</span> <span class="n">the</span> <span class="mi">2</span><span class="n">nd</span><span class="o">-</span><span class="n">level</span> <span class="n">entry</span> <span class="n">has</span> <span class="n">P</span><span class="o">=</span><span class="mi">1</span>
+      <span class="ow">and</span> <span class="ow">is</span><span class="p">(</span><span class="n">read</span><span class="p">)</span> <span class="ow">or</span> <span class="n">W</span><span class="o">=</span><span class="mi">1</span>
+      <span class="ow">and</span> <span class="ow">is</span><span class="p">(</span><span class="n">supervisor</span><span class="p">)</span> <span class="ow">or</span> <span class="n">U</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span>
+
+        <span class="n">use</span> <span class="n">translated</span> <span class="n">address</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>If translation fails at any one of the six possible points above (P, W,
+or U at each level) then a page fault is generated.</p>
+<section id="page-faults">
+<h3><span class="section-number">19.1.1. </span>Page Faults<a class="headerlink" href="#page-faults" title="Permalink to this headline">#</a></h3>
+<p>A page fault is a special form of exception that has the following two
+characteristics: first, it is generated when an address translation
+fails, and second, it occurs in the middle of an instruction, not after
+it is done, so that the instruction can be continued after fixing the
+problem which caused the page fault. Typical information that the MMU
+passes to the page fault handler is:</p>
+<ol class="simple">
+<li><p>The instruction address when the page fault occurred. (this is the
+return address pushed on the stack as part of the exception handling
+process)</p></li>
+<li><p>The address that caused the page fault</p></li>
+<li><p>Whether the access attempt was a read or a write</p></li>
+<li><p>Whether the access was attempted in user or supervisor mode</p></li>
+</ol>
+<p>After the page fault handler returns, the instruction that caused the
+fault resumes, and it retries the memory access that caused the fault in
+the first place.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>15 Many of the examples in this section are illustrated using Linux, as
+the source code is readily available, but same principles (although not
+details) hold true for other modern OSes such as Windows, Mac OS X, or
+Solaris.</p>
+<p>In addition, keep in mind that the virtual memory map for a process is a
+software concept, and will almost certainly differ between two unrelated
+operating systems. In contrast, the page table structure is defined by
+the CPU itself, and must be used in that form by any operating system
+running on that CPU.</p>
+</div>
+<p>A single instruction can cause multiple, different page faults, of which
+there are two different types:</p>
+<ul class="simple">
+<li><p><strong>Instruction fetch:</strong> A fault can occur when the CPU tries to fetch the
+instruction at a particular address. If the instruction “straddles” a
+page boundary (i.e., a 6-byte instruction that starts 2 bytes before the
+end of a page) then you could (in the worst case) get two page faults
+while trying to fetch an instruction.</p></li>
+<li><p><strong>Memory access:</strong> Once the instruction has been fetched and decoded, it
+may require one or more memory accesses that result in page faults.
+These memory accesses include those to the stack (e.g., for CALL and RET
+instructions) in addition to load and store instructions. As before,
+accessing memory that straddles a page boundary will result in
+additional faults.</p></li>
+</ul>
+</section>
+<section id="process-address-space-revisited">
+<h3><span class="section-number">19.1.2. </span>Process Address Space, Revisited<a class="headerlink" href="#process-address-space-revisited" title="Permalink to this headline">#</a></h3>
+<p>How does the OS know how to handle a page fault? By examining its
+internal memory map for a process. We’ve talked briefly about process
+memory maps earlier, but now we will look in more detail at a specific
+one, from a fairly recent (kernel 2.6 or 3.0) 32-bit Linux system. A
+more thorough description of the Linux memory layout can be found <a class="reference external" href="http://duartes.org/gustavo/blog/post/anatomy-of-a-program-in-memory">here</a>.</p>
+<figure class="align-default" id="fig-vm-fig100">
+<a class="reference internal image-reference" href="../_images/virt-mem-pic100.png"><img alt="../_images/virt-mem-pic100.png" src="../_images/virt-mem-pic100.png" style="width: 25%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 19.1 </span><span class="caption-text">Top 1GB is the Kernel address space and bottom 3GB is the user address space.</span><a class="headerlink" href="#fig-vm-fig100" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In earlier chapters we saw how simple operating systems may use separate
+portions of the address space for programs and for the operating system.
+The same approach is often used in dividing up the virtual address space
+in more complex operating systems, as seen in the 32-bit Linux memory
+map in <a class="reference internal" href="#fig-vm-fig100"><span class="std std-numref">Fig. 19.1</span></a>. In recent Linux versions running on 32-bit
+Intel-compatible CPUs, the kernel “owns” the top 1GB, from virtual
+address 0xC0000000 to 0xFFFFFFFF, and all kernel code, data structures,
+and temporary mappings go in this range.</p>
+<p>The kernel must be part of every address space, so that when exceptions
+like system calls and page faults change execution from user mode to
+supervisor mode, all the kernel code and data needed to execute the
+system call or page fault handler are already available in the current
+virtual memory map[^8] This is the primary use for the U bit in the page
+table—by setting the U bit to zero in any mappings for operating
+system code and data, user processes are prevented from modifying the OS
+or viewing protected data.</p>
+<p>Here is the memory map of a very simple process[^9], as reported in
+<code class="docutils literal notranslate"><span class="pre">/proc/&lt;pid&gt;/maps</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">08048000</span><span class="o">-</span><span class="mi">08049000</span> <span class="n">r</span><span class="o">-</span><span class="n">xp</span> <span class="mi">00000000</span> <span class="mi">08</span><span class="p">:</span><span class="mi">03</span> <span class="mi">4072226</span>    <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">a</span><span class="o">.</span><span class="n">out</span>
+<span class="mi">08049000</span><span class="o">-</span><span class="mi">0804</span><span class="n">a000</span> <span class="n">rw</span><span class="o">-</span><span class="n">p</span> <span class="mi">00000000</span> <span class="mi">08</span><span class="p">:</span><span class="mi">03</span> <span class="mi">4072226</span>    <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">a</span><span class="o">.</span><span class="n">out</span>
+<span class="mi">0804</span><span class="n">a000</span><span class="o">-</span><span class="mi">0804</span><span class="n">b000</span> <span class="n">rw</span><span class="o">-</span><span class="n">p</span> <span class="mi">00000000</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="mi">0</span>          <span class="p">[</span><span class="n">anon</span><span class="p">]</span>
+<span class="n">bffd5000</span><span class="o">-</span><span class="n">bfff6000</span> <span class="n">rw</span><span class="o">-</span><span class="n">p</span> <span class="mi">00000000</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="mi">0</span>          <span class="p">[</span><span class="n">stack</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The memory space has four segments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">**</span><span class="mi">08048000</span><span class="o">**</span> <span class="p">(</span><span class="n">one</span> <span class="n">page</span><span class="p">)</span> <span class="o">-</span> <span class="n">read</span><span class="o">-</span><span class="n">only</span><span class="p">,</span> <span class="n">executable</span><span class="p">,</span> <span class="n">mapped</span> <span class="kn">from</span> <span class="nn">file</span> <span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">out</span><span class="o">*</span>
+<span class="o">**</span><span class="mi">08049000</span><span class="o">**</span> <span class="p">(</span><span class="n">one</span> <span class="n">page</span><span class="p">)</span> <span class="o">-</span> <span class="n">read</span><span class="o">/</span><span class="n">write</span><span class="p">,</span> <span class="n">mapped</span> <span class="kn">from</span> <span class="nn">file</span> <span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">out</span><span class="o">*</span>
+<span class="o">**</span><span class="mi">0804</span><span class="n">a000</span><span class="o">**</span> <span class="p">(</span><span class="n">one</span> <span class="n">page</span><span class="p">)</span> <span class="o">-</span> <span class="n">read</span><span class="o">/</span><span class="n">write</span><span class="p">,</span> <span class="s2">&quot;anonymous&quot;</span>
+<span class="o">**</span><span class="n">bffd5000</span><span class="o">-</span><span class="n">bfff6000</span><span class="o">**</span> <span class="p">(</span><span class="mi">33</span> <span class="mi">4</span><span class="n">KB</span> <span class="n">pages</span><span class="p">)</span> <span class="o">-</span> <span class="n">read</span><span class="o">/</span><span class="n">write</span><span class="p">,</span> <span class="s2">&quot;stack&quot;</span>
+</pre></div>
+</div>
+<p>Where does this map come from? When the OS creates the new address space
+in the <code class="docutils literal notranslate"><span class="pre">exec()</span></code> system call, it knows it needs to create a stack, but
+the rest of the information comes from the executable file itself:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ objdump -h a.out
+a.out:     file format elf32-i386
+
+Idx Name          Size      VMA       LMA       File off  Algn
+
+  0 .text         00000072  08048094  08048094  00000094  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .rodata       000006bd  08048108  08048108  00000108  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  2 .data         00000030  080497c8  080497c8  000007c8  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .bss          00001000  08049800  08049800  000007f8  2**5
+                  ALLOC
+$
+</pre></div>
+</div>
+<p>Executable files on Linux are stored in the ELF format (Executable and
+Linking Format), and include a header that describes the file to the OS;
+the information above came from this header. Looking at the file, the
+following sections can be seen:</p>
+<hr class="docutils" />
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>          `0 ... x93` various header information   
+`00000094 - 00000107` &quot;.text&quot;                      program code
+`00000108 - 000007c7` &quot;.rodata&quot;                    read/only data (mostly strings)
+`000007c8 - 000007e7` &quot;.data&quot;&#39;                     initialized writable data
+            (no data) &quot;.bss&quot;&#39;                      zero-initialized data
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>The BSS section corresponds to global variables initialized to
+zero.  Since the BSS section is initialized to all zeros, there is no
+need to store its initial contents in the executable file.  Instead,
+the exec() system call allocate anonymous memory for any BSS sections
+thereby reducing the actual size of executable files on storage.</p>
+<section id="executable-file-and-process-address-space">
+<h4><span class="section-number">19.1.2.1. </span>Executable file and process address space<a class="headerlink" href="#executable-file-and-process-address-space" title="Permalink to this headline">#</a></h4>
+<p>Here you can see the relationship between the structure of the
+executable file and the process address space created by the kernel when
+it runs this executable. One page (08048xxx) is used for read-only code
+and data, while two pages (08049xxx and 0804Axxx) are used for writable
+data.</p>
+<figure class="align-default" id="vm-pic101">
+<a class="reference internal image-reference" href="../_images/virt-mem-pic101.png"><img alt="../_images/virt-mem-pic101.png" src="../_images/virt-mem-pic101.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 19.2 </span><span class="caption-text">Relationship of executable file header to memory map
+structure</span><a class="headerlink" href="#vm-pic101" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="page-faults-in-the-kernel">
+<h3><span class="section-number">19.1.3. </span>Page Faults in the Kernel<a class="headerlink" href="#page-faults-in-the-kernel" title="Permalink to this headline">#</a></h3>
+<p>Although common in the past, modern Windows and Linux systems rarely
+seem to crash due to driver problems. (Although my Mac panics every
+month or two.) If you ever develop kernel drivers, however, you will
+become very familiar with them during the debug phase of development.</p>
+<p>What happens if there is a page fault while the CPU is running kernel
+code in supervisor mode? It depends.</p>
+<p>If the error is due to a bug in kernel-mode code, then in most operating
+systems the kernel is unable to handle it. In Linux the system will
+display an “Oops” message, as shown below, while in Windows the result is typically a
+“kernel panic”, which used to be called a Blue Screen of Death. Most of
+the time in Linux the process executing when this happens will be
+terminated, but the rest of the system remains running with possibly
+reduced functionality.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>  <span class="mf">397.864759</span><span class="p">]</span> <span class="n">BUG</span><span class="p">:</span> <span class="n">unable</span> <span class="n">to</span> <span class="n">handle</span> <span class="n">kernel</span> <span class="n">NULL</span> <span class="n">pointer</span> <span class="n">dereference</span> <span class="n">at</span> 
+                                                                <span class="mi">0000000000000004</span>
+<span class="p">[</span>  <span class="mf">397.865725</span><span class="p">]</span> <span class="n">IP</span><span class="p">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">ffffffffc01d1027</span><span class="o">&gt;</span><span class="p">]</span> <span class="n">track2lba</span><span class="o">+</span><span class="mh">0x27</span><span class="o">/</span><span class="mh">0x3f</span> <span class="p">[</span><span class="n">dm_vguard</span><span class="p">]</span>
+<span class="p">[</span>  <span class="mf">397.866619</span><span class="p">]</span> <span class="n">PGD</span> <span class="mi">0</span> 
+<span class="p">[</span>  <span class="mf">397.866929</span><span class="p">]</span> <span class="n">Oops</span><span class="p">:</span> <span class="mi">0000</span> <span class="p">[</span><span class="c1">#1] SMP </span>
+<span class="p">[</span>  <span class="mf">397.867395</span><span class="p">]</span> <span class="n">Modules</span> <span class="n">linked</span> <span class="ow">in</span><span class="p">:</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="p">[</span>  <span class="mf">397.872730</span><span class="p">]</span> <span class="n">CPU</span><span class="p">:</span> <span class="mi">0</span> <span class="n">PID</span><span class="p">:</span> <span class="mi">1335</span> <span class="n">Comm</span><span class="p">:</span> <span class="n">dmsetup</span> <span class="n">Tainted</span><span class="p">:</span> <span class="n">G</span>           <span class="n">OE</span>   <span class="mf">4.6.0</span> <span class="c1">#3</span>
+<span class="p">[</span>  <span class="mf">397.873419</span><span class="p">]</span> <span class="n">Hardware</span> <span class="n">name</span><span class="p">:</span> <span class="n">QEMU</span> <span class="n">Standard</span> <span class="n">PC</span> <span class="p">(</span><span class="n">i440FX</span> <span class="o">+</span> <span class="n">PIIX</span><span class="p">,</span> <span class="mi">1996</span><span class="p">),</span> <span class="n">BIOS</span> <span class="o">...</span>
+<span class="p">[</span>  <span class="mf">397.874487</span><span class="p">]</span> <span class="n">task</span><span class="p">:</span> <span class="n">ffff88003cd10e40</span> <span class="n">ti</span><span class="p">:</span> <span class="n">ffff880037080000</span> <span class="n">task</span><span class="o">.</span><span class="n">ti</span><span class="p">:</span> <span class="n">ffff88003708</span>
+<span class="p">[</span>  <span class="mf">397.875375</span><span class="p">]</span> <span class="n">RIP</span><span class="p">:</span> <span class="mi">0010</span><span class="p">:[</span><span class="o">&lt;</span><span class="n">ffffffffc01d1027</span><span class="o">&gt;</span><span class="p">]</span>  <span class="p">[</span><span class="o">&lt;</span><span class="n">ffffffffc01d1027</span><span class="o">&gt;</span><span class="p">]</span> <span class="n">track2lba</span><span class="o">+</span><span class="mh">0x27</span>
+<span class="p">[</span>  <span class="mf">397.876509</span><span class="p">]</span> <span class="n">RSP</span><span class="p">:</span> <span class="mi">0018</span><span class="p">:</span><span class="n">ffff880037083bd0</span>  <span class="n">EFLAGS</span><span class="p">:</span> <span class="mi">00010282</span>
+<span class="p">[</span>  <span class="mf">397.877193</span><span class="p">]</span> <span class="n">RAX</span><span class="p">:</span> <span class="mi">0000000000000001</span> <span class="n">RBX</span><span class="p">:</span> <span class="mi">0000000000003520</span> <span class="n">RCX</span><span class="p">:</span> <span class="mi">0000000000000000</span>
+<span class="p">[</span>  <span class="mf">397.878085</span><span class="p">]</span> <span class="n">RDX</span><span class="p">:</span> <span class="mi">0000000000000000</span> <span class="n">RSI</span><span class="p">:</span> <span class="mi">0000000000003520</span> <span class="n">RDI</span><span class="p">:</span> <span class="n">ffff880036bd70c0</span>
+<span class="p">[</span>  <span class="mf">397.879016</span><span class="p">]</span> <span class="n">RBP</span><span class="p">:</span> <span class="n">ffff880037083bd0</span> <span class="n">R08</span><span class="p">:</span> <span class="mi">00000000000001</span><span class="n">b0</span> <span class="n">R09</span><span class="p">:</span> <span class="mi">0000000000000000</span>
+<span class="p">[</span>  <span class="mf">397.879912</span><span class="p">]</span> <span class="n">R10</span><span class="p">:</span> <span class="mi">000000000000000</span><span class="n">a</span> <span class="n">R11</span><span class="p">:</span> <span class="n">f000000000000000</span> <span class="n">R12</span><span class="p">:</span> <span class="n">ffff880036bd70c0</span>
+<span class="p">[</span>  <span class="mf">397.880763</span><span class="p">]</span> <span class="n">R13</span><span class="p">:</span> <span class="mf">00000000002e46</span><span class="n">e0</span> <span class="n">R14</span><span class="p">:</span> <span class="n">ffffc900001f7040</span> <span class="n">R15</span><span class="p">:</span> <span class="mi">0000000000000000</span>
+<span class="p">[</span>  <span class="mf">397.881618</span><span class="p">]</span> <span class="n">FS</span><span class="p">:</span>  <span class="mi">00007</span><span class="n">f5767938700</span><span class="p">(</span><span class="mi">0000</span><span class="p">)</span> <span class="n">GS</span><span class="p">:</span><span class="n">ffff88003fc00000</span><span class="p">(</span><span class="mi">0000</span><span class="p">)</span> 
+<span class="p">[</span>  <span class="mf">397.915186</span><span class="p">]</span> <span class="n">CS</span><span class="p">:</span>  <span class="mi">0010</span> <span class="n">DS</span><span class="p">:</span> <span class="mi">0000</span> <span class="n">ES</span><span class="p">:</span> <span class="mi">0000</span> <span class="n">CR0</span><span class="p">:</span> <span class="mi">0000000080050033</span>
+<span class="p">[</span>  <span class="mf">397.932122</span><span class="p">]</span> <span class="n">CR2</span><span class="p">:</span> <span class="mi">0000000000000004</span> <span class="n">CR3</span><span class="p">:</span> <span class="mi">000000003</span><span class="n">d3ea000</span> <span class="n">CR4</span><span class="p">:</span> <span class="mi">00000000000406</span><span class="n">f0</span>
+<span class="p">[</span>  <span class="mf">397.949459</span><span class="p">]</span> <span class="n">Stack</span><span class="p">:</span>
+                      <span class="o">...</span> <span class="n">stack</span> <span class="n">contents</span> <span class="ow">and</span> <span class="n">backtrace</span> <span class="n">omitted</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>But what about addresses passed by the user in a system call? For
+example, what if the memory address passed to a <code class="docutils literal notranslate"><span class="pre">read</span></code>
+system call has been paged out, or not instantiated yet? It turns out
+that the same page faulting logic can be used in the kernel, as
+well—the first access to an unmapped page will result in a fault, the
+process will be interrupted (in the kernel this time, rather than in
+user-space code), and then execution will resume after the page fault is
+handled.</p>
+<p>But what if the user passes a bad address? We can’t just kill the
+process partway through the system call, because that would risk leaving
+internal operating system data structures in an inconsistent state. (Not
+only that, but the POSIX standard requires that system calls return the
+EFAULT error in response to bad addresses, not exit.) Instead, all code
+in the Linux kernel which accesses user-provided memory addresses is
+supposed to use a pair of functions,
+<code class="docutils literal notranslate"><span class="pre">copy_from_user</span></code> and <code class="docutils literal notranslate"><span class="pre">copy_to_user</span></code>, which check that the user-provided
+memory region is valid for user-mode access[^11].</p>
+<p>In very early versions of Linux the kernel ran in a separate address
+space where virtual addresses mapped directly to physical addresses, and
+so these functions actually interpreted the page tables to translate
+virtual addresses to physical (i.e. kernel virtual) addresses, which was
+slow but made it easy to return an error if an address was bad. Newer
+Linux versions map the kernel and its data structures into a predefined
+region of each each process virtual address space, making these functions
+much faster but more
+complicated. The speedup is because there is no longer any need to
+translate page tables in software; instead the two
+<code class="docutils literal notranslate"><span class="pre">copy_*_user</span></code> functions just perform a few checks
+and then a <code class="docutils literal notranslate"><span class="pre">memcpy</span></code>. More complicated because if it fails
+we don’t find out about it in either of these functions, but rather in
+the page fault handler itself. To make this work, if the page fault (a)
+occurs in kernel mode, and (b) the handler can’t find a translation for
+the address, it checks to see if the fault occurred while executing the
+<code class="docutils literal notranslate"><span class="pre">copy_from_user</span></code> or <code class="docutils literal notranslate"><span class="pre">copy_to_user</span></code> functions, and if so it performs some
+horrible stack manipulation to cause that function to return an error
+code[^12].</p>
+<p>But what if a page fault occurs in the kernel outside of these two
+functions? That should never happen, because kernel structures are
+allocated from memory that’s already mapped in the kernel address space.
+In other words it’s a bug, just like the bugs that cause segmentation
+faults in your C programs. And just like those bugs it causes a crash,
+resulting in an error message such as the one shown above. If the kernel was running in a process context
+(e.g. executing system call code) then the currently-running process
+will be killed.  This behavior is really not safe because its likely some
+corruption of kernel data structures and not likely cause be the process
+itself. However, it does prevent the whole system from crashing.<br />
+If this occurs during an interrupt the system will crash.
+The equivalent in Windows is called a Blue Screen of Death
+(although they changed the color several versions back); since almost
+all Windows kernel code executes in interrupt context, these errors
+always result in a system crash.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./mm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="buffer-cache.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">18. </span>Buffer Cache</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="realworld.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>Memory management in the real world</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By (see contributing chapter book)<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

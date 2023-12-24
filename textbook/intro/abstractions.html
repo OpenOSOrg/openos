@@ -155,38 +155,38 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="tools-c.html">
+     5.1. The C Programming Language
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="tools-shell.html">
-     5.1. Shell
+     5.2. Shell
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="tools-editors.html">
-     5.2. Editors
+     5.3. Editors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="tools-make.html">
-     5.3. Makefiles
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="tools-git.html">
-     5.4. Git Basics
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="tools-gdb.html">
-     5.5. GDB
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="tools-c.html">
-     5.6. The C Programming Language
+     5.4. Make
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="tools-testing.html">
-     5.7. Unit Tests
+     5.5. Unit Tests
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tools-git.html">
+     5.6. Git Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tools-gdb.html">
+     5.7. GDB
     </a>
    </li>
   </ul>
@@ -989,31 +989,31 @@ obscure historical reasons, <em>heap</em> or dynamically allocated memory, and
 <p>Okay let’s look at some code to better understand how these process-related system calls are used, starting with <code class="docutils literal notranslate"><span class="pre">fork()</span></code>.</p>
 <div class="literal-block-wrapper docutils container" id="testfork-listing">
 <div class="code-block-caption"><span class="caption-number">Listing 4.1 </span><span class="caption-text">testfork.c - A simple program to illustrate fork()</span><a class="headerlink" href="#testfork-listing" title="Permalink to this code">#</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#include &lt;sys/types.h&gt;</span>
-<span class="linenos"> 2</span><span class="c1">#include &lt;unistd.h&gt;</span>
-<span class="linenos"> 3</span><span class="c1">#include &lt;stdio.h&gt;</span>
-<span class="linenos"> 4</span><span class="c1">#include &lt;stdlib.h&gt;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+<span class="linenos"> 3</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="linenos"> 4</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
 <span class="linenos"> 5</span>
-<span class="linenos"> 6</span><span class="nb">int</span>
-<span class="linenos"> 7</span><span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> 
-<span class="linenos"> 8</span><span class="p">{</span>
-<span class="linenos"> 9</span>  <span class="n">pid_t</span> <span class="n">mypid</span><span class="p">,</span> <span class="n">cpid</span><span class="p">,</span> <span class="n">ppid</span><span class="p">;</span>
-<span class="linenos">10</span>  <span class="n">cpid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
-<span class="linenos">11</span>  <span class="n">ppid</span> <span class="o">=</span> <span class="n">getppid</span><span class="p">();</span>
-<span class="linenos">12</span>  <span class="n">mypid</span> <span class="o">=</span> <span class="n">getpid</span><span class="p">();</span>
+<span class="linenos"> 6</span><span class="kt">int</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span>
+<span class="linenos"> 8</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">  </span><span class="kt">pid_t</span><span class="w"> </span><span class="n">mypid</span><span class="p">,</span><span class="w"> </span><span class="n">cpid</span><span class="p">,</span><span class="w"> </span><span class="n">ppid</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">  </span><span class="n">cpid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fork</span><span class="p">();</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">  </span><span class="n">ppid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getppid</span><span class="p">();</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">  </span><span class="n">mypid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getpid</span><span class="p">();</span><span class="w"></span>
 <span class="linenos">13</span>
-<span class="linenos">14</span>  <span class="k">if</span> <span class="p">(</span><span class="n">cpid</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-<span class="linenos">15</span>    <span class="o">/*</span> <span class="n">Parent</span> <span class="n">code</span> <span class="o">*/</span> 
-<span class="linenos">16</span>    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;hello, from parent with pid </span><span class="si">%d</span><span class="s2">, pid of child is </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mypid</span><span class="p">,</span> <span class="n">cpid</span><span class="p">);</span>
-<span class="linenos">17</span>  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">cpid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-<span class="linenos">18</span>    <span class="o">/*</span> <span class="n">Child</span> <span class="n">code</span> <span class="o">*/</span>
-<span class="linenos">19</span>    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;hello, I am child with pid </span><span class="si">%d</span><span class="s2">, my parent is </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mypid</span><span class="p">,</span> <span class="n">ppid</span><span class="p">);</span>
-<span class="linenos">20</span>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-<span class="linenos">21</span>    <span class="n">perror</span><span class="p">(</span><span class="s2">&quot;fork failed</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
-<span class="linenos">22</span>    <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-<span class="linenos">23</span>  <span class="p">}</span>
-<span class="linenos">24</span>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="linenos">25</span><span class="p">}</span> 
+<span class="linenos">14</span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cpid</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">    </span><span class="cm">/* Parent code */</span><span class="w"> </span>
+<span class="linenos">16</span><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;hello, from parent with pid %d, pid of child is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mypid</span><span class="p">,</span><span class="w"> </span><span class="n">cpid</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cpid</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">18</span><span class="w">    </span><span class="cm">/* Child code */</span><span class="w"></span>
+<span class="linenos">19</span><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;hello, I am child with pid %d, my parent is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mypid</span><span class="p">,</span><span class="w"> </span><span class="n">ppid</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">21</span><span class="w">    </span><span class="n">perror</span><span class="p">(</span><span class="s">&quot;fork failed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">22</span><span class="w">    </span><span class="n">exit</span><span class="p">(</span><span class="mi">-1</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">23</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">24</span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">25</span><span class="p">}</span><span class="w"> </span>
 </pre></div>
 </div>
 </div>
