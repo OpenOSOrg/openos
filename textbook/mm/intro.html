@@ -698,6 +698,18 @@ title="Print to PDF"
     <a class="reference internal nav-link" href="#paged-virtual-memory">
      11.2.2. Paged Virtual Memory
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pros">
+       11.2.2.1. Pros
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cons">
+       11.2.2.2. Cons
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -739,6 +751,18 @@ title="Print to PDF"
     <a class="reference internal nav-link" href="#paged-virtual-memory">
      11.2.2. Paged Virtual Memory
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pros">
+       11.2.2.1. Pros
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cons">
+       11.2.2.2. Cons
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -895,13 +919,20 @@ title="Print to PDF"
 <section id="paged-virtual-memory">
 <h3><span class="section-number">11.2.2. </span>Paged Virtual Memory<a class="headerlink" href="#paged-virtual-memory" title="Permalink to this headline">#</a></h3>
 <p>A paged virtual memory model splits both the virtual address space and physical memory into fixed size pieces knows as virtual pages and physical page frames respectively.  The mapping of virtual pages to physical page frames is accomplished via an array of page frame numbers known as a page table.  There is one page table entry for each virtual page and only then pages that are being used contain valid page table entries and therefore map physical page frames.</p>
-<p>Paged virtual memory aka paging introduces the possibility of several additional highly desirable features to the memory management system but also introduces several additional challenges.</p>
+<p>Paged virtual memory aka paging introduces the possibility of several additional highly desirable features or pros to the memory management system but also introduces several additional challenges or cons.</p>
+<section id="pros">
+<h4><span class="section-number">11.2.2.1. </span>Pros<a class="headerlink" href="#pros" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>Several huge virtual address spaces can be much larger than physical memory via over-committing physical memory.</p></li>
 <li><p>Total isolation of each virtual address space from all others.</p></li>
 <li><p>Sharing of selective regions of memory between different virtual address spaces is easy.</p></li>
 <li><p>Use of memory pages to cache file system data and meta-data is possible.</p></li>
 <li><p>Very large and sparse virtual address space requires page fault logic that maps physical memory on-demand.</p></li>
+</ul>
+</section>
+<section id="cons">
+<h4><span class="section-number">11.2.2.2. </span>Cons<a class="headerlink" href="#cons" title="Permalink to this headline">#</a></h4>
+<ul class="simple">
 <li><p>Over-committing physical memory requires sophisticated page reclaim logic.</p></li>
 <li><p>Supporting multiple page sizes on different architectures complicates an already complex memory management system.</p></li>
 <li><p>Very large virtual address space requires large and complex multi-level page table design.</p></li>
@@ -919,6 +950,7 @@ title="Print to PDF"
 <li><p><a class="reference internal" href="realworld.html#cont-mm-realworld"><span class="std std-ref">realworld</span></a></p></li>
 <li><p><a class="reference internal" href="concl.html#cont-mm-concl"><span class="std std-ref">concl</span></a></p></li>
 </ul>
+</section>
 </section>
 </section>
 </section>

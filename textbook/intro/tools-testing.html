@@ -785,7 +785,7 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<p>Before implementing any functionality we write tests on what we expect a correct implementation to do.  For example, <code class="xref std std-numref docutils literal notranslate"><span class="pre">test_simple_input_c</span></code> shows a test that calls the parser <code class="docutils literal notranslate"><span class="pre">pipeline_build</span></code> with a single command <code class="docutils literal notranslate"><span class="pre">ls</span></code>, asserts what it expects the state of a correct execution of the parser is.</p>
+<p>Before implementing any functionality we write tests on what we expect a correct implementation to do.  For example, <a class="reference internal" href="#test-simple-input-c"><span class="std std-numref">Listing 5.5</span></a> shows a test that calls the parser <code class="docutils literal notranslate"><span class="pre">pipeline_build</span></code> with a single command <code class="docutils literal notranslate"><span class="pre">ls</span></code>, asserts what it expects the state of a correct execution of the parser is.</p>
 <div class="literal-block-wrapper docutils container" id="test-simple-input-c">
 <div class="code-block-caption"><span class="caption-number">Listing 5.5 </span><span class="caption-text">Test of a simple</span><a class="headerlink" href="#test-simple-input-c" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;myshell_parser.h&quot;</span><span class="cp"></span>
@@ -821,8 +821,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>As another example, <code class="xref std std-numref docutils literal notranslate"><span class="pre">test_pipe_input_c</span></code> runs a simple example of two commands with a pipe between them.</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-number">Listing 5.6 </span><span class="caption-text">Test of a simple pipe</span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
+<div class="literal-block-wrapper docutils container" id="test-simple-pipe-c">
+<div class="code-block-caption"><span class="caption-number">Listing 5.6 </span><span class="caption-text">Test of a simple pipe</span><a class="headerlink" href="#test-simple-pipe-c" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;myshell_parser.h&quot;</span><span class="cp"></span>
 <span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 <span class="linenos"> 3</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
