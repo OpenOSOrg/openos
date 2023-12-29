@@ -8,8 +8,8 @@ all: check
 # rule for making the parser.o  that is needed by all the test programs
 myshell_parser.o: myshell_parser.c myshell_parser.h
 
+
 # each of the test files depend on their own .c and myshell_parser.h
-#  add another time for each test, e.g., test_simple_pipe.o line below
 test_simple_input.o: test_simple_input.c myshell_parser.h
 test_simple_pipe.o: test_simple_pipe.c myshell_parser.h
 
