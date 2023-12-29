@@ -683,8 +683,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="the-c-programming-language">
 <span id="cont-gs-tools-c"></span><h1><span class="section-number">5.1. </span>The C Programming Language<a class="headerlink" href="#the-c-programming-language" title="Permalink to this headline">#</a></h1>
-<p>The C programming language is a high level statically typed procedural compiled programming language valued for its accessibility to low level computer memory. You have probably already learned the language in a previous course, but this course will utilize some of its advanced features that have probably not been taught in those introductory courses.</p>
-<p>We don’t expect you to memorize the advanced features of he language; instead you should reference <a class="reference external" href="https://en.cppreference.com/w/c/language">this</a> searchable documentation as you need to, or if you prefer the famous K&amp;R <a class="reference external" href="https://archive.org/details/cprogramminglang00denn">book</a> that can be downloaded for free.  Make sure you have at least a basic understanding of:</p>
+<p>The C programming language is a high level statically typed procedural compiled programming language which most operating systems are written in because it allows the programmer the full control needed to interact with devices and hardware. You have probably already learned the language in a previous course, but this course will utilize some of its advanced features that have probably not been taught in those introductory courses.  We don’t expect you to memorize the advanced features of he language; instead you should reference <a class="reference external" href="https://en.cppreference.com/w/c/language">this</a> searchable documentation as you need to, or if you prefer the famous K&amp;R <a class="reference external" href="https://archive.org/details/cprogramminglang00denn">book</a> that can be downloaded for free.  Make sure you have at least a basic understanding of:</p>
 <ul class="simple">
 <li><p>Functions: declarations and definitions</p></li>
 <li><p>Variables: definitions, usage</p></li>
@@ -700,11 +699,11 @@ title="Print to PDF"
 <p>One thing that you should be aware of is that the C programming language, by giving absolute control to the programmer, makes it really easy to shoot yourself in the foot.  We strongly recommend using a set of tools and techniques that will give you some degree of foot armor:</p>
 <ul class="simple">
 <li><p>Use some form of coding style, e.g., <a class="reference external" href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html">this website</a> contains the preferred coding style for the Linux kernel. Adhering to a style will increase productivity so you and whoever else looks at your code will spend less time trying to understand what you wrote.</p></li>
-<li><p>As described <a class="reference internal" href="tools-make.html#cont-gs-tools-make"><span class="std std-ref">here</span></a> always compile your programs with <code class="docutils literal notranslate"><span class="pre">-Wall</span></code> and -Werror` to enable the compiler to catch many bugs.</p></li>
+<li><p>As described <a class="reference internal" href="tools-make.html#cont-gs-tools-make"><span class="std std-ref">here</span></a> always compile your programs with <code class="docutils literal notranslate"><span class="pre">-Wall</span></code> and <code class="docutils literal notranslate"><span class="pre">-Werror</span></code> to enable the compiler to catch many bugs.</p></li>
 <li><p>Use <a class="reference internal" href="tools-gdb.html#cont-gs-tools-gdb"><span class="std std-ref">debuggers</span></a> rather than print to debug your program.</p></li>
 <li><p>Use tools like <a class="reference external" href="https://valgrind.org/">valgrind</a>, or sanitizer arguments to add extra runtime checks to detect undefined behavior or memory leaks.</p></li>
 </ul>
-<p>Most of all, write extensive unit and integration <a class="reference internal" href="tools-testing.html#cont-gs-tools-testing"><span class="std std-ref">tests</span></a> as you develop your code.  You will be shocked how many times you will avoid debugging the same problem repeatedly by doing this.</p>
+<p>Most of all, write extensive unit and integration tests (see <a class="reference internal" href="tools-testing.html#cont-gs-tools-testing"><span class="std std-ref">this chapter</span></a>) as you develop your code.  You will be shocked how many times you will avoid debugging the same problem repeatedly by doing this.</p>
 </section>
 
     <script type="text/x-thebe-config">
