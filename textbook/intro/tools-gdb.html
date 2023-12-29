@@ -657,58 +657,12 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#getting-started">
-   5.7.1. Getting started
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-gdb-to-debug">
-   5.7.2. Using gdb to debug
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#debugging-threads">
-     5.7.2.1. Debugging threads
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#debugging-signals">
-     5.7.2.2. Debugging signals
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#review">
-   5.7.3. Review
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
@@ -720,41 +674,6 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#getting-started">
-   5.7.1. Getting started
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-gdb-to-debug">
-   5.7.2. Using gdb to debug
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#debugging-threads">
-     5.7.2.1. Debugging threads
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#debugging-signals">
-     5.7.2.2. Debugging signals
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#review">
-   5.7.3. Review
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -764,55 +683,42 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="gdb">
 <span id="cont-gs-tools-gdb"></span><h1><span class="section-number">5.7. </span>GDB<a class="headerlink" href="#gdb" title="Permalink to this headline">#</a></h1>
+<p>Until now, many of you have been able to get by debugging your programs using print statements.  Don’t even try to that with this course; you will not be successful.  In the container image available with this course, we provide you with the very powerful GNU Debugger gdb, with documentation available <a class="reference external" href="https://sourceware.org/gdb/current/onlinedocs/gdb.html/">here</a>.  As discussed previously, you should always run it from <a class="reference internal" href="tools-editors.html#cont-gs-tools-editors"><span class="std std-ref">emacs</span></a>, but if you want to run gdb from the command line, type <code class="docutils literal notranslate"><span class="pre">gdb</span> <span class="pre">&lt;program&gt;</span></code> to debug the executable program, and then <code class="docutils literal notranslate"><span class="pre">run</span></code> to run it.  Some of the key features you will find critical in this course are:</p>
 <ul class="simple">
-<li><p>FIXME: talk about features, backtrace,  threads…</p></li>
-</ul>
-<p>gdb is your best friend when it comes to debugging. It allows you to step through a program line by line, examine variable values and the contents of the stack, and much more. For a quick reference, we recommend <a class="reference external" href="https://users.ece.utexas.edu/~adnan/gdb-refcard.pdf">this guide</a>.</p>
-<section id="getting-started">
-<h2><span class="section-number">5.7.1. </span>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">#</a></h2>
-<p>In order to use gdb, you will have to use the <code class="docutils literal notranslate"><span class="pre">-g</span></code> command line flag when compiling. This flag makes sure that the necessary debugging information is produced.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcc</span> <span class="o">-</span><span class="n">g</span> <span class="o">-</span><span class="n">o</span> <span class="n">main</span> <span class="n">main</span><span class="o">.</span><span class="n">c</span>
-</pre></div>
-</div>
-<p>This will compile the program <code class="docutils literal notranslate"><span class="pre">main.c</span></code> into an executable named “main” with debugging information.</p>
-<p>To open the program in the debugger, you can type <code class="docutils literal notranslate"><span class="pre">gdb</span> <span class="pre">main</span></code>. To exit gdb, type <code class="docutils literal notranslate"><span class="pre">q</span></code> or <code class="docutils literal notranslate"><span class="pre">quit</span></code>.</p>
-<p>Gdb provides documentation, which you can access by typing the command <code class="docutils literal notranslate"><span class="pre">help</span></code>. This will provide a list of topics, and you can then get information about a specific topic or command by typing <code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">&lt;topic&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">&lt;command&gt;</span></code>.</p>
-</section>
-<section id="using-gdb-to-debug">
-<h2><span class="section-number">5.7.2. </span>Using gdb to debug<a class="headerlink" href="#using-gdb-to-debug" title="Permalink to this headline">#</a></h2>
-<p>One of the more useful things you can do in gdb is set <strong>breakpoints</strong> and observe the state of the process mid-execution. There are a couple of ways to set a breakpoint:</p>
-<ul class="simple">
+<li><p>Setting <a class="reference external" href="https://sourceware.org/gdb/current/onlinedocs/gdb.html/Breakpoints.html#Breakpoints">breakpoints</a> at specific lines in your source code where you want to see the state. For example:</p>
+<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">break</span> <span class="pre">&lt;function&gt;</span></code>: sets a breakpoint at the beginning of <code class="docutils literal notranslate"><span class="pre">function</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">break</span> <span class="pre">&lt;linenumber&gt;</span></code>: sets the breakpoint to the given line number in the source file. Execution will stop <strong>before</strong> that line has been executed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">break</span> <span class="pre">&lt;filename&gt;:&lt;linenumber&gt;</span></code>: sets the breakpoint to the given line number in the source file.</p></li>
+<li><p>to delete a breakpoint, type <code class="docutils literal notranslate"><span class="pre">delete</span> <span class="pre">#</span></code> where to find out what number each breakpoint is, type <code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">breakpoints</span></code></p></li>
+<li><p>you can then type <code class="docutils literal notranslate"><span class="pre">c</span></code> to continue, <code class="docutils literal notranslate"><span class="pre">n</span></code> to go to the next line (stepping over functions), <code class="docutils literal notranslate"><span class="pre">s</span></code> to step into a function, or <code class="docutils literal notranslate"><span class="pre">si</span></code> to step by a single machine instructions (critical with some of the programs you will write here).</p></li>
 </ul>
-<p>If your code is in multiple files, you may have to specify a file name before the function name or line number, e.g. <code class="docutils literal notranslate"><span class="pre">break</span> <span class="pre">&lt;filename&gt;:&lt;function&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">break</span> <span class="pre">&lt;filename&gt;:&lt;linenumber&gt;</span></code>.</p>
-<p>To delete the breakpoints you have set, you can type <code class="docutils literal notranslate"><span class="pre">delete</span></code>. You can also delete a specific breakpoint by typing <code class="docutils literal notranslate"><span class="pre">delete</span> <span class="pre">&lt;number&gt;</span></code>. To find out what number each breakpoint is, type <code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">breakpoints</span></code>.</p>
-<p>Once you have set all your desired breakpoints, you need to run the program. To do this, simply type the command <code class="docutils literal notranslate"><span class="pre">run</span></code> into gdb. If the program takes command line arguments, you can provide them the same way as you would in the command line, except you say “run” instead of the program name. Your code will execute up to where you specified your first breakpoint.</p>
-<p>Once you reach your breakpoint, you will probably want to look at the contents of the stack or some variables to make sure that your program is executing as expected. To see the current value of a variable, you can simply type <code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">&lt;variablename&gt;</span></code>.</p>
-<p>To continue running the program after stopping at a break time, you have several options. Typing <code class="docutils literal notranslate"><span class="pre">continue</span></code> will set the program running again until you hit another breakpoint or the process finishes. Typing <code class="docutils literal notranslate"><span class="pre">step</span></code> (or just <code class="docutils literal notranslate"><span class="pre">s</span></code>) will execute the current source line and stop execution before the next source line, If the line that is about to be executed is a function call, then <code class="docutils literal notranslate"><span class="pre">step</span></code> will step into that function. In contrast, moving through execution using the <code class="docutils literal notranslate"><span class="pre">next</span></code> will not “step in” to a called function. It will continue until the next source line in <em>the current function</em>.</p>
-<section id="debugging-threads">
-<h3><span class="section-number">5.7.2.1. </span>Debugging threads<a class="headerlink" href="#debugging-threads" title="Permalink to this headline">#</a></h3>
-<p>Once you learn about pthreads, a very powerful thing you can do is switch between threads and step through in the order you choose.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">threads</span></code>: lists all existing threads.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">thread</span> <span class="pre">&lt;thread_id&gt;</span></code>: selects which thread to switch to.</p></li>
+</li>
+<li><p>Displaying the state of your program, e.g.:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">&lt;variable&gt;</span></code> will print the value of a variable, or `display <variable> will print each every time you step ahead.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">registers</span></code> will show you the state in all the registers of the computer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">threads</span></code> will tell you about all the threads in your program.</p></li>
+</ul>
+</li>
+<li><p>Debugging multiple processes; something you will need for implementing a shell</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">follow-fork-mode</span> <span class="pre">&lt;option&gt;</span></code>: e.g., <strong>set follow-fork-mode child</strong> to debug child instead of parent</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">detach-on-fork</span> <span class="pre">&lt;option&gt;</span></code>: e.g. <strong>set detach-on-fork off</strong> to debug all the processes (you are debugging one at a time, and child is blocked right after fork)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">inferiors</span></code>: list all inferiors being managed</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">inferior</span> <span class="pre">&lt;inferior_id&gt;</span></code>: selects which inferior to switch to</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">follow-fork-mode</span> <span class="pre">&lt;option&gt;</span></code>: e.g. <strong>set follow-fork-mode child</strong> to follow child instead of parent</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">detach-on-fork</span> <span class="pre">&lt;option&gt;</span></code>: e.g. <strong>set detach-on-fork off</strong> to debug all the processes (you are debugging one at a time, and child is blocked right after fork)</p></li>
 </ul>
-<p>After you have selected which thread you would like to step through, you can use the basic stepping commands to execute the next instructions. Note that already existing break points exist across all threads. When debugging a process that forks with GDB, you can debug parent, debug children or all processes.</p>
-<p>For more information, see <a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb">here</a></p>
-</section>
-<section id="debugging-signals">
-<h3><span class="section-number">5.7.2.2. </span>Debugging signals<a class="headerlink" href="#debugging-signals" title="Permalink to this headline">#</a></h3>
-<p>Once you learn about signals, you can use gdb to change its behavior on how to handle those signals.</p>
-<ul class="simple">
+</li>
+<li><p>Debugging threads of execution in your program</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">threads</span></code>: lists all existing threads.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">thread</span> <span class="pre">&lt;thread_id&gt;</span></code>: selects which thread to switch to.</p></li>
+</ul>
+</li>
+<li><p>Debugging signals</p>
+<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">signals</span></code> or <code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">signals</span> <span class="pre">&lt;signal&gt;</span></code>: lists all signals (or one signal) and shows how gdb responds to it.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">handle</span> <span class="pre">&lt;signal&gt;</span> <span class="pre">&lt;keyword&gt;</span></code>: changes how gdb responds to that signal based on the keyword.</p></li>
-</ul>
-<p>Below is a list of keywords:</p>
-<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">handle</span> <span class="pre">&lt;signal&gt;</span> <span class="pre">&lt;keyword&gt;</span></code>: changes how gdb responds to that signal based on the keyword.</p>
+<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">nostop</span></code>: gdb should not stop your program when this signal happens.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stop</span></code>: gdb should stop your program when this signal happens.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">print</span></code>: gdb should print a message when this signal happens.</p></li>
@@ -820,21 +726,11 @@ title="Print to PDF"
 <li><p><code class="docutils literal notranslate"><span class="pre">ignore</span></code>: gdb should not allow your program to see this signal.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">noignore</span></code>: gdb should allow your program to see this signal.</p></li>
 </ul>
-</section>
-</section>
-<section id="review">
-<h2><span class="section-number">5.7.3. </span>Review<a class="headerlink" href="#review" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">break</span></code>: use to set breakpoints</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">run</span></code>: run the program in gdb</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">delete</span></code>: delete breakpoints</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">continue</span></code>: set the program running again after being stopped at a breakpoint</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">step</span></code>: execute the current source line and stop again before the next source line</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">next</span></code>: continue until the next source line in the current function</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">list</span> <span class="pre">&lt;linenumber&gt;</span></code>: print out some lines from the source code around <code class="docutils literal notranslate"><span class="pre">linenumber</span></code>.</p></li>
+</li>
 </ul>
-<p>This is just the beginning of what you can do with gdb, and we will add to this section of the book as the course continues!</p>
-</section>
+</li>
+</ul>
+<p>You really need to have a strog</p>
 </section>
 
     <script type="text/x-thebe-config">
