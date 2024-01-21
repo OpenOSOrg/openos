@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>49. Contributing &#8212; Introduction to Operating Systems</title>
+    <title>52. Contributing &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="50. Bibliography" href="../misc/bib.html" />
-    <link rel="prev" title="48. How to read this book" href="../misc/howto.html" />
+    <link rel="next" title="53. Bibliography" href="../misc/bib.html" />
+    <link rel="prev" title="51. How to read this book" href="../misc/howto.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -203,22 +203,37 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/process.html">
-   7. Virtualizing a CPU
+   7. The Process: A virtual Computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/virtual.html">
+   8. Virtualizing the CPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/threads.html">
+   9. The Thread: A Virtual Processor
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   8. Scheduling
+   10. Simple Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/preempt.html">
+   11. Preemptive Scheduling
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/real_sched.html">
-   9. A Look at the Linux Scheduler
+   12. A Look at the Linux Scheduler
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/review.html">
-   10. Review
+   13. Review
   </a>
  </li>
 </ul>
@@ -230,62 +245,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   11. Introduction
+   14. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/phys-and-seg.html">
-   12. Memory management before paged virtual memory
+   15. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   13. Paging
+   16. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   14. Page Tables
+   17. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   15. Memory reclaiming algorithms.
+   18. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   16. Page Sizes
+   19. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   17. Other topics
+   20. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   18. Buffer Cache
+   21. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   19. Memory Management Dynamics
+   22. Memory Management Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   20. Memory management in the real world
+   23. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   21. Conclusion
+   24. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/review.html">
-   22. Review
+   25. Review
   </a>
  </li>
 </ul>
@@ -297,57 +312,57 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   23. Introduction
+   26. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   24. File System Abstraction
+   27. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/diskhw.html">
-   25. A bit about Disks
+   28. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   26. File System Layout
+   29. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_used.html">
-   27. Disk Layout:Tracking Used Space
+   30. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_free.html">
-   28. Disk Layout:Tracking Free Space
+   31. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_name.html">
-   29. Disk Layout:Implementing Name Space
+   32. Disk Layout:Implementing Name Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_failures.html">
-   30. Disk Layout:Dealing with Failures
+   33. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_ex_exx.html">
-   31. Disk Layout:Examples of Real World File Systems
+   34. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   32. Kernel implementation
+   35. Kernel implementation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/review.html">
-   33. Review
+   36. Review
   </a>
  </li>
 </ul>
@@ -359,52 +374,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   34. Introduction to Concurrency, Synchronization and Deadlock
+   37. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   35. Cooperating Processes and Inter-process Communication
+   38. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/criticalsection.html">
-   36. The Critical Section Problem
+   39. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locks.html">
-   37. Implementing Locks
+   40. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/ordering.html">
-   38. Ordering Thread Events
+   41. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   39. Common Concurrency Bugs
+   42. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/readmostly.html">
-   40. Read-Dominated Workloads
+   43. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   41. Challenges of Modern Hardware
+   44. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   42. Locking in the Linux Kernel
+   45. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   43. Review
+   46. Review
   </a>
  </li>
 </ul>
@@ -416,22 +431,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   44. Input and Output
+   47. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   45. More on Disks
+   48. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   46. Virtualization
+   49. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   47. Security
+   50. Security
   </a>
  </li>
 </ul>
@@ -443,17 +458,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   48. How to read this book
+   51. How to read this book
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   49. Contributing
+   52. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   50. Bibliography
+   53. Bibliography
   </a>
  </li>
 </ul>
@@ -681,96 +696,96 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#set-up">
-   49.1. Set Up
+   52.1. Set Up
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-your-image">
-   49.2. Create Your Image
+   52.2. Create Your Image
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#build-your-book">
-   49.3. Build Your Book
+   52.3. Build Your Book
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#resources-to-look-at">
-   49.4. Resources to look at
+   52.4. Resources to look at
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#design-choices">
-   49.5. Design choices
+   52.5. Design choices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#authoring-content">
-   49.6. Authoring content
+   52.6. Authoring content
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#using-jupyterlab">
-     49.6.1. Using jupyterlab
+     52.6.1. Using jupyterlab
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#adding-figures">
-     49.6.2. Adding figures
+     52.6.2. Adding figures
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#tags">
-     49.6.3. TAGS
+     52.6.3. TAGS
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#rise-presentations">
-     49.6.4. RISE presentations.
+     52.6.4. RISE presentations.
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#developing-one">
-       49.6.4.1. Developing one
+       52.6.4.1. Developing one
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#coverting-google-slide-presentation">
-       49.6.4.2. Coverting google slide presentation
+       52.6.4.2. Coverting google slide presentation
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#running-one">
-       49.6.4.3. Running one
+       52.6.4.3. Running one
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#useful-tricks-and-stuff-we-should-try">
-     49.6.5. Useful tricks and stuff we should try
+     52.6.5. Useful tricks and stuff we should try
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
-   49.7. References
+   52.7. References
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#contributors">
-   49.8. Contributors
+   52.8. Contributors
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#editors-in-charge-of-specific-sections">
-     49.8.1. Editors in charge of specific sections
+     52.8.1. Editors in charge of specific sections
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#major-contributors">
-     49.8.2. Major contributors
+     52.8.2. Major contributors
     </a>
    </li>
   </ul>
@@ -796,96 +811,96 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#set-up">
-   49.1. Set Up
+   52.1. Set Up
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-your-image">
-   49.2. Create Your Image
+   52.2. Create Your Image
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#build-your-book">
-   49.3. Build Your Book
+   52.3. Build Your Book
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#resources-to-look-at">
-   49.4. Resources to look at
+   52.4. Resources to look at
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#design-choices">
-   49.5. Design choices
+   52.5. Design choices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#authoring-content">
-   49.6. Authoring content
+   52.6. Authoring content
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#using-jupyterlab">
-     49.6.1. Using jupyterlab
+     52.6.1. Using jupyterlab
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#adding-figures">
-     49.6.2. Adding figures
+     52.6.2. Adding figures
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#tags">
-     49.6.3. TAGS
+     52.6.3. TAGS
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#rise-presentations">
-     49.6.4. RISE presentations.
+     52.6.4. RISE presentations.
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#developing-one">
-       49.6.4.1. Developing one
+       52.6.4.1. Developing one
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#coverting-google-slide-presentation">
-       49.6.4.2. Coverting google slide presentation
+       52.6.4.2. Coverting google slide presentation
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#running-one">
-       49.6.4.3. Running one
+       52.6.4.3. Running one
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#useful-tricks-and-stuff-we-should-try">
-     49.6.5. Useful tricks and stuff we should try
+     52.6.5. Useful tricks and stuff we should try
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
-   49.7. References
+   52.7. References
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#contributors">
-   49.8. Contributors
+   52.8. Contributors
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#editors-in-charge-of-specific-sections">
-     49.8.1. Editors in charge of specific sections
+     52.8.1. Editors in charge of specific sections
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#major-contributors">
-     49.8.2. Major contributors
+     52.8.2. Major contributors
     </a>
    </li>
   </ul>
@@ -901,10 +916,10 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="contributing">
-<span id="cont-contr"></span><h1><span class="section-number">49. </span>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">#</a></h1>
+<span id="cont-contr"></span><h1><span class="section-number">52. </span>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">#</a></h1>
 <p>To run the environment look at the <a class="reference internal" href="../misc/howto.html#misc-howto"><span class="std std-ref">howto</span></a> guild.  This chapter is intended to be a guide to people collaborating with us on developing the open OS textbook.  We first provide <a class="reference internal" href="#cont-contr-links"><span class="std std-ref">links</span></a> to background information on the tools used and describe some of our design <a class="reference internal" href="#cont-contr-design"><span class="std std-ref">choices</span></a>.  Next, we provide a <a class="reference internal" href="#cont-contr-tutorial"><span class="std std-ref">tutorial</span></a> on how to get started with the environment if you are a collaborator of the authors, followed by information on how to <a class="reference internal" href="#cont-contr-authoring"><span class="std std-ref">author</span></a> content.  Finally, we have a list of main <a class="reference internal" href="#cont-contr-contributors"><span class="std std-ref">contributors</span></a>.</p>
 <section id="set-up">
-<span id="cont-contr-tutorial"></span><h2><span class="section-number">49.1. </span>Set Up<a class="headerlink" href="#set-up" title="Permalink to this headline">#</a></h2>
+<span id="cont-contr-tutorial"></span><h2><span class="section-number">52.1. </span>Set Up<a class="headerlink" href="#set-up" title="Permalink to this headline">#</a></h2>
 <p>You will want to create your own forked repository from the <a class="reference external" href="https://github.com/OpenOSOrg/openos">openos repository</a> . If you already have your own container/environment used to build and publish the book, then you can clone your forked repository there and skip the image creation section. Otherwise, clone it locally.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -912,7 +927,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="create-your-image">
-<h2><span class="section-number">49.2. </span>Create Your Image<a class="headerlink" href="#create-your-image" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">52.2. </span>Create Your Image<a class="headerlink" href="#create-your-image" title="Permalink to this headline">#</a></h2>
 <p>Navigate to the /containers/container/base folder. This is where you can make any modifications to your image. Navigate back to /containers/container and type “make build” to build your image. This will take around 10-15 minutes, so make sure you have no syntax errors. Type “make publish” to publish to your image registry.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -920,7 +935,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="build-your-book">
-<h2><span class="section-number">49.3. </span>Build Your Book<a class="headerlink" href="#build-your-book" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">52.3. </span>Build Your Book<a class="headerlink" href="#build-your-book" title="Permalink to this headline">#</a></h2>
 <p>Navigate to the /content folder. Here is where all of your book content will be stored. Please visit the <a class="reference external" href="https://jupyterbook.org/en/stable/intro.html">Jupyter Book website</a> to see a more detailed description of book format and markup syntax.</p>
 <p>Once your book is ready, In your container environment, navigate to /books/textbook and type “make build” to build the textbook. It will create a _build folder in the same directory containing all of the static assets needed for the website. Type “make pub” to publish to your GitHub Pages site.</p>
 <p>Note that you are publishing the book to your forked repository’s GitHub Pages site. If you are happy with your changes, commit them and submit a pull request to add your changes to the original repository.</p>
@@ -942,7 +957,7 @@ title="Print to PDF"
 <p>At the end of this section we have links to various <a class="reference internal" href="#cont-contr-ref"><span class="std std-ref">reference</span></a> materials, for example, sections of Jonathan’s textbook that we plan to steal materials from.</p>
 </section>
 <section id="resources-to-look-at">
-<span id="cont-contr-links"></span><h2><span class="section-number">49.4. </span>Resources to look at<a class="headerlink" href="#resources-to-look-at" title="Permalink to this headline">#</a></h2>
+<span id="cont-contr-links"></span><h2><span class="section-number">52.4. </span>Resources to look at<a class="headerlink" href="#resources-to-look-at" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://jupyterbook.org/en/stable/intro.html">jupyterbook: </a>: look here for basic instructions on authoring; we are basically using jupyterbook in a prescriptive fashion for the static content.</p>
 <ul>
@@ -957,7 +972,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="design-choices">
-<span id="cont-contr-design"></span><h2><span class="section-number">49.5. </span>Design choices<a class="headerlink" href="#design-choices" title="Permalink to this headline">#</a></h2>
+<span id="cont-contr-design"></span><h2><span class="section-number">52.5. </span>Design choices<a class="headerlink" href="#design-choices" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>All real content is in the “content” directory</p>
 <ul>
@@ -977,9 +992,9 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="authoring-content">
-<span id="cont-contr-authoring"></span><h2><span class="section-number">49.6. </span>Authoring content<a class="headerlink" href="#authoring-content" title="Permalink to this headline">#</a></h2>
+<span id="cont-contr-authoring"></span><h2><span class="section-number">52.6. </span>Authoring content<a class="headerlink" href="#authoring-content" title="Permalink to this headline">#</a></h2>
 <section id="using-jupyterlab">
-<h3><span class="section-number">49.6.1. </span>Using jupyterlab<a class="headerlink" href="#using-jupyterlab" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">52.6.1. </span>Using jupyterlab<a class="headerlink" href="#using-jupyterlab" title="Permalink to this headline">#</a></h3>
 <p>Will put various hints here on what we find works, although for the most part like any editor, you will gradually experience what works best for you.</p>
 <ul class="simple">
 <li><p>there seems to be just one file browser, I tend to open multiple links to the textbook:</p>
@@ -993,32 +1008,32 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="adding-figures">
-<h3><span class="section-number">49.6.2. </span>Adding figures<a class="headerlink" href="#adding-figures" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">52.6.2. </span>Adding figures<a class="headerlink" href="#adding-figures" title="Permalink to this headline">#</a></h3>
 <p>Use <a class="reference external" href="http://draw.io">draw.io</a> for open source software, I download the desktop version from <a class="reference external" href="https://www.diagrams.net/%7D">here</a> since it seems more reliable.  You can just download the image to your desktop, edit it there, and upload it again. You can Please use png as the source type of the file, rather than the default drawio; in this case it will create a XXX.drawio.png file, where the diagram is embedded in the png, so you can both dispay it, and edit it. This means you can not only continue to edit the file directly, but can also include exactly the same file in a figure.</p>
 <p>Tricks I have found in using this:</p>
 <ol class="simple">
 <li><p>with the desktop version you can directly copy images browser see this <a class="reference external" href="https://www.youtube.com/watch?v=pYROq5Aphoc">vidio</a></p></li>
 <li><p>I tend to use layers, for animation, then upload it and generate multiple png files form the same image</p></li>
-<li><p>You very much want to export the picture as high-resolution, by using a large zoom, see Figure <a class="reference internal" href="#contrib-fig-dioex2"><span class="std std-numref">Fig. 49.3</span></a></p></li>
+<li><p>You very much want to export the picture as high-resolution, by using a large zoom, see Figure <a class="reference internal" href="#contrib-fig-dioex2"><span class="std std-numref">Fig. 52.3</span></a></p></li>
 </ol>
 <figure class="align-default" id="contrib-fig-dioex3">
 <a class="reference internal image-reference" href="../_images/draw-io-control-resolution.png"><img alt="../_images/draw-io-control-resolution.png" src="../_images/draw-io-control-resolution.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 49.1 </span><span class="caption-text">Making images high resolution.</span><a class="headerlink" href="#contrib-fig-dioex3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 52.1 </span><span class="caption-text">Making images high resolution.</span><a class="headerlink" href="#contrib-fig-dioex3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>If you use the drawio embedded in the notebook environment, to generate a png rather than using the file export from the figure, use the command palette from jupyter “view” menue as shown in figures
-<a class="reference internal" href="#contrib-fig-dioex1"><span class="std std-numref">Fig. 49.2</span></a> and <a class="reference internal" href="#contrib-fig-dioex2"><span class="std std-numref">Fig. 49.3</span></a>.</p>
+<a class="reference internal" href="#contrib-fig-dioex1"><span class="std std-numref">Fig. 52.2</span></a> and <a class="reference internal" href="#contrib-fig-dioex2"><span class="std std-numref">Fig. 52.3</span></a>.</p>
 <figure class="align-default" id="contrib-fig-dioex1">
 <a class="reference internal image-reference" href="../_images/drawio-export-1.png"><img alt="../_images/drawio-export-1.png" src="../_images/drawio-export-1.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 49.2 </span><span class="caption-text">Activate Command Palette to export drawio figure as png.</span><a class="headerlink" href="#contrib-fig-dioex1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 52.2 </span><span class="caption-text">Activate Command Palette to export drawio figure as png.</span><a class="headerlink" href="#contrib-fig-dioex1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="contrib-fig-dioex2">
 <a class="reference internal image-reference" href="../_images/drawio-export-2.png"><img alt="../_images/drawio-export-2.png" src="../_images/drawio-export-2.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 49.3 </span><span class="caption-text">Export drawio figure as png.</span><a class="headerlink" href="#contrib-fig-dioex2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 52.3 </span><span class="caption-text">Export drawio figure as png.</span><a class="headerlink" href="#contrib-fig-dioex2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Note, this is strongly discouraged, since I don’t see any way to fix the resolution so that the images don’t suck.  I end up exporting from <a class="reference external" href="http://draw.io">draw.io</a> at 500% to get pictures to look reasonable.</p>
@@ -1039,13 +1054,13 @@ A caption for figure
 <figure class="align-right" id="contrib-fig-examp">
 <a class="reference internal image-reference" href="../_images/osstructure-1.dio.png"><img alt="../_images/osstructure-1.dio.png" src="../_images/osstructure-1.dio.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 49.4 </span><span class="caption-text">A caption for figure</span><a class="headerlink" href="#contrib-fig-examp" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 52.4 </span><span class="caption-text">A caption for figure</span><a class="headerlink" href="#contrib-fig-examp" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For more on figures look at this <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html#images-and-figures">reference</a>.</p>
 </section>
 <section id="tags">
-<h3><span class="section-number">49.6.3. </span>TAGS<a class="headerlink" href="#tags" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">52.6.3. </span>TAGS<a class="headerlink" href="#tags" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>you can add <a class="reference external" href="https://jupyterbook.org/en/stable/content/metadata.html#jupyter-cell-tags%7D">tags</a> to cells, e.g., to make a slide a note, or to make a cell display in the margin.  Tags I am using so far are:</p>
 <ul>
@@ -1055,9 +1070,9 @@ A caption for figure
 </ul>
 </section>
 <section id="rise-presentations">
-<h3><span class="section-number">49.6.4. </span>RISE presentations.<a class="headerlink" href="#rise-presentations" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">52.6.4. </span>RISE presentations.<a class="headerlink" href="#rise-presentations" title="Permalink to this headline">#</a></h3>
 <section id="developing-one">
-<h4><span class="section-number">49.6.4.1. </span>Developing one<a class="headerlink" href="#developing-one" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">52.6.4.1. </span>Developing one<a class="headerlink" href="#developing-one" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>you can find an example with templates for slides in the “content/contributing” directory under L01-example notebook.</p></li>
 <li><p>you should create a symbolic link to the lecture note css file (content/css/ln.css) with the name of your slide (e.g., L01-example), and commit it to the repo</p></li>
@@ -1065,7 +1080,7 @@ A caption for figure
 </ul>
 </section>
 <section id="coverting-google-slide-presentation">
-<h4><span class="section-number">49.6.4.2. </span>Coverting google slide presentation<a class="headerlink" href="#coverting-google-slide-presentation" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">52.6.4.2. </span>Coverting google slide presentation<a class="headerlink" href="#coverting-google-slide-presentation" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>download google slidedeck as a powerpoint</p></li>
 <li><p>open powerpoint in keynote</p></li>
@@ -1086,14 +1101,14 @@ A caption for figure
 </ul>
 </section>
 <section id="running-one">
-<h4><span class="section-number">49.6.4.3. </span>Running one<a class="headerlink" href="#running-one" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">52.6.4.3. </span>Running one<a class="headerlink" href="#running-one" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>press lower case “t”, in screen show for speaker notes; my experience is that only works if you start the note before going to full screen on the slide</p></li>
 </ul>
 </section>
 </section>
 <section id="useful-tricks-and-stuff-we-should-try">
-<h3><span class="section-number">49.6.5. </span>Useful tricks and stuff we should try<a class="headerlink" href="#useful-tricks-and-stuff-we-should-try" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">52.6.5. </span>Useful tricks and stuff we should try<a class="headerlink" href="#useful-tricks-and-stuff-we-should-try" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>as add-on to google doc, can convert google doc to markdown using <a class="reference external" href="https://workspace.google.com/marketplace/app/docs_to_markdown/700168918607">docs to markdown</a></p></li>
 <li><p>worth downloading google slides and then converting to markdown to get a start on slides and figures we want to include</p></li>
@@ -1101,7 +1116,7 @@ A caption for figure
 </section>
 </section>
 <section id="references">
-<span id="cont-contr-ref"></span><h2><span class="section-number">49.7. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<span id="cont-contr-ref"></span><h2><span class="section-number">52.7. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <p>Stuff to steal from look at, pasting here</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/shellintro.html#standard-output-and-redirection">examples of proc file system</a></p></li>
@@ -1132,10 +1147,10 @@ $ file /usr/bin/date
 </div>
 </section>
 <section id="contributors">
-<span id="cont-contr-contributors"></span><h2><span class="section-number">49.8. </span>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">#</a></h2>
+<span id="cont-contr-contributors"></span><h2><span class="section-number">52.8. </span>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">#</a></h2>
 <p>We hope that many will contribute to this over time, and the github <a class="reference external" href="https://github.com/okrieg/openos/graphs/contributors">community</a> page should show recent ones. A major way to contribute is to submit issues (<a class="reference internal" href="../misc/howto.html#misc-howto-issue"><span class="std std-ref">see here</span></a>) when you see a problem. Major contributors and editors for parts of the book are:</p>
 <section id="editors-in-charge-of-specific-sections">
-<h3><span class="section-number">49.8.1. </span>Editors in charge of specific sections<a class="headerlink" href="#editors-in-charge-of-specific-sections" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">52.8.1. </span>Editors in charge of specific sections<a class="headerlink" href="#editors-in-charge-of-specific-sections" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Orran Krieger: Editor of this version, <a class="reference internal" href="../fs/intro.html#cont-fs-intro"><span class="std std-ref">file systems</span></a>, getting started</p></li>
 <li><p>Larry Woodman: Memory Management</p></li>
@@ -1145,7 +1160,7 @@ $ file /usr/bin/date
 </ul>
 </section>
 <section id="major-contributors">
-<h3><span class="section-number">49.8.2. </span>Major contributors<a class="headerlink" href="#major-contributors" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">52.8.2. </span>Major contributors<a class="headerlink" href="#major-contributors" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Peter Desnoyers: provided much of the content that we seeded this book with from his open source OS book for northeastern graduate course.</p></li>
 <li><p>Jonathan Appavoo: who’s book <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/intro_tb.html#under-the-covers-the-secret-life-of-software">Under the Covers: The Secret Life of Software</a> both inspired this book and from which we have stolen content and many ideas.</p></li>
@@ -1185,13 +1200,13 @@ $ file /usr/bin/date
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">48. </span>How to read this book</p>
+            <p class="prev-next-title"><span class="section-number">51. </span>How to read this book</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../misc/bib.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">50. </span>Bibliography</p>
+        <p class="prev-next-title"><span class="section-number">53. </span>Bibliography</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

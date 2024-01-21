@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>7. Virtualizing a CPU &#8212; Introduction to Operating Systems</title>
+    <title>7. The Process: A virtual Computer &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="8. Scheduling" href="scheduling.html" />
+    <link rel="next" title="8. Virtualizing the CPU" href="virtual.html" />
     <link rel="prev" title="6. Introduction" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -203,22 +203,37 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   7. Virtualizing a CPU
+   7. The Process: A virtual Computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="virtual.html">
+   8. Virtualizing the CPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="threads.html">
+   9. The Thread: A Virtual Processor
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="scheduling.html">
-   8. Scheduling
+   10. Simple Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="preempt.html">
+   11. Preemptive Scheduling
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="real_sched.html">
-   9. A Look at the Linux Scheduler
+   12. A Look at the Linux Scheduler
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   10. Review
+   13. Review
   </a>
  </li>
 </ul>
@@ -230,62 +245,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   11. Introduction
+   14. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/phys-and-seg.html">
-   12. Memory management before paged virtual memory
+   15. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   13. Paging
+   16. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   14. Page Tables
+   17. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   15. Memory reclaiming algorithms.
+   18. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   16. Page Sizes
+   19. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   17. Other topics
+   20. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   18. Buffer Cache
+   21. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   19. Memory Management Dynamics
+   22. Memory Management Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   20. Memory management in the real world
+   23. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   21. Conclusion
+   24. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/review.html">
-   22. Review
+   25. Review
   </a>
  </li>
 </ul>
@@ -297,57 +312,57 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   23. Introduction
+   26. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   24. File System Abstraction
+   27. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/diskhw.html">
-   25. A bit about Disks
+   28. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   26. File System Layout
+   29. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_used.html">
-   27. Disk Layout:Tracking Used Space
+   30. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_free.html">
-   28. Disk Layout:Tracking Free Space
+   31. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_name.html">
-   29. Disk Layout:Implementing Name Space
+   32. Disk Layout:Implementing Name Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_failures.html">
-   30. Disk Layout:Dealing with Failures
+   33. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_ex_exx.html">
-   31. Disk Layout:Examples of Real World File Systems
+   34. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   32. Kernel implementation
+   35. Kernel implementation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/review.html">
-   33. Review
+   36. Review
   </a>
  </li>
 </ul>
@@ -359,52 +374,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   34. Introduction to Concurrency, Synchronization and Deadlock
+   37. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   35. Cooperating Processes and Inter-process Communication
+   38. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/criticalsection.html">
-   36. The Critical Section Problem
+   39. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locks.html">
-   37. Implementing Locks
+   40. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/ordering.html">
-   38. Ordering Thread Events
+   41. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   39. Common Concurrency Bugs
+   42. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/readmostly.html">
-   40. Read-Dominated Workloads
+   43. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   41. Challenges of Modern Hardware
+   44. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   42. Locking in the Linux Kernel
+   45. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   43. Review
+   46. Review
   </a>
  </li>
 </ul>
@@ -416,22 +431,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   44. Input and Output
+   47. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   45. More on Disks
+   48. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   46. Virtualization
+   49. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   47. Security
+   50. Security
   </a>
  </li>
 </ul>
@@ -443,17 +458,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   48. How to read this book
+   51. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   49. Contributing
+   52. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   50. Bibliography
+   53. Bibliography
   </a>
  </li>
 </ul>
@@ -680,18 +695,13 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-process-abstraction">
-   7.1. The Process Abstraction
+  <a class="reference internal nav-link" href="#the-interface">
+   7.1. The interface
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-a-new-process">
-   7.2. Creating a New Process
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-are-threads-different">
-   7.3. How are threads different?
+  <a class="reference internal nav-link" href="#process-versus-program">
+   7.2. Process versus Program
   </a>
  </li>
 </ul>
@@ -703,7 +713,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Virtualizing a CPU</h1>
+                <h1>The Process: A virtual Computer</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -714,18 +724,13 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-process-abstraction">
-   7.1. The Process Abstraction
+  <a class="reference internal nav-link" href="#the-interface">
+   7.1. The interface
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-a-new-process">
-   7.2. Creating a New Process
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-are-threads-different">
-   7.3. How are threads different?
+  <a class="reference internal nav-link" href="#process-versus-program">
+   7.2. Process versus Program
   </a>
  </li>
 </ul>
@@ -738,56 +743,83 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="virtualizing-a-cpu">
-<span id="cont-scheduling-process"></span><h1><span class="section-number">7. </span>Virtualizing a CPU<a class="headerlink" href="#virtualizing-a-cpu" title="Permalink to this headline">#</a></h1>
-<p>When we say “virtualizing” what we mean is actually adding a layer of indirection between the target (in this case the CPU) and the user (the process). In order to do this, we will need a way of pausing the execution of a process while another process runs and then resuming execution later without the process having to be aware of this pause, which means we need to capture all of the state that is relevant to a process in one or more data structures we can use to hold them when the process is not active. When the OS changes the active process on a CPU, we call this a <em>context switch</em>. To complete a context switch we need to save the CPU state for the process coming off the CPU and then load the state for the incoming process before allowing the CPU to execute the incoming process.</p>
-<section id="the-process-abstraction">
-<span id="cont-scheduling-process-abstraction"></span><h2><span class="section-number">7.1. </span>The Process Abstraction<a class="headerlink" href="#the-process-abstraction" title="Permalink to this headline">#</a></h2>
-<p>So far our discussion has remained fairly high level, but we need to concretely define what all of this process state actually is in order to be able to save it for a context switch. If a process is simply the execution of a program, what parts of the computer might be important to the state of a process? We need to capture any non-durable data used by this process, so memory is part of process state. CPU registers are also modified during execution, so their contents are part of process state. In order to pause the execution of a process we need to save that process’s view of memory and the contents of all the CPU registers where it was executing. Saving register contents is fairly simple, the OS copies them into a data structure associated with this process so they are saved for later retrieval. However, memory is slightly harder. As we will cover later in this book, we use virtualization of memory to provide each process with the illusion that it has an almost limitless amount of memory to work with. This virtual memory is encapsulated in a process <em>address space</em> or its view of memory.</p>
-<p>Now that we have a collection of things we need to keep together for this process we need to introduce a data structure to contain them. Generically we use a process control block or PCB to keep these related objects together. In Linux, this structure is call the <code class="docutils literal notranslate"><span class="pre">task_struct</span></code>, so let’s take a quick look.</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="c1">// Defined in include/linux/sched.h</span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">task_struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">//...</span>
-<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">mm_struct</span><span class="w">                </span><span class="o">*</span><span class="n">mm</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="cm">/* CPU-specific state of this task: */</span><span class="w"></span>
-<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">thread_struct</span><span class="w">            </span><span class="kr">thread</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+  <div class="cell tag_remove-input docutils container">
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="the-process-a-virtual-computer">
+<span id="cont-vp-process-abstraction"></span><h1><span class="section-number">7. </span>The Process: A virtual Computer<a class="headerlink" href="#the-process-a-virtual-computer" title="Permalink to this headline">#</a></h1>
+<p>A process is a virtual computer than encapsulates CPU state for execution context, a virtual memory abstraction of massive contiguous memory that starts at address <code class="docutils literal notranslate"><span class="pre">0x0</span></code>, and state needed to interact with other processes and read/write state from file system.</p>
+<section id="the-interface">
+<h2><span class="section-number">7.1. </span>The interface<a class="headerlink" href="#the-interface" title="Permalink to this headline">#</a></h2>
+<p>The key system calls in traditional Unix related to processes are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pid</span> <span class="pre">=</span> <span class="pre">fork(void)</span></code>:  Create a child process that is a duplicate of the parent; return 0 in child, and <code class="docutils literal notranslate"><span class="pre">PID</span></code> of child in parent.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exit(status)</span></code>: Terminate the calling process and record the status passed in for others.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pid</span> <span class="pre">=</span> <span class="pre">waitpid(cpid,</span> <span class="pre">*status...)</span></code>: Wait for specified child process <code class="docutils literal notranslate"><span class="pre">cpid</span></code> to complete (or change state), fill <code class="docutils literal notranslate"><span class="pre">*status</span></code> with the status passed on child’s exit, and garbage collect any kernel resources; return the <code class="docutils literal notranslate"><span class="pre">PID</span></code> of the child process that exited (or changed state).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">err</span> <span class="pre">=</span> <span class="pre">execve(program,</span> <span class="pre">arguments,</span> <span class="pre">environment)</span></code>: executing the file <code class="docutils literal notranslate"><span class="pre">program</span></code> with specified arguments and environment information</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">fork</span></code> system call duplicates the calling process (referred to as the <em>parent</em>) into a new <em>child</em> process, where the only difference that enables the parent and child to distinguish themself is the return value.  You can think of this logically as creating a copy of all the process memory, copying the CPU state, and copying the file descriptor table (while incrementing reference counts on all the files pointed to by the file descriptor table).</p>
+<p>A process has a large amount of state associated with it.  Linux implements <code class="docutils literal notranslate"><span class="pre">fork</span></code> in a library on top of the lower level <code class="docutils literal notranslate"><span class="pre">clone</span></code> call that lets the calling program control what part of the state is copied to the child.  As we will see, this enables the same system call to be used to both create processes, and create threads within those processes.</p>
+<p>Fork is usually quickly followed by a call to <code class="docutils literal notranslate"><span class="pre">exec</span></code> to execute a new program.  One of the often claimed <em>elegant</em> design decisions of unix is that after a fork, the child has fine grained control to change file descriptor state before calling <code class="docutils literal notranslate"><span class="pre">exec</span></code>; that is, the same functionality that is used for normal access to files is used by the shell between fork and exec to set up he child.</p>
+<p>Some of he authors have argued that fork was a clever hack for machines and programs of the 1970s that has long outlived its usefulness and is now a liability <span id="id1">[<a class="reference internal" href="../misc/bib.html#id3" title="Andrew Baumann, Jonathan Appavoo, Orran Krieger, and Timothy Roscoe. A fork() in the road. In Proceedings of the Workshop on Hot Topics in Operating Systems, HotOS '19, 14–22. New York, NY, USA, 2019. Association for Computing Machinery. URL: https://doi.org/10.1145/3317550.3321435, doi:10.1145/3317550.3321435.">BAKR19</a>]</span>.  Many operating systems provide powerful primitives to control the launching of new programs without an intervening <code class="docutils literal notranslate"><span class="pre">fork</span></code>, and fork imposes design constraints and overheads that these alternatives don’t have.  Even on Linux for many use cases, <code class="docutils literal notranslate"><span class="pre">posix_spawn</span></code> combines the functionality of <code class="docutils literal notranslate"><span class="pre">fork</span></code> and <code class="docutils literal notranslate"><span class="pre">exec</span></code>.  However, <code class="docutils literal notranslate"><span class="pre">posix_spawn</span></code> is on Linux implemented on top of clone, so it doesn’t actually alleviate the author’s concerns.</p>
+<aside class="sidebar">
+<p class="sidebar-title">Heresy “fork is a clever hack that has outlived its usefulness”:</p>
+<p>The paper “A fork in the road”<span id="id2">[<a class="reference internal" href="../misc/bib.html#id3" title="Andrew Baumann, Jonathan Appavoo, Orran Krieger, and Timothy Roscoe. A fork() in the road. In Proceedings of the Workshop on Hot Topics in Operating Systems, HotOS '19, 14–22. New York, NY, USA, 2019. Association for Computing Machinery. URL: https://doi.org/10.1145/3317550.3321435, doi:10.1145/3317550.3321435.">BAKR19</a>]</span>, resulted in thousands and thousands of heated posts on a range of public forums.  You can see some of the debate between Orran Krieger and a well known Linux architect Uli Drepper <a class="reference external" href="https://www.bu.edu/rhcollab/2019/04/11/a-fork-in-the-road/">here</a>, along with links to the public forums.  While those of us that wrote the paper still assert <code class="docutils literal notranslate"><span class="pre">fork</span></code> is a poor idea, we will use this opportunity to assert that we much prefer Linux to windows and we are in fact not “Microsoft stooges”.</p>
+</aside>
+<p>There are actually many more interfaces supported by systems like Linux related to process management.  You can, for example, send a signal (e.g., to stop or kill) a process using:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">kill(pid_t</span> <span class="pre">pid,</span> <span class="pre">int</span> <span class="pre">sig)</span></code>: Send a signal to a process or group of processes</p></li>
+</ul>
+<p>Some of these interfaces are actual system calls and are in section 2 of the man pages, others are implemented in a library; you can, for example type <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">-k</span> <span class="pre">exec</span></code> to find out which man pages relate to exec.   If you type <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">3</span> <span class="pre">exec</span></code> you will find a whole series of higher level functions built on top of <code class="docutils literal notranslate"><span class="pre">execve</span></code>.</p>
+</section>
+<section id="process-versus-program">
+<h2><span class="section-number">7.2. </span>Process versus Program<a class="headerlink" href="#process-versus-program" title="Permalink to this headline">#</a></h2>
+<p>It is important to understand the difference between a program and a process.  A program is a executable file, generated by a compiler and linker, that can be executed using <code class="docutils literal notranslate"><span class="pre">exec</span></code>.  The <code class="docutils literal notranslate"><span class="pre">exec</span></code> system call then populates the memory region of the process with information pulled out of that program and there can be many processes, by many users, running the same program.</p>
+<p>To understand how the portions of the executable file are used by the process, consider the following trivial program that runs an infinite loop so we can examine it while it is running.</p>
+<div class="literal-block-wrapper docutils container" id="while-one-listing">
+<div class="code-block-caption"><span class="caption-number">Listing 7.1 </span><span class="caption-text">wo.c - A simple program that loops forever</span><a class="headerlink" href="#while-one-listing" title="Permalink to this code">#</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">4</span><span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">5</span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>The actual <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> is quite a bit larger, but for our simplified explanation, these two fields are the ones we care about. The <code class="docutils literal notranslate"><span class="pre">mm_struct</span></code> contains the view of memory for this process and the <code class="docutils literal notranslate"><span class="pre">thread_struct</span></code> contains space to save register values when a process is paused for scheduling. So when the OS decides that a process needs to be removed from the CPU and replaced with another, waiting process it uses these fields to save process state and uses the fields from another task to populate the CPU registers and view of memory before resuming its execution. The relationship is shown in figure <a class="reference internal" href="#process"><span class="std std-numref">Fig. 7.1</span></a>.</p>
-<figure class="align-default" id="process">
-<img alt="../_images/Process.png" src="../_images/Process.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 7.1 </span><span class="caption-text">A visual representation of a process</span><a class="headerlink" href="#process" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>To tie this back to our introduction, let’s look at this process representation and connect it to our hardware in <a class="reference internal" href="#process-virt"><span class="std std-numref">Fig. 7.2</span></a>.</p>
-<figure class="align-default" id="process-virt">
-<img alt="../_images/process-virt.drawio.png" src="../_images/process-virt.drawio.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 7.2 </span><span class="caption-text">The process illustration with the relevant parts connected to the hardware that they ‘virtualize’. The <em>Registers</em> data structure captures all the necessary state to virtualize the CPU and the address space does the same for memory.</span><a class="headerlink" href="#process-virt" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="creating-a-new-process">
-<h2><span class="section-number">7.2. </span>Creating a New Process<a class="headerlink" href="#creating-a-new-process" title="Permalink to this headline">#</a></h2>
-<p>As we discussed earlier in <a class="reference internal" href="../intro/abstractions.html#cont-gs-abstractions-process-syscalls"><span class="std std-numref">Section 4.2.2</span></a>, we create a new process with the <code class="docutils literal notranslate"><span class="pre">fork()</span></code> system call. This call instructs the operating system to create a new PCB based on the the active PCB when <code class="docutils literal notranslate"><span class="pre">fork()</span></code> is called.  When discussing <code class="docutils literal notranslate"><span class="pre">fork()</span></code>, we typically refer to the process calling <code class="docutils literal notranslate"><span class="pre">fork()</span></code> as the <em>parent</em> process and the newly created process as the <em>child</em> process. The child process contains a new address space that is based on the one from the parent.  We will discuss how this is done in a later chapter, but even though the new address space is based on the one from the parent process, the two processes do not <em>share</em> memory.</p>
-<figure class="align-default" id="new-process">
-<img alt="../_images/CreateNewProcess.png" src="../_images/CreateNewProcess.png" />
-</figure>
-</section>
-<section id="how-are-threads-different">
-<span id="cont-scheduling-process-threads"></span><h2><span class="section-number">7.3. </span>How are threads different?<a class="headerlink" href="#how-are-threads-different" title="Permalink to this headline">#</a></h2>
-<p>A core part of the UNIX model is separation of processes, or to be more specific, one running process should not be able to directly interact with the resources (memory, etc.) owned by another process without explicitly being setup to do so. This model is great for simple processes which do not need to utilize multiple CPUs, but it can make writing programs to use multiple CPUs more difficult as memory must be explicitly shared or processes must use another form of communication. A <em>thread</em> is like a process in that it has its own PCB, however, unlike a process it does not have its own address space. Instead threads all belong to a process and share the address space of that process so any changes made to memory by one thread are visible to all the other threads belonging to the same process. From the <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> above, what this means is that the <code class="docutils literal notranslate"><span class="pre">mm</span></code> pointer in the task creating a new thread is used directly in the child thread instead of making a new copy of the structure. Figure <a class="reference internal" href="#thread"><span class="std std-numref">Fig. 7.3</span></a> shows the difference from a forked process.</p>
-<figure class="align-default" id="thread">
-<img alt="../_images/Threads.png" src="../_images/Threads.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 7.3 </span><span class="caption-text">How is a thread different from a process?</span><a class="headerlink" href="#thread" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+</div>
+<p>If we compile this program, run it, I can use the synthetic file system “/proc/PID/maps” to ask Linux about what is mapped in different parts of the application address space.  Node, in bash the variable <code class="docutils literal notranslate"><span class="pre">$!</span></code> is the pid of the last started process.</p>
+<aside class="sidebar">
+<p class="sidebar-title">Fields when looking at /proc/PID/maps:</p>
+<ul class="simple">
+<li><p>address: This is the starting and ending address of the region in the process’s address space</p></li>
+<li><p>permissions - This describes how pages in the region can be accessed. There are four different permissions: read, write, execute, and shared. If a region is not shared, it is private, so a p will appear instead of an s.</p></li>
+<li><p>offset - If the region was mapped from a file (using mmap), this is the offset in the file where the mapping begins. If the memory was not mapped from a file, it’s just 0.</p></li>
+<li><p>device - If the region was mapped from a file, this is the major and minor device number (in hex) where the file lives.</p></li>
+<li><p>inode - If the region was mapped from a file, this is the file number.</p></li>
+<li><p>pathname - If the region was mapped from a file, this is the name of the file. Otherwise, for special regions like the heap, stack… this field identifies the use.</p></li>
+</ul>
+</aside>
+<div class="cell tag_remove-input tag_hide-output docutils container">
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "c8fd70b15f9f49768d1262c77c013f09", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>We can see that the first five regions of the process come directly from the file.  We can use the <code class="docutils literal notranslate"><span class="pre">objdump</span></code> utility to print the different sections of the executable file, as shown below, where the second column <code class="docutils literal notranslate"><span class="pre">Name</span></code> describes that part of the file, and the fourth column <code class="docutils literal notranslate"><span class="pre">VMA</span></code> is the virtual memory address that should be loaded from the program.  If you scroll through that information, you can see that the executable parts of the program (<code class="docutils literal notranslate"><span class="pre">.init</span></code>, <code class="docutils literal notranslate"><span class="pre">.plt</span> </code>and <code class="docutils literal notranslate"><span class="pre">.text</span></code>) is loaded into the memory with executable permission.  The <code class="docutils literal notranslate"><span class="pre">.rodata</span></code> is mapped into memory right after that, etc…  All these regions have the <strong>p</strong>, or private, flag set in the permissions on the map, meaning that the operating system is creating a copy of the information from the file, so many processes can run the same program, and any writes they make to the corresponding memory will not be visible to other processes executing the same program.</p>
+<div class="cell tag_remove-input tag_output_scroll docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "807a5702907e47459f5f5da5f92670c7", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
 </section>
 </section>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"038465380a7e45958335f88f75f554c4": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "6f38996fea264fe8834b8bf472b5b5a1": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "7f68d9739c444ca69f7f2c2d03eef177": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_6f38996fea264fe8834b8bf472b5b5a1", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ make wo\r\nmake[1]: Entering directory '/home/jovyan/lec3'\r\ngcc -static  wo.c -o wo\r\nmake[1]: Leaving directory '/home/jovyan/lec3'\r\n$ "}]}}, "807a5702907e47459f5f5da5f92670c7": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_c98dbab7adbe449ea3110a9a014a4859", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ objdump -h wo\r\n\r\nwo:     file format elf64-x86-64\r\n\r\nSections:\r\nIdx Name          Size      VMA               LMA               File off  Algn\r\n  0 .note.gnu.property 00000020  0000000000400270  0000000000400270  00000270  2**3\r\n                  CONTENTS, ALLOC, LOAD, READONLY, DATA\r\n  1 .note.gnu.build-id 00000024  0000000000400290  0000000000400290  00000290  2**2\r\n                  CONTENTS, ALLOC, LOAD, READONLY, DATA\r\n  2 .note.ABI-tag 00000020  00000000004002b4  00000000004002b4  000002b4  2**2\r\n                  CONTENTS, ALLOC, LOAD, READONLY, DATA\r\n  3 .rela.plt     00000240  00000000004002d8  00000000004002d8  000002d8  2**3\r\n                  CONTENTS, ALLOC, LOAD, READONLY, DATA\r\n  4 .init         0000001b  0000000000401000  0000000000401000  00001000  2**2\r\n                  CONTENTS, ALLOC, LOAD, READONLY, CODE\r\n  5 .plt          00000180  0000000000401020  0000000000401020  00001020  2**4\r\n                  CONTENTS, ALLOC, LOAD, READONLY, CODE\r\n  6 .text         00091850  00000000004011a0  00000000004011a0  000011a0  2**4\r\n                  CONTENTS, ALLOC, LOAD, READONLY, CODE\r\n  7 __libc_freeres_fn 00001ca0  00000000004929f0  00000000004929f0  000929f0  2**4\r\n                  CONTENTS, ALLOC, LOAD, READONLY, CODE\r\n  8 .fini         0000000d  0000000000494690  0000000000494690  00094690  2**2\r\n                  CONTENTS, ALLOC, LOAD, READONLY, CODE\r\n  9 .rodata       0001bfec  0000000000495000  0000000000495000  00095000  2**5\r\n                  CONTENTS, ALLOC, LOAD, READONLY, DATA\r\n 10 .stapsdt.base 00000001  00000000004b0fec  00000000004b0fec  000b0fec  2**0\r\n                  CONTENTS, ALLOC, LOAD, READONLY, DATA\r\n 11 .eh_frame     0000a5ac  00000000004b0ff0  00000000004b0ff0  000b0ff0  2**3\r\n                  CONTENTS, ALLOC, LOAD, READONLY, DATA\r\n 12 .gcc_except_table 000000b1  00000000004bb59c  00000000004bb59c  000bb59c  2**0\r\n                  CONTENTS, ALLOC, LOAD, READONLY, DATA\r\n 13 .tdata        00000020  00000000004bd0c0  00000000004bd0c0  000bc0c0  2**3\r\n                  CONTENTS, ALLOC, LOAD, DATA, THREAD_LOCAL\r\n 14 .tbss         00000040  00000000004bd0e0  00000000004bd0e0  000bc0e0  2**3\r\n                  ALLOC, THREAD_LOCAL\r\n 15 .init_array   00000010  00000000004bd0e0  00000000004bd0e0  000bc0e0  2**3\r\n                  CONTENTS, ALLOC, LOAD, DATA\r\n 16 .fini_array   00000010  00000000004bd0f0  00000000004bd0f0  000bc0f0  2**3\r\n                  CONTENTS, ALLOC, LOAD, DATA\r\n 17 .data.rel.ro  00002df4  00000000004bd100  00000000004bd100  000bc100  2**5\r\n                  CONTENTS, ALLOC, LOAD, DATA\r\n 18 .got          000000f0  00000000004bfef8  00000000004bfef8  000beef8  2**3\r\n                  CONTENTS, ALLOC, LOAD, DATA\r\n 19 .got.plt      000000d8  00000000004c0000  00000000004c0000  000bf000  2**3\r\n                  CONTENTS, ALLOC, LOAD, DATA\r\n 20 .data         00001a50  00000000004c00e0  00000000004c00e0  000bf0e0  2**5\r\n                  CONTENTS, ALLOC, LOAD, DATA\r\n 21 __libc_subfreeres 00000048  00000000004c1b30  00000000004c1b30  000c0b30  2**3\r\n                  CONTENTS, ALLOC, LOAD, DATA\r\n 22 __libc_IO_vtables 000006a8  00000000004c1b80  00000000004c1b80  000c0b80  2**5\r\n                  CONTENTS, ALLOC, LOAD, DATA\r\n 23 __libc_atexit 00000008  00000000004c2228  00000000004c2228  000c1228  2**3\r\n                  CONTENTS, ALLOC, LOAD, DATA\r\n 24 .bss          00001718  00000000004c2240  00000000004c2240  000c1230  2**5\r\n                  ALLOC\r\n 25 __libc_freeres_ptrs 00000028  00000000004c3958  00000000004c3958  000c1230  2**3\r\n                  ALLOC\r\n 26 .comment      0000002b  0000000000000000  0000000000000000  000c1230  2**0\r\n                  CONTENTS, READONLY\r\n 27 .note.stapsdt 000013e8  0000000000000000  0000000000000000  000c125c  2**2\r\n                  CONTENTS, READONLY\r\n$ "}]}}, "9623e944a42f48d29a82b151d04380cb": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_d48584125b5a475e8f92e1d586d6eed5", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d mydir ]] && rm -rf mydir\r\n$     [[ -a myfile ]] && rm myfile\r\n$     [[ -a errors ]] && rm errors \r\n$     [[ -a mydate ]] && rm mydate\r\n$     [[ -a mynewdir ]] && rm -rf mynewdir\r\n$     [[ -a anotherfile ]] && rm anotherfile\r\n$     [[ -a mybin ]] && rm -rf  mybin\r\n$     [[ -a myinfo ]] && rm myinfo\r\n$ "}]}}, "c33f4c38429f4cdc8cfef5c11d863e4f": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_d085cea38ad346a189a992d419f3e971", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ls \nintro.ipynb    real_sched.ipynb  scheduling.ipynb\r\nprocess.ipynb  review.ipynb      threads.ipynb\r\n$ "}]}}, "c8fd70b15f9f49768d1262c77c013f09": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_038465380a7e45958335f88f75f554c4", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ./wo & cat /proc/$!/maps\r\n[1] 5501\r\n00400000-00401000 r--p 00000000 08:04 346541844                          /home/jovyan/lec3/wo\r\n00401000-00495000 r-xp 00001000 08:04 346541844                          /home/jovyan/lec3/wo\r\n00495000-004bc000 r--p 00095000 08:04 346541844                          /home/jovyan/lec3/wo\r\n004bd000-004c0000 r--p 000bc000 08:04 346541844                          /home/jovyan/lec3/wo\r\n004c0000-004c3000 rw-p 000bf000 08:04 346541844                          /home/jovyan/lec3/wo\r\n004c3000-004c4000 rw-p 00000000 00:00 0 \r\n01be2000-01c05000 rw-p 00000000 00:00 0                                  [heap]\r\n7ffe22089000-7ffe220aa000 rw-p 00000000 00:00 0                          [stack]\r\n7ffe220ae000-7ffe220b2000 r--p 00000000 00:00 0                          [vvar]\r\n7ffe220b2000-7ffe220b4000 r-xp 00000000 00:00 0                          [vdso]\r\nffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]\r\n$ "}]}}, "c98dbab7adbe449ea3110a9a014a4859": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "2in", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d085cea38ad346a189a992d419f3e971": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d48584125b5a475e8f92e1d586d6eed5": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+</script>
+
 
     <script type="text/x-thebe-config">
     {
@@ -823,10 +855,10 @@ title="Print to PDF"
             <p class="prev-next-title"><span class="section-number">6. </span>Introduction</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="scheduling.html" title="next page">
+    <a class='right-next' id="next-link" href="virtual.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Scheduling</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Virtualizing the CPU</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

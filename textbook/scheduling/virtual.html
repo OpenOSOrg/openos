@@ -1,0 +1,824 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>8. Virtualizing the CPU &#8212; Introduction to Operating Systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9. The Thread: A Virtual Processor" href="threads.html" />
+    <link rel="prev" title="7. The Process: A virtual Computer" href="process.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/pref.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/purpose.html">
+   2. Purpose of operating systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/structure.html">
+   3. Operating System Structure &amp; Unix/Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/abstractions.html">
+   4. Operating System Abstractions
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/tools.html">
+   5. What you should know
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-c.html">
+     5.1. The C Programming Language
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-shell.html">
+     5.2. Shell
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-editors.html">
+     5.3. Editors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-make.html">
+     5.4. Make
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-testing.html">
+     5.5. Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-git.html">
+     5.6. Git Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-gdb.html">
+     5.7. GDB
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Processor
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   6. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="process.html">
+   7. The Process: A virtual Computer
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   8. Virtualizing the CPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="threads.html">
+   9. The Thread: A Virtual Processor
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scheduling.html">
+   10. Simple Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="preempt.html">
+   11. Preemptive Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="real_sched.html">
+   12. A Look at the Linux Scheduler
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review.html">
+   13. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Virtual Memory
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/intro.html">
+   14. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/phys-and-seg.html">
+   15. Memory management before paged virtual memory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/virt-paging.html">
+   16. Paging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/page-tables.html">
+   17. Page Tables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/reclamation.html">
+   18. Memory reclaiming algorithms.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/page-size.html">
+   19. Page Sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/misc.html">
+   20. Other topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/buffer-cache.html">
+   21. Buffer Cache
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/pagefaults.html">
+   22. Memory Management Page Faults
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/realworld.html">
+   23. Memory management in the real world
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/concl.html">
+   24. Conclusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mm/review.html">
+   25. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  File Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/intro.html">
+   26. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/interface.html">
+   27. File System Abstraction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/diskhw.html">
+   28. A bit about Disks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/disklayout.html">
+   29. File System Layout
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_track_used.html">
+   30. Disk Layout:Tracking Used Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_track_free.html">
+   31. Disk Layout:Tracking Free Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_name.html">
+   32. Disk Layout:Implementing Name Space
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_failures.html">
+   33. Disk Layout:Dealing with Failures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/dl_ex_exx.html">
+   34. Disk Layout:Examples of Real World File Systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/kernelimp.html">
+   35. Kernel implementation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fs/review.html">
+   36. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sync.html">
+   37. Introduction to Concurrency, Synchronization and Deadlock
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/sharing.html">
+   38. Cooperating Processes and Inter-process Communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/criticalsection.html">
+   39. The Critical Section Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/locks.html">
+   40. Implementing Locks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/ordering.html">
+   41. Ordering Thread Events
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/concurrency_bugs.html">
+   42. Common Concurrency Bugs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/readmostly.html">
+   43. Read-Dominated Workloads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
+   44. Challenges of Modern Hardware
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/linux_locking.html">
+   45. Locking in the Linux Kernel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/review.html">
+   46. Review
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../devices/devices.html">
+   47. Input and Output
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../devices/disk2.html">
+   48. More on Disks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../virt/virt.html">
+   49. Virtualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sec/sec.html">
+   50. Security
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/howto.html">
+   51. How to read this book
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing/Contributing.html">
+   52. Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../misc/bib.html">
+   53. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/scheduling/virtual.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/OpenOSOrg/openos"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fscheduling/virtual.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/scheduling/virtual.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/scheduling/virtual.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Virtualizing the CPU</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="virtualizing-the-cpu">
+<h1><span class="section-number">8. </span>Virtualizing the CPU<a class="headerlink" href="#virtualizing-the-cpu" title="Permalink to this headline">#</a></h1>
+<p>When we say “virtualizing” what we mean is actually adding a layer of indirection between the target (in this case the CPU) and the source (the process). In order to do this, we will need a way of pausing the execution of a process while another process runs and then resuming execution later without the process having to be aware of this pause, which means we need to capture all of the state that is relevant to a process in one or more data structures we can use to hold them when the process is not active. When the OS changes the active process on a CPU, we call this a <strong>context switch</strong>. To complete a context switch we need to save the CPU state for the process coming off the CPU and then load the state for the incoming process before allowing the CPU to execute the incoming process.</p>
+<figure class="align-left" id="img-vp-proc">
+<a class="reference internal image-reference" href="../_images/vp-osstruc.png"><img alt="../_images/vp-osstruc.png" src="../_images/vp-osstruc.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8.1 </span><span class="caption-text">For each process, a task structure contains information about each of the processes.  All processes that are ready to run are on a queue</span><a class="headerlink" href="#img-vp-proc" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<aside class="sidebar">
+<p class="sidebar-title">Definitions:</p>
+<ul class="simple">
+<li><p>Process: A virtual computer</p></li>
+<li><p>Thread: A virtual CPU, where a process may contain multiple threads.</p></li>
+<li><p>Context switching: Switching the processor from running one thread to another, i.e., saving the processor registers used by the running thread into its thread struc, and loading some other processes registers into the CPU.</p></li>
+<li><p>Scheduling: Deciding which thread is to be run next.</p></li>
+<li><p>Preemption: Stopping a thread to run another one.</p></li>
+</ul>
+</aside>
+<p>We stated <a class="reference internal" href="../intro/abstractions.html#cont-gs-abstractions-process"><span class="std std-ref">earlier</span></a> (see <a class="reference internal" href="../intro/abstractions.html#img-intro-proc"><span class="std std-numref">Fig. 4.2</span></a>) the kernel maintains a table of all processes, indexed by the <em>process id</em>, or <strong>pid</strong>, to keep track of all the information about each process.   For reasons that will soon make sense, rather than processes, we will refer here to the abstraction that the kernel runs on the processor as a <strong>task</strong>, although feel free to think about a task as being a process for the time being.  As shown in <a class="reference internal" href="../intro/abstractions.html#img-intro-proc"><span class="std std-numref">Fig. 4.2</span></a>, the kernel  maintains a data structures, we call here a <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">queue</span></code> for scheduling the tasks on the CPU.   On a single CPU (actually single core) system, only one task can run at a time, and the kernel is responsible for selecting the task to be run and switching between them.</p>
+<p>For each task, the kernel maintains a pointer to the file descriptor table, the memory management data structures (i.e. the map described above) and information about execution state of the task.   For example, <a class="reference internal" href="#simple-task-struct"><span class="std std-numref">Listing 8.1</span></a> shows a highly simplified version of the <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> data structure used by Linux.   The state field indicates if the task is currently running, is blocked for some reason, or is ready and waiting to be run.  The thread structure is a place for the kernel to store all the processor registers whenever the task is not running.</p>
+<div class="margin admonition note">
+<p class="admonition-title">Note</p>
+<p>To see the actual data structure, you can use the online browser for the current linux code base, and search for <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> at this <a class="reference external" href="https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L746">link</a>.</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="simple-task-struct">
+<div class="code-block-caption"><span class="caption-number">Listing 8.1 </span><span class="caption-text">A highly simplified version of the Linux task struct from the kernel include file linux/sched.h</span><a class="headerlink" href="#simple-task-struct" title="Permalink to this code">#</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">struct</span><span class="w"> </span><span class="nc">task_struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="w">  </span><span class="c1">// the state of the task: running, blocked, runable</span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w">  </span><span class="n">__state</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="c1">// CPU-specific state of this task</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">thread_struct</span><span class="w">            </span><span class="kr">thread</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="c1">// a pointer to the memory management data structures</span>
+<span class="linenos"> 9</span><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">mm_struct</span><span class="w">                </span><span class="o">*</span><span class="n">mm</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="w">  </span><span class="c1">// Open file information </span>
+<span class="linenos">12</span><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">files_struct</span><span class="w">             </span><span class="o">*</span><span class="n">files</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">13</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="#img-vp-states"><span class="std std-numref">Fig. 8.2</span></a> shows the three possible states for a task, with all the valid state transitions represented by arrows. A task in the Running state is one that is currently active on a CPU. Processes do many things other than just use the CPU, e.g., they read data from files, communicate with other processes, etc…  For example, as I type this, the process is constantly blocked waiting for me to type characters.  Some examples of blocking operations are: issuing a read from disk or from a network socket that does not have data ready, issuing a write to a pipe that has no more space to buffer data, trying to acquire certain kinds of resources that are already owned by another process or thread, etc.</p>
+<p>In these situations, the process must wait for something external to happen before it can make progress (e.g., data arrives over the network, another process reads some data out of the pipe, the requested resource is released by another process, etc.), and is unable to make use of the CPU until that event occurs. We would be wasting the limited CPU resource if we left such a process on the CPU, and there is no point considering it among the set of runnable processes that we might want to choose next either.
+Tasks that are waiting for something go into the <strong>Blocked</strong> state, the kernel removes them from the run queue, saves all the processor registers into the thread structure, and then make a <strong>scheduling</strong> decision to select some other process to run from the run queue. The kernel changes the state of the selected task from <strong>Ready</strong> to <strong>Running</strong> and loads its registers from the task structures into the CPU registers.</p>
+<p>The process of switching the CPU between two tasks is called a <strong>Context Switch</strong>.
+Context switches are expensive for two reasons. First, there is overhead to save the state (i.e., CPU registers) of the outgoing process, select the next process to run, and load the state of the incoming task. Second, even though we are saving all the state needed to resume a process, modern processors have several caches (e.g., data and instruction caches, the translation look aside buffer, etc.) that help an application run more quickly. As the application runs, these caches are filled with instructions or data that are related to the executing process. When a new task is placed on a CPU, the contents of these caches are no longer related to the running process, and either need to be cleared by the OS, or need to be replaced by the new process as it executes.</p>
+<p>Once whatever causes the task to be blocked is resolved, the kernel changes the state of the task from <strong>Blocked</strong> to <strong>Ready</strong>, and places the task struct onto the run queue so it can be run the next time there is a scheduling decision to be made.</p>
+<figure class="margin align-default" id="img-vp-states">
+<a class="reference internal image-reference" href="../_images/ProcessLifecycle.png"><img alt="../_images/ProcessLifecycle.png" src="../_images/ProcessLifecycle.png" style="width: 200pt;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8.2 </span><span class="caption-text">Task states</span><a class="headerlink" href="#img-vp-states" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>A task may also transition from the <strong>Running</strong> to the <strong>Ready</strong> state without going through the <strong>Blocked</strong> state.
+Some tasks may run for a really long time without doing any I/O.  This can cause a problem for other tasks that are constantly blocking and doing get their fair share of the processor.  To handle this, all systems have hardware timers, where the kernel can configure the timer to cause an interrupt at some future time.  When the interrupt occurs, the kernel stops the current task, and makes a scheduling decision to context switch to some other task.  This is called <strong>Preemption</strong>, where the kernel stops, or <strong>Preempts</strong> a task to run another one.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./scheduling"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="process.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">7. </span>The Process: A virtual Computer</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="threads.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>The Thread: A Virtual Processor</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By (see contributing chapter book)<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

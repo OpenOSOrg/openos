@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7. Virtualizing a CPU" href="process.html" />
+    <link rel="next" title="7. The Process: A virtual Computer" href="process.html" />
     <link rel="prev" title="5.7. GDB" href="../intro/tools-gdb.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -203,22 +203,37 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="process.html">
-   7. Virtualizing a CPU
+   7. The Process: A virtual Computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="virtual.html">
+   8. Virtualizing the CPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="threads.html">
+   9. The Thread: A Virtual Processor
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="scheduling.html">
-   8. Scheduling
+   10. Simple Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="preempt.html">
+   11. Preemptive Scheduling
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="real_sched.html">
-   9. A Look at the Linux Scheduler
+   12. A Look at the Linux Scheduler
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   10. Review
+   13. Review
   </a>
  </li>
 </ul>
@@ -230,62 +245,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   11. Introduction
+   14. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/phys-and-seg.html">
-   12. Memory management before paged virtual memory
+   15. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   13. Paging
+   16. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   14. Page Tables
+   17. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   15. Memory reclaiming algorithms.
+   18. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   16. Page Sizes
+   19. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   17. Other topics
+   20. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   18. Buffer Cache
+   21. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   19. Memory Management Dynamics
+   22. Memory Management Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   20. Memory management in the real world
+   23. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   21. Conclusion
+   24. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/review.html">
-   22. Review
+   25. Review
   </a>
  </li>
 </ul>
@@ -297,57 +312,57 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   23. Introduction
+   26. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   24. File System Abstraction
+   27. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/diskhw.html">
-   25. A bit about Disks
+   28. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   26. File System Layout
+   29. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_used.html">
-   27. Disk Layout:Tracking Used Space
+   30. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_free.html">
-   28. Disk Layout:Tracking Free Space
+   31. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_name.html">
-   29. Disk Layout:Implementing Name Space
+   32. Disk Layout:Implementing Name Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_failures.html">
-   30. Disk Layout:Dealing with Failures
+   33. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_ex_exx.html">
-   31. Disk Layout:Examples of Real World File Systems
+   34. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   32. Kernel implementation
+   35. Kernel implementation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/review.html">
-   33. Review
+   36. Review
   </a>
  </li>
 </ul>
@@ -359,52 +374,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   34. Introduction to Concurrency, Synchronization and Deadlock
+   37. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   35. Cooperating Processes and Inter-process Communication
+   38. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/criticalsection.html">
-   36. The Critical Section Problem
+   39. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locks.html">
-   37. Implementing Locks
+   40. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/ordering.html">
-   38. Ordering Thread Events
+   41. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   39. Common Concurrency Bugs
+   42. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/readmostly.html">
-   40. Read-Dominated Workloads
+   43. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   41. Challenges of Modern Hardware
+   44. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   42. Locking in the Linux Kernel
+   45. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   43. Review
+   46. Review
   </a>
  </li>
 </ul>
@@ -416,22 +431,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   44. Input and Output
+   47. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   45. More on Disks
+   48. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   46. Virtualization
+   49. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   47. Security
+   50. Security
   </a>
  </li>
 </ul>
@@ -443,17 +458,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   48. How to read this book
+   51. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   49. Contributing
+   52. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   50. Bibliography
+   53. Bibliography
   </a>
  </li>
 </ul>
@@ -681,16 +696,9 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This portion of the book is under construction, not ready to be read</p>
-</div>
-<section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<span id="cont-scheduling"></span><h1><span class="section-number">6. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
-<p>We are going to discuss the various methods used by the operating system to allow multiple programs to execute on a computer while giving each the illusion it has the entire computer to itself. But before we get to discussing scheduling algorithms, we need to define a few terms we will use in that discussion. The terms <em>program</em> and <em>process</em> are often used inter-changeably, but we will distinguish them and only use them according to our individual definitions. Recall when we discussed abstracting hardware <a class="reference internal" href="../intro/purpose.html#cont-gs-purpose-platform-abs"><span class="std std-ref">Abstracting Hardware</span></a>, we drew the distinction between the contents of the executable stored on disk (the program) from an execution of those contents (a process). In this chapter we will briefly introduce the problem solved by scheduling and then dive into how it happens.</p>
-<p>Consider a very simple computer with a single processor and some memory. If we have a single user who only wants to run a single instance of a program on that processor, we are able to meet the user’s need. However, this model isn’t very useful because if we introduce a second user or a second task, we need a way to ensure that all users can run the processes they need. Without help from an operating system, the users would have to coordinate time for using this computer. This coordination gives users good control over when their process runs, but does not handle conflicts or changes well. What if the user scheduled to use the computer misses their appointment? The hardware is left idle and that user’s process still needs to run.</p>
-<p>As with other resources managed by an operating system, we solve the scheduling problem by <em>virtualizing</em> the processor or CPU. As with memory, this virtualization of the resource allows the operating system to provide the illusion of an infinite number of CPUs on which a process can run.</p>
-<p>For the remainder of this chapter we will discuss what a process is and how we can virtualize the CPU. Next we will look at <em>threads</em> and how they differ from a process. Finally, we will end with a look at the methods for scheduling processes or threads.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<span id="cont-vp"></span><h1><span class="section-number">6. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
+<p>We <a class="reference internal" href="../intro/structure.html#cont-gs-structure-struc"><span class="std std-ref">already</span></a> described the idea of a process, as a virtual computer that isolates running applications from each other, and discussed a bit how the <a class="reference internal" href="../intro/abstractions.html#cont-gs-abstractions-process"><span class="std std-ref">OS</span></a> implements that abstraction.  We first <span class="xref myst">review</span> the abstraction of a process in more detail and how the operating system allows multiple processes to execute on a computer while giving each the illusion it has the entire computer to itself.  We then discuss the abstraction of <a class="reference internal" href="threads.html#cont-vp-threads"><span class="std std-ref">threads</span></a>, which implements the abstraction of a virtual processor.   The processor needs to be multiplexed between different applications, we then discuss this <a class="reference internal" href="scheduling.html#cont-vp-scheduling"><span class="std std-ref">scheduling</span></a> problem at a high level.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -730,7 +738,7 @@ title="Print to PDF"
     <a class='right-next' id="next-link" href="process.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Virtualizing a CPU</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>The Process: A virtual Computer</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

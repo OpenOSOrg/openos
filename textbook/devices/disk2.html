@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>45. More on Disks &#8212; Introduction to Operating Systems</title>
+    <title>48. More on Disks &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="46. Virtualization" href="../virt/virt.html" />
-    <link rel="prev" title="44. Input and Output" href="devices.html" />
+    <link rel="next" title="49. Virtualization" href="../virt/virt.html" />
+    <link rel="prev" title="47. Input and Output" href="devices.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -205,22 +205,37 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/process.html">
-   7. Virtualizing a CPU
+   7. The Process: A virtual Computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/virtual.html">
+   8. Virtualizing the CPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/threads.html">
+   9. The Thread: A Virtual Processor
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   8. Scheduling
+   10. Simple Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/preempt.html">
+   11. Preemptive Scheduling
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/real_sched.html">
-   9. A Look at the Linux Scheduler
+   12. A Look at the Linux Scheduler
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/review.html">
-   10. Review
+   13. Review
   </a>
  </li>
 </ul>
@@ -232,62 +247,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   11. Introduction
+   14. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/phys-and-seg.html">
-   12. Memory management before paged virtual memory
+   15. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   13. Paging
+   16. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   14. Page Tables
+   17. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   15. Memory reclaiming algorithms.
+   18. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   16. Page Sizes
+   19. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   17. Other topics
+   20. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   18. Buffer Cache
+   21. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   19. Memory Management Dynamics
+   22. Memory Management Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   20. Memory management in the real world
+   23. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   21. Conclusion
+   24. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/review.html">
-   22. Review
+   25. Review
   </a>
  </li>
 </ul>
@@ -299,57 +314,57 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   23. Introduction
+   26. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   24. File System Abstraction
+   27. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/diskhw.html">
-   25. A bit about Disks
+   28. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   26. File System Layout
+   29. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_used.html">
-   27. Disk Layout:Tracking Used Space
+   30. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_free.html">
-   28. Disk Layout:Tracking Free Space
+   31. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_name.html">
-   29. Disk Layout:Implementing Name Space
+   32. Disk Layout:Implementing Name Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_failures.html">
-   30. Disk Layout:Dealing with Failures
+   33. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_ex_exx.html">
-   31. Disk Layout:Examples of Real World File Systems
+   34. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   32. Kernel implementation
+   35. Kernel implementation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/review.html">
-   33. Review
+   36. Review
   </a>
  </li>
 </ul>
@@ -361,52 +376,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   34. Introduction to Concurrency, Synchronization and Deadlock
+   37. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   35. Cooperating Processes and Inter-process Communication
+   38. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/criticalsection.html">
-   36. The Critical Section Problem
+   39. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locks.html">
-   37. Implementing Locks
+   40. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/ordering.html">
-   38. Ordering Thread Events
+   41. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   39. Common Concurrency Bugs
+   42. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/readmostly.html">
-   40. Read-Dominated Workloads
+   43. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   41. Challenges of Modern Hardware
+   44. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   42. Locking in the Linux Kernel
+   45. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   43. Review
+   46. Review
   </a>
  </li>
 </ul>
@@ -418,22 +433,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="devices.html">
-   44. Input and Output
+   47. Input and Output
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   45. More on Disks
+   48. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   46. Virtualization
+   49. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   47. Security
+   50. Security
   </a>
  </li>
 </ul>
@@ -445,17 +460,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   48. How to read this book
+   51. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   49. Contributing
+   52. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   50. Bibliography
+   53. Bibliography
   </a>
  </li>
 </ul>
@@ -683,71 +698,71 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#disk-scheduling">
-   45.1. Disk scheduling
+   48.1. Disk scheduling
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#primary-disk-scheduling-algorithms">
-     45.1.1. Primary Disk Scheduling Algorithms
+     48.1.1. Primary Disk Scheduling Algorithms
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#implementing-disk-scheduling">
-     45.1.2. Implementing Disk Scheduling
+     48.1.2. Implementing Disk Scheduling
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#on-disk-cache">
-   45.2. On-Disk Cache
+   48.2. On-Disk Cache
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sata-and-scsi">
-   45.3. SATA and SCSI
+   48.3. SATA and SCSI
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#scsi-over-everything">
-   45.4. SCSI over everything
+   48.4. SCSI over everything
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#raid-and-other-remapping-technologies">
-   45.5. RAID and other remapping technologies
+   48.5. RAID and other remapping technologies
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#striping-raid0">
-     45.5.1. Striping — RAID0
+     48.5.1. Striping — RAID0
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#mirroring-raid1">
-     45.5.2. Mirroring — RAID1
+     48.5.2. Mirroring — RAID1
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#raid-4">
-     45.5.3. RAID 4
+     48.5.3. RAID 4
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#raid-5">
-     45.5.4. RAID 5
+     48.5.4. RAID 5
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#raid-6-more-reliability">
-     45.5.5. RAID 6 - more reliability
+     48.5.5. RAID 6 - more reliability
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#solid-state-drives">
-   45.6. Solid State Drives
+   48.6. Solid State Drives
   </a>
  </li>
 </ul>
@@ -771,71 +786,71 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#disk-scheduling">
-   45.1. Disk scheduling
+   48.1. Disk scheduling
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#primary-disk-scheduling-algorithms">
-     45.1.1. Primary Disk Scheduling Algorithms
+     48.1.1. Primary Disk Scheduling Algorithms
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#implementing-disk-scheduling">
-     45.1.2. Implementing Disk Scheduling
+     48.1.2. Implementing Disk Scheduling
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#on-disk-cache">
-   45.2. On-Disk Cache
+   48.2. On-Disk Cache
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sata-and-scsi">
-   45.3. SATA and SCSI
+   48.3. SATA and SCSI
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#scsi-over-everything">
-   45.4. SCSI over everything
+   48.4. SCSI over everything
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#raid-and-other-remapping-technologies">
-   45.5. RAID and other remapping technologies
+   48.5. RAID and other remapping technologies
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#striping-raid0">
-     45.5.1. Striping — RAID0
+     48.5.1. Striping — RAID0
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#mirroring-raid1">
-     45.5.2. Mirroring — RAID1
+     48.5.2. Mirroring — RAID1
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#raid-4">
-     45.5.3. RAID 4
+     48.5.3. RAID 4
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#raid-5">
-     45.5.4. RAID 5
+     48.5.4. RAID 5
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#raid-6-more-reliability">
-     45.5.5. RAID 6 - more reliability
+     48.5.5. RAID 6 - more reliability
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#solid-state-drives">
-   45.6. Solid State Drives
+   48.6. Solid State Drives
   </a>
  </li>
 </ul>
@@ -849,10 +864,10 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="more-on-disks">
-<h1><span class="section-number">45. </span>More on Disks<a class="headerlink" href="#more-on-disks" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">48. </span>More on Disks<a class="headerlink" href="#more-on-disks" title="Permalink to this headline">#</a></h1>
 <p><a class="reference internal" href="../fs/diskhw.html#cont-fs-disks"><span class="std std-ref">Earlier</span></a> we introduced Disk hardware in sufficient detail to enable us to introduce file systems.  In this section we go deeper discussing how disks are scheduled, cover RAID storage systems, a bit on SSDs, etc…</p>
 <section id="disk-scheduling">
-<h2><span class="section-number">45.1. </span>Disk scheduling<a class="headerlink" href="#disk-scheduling" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">48.1. </span>Disk scheduling<a class="headerlink" href="#disk-scheduling" title="Permalink to this headline">#</a></h2>
 <p>A number of strategies are used to avoid the full penalties of seek and
 rotational delay in disks. One of these strategies is that of optimizing
 the order in which requests are performed—for instance reading sectors
@@ -871,7 +886,7 @@ complete before continuing, when multiple processes are running they can
 each issue requests and go to sleep, and then be woken in the order that
 requests complete.</p>
 <section id="primary-disk-scheduling-algorithms">
-<h3><span class="section-number">45.1.1. </span>Primary Disk Scheduling Algorithms<a class="headerlink" href="#primary-disk-scheduling-algorithms" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">48.1.1. </span>Primary Disk Scheduling Algorithms<a class="headerlink" href="#primary-disk-scheduling-algorithms" title="Permalink to this headline">#</a></h3>
 <p>The primary algorithms used for disk scheduling are:</p>
 <ul class="simple">
 <li><p><strong>first-come first-served (FCFS):</strong> in other words no scheduling, with
@@ -894,7 +909,7 @@ doubt be found by a scan of the patent literature; however they are
 mostly of interest to hard drive designers.</p>
 </section>
 <section id="implementing-disk-scheduling">
-<h3><span class="section-number">45.1.2. </span>Implementing Disk Scheduling<a class="headerlink" href="#implementing-disk-scheduling" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">48.1.2. </span>Implementing Disk Scheduling<a class="headerlink" href="#implementing-disk-scheduling" title="Permalink to this headline">#</a></h3>
 <p>Disk scheduling can be implemented in two ways — in the operating
 system, or in the device itself. OS-level scheduling is performed by
 keeping a queue of requests which can be re-ordered before they are sent
@@ -910,7 +925,7 @@ different processes, however.)</p>
 </section>
 </section>
 <section id="on-disk-cache">
-<h2><span class="section-number">45.2. </span>On-Disk Cache<a class="headerlink" href="#on-disk-cache" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">48.2. </span>On-Disk Cache<a class="headerlink" href="#on-disk-cache" title="Permalink to this headline">#</a></h2>
 <p>In addition to scheduling, the other strategy used to improve disk
 performance is caching, which takes two forms—<em>read caching</em> (also
 called track buffering) and <em>write buffering</em>. Disk drives typically
@@ -941,7 +956,7 @@ per-drive basis, modern file systems typically issue commands[^4] to
 flush the cache when necessary to ensure file system data is not lost.</p>
 </section>
 <section id="sata-and-scsi">
-<h2><span class="section-number">45.3. </span>SATA and SCSI<a class="headerlink" href="#sata-and-scsi" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">48.3. </span>SATA and SCSI<a class="headerlink" href="#sata-and-scsi" title="Permalink to this headline">#</a></h2>
 <p>Almost all disk drives today use one of two interfaces: SATA (or its
 precursor, IDE) or SCSI. The SATA and IDE interfaces are derived from an
 ancient disk controller for the PC, the ST-506, introduced in about
@@ -987,7 +1002,7 @@ been adopted by IDE and SATA, as well.</p></li>
 </ul>
 </section>
 <section id="scsi-over-everything">
-<h2><span class="section-number">45.4. </span>SCSI over everything<a class="headerlink" href="#scsi-over-everything" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">48.4. </span>SCSI over everything<a class="headerlink" href="#scsi-over-everything" title="Permalink to this headline">#</a></h2>
 <p>SCSI (like e.g. TCP/IP) is defined in a way that allows it to be carried
 across many different transport layers. Thus today it is found in:</p>
 <ul class="simple">
@@ -1015,7 +1030,7 @@ re-ordering of outstanding requests.</p></li>
 </ul>
 </section>
 <section id="raid-and-other-remapping-technologies">
-<h2><span class="section-number">45.5. </span>RAID and other remapping technologies<a class="headerlink" href="#raid-and-other-remapping-technologies" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">48.5. </span>RAID and other remapping technologies<a class="headerlink" href="#raid-and-other-remapping-technologies" title="Permalink to this headline">#</a></h2>
 <p>There is no need for
 the device on the other end of the SCSI (or SATA) bus to actually <em>be</em> a
 disk drive. (You can do this with C/H/S addressing, as well, but it
@@ -1063,7 +1078,7 @@ you may need to split it into multiple logical parts.</p></li>
 </ul>
 <p>We discuss RAID systems and SSDs.</p>
 <section id="striping-raid0">
-<h3><span class="section-number">45.5.1. </span>Striping — RAID0<a class="headerlink" href="#striping-raid0" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">48.5.1. </span>Striping — RAID0<a class="headerlink" href="#striping-raid0" title="Permalink to this headline">#</a></h3>
 <aside class="sidebar">
 <p><strong>Isn’t that RAID0?</strong> The term “RAID” was coined in a 1988 paper by
 Paterson, Gibson, and Katz, titled “A case for redundant arrays of
@@ -1078,7 +1093,7 @@ on a different disk than the chunk before it, it would be possible to
 read and write to all disks in parallel. This is called <em>striping</em>, as
 the data is split into stripes which are spread across the set of
 drives.</p>
-<p>In <a class="reference internal" href="#fig-raid-stripe"><span class="std std-numref">Fig. 45.1</span></a> we see individual <em>strips</em>, or chunks of
+<p>In <a class="reference internal" href="#fig-raid-stripe"><span class="std std-numref">Fig. 48.1</span></a> we see individual <em>strips</em>, or chunks of
 data, layed out in horizontal rows (called <em>stripes</em>) across three
 disks. In the figure, when writing strips 0 through 5, strips 0, 1, and
 2 would be written first at the same time to the three different disks,
@@ -1088,7 +1103,7 @@ disk.</p>
 <figure class="align-default" id="fig-raid-stripe">
 <a class="reference internal image-reference" href="../_images/raid-stripe.png"><img alt="../_images/raid-stripe.png" src="../_images/raid-stripe.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 45.1 </span><span class="caption-text">Striping across three disks</span><a class="headerlink" href="#fig-raid-stripe" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 48.1 </span><span class="caption-text">Striping across three disks</span><a class="headerlink" href="#fig-raid-stripe" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>How big is a strip? It depends, as this value is typically
@@ -1116,11 +1131,11 @@ for striping to work. (Well, if any disks are bigger than the smallest
 one, that extra space will be wasted.)</p>
 </section>
 <section id="mirroring-raid1">
-<h3><span class="section-number">45.5.2. </span>Mirroring — RAID1<a class="headerlink" href="#mirroring-raid1" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">48.5.2. </span>Mirroring — RAID1<a class="headerlink" href="#mirroring-raid1" title="Permalink to this headline">#</a></h3>
 <figure class="align-right" id="fig-mirrorfail">
 <a class="reference internal image-reference" href="../_images/raid-mirrorfail.png"><img alt="../_images/raid-mirrorfail.png" src="../_images/raid-mirrorfail.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 45.2 </span><span class="caption-text">Failure of one disk in<br />
+<p><span class="caption-number">Fig. 48.2 </span><span class="caption-text">Failure of one disk in<br />
 a mirrored volue.</span><a class="headerlink" href="#fig-mirrorfail" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
@@ -1135,7 +1150,7 @@ more likely than failure of a single disk, then you will almost
 certainly lose all the data in that volume.)</p>
 <p>The simplest redundant configuration is <em>mirroring</em>, where two identical
 (“mirror image”) copies of the entire volume are kept on two identical
-disks. In <a class="reference internal" href="#fig-mirrorfail"><span class="std std-numref">Fig. 45.2</span></a> we see a mirrored volume comprising two
+disks. In <a class="reference internal" href="#fig-mirrorfail"><span class="std std-numref">Fig. 48.2</span></a> we see a mirrored volume comprising two
 physical disks; writes are sent to both disks, and reads may be sent to
 either one. If one disk fails, reads (and writes) will go to the
 remaining disk, and data is not lost. After the failed disk is replaced,
@@ -1149,7 +1164,7 @@ disks. As with striping, both disks must be of the same size. (or any
 extra sectors in the larger drive must be ignored.)</p>
 </section>
 <section id="raid-4">
-<h3><span class="section-number">45.5.3. </span>RAID 4<a class="headerlink" href="#raid-4" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">48.5.3. </span>RAID 4<a class="headerlink" href="#raid-4" title="Permalink to this headline">#</a></h3>
 <p>Although mirroring are good for constructing highly
 reliable storage systems, sometimes you don’t want reliability bad
 enough to be willing to devote half of your disk space to redundant
@@ -1178,19 +1193,19 @@ shown here where the parity of two blocks is computed:</p>
 <figure class="align-right" id="fig-raid4-org">
 <a class="reference internal image-reference" href="../_images/raid-four.png"><img alt="../_images/raid-four.png" src="../_images/raid-four.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 45.3 </span><span class="caption-text">RAID 4 organization</span><a class="headerlink" href="#fig-raid4-org" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 48.3 </span><span class="caption-text">RAID 4 organization</span><a class="headerlink" href="#fig-raid4-org" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-right" id="fig-raid4-dsk">
 <a class="reference internal image-reference" href="../_images/raid-four2.png"><img alt="../_images/raid-four2.png" src="../_images/raid-four2.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 45.4 </span><span class="caption-text">RAID 4 organization (disk view)</span><a class="headerlink" href="#fig-raid4-dsk" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 48.4 </span><span class="caption-text">RAID 4 organization (disk view)</span><a class="headerlink" href="#fig-raid4-dsk" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>RAID 4 is organized almost exactly like a striped (RAID 0) volume, except for the parity drive. We can see this in <a class="reference internal" href="#fig-raid4-org"><span class="std std-numref">Fig. 45.3</span></a> — each data block is located in the same place as in the striped volume, and then the corresponding parity block is located on a separate disk.</p>
+<p>RAID 4 is organized almost exactly like a striped (RAID 0) volume, except for the parity drive. We can see this in <a class="reference internal" href="#fig-raid4-org"><span class="std std-numref">Fig. 48.3</span></a> — each data block is located in the same place as in the striped volume, and then the corresponding parity block is located on a separate disk.</p>
 </section>
 <section id="raid-5">
-<h3><span class="section-number">45.5.4. </span>RAID 5<a class="headerlink" href="#raid-5" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">48.5.4. </span>RAID 5<a class="headerlink" href="#raid-5" title="Permalink to this headline">#</a></h3>
 <p>Small writes to RAID 4 require four operations: one read each for the
 old data and parity, and one write for each of the new data and parity.
 Two of these four operations go to the parity drive, no matter what LBA
@@ -1210,12 +1225,12 @@ writes per second, while the RAID 5 array could perform 250. (5 disks =
 <figure class="align-right" id="fig-raid5">
 <a class="reference internal image-reference" href="../_images/raid-five.png"><img alt="../_images/raid-five.png" src="../_images/raid-five.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 45.5 </span><span class="caption-text">RAID 5</span><a class="headerlink" href="#fig-raid5" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 48.5 </span><span class="caption-text">RAID 5</span><a class="headerlink" href="#fig-raid5" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="raid-6-more-reliability">
-<h3><span class="section-number">45.5.5. </span>RAID 6 - more reliability<a class="headerlink" href="#raid-6-more-reliability" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">48.5.5. </span>RAID 6 - more reliability<a class="headerlink" href="#raid-6-more-reliability" title="Permalink to this headline">#</a></h3>
 <p>RAID level 1, and levels 4 and 5 are designed to
 protect against the total failure of any single disk, assuming that the
 remaining disks operate perfectly. However, there is another failure
@@ -1244,7 +1259,7 @@ of the codes used.</p>
 </section>
 </section>
 <section id="solid-state-drives">
-<h2><span class="section-number">45.6. </span>Solid State Drives<a class="headerlink" href="#solid-state-drives" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">48.6. </span>Solid State Drives<a class="headerlink" href="#solid-state-drives" title="Permalink to this headline">#</a></h2>
 <p>Solid-state drives (SSDs) store data on semiconductor-based flash memory
 instead of magnetic disk; however by using the same block-based
 interface (e.g. SATA) to connect to the host they are able to directly
@@ -1332,13 +1347,13 @@ a day.)</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">44. </span>Input and Output</p>
+            <p class="prev-next-title"><span class="section-number">47. </span>Input and Output</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../virt/virt.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">46. </span>Virtualization</p>
+        <p class="prev-next-title"><span class="section-number">49. </span>Virtualization</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

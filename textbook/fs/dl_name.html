@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>29. Disk Layout:Implementing Name Space &#8212; Introduction to Operating Systems</title>
+    <title>32. Disk Layout:Implementing Name Space &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="30. Disk Layout:Dealing with Failures" href="dl_failures.html" />
-    <link rel="prev" title="28. Disk Layout:Tracking Free Space" href="dl_track_free.html" />
+    <link rel="next" title="33. Disk Layout:Dealing with Failures" href="dl_failures.html" />
+    <link rel="prev" title="31. Disk Layout:Tracking Free Space" href="dl_track_free.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -205,22 +205,37 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/process.html">
-   7. Virtualizing a CPU
+   7. The Process: A virtual Computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/virtual.html">
+   8. Virtualizing the CPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/threads.html">
+   9. The Thread: A Virtual Processor
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   8. Scheduling
+   10. Simple Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/preempt.html">
+   11. Preemptive Scheduling
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/real_sched.html">
-   9. A Look at the Linux Scheduler
+   12. A Look at the Linux Scheduler
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/review.html">
-   10. Review
+   13. Review
   </a>
  </li>
 </ul>
@@ -232,62 +247,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   11. Introduction
+   14. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/phys-and-seg.html">
-   12. Memory management before paged virtual memory
+   15. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   13. Paging
+   16. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   14. Page Tables
+   17. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   15. Memory reclaiming algorithms.
+   18. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   16. Page Sizes
+   19. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   17. Other topics
+   20. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   18. Buffer Cache
+   21. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   19. Memory Management Dynamics
+   22. Memory Management Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   20. Memory management in the real world
+   23. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   21. Conclusion
+   24. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/review.html">
-   22. Review
+   25. Review
   </a>
  </li>
 </ul>
@@ -299,57 +314,57 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   23. Introduction
+   26. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="interface.html">
-   24. File System Abstraction
+   27. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="diskhw.html">
-   25. A bit about Disks
+   28. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="disklayout.html">
-   26. File System Layout
+   29. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dl_track_used.html">
-   27. Disk Layout:Tracking Used Space
+   30. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dl_track_free.html">
-   28. Disk Layout:Tracking Free Space
+   31. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   29. Disk Layout:Implementing Name Space
+   32. Disk Layout:Implementing Name Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dl_failures.html">
-   30. Disk Layout:Dealing with Failures
+   33. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dl_ex_exx.html">
-   31. Disk Layout:Examples of Real World File Systems
+   34. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="kernelimp.html">
-   32. Kernel implementation
+   35. Kernel implementation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   33. Review
+   36. Review
   </a>
  </li>
 </ul>
@@ -361,52 +376,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   34. Introduction to Concurrency, Synchronization and Deadlock
+   37. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   35. Cooperating Processes and Inter-process Communication
+   38. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/criticalsection.html">
-   36. The Critical Section Problem
+   39. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locks.html">
-   37. Implementing Locks
+   40. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/ordering.html">
-   38. Ordering Thread Events
+   41. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   39. Common Concurrency Bugs
+   42. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/readmostly.html">
-   40. Read-Dominated Workloads
+   43. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   41. Challenges of Modern Hardware
+   44. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   42. Locking in the Linux Kernel
+   45. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   43. Review
+   46. Review
   </a>
  </li>
 </ul>
@@ -418,22 +433,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   44. Input and Output
+   47. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   45. More on Disks
+   48. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   46. Virtualization
+   49. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   47. Security
+   50. Security
   </a>
  </li>
 </ul>
@@ -445,17 +460,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   48. How to read this book
+   51. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   49. Contributing
+   52. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   50. Bibliography
+   53. Bibliography
   </a>
  </li>
 </ul>
@@ -683,7 +698,7 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#smarter-directories">
-   29.1. Smarter Directories
+   32.1. Smarter Directories
   </a>
  </li>
 </ul>
@@ -707,7 +722,7 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#smarter-directories">
-   29.1. Smarter Directories
+   32.1. Smarter Directories
   </a>
  </li>
 </ul>
@@ -721,25 +736,25 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="disk-layout-implementing-name-space">
-<span id="fs-dl-name"></span><h1><span class="section-number">29. </span>Disk Layout:Implementing Name Space<a class="headerlink" href="#disk-layout-implementing-name-space" title="Permalink to this headline">#</a></h1>
-<p>As we discussed in the <a class="reference internal" href="interface.html#cont-fs-interface-dir"><span class="std std-ref">file system abstractions</span></a>, the name space is created by having directories, where a directory as shown in <a class="reference internal" href="#fs-tree-imp-rep"><span class="std std-numref">Fig. 29.1</span></a>, is just another file that has strings and information about the files those strings represent.</p>
+<span id="fs-dl-name"></span><h1><span class="section-number">32. </span>Disk Layout:Implementing Name Space<a class="headerlink" href="#disk-layout-implementing-name-space" title="Permalink to this headline">#</a></h1>
+<p>As we discussed in the <a class="reference internal" href="interface.html#cont-fs-interface-dir"><span class="std std-ref">file system abstractions</span></a>, the name space is created by having directories, where a directory as shown in <a class="reference internal" href="#fs-tree-imp-rep"><span class="std std-numref">Fig. 32.1</span></a>, is just another file that has strings and information about the files those strings represent.</p>
 <figure class="align-default" id="fs-tree-imp-rep">
 <a class="reference internal image-reference" href="../_images/filesys-tree2.png"><img alt="../_images/filesys-tree2.png" src="../_images/filesys-tree2.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 29.1 </span><span class="caption-text">Implementation view: hierarchical file system name space. Gray blocks are directories that contain entries with strings and corresponding inode numbers that identify the files.</span><a class="headerlink" href="#fs-tree-imp-rep" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 32.1 </span><span class="caption-text">Implementation view: hierarchical file system name space. Gray blocks are directories that contain entries with strings and corresponding inode numbers that identify the files.</span><a class="headerlink" href="#fs-tree-imp-rep" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>A simple way to implement such a directory (<a class="reference internal" href="#directory1"><span class="std std-numref">Fig. 29.2</span></a>a), is to have a fixed array of data structures, where each entry has room for a fixed-size string, and the attributes of the file such as permissions, owner, and location of file on disk.  This approach is used in the MS-DOS, and CDROM file systems described earlier.  With these file systems, there is only one name for each file, and attributes identify if an entry is valid or not.</p>
-<p>For Unix file systems, the directory typically does not contain the attributes, but instead contains an inode number (<a class="reference internal" href="#directory1"><span class="std std-numref">Fig. 29.2</span></a>b) that identifies the inode that contains those attributes; this approach enables multiple directory entries to reference the same file.  The separation of name (i.e., directory entry) and attributes (the inode and the blocks it points to) allows files to have multiple names, which for historical reasons are called hard links.</p>
+<p>A simple way to implement such a directory (<a class="reference internal" href="#directory1"><span class="std std-numref">Fig. 32.2</span></a>a), is to have a fixed array of data structures, where each entry has room for a fixed-size string, and the attributes of the file such as permissions, owner, and location of file on disk.  This approach is used in the MS-DOS, and CDROM file systems described earlier.  With these file systems, there is only one name for each file, and attributes identify if an entry is valid or not.</p>
+<p>For Unix file systems, the directory typically does not contain the attributes, but instead contains an inode number (<a class="reference internal" href="#directory1"><span class="std std-numref">Fig. 32.2</span></a>b) that identifies the inode that contains those attributes; this approach enables multiple directory entries to reference the same file.  The separation of name (i.e., directory entry) and attributes (the inode and the blocks it points to) allows files to have multiple names, which for historical reasons are called hard links.</p>
 <figure class="align-default" id="directory1">
 <a class="reference internal image-reference" href="../_images/directory1.png"><img alt="../_images/directory1.png" src="../_images/directory1.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 29.2 </span><span class="caption-text">Structure of a simplified directory with fixed-size file names where attributes are stored in the directory or in an external inode</span><a class="headerlink" href="#directory1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 32.2 </span><span class="caption-text">Structure of a simplified directory with fixed-size file names where attributes are stored in the directory or in an external inode</span><a class="headerlink" href="#directory1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The directory structure above could be implemented with the following data structure in <a class="reference internal" href="#fs-simple-dirent"><span class="std std-numref">Listing 29.1</span></a>:</p>
+<p>The directory structure above could be implemented with the following data structure in <a class="reference internal" href="#fs-simple-dirent"><span class="std std-numref">Listing 32.1</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="fs-simple-dirent">
-<div class="code-block-caption"><span class="caption-number">Listing 29.1 </span><span class="caption-text">Simple data structure for a directory entry.</span><a class="headerlink" href="#fs-simple-dirent" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 32.1 </span><span class="caption-text">Simple data structure for a directory entry.</span><a class="headerlink" href="#fs-simple-dirent" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">dentry</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="c1">// inode number</span>
 <span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">inode</span><span class="p">;</span><span class="w"></span>
@@ -751,9 +766,9 @@ title="Print to PDF"
 </div>
 <p>This simple directory entry structure supports files with string names that can be up to 252 characters, and an inode number. Assuming 4-byte integers, one directory entry takes up 256 bytes.  When searching for a file, the directory block(s) are read into memory and a linear search through the entries is used to locate the file.  The alignment to 256 bytes (i.e., the somewhat strange length of the string name) ensures that when the entry is loaded into memory, the 4 byte inode is aligned to 4 bytes; so the processor can load it with a single memory load. The 256-byte entry size also ensures that directory entries are never split across file system blocks. For example, with a 4 K block size, one directory block will hold exactly 16 of these 256-byte directory entries.
 A simple fixed-size data structure like this is easy to manage: a new file is added by searching for an entry with an invalid attribute, and deleting a file just sets the attribute to invalid.</p>
-<p>With the above data structure, all file names are limited to at most 252 characters, and more importantly, you are wasting a great deal of space for most files that have short names.  More sophisticated file systems use structures like the ext2 file system shown below in <a class="reference internal" href="#fs-ext2-dirent"><span class="std std-numref">Listing 29.2</span></a>:</p>
+<p>With the above data structure, all file names are limited to at most 252 characters, and more importantly, you are wasting a great deal of space for most files that have short names.  More sophisticated file systems use structures like the ext2 file system shown below in <a class="reference internal" href="#fs-ext2-dirent"><span class="std std-numref">Listing 32.2</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="fs-ext2-dirent">
-<div class="code-block-caption"><span class="caption-number">Listing 29.2 </span><span class="caption-text">Data structure used by ext2 file system directory entries.</span><a class="headerlink" href="#fs-ext2-dirent" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 32.2 </span><span class="caption-text">Data structure used by ext2 file system directory entries.</span><a class="headerlink" href="#fs-ext2-dirent" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">ext2_dir_entry</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="c1">// inode number</span>
 <span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w">   </span><span class="n">inode</span><span class="p">;</span><span class="w"></span>
@@ -771,7 +786,7 @@ A simple fixed-size data structure like this is easy to manage: a new file is ad
 </div>
 <p>In this case, the name of the file is variable length, with the length of the string specified by <code class="docutils literal notranslate"><span class="pre">name_len</span></code>.  The <code class="docutils literal notranslate"><span class="pre">rec_len</span></code> describes how big the record is.  The <code class="docutils literal notranslate"><span class="pre">rec_len</span></code> may include padding to ensure that entries are aligned to 4-byte boundaries. The last entry’s <code class="docutils literal notranslate"><span class="pre">rec_len</span></code> can be set to the remainder of the size of the directory block, and if a file is unlinked from a directory, the previous entry’s <code class="docutils literal notranslate"><span class="pre">rec_len</span></code> can be padded by the size of the record being removed.  This enables the file system to add a new file to the directory by comparing the <code class="docutils literal notranslate"><span class="pre">rec_len</span></code> and the <code class="docutils literal notranslate"><span class="pre">name_len</span></code> to identify if there is enough unused space between the used part of a directory entry and the next to insert the file.</p>
 <section id="smarter-directories">
-<h2><span class="section-number">29.1. </span>Smarter Directories<a class="headerlink" href="#smarter-directories" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">32.1. </span>Smarter Directories<a class="headerlink" href="#smarter-directories" title="Permalink to this headline">#</a></h2>
 <p>From your data structures class, you should realize that linear search
 isn’t an optimal algorithm for searching, but it’s simple, robust,
 and fast enough for small directories, where the primary cost is
@@ -828,13 +843,13 @@ directories, while ext4 uses a hybrid hash/tree structure.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">28. </span>Disk Layout:Tracking Free Space</p>
+            <p class="prev-next-title"><span class="section-number">31. </span>Disk Layout:Tracking Free Space</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="dl_failures.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">30. </span>Disk Layout:Dealing with Failures</p>
+        <p class="prev-next-title"><span class="section-number">33. </span>Disk Layout:Dealing with Failures</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

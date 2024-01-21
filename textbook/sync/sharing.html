@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>35. Cooperating Processes and Inter-process Communication &#8212; Introduction to Operating Systems</title>
+    <title>38. Cooperating Processes and Inter-process Communication &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="36. The Critical Section Problem" href="criticalsection.html" />
-    <link rel="prev" title="34. Introduction to Concurrency, Synchronization and Deadlock" href="sync.html" />
+    <link rel="next" title="39. The Critical Section Problem" href="criticalsection.html" />
+    <link rel="prev" title="37. Introduction to Concurrency, Synchronization and Deadlock" href="sync.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -203,22 +203,37 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/process.html">
-   7. Virtualizing a CPU
+   7. The Process: A virtual Computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/virtual.html">
+   8. Virtualizing the CPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/threads.html">
+   9. The Thread: A Virtual Processor
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   8. Scheduling
+   10. Simple Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../scheduling/preempt.html">
+   11. Preemptive Scheduling
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/real_sched.html">
-   9. A Look at the Linux Scheduler
+   12. A Look at the Linux Scheduler
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/review.html">
-   10. Review
+   13. Review
   </a>
  </li>
 </ul>
@@ -230,62 +245,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   11. Introduction
+   14. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/phys-and-seg.html">
-   12. Memory management before paged virtual memory
+   15. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   13. Paging
+   16. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   14. Page Tables
+   17. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   15. Memory reclaiming algorithms.
+   18. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   16. Page Sizes
+   19. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   17. Other topics
+   20. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   18. Buffer Cache
+   21. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   19. Memory Management Dynamics
+   22. Memory Management Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   20. Memory management in the real world
+   23. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   21. Conclusion
+   24. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/review.html">
-   22. Review
+   25. Review
   </a>
  </li>
 </ul>
@@ -297,57 +312,57 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   23. Introduction
+   26. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   24. File System Abstraction
+   27. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/diskhw.html">
-   25. A bit about Disks
+   28. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   26. File System Layout
+   29. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_used.html">
-   27. Disk Layout:Tracking Used Space
+   30. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_free.html">
-   28. Disk Layout:Tracking Free Space
+   31. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_name.html">
-   29. Disk Layout:Implementing Name Space
+   32. Disk Layout:Implementing Name Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_failures.html">
-   30. Disk Layout:Dealing with Failures
+   33. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_ex_exx.html">
-   31. Disk Layout:Examples of Real World File Systems
+   34. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   32. Kernel implementation
+   35. Kernel implementation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/review.html">
-   33. Review
+   36. Review
   </a>
  </li>
 </ul>
@@ -359,52 +374,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="sync.html">
-   34. Introduction to Concurrency, Synchronization and Deadlock
+   37. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   35. Cooperating Processes and Inter-process Communication
+   38. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="criticalsection.html">
-   36. The Critical Section Problem
+   39. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="locks.html">
-   37. Implementing Locks
+   40. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ordering.html">
-   38. Ordering Thread Events
+   41. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concurrency_bugs.html">
-   39. Common Concurrency Bugs
+   42. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="readmostly.html">
-   40. Read-Dominated Workloads
+   43. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hardware_challenges.html">
-   41. Challenges of Modern Hardware
+   44. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linux_locking.html">
-   42. Locking in the Linux Kernel
+   45. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   43. Review
+   46. Review
   </a>
  </li>
 </ul>
@@ -416,22 +431,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   44. Input and Output
+   47. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   45. More on Disks
+   48. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   46. Virtualization
+   49. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   47. Security
+   50. Security
   </a>
  </li>
 </ul>
@@ -443,17 +458,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   48. How to read this book
+   51. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   49. Contributing
+   52. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   50. Bibliography
+   53. Bibliography
   </a>
  </li>
 </ul>
@@ -681,22 +696,22 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#shared-memory">
-   35.1. Shared Memory
+   38.1. Shared Memory
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#multi-threaded-processes">
-   35.2. Multi-threaded Processes
+   38.2. Multi-threaded Processes
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#issues-with-concurrent-execution">
-   35.3. Issues with Concurrent Execution
+   38.3. Issues with Concurrent Execution
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#race-conditions">
-   35.4. Race Conditions
+   38.4. Race Conditions
   </a>
  </li>
 </ul>
@@ -720,22 +735,22 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#shared-memory">
-   35.1. Shared Memory
+   38.1. Shared Memory
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#multi-threaded-processes">
-   35.2. Multi-threaded Processes
+   38.2. Multi-threaded Processes
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#issues-with-concurrent-execution">
-   35.3. Issues with Concurrent Execution
+   38.3. Issues with Concurrent Execution
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#race-conditions">
-   35.4. Race Conditions
+   38.4. Race Conditions
   </a>
  </li>
 </ul>
@@ -751,7 +766,7 @@ title="Print to PDF"
   <div class="cell tag_remove-input docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="cooperating-processes-and-inter-process-communication">
-<span id="cont-sync-sharing"></span><h1><span class="section-number">35. </span>Cooperating Processes and Inter-process Communication<a class="headerlink" href="#cooperating-processes-and-inter-process-communication" title="Permalink to this headline">#</a></h1>
+<span id="cont-sync-sharing"></span><h1><span class="section-number">38. </span>Cooperating Processes and Inter-process Communication<a class="headerlink" href="#cooperating-processes-and-inter-process-communication" title="Permalink to this headline">#</a></h1>
 <p>The process abstraction is designed to give the illusion that a program executes on its own
 private, isolated (virtual) machine. The OS scheduling mechanism hides the fact that the
 physical CPU is, in fact, shared by multiple processes. From the perspective of any given
@@ -766,13 +781,13 @@ cooperate if they are completely isolated from each other? The short answer is, 
 <dl class="simple myst">
 <dt><a class="reference internal" href="../intro/abstractions.html#cont-gs-abstractions-pipes"><span class="std std-ref">Unix command pipelines</span></a></dt><dd><p>Each program is designed to do one thing well, and more complex operations can be created by composing multiple simple programs. Here, communication is supported by the <code class="docutils literal notranslate"><span class="pre">pipe()</span></code> system call, which creates a communication channel between processes. With some manipulation of file descriptors, the shell can arrange for the standard output of one process to become the standard input of the next process in the pipeline. The pipe provides both a way to pass data from one process to the next and a way to control the order in which processes execute, because a downstream process cannot read its input until after the previous process in the pipeline has started to produce some output.</p>
 </dd>
-<dt>Complex services</dt><dd><p>A complex service, such as a banking service, may have multiple logical operations that it needs to carry out, such as handling user input, executing account operations like deposits, calculating daily interest, running fraud detection analytics, etc. It is often convenient to implement the service as a collection of processes, with each process carrying out one of the major tasks of the service and the operating system <a class="reference internal" href="../scheduling/scheduling.html#cont-scheduling-scheduling"><span class="std std-ref">scheduler</span></a> ensuring that all tasks make progress concurrently. The processes may communicate by reading and writing shared files in the file system. By</p>
+<dt>Complex services</dt><dd><p>A complex service, such as a banking service, may have multiple logical operations that it needs to carry out, such as handling user input, executing account operations like deposits, calculating daily interest, running fraud detection analytics, etc. It is often convenient to implement the service as a collection of processes, with each process carrying out one of the major tasks of the service and the operating system <span class="xref myst">scheduler</span> ensuring that all tasks make progress concurrently. The processes may communicate by reading and writing shared files in the file system. By</p>
 </dd>
 <dt>Parallel computation</dt><dd><p>In this case, the goal is to complete a single task in less time by using multiple physical compute cores. As a trivial example, consider sorting a very large set of values. On a multi-core machine, you could create one process per core, arrange for each process to sort a portion of the input, and then merge the results together after all the individual sorts were complete. Here, processes might communicate using a combination of files in the file system (e.g., to read the original, unsorted input, and write the intermediate results from each sorting process) and pipes (e.g., to notify the merging process when each sorting process was finished).</p>
 </dd>
 </dl>
 <section id="shared-memory">
-<h2><span class="section-number">35.1. </span>Shared Memory<a class="headerlink" href="#shared-memory" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">38.1. </span>Shared Memory<a class="headerlink" href="#shared-memory" title="Permalink to this headline">#</a></h2>
 <p>To support more efficient, fine-grained inter-process communication, the operating system also provides system calls to let processes explicitly share a portion of their virtual address space. This allows processes to exchange information simply by reading or writing variables that are allocated in the shared part of the address space. There are actually two ways to do this on Unix systems. The first comes from UNIX System V:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">segment_id</span> <span class="pre">=</span> <span class="pre">shmget(key,</span> <span class="pre">size,</span> <span class="pre">shmflg)</span></code> : return the identifier of the System V shared memory segment associated with the value of the argument <code class="docutils literal notranslate"><span class="pre">key</span></code>; may be used either to obtain the identifier of a previously created shared memory segment (when <code class="docutils literal notranslate"><span class="pre">shmflg</span></code> is zero and <code class="docutils literal notranslate"><span class="pre">key</span></code> does not have the value <code class="docutils literal notranslate"><span class="pre">IPC_PRIVATE</span></code>), or to create a new shared memory segment.</p></li>
@@ -787,19 +802,19 @@ cooperate if they are completely isolated from each other? The short answer is, 
 <p>The shared memory segments are implemented in the operating system using the virtual memory mechanisms. Each process that shares the memory segment has its page tables pointing to the same underlying physical pages, so that any load or store access to a virtual address in the shared segment will be translated to the same physical location in the machine memory.</p>
 </section>
 <section id="multi-threaded-processes">
-<span id="cont-sync-sharing-shared-mem"></span><h2><span class="section-number">35.2. </span>Multi-threaded Processes<a class="headerlink" href="#multi-threaded-processes" title="Permalink to this headline">#</a></h2>
-<p>Recall from <a class="reference internal" href="../scheduling/process.html#cont-scheduling-process-threads"><span class="std std-numref">Section 7.3</span></a> that a process can have multiple <em>threads</em>, and that all threads in a process share the same virtual address space. This means that multi-threaded processes do not need to do any extra work to communicate using shared memory. The operating system itself is multi-threaded: every user-level process has at least one thread in the kernel, and other threads carry out asynchronous operating system activities, such as writing dirty file system blocks back to the disk. All of these kernel threads share the same operating system code and data structures. We will see later how user-level communication through pipes is implemented in the operating system by threads writing to, and reading from, a shared buffer of memory. In our discussion of concurrency and synchronization, we will use examples in multi-threaded user-level processes, since they can be presented as simple, stand-alone programs. Keep in mind that everything we say about multi-threaded processes also applies to the implementation of the operating system.</p>
+<span id="cont-sync-sharing-shared-mem"></span><h2><span class="section-number">38.2. </span>Multi-threaded Processes<a class="headerlink" href="#multi-threaded-processes" title="Permalink to this headline">#</a></h2>
+<p>Recall from <code class="xref std std-numref docutils literal notranslate"><span class="pre">cont:scheduling:process:threads</span></code> that a process can have multiple <em>threads</em>, and that all threads in a process share the same virtual address space. This means that multi-threaded processes do not need to do any extra work to communicate using shared memory. The operating system itself is multi-threaded: every user-level process has at least one thread in the kernel, and other threads carry out asynchronous operating system activities, such as writing dirty file system blocks back to the disk. All of these kernel threads share the same operating system code and data structures. We will see later how user-level communication through pipes is implemented in the operating system by threads writing to, and reading from, a shared buffer of memory. In our discussion of concurrency and synchronization, we will use examples in multi-threaded user-level processes, since they can be presented as simple, stand-alone programs. Keep in mind that everything we say about multi-threaded processes also applies to the implementation of the operating system.</p>
 <p>Since each thread is an independent execution entity, they need to have their own execution state. This includes a per-thread execution stack to hold local variables. In contrast, global variables and heap-allocated variables are shared by all threads in a process. Note that although each thread has its own execution stack, these are still all part of the same virtual address space, and threads in the same process are not protected from each other by the operating system. Thus, it is possible for a buggy thread to accidentally scribble on another thread’s stack space, leading to bizarre behavior.</p>
 </section>
 <section id="issues-with-concurrent-execution">
-<span id="cont-sync-sharing-issues"></span><h2><span class="section-number">35.3. </span>Issues with Concurrent Execution<a class="headerlink" href="#issues-with-concurrent-execution" title="Permalink to this headline">#</a></h2>
+<span id="cont-sync-sharing-issues"></span><h2><span class="section-number">38.3. </span>Issues with Concurrent Execution<a class="headerlink" href="#issues-with-concurrent-execution" title="Permalink to this headline">#</a></h2>
 <p>Regardless of whether we are using multiple processes, or a single multi-threaded process, whether we are implementing user-level programs or the operating system, we need a way to coordinate multiple concurrent activities.</p>
 <aside class="sidebar">
 <p><em>Concurrency</em> in computer systems means that the execution of multiple (i.e., two or more) tasks <em>overlaps in time</em>. The context switch mechanism gives us concurrent execution of multiple processes, even on a single physical CPU. <em>Parallelism</em> means that multiple tasks are executing <em>at the same time</em>. Parallelism requires multiple physical CPUs.</p>
 </aside>
-<p>The operating system scheduler controls when, and for how long, any given thread is allowed to execute. Although each thread’s instructions execute in program order, its execution is interleaved with other threads. And when threads share resources, such as data structures in shared memory, the arbitrary interleaving of operations from multiple threads can lead to unpredictable, and undesirable, outcomes. <strong>Synchronization</strong> is the mechanism that allows us to restrict the possible interleavings of threads, so that we can control how they use shared resources, reason about their behavior, and prevent undesirable outcomes. There are two main problems that synchronization helps us to solve: how to ensure that threads do not interfere with each other when they use a shared resource, and how to ensure that threads execute their operations in the correct order. For example, consider the simple program in <a class="reference internal" href="#listing-sync-outputs"><span class="std std-numref">Listing 35.1</span></a>, below, in which two threads each output a string:</p>
+<p>The operating system scheduler controls when, and for how long, any given thread is allowed to execute. Although each thread’s instructions execute in program order, its execution is interleaved with other threads. And when threads share resources, such as data structures in shared memory, the arbitrary interleaving of operations from multiple threads can lead to unpredictable, and undesirable, outcomes. <strong>Synchronization</strong> is the mechanism that allows us to restrict the possible interleavings of threads, so that we can control how they use shared resources, reason about their behavior, and prevent undesirable outcomes. There are two main problems that synchronization helps us to solve: how to ensure that threads do not interfere with each other when they use a shared resource, and how to ensure that threads execute their operations in the correct order. For example, consider the simple program in <a class="reference internal" href="#listing-sync-outputs"><span class="std std-numref">Listing 38.1</span></a>, below, in which two threads each output a string:</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-outputs">
-<div class="code-block-caption"><span class="caption-number">Listing 35.1 </span><span class="caption-text">output_example.c - Uncontrolled thread interleaving example using output to the terminal.</span><a class="headerlink" href="#listing-sync-outputs" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 38.1 </span><span class="caption-text">output_example.c - Uncontrolled thread interleaving example using output to the terminal.</span><a class="headerlink" href="#listing-sync-outputs" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#include &lt;pthread.h&gt;</span>
 <span class="linenos"> 2</span><span class="c1">#include &lt;stdlib.h&gt;</span>
 <span class="linenos"> 3</span><span class="c1">#include &lt;sys/types.h&gt;</span>
@@ -872,7 +887,7 @@ cooperate if they are completely isolated from each other? The short answer is, 
 <p>The output doesn’t look great. Not only is the output unreadable, it is also different from one run to the next. (And each time we build this book, we don’t know exactly what output you will be seeing! Maybe some of the runs even produce something reasonable.) What we want to see is either “HelloGoodbye” or “GoodbyeHello” — by adding synchronization, we can restrict the interleavings of the output to just these two possibilities. And, if we wanted to ensure that “Hello” always appeared on the terminal before “Goodbye”, another form of synchronization would allow us to enforce that ordering as well. In fact, the C library <code class="docutils literal notranslate"><span class="pre">printf()</span></code> family of functions, and the internal implementation of the <code class="docutils literal notranslate"><span class="pre">write()</span></code> system call, contain synchronization to ensure that output from one call is not interleaved with another, but if we wanted to ensure that “Hello” is displayed before “Goodbye”, we would still need to add more synchronization on top of the <code class="docutils literal notranslate"><span class="pre">write()</span></code> or <code class="docutils literal notranslate"><span class="pre">printf()</span></code> functions.</p>
 <p>Let’s look at another illustrative example of the problems that can arise when we don’t control concurrent execution.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-bank">
-<div class="code-block-caption"><span class="caption-number">Listing 35.2 </span><span class="caption-text">deposit function from bank_deposit.c - Simple bank account example.</span><a class="headerlink" href="#listing-sync-bank" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 38.2 </span><span class="caption-text">deposit function from bank_deposit.c - Simple bank account example.</span><a class="headerlink" href="#listing-sync-bank" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">static</span> <span class="n">void</span> <span class="n">deposit</span><span class="p">(</span><span class="nb">int</span> <span class="n">account</span><span class="p">,</span> <span class="n">money_t</span> <span class="n">amount</span><span class="p">)</span>
 <span class="linenos">2</span><span class="p">{</span>
 <span class="linenos">3</span>    <span class="n">money_t</span> <span class="n">balance</span> <span class="o">=</span> <span class="n">get_balance</span><span class="p">(</span><span class="n">account</span><span class="p">);</span>
@@ -884,7 +899,7 @@ cooperate if they are completely isolated from each other? The short answer is, 
 </pre></div>
 </div>
 </div>
-<p>In <a class="reference internal" href="#listing-sync-bank"><span class="std std-numref">Listing 35.2</span></a> we see a simplified example of a function that is part of a program to
+<p>In <a class="reference internal" href="#listing-sync-bank"><span class="std std-numref">Listing 38.2</span></a> we see a simplified example of a function that is part of a program to
 maintain a bank account balance at the Bank of Lost Funds. When running
 on a single thread, the <code class="docutils literal notranslate"><span class="pre">deposit</span></code> function is trivially correct: after it
 completes execution, the value of <code class="docutils literal notranslate"><span class="pre">balance</span></code> stored back to the <code class="docutils literal notranslate"><span class="pre">account</span></code> will be <code class="docutils literal notranslate"><span class="pre">amount</span></code> greater than
@@ -892,22 +907,22 @@ it was before the function was invoked. Problems arise, however, when multiple t
 <figure class="align-default" id="fig-sync-badbank">
 <a class="reference internal image-reference" href="../_images/bank_deposit_interleaving.drawio.png"><img alt="../_images/bank_deposit_interleaving.drawio.png" src="../_images/bank_deposit_interleaving.drawio.png" style="width: 85%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35.1 </span><span class="caption-text">(a) The body of the <code class="docutils literal notranslate"><span class="pre">deposit()</span></code> function executed by two threads, (b) one possible interleaving of the execution of the threads, and (c) a second possible interleaving.</span><a class="headerlink" href="#fig-sync-badbank" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 38.1 </span><span class="caption-text">(a) The body of the <code class="docutils literal notranslate"><span class="pre">deposit()</span></code> function executed by two threads, (b) one possible interleaving of the execution of the threads, and (c) a second possible interleaving.</span><a class="headerlink" href="#fig-sync-badbank" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="#fig-sync-badbank"><span class="std std-numref">Fig. 35.1</span></a>(b), we see one possible interleaving when
+<p>In <a class="reference internal" href="#fig-sync-badbank"><span class="std std-numref">Fig. 38.1</span></a>(b), we see one possible interleaving when
 this function is invoked by two threads nearly simultaneously. In this
 case Thread 1 is interrupted after it has read the current value of
 <code class="docutils literal notranslate"><span class="pre">balance</span></code>, but before it could store the new value back to memory. Thread 2 then gets to run and completes its execution of the <code class="docutils literal notranslate"><span class="pre">deposit()</span></code> function before being interrupted. Finally, Thread 1 can run again and complete its execution of <code class="docutils literal notranslate"><span class="pre">deposit()</span></code> by storing its local <code class="docutils literal notranslate"><span class="pre">balance</span></code> variable back to the account. The
 result is that the update performed by Thread 2 is lost, being
 over-written by Thread 1’s computation. After depositing a total of
-$150 to the account we have a final balance of $50. Context switches are unpredictable, however, and other interleavings of the thread executions are also possible. In <a class="reference internal" href="#fig-sync-badbank"><span class="std std-numref">Fig. 35.1</span></a>(c) we see another possible schedule, where Thread 1’s update to the account balance is overwritten by Thread 2.</p>
+$150 to the account we have a final balance of $50. Context switches are unpredictable, however, and other interleavings of the thread executions are also possible. In <a class="reference internal" href="#fig-sync-badbank"><span class="std std-numref">Fig. 38.1</span></a>(c) we see another possible schedule, where Thread 1’s update to the account balance is overwritten by Thread 2.</p>
 <p>Let’s try running the bank deposit program a few times and see what happens.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Click to show the full source code of the bank balance program.</p>
 <p>Here is the complete code for the bank balance example, including the creation of two threads to run the deposit function on the same account with different amounts.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-bank-full">
-<div class="code-block-caption"><span class="caption-number">Listing 35.3 </span><span class="caption-text">bank_deposit.c - Full source code for simple bank account example</span><a class="headerlink" href="#listing-sync-bank-full" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 38.3 </span><span class="caption-text">bank_deposit.c - Full source code for simple bank account example</span><a class="headerlink" href="#listing-sync-bank-full" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#include &lt;pthread.h&gt;</span>
 <span class="linenos">  2</span><span class="c1">#include &lt;stdlib.h&gt;</span>
 <span class="linenos">  3</span><span class="c1">#include &lt;sys/types.h&gt;</span>
@@ -1023,13 +1038,13 @@ $150 to the account we have a final balance of $50. Context switches are unpredi
 </div>
 </section>
 <section id="race-conditions">
-<h2><span class="section-number">35.4. </span>Race Conditions<a class="headerlink" href="#race-conditions" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">38.4. </span>Race Conditions<a class="headerlink" href="#race-conditions" title="Permalink to this headline">#</a></h2>
 <p>The unpredictable and undesirable outcomes that we have seen in the previous examples arise because of <strong>race conditions</strong>.  A race condition occurs whenever two or more threads access a shared resource (like the terminal device, or the variable that stores the bank account balance), and the outcome depends on the order in which the accesses occur. Clearly, this implies that at least one of the accesses must be a write operation, since the outcome of concurrent read operations is not dependent on the order they occur. Logically, the threads are racing with each other to use the resource, and we don’t know which one will come first. Sometimes, the result of the race will be the one we want, and sometimes things can go horribly wrong. Race condition bugs are extremely tricky to diagnose and fix, since the program might produce the correct results millions of times before failing.</p>
 <p>Race conditions happen even on a single CPU because asynchronous events occur arbitrarily during thread execution. For example, the network controller raises an interrupt upon arrival of a network packet, which causes the current thread to be suspended while the interrupt handler runs. Or a timer interrupt occurs and the OS scheduler switches the CPU from the current thread to another thread. With multiple CPUs, threads running in parallel on different CPUs can read and write the same memory location. Multi-threaded programs must be designed so that they can execute correctly in the face of such asynchrony.</p>
 <p>In our simple example programs, we added extra code to make it more likely for the negative consequences of race conditions to manifest. Without those added operations, the code executed by each thread is short enough to complete in a single time slice, and the threads are less likely to interfere with each other. However, the race condition is still there, lurking in our code.</p>
-<p>Consider the example in <a class="reference internal" href="#listing-sync-counter"><span class="std std-numref">Listing 35.4</span></a>, in which two threads either increment or decrement a shared counter some number of times. The arguments to this program let you try different numbers of threads, and different numbers of iterations for each thread to either increment or decrement the shared counter. The program always creates an equal number of incrementing or decrementing threads, and each thread does the same amount of work, so we would expect the final value of the counter to be the same as its initial value when all the threads are done.</p>
+<p>Consider the example in <a class="reference internal" href="#listing-sync-counter"><span class="std std-numref">Listing 38.4</span></a>, in which two threads either increment or decrement a shared counter some number of times. The arguments to this program let you try different numbers of threads, and different numbers of iterations for each thread to either increment or decrement the shared counter. The program always creates an equal number of incrementing or decrementing threads, and each thread does the same amount of work, so we would expect the final value of the counter to be the same as its initial value when all the threads are done.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-counter">
-<div class="code-block-caption"><span class="caption-number">Listing 35.4 </span><span class="caption-text">counter.c - Two threads increment and decrement a shared counter without synchronization.</span><a class="headerlink" href="#listing-sync-counter" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 38.4 </span><span class="caption-text">counter.c - Two threads increment and decrement a shared counter without synchronization.</span><a class="headerlink" href="#listing-sync-counter" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#include &lt;pthread.h&gt;</span>
 <span class="c1">#include &lt;stdlib.h&gt;</span>
 <span class="c1">#include &lt;sys/types.h&gt;</span>
@@ -1107,9 +1122,9 @@ $150 to the account we have a final balance of $50. Context switches are unpredi
 {"model_id": "5855e960e9654088b89cfd37f091368e", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
-<p>Even though it looks like the racing thread accesses to the shared counter variable are each just a single line of code, we still have unpredictable final results. The reason is because that single line of C source code, <code class="docutils literal notranslate"><span class="pre">shared_counter++</span></code> or <code class="docutils literal notranslate"><span class="pre">shared_counter--</span></code> becomes three lines of machine code when the program is compiled, as shown in <a class="reference internal" href="#listing-sync-counter-assembly"><span class="std std-numref">Listing 35.5</span></a>. (Try <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">counter.s</span></code>, and see if you can find these lines in the assembly file <code class="docutils literal notranslate"><span class="pre">counter.s</span></code>.) The highlighted lines load the value of the counter from memory into a register, decrement the value in the register, and then store the register value back to memory. Context switches can occur between any of these statements, leading to exactly the same interleaving problems that we saw in the bank account example.</p>
+<p>Even though it looks like the racing thread accesses to the shared counter variable are each just a single line of code, we still have unpredictable final results. The reason is because that single line of C source code, <code class="docutils literal notranslate"><span class="pre">shared_counter++</span></code> or <code class="docutils literal notranslate"><span class="pre">shared_counter--</span></code> becomes three lines of machine code when the program is compiled, as shown in <a class="reference internal" href="#listing-sync-counter-assembly"><span class="std std-numref">Listing 38.5</span></a>. (Try <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">counter.s</span></code>, and see if you can find these lines in the assembly file <code class="docutils literal notranslate"><span class="pre">counter.s</span></code>.) The highlighted lines load the value of the counter from memory into a register, decrement the value in the register, and then store the register value back to memory. Context switches can occur between any of these statements, leading to exactly the same interleaving problems that we saw in the bank account example.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-counter-assembly">
-<div class="code-block-caption"><span class="caption-number">Listing 35.5 </span><span class="caption-text">Assembly code snippet of loop in <code class="docutils literal notranslate"><span class="pre">decrement_thread()</span></code> function.</span><a class="headerlink" href="#listing-sync-counter-assembly" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 38.5 </span><span class="caption-text">Assembly code snippet of loop in <code class="docutils literal notranslate"><span class="pre">decrement_thread()</span></code> function.</span><a class="headerlink" href="#listing-sync-counter-assembly" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>decrement_thread:
 <span class="linenos"> 2</span>.LFB63:
 <span class="linenos"> 3</span>	.cfi_startproc
@@ -1174,13 +1189,13 @@ $150 to the account we have a final balance of $50. Context switches are unpredi
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">34. </span>Introduction to Concurrency, Synchronization and Deadlock</p>
+            <p class="prev-next-title"><span class="section-number">37. </span>Introduction to Concurrency, Synchronization and Deadlock</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="criticalsection.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">36. </span>The Critical Section Problem</p>
+        <p class="prev-next-title"><span class="section-number">39. </span>The Critical Section Problem</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
