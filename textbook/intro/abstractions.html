@@ -1175,7 +1175,7 @@ allocated for it.</p></li>
 <span class="linenos">12</span>  <span class="n">pid_t</span> <span class="n">cpid</span><span class="p">;</span>
 <span class="linenos">13</span>  <span class="n">char</span> <span class="n">buf</span><span class="p">;</span>
 <span class="linenos">14</span>  
-<span class="linenos">15</span>  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">15</span>  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
 <span class="linenos">16</span>    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s2">&quot;Usage: </span><span class="si">%s</span><span class="s2"> &lt;string&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 <span class="linenos">17</span>    <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
 <span class="linenos">18</span>  <span class="p">}</span>
@@ -1192,7 +1192,7 @@ allocated for it.</p></li>
 <span class="linenos">29</span>  <span class="p">}</span>
 <span class="linenos">30</span>  
 <span class="linenos">31</span>  <span class="k">if</span> <span class="p">(</span><span class="n">cpid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>    <span class="o">/*</span> <span class="n">Child</span> <span class="n">reads</span> <span class="kn">from</span> <span class="nn">pipe</span> <span class="o">*/</span>
-<span class="linenos">32</span>    <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>          <span class="o">/*</span> <span class="n">Close</span> <span class="n">unused</span> <span class="n">write</span> <span class="n">end</span> <span class="o">*/</span>
+<span class="linenos">32</span>    <span class="o">//</span> <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>          <span class="o">/*</span> <span class="n">Close</span> <span class="n">unused</span> <span class="n">write</span> <span class="n">end</span> <span class="o">*/</span>
 <span class="linenos">33</span>    
 <span class="hll"><span class="linenos">34</span>    <span class="k">while</span> <span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
 </span><span class="hll"><span class="linenos">35</span>      <span class="n">write</span><span class="p">(</span><span class="n">STDOUT_FILENO</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
