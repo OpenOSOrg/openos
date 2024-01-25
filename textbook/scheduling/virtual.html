@@ -719,7 +719,15 @@ title="Print to PDF"
 <p>For each task, the kernel maintains a pointer to the file descriptor table, the memory management data structures (i.e. the map described above) and information about execution state of the task.   For example, <a class="reference internal" href="#simple-task-struct"><span class="std std-numref">Listing 8.1</span></a> shows a highly simplified version of the <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> data structure used by Linux.   The state field indicates if the task is currently running, is blocked for some reason, or is ready and waiting to be run.  The thread structure is a place for the kernel to store all the processor registers whenever the task is not running.</p>
 <div class="margin admonition note">
 <p class="admonition-title">Note</p>
-<p>To see the actual data structure, you can use the online browser for the current linux code base, and search for <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> at this <a class="reference external" href="https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L746">link</a>.</p>
+<p>There is much more state in the task structure including:</p>
+<ul class="simple">
+<li><p>Process ID, User ID, Group ID</p></li>
+<li><p>Priority/Scheduling parameters</p></li>
+<li><p>Accounting information</p></li>
+<li><p>Signal management functions</p></li>
+<li><p>Working directory
+To see the actual data structure, you can use the online browser for the current linux code base, and search for <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> at this <a class="reference external" href="https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L746">link</a>.</p></li>
+</ul>
 </div>
 <div class="literal-block-wrapper docutils container" id="simple-task-struct">
 <div class="code-block-caption"><span class="caption-number">Listing 8.1 </span><span class="caption-text">A highly simplified version of the Linux task struct from the kernel include file linux/sched.h</span><a class="headerlink" href="#simple-task-struct" title="Permalink to this code">#</a></div>
