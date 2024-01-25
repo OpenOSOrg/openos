@@ -12,7 +12,7 @@ main(int argc, char *argv[])
   pid_t cpid;
   char buf;
   
-  if (argc != 2) {
+  if (argc < 2) {
     fprintf(stderr, "Usage: %s <string>\n", argv[0]);
     exit(EXIT_FAILURE);
   }
@@ -29,7 +29,7 @@ main(int argc, char *argv[])
   }
   
   if (cpid == 0) {    /* Child reads from pipe */
-    close(pipefd[1]);          /* Close unused write end */
+    // close(pipefd[1]);          /* Close unused write end */
     
     while (read(pipefd[0], &buf, 1) > 0)
       write(STDOUT_FILENO, &buf, 1);

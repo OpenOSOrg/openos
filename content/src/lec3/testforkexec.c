@@ -8,18 +8,21 @@ int
 main(int argc, char* argv[]) 
 {
   char *args[4];
-  args[1] = 0;
 
-  args[0] = "-al";
-  do_fork_exec("/usr/bin/ls", args);
-
-  args[0] = "-a";
-  args[1] = "/usr/bin";
+  args[0] = "/usr/bin/ls";
+  args[1] = "-al";
   args[2] = 0;
   do_fork_exec("/usr/bin/ls", args);
 
-  args[0] = "hello class";
-  args[1] = 0;
+  args[0] = "/usr/bin/ls";
+  args[1] = "-a";
+  args[2] = "/usr/bin";
+  args[3] = 0;
+  do_fork_exec("/usr/bin/ls", args);
+
+  args[0] = "/usr/bin/echo";
+  args[1] = "hello class\n";
+  args[2] = NULL;
   do_fork_exec("/usr/bin/echo", args);
 
   return 0;

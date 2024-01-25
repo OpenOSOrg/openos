@@ -24,7 +24,10 @@ parts:
   chapters:
   - file: scheduling/intro
   - file: scheduling/process
+  - file: scheduling/virtual
+  - file: scheduling/threads
   - file: scheduling/scheduling
+  - file: scheduling/preempt
   - file: scheduling/real_sched
   - file: scheduling/review
 - caption: 'Virtual Memory'
