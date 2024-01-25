@@ -709,10 +709,11 @@ title="Print to PDF"
 <p class="sidebar-title">Definitions:</p>
 <ul class="simple">
 <li><p>Process: A virtual computer</p></li>
-<li><p>Thread: A virtual CPU, where a process may contain multiple threads.</p></li>
-<li><p>Context switching: Switching the processor from running one thread to another, i.e., saving the processor registers used by the running thread into its thread struc, and loading some other processes registers into the CPU.</p></li>
-<li><p>Scheduling: Deciding which thread is to be run next.</p></li>
-<li><p>Preemption: Stopping a thread to run another one.</p></li>
+<li><p>Thread: A virtual CPU, where a process has at least one and possibly many</p></li>
+<li><p>Task: Term to refer to either process or thread</p></li>
+<li><p>Context switching: Switching the processor from running one task to another, i.e., saving the processor registers used by the running task into its thread struc, and loading some other task’s registers into the CPU.</p></li>
+<li><p>Scheduling: Deciding which task to run.</p></li>
+<li><p>Preemption: Stopping a task to run another one.</p></li>
 </ul>
 </aside>
 <p>We stated <a class="reference internal" href="../intro/abstractions.html#cont-gs-abstractions-process"><span class="std std-ref">earlier</span></a> (see <a class="reference internal" href="../intro/abstractions.html#img-intro-proc"><span class="std std-numref">Fig. 4.2</span></a>) the kernel maintains a table of all processes, indexed by the <em>process id</em>, or <strong>pid</strong>, to keep track of all the information about each process.   For reasons that will soon make sense, rather than processes, we will refer here to the abstraction that the kernel runs on the processor as a <strong>task</strong>, although feel free to think about a task as being a process for the time being.  As shown in <a class="reference internal" href="../intro/abstractions.html#img-intro-proc"><span class="std std-numref">Fig. 4.2</span></a>, the kernel  maintains a data structures, we call here a <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">queue</span></code> for scheduling the tasks on the CPU.   On a single CPU (actually single core) system, only one task can run at a time, and the kernel is responsible for selecting the task to be run and switching between them.</p>

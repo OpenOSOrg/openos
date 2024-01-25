@@ -700,6 +700,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#paged-address-translation">
    16.1. Paged Address Translation
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-virtual-address-space-with-paging">
+     16.1.1. The virtual address space with Paging
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#mmu-memory-management-unit">
@@ -748,6 +755,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#paged-address-translation">
    16.1. Paged Address Translation
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-virtual-address-space-with-paging">
+     16.1.1. The virtual address space with Paging
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#mmu-memory-management-unit">
@@ -789,15 +803,23 @@ and how we over commit physical memory using it.</p>
 <h1><span class="section-number">16. </span>Paging<a class="headerlink" href="#paging" title="Permalink to this headline">#</a></h1>
 <section id="paged-address-translation">
 <h2><span class="section-number">16.1. </span>Paged Address Translation<a class="headerlink" href="#paged-address-translation" title="Permalink to this headline">#</a></h2>
-<p>Most systems today use paged address translation or paging.  A paged virtual memory system divides both virtual memory and physical memory into fixed size chunks or pieces.  They are known as virtual pages or just pages in the virtual address space and page frames in physical memory.  Each page of virtual memory that is being used maps to a page frame.</p>
+<p>For virtual memory most systems today use paged address translation or paging.  A paged virtual memory system divides both virtual memory and physical memory into fixed size chunks or pieces.  They are known as virtual pages or just pages in the virtual address space and page frames in physical memory.</p>
 <figure class="align-default" id="paged-memory">
 <a class="reference internal image-reference" href="../_images/pagedmem.png"><img alt="../_images/pagedmem.png" src="../_images/pagedmem.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Paged virtual memory example</span><a class="headerlink" href="#paged-memory" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>One benefit of paging over segmentation is that the virtual address space can be much larger than physical memory.  In the segmentation memory model its not possible to run a program that’s requires more memory than the system has.  This means a program may run on a system with a large amount of memory and not be able to run on a system with a smaller amount of memory.  On a paged memory system every process has exactly the same size virtual address space typically gigabytes, terabytes or even petabytes on modern systems but only uses a small portion in most cases.  The physical memory is typically much smaller than a single virtual address space, megabytes or gigabytes, and there can be hundreds or even thousands of processes running on a system.  As a process runs on a paged memory system only the virtual pages needed at any moment are required to be in physical memory which is a small subset of the entire amount of physical memory.  The memory management system takes care of insuring that the necessary virtual to physical mappings are in place.  A large program running on a small memory system just runs slower rather than not at all on a paged memory system.</p>
-<p>Another benefit of paging over segmentation is that a region of virtual memory or memory segment does not need to map physically contiguous memory.  Since the virtual address space is divided into small fixed size pages a virtually contiguous region of memory can map to page frames that are randomly scattered throughout the entire physical memory.  This completely eliminates external fragmentation and therefore the need to perform compaction.  The only fragmentation issue encountered in a page virtual memory system is internal fragmentation of the unused portion of a page at the end of a region of virtual memory.</p>
+<p>Paging solves a couple major problems that segmentation has: 1.) The paged virtual address space can be much larger than physical memory. 2.) Paging eliminates the need to maintain large regions of physically contiguous memory.</p>
+<p>In the segmentation memory model its not possible to run a program that’s requires more physical memory than the system has.  This means a program may run on a system with a large amount of memory and not be able to run on a system with a smaller amount of memory at all.</p>
+<p>Another benefit of paging over segmentation is that a region of virtual memory does not need to map physically contiguous memory.  Since the virtual address space is divided into small fixed size pages a virtually contiguous region of memory can map to page frames that are randomly scattered throughout the entire physical memory.</p>
+<section id="the-virtual-address-space-with-paging">
+<h3><span class="section-number">16.1.1. </span>The virtual address space with Paging<a class="headerlink" href="#the-virtual-address-space-with-paging" title="Permalink to this headline">#</a></h3>
+<p>On a paged virtual memory system every process has exactly the same size virtual address space, gigabytes, terabytes or even petabytes on modern systems is typical.  By default none of the virtual pages within this huge address space is valid when a process and it’s associated virtual address space is created and therefore can not be referenced.  In order to make regions of the virtual address space valid either part of a file must be mapped into a virtual region or virtual memory must be dynamically allocated creating a virtual region.  Since the virtual regions are relatively small the huge virtual address space is sparsely populated with small valid virtual regions.</p>
+<p>When the virtual regions are initially created no physical memory pages are mapped into the virtual pages within them, however a program can legally access pages within the virtual regions.  When this happens the memory management system responds by mapping a physical page into each virtual page as it is accessed or on demand.  This means the virtual regions are sparsely populated with physical memory pages, similar to the way the entire virtual address space is sparsely populated with valid virtual regions.  As a process runs on a paged virtual memory system only a small subset of physical page frames are required to be mapped into virtual memory pages at a given time.  The memory management system is responsible for multiplexing the page frames and insuring that the necessary virtual to physical mappings are in place.</p>
+<p>A large program running on a small memory system just runs slower rather than not at all on a paged memory system.</p>
+<p>Another benefit of paging over segmentation is that a region of virtual memory or memory segment does not need to map physically contiguous memory.  Since the virtual address space is divided into small fixed size pages a virtually contiguous region of memory can map to page frames that are randomly scattered throughout the entire physical memory.  This completely eliminates external fragmentation and therefore the need to perform compaction.  The only fragmentation issue encountered in a page virtual memory system is internal fragmentation which is the unused portion of a page at the end of a region of virtual memory.</p>
+</section>
 </section>
 <section id="mmu-memory-management-unit">
 <h2><span class="section-number">16.2. </span>MMU Memory Management Unit<a class="headerlink" href="#mmu-memory-management-unit" title="Permalink to this headline">#</a></h2>
