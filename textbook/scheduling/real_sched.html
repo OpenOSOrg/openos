@@ -745,6 +745,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="a-look-at-the-linux-scheduler">
 <h1><span class="section-number">12. </span>A Look at the Linux Scheduler<a class="headerlink" href="#a-look-at-the-linux-scheduler" title="Permalink to this headline">#</a></h1>
+<p>talk about multi-CPU system</p>
 <section id="a-bit-of-history">
 <h2><span class="section-number">12.1. </span>A Bit of History<a class="headerlink" href="#a-bit-of-history" title="Permalink to this headline">#</a></h2>
 <p>Prior to kernel version 2.6.23, Linux employed a scheduler that combined priority queues with a heuristic that altered a process’s priority based on the amount of a time slice it used. CPU-bound processes would consume their entire slice and would drop in priority. Conversely, I/O-bound processes would often block before consuming an entire time slice and so their priority would be increased. This was meant to allow for interactive processes to stay in the high priority queues and batch processing jobs (really anything that was CPU-bound) to drop. This scheduler had a number of heuristics that were used in decision making that were also exposed as tunable parameters, but the biggest feature it boasted was that it had O(1) run time. In other words, the time to select the next process was constant, regardless of how many runnable processes there were in the system.</p>
