@@ -27,8 +27,10 @@ parts:
   - file: scheduling/virtual
   - file: scheduling/threads
   - file: scheduling/scheduling
-  - file: scheduling/preempt
-  - file: scheduling/real_sched
+    sections: 
+    - file: scheduling/sch-goals
+    - file: scheduling/sch-simple
+    - file: scheduling/sch-real
   - file: scheduling/review
 - caption: 'Virtual Memory'
   numbered: True

@@ -25,30 +25,26 @@
             }
         ]
     },
-    {
-        "question": "Which are NOT valid transitions in the process life cycle?",
-        "type": "many_choice",
-        "answers": [
-            {
-                "answer": "ready -> running",
-                "correct": false,
-                "feedback": "Incorrect. A process can transition from ready to running."
-            },
-            {
-                "answer": "ready -> blocked",
-                "correct": true,
-                "feedback": "Correct!. A process cannot transition from ready to blocked."
-            },
-            {
-                "answer": "running -> ready",
-                "correct": false,
-                "feedback": "Incorrect. A process can transition from running to ready."
-            },
-            {
-                "answer": "running -> blocked",
-                "correct": false,
-                "feedback": "Incorrect. A process can transition from running to blocked."
-            },
+
+{ "question": "Which are NOT valid transitions in the process life cycle?",
+  "type": "many_choice",
+  "answers": [
+      { "answer": "ready -> running",
+        "correct": false,
+        "feedback": "Incorrect. A process can transition from ready to running."
+      },
+      { "answer": "ready -> blocked",
+        "correct": true,
+        "feedback": "Correct!. A process cannot transition from ready to blocked."
+      },
+      { "answer": "running -> ready",
+        "correct": false,
+        "feedback": "Incorrect. A process can transition from running to ready."
+      },
+      { "answer": "running -> blocked",
+        "correct": false,
+        "feedback": "Incorrect. A process can transition from running to blocked."
+      },
             {
                 "answer": "blocked -> ready",
                 "correct": false,
