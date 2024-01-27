@@ -473,10 +473,42 @@ const thebe_selector_output = ".output, .cell_output"
    49. How to read this book
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../contributing/Contributing.html">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../contributing/intro.html">
    50. Contributing
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../contributing/examples.html">
+     50.1. Examples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../contributing/credit.html">
+     50.2. Contributors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../contributing/Contributing.html">
+     50.3. Contributing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../contributing/resources.html">
+     50.4. Resources to look at
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../contributing/fix.html">
+     50.5. Out of date
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
@@ -787,11 +819,12 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="simple-examples-of-scheduling-policies">
 <span id="cont-scheduling-scheduling-policies"></span><h1><span class="section-number">10.2. </span>Simple Examples of Scheduling Policies<a class="headerlink" href="#simple-examples-of-scheduling-policies" title="Permalink to this headline">#</a></h1>
-<p>Now that we have a collection of requirements, let’s look at a few simple possibilities and see which of our requirements they meet well and which ones they fail. Our first two examples are for batch system scheduling, which means that each job runs to completion before a new job is selected. All batch scheduling scheduling policies are optimized for throughput, since the CPU time spent on context switches is minimized and the time to complete each job is minimized.</p>
-<p>The remaining examples are intended for preemptive scheduling.</p>
+<p>Now that we have a collection of requirements, let’s look at a few simple possibilities and see which of our requirements they meet well and which ones they fail.</p>
 <section id="first-come-first-served-fcfs">
 <h2><span class="section-number">10.2.1. </span>First Come, First Served (FCFS)<a class="headerlink" href="#first-come-first-served-fcfs" title="Permalink to this headline">#</a></h2>
-<p>Just like waiting in line at the local government office, each process gets into a queue and the processor executes the first process in that queue until it completes. Then we repeat the same. This method is really simple and it meets our fairness requirement as we can prove that no process will be stalled indefinitely. However, this policy has poor behavior when we mix short, CPU intensive jobs with longer or I/O bound jobs. If a terminal process has to wait in a queue behind a long compilation task, it could look to the user as if the terminal is not responding to key strokes. Also, turnaround time for a job in this scheduler is entirely based on the length of the jobs preceding it in the queue.</p>
+<p>The simplest policy just processes each task to completion when they arrive. Just like waiting in line at the local government office, each process gets into a queue and the processor executes the first process in that queue until it completes. Then we repeat the same.</p>
+<p>One problem with this policy is that it can result in poor average turnaround time.</p>
+<p>However, this policy has poor behavior when we mix short, CPU intensive jobs with longer or I/O bound jobs. If a terminal process has to wait in a queue behind a long compilation task, it could look to the user as if the terminal is not responding to key strokes. Also, turnaround time for a job in this scheduler is entirely based on the length of the jobs preceding it in the queue.</p>
 <p>First come, first served meets our fairness requirement well, but it falls down on almost all the others.</p>
 </section>
 <section id="shortest-job-first-sjf">
