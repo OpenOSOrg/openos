@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>42. Challenges of Modern Hardware &#8212; Introduction to Operating Systems</title>
+    <title>10.3. A Look at the Linux Scheduler &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="43. Locking in the Linux Kernel" href="linux_locking.html" />
-    <link rel="prev" title="41. Read-Dominated Workloads" href="readmostly.html" />
+    <link rel="next" title="11. Review Questions" href="review.html" />
+    <link rel="prev" title="10.2. Simple Examples of Scheduling Policies" href="sch-simple.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -195,56 +195,56 @@ const thebe_selector_output = ".output, .cell_output"
   Virtual Processor
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/intro.html">
+  <a class="reference internal" href="intro.html">
    6. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/process.html">
+  <a class="reference internal" href="process.html">
    7. The Process: A virtual Computer
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/virtual.html">
+  <a class="reference internal" href="virtual.html">
    8. Virtualizing the CPU
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/threads.html">
+  <a class="reference internal" href="threads.html">
    9. The Thread: A Virtual Processor
   </a>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../scheduling/scheduling.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="scheduling.html">
    10. Scheduling
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="../scheduling/sch-goals.html">
+    <a class="reference internal" href="sch-goals.html">
      10.1. Scheduling Goals
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../scheduling/sch-simple.html">
+    <a class="reference internal" href="sch-simple.html">
      10.2. Simple Examples of Scheduling Policies
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../scheduling/sch-real.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      10.3. A Look at the Linux Scheduler
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/review.html">
+  <a class="reference internal" href="review.html">
    11. Review Questions
   </a>
  </li>
@@ -383,54 +383,54 @@ const thebe_selector_output = ".output, .cell_output"
   Concurrency
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="sync.html">
+  <a class="reference internal" href="../sync/sync.html">
    35. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sharing.html">
+  <a class="reference internal" href="../sync/sharing.html">
    36. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="criticalsection.html">
+  <a class="reference internal" href="../sync/criticalsection.html">
    37. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="locks.html">
+  <a class="reference internal" href="../sync/locks.html">
    38. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ordering.html">
+  <a class="reference internal" href="../sync/ordering.html">
    39. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="concurrency_bugs.html">
+  <a class="reference internal" href="../sync/concurrency_bugs.html">
    40. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="readmostly.html">
+  <a class="reference internal" href="../sync/readmostly.html">
    41. Read-Dominated Workloads
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
    42. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="linux_locking.html">
+  <a class="reference internal" href="../sync/linux_locking.html">
    43. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="review.html">
+  <a class="reference internal" href="../sync/review.html">
    44. Review
   </a>
  </li>
@@ -542,7 +542,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/sync/hardware_challenges.ipynb&branch=main"
+        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/scheduling/sch-real.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -602,7 +602,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fsync/hardware_challenges.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fscheduling/sch-real.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -619,7 +619,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/sync/hardware_challenges.ipynb"
+        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/scheduling/sch-real.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -647,7 +647,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/sync/hardware_challenges.ipynb"
+        <a href="../_sources/scheduling/sch-real.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -684,23 +684,70 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-bit-of-history">
+   10.3.1. A Bit of History
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-completely-fair-scheduler-cfs">
+   10.3.2. The Completely Fair Scheduler (CFS)
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Challenges of Modern Hardware</h1>
+                <h1>A Look at the Linux Scheduler</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-bit-of-history">
+   10.3.1. A Bit of History
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-completely-fair-scheduler-cfs">
+   10.3.2. The Completely Fair Scheduler (CFS)
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -708,14 +755,23 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="challenges-of-modern-hardware">
-<span id="cont-sync-hardware-challenge"></span><h1><span class="section-number">42. </span>Challenges of Modern Hardware<a class="headerlink" href="#challenges-of-modern-hardware" title="Permalink to this headline">#</a></h1>
-<p>Describe how modern hardware makes high-performance synchronization challenging</p>
-<ol class="simple">
-<li><p>caches, NUMA, …</p></li>
-<li><p>memory consistency models (sequential consistency, processor consistency…) and the C++11 memory model (possible part 4)</p></li>
-<li><p>scalability, lock granularity</p></li>
-</ol>
+  <section class="tex2jax_ignore mathjax_ignore" id="a-look-at-the-linux-scheduler">
+<h1><span class="section-number">10.3. </span>A Look at the Linux Scheduler<a class="headerlink" href="#a-look-at-the-linux-scheduler" title="Permalink to this headline">#</a></h1>
+<p>talk about multi-CPU system</p>
+<section id="a-bit-of-history">
+<h2><span class="section-number">10.3.1. </span>A Bit of History<a class="headerlink" href="#a-bit-of-history" title="Permalink to this headline">#</a></h2>
+<p>Prior to kernel version 2.6.23, Linux employed a scheduler that combined priority queues with a heuristic that altered a process’s priority based on the amount of a time slice it used. CPU-bound processes would consume their entire slice and would drop in priority. Conversely, I/O-bound processes would often block before consuming an entire time slice and so their priority would be increased. This was meant to allow for interactive processes to stay in the high priority queues and batch processing jobs (really anything that was CPU-bound) to drop. This scheduler had a number of heuristics that were used in decision making that were also exposed as tunable parameters, but the biggest feature it boasted was that it had O(1) run time. In other words, the time to select the next process was constant, regardless of how many runnable processes there were in the system.</p>
+</section>
+<section id="the-completely-fair-scheduler-cfs">
+<h2><span class="section-number">10.3.2. </span>The Completely Fair Scheduler (CFS)<a class="headerlink" href="#the-completely-fair-scheduler-cfs" title="Permalink to this headline">#</a></h2>
+<p>The Linux Kernel documentation has the whole story <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html">here.</a> The completely fair scheduler was a from-scratch redesign of the Linux scheduler; it did away with priority queues and with all<a class="footnote-reference brackets" href="#notall" id="id1">1</a> heuristics and tunables found in the O(1) scheduler. CFS introduced keeping a counter for the amount of runtime each task has received and this counter is used to decide on the next task to run. Instead of priority queues CFS places all tasks in a red-black tree sorted on their accumulated runtime with tasks on the left having less accumulated run time than tasks on the right. When the system needs a new task to run, the left most task is selected. This change allows CFS to completely avoid the starvation of CPU bound tasks that could occur with the previous scheduler.</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="notall"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>CFS still has a single tunable than can be exposed, but the kernel must be configured with <code class="docutils literal notranslate"><span class="pre">SCHED_DEBUG</span></code> selected.</p>
+</dd>
+</dl>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -731,7 +787,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./sync"
+            path: "./scheduling"
         },
         predefinedOutput: true
     }
@@ -745,17 +801,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="readmostly.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="sch-simple.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">41. </span>Read-Dominated Workloads</p>
+            <p class="prev-next-title"><span class="section-number">10.2. </span>Simple Examples of Scheduling Policies</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="linux_locking.html" title="next page">
+    <a class='right-next' id="next-link" href="review.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">43. </span>Locking in the Linux Kernel</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Review Questions</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

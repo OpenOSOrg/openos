@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>14. Introduction &#8212; Introduction to Operating Systems</title>
+    <title>12. Introduction &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="15. Memory management before paged virtual memory" href="phys-and-seg.html" />
-    <link rel="prev" title="13. Review" href="../scheduling/review.html" />
+    <link rel="next" title="13. Memory management before paged virtual memory" href="phys-and-seg.html" />
+    <link rel="prev" title="11. Review Questions" href="../scheduling/review.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -216,24 +216,36 @@ const thebe_selector_output = ".output, .cell_output"
    9. The Thread: A Virtual Processor
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   10. Simple Scheduling
+   10. Scheduling
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/preempt.html">
-   11. Preemptive Scheduling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/real_sched.html">
-   12. A Look at the Linux Scheduler
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-goals.html">
+     10.1. Scheduling Goals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-simple.html">
+     10.2. Simple Examples of Scheduling Policies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-real.html">
+     10.3. A Look at the Linux Scheduler
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/review.html">
-   13. Review
+   11. Review Questions
   </a>
  </li>
 </ul>
@@ -245,62 +257,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   14. Introduction
+   12. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="phys-and-seg.html">
-   15. Memory management before paged virtual memory
+   13. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="virt-paging.html">
-   16. Paging
+   14. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-tables.html">
-   17. Page Tables
+   15. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="reclamation.html">
-   18. Memory reclaiming algorithms.
+   16. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-size.html">
-   19. Page Sizes
+   17. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="misc.html">
-   20. Other topics
+   18. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="buffer-cache.html">
-   21. Buffer Cache
+   19. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pagefaults.html">
-   22. Memory Management Page Faults
+   20. Memory Management Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="realworld.html">
-   23. Memory management in the real world
+   21. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concl.html">
-   24. Conclusion
+   22. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   25. Review
+   23. Review
   </a>
  </li>
 </ul>
@@ -312,57 +324,57 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   26. Introduction
+   24. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   27. File System Abstraction
+   25. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/diskhw.html">
-   28. A bit about Disks
+   26. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   29. File System Layout
+   27. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_used.html">
-   30. Disk Layout:Tracking Used Space
+   28. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_free.html">
-   31. Disk Layout:Tracking Free Space
+   29. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_name.html">
-   32. Disk Layout:Implementing Name Space
+   30. Disk Layout:Implementing Name Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_failures.html">
-   33. Disk Layout:Dealing with Failures
+   31. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_ex_exx.html">
-   34. Disk Layout:Examples of Real World File Systems
+   32. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   35. Kernel implementation
+   33. Kernel implementation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/review.html">
-   36. Review
+   34. Review
   </a>
  </li>
 </ul>
@@ -374,52 +386,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   37. Introduction to Concurrency, Synchronization and Deadlock
+   35. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   38. Cooperating Processes and Inter-process Communication
+   36. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/criticalsection.html">
-   39. The Critical Section Problem
+   37. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locks.html">
-   40. Implementing Locks
+   38. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/ordering.html">
-   41. Ordering Thread Events
+   39. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   42. Common Concurrency Bugs
+   40. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/readmostly.html">
-   43. Read-Dominated Workloads
+   41. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   44. Challenges of Modern Hardware
+   42. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   45. Locking in the Linux Kernel
+   43. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   46. Review
+   44. Review
   </a>
  </li>
 </ul>
@@ -431,22 +443,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   47. Input and Output
+   45. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   48. More on Disks
+   46. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   49. Virtualization
+   47. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   50. Security
+   48. Security
   </a>
  </li>
 </ul>
@@ -458,17 +470,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   51. How to read this book
+   49. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   52. Contributing
+   50. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   53. Bibliography
+   51. Bibliography
   </a>
  </li>
 </ul>
@@ -696,37 +708,37 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#physical-memory-no-virtual-memory">
-   14.1. Physical Memory/No Virtual Memory
+   12.1. Physical Memory/No Virtual Memory
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#virtual-memory">
-   14.2. Virtual Memory
+   12.2. Virtual Memory
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#segmented-virtual-memory">
-     14.2.1. Segmented Virtual Memory
+     12.2.1. Segmented Virtual Memory
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#paged-virtual-memory">
-     14.2.2. Paged Virtual Memory
+     12.2.2. Paged Virtual Memory
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#the-virtual-address-space">
-       14.2.2.1. The virtual address space
+       12.2.2.1. The virtual address space
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#pros">
-       14.2.2.2. Pros
+       12.2.2.2. Pros
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#cons">
-       14.2.2.3. Cons
+       12.2.2.3. Cons
       </a>
      </li>
     </ul>
@@ -754,37 +766,37 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#physical-memory-no-virtual-memory">
-   14.1. Physical Memory/No Virtual Memory
+   12.1. Physical Memory/No Virtual Memory
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#virtual-memory">
-   14.2. Virtual Memory
+   12.2. Virtual Memory
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#segmented-virtual-memory">
-     14.2.1. Segmented Virtual Memory
+     12.2.1. Segmented Virtual Memory
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#paged-virtual-memory">
-     14.2.2. Paged Virtual Memory
+     12.2.2. Paged Virtual Memory
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#the-virtual-address-space">
-       14.2.2.1. The virtual address space
+       12.2.2.1. The virtual address space
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#pros">
-       14.2.2.2. Pros
+       12.2.2.2. Pros
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#cons">
-       14.2.2.3. Cons
+       12.2.2.3. Cons
       </a>
      </li>
     </ul>
@@ -929,30 +941,30 @@ physical memory into virtual memory and the pros/cons of it.</p>
 </ul>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<span id="cont-mm-intro"></span><h1><span class="section-number">14. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
+<span id="cont-mm-intro"></span><h1><span class="section-number">12. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
 <p>To paraphrase <a class="reference external" href="https://en.wikipedia.org/wiki/Parkinson%27s_law">Parkinson’s law</a> programs expand to fill the memory available to hold them, and home computers have millions times more memory than they had when Larry was young.  As discussed in the overall introduction memory is fast but small and expensive compared to storage, but it is volatile, all changes are lost after a reboot.  Memory management is the part of the operating system that provides a useful virtual memory interface and that allocates, frees and tracks the usage of the actual physical memory or RAM.  It manages a virtual address space for each process it manages and all the physical memory of the system, making it available to different processes through virtual memory depending on their demand.</p>
 <p>Today, most computers support paged virtual memory, but before we get into that, we motivate today’s memory management by discussing systems without any virtual memory and with segmented virtual memory.</p>
 <section id="physical-memory-no-virtual-memory">
-<h2><span class="section-number">14.1. </span>Physical Memory/No Virtual Memory<a class="headerlink" href="#physical-memory-no-virtual-memory" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">12.1. </span>Physical Memory/No Virtual Memory<a class="headerlink" href="#physical-memory-no-virtual-memory" title="Permalink to this headline">#</a></h2>
 <p>On a system without virtual memory there is one physical address space and programs are loaded into physical memory, allocate physical memory as needed and directly access those physical memory locations or addresses.  If more than one program is running at the same time they are simply loaded into a different physical address and allocate different physical addresses.  This means every program must either know the physical address that it is running or it must be relocated when it is loaded.</p>
 </section>
 <section id="virtual-memory">
-<h2><span class="section-number">14.2. </span>Virtual Memory<a class="headerlink" href="#virtual-memory" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">12.2. </span>Virtual Memory<a class="headerlink" href="#virtual-memory" title="Permalink to this headline">#</a></h2>
 <p>What is most desirable and usable is a virtual memory model where every program would run in a process that has a unique but identical virtual address space.  A virtual address space would ideally start at address zero and extend up to some very large address.  Since every process appears to have the same virtual address space programs can be loaded at the same virtual address and therefore do not need to to be relocated.  There are 2 basic virtual memory models: Segmented Virtual Memory and Paged Virtual Memory.</p>
 <section id="segmented-virtual-memory">
-<h3><span class="section-number">14.2.1. </span>Segmented Virtual Memory<a class="headerlink" href="#segmented-virtual-memory" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">12.2.1. </span>Segmented Virtual Memory<a class="headerlink" href="#segmented-virtual-memory" title="Permalink to this headline">#</a></h3>
 <p>A simple segmented virtual address space starts at location zero and extend up to some upper limit. Its implemented in hardware using base and offset registers.  Every memory reference is virtual and is translated to a physical address in hardware by adding the base register to the virtual address and qualified by insuring the result is less than the offset register.</p>
 </section>
 <section id="paged-virtual-memory">
-<h3><span class="section-number">14.2.2. </span>Paged Virtual Memory<a class="headerlink" href="#paged-virtual-memory" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">12.2.2. </span>Paged Virtual Memory<a class="headerlink" href="#paged-virtual-memory" title="Permalink to this headline">#</a></h3>
 <p>A paged virtual memory model splits both the virtual address space and physical memory into fixed size pieces knows as virtual pages and physical page frames respectively.  The mapping of virtual pages to physical page frames is accomplished via an array of page frame numbers known as a page table.  There is one page table entry for each virtual page and only then pages that are being used contain valid page table entries and therefore map physical page frames.</p>
 <section id="the-virtual-address-space">
-<h4><span class="section-number">14.2.2.1. </span>The virtual address space<a class="headerlink" href="#the-virtual-address-space" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">12.2.2.1. </span>The virtual address space<a class="headerlink" href="#the-virtual-address-space" title="Permalink to this headline">#</a></h4>
 <p>The virtual address space of every process is typically very large and fixed in size, for example the virtual address space for every process running on an x86_64 system is 2^48 or 258TB.  By default the entire virtual address space is not accessible to programs running in it.  The only portions or regions that are accessible are those that the program requested via system calls(mmap and sbrk) and the kernel granted access to.  So the virtual address space is sparsely populated with valid regions and those are either anonymous regions or file-backed regions.  Anonymous regions are any region that is not backed by a file, for example; stacks, heaps, BSS, malloc()’d and sbrk()’d regions.   File-backed regions are sections of a file that are mapped into the virtual address space.  Once the valid regions have been created physical memory pages are mapped into the virtual pages on demand therefore those regions are sparsely populated with physical memory.</p>
 <p>Paged virtual memory aka paging introduces the possibility of several additional highly desirable features or pros to the memory management system but also introduces several additional challenges or cons.</p>
 </section>
 <section id="pros">
-<h4><span class="section-number">14.2.2.2. </span>Pros<a class="headerlink" href="#pros" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">12.2.2.2. </span>Pros<a class="headerlink" href="#pros" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>Several huge virtual address spaces can be much larger than physical memory via over-committing physical memory.</p></li>
 <li><p>Total isolation of each virtual address space from all others.</p></li>
@@ -962,7 +974,7 @@ physical memory into virtual memory and the pros/cons of it.</p>
 </ul>
 </section>
 <section id="cons">
-<h4><span class="section-number">14.2.2.3. </span>Cons<a class="headerlink" href="#cons" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">12.2.2.3. </span>Cons<a class="headerlink" href="#cons" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>Over-committing physical memory requires sophisticated page reclaim logic.</p></li>
 <li><p>Supporting multiple page sizes on different architectures complicates an already complex memory management system.</p></li>
@@ -1017,13 +1029,13 @@ physical memory into virtual memory and the pros/cons of it.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">13. </span>Review</p>
+            <p class="prev-next-title"><span class="section-number">11. </span>Review Questions</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="phys-and-seg.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Memory management before paged virtual memory</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Memory management before paged virtual memory</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

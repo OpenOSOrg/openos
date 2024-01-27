@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>42. Common Concurrency Bugs &#8212; Introduction to Operating Systems</title>
+    <title>40. Common Concurrency Bugs &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="43. Read-Dominated Workloads" href="readmostly.html" />
-    <link rel="prev" title="41. Ordering Thread Events" href="ordering.html" />
+    <link rel="next" title="41. Read-Dominated Workloads" href="readmostly.html" />
+    <link rel="prev" title="39. Ordering Thread Events" href="ordering.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -218,24 +218,36 @@ const thebe_selector_output = ".output, .cell_output"
    9. The Thread: A Virtual Processor
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   10. Simple Scheduling
+   10. Scheduling
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/preempt.html">
-   11. Preemptive Scheduling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/real_sched.html">
-   12. A Look at the Linux Scheduler
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-goals.html">
+     10.1. Scheduling Goals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-simple.html">
+     10.2. Simple Examples of Scheduling Policies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-real.html">
+     10.3. A Look at the Linux Scheduler
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/review.html">
-   13. Review
+   11. Review Questions
   </a>
  </li>
 </ul>
@@ -247,62 +259,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   14. Introduction
+   12. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/phys-and-seg.html">
-   15. Memory management before paged virtual memory
+   13. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   16. Paging
+   14. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   17. Page Tables
+   15. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   18. Memory reclaiming algorithms.
+   16. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   19. Page Sizes
+   17. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   20. Other topics
+   18. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   21. Buffer Cache
+   19. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   22. Memory Management Page Faults
+   20. Memory Management Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   23. Memory management in the real world
+   21. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   24. Conclusion
+   22. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/review.html">
-   25. Review
+   23. Review
   </a>
  </li>
 </ul>
@@ -314,57 +326,57 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   26. Introduction
+   24. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   27. File System Abstraction
+   25. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/diskhw.html">
-   28. A bit about Disks
+   26. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   29. File System Layout
+   27. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_used.html">
-   30. Disk Layout:Tracking Used Space
+   28. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_free.html">
-   31. Disk Layout:Tracking Free Space
+   29. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_name.html">
-   32. Disk Layout:Implementing Name Space
+   30. Disk Layout:Implementing Name Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_failures.html">
-   33. Disk Layout:Dealing with Failures
+   31. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_ex_exx.html">
-   34. Disk Layout:Examples of Real World File Systems
+   32. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   35. Kernel implementation
+   33. Kernel implementation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/review.html">
-   36. Review
+   34. Review
   </a>
  </li>
 </ul>
@@ -376,52 +388,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="sync.html">
-   37. Introduction to Concurrency, Synchronization and Deadlock
+   35. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="sharing.html">
-   38. Cooperating Processes and Inter-process Communication
+   36. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="criticalsection.html">
-   39. The Critical Section Problem
+   37. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="locks.html">
-   40. Implementing Locks
+   38. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ordering.html">
-   41. Ordering Thread Events
+   39. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   42. Common Concurrency Bugs
+   40. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="readmostly.html">
-   43. Read-Dominated Workloads
+   41. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hardware_challenges.html">
-   44. Challenges of Modern Hardware
+   42. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linux_locking.html">
-   45. Locking in the Linux Kernel
+   43. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   46. Review
+   44. Review
   </a>
  </li>
 </ul>
@@ -433,22 +445,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   47. Input and Output
+   45. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   48. More on Disks
+   46. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   49. Virtualization
+   47. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   50. Security
+   48. Security
   </a>
  </li>
 </ul>
@@ -460,17 +472,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   51. How to read this book
+   49. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   52. Contributing
+   50. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   53. Bibliography
+   51. Bibliography
   </a>
  </li>
 </ul>
@@ -698,64 +710,64 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#atomicity-violations">
-   42.1. Atomicity Violations
+   40.1. Atomicity Violations
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#order-violations">
-   42.2. Order Violations
+   40.2. Order Violations
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#deadlocks">
-   42.3. Deadlocks
+   40.3. Deadlocks
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#what-is-a-resource">
-     42.3.1. What is a resource?
+     40.3.1. What is a resource?
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#visualizing-and-modeling-deadlocks">
-     42.3.2. Visualizing and Modeling Deadlocks
+     40.3.2. Visualizing and Modeling Deadlocks
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-four-conditions-for-deadlock">
-     42.3.3. The Four Conditions for Deadlock
+     40.3.3. The Four Conditions for Deadlock
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#breaking-mutual-exclusion">
-     42.3.4. Breaking Mutual Exclusion
+     40.3.4. Breaking Mutual Exclusion
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#breaking-hold-and-wait">
-     42.3.5. Breaking Hold-and-Wait
+     40.3.5. Breaking Hold-and-Wait
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#allowing-preemption-breaking-the-no-preemption-condition">
-     42.3.6. Allowing Preemption (breaking the no preemption condition)
+     40.3.6. Allowing Preemption (breaking the no preemption condition)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#breaking-circular-wait">
-     42.3.7. Breaking Circular Wait
+     40.3.7. Breaking Circular Wait
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#reality-check">
-     42.3.8. Reality Check
+     40.3.8. Reality Check
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#livelock-starvation-and-other-bugs">
-   42.4. Livelock, Starvation and Other Bugs
+   40.4. Livelock, Starvation and Other Bugs
   </a>
  </li>
 </ul>
@@ -779,64 +791,64 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#atomicity-violations">
-   42.1. Atomicity Violations
+   40.1. Atomicity Violations
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#order-violations">
-   42.2. Order Violations
+   40.2. Order Violations
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#deadlocks">
-   42.3. Deadlocks
+   40.3. Deadlocks
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#what-is-a-resource">
-     42.3.1. What is a resource?
+     40.3.1. What is a resource?
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#visualizing-and-modeling-deadlocks">
-     42.3.2. Visualizing and Modeling Deadlocks
+     40.3.2. Visualizing and Modeling Deadlocks
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-four-conditions-for-deadlock">
-     42.3.3. The Four Conditions for Deadlock
+     40.3.3. The Four Conditions for Deadlock
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#breaking-mutual-exclusion">
-     42.3.4. Breaking Mutual Exclusion
+     40.3.4. Breaking Mutual Exclusion
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#breaking-hold-and-wait">
-     42.3.5. Breaking Hold-and-Wait
+     40.3.5. Breaking Hold-and-Wait
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#allowing-preemption-breaking-the-no-preemption-condition">
-     42.3.6. Allowing Preemption (breaking the no preemption condition)
+     40.3.6. Allowing Preemption (breaking the no preemption condition)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#breaking-circular-wait">
-     42.3.7. Breaking Circular Wait
+     40.3.7. Breaking Circular Wait
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#reality-check">
-     42.3.8. Reality Check
+     40.3.8. Reality Check
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#livelock-starvation-and-other-bugs">
-   42.4. Livelock, Starvation and Other Bugs
+   40.4. Livelock, Starvation and Other Bugs
   </a>
  </li>
 </ul>
@@ -852,11 +864,11 @@ title="Print to PDF"
   <div class="cell tag_remove-input docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="common-concurrency-bugs">
-<span id="cont-sync-concurrency-bugs"></span><h1><span class="section-number">42. </span>Common Concurrency Bugs<a class="headerlink" href="#common-concurrency-bugs" title="Permalink to this headline">#</a></h1>
+<span id="cont-sync-concurrency-bugs"></span><h1><span class="section-number">40. </span>Common Concurrency Bugs<a class="headerlink" href="#common-concurrency-bugs" title="Permalink to this headline">#</a></h1>
 <p>In the previous chapters, we have already seen some examples of how things can go wrong without correct synchronization. In this chapter, we examine the three most common types of concurrency bugs: <em>atomicity violations</em>, <em>order violations</em>, and <em>deadlocks</em>. We will also briefly discuss other, less common, concurrency bugs. We will focus on deadlocks, since we have already seen the tools needed to address the other two main types of bugs.</p>
-<p>Our bug classifications, and real-world examples, are drawn from Lu et al.’s 2008 study of concurrency bugs <span id="id1">[<a class="reference internal" href="../misc/bib.html#id10" title="Shan Lu, Soyeon Park, Eunsoo Seo, and Yuanyuan Zhou. Learning from mistakes: a comprehensive study on real world concurrency bug characteristics. In Proceedings of the 13th International Conference on Architectural Support for Programming Languages and Operating Systems, ASPLOS XIII, 329–339. New York, NY, USA, 2008. Association for Computing Machinery. URL: https://doi.org/10.1145/1346281.1346323, doi:10.1145/1346281.1346323.">LPSZ08</a>]</span>, which examined 105 randomly selected concurrency bugs drawn from the bug databases of four open-source applications (MySQL, Apache, Mozilla, and OpenOffice). In <a class="reference internal" href="#table-sync-bugs-breakdown"><span class="std std-numref">Table 42.1</span></a>, we break down these bugs by category.</p>
+<p>Our bug classifications, and real-world examples, are drawn from Lu et al.’s 2008 study of concurrency bugs <span id="id1">[<a class="reference internal" href="../misc/bib.html#id10" title="Shan Lu, Soyeon Park, Eunsoo Seo, and Yuanyuan Zhou. Learning from mistakes: a comprehensive study on real world concurrency bug characteristics. In Proceedings of the 13th International Conference on Architectural Support for Programming Languages and Operating Systems, ASPLOS XIII, 329–339. New York, NY, USA, 2008. Association for Computing Machinery. URL: https://doi.org/10.1145/1346281.1346323, doi:10.1145/1346281.1346323.">LPSZ08</a>]</span>, which examined 105 randomly selected concurrency bugs drawn from the bug databases of four open-source applications (MySQL, Apache, Mozilla, and OpenOffice). In <a class="reference internal" href="#table-sync-bugs-breakdown"><span class="std std-numref">Table 40.1</span></a>, we break down these bugs by category.</p>
 <table class="table" id="table-sync-bugs-breakdown">
-<caption><span class="caption-number">Table 42.1 </span><span class="caption-text">Concurrency Bug Breakdown (3 bugs are counted as both atomicity violation and order violation)</span><a class="headerlink" href="#table-sync-bugs-breakdown" title="Permalink to this table">#</a></caption>
+<caption><span class="caption-number">Table 40.1 </span><span class="caption-text">Concurrency Bug Breakdown (3 bugs are counted as both atomicity violation and order violation)</span><a class="headerlink" href="#table-sync-bugs-breakdown" title="Permalink to this table">#</a></caption>
 <colgroup>
 <col style="width: 50%" />
 <col style="width: 50%" />
@@ -883,28 +895,28 @@ title="Print to PDF"
 </table>
 <p>One key takeaway from this study is that concurrent programming is <em>hard</em>—even mature, widely used projects have concurrency bugs. Developing tools to help detect, diagnose, and correct these concurrency bugs is an active area of research, but so far, there is no silver bullet.</p>
 <section id="atomicity-violations">
-<h2><span class="section-number">42.1. </span>Atomicity Violations<a class="headerlink" href="#atomicity-violations" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">40.1. </span>Atomicity Violations<a class="headerlink" href="#atomicity-violations" title="Permalink to this headline">#</a></h2>
 <blockquote>
 <div><p>The desired serializability among multiple memory accesses is violated (i.e., a code region is intended to be atomic, but the atomicity is not enforced during execution).<span id="id2">[<a class="reference internal" href="../misc/bib.html#id10" title="Shan Lu, Soyeon Park, Eunsoo Seo, and Yuanyuan Zhou. Learning from mistakes: a comprehensive study on real world concurrency bug characteristics. In Proceedings of the 13th International Conference on Architectural Support for Programming Languages and Operating Systems, ASPLOS XIII, 329–339. New York, NY, USA, 2008. Association for Computing Machinery. URL: https://doi.org/10.1145/1346281.1346323, doi:10.1145/1346281.1346323.">LPSZ08</a>]</span></p>
 </div></blockquote>
-<p>Atomicity violations are related to data races, but they are not the same. A data race occurs when two or more threads have conflicting accesses to a shared variable without any synchronization, but in some cases this may be the programmer’s intent (not a bug). For example, we used a flag variable in <a class="reference internal" href="locks.html#listing-sync-check-spinlock-fairness"><span class="std std-numref">Listing 40.16</span></a> to force the child threads to wait until the parent had finished creating all the threads. An atomicity violation occurs when some section of code needs to be atomic for correctness, but there is no synchronzation to ensure atomicity. In <a class="reference internal" href="#fig-sync-bugs-mysql-atomicity-violation"><span class="std std-numref">Fig. 42.1</span></a> we show a real-world example of an atomicity violation bug found in one version of MySQL. Here, the atomicity violation bug is also a data race, since the conflicting accesses to <code class="docutils literal notranslate"><span class="pre">thd-&gt;proc_info</span></code> are not separated by any synchronization. Programmers often mistakenly believe that short code sequences can’t be interrupted or interleaved, leading to atomicity violation bugs like the MySQL example. The solution is simple: introduce a lock to protect the <code class="docutils literal notranslate"><span class="pre">proc_info</span></code> and ensure the lock is acquired prior to checking if <code class="docutils literal notranslate"><span class="pre">thd-&gt;proc_info</span></code> is NULL, and released only after Thread 1 is done using <code class="docutils literal notranslate"><span class="pre">thd-&gt;proc_info</span></code>. (Thread 2 should also hold the lock when setting <code class="docutils literal notranslate"><span class="pre">thd-&gt;proc_info</span></code> to NULL.)</p>
+<p>Atomicity violations are related to data races, but they are not the same. A data race occurs when two or more threads have conflicting accesses to a shared variable without any synchronization, but in some cases this may be the programmer’s intent (not a bug). For example, we used a flag variable in <a class="reference internal" href="locks.html#listing-sync-check-spinlock-fairness"><span class="std std-numref">Listing 38.16</span></a> to force the child threads to wait until the parent had finished creating all the threads. An atomicity violation occurs when some section of code needs to be atomic for correctness, but there is no synchronzation to ensure atomicity. In <a class="reference internal" href="#fig-sync-bugs-mysql-atomicity-violation"><span class="std std-numref">Fig. 40.1</span></a> we show a real-world example of an atomicity violation bug found in one version of MySQL. Here, the atomicity violation bug is also a data race, since the conflicting accesses to <code class="docutils literal notranslate"><span class="pre">thd-&gt;proc_info</span></code> are not separated by any synchronization. Programmers often mistakenly believe that short code sequences can’t be interrupted or interleaved, leading to atomicity violation bugs like the MySQL example. The solution is simple: introduce a lock to protect the <code class="docutils literal notranslate"><span class="pre">proc_info</span></code> and ensure the lock is acquired prior to checking if <code class="docutils literal notranslate"><span class="pre">thd-&gt;proc_info</span></code> is NULL, and released only after Thread 1 is done using <code class="docutils literal notranslate"><span class="pre">thd-&gt;proc_info</span></code>. (Thread 2 should also hold the lock when setting <code class="docutils literal notranslate"><span class="pre">thd-&gt;proc_info</span></code> to NULL.)</p>
 <figure class="align-default" id="fig-sync-bugs-mysql-atomicity-violation">
 <a class="reference internal image-reference" href="../_images/mysql_atomicity_violation.drawio.png"><img alt="../_images/mysql_atomicity_violation.drawio.png" src="../_images/mysql_atomicity_violation.drawio.png" style="width: 75%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 42.1 </span><span class="caption-text">Example of an atomicity violation bug from MySQL.</span><a class="headerlink" href="#fig-sync-bugs-mysql-atomicity-violation" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 40.1 </span><span class="caption-text">Example of an atomicity violation bug from MySQL.</span><a class="headerlink" href="#fig-sync-bugs-mysql-atomicity-violation" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>We can also find atomicity violation bugs in data-race-free programs. For example, consider the attempt to add locking to the bank account deposit example from <a class="reference internal" href="sharing.html#listing-sync-bank"><span class="std std-numref">Listing 38.2</span></a>, as shown in <a class="reference internal" href="#fig-sync-bugs-bank-deposit-atomicity-violation"><span class="std std-numref">Fig. 42.2</span></a>(a). Here, the programmer has ensured that all accesses to the shared data in the bank account are protected by a lock variable, however, they have not enforced the required atomicity. Because the lock is released after reading the old balance from the account, and re-acquired before writing the new balance, two threads can still interleave in a way that causes one of the deposits to be lost.</p>
+<p>We can also find atomicity violation bugs in data-race-free programs. For example, consider the attempt to add locking to the bank account deposit example from <a class="reference internal" href="sharing.html#listing-sync-bank"><span class="std std-numref">Listing 36.2</span></a>, as shown in <a class="reference internal" href="#fig-sync-bugs-bank-deposit-atomicity-violation"><span class="std std-numref">Fig. 40.2</span></a>(a). Here, the programmer has ensured that all accesses to the shared data in the bank account are protected by a lock variable, however, they have not enforced the required atomicity. Because the lock is released after reading the old balance from the account, and re-acquired before writing the new balance, two threads can still interleave in a way that causes one of the deposits to be lost.</p>
 <figure class="align-default" id="fig-sync-bugs-bank-deposit-atomicity-violation">
 <a class="reference internal image-reference" href="../_images/bank_deposit_atomicity_violation.drawio.png"><img alt="../_images/bank_deposit_atomicity_violation.drawio.png" src="../_images/bank_deposit_atomicity_violation.drawio.png" style="width: 75%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 42.2 </span><span class="caption-text">Atomicity violation bug and its fix in a data-race-free implementation of the bank deposit function.</span><a class="headerlink" href="#fig-sync-bugs-bank-deposit-atomicity-violation" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 40.2 </span><span class="caption-text">Atomicity violation bug and its fix in a data-race-free implementation of the bank deposit function.</span><a class="headerlink" href="#fig-sync-bugs-bank-deposit-atomicity-violation" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>When writing concurrent code, always think adversarially. Is your code guaranteed to execute correctly even if the scheduler switches between threads at the worst possible moment? Consider what operations <em>must</em> execute without interference—these sequences of instructions must have mutual exclusion enforced.</p>
 </section>
 <section id="order-violations">
-<h2><span class="section-number">42.2. </span>Order Violations<a class="headerlink" href="#order-violations" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">40.2. </span>Order Violations<a class="headerlink" href="#order-violations" title="Permalink to this headline">#</a></h2>
 <blockquote>
 <div><p>The desired order between two (groups of) memory accesses is flipped (i.e., A should always be executed before B, but the order is not enforced during execution).<span id="id3">[<a class="reference internal" href="../misc/bib.html#id10" title="Shan Lu, Soyeon Park, Eunsoo Seo, and Yuanyuan Zhou. Learning from mistakes: a comprehensive study on real world concurrency bug characteristics. In Proceedings of the 13th International Conference on Architectural Support for Programming Languages and Operating Systems, ASPLOS XIII, 329–339. New York, NY, USA, 2008. Association for Computing Machinery. URL: https://doi.org/10.1145/1346281.1346323, doi:10.1145/1346281.1346323.">LPSZ08</a>]</span></p>
 </div></blockquote>
@@ -912,14 +924,14 @@ title="Print to PDF"
 <figure class="align-default" id="fig-sync-bugs-mozilla-ordering-violation">
 <a class="reference internal image-reference" href="../_images/mozilla_ordering_violation.drawio.png"><img alt="../_images/mozilla_ordering_violation.drawio.png" src="../_images/mozilla_ordering_violation.drawio.png" style="width: 75%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 42.3 </span><span class="caption-text">Ordering violation bug in Mozilla.</span><a class="headerlink" href="#fig-sync-bugs-mozilla-ordering-violation" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 40.3 </span><span class="caption-text">Ordering violation bug in Mozilla.</span><a class="headerlink" href="#fig-sync-bugs-mozilla-ordering-violation" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>A real-world example of an order violation bug comes from Mozilla, and is illustrated in <a class="reference internal" href="#fig-sync-bugs-mozilla-ordering-violation"><span class="std std-numref">Fig. 42.3</span></a>. In this example, Thread 1 is responsible for initialization and creation of other threads. Thread 2 is one of the threads created by Thread 1, and the programmers assumed that Thread 2 would have to run after Thread 1. Unfortunately, Thread 2 becomes runnable as soon as it is created, and may execute before Thread 1 assigns a value to the variable <code class="docutils literal notranslate"><span class="pre">mThread</span></code>. In the best case scenario, <code class="docutils literal notranslate"><span class="pre">mThread</span></code> will be NULL prior to the assignment in Thread 1, and Thread 2 will crash when it attempts to dereference <code class="docutils literal notranslate"><span class="pre">mThread-&gt;mState</span></code>. Why is this the best case? Because if <code class="docutils literal notranslate"><span class="pre">mThread</span></code> is non-NULL but not correctly initialized yet, then Thread 2 will set its <code class="docutils literal notranslate"><span class="pre">mState</span></code> from a random memory location and could continue to execute in unexpected ways for a long time without actually crashing. Crash failures are <em>much</em> easier to detect and debug than arbitrary incorrect behavior.</p>
+<p>A real-world example of an order violation bug comes from Mozilla, and is illustrated in <a class="reference internal" href="#fig-sync-bugs-mozilla-ordering-violation"><span class="std std-numref">Fig. 40.3</span></a>. In this example, Thread 1 is responsible for initialization and creation of other threads. Thread 2 is one of the threads created by Thread 1, and the programmers assumed that Thread 2 would have to run after Thread 1. Unfortunately, Thread 2 becomes runnable as soon as it is created, and may execute before Thread 1 assigns a value to the variable <code class="docutils literal notranslate"><span class="pre">mThread</span></code>. In the best case scenario, <code class="docutils literal notranslate"><span class="pre">mThread</span></code> will be NULL prior to the assignment in Thread 1, and Thread 2 will crash when it attempts to dereference <code class="docutils literal notranslate"><span class="pre">mThread-&gt;mState</span></code>. Why is this the best case? Because if <code class="docutils literal notranslate"><span class="pre">mThread</span></code> is non-NULL but not correctly initialized yet, then Thread 2 will set its <code class="docutils literal notranslate"><span class="pre">mState</span></code> from a random memory location and could continue to execute in unexpected ways for a long time without actually crashing. Crash failures are <em>much</em> easier to detect and debug than arbitrary incorrect behavior.</p>
 <p>The fix for this bug is simply to enforce some ordering, so that Thread 2 has to wait until the initialization is complete. A semaphore with initial value 0 would work well for this purpose. Thread 2 issues a <code class="docutils literal notranslate"><span class="pre">sem_wait()</span></code> prior to accessing <code class="docutils literal notranslate"><span class="pre">mThread</span></code>, and Thread 1 issues a <code class="docutils literal notranslate"><span class="pre">sem_post()</span></code> when it is safe to use <code class="docutils literal notranslate"><span class="pre">mThread</span></code>.</p>
 </section>
 <section id="deadlocks">
-<h2><span class="section-number">42.3. </span>Deadlocks<a class="headerlink" href="#deadlocks" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">40.3. </span>Deadlocks<a class="headerlink" href="#deadlocks" title="Permalink to this headline">#</a></h2>
 <blockquote>
 <div><p>A situation, typically one involving opposing parties, in which no progress can be made. (Oxford Languages definition)</p>
 </div></blockquote>
@@ -934,7 +946,7 @@ Kansas State Legislature in the early 20th century:</p>
 <figure class="align-default" id="fig-sync-bugs-train-deadlock">
 <a class="reference internal image-reference" href="../_images/trains-from-slides.png"><img alt="../_images/trains-from-slides.png" src="../_images/trains-from-slides.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 42.4 </span><span class="caption-text">Two trains approaching each other at a crossing.</span><a class="headerlink" href="#fig-sync-bugs-train-deadlock" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 40.4 </span><span class="caption-text">Two trains approaching each other at a crossing.</span><a class="headerlink" href="#fig-sync-bugs-train-deadlock" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Another real-world example of deadlock comes from the
@@ -952,17 +964,17 @@ time as you</p></li>
 <figure class="align-default" id="fig-sync-bugs-four-way-stop">
 <a class="reference internal image-reference" href="../_images/four-way-stop.drawio.png"><img alt="../_images/four-way-stop.drawio.png" src="../_images/four-way-stop.drawio.png" style="width: 25%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 42.5 </span><span class="caption-text">Deadlock at a four-way stop caused by strictly following the rules of the road.</span><a class="headerlink" href="#fig-sync-bugs-four-way-stop" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 40.5 </span><span class="caption-text">Deadlock at a four-way stop caused by strictly following the rules of the road.</span><a class="headerlink" href="#fig-sync-bugs-four-way-stop" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As illustrated in <a class="reference internal" href="#fig-sync-bugs-four-way-stop"><span class="std std-numref">Fig. 42.5</span></a>, strictly following the rules of the road would result in a deadlock if four cars arrived at a four-way stop at exactly the same time. Each driver is required to yield to the vehicle on their right, so no driver is actually permitted to proceed through the intersection.</p>
+<p>As illustrated in <a class="reference internal" href="#fig-sync-bugs-four-way-stop"><span class="std std-numref">Fig. 40.5</span></a>, strictly following the rules of the road would result in a deadlock if four cars arrived at a four-way stop at exactly the same time. Each driver is required to yield to the vehicle on their right, so no driver is actually permitted to proceed through the intersection.</p>
 <p>Since this is an operating systems book, our focus is on deadlocks that arise in the concurrent execution of computer programs. We will use the term <code class="docutils literal notranslate"><span class="pre">thread</span></code> to refer to the concurrent execution contexts, although the same issues arise when processes share resources.</p>
 <section id="what-is-a-resource">
-<h3><span class="section-number">42.3.1. </span>What is a resource?<a class="headerlink" href="#what-is-a-resource" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">40.3.1. </span>What is a resource?<a class="headerlink" href="#what-is-a-resource" title="Permalink to this headline">#</a></h3>
 <p>In discussing deadlocks, we often talk about <em>resources</em> that are shared by multiple threads or processes in a computer system. In general, a resource is any object that is needed by a thread to do its work. Some resources may be physical objects, like a printer or a network card, while others are logical objects, like a counter variable, a scheduler queue, or a data structure representing a bank account record in a database. In fact, even the physical resources will be represented and managed by the computer system using some data structure. And, when we have a shared data object, we usually need to associate a lock with it to protect against unwanted interference. So, when we talk about resource deadlocks, we are often talking about the lock that protects that resource from concurrent access. When we say that a thread (or process) has been allocated (equivalently, assigned or granted) a resource, we often mean that the thread has acquired the lock protecting that resource, and is now permitted to use the resource.</p>
-<p>We often find situations where threads need to acquire multiple resources protected by different locks. For example, consider the problem of transferring funds from one bank account to another. We want the entire transfer to happen atomically—either the funds are in the source account, meaning the transfer hasn’t happened yet, or the funds are in the destination account, meaning the transfer has been completed. If we had a single lock for the entire bank database, then all we need to do is acquire that lock, debit the source account and credit the destination account before releasing the lock. But since most operations access a single account (e.g., deposit, withdraw, read balance, etc.), this would give terrible performance to the bank customers. We really want to have a lock associated with each account, so that independent operations on different accounts can happen concurrently. Now the transfer operation needs to acquire locks for both the source and destination accounts and hold them until the balances of both accounts have been updated. Sample code for this setup is shown in <a class="reference internal" href="#listing-sync-bugs-transfer"><span class="std std-numref">Listing 42.1</span></a>: we have a structure for each account which includes the account balance and a lock, and the transfer function must acquire the locks on both accounts before it updates the balances. As we will see, situations like this can easily lead to deadlocks.</p>
+<p>We often find situations where threads need to acquire multiple resources protected by different locks. For example, consider the problem of transferring funds from one bank account to another. We want the entire transfer to happen atomically—either the funds are in the source account, meaning the transfer hasn’t happened yet, or the funds are in the destination account, meaning the transfer has been completed. If we had a single lock for the entire bank database, then all we need to do is acquire that lock, debit the source account and credit the destination account before releasing the lock. But since most operations access a single account (e.g., deposit, withdraw, read balance, etc.), this would give terrible performance to the bank customers. We really want to have a lock associated with each account, so that independent operations on different accounts can happen concurrently. Now the transfer operation needs to acquire locks for both the source and destination accounts and hold them until the balances of both accounts have been updated. Sample code for this setup is shown in <a class="reference internal" href="#listing-sync-bugs-transfer"><span class="std std-numref">Listing 40.1</span></a>: we have a structure for each account which includes the account balance and a lock, and the transfer function must acquire the locks on both accounts before it updates the balances. As we will see, situations like this can easily lead to deadlocks.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-bugs-transfer">
-<div class="code-block-caption"><span class="caption-number">Listing 42.1 </span><span class="caption-text">Simple bank transfer, requiring locks on two accounts</span><a class="headerlink" href="#listing-sync-bugs-transfer" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 40.1 </span><span class="caption-text">Simple bank transfer, requiring locks on two accounts</span><a class="headerlink" href="#listing-sync-bugs-transfer" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">account_s</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">acct_num</span><span class="p">;</span><span class="w"></span>
 <span class="linenos"> 3</span><span class="w">    </span><span class="n">money_t</span><span class="w"> </span><span class="n">balance</span><span class="p">;</span><span class="w"></span>
@@ -985,19 +997,19 @@ time as you</p></li>
 </div>
 </section>
 <section id="visualizing-and-modeling-deadlocks">
-<h3><span class="section-number">42.3.2. </span>Visualizing and Modeling Deadlocks<a class="headerlink" href="#visualizing-and-modeling-deadlocks" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">40.3.2. </span>Visualizing and Modeling Deadlocks<a class="headerlink" href="#visualizing-and-modeling-deadlocks" title="Permalink to this headline">#</a></h3>
 <p>To visualize resource deadlocks, we adopt the directed bipartite graph model introduced by Holt <span id="id4">[<a class="reference internal" href="../misc/bib.html#id12" title="Richard C. Holt. Some deadlock properties of computer systems. ACM Comput. Surv., 4(3):179–196, sep 1972. URL: https://doi.org/10.1145/356603.356607, doi:10.1145/356603.356607.">Hol72</a>]</span>, in which threads and resources are represented by nodes, resource allocations are represented by a directed edge from the resource node to the thread node that has been granted exclusive use of that resource, and resource requests are represented by a directed edge from a thread node to the resource node that it is requesting. (We will only deal with the case where there is a single instance of each type of resource.) When drawing such a resource graph, we depict thread nodes using circles, and resource nodes using squares.</p>
-<p><a class="reference internal" href="#fig-sync-bugs-resource-graph"><span class="std std-numref">Fig. 42.6</span></a> shows an example resource allocation graph with two threads and two resources. Resource R1 has been allocated to thread T1, and resource R2 has been allocated to thread T2. Thread T1 has made a request for R2 (which cannot be granted until T2 releases it), and T2 has made a request for R1 (which cannot be granted until T1 releases it). These threads are deadlocked.</p>
+<p><a class="reference internal" href="#fig-sync-bugs-resource-graph"><span class="std std-numref">Fig. 40.6</span></a> shows an example resource allocation graph with two threads and two resources. Resource R1 has been allocated to thread T1, and resource R2 has been allocated to thread T2. Thread T1 has made a request for R2 (which cannot be granted until T2 releases it), and T2 has made a request for R1 (which cannot be granted until T1 releases it). These threads are deadlocked.</p>
 <figure class="align-default" id="fig-sync-bugs-resource-graph">
 <a class="reference internal image-reference" href="../_images/resource_graph.drawio.png"><img alt="../_images/resource_graph.drawio.png" src="../_images/resource_graph.drawio.png" style="width: 25%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 42.6 </span><span class="caption-text">Example of a resource allocation graph with a cycle, showing two threads and two resources; the threads are deadlocked.</span><a class="headerlink" href="#fig-sync-bugs-resource-graph" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 40.6 </span><span class="caption-text">Example of a resource allocation graph with a cycle, showing two threads and two resources; the threads are deadlocked.</span><a class="headerlink" href="#fig-sync-bugs-resource-graph" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Returning to our bank transfer example, the situation in <a class="reference internal" href="#fig-sync-bugs-resource-graph"><span class="std std-numref">Fig. 42.6</span></a> could arise if R1 and R2 are accounts, and T1 is running <code class="docutils literal notranslate"><span class="pre">transfer(R1,</span> <span class="pre">R2,</span> <span class="pre">amt1)</span></code> while T2 is running <code class="docutils literal notranslate"><span class="pre">transfer(R2,</span> <span class="pre">R1,</span> <span class="pre">amt2)</span></code>. In the <code class="docutils literal notranslate"><span class="pre">transfer()</span></code> function code, each thread first acquires the lock on the source account, so T1 locks R1 and T2 locks R2. Then, each thread attempts to acquire the lock on the destination account, so T1 blocks waiting for T2 to release R2, and T2 blocks waiting for T1 to release R1.</p>
+<p>Returning to our bank transfer example, the situation in <a class="reference internal" href="#fig-sync-bugs-resource-graph"><span class="std std-numref">Fig. 40.6</span></a> could arise if R1 and R2 are accounts, and T1 is running <code class="docutils literal notranslate"><span class="pre">transfer(R1,</span> <span class="pre">R2,</span> <span class="pre">amt1)</span></code> while T2 is running <code class="docutils literal notranslate"><span class="pre">transfer(R2,</span> <span class="pre">R1,</span> <span class="pre">amt2)</span></code>. In the <code class="docutils literal notranslate"><span class="pre">transfer()</span></code> function code, each thread first acquires the lock on the source account, so T1 locks R1 and T2 locks R2. Then, each thread attempts to acquire the lock on the destination account, so T1 blocks waiting for T2 to release R2, and T2 blocks waiting for T1 to release R1.</p>
 </section>
 <section id="the-four-conditions-for-deadlock">
-<h3><span class="section-number">42.3.3. </span>The Four Conditions for Deadlock<a class="headerlink" href="#the-four-conditions-for-deadlock" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">40.3.3. </span>The Four Conditions for Deadlock<a class="headerlink" href="#the-four-conditions-for-deadlock" title="Permalink to this headline">#</a></h3>
 <p>Deadlocks in concurrent software systems were described by Djikstra <span id="id5">[<a class="reference internal" href="../misc/bib.html#id5">Dij65</a>]</span>, who called them “the deadly embrace”. A few years later, Coffman et al. laid out the formal conditions for deadlock to occur <span id="id6">[<a class="reference internal" href="../misc/bib.html#id11" title="E. G. Coffman, M. Elphick, and A. Shoshani. System deadlocks. ACM Comput. Surv., 3(2):67–78, jun 1971. URL: https://doi.org/10.1145/356586.356588, doi:10.1145/356586.356588.">CES71</a>]</span>:</p>
 <dl class="simple myst">
 <dt>Mutual exclusion</dt><dd><p>Threads are granted exclusive access to the resources they need; a resource that has been allocated to one thread cannot be used by any other thread.</p>
@@ -1012,10 +1024,10 @@ time as you</p></li>
 <p>These conditions, taken together, are necessary and sufficient for deadlock. If we break one of the four conditions, then deadlock cannot occur. Let’s try attacking each condition in turn.</p>
 </section>
 <section id="breaking-mutual-exclusion">
-<span id="cont-sync-concurrency-bugs-break-mutex"></span><h3><span class="section-number">42.3.4. </span>Breaking Mutual Exclusion<a class="headerlink" href="#breaking-mutual-exclusion" title="Permalink to this headline">#</a></h3>
+<span id="cont-sync-concurrency-bugs-break-mutex"></span><h3><span class="section-number">40.3.4. </span>Breaking Mutual Exclusion<a class="headerlink" href="#breaking-mutual-exclusion" title="Permalink to this headline">#</a></h3>
 <p>Recall that we introduced mutual exclusion as one of the requirements for a solution to the critical section problem. Herlihy, however, showed that we can devise <em>non-blocking</em> algorithms to operate on concurrent data structures without enforcing mutual exclusion, given atomic hardware instructions such as <code class="docutils literal notranslate"><span class="pre">compare-and-swap</span></code> (<code class="docutils literal notranslate"><span class="pre">CAS</span></code>) <span id="id7">[<a class="reference internal" href="../misc/bib.html#id14" title="Maurice Herlihy. A methodology for implementing highly concurrent data objects. ACM Trans. Program. Lang. Syst., 15(5):745–770, nov 1993. URL: https://doi.org/10.1145/161468.161469, doi:10.1145/161468.161469.">Her93</a>]</span> <span id="id8">[<a class="reference internal" href="../misc/bib.html#id13" title="M. Herlihy. A methodology for implementing highly concurrent data structures. In Proceedings of the Second ACM SIGPLAN Symposium on Principles &amp; Practice of Parallel Programming, PPOPP '90, 197–206. New York, NY, USA, 1990. Association for Computing Machinery. URL: https://doi.org/10.1145/99163.99185, doi:10.1145/99163.99185.">Her90</a>]</span>. These algorithms and data structures are called <em>lock-free</em> if they guarantee that <em>some</em> thread will complete an operation in a finite number of steps taken by itself or other threads, and <em>wait-free</em> if they guarantee that <em>each</em> thread will complete an operation in a finite number of steps.</p>
-<p>The basic idea behind lock-free synchronization is to attempt to make a change optimistically, assuming there will be no interference from other threads. If any interference happens there must be a way to detect and recover from it, usually by retrying the operation. The <code class="docutils literal notranslate"><span class="pre">CAS(location,</span> <span class="pre">expected,</span> <span class="pre">new)</span></code> atomic instruction (see <a class="reference internal" href="locks.html#listing-sync-cas"><span class="std std-numref">Listing 40.8</span></a>) has this flavor—if the specified memory location still contains the expected value, then there has been no interference, the memory location can be updated with the new value, and the <code class="docutils literal notranslate"><span class="pre">CAS</span></code> succeeds. If the <code class="docutils literal notranslate"><span class="pre">CAS</span></code> fails, then the operation must be retried.</p>
-<p>For example, suppose we needed to implement an <code class="docutils literal notranslate"><span class="pre">AtomicAdd()</span></code> function. We saw earlier (<a class="reference internal" href="sharing.html#listing-sync-counter-assembly"><span class="std std-numref">Listing 38.5</span></a>) that incrementing or decrementing a variable involves multiple steps, and so we used a lock to make those steps atomic.</p>
+<p>The basic idea behind lock-free synchronization is to attempt to make a change optimistically, assuming there will be no interference from other threads. If any interference happens there must be a way to detect and recover from it, usually by retrying the operation. The <code class="docutils literal notranslate"><span class="pre">CAS(location,</span> <span class="pre">expected,</span> <span class="pre">new)</span></code> atomic instruction (see <a class="reference internal" href="locks.html#listing-sync-cas"><span class="std std-numref">Listing 38.8</span></a>) has this flavor—if the specified memory location still contains the expected value, then there has been no interference, the memory location can be updated with the new value, and the <code class="docutils literal notranslate"><span class="pre">CAS</span></code> succeeds. If the <code class="docutils literal notranslate"><span class="pre">CAS</span></code> fails, then the operation must be retried.</p>
+<p>For example, suppose we needed to implement an <code class="docutils literal notranslate"><span class="pre">AtomicAdd()</span></code> function. We saw earlier (<a class="reference internal" href="sharing.html#listing-sync-counter-assembly"><span class="std std-numref">Listing 36.5</span></a>) that incrementing or decrementing a variable involves multiple steps, and so we used a lock to make those steps atomic.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">pthread_mutex_t</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PTHREAD_MUTEX_INITIALIZER</span><span class="p">;</span><span class="w"></span>
 
 <span class="kt">void</span><span class="w"> </span><span class="nf">AtomicAdd</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span>
@@ -1042,7 +1054,7 @@ time as you</p></li>
 <p>We will discuss <em>Read-Copy-Update</em> (RCU), a widely used primitive that provides lock-free synchronization for readers of a data structure, later.</p>
 </section>
 <section id="breaking-hold-and-wait">
-<span id="cont-sync-concurrency-bugs-deadlock-holdandwait"></span><h3><span class="section-number">42.3.5. </span>Breaking Hold-and-Wait<a class="headerlink" href="#breaking-hold-and-wait" title="Permalink to this headline">#</a></h3>
+<span id="cont-sync-concurrency-bugs-deadlock-holdandwait"></span><h3><span class="section-number">40.3.5. </span>Breaking Hold-and-Wait<a class="headerlink" href="#breaking-hold-and-wait" title="Permalink to this headline">#</a></h3>
 <p>If threads acquire all the resources they need before starting execution, then a thread will never have to wait for additional resources while holding onto resources it has already been granted. Once a thread is able to start running, it will have everything it needs to finish, making the resources available again for other threads. No deadlock! Unfortunately, there are several significant problems with this approach:</p>
 <ul class="simple">
 <li><p>A thread with ‘large’ resource needs (e.g., many different locks) may have to wait for a long time for all resources to be available at the same time. Additional effort is needed to ensure these threads do not starve.</p></li>
@@ -1056,7 +1068,7 @@ time as you</p></li>
 </ul>
 <p>A thread holding one or more locks already will first try to acquire an additional lock with a <code class="docutils literal notranslate"><span class="pre">trylock()</span></code> operation. If it succeeds, then there is no need to release the locks it already held. If the <code class="docutils literal notranslate"><span class="pre">trylock()</span></code> fails, however, the thread must release all of the other locks and try again to acquire the full set of locks. For example:</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-bugs-transfer-trylock">
-<div class="code-block-caption"><span class="caption-number">Listing 42.2 </span><span class="caption-text">Simple bank transfer, using trylock to break the hold-and-wait condition</span><a class="headerlink" href="#listing-sync-bugs-transfer-trylock" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 40.2 </span><span class="caption-text">Simple bank transfer, using trylock to break the hold-and-wait condition</span><a class="headerlink" href="#listing-sync-bugs-transfer-trylock" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kt">void</span><span class="w"> </span><span class="nf">transfer</span><span class="p">(</span><span class="n">account_t</span><span class="w"> </span><span class="o">*</span><span class="n">src_acct</span><span class="p">,</span><span class="w"> </span><span class="n">account_t</span><span class="w"> </span><span class="o">*</span><span class="n">dest_acct</span><span class="p">,</span><span class="w"> </span><span class="n">money_t</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"></span>
 <span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
 <span class="linenos"> 3</span><span class="w">    </span><span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">src_acct</span><span class="o">-&gt;</span><span class="n">acct_lock</span><span class="p">);</span><span class="w"></span>
@@ -1079,18 +1091,18 @@ time as you</p></li>
 <p>Breaking the hold-and-wait condition is related to <em>two-phase locking</em>, which is a common strategy in database systems. In two-phase locking, an operation that requires multiple locks executes first in a <em>growing</em> phase, and then in a <em>shrinking phase</em>. In Phase One (growing), the thread tries to acquire all the locks it needs, one at a time. If any lock is unavailable, then it releases all the locks and starts over. Once Phase One succeeds, the thread has all the locks it needs, and can start performing updates, after which it can release the locks. This version of two-phase locking prevents deadlocks by not allowing the hold-and-wait condition. (Note that in the database literature, two-phase locking is often described with hold-and-wait in Phase One. Deadlocks are thus possible, and the database system needs a strategy for detecting them and aborting one of the transactions that is involved in the deadlock cycle.)</p>
 </section>
 <section id="allowing-preemption-breaking-the-no-preemption-condition">
-<h3><span class="section-number">42.3.6. </span>Allowing Preemption (breaking the no preemption condition)<a class="headerlink" href="#allowing-preemption-breaking-the-no-preemption-condition" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">40.3.6. </span>Allowing Preemption (breaking the no preemption condition)<a class="headerlink" href="#allowing-preemption-breaking-the-no-preemption-condition" title="Permalink to this headline">#</a></h3>
 <p>For certain physical resources, we can prevent deadlock by forcibly preempting the resource from one thread and allocating it to another. In particular, this works for resources that we can <em>virtualize</em> so that each thread has the illusion of its own private copy of the resource. For example, a physical CPU can be allocated to one thread for a timeslice, then forcibly preempted and allocated to another thread. Similarly, a page of physical memory can be allocated to the use of one address space, then preempted and reallocated to the use of another address space. In both cases, this is feasible because we can save the state of the resource (in the thread struct for the CPU, or in the swap file for memory) when it is preempted from a thread, and restore the state when it is returned to the thread.</p>
 <p>However, when we are dealing with shared data structures, breaking ‘no preemption’ is not a very appealing option. We don’t generally know the state of the data structure if we preempt a lock from a thread in the middle of a critical section, so we have no way of ensuring that the data is consistent before allowing another thread to access it. We also can’t guarantee that it is safe for the original thread to resume from the point at which it was preempted, and we have no way of rolling back or aborting the operation that the thread was in the middle of performing. In contrast, database systems include transactional logging mechanisms that make it possible to abort a transaction, preempting the locks that the transaction held and restoring the database to its pre-transaction state.</p>
 </section>
 <section id="breaking-circular-wait">
-<h3><span class="section-number">42.3.7. </span>Breaking Circular Wait<a class="headerlink" href="#breaking-circular-wait" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">40.3.7. </span>Breaking Circular Wait<a class="headerlink" href="#breaking-circular-wait" title="Permalink to this headline">#</a></h3>
 <p>The final condition we have to consider is the circular wait. It is quite appealing to allow the first three conditions, since they all serve to make it easier to write correct concurrent code, while ensuring that we never find ourselves in a situation with a circular chain of threads holding some resources and waiting for a resource held by the next thread in the chain.</p>
 <p>One idea that we can immediately reject is to prevent circular wait by only allowing a thread to request or hold one resource at a time. There are simply too many scenarios where a thread needs to use multiple resources together to accomplish the desired task, such as transferring between two bank accounts. The only feasible way to implement this idea is to have a ‘big giant lock’ that protects all the resources in the system that could possibly be used together. Then, threads would only need a single resource, namely the big giant lock. In our bank scenario, this would mean a single lock for all the bank accounts, but the resulting loss of concurrency would be unacceptable.</p>
 <p>The other option is to provide a global ordering of resources, and require all threads to acquire resources according to this ordering. That is, a thread holding resource <span class="math notranslate nohighlight">\(j\)</span> cannot make a request for resource <span class="math notranslate nohighlight">\(i\)</span> where <span class="math notranslate nohighlight">\(i\)</span> &lt; <span class="math notranslate nohighlight">\(j\)</span> in the global ordering. The resulting resource allocation graph is guaranteed to contain no cycles, and circular wait is impossible. There are several challenges with this idea in practice. The first is that it may be difficult to come up with a global ordering for a system when there are a large number of different resources. The second is that it relies on programmers to know and respect the global ordering when they write code. Nonetheless, it is a very widely used and effective strategy in practice.</p>
-<p>Returning again to our bank transfer function, we can use the account numbers to define a global lock ordering: lower-numbered accounts precede higher-numbered accounts in the lock ordering. An example of this strategy is shown in <a class="reference internal" href="#listing-sync-bugs-transfer-ordering"><span class="std std-numref">Listing 42.3</span></a>.</p>
+<p>Returning again to our bank transfer function, we can use the account numbers to define a global lock ordering: lower-numbered accounts precede higher-numbered accounts in the lock ordering. An example of this strategy is shown in <a class="reference internal" href="#listing-sync-bugs-transfer-ordering"><span class="std std-numref">Listing 40.3</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-bugs-transfer-ordering">
-<div class="code-block-caption"><span class="caption-number">Listing 42.3 </span><span class="caption-text">Simple bank transfer, using lock ordering to break the circular wait condition</span><a class="headerlink" href="#listing-sync-bugs-transfer-ordering" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 40.3 </span><span class="caption-text">Simple bank transfer, using lock ordering to break the circular wait condition</span><a class="headerlink" href="#listing-sync-bugs-transfer-ordering" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kt">void</span><span class="w"> </span><span class="nf">transfer</span><span class="p">(</span><span class="n">account_t</span><span class="w"> </span><span class="o">*</span><span class="n">src_acct</span><span class="p">,</span><span class="w"> </span><span class="n">account_t</span><span class="w"> </span><span class="o">*</span><span class="n">dest_acct</span><span class="p">,</span><span class="w"> </span><span class="n">money_t</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"></span>
 <span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
 <span class="hll"><span class="linenos"> 3</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">src_acct</span><span class="o">-&gt;</span><span class="n">acct_num</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dest_acct</span><span class="o">-&gt;</span><span class="n">acct_num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
@@ -1113,16 +1125,16 @@ time as you</p></li>
 <p>Now, if T1 is running <code class="docutils literal notranslate"><span class="pre">transfer(R1,</span> <span class="pre">R2,</span> <span class="pre">amt1)</span></code> while T2 is running <code class="docutils literal notranslate"><span class="pre">transfer(R2,</span> <span class="pre">R1,</span> <span class="pre">amt2)</span></code>, the two threads must lock the accounts in the same order. Suppose R2 has a lower account number than R1. Then, T1 will execute lines 7-8, locking R2 first followed by R1, and T2 will execute lines 4-5, also locking R2 followed by R1. Whichever thread succeeds in locking R2 first will proceed to lock R1 and complete its transfer, releasing both the locks and allowing the other thread to proceed. Deadlock is prevented.</p>
 </section>
 <section id="reality-check">
-<h3><span class="section-number">42.3.8. </span>Reality Check<a class="headerlink" href="#reality-check" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">40.3.8. </span>Reality Check<a class="headerlink" href="#reality-check" title="Permalink to this headline">#</a></h3>
 <p>No single strategy for dealing with deadlock is appropriate for all resources in all situations. Moreover, all strategies are costly in terms of computation overhead, or restricting the use of resources. Consequently, many systems make some use of what Tanenbaum refers to as “the ostrich algorithm”: ignore the problem and hope it doesn’t happen too often <span id="id9">[<a class="reference internal" href="../misc/bib.html#id15" title="Andrew S. Tanenbaum and Herbert Bos. Modern Operating Systems. Prentice Hall Press, USA, 4th edition, 2014. ISBN 013359162X.">TB14</a>]</span>. This isn’t really as shocking as it might sound at first. For personal computers, which are rebooted frequently, the rare inconvenience of manually resolving a deadlock (by forcibly killing some tasks, or rebooting the machine) is likely to be preferable to the constant overhead of ensuring deadlocks don’t occur. On the other hand, deadlocks are unacceptable in safety critical systems and ensuring they don’t occur is worth some loss in performance. Modern operating systems like Linux employ a mix of strategies for deadlock, including using lock-free algorithms when possible, defining a well-documented lock hierarchy that kernel programmers are expected to follow, and providing runtime lock validators that check for deadlocks or incorrect lock usage. Because of the high runtime cost, such validators are generally used during development but not in deployment.</p>
 </section>
 </section>
 <section id="livelock-starvation-and-other-bugs">
-<h2><span class="section-number">42.4. </span>Livelock, Starvation and Other Bugs<a class="headerlink" href="#livelock-starvation-and-other-bugs" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">40.4. </span>Livelock, Starvation and Other Bugs<a class="headerlink" href="#livelock-starvation-and-other-bugs" title="Permalink to this headline">#</a></h2>
 <p>While atomicity violations, order violations, and deadlocks collectively made up over 98% of the concurrency bugs in Lu et al.’s study <span id="id10">[<a class="reference internal" href="../misc/bib.html#id10" title="Shan Lu, Soyeon Park, Eunsoo Seo, and Yuanyuan Zhou. Learning from mistakes: a comprehensive study on real world concurrency bug characteristics. In Proceedings of the 13th International Conference on Architectural Support for Programming Languages and Operating Systems, ASPLOS XIII, 329–339. New York, NY, USA, 2008. Association for Computing Machinery. URL: https://doi.org/10.1145/1346281.1346323, doi:10.1145/1346281.1346323.">LPSZ08</a>]</span>, there are other subtle concurrency issues that can occur.</p>
-<p>In <a class="reference internal" href="#cont-sync-concurrency-bugs-deadlock-holdandwait"><span class="std std-numref">Section 42.3.5</span></a>, we briefly mentioned <em>livelock</em>, which occurs when threads are running and changing state, but are not making progress towards completing an operation.  The common example of a real-world livelock is when two people meet in a narrow corridor and each repeatedly steps aside in the same direction to let the other person pass.  The <code class="docutils literal notranslate"><span class="pre">trylock</span></code> scenario is one way that livelock can occur in a computer system. More generally, livelocks can happen whenever threads continually retry a failed operation. For example, there is usually some limit on the number of files that a process can have open. Suppose this limit is set to 10 and we have a multithreaded process with 16 threads, each of which needs to open 2 files (say, to read its input and write its output). If a thread’s attempt to open a file fails because there are too many open files already (e.g., <code class="docutils literal notranslate"><span class="pre">open()</span></code> returns -1 with <code class="docutils literal notranslate"><span class="pre">errno</span> <span class="pre">==</span> <span class="pre">EMFILE</span></code> “Too many open files”), then the thread will simply try to open the file again, in the hopes that some other thread will finish, close its files, and allow this thread to proceed. Code for this is depicted in <a class="reference internal" href="#listing-sync-bugs-livelock-files"><span class="std std-numref">Listing 42.4</span></a>. Now, if all available open files are used by threads that have opened their input files, no thread will be able to open an output file and complete its work. This scenario looks extremely similar to deadlock: we have a limited set of resources (slots in the open file table), all of the resources have been allocated to threads, and all of the threads are holding their resources while waiting for an additional resource that is held by another thread. The difference is that the threads are not blocked—they are repeatedly issuing an <code class="docutils literal notranslate"><span class="pre">open()</span></code> system call and getting a response, so work is being done, but the threads are not making any progress.</p>
+<p>In <a class="reference internal" href="#cont-sync-concurrency-bugs-deadlock-holdandwait"><span class="std std-numref">Section 40.3.5</span></a>, we briefly mentioned <em>livelock</em>, which occurs when threads are running and changing state, but are not making progress towards completing an operation.  The common example of a real-world livelock is when two people meet in a narrow corridor and each repeatedly steps aside in the same direction to let the other person pass.  The <code class="docutils literal notranslate"><span class="pre">trylock</span></code> scenario is one way that livelock can occur in a computer system. More generally, livelocks can happen whenever threads continually retry a failed operation. For example, there is usually some limit on the number of files that a process can have open. Suppose this limit is set to 10 and we have a multithreaded process with 16 threads, each of which needs to open 2 files (say, to read its input and write its output). If a thread’s attempt to open a file fails because there are too many open files already (e.g., <code class="docutils literal notranslate"><span class="pre">open()</span></code> returns -1 with <code class="docutils literal notranslate"><span class="pre">errno</span> <span class="pre">==</span> <span class="pre">EMFILE</span></code> “Too many open files”), then the thread will simply try to open the file again, in the hopes that some other thread will finish, close its files, and allow this thread to proceed. Code for this is depicted in <a class="reference internal" href="#listing-sync-bugs-livelock-files"><span class="std std-numref">Listing 40.4</span></a>. Now, if all available open files are used by threads that have opened their input files, no thread will be able to open an output file and complete its work. This scenario looks extremely similar to deadlock: we have a limited set of resources (slots in the open file table), all of the resources have been allocated to threads, and all of the threads are holding their resources while waiting for an additional resource that is held by another thread. The difference is that the threads are not blocked—they are repeatedly issuing an <code class="docutils literal notranslate"><span class="pre">open()</span></code> system call and getting a response, so work is being done, but the threads are not making any progress.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-bugs-livelock-files">
-<div class="code-block-caption"><span class="caption-number">Listing 42.4 </span><span class="caption-text">thread function from livelock.c - Example of livelock due to open file limit.</span><a class="headerlink" href="#listing-sync-bugs-livelock-files" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 40.4 </span><span class="caption-text">thread function from livelock.c - Example of livelock due to open file limit.</span><a class="headerlink" href="#listing-sync-bugs-livelock-files" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">void</span> <span class="o">*</span><span class="n">threadfunc</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="p">{</span>
 <span class="linenos"> 3</span>    <span class="n">struct</span> <span class="n">args_s</span> <span class="o">*</span><span class="n">my_args</span> <span class="o">=</span> <span class="p">(</span><span class="n">struct</span> <span class="n">args_s</span> <span class="o">*</span><span class="p">)</span><span class="n">arg</span><span class="p">;</span>
@@ -1171,11 +1183,11 @@ time as you</p></li>
 </div>
 <p>Another study of bugs in open source code <span id="id11">[<a class="reference internal" href="../misc/bib.html#id16" title="Abbaspour Asadollah, S., Sundmark, D., Eldh, S., and Hans Hansson. Concurrency bugs in open source software: a case study. Journal of Internet Services and Applications, 8(4):1-15, apr 2017. URL: https://doi.org/10.1186/s13174-017-0055-2, doi:10.1186/s13174-017-0055-2.">AASEH17</a>]</span> found that livelock bug reports were extremely rare (only 2 out of 351 concurrency-related bug reports). This may be because of the difficulty in diagnosing and reproducing livelocks, or because programmers were aware of the potential for livelock and took care to avoid it (for example, by setting a limit on the number of retries).</p>
 <p><strong>Starvation</strong> is distinct from deadlock and livelock, although, again, some thread (or threads) never receive the resources they need. The difference is that the resource(s) a thread is waiting for will repeatedly become free, but is always allocated to a different thread. We saw this in shortest-job-first scheduling, where an infinite sequence of short threads are always granted the CPU ahead of a long-running thread. Starvation may also occur if a thread has to give up all the resources (locks) it already holds before it is allowed to request more resources. Starvation related to synchronization can also occur with reader/writer locks, where threads that only need to read a data object can execute concurrently using a shared lock but threads that need to write the data object must obtain an exclusive lock, waiting for all readers to finish. Finally, starvation can occur due to characteristics of modern hardware that give some threads an advantage when competing for a lock, such as NUMA memory systems and caching.</p>
-<p>Finally, there are concurrency bugs that are difficult to classify. Lu et al. provide one example from MySQL, where the developers included a <em>watchdog</em> thread to monitor other threads for potential deadlock. The monitor was designed to crash the server, forcing a restart, if it detected that some thread had waited for more than <code class="docutils literal notranslate"><span class="pre">fatal_timeout</span></code> to acquire a lock. A simplified version of this scenario is depicted in <a class="reference internal" href="#fig-sync-bugs-timing"><span class="std std-numref">Fig. 42.7</span></a>. Unfortunately, when the workload was high, there could be a very large number of worker threads and the lock wait time frequently exceeded the allowed timeout. The developers had not considered how to adjust the fatal timeout value based on the workload.</p>
+<p>Finally, there are concurrency bugs that are difficult to classify. Lu et al. provide one example from MySQL, where the developers included a <em>watchdog</em> thread to monitor other threads for potential deadlock. The monitor was designed to crash the server, forcing a restart, if it detected that some thread had waited for more than <code class="docutils literal notranslate"><span class="pre">fatal_timeout</span></code> to acquire a lock. A simplified version of this scenario is depicted in <a class="reference internal" href="#fig-sync-bugs-timing"><span class="std std-numref">Fig. 40.7</span></a>. Unfortunately, when the workload was high, there could be a very large number of worker threads and the lock wait time frequently exceeded the allowed timeout. The developers had not considered how to adjust the fatal timeout value based on the workload.</p>
 <figure class="align-default" id="fig-sync-bugs-timing">
 <a class="reference internal image-reference" href="../_images/timing_bug.drawio.png"><img alt="../_images/timing_bug.drawio.png" src="../_images/timing_bug.drawio.png" style="width: 90%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 42.7 </span><span class="caption-text">Example of a concurrency-related bug from MySQL.</span><a class="headerlink" href="#fig-sync-bugs-timing" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 40.7 </span><span class="caption-text">Example of a concurrency-related bug from MySQL.</span><a class="headerlink" href="#fig-sync-bugs-timing" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1218,13 +1230,13 @@ time as you</p></li>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">41. </span>Ordering Thread Events</p>
+            <p class="prev-next-title"><span class="section-number">39. </span>Ordering Thread Events</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="readmostly.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">43. </span>Read-Dominated Workloads</p>
+        <p class="prev-next-title"><span class="section-number">41. </span>Read-Dominated Workloads</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

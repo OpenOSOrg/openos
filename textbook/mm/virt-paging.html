@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>16. Paging &#8212; Introduction to Operating Systems</title>
+    <title>14. Paging &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="17. Page Tables" href="page-tables.html" />
-    <link rel="prev" title="15. Memory management before paged virtual memory" href="phys-and-seg.html" />
+    <link rel="next" title="15. Page Tables" href="page-tables.html" />
+    <link rel="prev" title="13. Memory management before paged virtual memory" href="phys-and-seg.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -218,24 +218,36 @@ const thebe_selector_output = ".output, .cell_output"
    9. The Thread: A Virtual Processor
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   10. Simple Scheduling
+   10. Scheduling
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/preempt.html">
-   11. Preemptive Scheduling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/real_sched.html">
-   12. A Look at the Linux Scheduler
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-goals.html">
+     10.1. Scheduling Goals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-simple.html">
+     10.2. Simple Examples of Scheduling Policies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-real.html">
+     10.3. A Look at the Linux Scheduler
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/review.html">
-   13. Review
+   11. Review Questions
   </a>
  </li>
 </ul>
@@ -247,62 +259,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   14. Introduction
+   12. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="phys-and-seg.html">
-   15. Memory management before paged virtual memory
+   13. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   16. Paging
+   14. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-tables.html">
-   17. Page Tables
+   15. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="reclamation.html">
-   18. Memory reclaiming algorithms.
+   16. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="page-size.html">
-   19. Page Sizes
+   17. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="misc.html">
-   20. Other topics
+   18. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="buffer-cache.html">
-   21. Buffer Cache
+   19. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pagefaults.html">
-   22. Memory Management Page Faults
+   20. Memory Management Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="realworld.html">
-   23. Memory management in the real world
+   21. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concl.html">
-   24. Conclusion
+   22. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   25. Review
+   23. Review
   </a>
  </li>
 </ul>
@@ -314,57 +326,57 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   26. Introduction
+   24. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   27. File System Abstraction
+   25. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/diskhw.html">
-   28. A bit about Disks
+   26. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   29. File System Layout
+   27. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_used.html">
-   30. Disk Layout:Tracking Used Space
+   28. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_free.html">
-   31. Disk Layout:Tracking Free Space
+   29. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_name.html">
-   32. Disk Layout:Implementing Name Space
+   30. Disk Layout:Implementing Name Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_failures.html">
-   33. Disk Layout:Dealing with Failures
+   31. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_ex_exx.html">
-   34. Disk Layout:Examples of Real World File Systems
+   32. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   35. Kernel implementation
+   33. Kernel implementation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/review.html">
-   36. Review
+   34. Review
   </a>
  </li>
 </ul>
@@ -376,52 +388,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   37. Introduction to Concurrency, Synchronization and Deadlock
+   35. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   38. Cooperating Processes and Inter-process Communication
+   36. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/criticalsection.html">
-   39. The Critical Section Problem
+   37. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locks.html">
-   40. Implementing Locks
+   38. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/ordering.html">
-   41. Ordering Thread Events
+   39. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   42. Common Concurrency Bugs
+   40. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/readmostly.html">
-   43. Read-Dominated Workloads
+   41. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   44. Challenges of Modern Hardware
+   42. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   45. Locking in the Linux Kernel
+   43. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   46. Review
+   44. Review
   </a>
  </li>
 </ul>
@@ -433,22 +445,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   47. Input and Output
+   45. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   48. More on Disks
+   46. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   49. Virtualization
+   47. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   50. Security
+   48. Security
   </a>
  </li>
 </ul>
@@ -460,17 +472,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   51. How to read this book
+   49. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   52. Contributing
+   50. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   53. Bibliography
+   51. Bibliography
   </a>
  </li>
 </ul>
@@ -698,36 +710,36 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paged-address-translation">
-   16.1. Paged Address Translation
+   14.1. Paged Address Translation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-virtual-address-space-with-paging">
-     16.1.1. The virtual address space with Paging
+     14.1.1. The virtual address space with Paging
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#mmu-memory-management-unit">
-   16.2. MMU Memory Management Unit
+   14.2. MMU Memory Management Unit
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#memory-over-commitment-and-paging">
-     16.2.1. Memory Over-Commitment and Paging
+     14.2.1. Memory Over-Commitment and Paging
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paging-avoiding-fragmentation">
-   16.3. Paging - Avoiding Fragmentation
+   14.3. Paging - Avoiding Fragmentation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#internal-fragmentation">
-     16.3.1. Internal Fragmentation
+     14.3.1. Internal Fragmentation
     </a>
    </li>
   </ul>
@@ -753,36 +765,36 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paged-address-translation">
-   16.1. Paged Address Translation
+   14.1. Paged Address Translation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-virtual-address-space-with-paging">
-     16.1.1. The virtual address space with Paging
+     14.1.1. The virtual address space with Paging
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#mmu-memory-management-unit">
-   16.2. MMU Memory Management Unit
+   14.2. MMU Memory Management Unit
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#memory-over-commitment-and-paging">
-     16.2.1. Memory Over-Commitment and Paging
+     14.2.1. Memory Over-Commitment and Paging
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paging-avoiding-fragmentation">
-   16.3. Paging - Avoiding Fragmentation
+   14.3. Paging - Avoiding Fragmentation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#internal-fragmentation">
-     16.3.1. Internal Fragmentation
+     14.3.1. Internal Fragmentation
     </a>
    </li>
   </ul>
@@ -800,21 +812,21 @@ title="Print to PDF"
   <p id="cont-mm-virt-paging">This chapter describes a pages virtual memory system works, what the MMU is and how it works
 and how we over commit physical memory using it.</p>
 <section class="tex2jax_ignore mathjax_ignore" id="paging">
-<h1><span class="section-number">16. </span>Paging<a class="headerlink" href="#paging" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">14. </span>Paging<a class="headerlink" href="#paging" title="Permalink to this headline">#</a></h1>
 <section id="paged-address-translation">
-<h2><span class="section-number">16.1. </span>Paged Address Translation<a class="headerlink" href="#paged-address-translation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">14.1. </span>Paged Address Translation<a class="headerlink" href="#paged-address-translation" title="Permalink to this headline">#</a></h2>
 <p>For virtual memory most systems today use paged address translation or paging.  A paged virtual memory system divides both virtual memory and physical memory into fixed size chunks or pieces.  They are known as virtual pages or just pages in the virtual address space and page frames in physical memory.</p>
 <figure class="align-default" id="paged-memory">
 <a class="reference internal image-reference" href="../_images/pagedmem.png"><img alt="../_images/pagedmem.png" src="../_images/pagedmem.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Paged virtual memory example</span><a class="headerlink" href="#paged-memory" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 14.1 </span><span class="caption-text">Paged virtual memory example</span><a class="headerlink" href="#paged-memory" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Paging solves a couple major problems that segmentation has: 1.) The paged virtual address space can be much larger than physical memory. 2.) Paging eliminates the need to maintain large regions of physically contiguous memory.</p>
 <p>In the segmentation memory model its not possible to run a program that’s requires more physical memory than the system has.  This means a program may run on a system with a large amount of memory and not be able to run on a system with a smaller amount of memory at all.</p>
 <p>Another benefit of paging over segmentation is that a region of virtual memory does not need to map physically contiguous memory.  Since the virtual address space is divided into small fixed size pages a virtually contiguous region of memory can map to page frames that are randomly scattered throughout the entire physical memory.</p>
 <section id="the-virtual-address-space-with-paging">
-<h3><span class="section-number">16.1.1. </span>The virtual address space with Paging<a class="headerlink" href="#the-virtual-address-space-with-paging" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">14.1.1. </span>The virtual address space with Paging<a class="headerlink" href="#the-virtual-address-space-with-paging" title="Permalink to this headline">#</a></h3>
 <p>On a paged virtual memory system every process has exactly the same size virtual address space, gigabytes, terabytes or even petabytes on modern systems is typical.  By default none of the virtual pages within this huge address space is valid when a process and it’s associated virtual address space is created and therefore can not be referenced.  In order to make regions of the virtual address space valid either part of a file must be mapped into a virtual region or virtual memory must be dynamically allocated creating a virtual region.  Since the virtual regions are relatively small the huge virtual address space is sparsely populated with small valid virtual regions.</p>
 <p>When the virtual regions are initially created no physical memory pages are mapped into the virtual pages within them, however a program can legally access pages within the virtual regions.  When this happens the memory management system responds by mapping a physical page into each virtual page as it is accessed or on demand.  This means the virtual regions are sparsely populated with physical memory pages, similar to the way the entire virtual address space is sparsely populated with valid virtual regions.  As a process runs on a paged virtual memory system only a small subset of physical page frames are required to be mapped into virtual memory pages at a given time.  The memory management system is responsible for multiplexing the page frames and insuring that the necessary virtual to physical mappings are in place.</p>
 <p>A large program running on a small memory system just runs slower rather than not at all on a paged memory system.</p>
@@ -822,28 +834,28 @@ and how we over commit physical memory using it.</p>
 </section>
 </section>
 <section id="mmu-memory-management-unit">
-<h2><span class="section-number">16.2. </span>MMU Memory Management Unit<a class="headerlink" href="#mmu-memory-management-unit" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">14.2. </span>MMU Memory Management Unit<a class="headerlink" href="#mmu-memory-management-unit" title="Permalink to this headline">#</a></h2>
 <p>On paged systems the CPU includes special hardware that maintains the virtual to physical page mappings known as the MMU or Memory Management Unit.  Every time a virtual address is referenced the MMU translates that virtual address to a physical address before presenting it to the memory address bus hardware.</p>
 <p>We examine a single model of address translation in detail: the one used
 by the original Pentium, and by any Intel-compatible CPU running in
 32-bit mode. It uses 32-bit virtual addresses, 32-bit physical
 addresses, and a page size of 4096 bytes. Since pages are <span class="math notranslate nohighlight">\(2^{12}\)</span> bytes
 each, addresses can be divided into 20-bit page numbers and 12-bit
-offsets within each page, as shown in <a class="reference internal" href="#fig-vm-fig5"><span class="std std-numref">Fig. 16.3</span></a>.</p>
+offsets within each page, as shown in <a class="reference internal" href="#fig-vm-fig5"><span class="std std-numref">Fig. 14.3</span></a>.</p>
 <figure class="align-default" id="fig-vm-fig6">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic10.png"><img alt="../_images/virt-mem-pic10.png" src="../_images/virt-mem-pic10.png" style="height: 5.5cm;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Example of virtual address mapping to physical address</span><a class="headerlink" href="#fig-vm-fig6" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 14.2 </span><span class="caption-text">Example of virtual address mapping to physical address</span><a class="headerlink" href="#fig-vm-fig6" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The Memory Management Unit (MMU) maps a 20-bit virtual page number to a
 20-bit physical page number; the offset can pass through unchanged, as
-shown in <a class="reference internal" href="#fig-vm-fig6"><span class="std std-numref">Fig. 16.2</span></a>, giving the physical address the CPU should
+shown in <a class="reference internal" href="#fig-vm-fig6"><span class="std std-numref">Fig. 14.2</span></a>, giving the physical address the CPU should
 access.</p>
 <figure class="align-default" id="fig-vm-fig5">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic9.png"><img alt="../_images/virt-mem-pic9.png" src="../_images/virt-mem-pic9.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 16.3 </span><span class="caption-text">Page number and offset in 32-bit paged translation with 4KB pages</span><a class="headerlink" href="#fig-vm-fig5" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 14.3 </span><span class="caption-text">Page number and offset in 32-bit paged translation with 4KB pages</span><a class="headerlink" href="#fig-vm-fig5" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Although paged address translation is far more flexible than base and
@@ -856,7 +868,7 @@ The only possible place to store the amount of information required by
 paged address translation is in memory itself, so the MMU uses page
 tables in memory to specify virtual-to-physical mappings.</p>
 <section id="memory-over-commitment-and-paging">
-<h3><span class="section-number">16.2.1. </span>Memory Over-Commitment and Paging<a class="headerlink" href="#memory-over-commitment-and-paging" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">14.2.1. </span>Memory Over-Commitment and Paging<a class="headerlink" href="#memory-over-commitment-and-paging" title="Permalink to this headline">#</a></h3>
 <p>Page faults allow data to be dynamically fetched into memory when it is
 needed, in the same way that the CPU dynamically fetches data from
 memory into the cache. This allows the operating system to over-commit
@@ -894,14 +906,14 @@ The entire PTE can be used by software when the present bit is not set.</p>
 <figure class="align-default" id="fig-vm-pic106">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic106.png"><img alt="../_images/virt-mem-pic106.png" src="../_images/virt-mem-pic106.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 16.4 </span><span class="caption-text">Page table entry with D (dirty) bit</span><a class="headerlink" href="#fig-vm-pic106" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 14.4 </span><span class="caption-text">Page table entry with D (dirty) bit</span><a class="headerlink" href="#fig-vm-pic106" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="paging-avoiding-fragmentation">
-<h2><span class="section-number">16.3. </span>Paging - Avoiding Fragmentation<a class="headerlink" href="#paging-avoiding-fragmentation" title="Permalink to this headline">#</a></h2>
-<p>The fragmentation in <a class="reference internal" href="phys-and-seg.html#mm-virt-mem-frag-4"><span class="std std-numref">Fig. 15.13</span></a> is termed <em>external fragmentation</em>, because the
+<h2><span class="section-number">14.3. </span>Paging - Avoiding Fragmentation<a class="headerlink" href="#paging-avoiding-fragmentation" title="Permalink to this headline">#</a></h2>
+<p>The fragmentation in <a class="reference internal" href="phys-and-seg.html#mm-virt-mem-frag-4"><span class="std std-numref">Fig. 13.13</span></a> is termed <em>external fragmentation</em>, because the
 memory wasted is <em>external</em> to the regions allocated. This situation can
 be avoided by <em>compacting</em> memory—moving existing allocations around,
 thereby consolidating multiple blocks of free memory into a single large
@@ -911,19 +923,19 @@ point to new locations[^2].</p>
 <figure class="align-default" id="fig-vm-fig3">
 <a class="reference internal image-reference" href="../_images/virt-mem-map.png"><img alt="../_images/virt-mem-map.png" src="../_images/virt-mem-map.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 16.5 </span><span class="caption-text">A mapping between virtual pages and physical pages</span><a class="headerlink" href="#fig-vm-fig3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 14.5 </span><span class="caption-text">A mapping between virtual pages and physical pages</span><a class="headerlink" href="#fig-vm-fig3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Instead, modern CPUs use <em>paged address translation</em>, which divides the
 physical and virtual memory spaces into fixed-sized pages, typically
 4KB, and provides a flexible mapping between virtual and physical pages,
-as shown in <a class="reference internal" href="#fig-vm-fig3"><span class="std std-numref">Fig. 16.5</span></a>. The operating system can then maintain a list
+as shown in <a class="reference internal" href="#fig-vm-fig3"><span class="std std-numref">Fig. 14.5</span></a>. The operating system can then maintain a list
 of free physical pages, and allocate them as needed. Because any
 combination of physical pages may be used for an allocation request,
 there is no external fragmentation, and a request will not fail as long
 as there are enough free physical pages to fulfill it.</p>
 <section id="internal-fragmentation">
-<h3><span class="section-number">16.3.1. </span>Internal Fragmentation<a class="headerlink" href="#internal-fragmentation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">14.3.1. </span>Internal Fragmentation<a class="headerlink" href="#internal-fragmentation" title="Permalink to this headline">#</a></h3>
 <p>Paging solves the problem of external fragmentation, there is no wasted space between pages of virtual memory.  However, paging does suffer from
 another issue, <em>internal fragmentation</em>, space may be wasted
 <em>inside</em> the allocated pages. E.g. if 10 KB of memory is allocated in
@@ -931,14 +943,14 @@ another issue, <em>internal fragmentation</em>, space may be wasted
 To allocate hundreds of KB in pages of 4KB this is a minor overhead:
 about <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> a page, or 2 KB, wasted per allocation. But internal
 fragmentation makes this approach inefficient for very small allocations
-(e.g. the <code class="docutils literal notranslate"><span class="pre">new</span></code> operator in C++), as shown in <a class="reference internal" href="#fig-vm-fig4"><span class="std std-numref">Fig. 16.6</span></a>.
+(e.g. the <code class="docutils literal notranslate"><span class="pre">new</span></code> operator in C++), as shown in <a class="reference internal" href="#fig-vm-fig4"><span class="std std-numref">Fig. 14.6</span></a>.
 (It is also one reason why even though most
 CPUs support multi-megabyte or even multi-gigabyte “huge” pages, which
 are slightly more efficient than 4 KB pages, they are rarely used.)</p>
 <figure class="align-default" id="fig-vm-fig4">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic7.png"><img alt="../_images/virt-mem-pic7.png" src="../_images/virt-mem-pic7.png" style="width: 90%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 16.6 </span><span class="caption-text">Example of internal fragmentation</span><a class="headerlink" href="#fig-vm-fig4" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 14.6 </span><span class="caption-text">Example of internal fragmentation</span><a class="headerlink" href="#fig-vm-fig4" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -976,13 +988,13 @@ are slightly more efficient than 4 KB pages, they are rarely used.)</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">15. </span>Memory management before paged virtual memory</p>
+            <p class="prev-next-title"><span class="section-number">13. </span>Memory management before paged virtual memory</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="page-tables.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">17. </span>Page Tables</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Page Tables</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

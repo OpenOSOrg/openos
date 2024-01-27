@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>13. Review &#8212; Introduction to Operating Systems</title>
+    <title>11. Review Questions &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="14. Introduction" href="../mm/intro.html" />
-    <link rel="prev" title="12. A Look at the Linux Scheduler" href="real_sched.html" />
+    <link rel="next" title="12. Introduction" href="../mm/intro.html" />
+    <link rel="prev" title="10.3. A Look at the Linux Scheduler" href="sch-real.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -216,24 +216,36 @@ const thebe_selector_output = ".output, .cell_output"
    9. The Thread: A Virtual Processor
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="scheduling.html">
-   10. Simple Scheduling
+   10. Scheduling
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="preempt.html">
-   11. Preemptive Scheduling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="real_sched.html">
-   12. A Look at the Linux Scheduler
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sch-goals.html">
+     10.1. Scheduling Goals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sch-simple.html">
+     10.2. Simple Examples of Scheduling Policies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sch-real.html">
+     10.3. A Look at the Linux Scheduler
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   13. Review
+   11. Review Questions
   </a>
  </li>
 </ul>
@@ -245,62 +257,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   14. Introduction
+   12. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/phys-and-seg.html">
-   15. Memory management before paged virtual memory
+   13. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   16. Paging
+   14. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   17. Page Tables
+   15. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   18. Memory reclaiming algorithms.
+   16. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   19. Page Sizes
+   17. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   20. Other topics
+   18. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   21. Buffer Cache
+   19. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   22. Memory Management Page Faults
+   20. Memory Management Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   23. Memory management in the real world
+   21. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   24. Conclusion
+   22. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/review.html">
-   25. Review
+   23. Review
   </a>
  </li>
 </ul>
@@ -312,57 +324,57 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   26. Introduction
+   24. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   27. File System Abstraction
+   25. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/diskhw.html">
-   28. A bit about Disks
+   26. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/disklayout.html">
-   29. File System Layout
+   27. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_used.html">
-   30. Disk Layout:Tracking Used Space
+   28. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_track_free.html">
-   31. Disk Layout:Tracking Free Space
+   29. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_name.html">
-   32. Disk Layout:Implementing Name Space
+   30. Disk Layout:Implementing Name Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_failures.html">
-   33. Disk Layout:Dealing with Failures
+   31. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/dl_ex_exx.html">
-   34. Disk Layout:Examples of Real World File Systems
+   32. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/kernelimp.html">
-   35. Kernel implementation
+   33. Kernel implementation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/review.html">
-   36. Review
+   34. Review
   </a>
  </li>
 </ul>
@@ -374,52 +386,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   37. Introduction to Concurrency, Synchronization and Deadlock
+   35. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   38. Cooperating Processes and Inter-process Communication
+   36. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/criticalsection.html">
-   39. The Critical Section Problem
+   37. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locks.html">
-   40. Implementing Locks
+   38. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/ordering.html">
-   41. Ordering Thread Events
+   39. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   42. Common Concurrency Bugs
+   40. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/readmostly.html">
-   43. Read-Dominated Workloads
+   41. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   44. Challenges of Modern Hardware
+   42. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   45. Locking in the Linux Kernel
+   43. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   46. Review
+   44. Review
   </a>
  </li>
 </ul>
@@ -431,22 +443,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   47. Input and Output
+   45. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   48. More on Disks
+   46. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   49. Virtualization
+   47. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   50. Security
+   48. Security
   </a>
  </li>
 </ul>
@@ -458,17 +470,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   51. How to read this book
+   49. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   52. Contributing
+   50. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   53. Bibliography
+   51. Bibliography
   </a>
  </li>
 </ul>
@@ -672,70 +684,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#common-scheduling-system-calls">
-   13.1. Common Scheduling System Calls
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#review-questions">
-   13.2. Review Questions
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Review</h1>
+                <h1>Review Questions</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#common-scheduling-system-calls">
-   13.1. Common Scheduling System Calls
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#review-questions">
-   13.2. Review Questions
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -743,67 +708,11 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="review">
-<h1><span class="section-number">13. </span>Review<a class="headerlink" href="#review" title="Permalink to this headline">#</a></h1>
-<section id="common-scheduling-system-calls">
-<h2><span class="section-number">13.1. </span>Common Scheduling System Calls<a class="headerlink" href="#common-scheduling-system-calls" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Function</p></th>
-<th class="head"><p>Reference</p></th>
-<th class="head"><p>Brief Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>fork()</p></td>
-<td><p><a class="reference internal" href="../intro/abstractions.html#cont-gs-abstractions-process-syscalls"><span class="std std-ref">here</span></a></p></td>
-<td><p>Clone the current process</p></td>
-</tr>
-<tr class="row-odd"><td><p>exit()</p></td>
-<td><p><a class="reference internal" href="../intro/abstractions.html#cont-gs-abstractions-process-syscalls"><span class="std std-ref">here</span></a></p></td>
-<td><p>Terminate the calling process</p></td>
-</tr>
-<tr class="row-even"><td><p>waitpid()</p></td>
-<td><p><a class="reference internal" href="../intro/abstractions.html#cont-gs-abstractions-process-syscalls"><span class="std std-ref">here</span></a></p></td>
-<td><p>Wait for child process</p></td>
-</tr>
-<tr class="row-odd"><td><p>kill</p></td>
-<td><p>man 1 kill</p></td>
-<td><p>Terminate a specified process</p></td>
-</tr>
-<tr class="row-even"><td><p>pthread_create()</p></td>
-<td><p>man 3 pthread_create</p></td>
-<td><p>Create a new thread in calling process</p></td>
-</tr>
-<tr class="row-odd"><td><p>pthread_self()</p></td>
-<td><p>man 3 pthread_self</p></td>
-<td><p>Return calling thread’s ID</p></td>
-</tr>
-<tr class="row-even"><td><p>pthread_join()</p></td>
-<td><p>man 3 pthread_join</p></td>
-<td><p>Wait for specified thread to finish</p></td>
-</tr>
-<tr class="row-odd"><td><p>pthread_exit()</p></td>
-<td><p>man 3 pthread_exit</p></td>
-<td><p>Terminate the calling thread</p></td>
-</tr>
-<tr class="row-even"><td><p>pthread_kill()</p></td>
-<td><p>man 2 pthread_kill</p></td>
-<td><p>Send a signal to a thread</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="review-questions">
-<h2><span class="section-number">13.2. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="review-questions">
+<h1><span class="section-number">11. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h1>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="FrxdfbDpkzpe" data-shufflequestions="False"
+<div class="output text_html"><div id="PGaPmsUwISjX" data-shufflequestions="False"
                data-shuffleanswers="True"
                data-preserveresponses="false"
                data-numquestions="1000000"> <style>:root {
@@ -965,7 +874,7 @@ title="Print to PDF"
     100% {
         background-color: var(--correct-green);
     }
-}</style></div><script type="application/javascript">var questionsFrxdfbDpkzpe=[
+}</style></div><script type="application/javascript">var questionsPGaPmsUwISjX=[
     {
         "question": "What is the purpose of a context switch in an operating system?",
         "type": "many_choice",
@@ -992,30 +901,26 @@ title="Print to PDF"
             }
         ]
     },
-    {
-        "question": "Which are NOT valid transitions in the process life cycle?",
-        "type": "many_choice",
-        "answers": [
-            {
-                "answer": "ready -> running",
-                "correct": false,
-                "feedback": "Incorrect. A process can transition from ready to running."
-            },
-            {
-                "answer": "ready -> blocked",
-                "correct": true,
-                "feedback": "Correct!. A process cannot transition from ready to blocked."
-            },
-            {
-                "answer": "running -> ready",
-                "correct": false,
-                "feedback": "Incorrect. A process can transition from running to ready."
-            },
-            {
-                "answer": "running -> blocked",
-                "correct": false,
-                "feedback": "Incorrect. A process can transition from running to blocked."
-            },
+
+{ "question": "Which are NOT valid transitions in the process life cycle?",
+  "type": "many_choice",
+  "answers": [
+      { "answer": "ready -> running",
+        "correct": false,
+        "feedback": "Incorrect. A process can transition from ready to running."
+      },
+      { "answer": "ready -> blocked",
+        "correct": true,
+        "feedback": "Correct!. A process cannot transition from ready to blocked."
+      },
+      { "answer": "running -> ready",
+        "correct": false,
+        "feedback": "Incorrect. A process can transition from running to ready."
+      },
+      { "answer": "running -> blocked",
+        "correct": false,
+        "feedback": "Incorrect. A process can transition from running to blocked."
+      },
             {
                 "answer": "blocked -> ready",
                 "correct": false,
@@ -1106,7 +1011,8 @@ title="Print to PDF"
             }
         ]
     }
-];
+]
+;
     // Make a random ID
 function makeid(length) {
     var result = [];
@@ -1840,11 +1746,10 @@ if (typeof version == 'undefined') {
 }
 
         {
-        show_questions(questionsFrxdfbDpkzpe,  FrxdfbDpkzpe);
+        show_questions(questionsPGaPmsUwISjX,  PGaPmsUwISjX);
         }
         </script></div>
 </div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1874,17 +1779,17 @@ if (typeof version == 'undefined') {
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="real_sched.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="sch-real.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">12. </span>A Look at the Linux Scheduler</p>
+            <p class="prev-next-title"><span class="section-number">10.3. </span>A Look at the Linux Scheduler</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../mm/intro.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>Introduction</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Introduction</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

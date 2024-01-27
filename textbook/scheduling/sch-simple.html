@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>42. Challenges of Modern Hardware &#8212; Introduction to Operating Systems</title>
+    <title>10.2. Simple Examples of Scheduling Policies &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="43. Locking in the Linux Kernel" href="linux_locking.html" />
-    <link rel="prev" title="41. Read-Dominated Workloads" href="readmostly.html" />
+    <link rel="next" title="10.3. A Look at the Linux Scheduler" href="sch-real.html" />
+    <link rel="prev" title="10.1. Scheduling Goals" href="sch-goals.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -195,56 +195,56 @@ const thebe_selector_output = ".output, .cell_output"
   Virtual Processor
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/intro.html">
+  <a class="reference internal" href="intro.html">
    6. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/process.html">
+  <a class="reference internal" href="process.html">
    7. The Process: A virtual Computer
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/virtual.html">
+  <a class="reference internal" href="virtual.html">
    8. Virtualizing the CPU
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/threads.html">
+  <a class="reference internal" href="threads.html">
    9. The Thread: A Virtual Processor
   </a>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../scheduling/scheduling.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="scheduling.html">
    10. Scheduling
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="../scheduling/sch-goals.html">
+    <a class="reference internal" href="sch-goals.html">
      10.1. Scheduling Goals
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../scheduling/sch-simple.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      10.2. Simple Examples of Scheduling Policies
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../scheduling/sch-real.html">
+    <a class="reference internal" href="sch-real.html">
      10.3. A Look at the Linux Scheduler
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/review.html">
+  <a class="reference internal" href="review.html">
    11. Review Questions
   </a>
  </li>
@@ -383,54 +383,54 @@ const thebe_selector_output = ".output, .cell_output"
   Concurrency
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="sync.html">
+  <a class="reference internal" href="../sync/sync.html">
    35. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sharing.html">
+  <a class="reference internal" href="../sync/sharing.html">
    36. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="criticalsection.html">
+  <a class="reference internal" href="../sync/criticalsection.html">
    37. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="locks.html">
+  <a class="reference internal" href="../sync/locks.html">
    38. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ordering.html">
+  <a class="reference internal" href="../sync/ordering.html">
    39. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="concurrency_bugs.html">
+  <a class="reference internal" href="../sync/concurrency_bugs.html">
    40. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="readmostly.html">
+  <a class="reference internal" href="../sync/readmostly.html">
    41. Read-Dominated Workloads
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
    42. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="linux_locking.html">
+  <a class="reference internal" href="../sync/linux_locking.html">
    43. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="review.html">
+  <a class="reference internal" href="../sync/review.html">
    44. Review
   </a>
  </li>
@@ -542,7 +542,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/sync/hardware_challenges.ipynb&branch=main"
+        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/scheduling/sch-simple.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -602,7 +602,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fsync/hardware_challenges.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fscheduling/sch-simple.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -619,7 +619,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/sync/hardware_challenges.ipynb"
+        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/scheduling/sch-simple.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -647,7 +647,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/sync/hardware_challenges.ipynb"
+        <a href="../_sources/scheduling/sch-simple.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -684,23 +684,100 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-come-first-served-fcfs">
+   10.2.1. First Come, First Served (FCFS)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shortest-job-first-sjf">
+   10.2.2. Shortest Job First (SJF)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#round-robin">
+   10.2.3. Round Robin
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#priority">
+   10.2.4. Priority
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lottery">
+   10.2.5. Lottery
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Challenges of Modern Hardware</h1>
+                <h1>Simple Examples of Scheduling Policies</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-come-first-served-fcfs">
+   10.2.1. First Come, First Served (FCFS)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shortest-job-first-sjf">
+   10.2.2. Shortest Job First (SJF)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#round-robin">
+   10.2.3. Round Robin
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#priority">
+   10.2.4. Priority
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lottery">
+   10.2.5. Lottery
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -708,14 +785,47 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="challenges-of-modern-hardware">
-<span id="cont-sync-hardware-challenge"></span><h1><span class="section-number">42. </span>Challenges of Modern Hardware<a class="headerlink" href="#challenges-of-modern-hardware" title="Permalink to this headline">#</a></h1>
-<p>Describe how modern hardware makes high-performance synchronization challenging</p>
-<ol class="simple">
-<li><p>caches, NUMA, …</p></li>
-<li><p>memory consistency models (sequential consistency, processor consistency…) and the C++11 memory model (possible part 4)</p></li>
-<li><p>scalability, lock granularity</p></li>
-</ol>
+  <section class="tex2jax_ignore mathjax_ignore" id="simple-examples-of-scheduling-policies">
+<span id="cont-scheduling-scheduling-policies"></span><h1><span class="section-number">10.2. </span>Simple Examples of Scheduling Policies<a class="headerlink" href="#simple-examples-of-scheduling-policies" title="Permalink to this headline">#</a></h1>
+<p>Now that we have a collection of requirements, let’s look at a few simple possibilities and see which of our requirements they meet well and which ones they fail. Our first two examples are for batch system scheduling, which means that each job runs to completion before a new job is selected. All batch scheduling scheduling policies are optimized for throughput, since the CPU time spent on context switches is minimized and the time to complete each job is minimized.</p>
+<p>The remaining examples are intended for preemptive scheduling.</p>
+<section id="first-come-first-served-fcfs">
+<h2><span class="section-number">10.2.1. </span>First Come, First Served (FCFS)<a class="headerlink" href="#first-come-first-served-fcfs" title="Permalink to this headline">#</a></h2>
+<p>Just like waiting in line at the local government office, each process gets into a queue and the processor executes the first process in that queue until it completes. Then we repeat the same. This method is really simple and it meets our fairness requirement as we can prove that no process will be stalled indefinitely. However, this policy has poor behavior when we mix short, CPU intensive jobs with longer or I/O bound jobs. If a terminal process has to wait in a queue behind a long compilation task, it could look to the user as if the terminal is not responding to key strokes. Also, turnaround time for a job in this scheduler is entirely based on the length of the jobs preceding it in the queue.</p>
+<p>First come, first served meets our fairness requirement well, but it falls down on almost all the others.</p>
+</section>
+<section id="shortest-job-first-sjf">
+<h2><span class="section-number">10.2.2. </span>Shortest Job First (SJF)<a class="headerlink" href="#shortest-job-first-sjf" title="Permalink to this headline">#</a></h2>
+<p>Instead of using arrival time for selecting the next process, we sort the queue of processes by the amount of time they will take to run, and we keep the queue sorted by inserting processes by run time. This algorithm improves turnaround time and throughput over first come, first served but we can construct scenarios where long-running jobs are stalled indefinitely by having short jobs continually arriving on the system. Knowing how long a job will take to run when it first arrives is an additional complication for shortest job first scheduling.</p>
+<p>Shortest job first gives excellent throughput and can yield good turnaround time and responsiveness for systems with only short jobs. However, it totally fails on fairness and predictability.</p>
+</section>
+<section id="round-robin">
+<h2><span class="section-number">10.2.3. </span>Round Robin<a class="headerlink" href="#round-robin" title="Permalink to this headline">#</a></h2>
+<p>Our first preemptive scheduling algorithm is just like first come, first served but we have added the time slice so processes are no longer run to completion. In this model, we still have a single queue of processes in the Ready state, and processes can be added to it upon creation or when leaving the Blocked state. When a process becomes active, it is given a fixed amount of time to run, and when this time slice expires the OS interrupts the process and puts it at the back of the queue.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The preemptive scheduling models introduces a new parameter we need to set: the length of the time slice. We have to weigh the cost of changing processes against the interactivity requirements when deciding on the length of a time slice. Later on we will see systems that change the length based on usage patterns.</p>
+</div>
+</section>
+<section id="priority">
+<h2><span class="section-number">10.2.4. </span>Priority<a class="headerlink" href="#priority" title="Permalink to this headline">#</a></h2>
+<p>The core idea behind priority scheduling is that some processes may be more important than others and should be given access to the CPU first. To implement this policy, the OS maintains two or more priority queues which hold processes assigned to the corresponding priority. Runnable processes in a higher priority queue are run before runnable processes in lower priority queues. In general we assign higher priorities to I/O bound processes and lower priorities to CPU bound ones. Figure <a class="reference internal" href="#priority-sched"><span class="std std-numref">Fig. 10.2</span></a> shows a simple example of a system with 4 priority queues. In this snapshot, the next process to be given CPU time will be the first process in the priority 4 queue. Assuming no additions, the processes in queue 3 will not run until all of the ones in 4 have completed.</p>
+<figure class="align-default" id="priority-sched">
+<img alt="../_images/priority-sched.png" src="../_images/priority-sched.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 10.2 </span><span class="caption-text">A simple example of a system with 4 priority queues and runnable processes in several of the queues.</span><a class="headerlink" href="#priority-sched" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It may seem counter-intuitive to assign high priority to I/O bound processes because they often do not make use of their full time slice. We do this because a process that is frequently blocking on I/O is more likely to be interactive and therefore have a user who will notice latency when the scheduler ignores the process for several periods.</p>
+</div>
+</section>
+<section id="lottery">
+<h2><span class="section-number">10.2.5. </span>Lottery<a class="headerlink" href="#lottery" title="Permalink to this headline">#</a></h2>
+<p>As the name suggests, in lottery scheduling the OS gives ‘tickets’ to each runnable process. When the scheduler needs to select a new process to run, it picks a ticket at random and the process holding that ticket runs. With a small modification, we can express priority in this method by assigning more tickets to high priority processes than low.</p>
+<p>These examples are not exhaustive, there are other algorithms for selecting the next runnable process, however these examples are meant to illustrate that there are a number of ways to approach this problem and this is an active area of research today.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -731,7 +841,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./sync"
+            path: "./scheduling"
         },
         predefinedOutput: true
     }
@@ -745,17 +855,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="readmostly.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="sch-goals.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">41. </span>Read-Dominated Workloads</p>
+            <p class="prev-next-title"><span class="section-number">10.1. </span>Scheduling Goals</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="linux_locking.html" title="next page">
+    <a class='right-next' id="next-link" href="sch-real.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">43. </span>Locking in the Linux Kernel</p>
+        <p class="prev-next-title"><span class="section-number">10.3. </span>A Look at the Linux Scheduler</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

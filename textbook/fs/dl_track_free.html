@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>31. Disk Layout:Tracking Free Space &#8212; Introduction to Operating Systems</title>
+    <title>29. Disk Layout:Tracking Free Space &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="32. Disk Layout:Implementing Name Space" href="dl_name.html" />
-    <link rel="prev" title="30. Disk Layout:Tracking Used Space" href="dl_track_used.html" />
+    <link rel="next" title="30. Disk Layout:Implementing Name Space" href="dl_name.html" />
+    <link rel="prev" title="28. Disk Layout:Tracking Used Space" href="dl_track_used.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -218,24 +218,36 @@ const thebe_selector_output = ".output, .cell_output"
    9. The Thread: A Virtual Processor
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../scheduling/scheduling.html">
-   10. Simple Scheduling
+   10. Scheduling
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/preempt.html">
-   11. Preemptive Scheduling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../scheduling/real_sched.html">
-   12. A Look at the Linux Scheduler
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-goals.html">
+     10.1. Scheduling Goals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-simple.html">
+     10.2. Simple Examples of Scheduling Policies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-real.html">
+     10.3. A Look at the Linux Scheduler
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../scheduling/review.html">
-   13. Review
+   11. Review Questions
   </a>
  </li>
 </ul>
@@ -247,62 +259,62 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/intro.html">
-   14. Introduction
+   12. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/phys-and-seg.html">
-   15. Memory management before paged virtual memory
+   13. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/virt-paging.html">
-   16. Paging
+   14. Paging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-tables.html">
-   17. Page Tables
+   15. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/reclamation.html">
-   18. Memory reclaiming algorithms.
+   16. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/page-size.html">
-   19. Page Sizes
+   17. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/misc.html">
-   20. Other topics
+   18. Other topics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   21. Buffer Cache
+   19. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/pagefaults.html">
-   22. Memory Management Page Faults
+   20. Memory Management Page Faults
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   23. Memory management in the real world
+   21. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   24. Conclusion
+   22. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/review.html">
-   25. Review
+   23. Review
   </a>
  </li>
 </ul>
@@ -314,57 +326,57 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   26. Introduction
+   24. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="interface.html">
-   27. File System Abstraction
+   25. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="diskhw.html">
-   28. A bit about Disks
+   26. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="disklayout.html">
-   29. File System Layout
+   27. File System Layout
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dl_track_used.html">
-   30. Disk Layout:Tracking Used Space
+   28. Disk Layout:Tracking Used Space
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   31. Disk Layout:Tracking Free Space
+   29. Disk Layout:Tracking Free Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dl_name.html">
-   32. Disk Layout:Implementing Name Space
+   30. Disk Layout:Implementing Name Space
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dl_failures.html">
-   33. Disk Layout:Dealing with Failures
+   31. Disk Layout:Dealing with Failures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dl_ex_exx.html">
-   34. Disk Layout:Examples of Real World File Systems
+   32. Disk Layout:Examples of Real World File Systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="kernelimp.html">
-   35. Kernel implementation
+   33. Kernel implementation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   36. Review
+   34. Review
   </a>
  </li>
 </ul>
@@ -376,52 +388,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   37. Introduction to Concurrency, Synchronization and Deadlock
+   35. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   38. Cooperating Processes and Inter-process Communication
+   36. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/criticalsection.html">
-   39. The Critical Section Problem
+   37. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locks.html">
-   40. Implementing Locks
+   38. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/ordering.html">
-   41. Ordering Thread Events
+   39. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   42. Common Concurrency Bugs
+   40. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/readmostly.html">
-   43. Read-Dominated Workloads
+   41. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   44. Challenges of Modern Hardware
+   42. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   45. Locking in the Linux Kernel
+   43. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   46. Review
+   44. Review
   </a>
  </li>
 </ul>
@@ -433,22 +445,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   47. Input and Output
+   45. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   48. More on Disks
+   46. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   49. Virtualization
+   47. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   50. Security
+   48. Security
   </a>
  </li>
 </ul>
@@ -460,17 +472,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   51. How to read this book
+   49. How to read this book
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributing/Contributing.html">
-   52. Contributing
+   50. Contributing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   53. Bibliography
+   51. Bibliography
   </a>
  </li>
 </ul>
@@ -699,24 +711,24 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="disk-layout-tracking-free-space">
-<span id="fs-dl-track-free"></span><h1><span class="section-number">31. </span>Disk Layout:Tracking Free Space<a class="headerlink" href="#disk-layout-tracking-free-space" title="Permalink to this headline">#</a></h1>
+<span id="fs-dl-track-free"></span><h1><span class="section-number">29. </span>Disk Layout:Tracking Free Space<a class="headerlink" href="#disk-layout-tracking-free-space" title="Permalink to this headline">#</a></h1>
 <p>So, we know how to keep track of blocks used in a file, how do we represent blocks that are free?</p>
 <p>If you recall the approach used in <a class="reference internal" href="dl_track_used.html#fs-dl-track-used-ll"><span class="std std-ref">FAT file system</span></a> to represent used blocks, the same data structure was also used to represent free blocks.  When allocating a block, the file system needed to search through the table until it found an entry marked as free—an extremely inefficient approach.</p>
 <figure class="align-default" id="fs-free-ll">
 <a class="reference internal image-reference" href="../_images/free_linkedlist.png"><img alt="../_images/free_linkedlist.png" src="../_images/free_linkedlist.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 31.1 </span><span class="caption-text">Free list as a linked list of blocks</span><a class="headerlink" href="#fs-free-ll" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 29.1 </span><span class="caption-text">Free list as a linked list of blocks</span><a class="headerlink" href="#fs-free-ll" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The original Unix file system used a free list to store a list of unused blocks (see <a class="reference internal" href="#fs-free-ll"><span class="std std-numref">Fig. 31.1</span></a>). Each block on the list was filled with free disk block numbers, so that a large number of free blocks could be found by reading a single block of the free list into memory. Blocks were allocated from the head of this list for new files, and returned to the head when freed. Implementing this idea results in a large initialization cost. If you have a 1 TB drive with 4 KB blocks, it means you will start off with 256 M blocks on the free list. Each 4 KB block can hold a list of 1024 32-bit free block numbers, so we will need 256 K blocks to hold the initial free list. However, it compresses to a small number of blocks for the free list when the disk becomes full.</p>
+<p>The original Unix file system used a free list to store a list of unused blocks (see <a class="reference internal" href="#fs-free-ll"><span class="std std-numref">Fig. 29.1</span></a>). Each block on the list was filled with free disk block numbers, so that a large number of free blocks could be found by reading a single block of the free list into memory. Blocks were allocated from the head of this list for new files, and returned to the head when freed. Implementing this idea results in a large initialization cost. If you have a 1 TB drive with 4 KB blocks, it means you will start off with 256 M blocks on the free list. Each 4 KB block can hold a list of 1024 32-bit free block numbers, so we will need 256 K blocks to hold the initial free list. However, it compresses to a small number of blocks for the free list when the disk becomes full.</p>
 <p>The bigger disadvantage of this approach was that, as files were created and deleted this list became randomized, so that blocks allocated for a file were rarely sequential and disk seeks were needed for nearly every block read from or written to disk. Originally this wasn’t a significant problem, because early Unix systems ran on machines with fast disks and excruciatingly slow CPUs.</p>
 <figure class="align-default" id="fs-free-bv">
 <a class="reference internal image-reference" href="../_images/free_bitvector.png"><img alt="../_images/free_bitvector.png" src="../_images/free_bitvector.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 31.2 </span><span class="caption-text">Free blocks recorded as bits</span><a class="headerlink" href="#fs-free-bv" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 29.2 </span><span class="caption-text">Free blocks recorded as bits</span><a class="headerlink" href="#fs-free-bv" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As computers got faster and users started noticing that seek times were killing performance, file systems started using an <em>allocation bitmap</em> as shown in <a class="reference internal" href="#fs-free-bv"><span class="std std-numref">Fig. 31.2</span></a>. It
+<p>As computers got faster and users started noticing that seek times were killing performance, file systems started using an <em>allocation bitmap</em> as shown in <a class="reference internal" href="#fs-free-bv"><span class="std std-numref">Fig. 29.2</span></a>. It
 keeps a boolean array with one bit for each disk block; if the block is
 allocated the corresponding bit is set to ‘1’, and cleared to ‘0’ if it
 is freed. To allocate a block, you read a portion of this bitmap into
@@ -759,13 +771,13 @@ greatly improving performance. Note, when disk is fragmented, each block of the 
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">30. </span>Disk Layout:Tracking Used Space</p>
+            <p class="prev-next-title"><span class="section-number">28. </span>Disk Layout:Tracking Used Space</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="dl_name.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">32. </span>Disk Layout:Implementing Name Space</p>
+        <p class="prev-next-title"><span class="section-number">30. </span>Disk Layout:Implementing Name Space</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
