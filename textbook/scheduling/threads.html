@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>9. The Thread: A Virtual Processor &#8212; Introduction to Operating Systems</title>
+    <title>9. The Thread: A Virtual CPU &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -213,7 +213,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   9. The Thread: A Virtual Processor
+   9. The Thread: A Virtual CPU
   </a>
  </li>
  <li class="toctree-l1 has-children">
@@ -737,7 +737,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>The Thread: A Virtual Processor</h1>
+                <h1>The Thread: A Virtual CPU</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -779,8 +779,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="the-thread-a-virtual-processor">
-<span id="cont-vp-threads"></span><h1><span class="section-number">9. </span>The Thread: A Virtual Processor<a class="headerlink" href="#the-thread-a-virtual-processor" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="the-thread-a-virtual-cpu">
+<span id="cont-vp-threads"></span><h1><span class="section-number">9. </span>The Thread: A Virtual CPU<a class="headerlink" href="#the-thread-a-virtual-cpu" title="Permalink to this headline">#</a></h1>
 <p>If a process is a <em>virtual computer</em>, a <strong>thread</strong> is a <em>virtual CPU</em>.   Modern computers have many CPUs, and many applications are written to exploit multiple <em>virtual CPU</em> either to enable progress to be made while some threads are blocked, or to enable the program to exploit multiple physical CPUs.  We call such applications multi-threaded applications.  All the <strong>threads</strong> are part of the same process, sharing memory, open files, etc… they only differ in the set of registers run on the CPU. Of course, one of those registers is the stack pointer, so each thread by default has its own stack.</p>
 <p>One special case of a multi-threaded program is the kernel itself.  While many applications may run on a single CPU, the kernel has to run on all the CPUs.  The major challenge to write multi-threaded programs, of which the kernel is probably the most extreme example, is how to ensure that the threads that are running at the same time <strong>synchronize</strong> so that they don’t modify the same memory in incompatible ways at the same time.  This is one of the most complex topics in operating systems, and we defer it to later (see <a class="reference internal" href="../sync/sync.html#cont-conc-intro"><span class="std std-ref">synchronization</span></a>) after we have finished discussing memory management and file systems.</p>
 <section id="interface">
