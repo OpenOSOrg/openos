@@ -97,5 +97,11 @@ parts:
   numbered: True
   chapters:
   - file: misc/howto
-  - file: contributing/Contributing
+  - file: contributing/intro
+    sections: 
+    - file: contributing/examples
+    - file: contributing/credit
+    - file: contributing/Contributing
+    - file: contributing/resources
+    - file: contributing/fix
   - file: misc/bib
