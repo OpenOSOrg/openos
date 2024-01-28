@@ -57,7 +57,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="10.3. A Look at the Linux Scheduler" href="sch-real.html" />
+    <link rel="next" title="10.3. Scheduling with Priorities" href="sch-prio.html" />
     <link rel="prev" title="10.1. Scheduling Goals" href="sch-goals.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -239,8 +239,18 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="sch-prio.html">
+     10.3. Scheduling with Priorities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sch-prop.html">
+     10.4. Proportional share
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="sch-real.html">
-     10.3. A Look at the Linux Scheduler
+     10.5. A Look at the Linux Scheduler
     </a>
    </li>
   </ul>
@@ -746,23 +756,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#shortest-job-first-sjf">
-   10.2.2. Shortest Job First (SJF)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#round-robin">
-   10.2.3. Round Robin
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#priority">
-   10.2.4. Priority
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#lottery">
-   10.2.5. Lottery
+   10.2.2. Round Robin
   </a>
  </li>
 </ul>
@@ -790,23 +785,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#shortest-job-first-sjf">
-   10.2.2. Shortest Job First (SJF)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#round-robin">
-   10.2.3. Round Robin
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#priority">
-   10.2.4. Priority
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#lottery">
-   10.2.5. Lottery
+   10.2.2. Round Robin
   </a>
  </li>
 </ul>
@@ -819,13 +799,52 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="simple-examples-of-scheduling-policies">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%HTML</span>
+<span class="p">&lt;</span><span class="nt">style</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span><span class="p">&gt;</span><span class="w"></span>
+<span class="nt">table</span><span class="p">.</span><span class="nc">dataframe</span><span class="w"> </span><span class="nt">td</span><span class="o">,</span><span class="w"> </span><span class="nt">table</span><span class="p">.</span><span class="nc">dataframe</span><span class="w"> </span><span class="nt">th</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+    border-style: solid;
+}
+
+customers = {&#39;CustomerID&#39;: [10, 11],
+         &#39;Name&#39;: [&#39;Mike&#39;, &#39;Marcia&#39;],
+         &#39;Address&#39;: [&#39;Address for Mike&#39;,&#39;Address for Marcia&#39;]}
+customers = pd.DataFrame(customers)
+customers
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+table.dataframe td, table.dataframe th {
+    border-style: solid;
+}
+
+customers = {'CustomerID': [10, 11],
+         'Name': ['Mike', 'Marcia'],
+         'Address': ['Address for Mike','Address for Marcia']}
+customers = pd.DataFrame(customers)
+customers
+</div></div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="simple-examples-of-scheduling-policies">
 <span id="cont-scheduling-scheduling-policies"></span><h1><span class="section-number">10.2. </span>Simple Examples of Scheduling Policies<a class="headerlink" href="#simple-examples-of-scheduling-policies" title="Permalink to this headline">#</a></h1>
-<p>Now that we have a collection of requirements, let’s look at a few simple possibilities and see which of our requirements they meet well and which ones they fail.</p>
+<p>Now that we have a collection of requirements, let’s look at a few simple possibilities.</p>
+<aside class="sidebar">
+<p class="sidebar-title">Definitions:</p>
+<p>We use some previously introduced terms, and add a few more:</p>
+<ul class="simple">
+<li><p><strong>Context switch</strong>: Switching the CPU from running one task to another, i.e., saving the processor registers used by the running task into its thread struc, and loading some other task’s registers into the CPU.</p></li>
+<li><p><strong>Preemption</strong>: Stopping a task to run another one.</p></li>
+<li><p><strong>Response time</strong>: How long does it take for an application to respond to external events.</p></li>
+<li><p><strong>Quantum</strong> or <strong>Time slice</strong>: The amount of time that a task is allowed to run before the kernel preempts it to run another.</p></li>
+</ul>
+</aside>
 <section id="first-come-first-served-fcfs">
 <h2><span class="section-number">10.2.1. </span>First Come, First Served (FCFS)<a class="headerlink" href="#first-come-first-served-fcfs" title="Permalink to this headline">#</a></h2>
-<p>The simplest policy just processes each task to completion when they arrive. Just like waiting in line at the local government office, each process gets into a queue and the processor executes the first process in that queue until it completes. Then we repeat the same.</p>
-<p>One problem with this policy is that it can result in poor average turnaround time.  Imagine we have three tasks that arrive at around the same start time with the run time shown in the table below:</p>
+<p>The simplest scheduling policy just processes each task to completion in the order that they arrived. Just like waiting in line at the local government office, each process gets into a queue and the processor executes the first process in that queue until it completes. Then we repeat the same.</p>
+<p>One problem with the FCFS policy is that it can result in poor average turnaround time.  Let us consider a situation with three tasks that arrive at around the same start time with the run time shown in the table below:</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="text-align:center head"><p>Task</p></th>
@@ -835,15 +854,15 @@ title="Print to PDF"
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-align:center"><p>A</p></td>
-<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>~0</p></td>
 <td class="text-align:center"><p>6</p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p>B</p></td>
-<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>~0</p></td>
 <td class="text-align:center"><p>2</p></td>
 </tr>
 <tr class="row-even"><td class="text-align:center"><p>C</p></td>
-<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>~0</p></td>
 <td class="text-align:center"><p>1</p></td>
 </tr>
 </tbody>
@@ -864,10 +883,9 @@ title="Print to PDF"
 </figcaption>
 </figure>
 <p>So the average turnaround time is: <span class="math notranslate nohighlight">\((1 + 3 + 9)/3 = 4.7 min\)</span></p>
-</section>
-<section id="shortest-job-first-sjf">
-<h2><span class="section-number">10.2.2. </span>Shortest Job First (SJF)<a class="headerlink" href="#shortest-job-first-sjf" title="Permalink to this headline">#</a></h2>
-<p>For systems like Batch, where we know a-priori how long a task will take, rather than running them in the order they arrived, we can sort them based on how long the tasks will take and always run the shortest tasks first to get the better turnaround time shown in  <a class="reference internal" href="#vp-sched-fifo2"><span class="std std-numref">Fig. 10.3</span></a>.   This policy is called shortest job first, and will always yield the optimal turnaround time.</p>
+<p>We see here that when short tasks are processed after long tasks the long ones have a major impact on the short ones, while if the order is reversed, the impact on the long tasks running after the short ones is much less.</p>
+<p><img alt="Screenshot 2024-01-28 at 9.46.19 AM.png" src="scheduling/attachment:d299148f-940d-4443-a3be-55f0159e3d24.png" />## Shortest Job First (SJF)</p>
+<p>For some systems, for example Batch, we know a-priori how long a task will take.  Hence, rather than running them in the order they arrived, we can sort them based on how long the tasks will take and always run the shortest tasks first to get the better turnaround time shown in  <a class="reference internal" href="#vp-sched-fifo2"><span class="std std-numref">Fig. 10.3</span></a>.   This policy is called shortest job first, and will always yield the optimal turnaround time.</p>
 <p>Let us, however, consider the case below, where tasks A and B arrive at time 0, and tasks C, D, and E arrive at time 3.</p>
 <table class="colwidths-auto table">
 <thead>
@@ -915,34 +933,47 @@ title="Print to PDF"
 </figcaption>
 </figure>
 <p>With a shorter average turnaround time of <span class="math notranslate nohighlight">\((2 + 4 + 5 + 6 + 9)/3 = 8.6\)</span></p>
-<p>This demonstrates the value of preemption, where we can stop long running tasks to get short ones in and out of the system.</p>
-<p>To understand the major problem with Shortest Job First, consider what happens if 1 minute tasks continue to arrive every minute starting at minute 7.  B will never complete, or in scheduling terminology, it will <em>starve</em> even though the system is processing work as fast as it is arriving.</p>
+<p>This demonstrates the value of preemption, where we can stop long running tasks to get short ones in and out of the system quickly.</p>
+<p>To understand the major problem with Shortest Job consider what happens if one minute tasks continue to arrive every minute starting at minute 4.  B will never complete, or in scheduling terminology, it will <em>starve</em> even though the system is processing work as fast as it is arriving.  <strong>Starvation</strong> is a major problem with a pure shortest job first algorithm.</p>
 </section>
 <section id="round-robin">
-<h2><span class="section-number">10.2.3. </span>Round Robin<a class="headerlink" href="#round-robin" title="Permalink to this headline">#</a></h2>
-<p>Our first preemptive scheduling algorithm is just like first come, first served but we have added the time slice so processes are no longer run to completion. In this model, we still have a single queue of processes in the Ready state, and processes can be added to it upon creation or when leaving the Blocked state. When a process becomes active, it is given a fixed amount of time to run, and when this time slice expires the OS interrupts the process and puts it at the back of the queue.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The preemptive scheduling models introduces a new parameter we need to set: the length of the time slice. We have to weigh the cost of changing processes against the interactivity requirements when deciding on the length of a time slice. Later on we will see systems that change the length based on usage patterns.</p>
-</div>
-</section>
-<section id="priority">
-<h2><span class="section-number">10.2.4. </span>Priority<a class="headerlink" href="#priority" title="Permalink to this headline">#</a></h2>
-<p>The core idea behind priority scheduling is that some processes may be more important than others and should be given access to the CPU first. To implement this policy, the OS maintains two or more priority queues which hold processes assigned to the corresponding priority. Runnable processes in a higher priority queue are run before runnable processes in lower priority queues. In general we assign higher priorities to I/O bound processes and lower priorities to CPU bound ones. Figure <a class="reference internal" href="#priority-sched"><span class="std std-numref">Fig. 10.6</span></a> shows a simple example of a system with 4 priority queues. In this snapshot, the next process to be given CPU time will be the first process in the priority 4 queue. Assuming no additions, the processes in queue 3 will not run until all of the ones in 4 have completed.</p>
-<figure class="align-default" id="priority-sched">
-<img alt="../_images/priority-sched.png" src="../_images/priority-sched.png" />
+<h2><span class="section-number">10.2.2. </span>Round Robin<a class="headerlink" href="#round-robin" title="Permalink to this headline">#</a></h2>
+<p>With SJF, we found that if we preempt a long running task when a short one arrives, we can improve turn around time.  In many environments, we don’t know how long a task will take, and, rather than just using the CPU, many tasks switch back and forth between using the CPU and doing I/O.</p>
+<p>We illustrated in <a class="reference internal" href="sch-goals.html#img-vp-cpuvsio"><span class="std std-numref">Fig. 10.1</span></a> how a CPU and I/O intensive application might use the CPU.  For such tasks, if we can make sure that CPU intensive tasks don’t block I/O intensive ones for too long, the system will enable the I/O intensive ones to better use the I/O devices while the CPU intensive task has only modest impact from the short periods of time that the I/O intensive ones use it.  Also, if a user is interacting with the I/O intensive one, e.g. running emacs, the <em>Response Time</em> is less affected by the CPU intensive applications.</p>
+<p>The <em>Round Robin</em> algorithm builds a simple FIFO run queue of tasks in the ready state much like the FIFO algorithm described earlier. When a task starts running it is given a fixed amount of time to run, often called a <em>Quantum</em> or <em>Time slice</em>.  When the quantum  expires the OS does a context switch to the next task in the queue and adds the previously running task at the back of the queue.</p>
+<p>Let us consider a situation with three tasks shown in the table below:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>Task</p></th>
+<th class="text-align:center head"><p>Start</p></th>
+<th class="text-align:center head"><p>Runtime</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>A</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>6</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>B</p></td>
+<td class="text-align:center"><p>1.1</p></td>
+<td class="text-align:center"><p>2</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>C</p></td>
+<td class="text-align:center"><p>1.3</p></td>
+<td class="text-align:center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p>Let us assume that the quantum is the (unrealistically) 1 minute.  In that case, a round robin scheduler will run tasks as shown in <a class="reference internal" href="#vp-sched-rr"><span class="std std-numref">Fig. 10.6</span></a> below:</p>
+<figure class="align-default" id="vp-sched-rr">
+<img alt="../_images/RR.png" src="../_images/RR.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 10.6 </span><span class="caption-text">A simple example of a system with 4 priority queues and runnable processes in several of the queues.</span><a class="headerlink" href="#priority-sched" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 10.6 </span><span class="caption-text">Round Robin scheduling, where every task executes for a quantum of time.</span><a class="headerlink" href="#vp-sched-rr" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It may seem counter-intuitive to assign high priority to I/O bound processes because they often do not make use of their full time slice. We do this because a process that is frequently blocking on I/O is more likely to be interactive and therefore have a user who will notice latency when the scheduler ignores the process for several periods.</p>
-</div>
-</section>
-<section id="lottery">
-<h2><span class="section-number">10.2.5. </span>Lottery<a class="headerlink" href="#lottery" title="Permalink to this headline">#</a></h2>
-<p>As the name suggests, in lottery scheduling the OS gives ‘tickets’ to each runnable process. When the scheduler needs to select a new process to run, it picks a ticket at random and the process holding that ticket runs. With a small modification, we can express priority in this method by assigning more tickets to high priority processes than low.</p>
+<p>The average turnaround time of this round robin schedule is <span class="math notranslate nohighlight">\((2 + 4 + 5 + 6 + 9)/3 = 8.6\)</span></p>
+<p>We can see that it is terrible compared to SJF, but much better than the worst FIFO case.</p>
+<p>The preemptive scheduling models introduces a new parameter we need to set: the length of the quantum. We have to weigh the cost of changing processes against the interactivity requirements when deciding on the length of a time we will run CPU intensive tasks.  You want to pick a time large enough that you are <strong>amortizing</strong> the cost of a context switch; if you picked a time that was a few hundred computer cycles you would be spending most of your time context switching.   On the other hand, if you it is too long, interactive tasks would get terrible response rate.  In all the above calculations we have assumed that the time for a context switch is irrelevant when we calculate turn around time, but in a real system this is not always a good assumption.</p>
 <p>These examples are not exhaustive, there are other algorithms for selecting the next runnable process, however these examples are meant to illustrate that there are a number of ways to approach this problem and this is an active area of research today.</p>
 </section>
 </section>
@@ -981,10 +1012,10 @@ title="Print to PDF"
             <p class="prev-next-title"><span class="section-number">10.1. </span>Scheduling Goals</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="sch-real.html" title="next page">
+    <a class='right-next' id="next-link" href="sch-prio.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">10.3. </span>A Look at the Linux Scheduler</p>
+        <p class="prev-next-title"><span class="section-number">10.3. </span>Scheduling with Priorities</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

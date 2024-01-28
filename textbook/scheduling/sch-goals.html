@@ -239,8 +239,18 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="sch-prio.html">
+     10.3. Scheduling with Priorities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sch-prop.html">
+     10.4. Proportional share
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="sch-real.html">
-     10.3. A Look at the Linux Scheduler
+     10.5. A Look at the Linux Scheduler
     </a>
    </li>
   </ul>
@@ -755,19 +765,19 @@ title="Print to PDF"
 <p>Scheduling policies may aim for different goals, for example, a system may try to give all tasks an equal share of the CPU.  They may also try to implement some kind of policy, for example, students should only get to use the CPU whenever professors don’t need it.  Or, they might try to maximize the number of tasks that complete per unit time, or minimize how long tasks take on average.  They can also try to schedule the CPU in such a fashion to maximize the utilization of all the resources of the computer; e.g., run I/O intensive tasks whenever they are not blocked so they will keep the I/O devices busy.  On the other hand, as we have discussed, context switching can be expensive, so if you are constantly preempting the running process you are wasting many resources. This is all complicated by the fact that the system may not know how long tasks will take, if they are I/O or CPU intensive, etc… Perhaps you can understand why researchers have published thousands and thousands of papers on different scheduling polices over the years.  To make things worse, while we are focused here on scheduling the CPU, as we will see later, to achieve any goal one needs to also schedule memory and even the disk head; achieving an end-to-end goal for a</p>
 <p>Applications and/or systems can care about:</p>
 <ul class="simple">
-<li><p>turnaround time: The time from when a task entered the system until it was done.</p></li>
-<li><p>throughput: The rate that tasks complete at.</p></li>
-<li><p>response time: How responsive is a system to external events, e.g., after an interrupt comes in for a network packet, how long until the task responds to the packet.</p></li>
-<li><p>fairness: How fairly are the resources of the computer shared between the tasks, e.g., if we have two tasks do they both get equal shares of the CPU.</p></li>
-<li><p>predictability: The guarantees on run time that a task can get.</p></li>
-<li><p>starvation: Is it possible for some tasks to never run when the demand on the system is high.</p></li>
+<li><p><strong>Turnaround time</strong>: The time from when a task entered the system until it was done.</p></li>
+<li><p><strong>Throughput</strong>: The rate that tasks complete at.</p></li>
+<li><p><strong>Response time</strong>: How long does it take for an application to respond to external events.</p></li>
+<li><p><strong>Fairness</strong>: How fairly are the resources of the computer shared between the tasks, e.g., if we have two tasks do they both get equal shares of the CPU.</p></li>
+<li><p><strong>Predictability</strong>: The guarantees on run time that a task can get.</p></li>
+<li><p><strong>Starvation</strong>: Is it possible for some tasks to never run when the demand on the system is high.</p></li>
 </ul>
 <p>These requirements are often in tension with each other and designing a scheduling algorithm is an act of balancing trade offs for the requirements of the OS.</p>
 <p>We should note that these metrics are generally not just about the scheduling, for example, response time depends not just on how long after a resource is available does the scheduler take to context switch to the right task, but also how long that task takes to execute once it is scheduled to respond to the request.  Also, the time the task takes depends not only on its processing requirements, but also how much of its state is in the CPU caches, if any of its state needs to be brought in from disk, etc… its complicated.</p>
 <p>With cloud computing, we have switched from caring about average response time, to tail latency.  In the cloud, a request may hit hundreds of computers, and we care about <span class="math notranslate nohighlight">\(99.9\%\)</span> tail latency, i.e., the response time for all but <span class="math notranslate nohighlight">\(0.1%\)</span> of the requests, since if even <span class="math notranslate nohighlight">\(1\%\)</span> of the requests hit a slow computer the aggregate request will be slow.  While it would be nice if one could guarantee the latency of <span class="math notranslate nohighlight">\(100\%\)</span> of the requests, that is likely too expensive.</p>
 <p>General purpose systems typically have limited information about the real needs of the applications, and implement complex schedulers that  try to do a good job of tradeing off between different goals we have discussed above. However a great deal of attention in scheduling has been spent on special purpose systems where more information is available, including:</p>
 <ul class="simple">
-<li><p><strong>real time</strong>: Real time systems are used in a wide class of applications from industrial controls to vehicle management to robotics. Predictability is a key requirement in each of these cases. Think of the program or programs responsible for managing an airplane in flight. The developers make decisions for the software with a guarantee that certain calculations can be made at least N times a second. If this requirement is not met, we start seeing bad and possibly dangerous behavior.  Such systems typically require users to specify how long tasks will take and the relative priority of different tasks so that the system can preempting lower priority work whenever a high priority task becomes available.</p></li>
+<li><p><strong>Real time</strong>: Real time systems are used in a wide class of applications from industrial controls to vehicle management to robotics. Predictability is a key requirement in each of these cases. Think of the program or programs responsible for managing an airplane in flight. The developers make decisions for the software with a guarantee that certain calculations can be made at least N times a second. If this requirement is not met, we start seeing bad and possibly dangerous behavior.  Such systems typically require users to specify how long tasks will take and the relative priority of different tasks so that the system can preempting lower priority work whenever a high priority task becomes available.</p></li>
 <li><p><strong>Batch</strong>: These are systems where the user submits jobs without any further interaction until the job completes.  Early mainframes where all based on batch processing, where users submitted jobs with punch cards.  Today, most high performance computing systems, where jobs consume enormous resources and run for long periods of time, use batch processing to enable the very expensive resources of the computer to be used efficiently.  These systems typically run tasks to completion to avoid any overhead of preemption and require users to specify how long tasks will run so they can schedule all the required resources.</p></li>
 </ul>
 <p>While general purpose operating systems cannot achieve the efficiency or predictability of specialized systems, they do need to support some applications with different requirements.  As we will see, they provide mechanisms, such as priority, to provide some control over the scheduling of applications.  While historically large HPC machines and embedded devices relied on special purpose systems, today specialized configurations of Linux has captured more and more of the requirements of these systems.</p>

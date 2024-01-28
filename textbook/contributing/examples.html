@@ -239,8 +239,18 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-prio.html">
+     10.3. Scheduling with Priorities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../scheduling/sch-prop.html">
+     10.4. Proportional share
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../scheduling/sch-real.html">
-     10.3. A Look at the Linux Scheduler
+     10.5. A Look at the Linux Scheduler
     </a>
    </li>
   </ul>
@@ -921,6 +931,54 @@ title="Print to PDF"
 </tr>
 </tbody>
 </table>
+<p>Could use Pandas from <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/style.html">this style guild</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;strings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="s2">&quot;Mike&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;ints&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="s2">&quot;floats&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.123</span><span class="p">,</span> <span class="mf">1000.23</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">df</span><span class="o">.</span><span class="n">style</span> \
+  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">thousands</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">decimal</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">format_index</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">relabel_index</span><span class="p">([</span><span class="s2">&quot;row 1&quot;</span><span class="p">,</span> <span class="s2">&quot;row 2&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+</style>
+<table id="T_f4df7">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_f4df7_level0_col0" class="col_heading level0 col0" >STRINGS</th>
+      <th id="T_f4df7_level0_col1" class="col_heading level0 col1" >INTS</th>
+      <th id="T_f4df7_level0_col2" class="col_heading level0 col2" >FLOATS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_f4df7_level0_row0" class="row_heading level0 row0" >row 1</th>
+      <td id="T_f4df7_row0_col0" class="data row0 col0" >Adam</td>
+      <td id="T_f4df7_row0_col1" class="data row0 col1" >1</td>
+      <td id="T_f4df7_row0_col2" class="data row0 col2" >1,123</td>
+    </tr>
+    <tr>
+      <th id="T_f4df7_level0_row1" class="row_heading level0 row1" >row 2</th>
+      <td id="T_f4df7_row1_col0" class="data row1 col0" >Mike</td>
+      <td id="T_f4df7_row1_col1" class="data row1 col1" >3</td>
+      <td id="T_f4df7_row1_col2" class="data row1 col2" >1.000,230</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
 <p>At the end of this section we have links to various <a class="reference internal" href="Contributing.html#cont-contr-ref"><span class="std std-ref">reference</span></a> materials, for example, sections of Jonathan’s textbook that we plan to steal materials from.</p>
 </section>
 <section id="authoring-content">

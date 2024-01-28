@@ -237,8 +237,18 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="sch-prio.html">
+     10.3. Scheduling with Priorities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sch-prop.html">
+     10.4. Proportional share
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="sch-real.html">
-     10.3. A Look at the Linux Scheduler
+     10.5. A Look at the Linux Scheduler
     </a>
    </li>
   </ul>
@@ -742,7 +752,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="scheduling">
 <span id="cont-vp-scheduling"></span><h1><span class="section-number">10. </span>Scheduling<a class="headerlink" href="#scheduling" title="Permalink to this headline">#</a></h1>
-<p>Scheduling is how the operating system time multiplexes the CPU between different tasks. A large number of scheduling policies have been developed over the years. Some of these are specialized for particular types of computing systems, while others aim to support more general-purpose systems.  We first discuss why scheduling is complicated and the goals scheduling systems are designed to meet, and then review different scheduling policies.</p>
+<p>Scheduling is the policy the operating system uses to time multiplexes the CPU between different tasks. A large number of scheduling policies have been developed over the years. Some of these are specialized for particular types of computing systems, while others aim to support more general-purpose systems.  We first discuss why scheduling is complicated and the goals scheduling policies are designed to meet, and then review a number of these policies.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Space and time multiplexing:</strong> In reality today all computers have many physical CPUs, and the kernel does both space and time multiplexing.  Given the existence of caches and NUMA memory, the decision of not only when to run a task but also where (i.e. on which CPU) to run it has profound performance implications.  However, we will largly focus on introducing the problem of scheduling from he perspective of a single CPU.</p>

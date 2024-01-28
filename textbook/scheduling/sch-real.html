@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>10.3. A Look at the Linux Scheduler &#8212; Introduction to Operating Systems</title>
+    <title>10.5. A Look at the Linux Scheduler &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="11. Review Questions" href="review.html" />
-    <link rel="prev" title="10.2. Simple Examples of Scheduling Policies" href="sch-simple.html" />
+    <link rel="prev" title="10.4. Proportional share" href="sch-prop.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -236,9 +236,19 @@ const thebe_selector_output = ".output, .cell_output"
      10.2. Simple Examples of Scheduling Policies
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sch-prio.html">
+     10.3. Scheduling with Priorities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sch-prop.html">
+     10.4. Proportional share
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     10.3. A Look at the Linux Scheduler
+     10.5. A Look at the Linux Scheduler
     </a>
    </li>
   </ul>
@@ -740,12 +750,12 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-bit-of-history">
-   10.3.1. A Bit of History
+   10.5.1. A Bit of History
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-completely-fair-scheduler-cfs">
-   10.3.2. The Completely Fair Scheduler (CFS)
+   10.5.2. The Completely Fair Scheduler (CFS)
   </a>
  </li>
 </ul>
@@ -769,12 +779,12 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-bit-of-history">
-   10.3.1. A Bit of History
+   10.5.1. A Bit of History
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-completely-fair-scheduler-cfs">
-   10.3.2. The Completely Fair Scheduler (CFS)
+   10.5.2. The Completely Fair Scheduler (CFS)
   </a>
  </li>
 </ul>
@@ -788,15 +798,16 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="a-look-at-the-linux-scheduler">
-<h1><span class="section-number">10.3. </span>A Look at the Linux Scheduler<a class="headerlink" href="#a-look-at-the-linux-scheduler" title="Permalink to this headline">#</a></h1>
-<p>talk about multi-CPU system</p>
+<h1><span class="section-number">10.5. </span>A Look at the Linux Scheduler<a class="headerlink" href="#a-look-at-the-linux-scheduler" title="Permalink to this headline">#</a></h1>
+<p>talk about multi-CPU system, multiple scheduling…</p>
 <section id="a-bit-of-history">
-<h2><span class="section-number">10.3.1. </span>A Bit of History<a class="headerlink" href="#a-bit-of-history" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.5.1. </span>A Bit of History<a class="headerlink" href="#a-bit-of-history" title="Permalink to this headline">#</a></h2>
 <p>Prior to kernel version 2.6.23, Linux employed a scheduler that combined priority queues with a heuristic that altered a process’s priority based on the amount of a time slice it used. CPU-bound processes would consume their entire slice and would drop in priority. Conversely, I/O-bound processes would often block before consuming an entire time slice and so their priority would be increased. This was meant to allow for interactive processes to stay in the high priority queues and batch processing jobs (really anything that was CPU-bound) to drop. This scheduler had a number of heuristics that were used in decision making that were also exposed as tunable parameters, but the biggest feature it boasted was that it had O(1) run time. In other words, the time to select the next process was constant, regardless of how many runnable processes there were in the system.</p>
 </section>
 <section id="the-completely-fair-scheduler-cfs">
-<h2><span class="section-number">10.3.2. </span>The Completely Fair Scheduler (CFS)<a class="headerlink" href="#the-completely-fair-scheduler-cfs" title="Permalink to this headline">#</a></h2>
-<p>The Linux Kernel documentation has the whole story <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html">here.</a> The completely fair scheduler was a from-scratch redesign of the Linux scheduler; it did away with priority queues and with all<a class="footnote-reference brackets" href="#notall" id="id1">1</a> heuristics and tunables found in the O(1) scheduler. CFS introduced keeping a counter for the amount of runtime each task has received and this counter is used to decide on the next task to run. Instead of priority queues CFS places all tasks in a red-black tree sorted on their accumulated runtime with tasks on the left having less accumulated run time than tasks on the right. When the system needs a new task to run, the left most task is selected. This change allows CFS to completely avoid the starvation of CPU bound tasks that could occur with the previous scheduler.</p>
+<h2><span class="section-number">10.5.2. </span>The Completely Fair Scheduler (CFS)<a class="headerlink" href="#the-completely-fair-scheduler-cfs" title="Permalink to this headline">#</a></h2>
+<p>Below is not accurate, there are multiple schedulers,
+The Linux Kernel documentation has the whole story <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html">here.</a> The completely fair scheduler was a from-scratch redesign of the Linux scheduler; it did away with priority queues and with all<a class="footnote-reference brackets" href="#notall" id="id1">1</a> heuristics and tunables found in the O(1) scheduler. CFS introduced keeping a counter for the amount of runtime each task has received and this counter is used to decide on the next task to run. Instead of priority queues CFS places all tasks in a red-black tree sorted on their accumulated runtime with tasks on the left having less accumulated run time than tasks on the right. When the system needs a new task to run, the left most task is selected. This change allows CFS to completely avoid the starvation of CPU bound tasks that could occur with the previous scheduler.</p>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="notall"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
@@ -833,11 +844,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="sch-simple.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="sch-prop.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">10.2. </span>Simple Examples of Scheduling Policies</p>
+            <p class="prev-next-title"><span class="section-number">10.4. </span>Proportional share</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="review.html" title="next page">
