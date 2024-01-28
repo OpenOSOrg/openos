@@ -57,7 +57,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="10.4. Proportional share" href="sch-prop.html" />
+    <link rel="next" title="10.4. Scheduling in the real world" href="sch-real.html" />
     <link rel="prev" title="10.2. Simple Examples of Scheduling Policies" href="sch-simple.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -244,13 +244,8 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="sch-prop.html">
-     10.4. Proportional share
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="sch-real.html">
-     10.5. A Look at the Linux Scheduler
+     10.4. Scheduling in the real world
     </a>
    </li>
   </ul>
@@ -801,6 +796,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="scheduling-with-priorities">
 <h1><span class="section-number">10.3. </span>Scheduling with Priorities<a class="headerlink" href="#scheduling-with-priorities" title="Permalink to this headline">#</a></h1>
+<p>We first discuss scheduling with fixed priorites for real time, and then how priorities can be used dynamically to support an interactive system.</p>
 <section id="fixed-priority">
 <h2><span class="section-number">10.3.1. </span>Fixed Priority<a class="headerlink" href="#fixed-priority" title="Permalink to this headline">#</a></h2>
 <p>The core idea behind priority scheduling is that some processes may be more important than others and should be given access to the CPU first.   For example, one reasonable assumption might be that tasks of students should only run if there are no tasks from professors.  To implement this policy, the OS maintains two or more priority queues which hold tasks assigned to the corresponding priority. Runnable processes in a lower priority queue are only run if there are none in a higher priority queues.  Figure <a class="reference internal" href="#priority-sched"><span class="std std-numref">Fig. 10.8</span></a> shows a simple example of a system with 4 priority queues. In this snapshot, the next process to be given CPU time will be the first process in the priority 4 queue. Assuming no additions, the processes in queue 3 will not run until all of the ones in 4 have completed.</p>
@@ -853,7 +849,7 @@ title="Print to PDF"
 <p>Note, one challenge with a fixed priority scheme is that low priority work can starve if there is always higher priority work entering the system.</p>
 </section>
 <section id="variable-priority-or-multilevel-feedback">
-<h2><span class="section-number">10.3.2. </span>Variable Priority or Multilevel feedback<a class="headerlink" href="#variable-priority-or-multilevel-feedback" title="Permalink to this headline">#</a></h2>
+<span id="cont-scheduling-scheduling-policies-mlf"></span><h2><span class="section-number">10.3.2. </span>Variable Priority or Multilevel feedback<a class="headerlink" href="#variable-priority-or-multilevel-feedback" title="Permalink to this headline">#</a></h2>
 <p>While round robin does a better job than run to completion it doesn’t do a good job for I/O bound tasks.  If there are many CPU intensive tasks.  Consider the case of 100 CPU intensive tasks that each consume their full quantum of, say, 10msec. If the I/O intensive task only runs for a few usec, and then does some quick I/O, it might have to wait for <span class="math notranslate nohighlight">\(10msec * 100 = 1 sec\)</span> before it gets to run again.  What we really want to do is to prioritize I/O intensive tasks.   Unfortunately, we don’t know which tasks are CPU or I/O intensive a-priori, and further a task may go back and forth between being CPU and I/O intensive.</p>
 <p>A very popular scheduling algorithm for this is called <strong>Multilevel</strong> feedback.  It assumes the same kind of data structure shown in <a class="reference internal" href="#vp-sched-pr"><span class="std std-numref">Fig. 10.9</span></a>.  One simple varient of the algorithm is:</p>
 <ul class="simple">
@@ -900,10 +896,10 @@ title="Print to PDF"
             <p class="prev-next-title"><span class="section-number">10.2. </span>Simple Examples of Scheduling Policies</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="sch-prop.html" title="next page">
+    <a class='right-next' id="next-link" href="sch-real.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">10.4. </span>Proportional share</p>
+        <p class="prev-next-title"><span class="section-number">10.4. </span>Scheduling in the real world</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
