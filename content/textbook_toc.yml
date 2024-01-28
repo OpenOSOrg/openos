@@ -27,8 +27,12 @@ parts:
   - file: scheduling/virtual
   - file: scheduling/threads
   - file: scheduling/scheduling
-  - file: scheduling/preempt
-  - file: scheduling/real_sched
+    sections: 
+    - file: scheduling/sch-goals
+    - file: scheduling/sch-simple
+    - file: scheduling/sch-prio
+    - file: scheduling/sch-prop
+    - file: scheduling/sch-real
   - file: scheduling/review
 - caption: 'Virtual Memory'
   numbered: True
@@ -95,5 +99,11 @@ parts:
   numbered: True
   chapters:
   - file: misc/howto
-  - file: contributing/Contributing
+  - file: contributing/intro
+    sections: 
+    - file: contributing/examples
+    - file: contributing/credit
+    - file: contributing/Contributing
+    - file: contributing/resources
+    - file: contributing/fix
   - file: misc/bib
