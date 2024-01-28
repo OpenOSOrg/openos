@@ -799,15 +799,41 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="a-look-at-the-linux-scheduler">
 <h1><span class="section-number">10.5. </span>A Look at the Linux Scheduler<a class="headerlink" href="#a-look-at-the-linux-scheduler" title="Permalink to this headline">#</a></h1>
-<p>talk about multi-CPU system, multiple scheduling…</p>
 <section id="a-bit-of-history">
 <h2><span class="section-number">10.5.1. </span>A Bit of History<a class="headerlink" href="#a-bit-of-history" title="Permalink to this headline">#</a></h2>
 <p>Prior to kernel version 2.6.23, Linux employed a scheduler that combined priority queues with a heuristic that altered a process’s priority based on the amount of a time slice it used. CPU-bound processes would consume their entire slice and would drop in priority. Conversely, I/O-bound processes would often block before consuming an entire time slice and so their priority would be increased. This was meant to allow for interactive processes to stay in the high priority queues and batch processing jobs (really anything that was CPU-bound) to drop. This scheduler had a number of heuristics that were used in decision making that were also exposed as tunable parameters, but the biggest feature it boasted was that it had O(1) run time. In other words, the time to select the next process was constant, regardless of how many runnable processes there were in the system.</p>
 </section>
 <section id="the-completely-fair-scheduler-cfs">
 <h2><span class="section-number">10.5.2. </span>The Completely Fair Scheduler (CFS)<a class="headerlink" href="#the-completely-fair-scheduler-cfs" title="Permalink to this headline">#</a></h2>
-<p>Below is not accurate, there are multiple schedulers,
-The Linux Kernel documentation has the whole story <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html">here.</a> The completely fair scheduler was a from-scratch redesign of the Linux scheduler; it did away with priority queues and with all<a class="footnote-reference brackets" href="#notall" id="id1">1</a> heuristics and tunables found in the O(1) scheduler. CFS introduced keeping a counter for the amount of runtime each task has received and this counter is used to decide on the next task to run. Instead of priority queues CFS places all tasks in a red-black tree sorted on their accumulated runtime with tasks on the left having less accumulated run time than tasks on the right. When the system needs a new task to run, the left most task is selected. This change allows CFS to completely avoid the starvation of CPU bound tasks that could occur with the previous scheduler.</p>
+<!--
+tracks the amount of time each process has gotten, and the maximum time it would have expected to run on an ideal processor
+
+I guess I don't get it, if it is just the vruntime, then even an interactive task that has been around for a long time will 
+
+https://opensource.com/article/19/2/fair-scheduling-linux
+
+
+Below is not accurate, there are multiple schedulers, 
+
+talk about multi-CPU system, multiple scheduling...  say that the CFS is per CPU, 
+
+SMP load-balancing has been reworked/sanitized: the runqueue-walking
+assumptions are gone from the load-balancing code now, and iterators of the
+scheduling modules are used.  The balancing code got quite a bit simpler as a
+result.
+
+
+https://www.kernel.org/doc/Documentation/scheduler/sched-design-CFS.txt
+
+sched/fair.c implements the CFS scheduler described above.
+
+sched/rt.c implements SCHED_FIFO and SCHED_RR semantics, in a simpler way than
+the previous vanilla scheduler did.  It uses 100 runqueues (for all 100 RT
+priority levels, instead of 140 in the previous scheduler) and it needs no
+expired array.
+
+-->
+<p>The Linux Kernel documentation has the whole story <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html">here.</a> The completely fair scheduler was a from-scratch redesign of the Linux scheduler; it did away with priority queues and with all<a class="footnote-reference brackets" href="#notall" id="id1">1</a> heuristics and tunables found in the O(1) scheduler. CFS introduced keeping a counter for the amount of runtime each task has received and this counter is used to decide on the next task to run. Instead of priority queues CFS places all tasks in a red-black tree sorted on their accumulated runtime with tasks on the left having less accumulated run time than tasks on the right. When the system needs a new task to run, the left most task is selected. This change allows CFS to completely avoid the starvation of CPU bound tasks that could occur with the previous scheduler.</p>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="notall"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>

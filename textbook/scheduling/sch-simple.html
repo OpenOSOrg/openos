@@ -756,8 +756,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shortest-job-first-sjf">
+   10.2.2. Shortest Job First (SJF)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#round-robin">
-   10.2.2. Round Robin
+   10.2.3. Round Robin
   </a>
  </li>
 </ul>
@@ -785,8 +790,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shortest-job-first-sjf">
+   10.2.2. Shortest Job First (SJF)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#round-robin">
-   10.2.2. Round Robin
+   10.2.3. Round Robin
   </a>
  </li>
 </ul>
@@ -884,7 +894,9 @@ customers
 </figure>
 <p>So the average turnaround time is: <span class="math notranslate nohighlight">\((1 + 3 + 9)/3 = 4.7 min\)</span></p>
 <p>We see here that when short tasks are processed after long tasks the long ones have a major impact on the short ones, while if the order is reversed, the impact on the long tasks running after the short ones is much less.</p>
-<p><img alt="Screenshot 2024-01-28 at 9.46.19 AM.png" src="scheduling/attachment:d299148f-940d-4443-a3be-55f0159e3d24.png" />## Shortest Job First (SJF)</p>
+</section>
+<section id="shortest-job-first-sjf">
+<h2><span class="section-number">10.2.2. </span>Shortest Job First (SJF)<a class="headerlink" href="#shortest-job-first-sjf" title="Permalink to this headline">#</a></h2>
 <p>For some systems, for example Batch, we know a-priori how long a task will take.  Hence, rather than running them in the order they arrived, we can sort them based on how long the tasks will take and always run the shortest tasks first to get the better turnaround time shown in  <a class="reference internal" href="#vp-sched-fifo2"><span class="std std-numref">Fig. 10.3</span></a>.   This policy is called shortest job first, and will always yield the optimal turnaround time.</p>
 <p>Let us, however, consider the case below, where tasks A and B arrive at time 0, and tasks C, D, and E arrive at time 3.</p>
 <table class="colwidths-auto table">
@@ -937,7 +949,7 @@ customers
 <p>To understand the major problem with Shortest Job consider what happens if one minute tasks continue to arrive every minute starting at minute 4.  B will never complete, or in scheduling terminology, it will <em>starve</em> even though the system is processing work as fast as it is arriving.  <strong>Starvation</strong> is a major problem with a pure shortest job first algorithm.</p>
 </section>
 <section id="round-robin">
-<h2><span class="section-number">10.2.2. </span>Round Robin<a class="headerlink" href="#round-robin" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.2.3. </span>Round Robin<a class="headerlink" href="#round-robin" title="Permalink to this headline">#</a></h2>
 <p>With SJF, we found that if we preempt a long running task when a short one arrives, we can improve turn around time.  In many environments, we don’t know how long a task will take, and, rather than just using the CPU, many tasks switch back and forth between using the CPU and doing I/O.</p>
 <p>We illustrated in <a class="reference internal" href="sch-goals.html#img-vp-cpuvsio"><span class="std std-numref">Fig. 10.1</span></a> how a CPU and I/O intensive application might use the CPU.  For such tasks, if we can make sure that CPU intensive tasks don’t block I/O intensive ones for too long, the system will enable the I/O intensive ones to better use the I/O devices while the CPU intensive task has only modest impact from the short periods of time that the I/O intensive ones use it.  Also, if a user is interacting with the I/O intensive one, e.g. running emacs, the <em>Response Time</em> is less affected by the CPU intensive applications.</p>
 <p>The <em>Round Robin</em> algorithm builds a simple FIFO run queue of tasks in the ready state much like the FIFO algorithm described earlier. When a task starts running it is given a fixed amount of time to run, often called a <em>Quantum</em> or <em>Time slice</em>.  When the quantum  expires the OS does a context switch to the next task in the queue and adds the previously running task at the back of the queue.</p>
@@ -951,29 +963,36 @@ customers
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-align:center"><p>A</p></td>
-<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>0</p></td>
 <td class="text-align:center"><p>6</p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p>B</p></td>
-<td class="text-align:center"><p>1.1</p></td>
+<td class="text-align:center"><p>0.0001</p></td>
 <td class="text-align:center"><p>2</p></td>
 </tr>
 <tr class="row-even"><td class="text-align:center"><p>C</p></td>
-<td class="text-align:center"><p>1.3</p></td>
+<td class="text-align:center"><p>0.0002</p></td>
 <td class="text-align:center"><p>1</p></td>
 </tr>
 </tbody>
 </table>
-<p>Let us assume that the quantum is the (unrealistically) 1 minute.  In that case, a round robin scheduler will run tasks as shown in <a class="reference internal" href="#vp-sched-rr"><span class="std std-numref">Fig. 10.6</span></a> below:</p>
+<p>Assuming the units are in seconds, let us assume that the quantum is also (unrealistically) 1 second.  In that case, a round robin scheduler will run tasks as shown in <a class="reference internal" href="#vp-sched-rr"><span class="std std-numref">Fig. 10.6</span></a> below:</p>
 <figure class="align-default" id="vp-sched-rr">
 <img alt="../_images/RR.png" src="../_images/RR.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 10.6 </span><span class="caption-text">Round Robin scheduling, where every task executes for a quantum of time.</span><a class="headerlink" href="#vp-sched-rr" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The average turnaround time of this round robin schedule is <span class="math notranslate nohighlight">\((2 + 4 + 5 + 6 + 9)/3 = 8.6\)</span></p>
-<p>We can see that it is terrible compared to SJF, but much better than the worst FIFO case.</p>
-<p>The preemptive scheduling models introduces a new parameter we need to set: the length of the quantum. We have to weigh the cost of changing processes against the interactivity requirements when deciding on the length of a time we will run CPU intensive tasks.  You want to pick a time large enough that you are <strong>amortizing</strong> the cost of a context switch; if you picked a time that was a few hundred computer cycles you would be spending most of your time context switching.   On the other hand, if you it is too long, interactive tasks would get terrible response rate.  In all the above calculations we have assumed that the time for a context switch is irrelevant when we calculate turn around time, but in a real system this is not always a good assumption.</p>
+<p>The average turnaround time of this round robin schedule is <span class="math notranslate nohighlight">\((2 + 4 + 5 + 6 + 9)/3 = 8.6\)</span>.  We can see that it is terrible compared to SJF, but much better than the worst FIFO case.</p>
+<p>The preemptive scheduling models introduces a new parameter we need to set: the length of the quantum. We have to weigh the cost of changing processes against the interactivity requirements when deciding on the length of a time we will run CPU intensive tasks.  You want to pick a time large enough that you are <strong>amortizing</strong> the cost of a context switch; if you picked a time that was a few hundred computer cycles you would be spending most of your time context switching.   On the other hand, if you it is too long, interactive tasks would get terrible response rate.</p>
+<p>Let us assume that the quantum is, say 10msec, a number much larger than the time for a context switch but reasonable to not add much delay to tasks that interact with humans.  Also, we will assume that we can ignore the context switching time.  We can represent what happens is shown below:</p>
+<figure class="align-default" id="vp-sched-rr2">
+<img alt="../_images/RR2.png" src="../_images/RR2.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 10.7 </span><span class="caption-text">Round Robin scheduling, with a reasonable quantum.</span><a class="headerlink" href="#vp-sched-rr2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>For the first three seconds, all three tasks share the CPU.  Assuming that each gets an equal share, C will have had a full second of compute time after three seconds and it will be done.  From seconds 3-5 the CPU is shared by tasks A and B, where each get half of it.  After 5 seconds, B will have had two full seconds of compute time, and A will have the CPU to itself from that point forward.</p>
 <p>These examples are not exhaustive, there are other algorithms for selecting the next runnable process, however these examples are meant to illustrate that there are a number of ways to approach this problem and this is an active area of research today.</p>
 </section>
 </section>

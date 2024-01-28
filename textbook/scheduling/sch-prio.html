@@ -53,6 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="10.4. Proportional share" href="sch-prop.html" />
@@ -749,8 +751,13 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#priority">
-   10.3.1. Priority
+  <a class="reference internal nav-link" href="#fixed-priority">
+   10.3.1. Fixed Priority
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variable-priority-or-multilevel-feedback">
+   10.3.2. Variable Priority or Multilevel feedback
   </a>
  </li>
 </ul>
@@ -773,8 +780,13 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#priority">
-   10.3.1. Priority
+  <a class="reference internal nav-link" href="#fixed-priority">
+   10.3.1. Fixed Priority
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variable-priority-or-multilevel-feedback">
+   10.3.2. Variable Priority or Multilevel feedback
   </a>
  </li>
 </ul>
@@ -789,19 +801,68 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="scheduling-with-priorities">
 <h1><span class="section-number">10.3. </span>Scheduling with Priorities<a class="headerlink" href="#scheduling-with-priorities" title="Permalink to this headline">#</a></h1>
-<section id="priority">
-<h2><span class="section-number">10.3.1. </span>Priority<a class="headerlink" href="#priority" title="Permalink to this headline">#</a></h2>
-<p>The core idea behind priority scheduling is that some processes may be more important than others and should be given access to the CPU first. To implement this policy, the OS maintains two or more priority queues which hold processes assigned to the corresponding priority. Runnable processes in a higher priority queue are run before runnable processes in lower priority queues. In general we assign higher priorities to I/O bound processes and lower priorities to CPU bound ones. Figure <a class="reference internal" href="#priority-sched"><span class="std std-numref">Fig. 10.7</span></a> shows a simple example of a system with 4 priority queues. In this snapshot, the next process to be given CPU time will be the first process in the priority 4 queue. Assuming no additions, the processes in queue 3 will not run until all of the ones in 4 have completed.</p>
+<section id="fixed-priority">
+<h2><span class="section-number">10.3.1. </span>Fixed Priority<a class="headerlink" href="#fixed-priority" title="Permalink to this headline">#</a></h2>
+<p>The core idea behind priority scheduling is that some processes may be more important than others and should be given access to the CPU first.   For example, one reasonable assumption might be that tasks of students should only run if there are no tasks from professors.  To implement this policy, the OS maintains two or more priority queues which hold tasks assigned to the corresponding priority. Runnable processes in a lower priority queue are only run if there are none in a higher priority queues.  Figure <a class="reference internal" href="#priority-sched"><span class="std std-numref">Fig. 10.8</span></a> shows a simple example of a system with 4 priority queues. In this snapshot, the next process to be given CPU time will be the first process in the priority 4 queue. Assuming no additions, the processes in queue 3 will not run until all of the ones in 4 have completed.</p>
 <figure class="align-default" id="priority-sched">
-<img alt="../_images/priority-sched.png" src="../_images/priority-sched.png" />
+<img alt="../_images/Priority.png" src="../_images/Priority.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 10.7 </span><span class="caption-text">A simple example of a system with 4 priority queues and runnable processes in several of the queues.</span><a class="headerlink" href="#priority-sched" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 10.8 </span><span class="caption-text">A simple example of a system with 4 priority queues and runnable processes in several of the queues.</span><a class="headerlink" href="#priority-sched" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It may seem counter-intuitive to assign high priority to I/O bound processes because they often do not make use of their full time slice. We do this because a process that is frequently blocking on I/O is more likely to be interactive and therefore have a user who will notice latency when the scheduler ignores the process for several periods.</p>
-</div>
+<p>Let us consider a situation with three tasks shown in the table below:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>Task</p></th>
+<th class="text-align:center head"><p>Start</p></th>
+<th class="text-align:center head"><p>Runtime</p></th>
+<th class="text-align:center head"><p>Priority</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>A</p></td>
+<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>6</p></td>
+<td class="text-align:center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>B</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>2</p></td>
+<td class="text-align:center"><p>3</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>C</p></td>
+<td class="text-align:center"><p>2</p></td>
+<td class="text-align:center"><p>2</p></td>
+<td class="text-align:center"><p>3</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>D</p></td>
+<td class="text-align:center"><p>3</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>5</p></td>
+</tr>
+</tbody>
+</table>
+<p>In that case, a priority scheduler will run tasks as shown in <a class="reference internal" href="#vp-sched-pr"><span class="std std-numref">Fig. 10.9</span></a> below:</p>
+<figure class="align-default" id="vp-sched-pr">
+<img alt="../_images/Priority-tl.png" src="../_images/Priority-tl.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 10.9 </span><span class="caption-text">Priority scheduling, where every task executes for a quantum of time.</span><a class="headerlink" href="#vp-sched-pr" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>A runs by itself until B becomes ready to run.  We then preempt A after it has accumulated one second of run time, and context switch to B since it is higher priority.  When C starts running, it is the same priority as B, so they share the CPU (i.e., we switch back and forth between them every quantum). At time 3, D enters with the highest priority, and we stop running B and C to just run it.  At that point, B has accumulated 1.5 sec of runtime, and C has accumulated .5 seconds.  Once D is done, we again share the CPU using round robin between B and C, until B has accumulated its full 2 seconds of runtime, after which we can use the CPU just for running C.  Finally, at second 6, all the other tasks are done and A, the lowest priority task, can be run until it completes.  The average turnaround time here is <span class="math notranslate nohighlight">\((4 + 5 + 6 + 11)/3 = 8.6\)</span> seconds.</p>
+<p>Note, one challenge with a fixed priority scheme is that low priority work can starve if there is always higher priority work entering the system.</p>
+</section>
+<section id="variable-priority-or-multilevel-feedback">
+<h2><span class="section-number">10.3.2. </span>Variable Priority or Multilevel feedback<a class="headerlink" href="#variable-priority-or-multilevel-feedback" title="Permalink to this headline">#</a></h2>
+<p>While round robin does a better job than run to completion it doesn’t do a good job for I/O bound tasks.  If there are many CPU intensive tasks.  Consider the case of 100 CPU intensive tasks that each consume their full quantum of, say, 10msec. If the I/O intensive task only runs for a few usec, and then does some quick I/O, it might have to wait for <span class="math notranslate nohighlight">\(10msec * 100 = 1 sec\)</span> before it gets to run again.  What we really want to do is to prioritize I/O intensive tasks.   Unfortunately, we don’t know which tasks are CPU or I/O intensive a-priori, and further a task may go back and forth between being CPU and I/O intensive.</p>
+<p>A very popular scheduling algorithm for this is called <strong>Multilevel</strong> feedback.  It assumes the same kind of data structure shown in <a class="reference internal" href="#vp-sched-pr"><span class="std std-numref">Fig. 10.9</span></a>.  One simple varient of the algorithm is:</p>
+<ul class="simple">
+<li><p>When a task first starts running, we assume it is I/O intensive, and add it to the highest priority queue.</p></li>
+<li><p>if a task consumes an entire quantum, we assume it is more CPU intensive, and decrease its priority by one before adding it to the runqueue.</p></li>
+<li><p>If a task performs I/O before its quantum expires, when it becomes runnable we increase its priority (up to the highest level) before adding it to the runqueue.</p></li>
+<li><p>To avoid starvation, we periodically move all the tasks to the highest priority queue.</p></li>
+</ul>
+<p>Note, a system can support both fixed priorities, e.g., for real time tasks, and a range of priorities for dealing with general purpose tasks.</p>
 </section>
 </section>
 
