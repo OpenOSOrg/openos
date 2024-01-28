@@ -30,6 +30,8 @@ parts:
     sections: 
     - file: scheduling/sch-goals
     - file: scheduling/sch-simple
+    - file: scheduling/sch-prio
+    - file: scheduling/sch-prop
     - file: scheduling/sch-real
   - file: scheduling/review
 - caption: 'Virtual Memory'
