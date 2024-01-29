@@ -833,6 +833,18 @@ title="Print to PDF"
 </div>
 </div>
 <p>If we compile this program, run it, I can use the synthetic file system “/proc/PID/maps” to ask Linux about what is mapped in different parts of the application address space.  Node, in bash the variable <code class="docutils literal notranslate"><span class="pre">$!</span></code> is the pid of the last started process.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Fields when looking at /proc/PID/maps:</p>
+<ul class="simple">
+<li><p>address: This is the starting and ending address of the region in the process’s address space</p></li>
+<li><p>permissions - This describes how pages in the region can be accessed. There are four different permissions: read, write, execute, and shared. If a region is not shared, it is private, so a p will appear instead of an s.</p></li>
+<li><p>offset - If the region was mapped from a file (using mmap), this is the offset in the file where the mapping begins. If the memory was not mapped from a file, it’s just 0.</p></li>
+<li><p>device - If the region was mapped from a file, this is the major and minor device number (in hex) where the file lives.</p></li>
+<li><p>inode - If the region was mapped from a file, this is the file number.</p></li>
+<li><p>pathname - If the region was mapped from a file, this is the name of the file. Otherwise, for special regions like the heap, stack… this field identifies the use.</p></li>
+</ul>
+</div>
 <div class="cell tag_remove-input tag_hide-output docutils container">
 </div>
 <div class="cell tag_remove-input docutils container">
@@ -842,17 +854,6 @@ title="Print to PDF"
 </script></div>
 </div>
 <p>We can see that the first five regions of the process come directly from the file.  We can use the <code class="docutils literal notranslate"><span class="pre">objdump</span></code> utility to print the different sections of the executable file, as shown below, where the second column <code class="docutils literal notranslate"><span class="pre">Name</span></code> describes that part of the file, and the fourth column <code class="docutils literal notranslate"><span class="pre">VMA</span></code> is the virtual memory address that should be loaded from the program.  If you scroll through that information, you can see that the executable parts of the program (<code class="docutils literal notranslate"><span class="pre">.init</span></code>, <code class="docutils literal notranslate"><span class="pre">.plt</span> </code>and <code class="docutils literal notranslate"><span class="pre">.text</span></code>) is loaded into the memory with executable permission.  The <code class="docutils literal notranslate"><span class="pre">.rodata</span></code> is mapped into memory right after that, etc…  All these regions have the <strong>p</strong>, or private, flag set in the permissions on the map, meaning that the operating system is creating a copy of the information from the file, so many processes can run the same program, and any writes they make to the corresponding memory will not be visible to other processes executing the same program.</p>
-<aside class="sidebar">
-<p class="sidebar-title">Fields when looking at /proc/PID/maps:</p>
-<ul class="simple">
-<li><p>address: This is the starting and ending address of the region in the process’s address space</p></li>
-<li><p>permissions - This describes how pages in the region can be accessed. There are four different permissions: read, write, execute, and shared. If a region is not shared, it is private, so a p will appear instead of an s.</p></li>
-<li><p>offset - If the region was mapped from a file (using mmap), this is the offset in the file where the mapping begins. If the memory was not mapped from a file, it’s just 0.</p></li>
-<li><p>device - If the region was mapped from a file, this is the major and minor device number (in hex) where the file lives.</p></li>
-<li><p>inode - If the region was mapped from a file, this is the file number.</p></li>
-<li><p>pathname - If the region was mapped from a file, this is the name of the file. Otherwise, for special regions like the heap, stack… this field identifies the use.</p></li>
-</ul>
-</aside>
 <div class="cell tag_remove-input tag_output_scroll docutils container">
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
