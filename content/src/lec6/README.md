@@ -1,9 +1,4 @@
 ## Programs
-- forkoff - starts a whole bunch of children and parent exits
-    - ```./forkoff & ps -f ; sleep 10 ; ps -f ```: note change in PPID
-    - ```ps -ejH ```: print out tree
-    - ```ps -f```: show PPID
-    - ```ps | grep forkoff | awk '{print $1}' | xargs kill```: kill all the processes with name forkoff
 - wo - also generates wo-static - is a simple program that runs forever to let you look at the sections in a simple program and the corresponding regions in the virtual memory
    - ``` objdump -h wo```: look at sections at the beginning
    - ``` objdump -h wo-static```: look at sections at the beginning
@@ -11,6 +6,11 @@
    - look at add map by doing ps to find pid of wo-static, and then ```cat /proc/PID/maps```
 - zombie - child sleeps for a long time, if you type ps -f, you see it is defunct, but has not been waited for
 - simplefork: parent starts a bunch of children; children start & sleep, parent's signal handler registers them
+- forkoff - starts a whole bunch of children and parent exits - look at top
+    - ```./forkoff & ps -f ; sleep 10 ; ps -f ```: note change in PPID
+    - ```ps -ejH ```: print out tree
+    - ```ps -f```: show PPID
+    - ```ps | grep forkoff | awk '{print $1}' | xargs kill```: kill all the processes with name forkoff
 
 
 
