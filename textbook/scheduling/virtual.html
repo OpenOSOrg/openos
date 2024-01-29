@@ -746,7 +746,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="virtualizing-the-cpu">
-<h1><span class="section-number">8. </span>Virtualizing the CPU<a class="headerlink" href="#virtualizing-the-cpu" title="Permalink to this headline">#</a></h1>
+<span id="cont-vp-virt"></span><h1><span class="section-number">8. </span>Virtualizing the CPU<a class="headerlink" href="#virtualizing-the-cpu" title="Permalink to this headline">#</a></h1>
 <p>When we say “virtualizing” what we mean is actually adding a layer of indirection between the target (in this case the CPU) and the source (the process), enabling multiple processes to take turns using the same CPU; that is time multiplexing the CPU.  In order to do this, we will need a way of pausing the execution of a process while another process runs and then resuming execution later without the process having to be aware of this pause, which means we need to capture all of the state that is relevant to a process in one or more data structures we can use to hold them when the process is not active. When the OS changes the active process on a CPU, we call this a <strong>context switch</strong>. To complete a context switch we need to save the CPU state for the process coming off the CPU and then load the state for the incoming process before allowing the CPU to execute the incoming process.</p>
 <figure class="align-left" id="img-vp-proc">
 <a class="reference internal image-reference" href="../_images/vp-osstruc.png"><img alt="../_images/vp-osstruc.png" src="../_images/vp-osstruc.png" style="width: 40%;" /></a>
