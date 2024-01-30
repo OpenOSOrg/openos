@@ -770,6 +770,24 @@ title="Print to PDF"
      20.1.3. Page Faults in the Kernel
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-memory-sharing-fork-and-copy-on-write">
+     20.1.4. More Memory Sharing:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       fork()
+      </span>
+     </code>
+     and copy-on-write
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#review-questions">
+       20.1.4.1. Review questions
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
  </li>
 </ul>
@@ -817,6 +835,24 @@ title="Print to PDF"
     <a class="reference internal nav-link" href="#page-faults-in-the-kernel">
      20.1.3. Page Faults in the Kernel
     </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-memory-sharing-fork-and-copy-on-write">
+     20.1.4. More Memory Sharing:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       fork()
+      </span>
+     </code>
+     and copy-on-write
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#review-questions">
+       20.1.4.1. Review questions
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -1089,6 +1125,69 @@ The equivalent in Windows is called a Blue Screen of Death
 (although they changed the color several versions back); since almost
 all Windows kernel code executes in interrupt context, these errors
 always result in a system crash.</p>
+</section>
+<section id="more-memory-sharing-fork-and-copy-on-write">
+<h3><span class="section-number">20.1.4. </span>More Memory Sharing: <code class="docutils literal notranslate"><span class="pre">fork()</span></code> and copy-on-write<a class="headerlink" href="#more-memory-sharing-fork-and-copy-on-write" title="Permalink to this headline">#</a></h3>
+<p>In all the cases you’ve seen so far, page sharing has been used to share
+read-only pages—these are intrinsically safe to share, because
+processes are unable to modify the pages and thereby affect other
+processes. But, can writable pages be shared safely? The answer is yes,
+but it has to be done carefully.</p>
+<p>First, some background on why this is important. The Unix operating
+system uses two system calls to create new processes and execute
+programs: <code class="docutils literal notranslate"><span class="pre">fork()</span></code> and <code class="docutils literal notranslate"><span class="pre">exec()</span></code>. <code class="docutils literal notranslate"><span class="pre">fork()</span></code> makes a copy of the current
+process[^16], while <code class="docutils literal notranslate"><span class="pre">exec(file)</span></code> replaces the address space of the
+current process with the program defined by <code class="docutils literal notranslate"><span class="pre">file</span></code> and begins executing
+that program at its designated starting point.</p>
+<p>UNIX uses this method because of an arbitrary choice someone made 40
+years ago; there are many other ways to do it, each of them with their
+own problems. However this is how UNIX works, and we’re stuck with it,
+so it’s important to be able to do it quickly.</p>
+<p>In early versions of Unix, <code class="docutils literal notranslate"><span class="pre">fork()</span></code> was implemented by literally copying
+all the writable sections (e.g., stack, data) of the parent process
+address space into the child process address space. After doing all this
+work, most (but not all) of the time, the first thing the child process
+would do is to call exec(), throwing away the entire contents of the
+address space that were just copied. It’s bad enough when the shell does
+this, but even worse when a large program (e.g. Chrome) tries to execute
+a small program (e.g. /bin/ls) in a child process.</p>
+<p>We’ve already seen how to share read-only data, but can we do anything
+about writable data? In particular, data which is writable, but isn’t
+actually going to be written?</p>
+<p>A quick inspection of several Firefox and Safari instances (using pmap
+on Linux and vmmap on OS X) indicates that a browser with two or three
+open tabs can easily have over 300MB of writable address space[^17].
+When fork is executed these writable pages can’t just be given writable
+mappings in the child process, or changes made in one process would be
+visible in the other. In certain cases (i.e., the stack) this mutual
+over-writing of memory would almost certainly be disastrous.</p>
+<p>However in practice, most of these writable pages <em>won’t</em> be written to
+again. In fact, if the child process only executes a few lines of code
+and then calls <span class="xref myst">exec</span>{.uri}, it may only modify a handful of pages
+before its virtual address space is destroyed and replaced with a new
+one.</p>
+<div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>12 Copy-on-write is in fact a widely-used strategy in computer systems.
+It is effectively a &quot;lazy&quot; copy, doing only the minimal amount of work
+needed and reducing both the cost of copying and the total space
+consumed. Similar copy-on-write mechanisms can be seen in file systems,
+storage devices, and some programming language runtime systems.
+</pre></div>
+</div>
+<p>Linux uses a technique called <em>copy-on-write</em> to eliminate the need to
+copy most of this memory. When a child process is created in the
+<span class="xref myst">fork</span>{.uri} system call, its address space shares not only the
+read-only pages from the parent process, but the writable pages as well.
+To prevent the two processes from interfering with each other, these
+pages are mapped read-only, resulting in a page fault whenever they are
+accessed by either process, but flagged as copy-on-write in the kernel
+memory map structures. This results in a page fault when either process
+tries to write to one of these pages; the page fault handler then
+“breaks” the sharing for that page, by allocating a new page, copying
+the old one, and mapping a separate page read-write in each of the
+processes.</p>
+<section id="review-questions">
+<h4><span class="section-number">20.1.4.1. </span>Review questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h4>
+</section>
 </section>
 </section>
 </section>

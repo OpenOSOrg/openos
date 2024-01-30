@@ -797,7 +797,22 @@ title="Print to PDF"
 <p>We briefly review some of the real world scheduling issues and approaches from a Linux perspective.</p>
 <section id="multi-cpu-scheduling">
 <h2><span class="section-number">10.4.1. </span>Multi-CPU scheduling<a class="headerlink" href="#multi-cpu-scheduling" title="Permalink to this headline">#</a></h2>
-<p>The easiest solution, and the one first adopted by most operating systems, was to have a single runqueue in the kernel.  This is both simple, and fair, since whatever algorithm you apply for scheduling selects the best task to run irrespective of which CPU becomes available.  However in today’s systems it results in terrible performance.  First, if you have hundreds of cores, the run queue itself becomes a bottleneck since only one CPU at a time can add or remove tasks from the queue.  Second, with today’s large caches, you often want to run a task on the same CPU it ran on recently to reduce cache misses.  Third, modern systems are NUMA, or Non Unform Memory Access (NUMA), and you want to run a task on a CPU near the memory allocated to it.</p>
+<p>Today almost all systems have multiple CPUs.  Early multi-CPU systems looked something like <a class="reference internal" href="#smp-hw"><span class="std std-numref">Fig. 10.10</span></a> below.  If you compare with the simple computer picture we showed in the past (<a class="reference internal" href="../intro/purpose.html#simplecomputer-fig"><span class="std std-numref">Fig. 2.1</span></a>), there are just a modest number of CPUs accessing both the memory and I/O buses.</p>
+<figure class="align-default" id="smp-hw">
+<a class="reference internal image-reference" href="../_images/SMP.png"><img alt="../_images/SMP.png" src="../_images/SMP.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10.10 </span><span class="caption-text">Early  multiprocessors</span><a class="headerlink" href="#smp-hw" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The easiest solution, and the one first adopted by most operating systems to support these computers, was to have a single runqueue in the kernel.  This is both simple, and fair, since whatever algorithm you apply for scheduling selects the best task to run irrespective of which CPU becomes available.</p>
+<p>Unfortunately, today’s systems look more like <a class="reference internal" href="#numa-hw"><span class="std std-numref">Fig. 10.11</span></a>. They have memory controllers and I/O controllers in <em>sockets</em>, which is really just a processor chip.  The sockets have a large number of CPUs (or cores) each with their own caches, and a shared cache per socket.  Memory is directly attached to one of the sockets, and all accesses from other sockets have to go through it; leading to Non-Uniform Memory Access (NUMA).</p>
+<figure class="align-default" id="numa-hw">
+<a class="reference internal image-reference" href="../_images/NUMA.png"><img alt="../_images/NUMA.png" src="../_images/NUMA.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10.11 </span><span class="caption-text">Todays Multiprocessors</span><a class="headerlink" href="#numa-hw" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In today’s systems a shared runqueue results in terrible performance.  First, if you have hundreds of cores, the run queue itself becomes a bottleneck since only one CPU at a time can add or remove tasks from the queue.  Second, with today’s large caches, you often want to run a task on the same CPU it ran on recently to reduce cache misses.  Third, modern systems are NUMA, or Non Unform Memory Access (NUMA), and you want to run a task on a CPU near the memory allocated to it.</p>
 <p>Most systems have a seperate run queue per CPU, and use some algorithm to shift tasks from one CPU to another if the imbalance between the CPUs becomes too large.  The simplest algorithm, called take, has any CPU that becomes idle look at the load on the other CPUs to try to steal work.  You can see <a class="reference external" href="https://elixir.bootlin.com/linux/latest/source/kernel/sched/fair.c#L11206">here</a> the current code in Linux for the load_balancer that is called whenever a runqueue is empty and periodically to re-balance work across the runqueus.</p>
 </section>
 <section id="scheduling-in-linux">
