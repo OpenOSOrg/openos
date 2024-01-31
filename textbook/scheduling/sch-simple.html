@@ -749,16 +749,37 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#first-come-first-served-fcfs">
    10.2.1. First Come, First Served (FCFS)
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tradeoffs">
+     10.2.1.1. Tradeoffs
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#shortest-job-first-sjf">
    10.2.2. Shortest Job First (SJF)
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     10.2.2.1. Tradeoffs
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#round-robin">
    10.2.3. Round Robin
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     10.2.3.1. Tradeoffs
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -783,16 +804,37 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#first-come-first-served-fcfs">
    10.2.1. First Come, First Served (FCFS)
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tradeoffs">
+     10.2.1.1. Tradeoffs
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#shortest-job-first-sjf">
    10.2.2. Shortest Job First (SJF)
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     10.2.2.1. Tradeoffs
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#round-robin">
    10.2.3. Round Robin
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     10.2.3.1. Tradeoffs
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -859,6 +901,28 @@ title="Print to PDF"
 </figure>
 <p>So the average turnaround time is: <span class="math notranslate nohighlight">\((1 + 3 + 9)/3 = 4.7 min\)</span></p>
 <p>We see here that when short tasks are processed after long tasks the long ones have a major impact on the short ones, while if the order is reversed, the impact on the long tasks running after the short ones is much less.</p>
+<section id="tradeoffs">
+<h3><span class="section-number">10.2.1.1. </span>Tradeoffs<a class="headerlink" href="#tradeoffs" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Requirements:</strong></p>
+<ul>
+<li><p>requires  no information from user</p></li>
+</ul>
+</li>
+<li><p><strong>The Good:</strong></p>
+<ul>
+<li><p>a very simple algorithm; can make sense for Batch since there is no context switching</p></li>
+</ul>
+</li>
+<li><p><strong>The Bad:</strong></p>
+<ul>
+<li><p>Poor average turnaround time</p></li>
+<li><p>Not appropriate for response time sensitive since they don’t get to run until all tasks ahead of them have completed and no mechanism to support real time workloads</p></li>
+<li><p>Doesn’t do anything to maintain high utilization of non-CPU resources</p></li>
+</ul>
+</li>
+</ul>
+</section>
 </section>
 <section id="shortest-job-first-sjf">
 <h2><span class="section-number">10.2.2. </span>Shortest Job First (SJF)<a class="headerlink" href="#shortest-job-first-sjf" title="Permalink to this headline">#</a></h2>
@@ -912,6 +976,29 @@ title="Print to PDF"
 <p>With a shorter average turnaround time of <span class="math notranslate nohighlight">\((2 + 4 + 5 + 6 + 9)/3 = 8.6\)</span></p>
 <p>This demonstrates the value of preemption, where we can stop long running tasks to get short ones in and out of the system quickly.</p>
 <p>To understand the major problem with Shortest Job consider what happens if one minute tasks continue to arrive every minute starting at minute 4.  B will never complete, or in scheduling terminology, it will <em>starve</em> even though the system is processing work as fast as it is arriving.  <strong>Starvation</strong> is a major problem with a pure shortest job first algorithm.</p>
+<section id="id1">
+<h3><span class="section-number">10.2.2.1. </span>Tradeoffs<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Requirements:</strong></p>
+<ul>
+<li><p>requires knowledge of task run time</p></li>
+</ul>
+</li>
+<li><p><strong>The Good:</strong></p>
+<ul>
+<li><p>Optimizes turn around time</p></li>
+<li><p>Great for Batch</p></li>
+</ul>
+</li>
+<li><p><strong>The Bad:</strong></p>
+<ul>
+<li><p>Not appropriate for response time sensitive that perform I/O</p></li>
+<li><p>Can result in starvation</p></li>
+<li><p>Doesn’t do anything to maintain high utilization of non-CPU resources</p></li>
+</ul>
+</li>
+</ul>
+</section>
 </section>
 <section id="round-robin">
 <h2><span class="section-number">10.2.3. </span>Round Robin<a class="headerlink" href="#round-robin" title="Permalink to this headline">#</a></h2>
@@ -958,7 +1045,29 @@ title="Print to PDF"
 </figcaption>
 </figure>
 <p>For the first three seconds, all three tasks share the CPU.  Assuming that each gets an equal share, C will have had a full second of compute time after three seconds and it will be done.  From seconds 3-5 the CPU is shared by tasks A and B, where each get half of it.  After 5 seconds, B will have had two full seconds of compute time, and A will have the CPU to itself from that point forward.</p>
-<p>These examples are not exhaustive, there are other algorithms for selecting the next runnable process, however these examples are meant to illustrate that there are a number of ways to approach this problem and this is an active area of research today.</p>
+<section id="id2">
+<h3><span class="section-number">10.2.3.1. </span>Tradeoffs<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Requirements:</strong></p>
+<ul>
+<li><p>requires no knowledge of task run time</p></li>
+</ul>
+</li>
+<li><p><strong>The Good:</strong></p>
+<ul>
+<li><p>Simplest preemptive algorithm, better for response time than any non-preemptive one</p></li>
+<li><p>Does better for non-CPU resource use than any non-preemptive algorithm</p></li>
+</ul>
+</li>
+<li><p><strong>The Bad:</strong></p>
+<ul>
+<li><p>Can still result in poor response time with many CPU intensive tasks</p></li>
+<li><p>Poor turnaround time</p></li>
+<li><p>Bad for batch since constant context switching, and real time since difficult to make any prediction on how long tasks will take</p></li>
+</ul>
+</li>
+</ul>
+</section>
 </section>
 </section>
 

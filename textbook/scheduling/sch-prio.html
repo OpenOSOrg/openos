@@ -749,11 +749,25 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#fixed-priority">
    10.3.1. Fixed Priority
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tradeoffs">
+     10.3.1.1. Tradeoffs
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#variable-priority-or-multilevel-feedback">
    10.3.2. Variable Priority or Multilevel feedback
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     10.3.2.1. Tradeoffs
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -778,11 +792,25 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#fixed-priority">
    10.3.1. Fixed Priority
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tradeoffs">
+     10.3.1.1. Tradeoffs
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#variable-priority-or-multilevel-feedback">
    10.3.2. Variable Priority or Multilevel feedback
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     10.3.2.1. Tradeoffs
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -803,7 +831,7 @@ title="Print to PDF"
 <figure class="align-default" id="priority-sched">
 <img alt="../_images/Priority.png" src="../_images/Priority.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 10.8 </span><span class="caption-text">A simple example of a system with 4 priority queues and runnable processes in several of the queues.</span><a class="headerlink" href="#priority-sched" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 10.8 </span><span class="caption-text">A simple example of a system with 5 priority queues and runnable processes in several of the queues.</span><a class="headerlink" href="#priority-sched" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Let us consider a situation with three tasks shown in the table below:</p>
@@ -847,6 +875,30 @@ title="Print to PDF"
 </figure>
 <p>A runs by itself until B becomes ready to run.  We then preempt A after it has accumulated one second of run time, and context switch to B since it is higher priority.  When C starts running, it is the same priority as B, so they share the CPU (i.e., we switch back and forth between them every quantum). At time 3, D enters with the highest priority, and we stop running B and C to just run it.  At that point, B has accumulated 1.5 sec of runtime, and C has accumulated .5 seconds.  Once D is done, we again share the CPU using round robin between B and C, until B has accumulated its full 2 seconds of runtime, after which we can use the CPU just for running C.  Finally, at second 6, all the other tasks are done and A, the lowest priority task, can be run until it completes.  The average turnaround time here is <span class="math notranslate nohighlight">\((4 + 5 + 6 + 11)/3 = 8.6\)</span> seconds.</p>
 <p>Note, one challenge with a fixed priority scheme is that low priority work can starve if there is always higher priority work entering the system.</p>
+<section id="tradeoffs">
+<h3><span class="section-number">10.3.1.1. </span>Tradeoffs<a class="headerlink" href="#tradeoffs" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Requirements:</strong></p>
+<ul>
+<li><p>User must specify priority of high priority work</p></li>
+</ul>
+</li>
+<li><p><strong>The Good:</strong></p>
+<ul>
+<li><p>Supports real time for high priority</p></li>
+</ul>
+</li>
+<li><p><strong>The Bad:</strong></p>
+<ul>
+<li><p>Bad for tasks that alternate between I/O and CPU</p></li>
+<li><p>Doesn’t do anything to maintain high utilization of non-CPU resources</p></li>
+<li><p>Poor turnaround time</p></li>
+<li><p>Wouldn’t use for batch</p></li>
+<li><p>Can result in Starvation</p></li>
+</ul>
+</li>
+</ul>
+</section>
 </section>
 <section id="variable-priority-or-multilevel-feedback">
 <span id="cont-scheduling-scheduling-policies-mlf"></span><h2><span class="section-number">10.3.2. </span>Variable Priority or Multilevel feedback<a class="headerlink" href="#variable-priority-or-multilevel-feedback" title="Permalink to this headline">#</a></h2>
@@ -859,6 +911,27 @@ title="Print to PDF"
 <li><p>To avoid starvation, we periodically move all the tasks to the highest priority queue.</p></li>
 </ul>
 <p>Note, a system can support both fixed priorities, e.g., for real time tasks, and a range of priorities for dealing with general purpose tasks.</p>
+<section id="id1">
+<h3><span class="section-number">10.3.2.1. </span>Tradeoffs<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Requirements:</strong></p>
+<ul>
+<li><p>requires no knowledge of task run time</p></li>
+</ul>
+</li>
+<li><p><strong>The Good:</strong></p>
+<ul>
+<li><p>Good for interactive tasks and maintaining high utilization of non-cpu resources</p></li>
+</ul>
+</li>
+<li><p><strong>The Bad:</strong></p>
+<ul>
+<li><p>Bad for real time and batch</p></li>
+<li><p>Hack to deal with starvation</p></li>
+</ul>
+</li>
+</ul>
+</section>
 </section>
 </section>
 
