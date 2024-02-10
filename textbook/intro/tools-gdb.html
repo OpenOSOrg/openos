@@ -505,12 +505,12 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/resources.html">
-     50.4. Resources to look at
+     50.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/fix.html">
-     50.5. Out of date
+     50.7. Out of date
     </a>
    </li>
   </ul>
@@ -760,7 +760,8 @@ title="Print to PDF"
 <li><p>Displaying the state of your program, e.g.:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">&lt;variable&gt;</span></code> will print the value of a variable, or `display <variable> will print each every time you step ahead.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">registers</span></code> will show you the state in all the registers of the computer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">registers</span></code> will show you the state in all the registers of the computer; and <code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">regis</span> <span class="pre">XXX</span></code> will show you the state of a particular register, e.g., <code class="docutils literal notranslate"><span class="pre">rsp</span></code> for the stack pointer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x/FMT</span></code> will examine the state of memory, e.g., <code class="docutils literal notranslate"><span class="pre">x/10gx</span> <span class="pre">&lt;address&gt;</span></code> will show you 10 values of giant (64 bit) values in hexidecimal</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">threads</span></code> will tell you about all the threads in your program.</p></li>
 </ul>
 </li>
@@ -794,7 +795,7 @@ title="Print to PDF"
 </ul>
 </li>
 </ul>
-<p>Note, most of the above functionality can be done from within emacs.  Occassionally it is valuable to run gdb on the command line using the <a class="reference external" href="https://developer.apple.com/library/archive/documentation/DeveloperTools/gdb/gdb/gdb_23.html">text user interface</a>.  When you run gdb, type <ctrl>Xa to go into tui mode, and then <ctrl>X2 to switch between displays, e.g., to see assembly, all the registers…</p>
+<p>Note, all of the above functionality can be done from within emacs.  Occassionally it is valuable to run gdb on the command line using the <a class="reference external" href="https://developer.apple.com/library/archive/documentation/DeveloperTools/gdb/gdb/gdb_23.html">text user interface</a>.  When you run gdb, type <ctrl>Xa to go into tui mode, and then <ctrl>X2 to switch between displays, e.g., to see assembly, all the registers…</p>
 </section>
 
     <script type="text/x-thebe-config">

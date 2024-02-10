@@ -505,12 +505,12 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/resources.html">
-     50.4. Resources to look at
+     50.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/fix.html">
-     50.5. Out of date
+     50.7. Out of date
     </a>
    </li>
   </ul>
@@ -771,14 +771,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#more-memory-sharing-fork-and-copy-on-write">
-     20.1.4. More Memory Sharing:
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       fork()
-      </span>
-     </code>
-     and copy-on-write
+    <a class="reference internal nav-link" href="#copy-on-write-page-faults">
+     20.1.4. copy-on-write page faults
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -837,14 +831,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#more-memory-sharing-fork-and-copy-on-write">
-     20.1.4. More Memory Sharing:
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       fork()
-      </span>
-     </code>
-     and copy-on-write
+    <a class="reference internal nav-link" href="#copy-on-write-page-faults">
+     20.1.4. copy-on-write page faults
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -870,6 +858,7 @@ title="Print to PDF"
 allow virtual address spaces that are much larger than physical memory.</p>
 <section class="tex2jax_ignore mathjax_ignore" id="memory-management-page-faults">
 <h1><span class="section-number">20. </span>Memory Management Page Faults<a class="headerlink" href="#memory-management-page-faults" title="Permalink to this headline">#</a></h1>
+<p>There are 3 basic types of page faults:</p>
 <ul class="simple">
 <li><p>File backed page faults</p></li>
 <li><p>Anonymous page faults</p></li>
@@ -1126,8 +1115,8 @@ The equivalent in Windows is called a Blue Screen of Death
 all Windows kernel code executes in interrupt context, these errors
 always result in a system crash.</p>
 </section>
-<section id="more-memory-sharing-fork-and-copy-on-write">
-<h3><span class="section-number">20.1.4. </span>More Memory Sharing: <code class="docutils literal notranslate"><span class="pre">fork()</span></code> and copy-on-write<a class="headerlink" href="#more-memory-sharing-fork-and-copy-on-write" title="Permalink to this headline">#</a></h3>
+<section id="copy-on-write-page-faults">
+<h3><span class="section-number">20.1.4. </span>copy-on-write page faults<a class="headerlink" href="#copy-on-write-page-faults" title="Permalink to this headline">#</a></h3>
 <p>In all the cases you’ve seen so far, page sharing has been used to share
 read-only pages—these are intrinsically safe to share, because
 processes are unable to modify the pages and thereby affect other

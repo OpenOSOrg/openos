@@ -505,12 +505,12 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/resources.html">
-     50.4. Resources to look at
+     50.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/fix.html">
-     50.5. Out of date
+     50.7. Out of date
     </a>
    </li>
   </ul>
@@ -979,6 +979,8 @@ physical memory into virtual memory and the pros/cons of it.</p>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <span id="cont-mm-intro"></span><h1><span class="section-number">12. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
+<p>The portion of the OK kernel that manages and tracks memory is the memory management system.  The main goals of the memory management system are to 1.) provide a virtual interface to the system physical memory that is easy and consistent to use and 2.) multiplex the system memory between every process running on the system.
+Like most hardware memory in its raw state is difficult and cumbersome to use.  Physical memory can be thought of as a very large array of bytes and the location of a given byte is its physical address.  Without a memory management system a program would have to know what memory is available to use and what memory is already used and use physical addresses to access these memory locations.  The memory management system hides these details and provides a much more usable interface.</p>
 <p>To paraphrase <a class="reference external" href="https://en.wikipedia.org/wiki/Parkinson%27s_law">Parkinson’s law</a> programs expand to fill the memory available to hold them, and home computers have millions times more memory than they had when Larry was young.  As discussed in the overall introduction memory is fast but small and expensive compared to storage, but it is volatile, all changes are lost after a reboot.  Memory management is the part of the operating system that provides a useful virtual memory interface and that allocates, frees and tracks the usage of the actual physical memory or RAM.  It manages a virtual address space for each process it manages and all the physical memory of the system, making it available to different processes through virtual memory depending on their demand.</p>
 <p>Today, most computers support paged virtual memory, but before we get into that, we motivate today’s memory management by discussing systems without any virtual memory and with segmented virtual memory.</p>
 <section id="physical-memory-no-virtual-memory">

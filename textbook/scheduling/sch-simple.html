@@ -507,12 +507,12 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/resources.html">
-     50.4. Resources to look at
+     50.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/fix.html">
-     50.5. Out of date
+     50.7. Out of date
     </a>
    </li>
   </ul>
@@ -965,7 +965,7 @@ title="Print to PDF"
 <p><span class="caption-number">Fig. 10.4 </span><span class="caption-text">SJF without preemption</span><a class="headerlink" href="#vp-sched-sjf1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>So the average turnaround time is: <span class="math notranslate nohighlight">\((2 + 6 + 7 + 8 + 9)/5 = 6.4  min\)</span></p>
+<p>So the average turnaround time is: <span class="math notranslate nohighlight">\((2+6+(7-3)+(8-3)+(9-3))/5 = 4.6  min\)</span></p>
 <p>If we instead preempt B to run the new jobs who’s time is shorter than B’s remaining time, we get the following execution:</p>
 <figure class="align-default" id="vp-sched-sjf2">
 <img alt="../_images/SJF-2.png" src="../_images/SJF-2.png" />
@@ -973,7 +973,7 @@ title="Print to PDF"
 <p><span class="caption-number">Fig. 10.5 </span><span class="caption-text">SJF with preemption</span><a class="headerlink" href="#vp-sched-sjf2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>With a shorter average turnaround time of <span class="math notranslate nohighlight">\((2 + 4 + 5 + 6 + 9)/5 = 5.2\)</span></p>
+<p>With a shorter average turnaround time of <span class="math notranslate nohighlight">\((2+(4-3)+(5-3)+(6-3)+9)/5 = 3.4\)</span></p>
 <p>This demonstrates the value of preemption, where we can stop long running tasks to get short ones in and out of the system quickly.</p>
 <p>To understand the major problem with Shortest Job consider what happens if one minute tasks continue to arrive every minute starting at minute 4.  B will never complete, or in scheduling terminology, it will <em>starve</em> even though the system is processing work as fast as it is arriving.  <strong>Starvation</strong> is a major problem with a pure shortest job first algorithm.</p>
 <section id="id1">

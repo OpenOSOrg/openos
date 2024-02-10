@@ -505,12 +505,12 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/resources.html">
-     50.4. Resources to look at
+     50.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/fix.html">
-     50.5. Out of date
+     50.7. Out of date
     </a>
    </li>
   </ul>
@@ -1549,9 +1549,13 @@ other students’ grades.</p>
 </section>
 <section id="attacks-stack-overflow">
 <h2><span class="section-number">48.4. </span>Attacks — Stack Overflow<a class="headerlink" href="#attacks-stack-overflow" title="Permalink to this headline">#</a></h2>
-<p><img alt="image" src="sec/figures/security-fig2" />{height=”14\baselineskip”}</p>
-<p>In <a class="reference external" href="#fig:security:worm">[fig:security:worm]</a>{reference-type=”autoref”
-reference=”fig:security:worm”} you can see a fragment of code that was
+<figure class="align-default" id="fig-sec-worm">
+<a class="reference internal image-reference" href="../_images/security-fig2.png"><img alt="../_images/security-fig2.png" src="../_images/security-fig2.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 48.2 </span><span class="caption-text">Stack frame and buffer overflow</span><a class="headerlink" href="#fig-sec-worm" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In <a class="reference internal" href="#fig-sec-worm"><span class="std std-numref">Fig. 48.2</span></a> you can see a fragment of code that was
 attacked (among others) by the first piece of Internet malware, the 1988
 Morris worm. The target program (<code class="docutils literal notranslate"><span class="pre">fingerd</span></code>) was run with a network
 connection for its standard input, and used the <code class="docutils literal notranslate"><span class="pre">gets</span></code> function to read
