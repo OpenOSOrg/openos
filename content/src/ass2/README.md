@@ -5,6 +5,13 @@ Some simple programs to demonstrate set and longjump and what how in the second 
    - jmp2 - extracting pc - look at disassembly
    - jmp3 - de-mangled pointer
    - jmp4 - using de-mangled pointer
-   - sched_simple: a toy round robin scheduler; starts each c program from start; how would you change it. 
+
+To look at the calling code convetion, a little tutorial on gdb
+   - debug calling_code
+     - disass
+     - info regis
+     - info regis rip
+     - info regis rsp
+     - x/10gx <address>
 
 

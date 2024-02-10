@@ -1,7 +1,7 @@
 override CFLAGS :=  -Werror -Wall -std=gnu99 -O0 -g $(CFLAGS) -I.
 CC = gcc
 
-prog = jmp1 jmp2 jmp3 jmp4 sched_simple
+prog = jmp1 jmp2 jmp3 jmp4 sched_simple calling_code
 c_files = jmp1.c jmp2.c jmp3.c jmp4.c sched_simple.o
 h_files = ec440threads.h 
 
