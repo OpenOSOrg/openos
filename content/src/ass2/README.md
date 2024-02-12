@@ -1,17 +1,2 @@
-# Debugging forked programs
-
-Some simple programs to demonstrate set and longjump and what how in the second assignment you can find the PC...
-   - jmp1 - example program using set/long jump
-   - jmp2 - extracting pc - look at disassembly
-   - jmp3 - de-mangled pointer
-   - jmp4 - using de-mangled pointer
-
-To look at the calling code convetion, a little tutorial on gdb
-   - debug calling_code
-     - disass
-     - info regis
-     - info regis rip
-     - info regis rsp
-     - x/10gx <address>
-
-
+- provided: directory with the provided code for assignment 2, implementing a preemptable user-level thread scheduler
+- examp: contains various example of using set and long jmp, and some hints on debugging
