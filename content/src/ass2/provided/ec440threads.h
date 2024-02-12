@@ -9,7 +9,7 @@
  * You should use:
  *    - setjmp to save registers of current thread
  *    - longjump to restore registers of thread you are context switching to
- * These routines store the registers in a mangled fashion, and hide 
+ * These routines store the registers that are pointers in a mangled fashion, and hide 
  * where different registers are. You can use:
  *    - the enum jump_buffer_location to identify where the register is in the buffer
  *    - the functions set_reg and get_reg to set and retrieve registers from this buffer
@@ -26,7 +26,8 @@
  * These constants define for current implementation of system libraries on our container
  * the registers held in various locations in the jump buffer when you call setjmp.
  * Note, these are not part of the public interface for jmp_buf, but are extracted from 
- * internal private libc headers here: https://github.com/nerc-project/operations/issues/288
+ * internal private libc headers here: 
+ *   https://elixir.bootlin.com/glibc/glibc-2.27/source/sysdeps/x86_64/jmpbuf-offsets.h
  */
 enum JBL
   {
@@ -39,7 +40,6 @@ enum JBL
    JBL_RSP = 6,
    JBL_PC  = 7
   };
-
 
 /* 
  * Unfortunately, there is a complication on the Linux systems in the
