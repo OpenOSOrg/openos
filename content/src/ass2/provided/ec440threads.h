@@ -26,7 +26,7 @@
  * These constants define for current implementation of system libraries on our container
  * the registers held in various locations in the jump buffer when you call setjmp.
  * Note, these are not part of the public interface for jmp_buf, but are extracted from 
- * internal private libc headers
+ * internal private libc headers here: https://github.com/nerc-project/operations/issues/288
  */
 enum JBL
   {
@@ -41,6 +41,13 @@ enum JBL
   };
 
 
+/* 
+ * Unfortunately, there is a complication on the Linux systems in the
+ * student/grading environment. These machines are equipped with a
+ * libc that includes a security feature to protect the addresses
+ * stored in jump buffers. This feature "mangles" a pointer before
+ * saving it in a jmp_buf.
+*/
 static unsigned long int _ptr_demangle(unsigned long int p)
 {
     unsigned long int ret;
