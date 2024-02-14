@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>32. The Critical Section Problem &#8212; Introduction to Operating Systems</title>
+    <title>31. The Critical Section Problem &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="33. Implementing Locks" href="locks.html" />
-    <link rel="prev" title="31. Cooperating Processes and Inter-process Communication" href="sharing.html" />
+    <link rel="next" title="32. Implementing Locks" href="locks.html" />
+    <link rel="prev" title="30. Cooperating Processes and Inter-process Communication" href="sharing.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -342,14 +342,9 @@ const thebe_selector_output = ".output, .cell_output"
    26. A bit about Disks
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fs/disklayout.html">
-   27. File System Layout
-  </a>
- </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../fs/impl.html">
-   28. Implementation
+   27. Implementation
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -358,40 +353,45 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../fs/disklayout.html">
+     27.1. File System Layout
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../fs/dl_track_used.html">
-     28.1. Disk Layout:Tracking Used Space
+     27.2. Disk Layout:Tracking Used Space
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../fs/dl_track_free.html">
-     28.2. Disk Layout:Tracking Free Space
+     27.3. Disk Layout:Tracking Free Space
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../fs/dl_name.html">
-     28.3. Disk Layout:Implementing Name Space
+     27.4. Disk Layout:Implementing Name Space
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../fs/dl_failures.html">
-     28.4. Disk Layout:Dealing with Failures
+     27.5. Disk Layout:Dealing with Failures
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../fs/dl_ex_exx.html">
-     28.5. Disk Layout:Examples of Real World File Systems
+     27.6. Disk Layout:Examples of Real World File Systems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../fs/kernelimp.html">
-     28.6. Kernel implementation
+     27.7. Kernel implementation
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/review.html">
-   29. Review
+   28. Review
   </a>
  </li>
 </ul>
@@ -403,52 +403,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="sync.html">
-   30. Introduction to Concurrency, Synchronization and Deadlock
+   29. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="sharing.html">
-   31. Cooperating Processes and Inter-process Communication
+   30. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   32. The Critical Section Problem
+   31. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="locks.html">
-   33. Implementing Locks
+   32. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ordering.html">
-   34. Ordering Thread Events
+   33. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concurrency_bugs.html">
-   35. Common Concurrency Bugs
+   34. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="readmostly.html">
-   36. Read-Dominated Workloads
+   35. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hardware_challenges.html">
-   37. Challenges of Modern Hardware
+   36. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linux_locking.html">
-   38. Locking in the Linux Kernel
+   37. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   39. Review
+   38. Review
   </a>
  </li>
 </ul>
@@ -460,22 +460,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   40. Input and Output
+   39. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   41. More on Disks
+   40. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   42. Virtualization
+   41. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   43. Security
+   42. Security
   </a>
  </li>
 </ul>
@@ -487,12 +487,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   44. How to read this book
+   43. How to read this book
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../contributing/intro.html">
-   45. Contributing
+   44. Contributing
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -502,34 +502,34 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/examples.html">
-     45.1. Examples
+     44.1. Examples
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/credit.html">
-     45.2. Contributors
+     44.2. Contributors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/Contributing.html">
-     45.3. Contributing
+     44.3. Contributing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/resources.html">
-     45.6. Resources to look at
+     44.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/fix.html">
-     45.7. Out of date
+     44.7. Out of date
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   46. Bibliography
+   45. Bibliography
   </a>
  </li>
 </ul>
@@ -757,12 +757,12 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#problem-definition">
-   32.1. Problem Definition
+   31.1. Problem Definition
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#abstracting-the-problem">
-   32.2. Abstracting the Problem
+   31.2. Abstracting the Problem
   </a>
  </li>
 </ul>
@@ -786,12 +786,12 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#problem-definition">
-   32.1. Problem Definition
+   31.1. Problem Definition
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#abstracting-the-problem">
-   32.2. Abstracting the Problem
+   31.2. Abstracting the Problem
   </a>
  </li>
 </ul>
@@ -807,11 +807,11 @@ title="Print to PDF"
   <div class="cell tag_remove-input docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="the-critical-section-problem">
-<span id="cont-sync-criticalsection"></span><h1><span class="section-number">32. </span>The Critical Section Problem<a class="headerlink" href="#the-critical-section-problem" title="Permalink to this headline">#</a></h1>
+<span id="cont-sync-criticalsection"></span><h1><span class="section-number">31. </span>The Critical Section Problem<a class="headerlink" href="#the-critical-section-problem" title="Permalink to this headline">#</a></h1>
 <p>The problem of controlling concurrent access to shared data was recognized very early. In an [undated lecture]<code class="docutils literal notranslate"><span class="pre">https://www.cs.utexas.edu/users/EWD/translations/EWD35-English.html</span></code> from 1962 or 1963, Dutch computer scientist Edsger W. Dijkstra described what has come to be known as the <em>critical section problem</em>.  Each thread executes some <em>critical section</em> of code that must be guarded against concurrent execution, i.e., only one thread is allowed to be executing in its critical section at any given time. The problem is to design a protocol that threads must execute prior to entering their critical section that will enforce the single-access rule. The term <em>critical section</em> is unfortunately misleading, as it should be obvious that it is the <em>shared data</em> that must be protected from concurrent access, and not the code. Think of the critical section as the code that must execute without interference in order to use the shared data correctly. In the shared counter example, the loop body in the <code class="docutils literal notranslate"><span class="pre">increment_thread()</span></code> and <code class="docutils literal notranslate"><span class="pre">decrement_thread()</span></code> functions are the critical sections for the counter variable. To identify the critical sections of code, we need to identify all the cases where shared data must be protected against simultaneous modification or access to prevent race conditions. Note also that the same code can be invoked to operate on different data – for example, <code class="docutils literal notranslate"><span class="pre">deposit()</span></code> called for account #100  in Thread 1, and <code class="docutils literal notranslate"><span class="pre">deposit()</span></code> called for account #200 in Thread 2 will not interfere with each other. In this case, we have critical sections for two different resources (i.e., two different bank accounts) and they do not need to be protected from each other.</p>
 <p>These ideas will become more concrete by the end of this Chapter, but initially we will reason about a single shared resource (like our <code class="docutils literal notranslate"><span class="pre">counter</span></code> variable), accessed repeatedly by multiple threads, with some additional code before and after the critical section that does not make any accesses to the shared variable.</p>
 <section id="problem-definition">
-<h2><span class="section-number">32.1. </span>Problem Definition<a class="headerlink" href="#problem-definition" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">31.1. </span>Problem Definition<a class="headerlink" href="#problem-definition" title="Permalink to this headline">#</a></h2>
 <p>In its classical form, a solution to the critical section problem must meet the following requirements:</p>
 <dl class="simple myst">
 <dt>Mutual Exclusion</dt><dd><p>Only one thread can be executing in its critical section at a time.</p>
@@ -835,34 +835,34 @@ title="Print to PDF"
 <li><p>The operations in each thread are executed in the order that they appear in the program code, and the result of concurrent execution is equivalent to some interleaving of operations from each of the concurrent threads. (Note that this last assumption is not true of modern cpu architectures, but we will omit the topic of memory consistency models for now.)</p></li>
 </ol>
 <p>With these requirements and assumptions in place, we now turn our attention to designing a protocol that threads can use to coordinate their use of shared data. Once we have identified the critical sections, we insert an <em>entry section</em> before the critical section, and an <em>exit section</em> immediately after the critical section. Each thread must request permission to enter its critical section, by executing the protocol in its entry section. When it completes the entry, the thread is guaranteed to have exclusive access to the shared data accessed within the critical section. When it finishes the critical section, the thread executes the code in the exit section to make the critical section available to other threads. Each thread may request entry to its critical section repeatedly. All other code executed by the thread, either before entry to, or after exit from, the critical section will be referred to as the <em>remainder</em> of the code.</p>
-<p><a class="reference internal" href="#fig-sync-criticalsection"><span class="std std-numref">Fig. 32.1</span></a> illustrates these concepts with a concrete code example from the <code class="docutils literal notranslate"><span class="pre">increment_thread</span></code> function in the shared counter program. In this figure, we are showing where the entry and exit sections need to be added around the critical section of code that accesses the shared variable, without specifying what goes into those sections.</p>
+<p><a class="reference internal" href="#fig-sync-criticalsection"><span class="std std-numref">Fig. 31.1</span></a> illustrates these concepts with a concrete code example from the <code class="docutils literal notranslate"><span class="pre">increment_thread</span></code> function in the shared counter program. In this figure, we are showing where the entry and exit sections need to be added around the critical section of code that accesses the shared variable, without specifying what goes into those sections.</p>
 <figure class="align-default" id="fig-sync-criticalsection">
 <a class="reference internal image-reference" href="../_images/critical_section.drawio.png"><img alt="../_images/critical_section.drawio.png" src="../_images/critical_section.drawio.png" style="width: 85%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 32.1 </span><span class="caption-text">Abstract view of a critical section of code, surrounded by entry and exit sections (left), and example of these concepts in the <code class="docutils literal notranslate"><span class="pre">increment_thread</span></code> function (right).</span><a class="headerlink" href="#fig-sync-criticalsection" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 31.1 </span><span class="caption-text">Abstract view of a critical section of code, surrounded by entry and exit sections (left), and example of these concepts in the <code class="docutils literal notranslate"><span class="pre">increment_thread</span></code> function (right).</span><a class="headerlink" href="#fig-sync-criticalsection" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="abstracting-the-problem">
-<span id="cont-sync-criticalsection-locks"></span><h2><span class="section-number">32.2. </span>Abstracting the Problem<a class="headerlink" href="#abstracting-the-problem" title="Permalink to this headline">#</a></h2>
+<span id="cont-sync-criticalsection-locks"></span><h2><span class="section-number">31.2. </span>Abstracting the Problem<a class="headerlink" href="#abstracting-the-problem" title="Permalink to this headline">#</a></h2>
 <p>We can encapsulate solutions to the critical section problem into a <em>lock</em> abstract data type, with the following operations:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">acquire()</span></code> : Obtain exclusive access to a critical section; this function returns only when the calling thread is granted entry to the critical section.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">release()</span></code> : Leave the critical region, making it available to other threads.</p></li>
 </ul>
 <p>The lock data type may also have some private data, which can be used by the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> and <code class="docutils literal notranslate"><span class="pre">release()</span></code> functions, but is not otherwise visible. Exactly what this data might be will depend on the implementation of these functions.</p>
-<p>We associate a lock object with the shared data that we need to protect. Threads must invoke the <code class="docutils literal notranslate"><span class="pre">lock.acquire()</span></code> function to enter the critical section, and the <code class="docutils literal notranslate"><span class="pre">lock.release()</span></code> function to leave the critical section, as shown in <a class="reference internal" href="#fig-sync-criticalsection-withlock"><span class="std std-numref">Fig. 32.2</span></a>. Note that we can have multiple lock objects that protect different data objects, such as a separate lock for each bank account. Threads simply simply have to invoke the acquire() and release() operations on the right lock object.</p>
+<p>We associate a lock object with the shared data that we need to protect. Threads must invoke the <code class="docutils literal notranslate"><span class="pre">lock.acquire()</span></code> function to enter the critical section, and the <code class="docutils literal notranslate"><span class="pre">lock.release()</span></code> function to leave the critical section, as shown in <a class="reference internal" href="#fig-sync-criticalsection-withlock"><span class="std std-numref">Fig. 31.2</span></a>. Note that we can have multiple lock objects that protect different data objects, such as a separate lock for each bank account. Threads simply simply have to invoke the acquire() and release() operations on the right lock object.</p>
 <p>The lock data type is sometimes called a <em>mutex</em>, because it is used to guarantee <em>mut</em>ual <em>ex</em>clusion, and the operations on a mutex are often called <code class="docutils literal notranslate"><span class="pre">lock()</span></code> and <code class="docutils literal notranslate"><span class="pre">unlock()</span></code>, with the same semantics as the <code class="docutils literal notranslate"><span class="pre">acquire</span></code> and <code class="docutils literal notranslate"><span class="pre">release</span></code> functions.</p>
 <figure class="align-default" id="fig-sync-criticalsection-withlock">
 <a class="reference internal image-reference" href="../_images/critical_section_with_lock.drawio.png"><img alt="../_images/critical_section_with_lock.drawio.png" src="../_images/critical_section_with_lock.drawio.png" style="width: 85%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 32.2 </span><span class="caption-text">e w
+<p><span class="caption-number">Fig. 31.2 </span><span class="caption-text">e w
 Encapsulating critical section entry and exit with operations on a lock object.</span><a class="headerlink" href="#fig-sync-criticalsection-withlock" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The pthreads specification includes the <code class="docutils literal notranslate"><span class="pre">pthread_mutex_t</span></code> data type, and operations <code class="docutils literal notranslate"><span class="pre">pthread_mutex_lock(mutex)</span></code> and <code class="docutils literal notranslate"><span class="pre">pthread_mutex_unlock(mutex)</span></code> to acquire and release the mutex, respectively. The code in <a class="reference internal" href="#listing-sync-pthread-mutex"><span class="std std-numref">Listing 32.1</span></a> shows how we use the pthreads mutex to protect access to the shared counter variable.</p>
+<p>The pthreads specification includes the <code class="docutils literal notranslate"><span class="pre">pthread_mutex_t</span></code> data type, and operations <code class="docutils literal notranslate"><span class="pre">pthread_mutex_lock(mutex)</span></code> and <code class="docutils literal notranslate"><span class="pre">pthread_mutex_unlock(mutex)</span></code> to acquire and release the mutex, respectively. The code in <a class="reference internal" href="#listing-sync-pthread-mutex"><span class="std std-numref">Listing 31.1</span></a> shows how we use the pthreads mutex to protect access to the shared counter variable.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-pthread-mutex">
-<div class="code-block-caption"><span class="caption-number">Listing 32.1 </span><span class="caption-text">Protecting access to the shared counter using a pthread mutex.</span><a class="headerlink" href="#listing-sync-pthread-mutex" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 31.1 </span><span class="caption-text">Protecting access to the shared counter using a pthread mutex.</span><a class="headerlink" href="#listing-sync-pthread-mutex" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#include &lt;pthread.h&gt;</span>
 <span class="linenos"> 2</span><span class="c1">#include &lt;stdlib.h&gt;</span>
 <span class="linenos"> 3</span><span class="c1">#include &lt;sys/types.h&gt;</span>
@@ -987,13 +987,13 @@ Encapsulating critical section entry and exit with operations on a lock object.<
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">31. </span>Cooperating Processes and Inter-process Communication</p>
+            <p class="prev-next-title"><span class="section-number">30. </span>Cooperating Processes and Inter-process Communication</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="locks.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">33. </span>Implementing Locks</p>
+        <p class="prev-next-title"><span class="section-number">32. </span>Implementing Locks</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
