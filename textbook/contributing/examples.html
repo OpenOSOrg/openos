@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>50.1. Examples &#8212; Introduction to Operating Systems</title>
+    <title>45.1. Examples &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="50.2. Contributors" href="credit.html" />
-    <link rel="prev" title="50. Contributing" href="intro.html" />
+    <link rel="next" title="45.2. Contributors" href="credit.html" />
+    <link rel="prev" title="45. Contributing" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -349,39 +349,51 @@ const thebe_selector_output = ".output, .cell_output"
    27. File System Layout
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fs/dl_track_used.html">
-   28. Disk Layout:Tracking Used Space
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../fs/impl.html">
+   28. Implementation
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fs/dl_track_free.html">
-   29. Disk Layout:Tracking Free Space
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fs/dl_name.html">
-   30. Disk Layout:Implementing Name Space
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fs/dl_failures.html">
-   31. Disk Layout:Dealing with Failures
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fs/dl_ex_exx.html">
-   32. Disk Layout:Examples of Real World File Systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fs/kernelimp.html">
-   33. Kernel implementation
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../fs/dl_track_used.html">
+     28.1. Disk Layout:Tracking Used Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../fs/dl_track_free.html">
+     28.2. Disk Layout:Tracking Free Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../fs/dl_name.html">
+     28.3. Disk Layout:Implementing Name Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../fs/dl_failures.html">
+     28.4. Disk Layout:Dealing with Failures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../fs/dl_ex_exx.html">
+     28.5. Disk Layout:Examples of Real World File Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../fs/kernelimp.html">
+     28.6. Kernel implementation
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/review.html">
-   34. Review
+   29. Review
   </a>
  </li>
 </ul>
@@ -393,52 +405,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   35. Introduction to Concurrency, Synchronization and Deadlock
+   30. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   36. Cooperating Processes and Inter-process Communication
+   31. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/criticalsection.html">
-   37. The Critical Section Problem
+   32. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locks.html">
-   38. Implementing Locks
+   33. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/ordering.html">
-   39. Ordering Thread Events
+   34. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   40. Common Concurrency Bugs
+   35. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/readmostly.html">
-   41. Read-Dominated Workloads
+   36. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   42. Challenges of Modern Hardware
+   37. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   43. Locking in the Linux Kernel
+   38. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   44. Review
+   39. Review
   </a>
  </li>
 </ul>
@@ -450,22 +462,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   45. Input and Output
+   40. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   46. More on Disks
+   41. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   47. Virtualization
+   42. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   48. Security
+   43. Security
   </a>
  </li>
 </ul>
@@ -477,49 +489,49 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   49. How to read this book
+   44. How to read this book
   </a>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="intro.html">
-   50. Contributing
+   45. Contributing
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     50.1. Examples
+     45.1. Examples
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="credit.html">
-     50.2. Contributors
+     45.2. Contributors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Contributing.html">
-     50.3. Contributing
+     45.3. Contributing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="resources.html">
-     50.6. Resources to look at
+     45.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="fix.html">
-     50.7. Out of date
+     45.7. Out of date
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   51. Bibliography
+   46. Bibliography
   </a>
  </li>
 </ul>
@@ -747,32 +759,32 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#notes-and-warnings">
-   50.1.1. Notes and warnings
+   45.1.1. Notes and warnings
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#figures">
-   50.1.2. Figures
+   45.1.2. Figures
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#table">
-   50.1.3. Table
+   45.1.3. Table
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#authoring-content">
-   50.1.4. Authoring content
+   45.1.4. Authoring content
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#using-jupyterlab">
-     50.1.4.1. Using jupyterlab
+     45.1.4.1. Using jupyterlab
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#adding-figures">
-     50.1.4.2. Adding figures
+     45.1.4.2. Adding figures
     </a>
    </li>
   </ul>
@@ -798,32 +810,32 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#notes-and-warnings">
-   50.1.1. Notes and warnings
+   45.1.1. Notes and warnings
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#figures">
-   50.1.2. Figures
+   45.1.2. Figures
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#table">
-   50.1.3. Table
+   45.1.3. Table
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#authoring-content">
-   50.1.4. Authoring content
+   45.1.4. Authoring content
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#using-jupyterlab">
-     50.1.4.1. Using jupyterlab
+     45.1.4.1. Using jupyterlab
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#adding-figures">
-     50.1.4.2. Adding figures
+     45.1.4.2. Adding figures
     </a>
    </li>
   </ul>
@@ -839,10 +851,10 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="examples">
-<h1><span class="section-number">50.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">45.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h1>
 <p>Starting to re-organize this, to just past in simple examples so there is one place to find them</p>
 <section id="notes-and-warnings">
-<h2><span class="section-number">50.1.1. </span>Notes and warnings<a class="headerlink" href="#notes-and-warnings" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">45.1.1. </span>Notes and warnings<a class="headerlink" href="#notes-and-warnings" title="Permalink to this headline">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We recommend you look at this notebook as the best example of generating content, and we will make a valiant attempt to keep it up to date as we gain more experience. Having said that, the file system chapter today probably has a better set of examples</p>
@@ -860,18 +872,18 @@ title="Print to PDF"
 </div>
 </section>
 <section id="figures">
-<h2><span class="section-number">50.1.2. </span>Figures<a class="headerlink" href="#figures" title="Permalink to this headline">#</a></h2>
-<p>As shown in figure <a class="reference internal" href="#contrib-fig-examp"><span class="std std-numref">Fig. 50.1</span></a>, most operating systems today have …</p>
+<h2><span class="section-number">45.1.2. </span>Figures<a class="headerlink" href="#figures" title="Permalink to this headline">#</a></h2>
+<p>As shown in figure <a class="reference internal" href="#contrib-fig-examp"><span class="std std-numref">Fig. 45.1</span></a>, most operating systems today have …</p>
 <figure class="align-right" id="contrib-fig-examp">
 <a class="reference internal image-reference" href="../_images/osstructure-1.dio.png"><img alt="../_images/osstructure-1.dio.png" src="../_images/osstructure-1.dio.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 50.1 </span><span class="caption-text">A caption for figure</span><a class="headerlink" href="#contrib-fig-examp" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45.1 </span><span class="caption-text">A caption for figure</span><a class="headerlink" href="#contrib-fig-examp" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For more on figures look at this <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html#images-and-figures">reference</a>.</p>
 </section>
 <section id="table">
-<h2><span class="section-number">50.1.3. </span>Table<a class="headerlink" href="#table" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">45.1.3. </span>Table<a class="headerlink" href="#table" title="Permalink to this headline">#</a></h2>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="text-align:left head"><p>Value</p></th>
@@ -977,9 +989,9 @@ title="Print to PDF"
 <p>At the end of this section we have links to various <span class="xref myst">reference</span> materials, for example, sections of Jonathan’s textbook that we plan to steal materials from.</p>
 </section>
 <section id="authoring-content">
-<span id="cont-contr-authoring"></span><h2><span class="section-number">50.1.4. </span>Authoring content<a class="headerlink" href="#authoring-content" title="Permalink to this headline">#</a></h2>
+<span id="cont-contr-authoring"></span><h2><span class="section-number">45.1.4. </span>Authoring content<a class="headerlink" href="#authoring-content" title="Permalink to this headline">#</a></h2>
 <section id="using-jupyterlab">
-<h3><span class="section-number">50.1.4.1. </span>Using jupyterlab<a class="headerlink" href="#using-jupyterlab" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">45.1.4.1. </span>Using jupyterlab<a class="headerlink" href="#using-jupyterlab" title="Permalink to this headline">#</a></h3>
 <p>Will put various hints here on what we find works, although for the most part like any editor, you will gradually experience what works best for you.</p>
 <ul class="simple">
 <li><p>there seems to be just one file browser, I tend to open multiple links to the textbook:</p>
@@ -993,32 +1005,32 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="adding-figures">
-<h3><span class="section-number">50.1.4.2. </span>Adding figures<a class="headerlink" href="#adding-figures" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">45.1.4.2. </span>Adding figures<a class="headerlink" href="#adding-figures" title="Permalink to this headline">#</a></h3>
 <p>Use <a class="reference external" href="http://draw.io">draw.io</a> for open source software, I download the desktop version from <a class="reference external" href="https://www.diagrams.net/%7D">here</a> since it seems more reliable.  You can just download the image to your desktop, edit it there, and upload it again. You can Please use png as the source type of the file, rather than the default drawio; in this case it will create a XXX.drawio.png file, where the diagram is embedded in the png, so you can both dispay it, and edit it. This means you can not only continue to edit the file directly, but can also include exactly the same file in a figure.</p>
 <p>Tricks I have found in using this:</p>
 <ol class="simple">
 <li><p>with the desktop version you can directly copy images browser see this <a class="reference external" href="https://www.youtube.com/watch?v=pYROq5Aphoc">vidio</a></p></li>
 <li><p>I tend to use layers, for animation, then upload it and generate multiple png files form the same image</p></li>
-<li><p>You very much want to export the picture as high-resolution, by using a large zoom, see Figure <a class="reference internal" href="#contrib-fig-dioex2"><span class="std std-numref">Fig. 50.4</span></a></p></li>
+<li><p>You very much want to export the picture as high-resolution, by using a large zoom, see Figure <a class="reference internal" href="#contrib-fig-dioex2"><span class="std std-numref">Fig. 45.4</span></a></p></li>
 </ol>
 <figure class="align-default" id="contrib-fig-dioex3">
 <a class="reference internal image-reference" href="../_images/draw-io-control-resolution.png"><img alt="../_images/draw-io-control-resolution.png" src="../_images/draw-io-control-resolution.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 50.2 </span><span class="caption-text">Making images high resolution.</span><a class="headerlink" href="#contrib-fig-dioex3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45.2 </span><span class="caption-text">Making images high resolution.</span><a class="headerlink" href="#contrib-fig-dioex3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>If you use the drawio embedded in the notebook environment, to generate a png rather than using the file export from the figure, use the command palette from jupyter “view” menue as shown in figures
-<a class="reference internal" href="#contrib-fig-dioex1"><span class="std std-numref">Fig. 50.3</span></a> and <a class="reference internal" href="#contrib-fig-dioex2"><span class="std std-numref">Fig. 50.4</span></a>.</p>
+<a class="reference internal" href="#contrib-fig-dioex1"><span class="std std-numref">Fig. 45.3</span></a> and <a class="reference internal" href="#contrib-fig-dioex2"><span class="std std-numref">Fig. 45.4</span></a>.</p>
 <figure class="align-default" id="contrib-fig-dioex1">
 <a class="reference internal image-reference" href="../_images/drawio-export-1.png"><img alt="../_images/drawio-export-1.png" src="../_images/drawio-export-1.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 50.3 </span><span class="caption-text">Activate Command Palette to export drawio figure as png.</span><a class="headerlink" href="#contrib-fig-dioex1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45.3 </span><span class="caption-text">Activate Command Palette to export drawio figure as png.</span><a class="headerlink" href="#contrib-fig-dioex1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="contrib-fig-dioex2">
 <a class="reference internal image-reference" href="../_images/drawio-export-2.png"><img alt="../_images/drawio-export-2.png" src="../_images/drawio-export-2.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 50.4 </span><span class="caption-text">Export drawio figure as png.</span><a class="headerlink" href="#contrib-fig-dioex2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45.4 </span><span class="caption-text">Export drawio figure as png.</span><a class="headerlink" href="#contrib-fig-dioex2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Note, this is strongly discouraged, since I don’t see any way to fix the resolution so that the images don’t suck.  I end up exporting from <a class="reference external" href="http://draw.io">draw.io</a> at 500% to get pictures to look reasonable.</p>
@@ -1070,13 +1082,13 @@ A caption for figure
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">50. </span>Contributing</p>
+            <p class="prev-next-title"><span class="section-number">45. </span>Contributing</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="credit.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">50.2. </span>Contributors</p>
+        <p class="prev-next-title"><span class="section-number">45.2. </span>Contributors</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

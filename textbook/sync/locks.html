@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>38. Implementing Locks &#8212; Introduction to Operating Systems</title>
+    <title>33. Implementing Locks &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="39. Ordering Thread Events" href="ordering.html" />
-    <link rel="prev" title="37. The Critical Section Problem" href="criticalsection.html" />
+    <link rel="next" title="34. Ordering Thread Events" href="ordering.html" />
+    <link rel="prev" title="32. The Critical Section Problem" href="criticalsection.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -349,39 +349,51 @@ const thebe_selector_output = ".output, .cell_output"
    27. File System Layout
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fs/dl_track_used.html">
-   28. Disk Layout:Tracking Used Space
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../fs/impl.html">
+   28. Implementation
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fs/dl_track_free.html">
-   29. Disk Layout:Tracking Free Space
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fs/dl_name.html">
-   30. Disk Layout:Implementing Name Space
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fs/dl_failures.html">
-   31. Disk Layout:Dealing with Failures
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fs/dl_ex_exx.html">
-   32. Disk Layout:Examples of Real World File Systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fs/kernelimp.html">
-   33. Kernel implementation
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../fs/dl_track_used.html">
+     28.1. Disk Layout:Tracking Used Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../fs/dl_track_free.html">
+     28.2. Disk Layout:Tracking Free Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../fs/dl_name.html">
+     28.3. Disk Layout:Implementing Name Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../fs/dl_failures.html">
+     28.4. Disk Layout:Dealing with Failures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../fs/dl_ex_exx.html">
+     28.5. Disk Layout:Examples of Real World File Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../fs/kernelimp.html">
+     28.6. Kernel implementation
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/review.html">
-   34. Review
+   29. Review
   </a>
  </li>
 </ul>
@@ -393,52 +405,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="sync.html">
-   35. Introduction to Concurrency, Synchronization and Deadlock
+   30. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="sharing.html">
-   36. Cooperating Processes and Inter-process Communication
+   31. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="criticalsection.html">
-   37. The Critical Section Problem
+   32. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   38. Implementing Locks
+   33. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ordering.html">
-   39. Ordering Thread Events
+   34. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concurrency_bugs.html">
-   40. Common Concurrency Bugs
+   35. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="readmostly.html">
-   41. Read-Dominated Workloads
+   36. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hardware_challenges.html">
-   42. Challenges of Modern Hardware
+   37. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linux_locking.html">
-   43. Locking in the Linux Kernel
+   38. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   44. Review
+   39. Review
   </a>
  </li>
 </ul>
@@ -450,22 +462,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   45. Input and Output
+   40. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   46. More on Disks
+   41. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   47. Virtualization
+   42. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   48. Security
+   43. Security
   </a>
  </li>
 </ul>
@@ -477,49 +489,49 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   49. How to read this book
+   44. How to read this book
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../contributing/intro.html">
-   50. Contributing
+   45. Contributing
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/examples.html">
-     50.1. Examples
+     45.1. Examples
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/credit.html">
-     50.2. Contributors
+     45.2. Contributors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/Contributing.html">
-     50.3. Contributing
+     45.3. Contributing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/resources.html">
-     50.6. Resources to look at
+     45.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/fix.html">
-     50.7. Out of date
+     45.7. Out of date
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   51. Bibliography
+   46. Bibliography
   </a>
  </li>
 </ul>
@@ -747,76 +759,76 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-oldest-trick-in-the-book-disable-interrupts">
-   38.1. The Oldest Trick in the Book - Disable Interrupts
+   33.1. The Oldest Trick in the Book - Disable Interrupts
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#lock-implementation-attempts-with-ordinary-machine-instructions">
-   38.2. Lock Implementation Attempts with Ordinary Machine Instructions
+   33.2. Lock Implementation Attempts with Ordinary Machine Instructions
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#broken-lock-implementation-attempt-1-check-a-flag">
-     38.2.1. (Broken) Lock Implementation Attempt #1 - Check a Flag
+     33.2.1. (Broken) Lock Implementation Attempt #1 - Check a Flag
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#broked-lock-implementation-attempt-2-take-turns">
-     38.2.2. (Broked) Lock Implementation Attempt #2 - Take Turns
+     33.2.2. (Broked) Lock Implementation Attempt #2 - Take Turns
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lock-implementation-attempt-3-peterson-s-algorithm">
-     38.2.3. Lock Implementation Attempt #3 - Peterson’s Algorithm
+     33.2.3. Lock Implementation Attempt #3 - Peterson’s Algorithm
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#discussion">
-     38.2.4. Discussion
+     33.2.4. Discussion
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#atomic-instructions-for-synchronization">
-   38.3. Atomic Instructions for Synchronization
+   33.3. Atomic Instructions for Synchronization
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#test-and-set-tas">
-     38.3.1. Test-and-Set (TAS)
+     33.3.1. Test-and-Set (TAS)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#compare-and-swap-cas">
-     38.3.2. Compare-and-Swap (CAS)
+     33.3.2. Compare-and-Swap (CAS)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#are-the-requirements-met">
-     38.3.3. Are the Requirements Met?
+     33.3.3. Are the Requirements Met?
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#atomic-instructions-and-portability">
-     38.3.4. Atomic Instructions and Portability
+     33.3.4. Atomic Instructions and Portability
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#ticket-locks">
-     38.3.5. Ticket Locks
+     33.3.5. Ticket Locks
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#comparing-lock-implementations">
-     38.3.6. Comparing Lock Implementations
+     33.3.6. Comparing Lock Implementations
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sleep-and-wakeup">
-   38.4. Sleep and Wakeup
+   33.4. Sleep and Wakeup
   </a>
  </li>
 </ul>
@@ -840,76 +852,76 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-oldest-trick-in-the-book-disable-interrupts">
-   38.1. The Oldest Trick in the Book - Disable Interrupts
+   33.1. The Oldest Trick in the Book - Disable Interrupts
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#lock-implementation-attempts-with-ordinary-machine-instructions">
-   38.2. Lock Implementation Attempts with Ordinary Machine Instructions
+   33.2. Lock Implementation Attempts with Ordinary Machine Instructions
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#broken-lock-implementation-attempt-1-check-a-flag">
-     38.2.1. (Broken) Lock Implementation Attempt #1 - Check a Flag
+     33.2.1. (Broken) Lock Implementation Attempt #1 - Check a Flag
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#broked-lock-implementation-attempt-2-take-turns">
-     38.2.2. (Broked) Lock Implementation Attempt #2 - Take Turns
+     33.2.2. (Broked) Lock Implementation Attempt #2 - Take Turns
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lock-implementation-attempt-3-peterson-s-algorithm">
-     38.2.3. Lock Implementation Attempt #3 - Peterson’s Algorithm
+     33.2.3. Lock Implementation Attempt #3 - Peterson’s Algorithm
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#discussion">
-     38.2.4. Discussion
+     33.2.4. Discussion
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#atomic-instructions-for-synchronization">
-   38.3. Atomic Instructions for Synchronization
+   33.3. Atomic Instructions for Synchronization
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#test-and-set-tas">
-     38.3.1. Test-and-Set (TAS)
+     33.3.1. Test-and-Set (TAS)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#compare-and-swap-cas">
-     38.3.2. Compare-and-Swap (CAS)
+     33.3.2. Compare-and-Swap (CAS)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#are-the-requirements-met">
-     38.3.3. Are the Requirements Met?
+     33.3.3. Are the Requirements Met?
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#atomic-instructions-and-portability">
-     38.3.4. Atomic Instructions and Portability
+     33.3.4. Atomic Instructions and Portability
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#ticket-locks">
-     38.3.5. Ticket Locks
+     33.3.5. Ticket Locks
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#comparing-lock-implementations">
-     38.3.6. Comparing Lock Implementations
+     33.3.6. Comparing Lock Implementations
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sleep-and-wakeup">
-   38.4. Sleep and Wakeup
+   33.4. Sleep and Wakeup
   </a>
  </li>
 </ul>
@@ -925,14 +937,14 @@ title="Print to PDF"
   <div class="cell tag_remove-input docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="implementing-locks">
-<span id="cont-sync-locks"></span><h1><span class="section-number">38. </span>Implementing Locks<a class="headerlink" href="#implementing-locks" title="Permalink to this headline">#</a></h1>
+<span id="cont-sync-locks"></span><h1><span class="section-number">33. </span>Implementing Locks<a class="headerlink" href="#implementing-locks" title="Permalink to this headline">#</a></h1>
 <p>Now let’s try to implement the lock data type. In the following examples, we will use C/C++-like pseudo-code, rather than actual C, to make the key points more clearly. We will also consider the special case of two concurrent threads first, before the general case of N concurrent threads.</p>
 <section id="the-oldest-trick-in-the-book-disable-interrupts">
-<span id="cont-sync-locks-interrupt-soln"></span><h2><span class="section-number">38.1. </span>The Oldest Trick in the Book - Disable Interrupts<a class="headerlink" href="#the-oldest-trick-in-the-book-disable-interrupts" title="Permalink to this headline">#</a></h2>
+<span id="cont-sync-locks-interrupt-soln"></span><h2><span class="section-number">33.1. </span>The Oldest Trick in the Book - Disable Interrupts<a class="headerlink" href="#the-oldest-trick-in-the-book-disable-interrupts" title="Permalink to this headline">#</a></h2>
 <p><a class="reference internal" href="sharing.html#cont-sync-sharing-issues"><span class="std std-ref">Earlier</span></a>, we blamed interrupts for causing untimely context switches that allowed thread operations to be interleaved arbitrarily. So, if we disable interrupts in the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function before the critical section, the currently executing thread cannot be kicked off the CPU until it enables interrupts in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function. Alas, this enticingly simple solution won’t work in most cases. First, user-level processes are not allowed to disable interrupts, so this solution is only available to operating system code. Second, leaving interrupts disabled for a long period of time can cause other problems, so even in the OS, it can only be used for short critical sections that do not cause blocking.
 Third, we can’t have different locks protecting different shared data objects if locks are implemented by disabling interrupts, since this approach will prevent other threads from running at all, regardless of what data they might want to access. Finally, and perhaps most importantly, disabling interrupts offers no protection against concurrent accesses from a thread running on another CPU, so this solution can only be applied on a uniprocessor. Historically, disabling interrupts was used to protect short critical sections in OS code, but in the multicore era, this idea has very limited uses.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-cs-interrupts">
-<div class="code-block-caption"><span class="caption-number">Listing 38.1 </span><span class="caption-text">Lock implementation using using interrupt disabling; C++-like definition.</span><a class="headerlink" href="#listing-sync-cs-interrupts" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.1 </span><span class="caption-text">Lock implementation using using interrupt disabling; C++-like definition.</span><a class="headerlink" href="#listing-sync-cs-interrupts" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">acquire</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -949,13 +961,13 @@ Third, we can’t have different locks protecting different shared data objects 
 <p>We now consider more general solutions that can be used in either user-level programs, or the operating system, without relying on any special hardware assistance.</p>
 </section>
 <section id="lock-implementation-attempts-with-ordinary-machine-instructions">
-<span id="cont-sync-locks-sw-solns"></span><h2><span class="section-number">38.2. </span>Lock Implementation Attempts with Ordinary Machine Instructions<a class="headerlink" href="#lock-implementation-attempts-with-ordinary-machine-instructions" title="Permalink to this headline">#</a></h2>
+<span id="cont-sync-locks-sw-solns"></span><h2><span class="section-number">33.2. </span>Lock Implementation Attempts with Ordinary Machine Instructions<a class="headerlink" href="#lock-implementation-attempts-with-ordinary-machine-instructions" title="Permalink to this headline">#</a></h2>
 <p>In this section, we will show you several attempts at implementing the lock functions that encapsulate the critical section entry and exit protocols. All of these solutions (or solution attempts) use only ordinary machine instructions (load, store, cmp, jmp, add, etc.).</p>
 <section id="broken-lock-implementation-attempt-1-check-a-flag">
-<span id="cont-sync-locks-flag-soln"></span><h3><span class="section-number">38.2.1. </span>(Broken) Lock Implementation Attempt #1 - Check a Flag<a class="headerlink" href="#broken-lock-implementation-attempt-1-check-a-flag" title="Permalink to this headline">#</a></h3>
-<p>Suppose we introduce a shared boolean variable to check if the critical section is currently in use, as shown in <a class="reference internal" href="#listing-sync-lockflag"><span class="std std-numref">Listing 38.2</span></a>.</p>
+<span id="cont-sync-locks-flag-soln"></span><h3><span class="section-number">33.2.1. </span>(Broken) Lock Implementation Attempt #1 - Check a Flag<a class="headerlink" href="#broken-lock-implementation-attempt-1-check-a-flag" title="Permalink to this headline">#</a></h3>
+<p>Suppose we introduce a shared boolean variable to check if the critical section is currently in use, as shown in <a class="reference internal" href="#listing-sync-lockflag"><span class="std std-numref">Listing 33.2</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-lockflag">
-<div class="code-block-caption"><span class="caption-number">Listing 38.2 </span><span class="caption-text">Lock implementation using a flag; C++-like definition.</span><a class="headerlink" href="#listing-sync-lockflag" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.2 </span><span class="caption-text">Lock implementation using a flag; C++-like definition.</span><a class="headerlink" href="#listing-sync-lockflag" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock_s</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">locked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span>
@@ -979,10 +991,10 @@ Third, we can’t have different locks protecting different shared data objects 
 <p>The heart of the problem with this non-solution is that our threads’ operations can interleave so that the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag can change between the time when a thread tests if it is safe to proceed and the time when the thread sets the flag to prevent others from also entering the critical section. If we could make the TEST and the SET an indivisible atomic operation, this problem would go away. Indeed, today’s processor architectures give us an instruction with the properties we need. But, the processors of the Djikstra’s era did not, and it is instructive to consider how we can implement the critical section entry and exit protocols without special assistance from the hardware. We will then see how some hardware support simplifies matters considerably.</p>
 </section>
 <section id="broked-lock-implementation-attempt-2-take-turns">
-<span id="cont-sync-locks-turn-soln"></span><h3><span class="section-number">38.2.2. </span>(Broked) Lock Implementation Attempt #2 - Take Turns<a class="headerlink" href="#broked-lock-implementation-attempt-2-take-turns" title="Permalink to this headline">#</a></h3>
-<p>Let’s try replacing the boolean <code class="docutils literal notranslate"><span class="pre">flag</span></code> with a <code class="docutils literal notranslate"><span class="pre">turn</span></code> variable to indicate which thread is allowed to use the critical section. Each thread will wait for <code class="docutils literal notranslate"><span class="pre">turn</span></code> to be set to its own thread id (tid) in the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function before entering, and will set <code class="docutils literal notranslate"><span class="pre">turn</span></code> to the other thread’s id in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function when it is done using the critical section, as shown in <a class="reference internal" href="#listing-sync-turn"><span class="std std-numref">Listing 38.3</span></a>.</p>
+<span id="cont-sync-locks-turn-soln"></span><h3><span class="section-number">33.2.2. </span>(Broked) Lock Implementation Attempt #2 - Take Turns<a class="headerlink" href="#broked-lock-implementation-attempt-2-take-turns" title="Permalink to this headline">#</a></h3>
+<p>Let’s try replacing the boolean <code class="docutils literal notranslate"><span class="pre">flag</span></code> with a <code class="docutils literal notranslate"><span class="pre">turn</span></code> variable to indicate which thread is allowed to use the critical section. Each thread will wait for <code class="docutils literal notranslate"><span class="pre">turn</span></code> to be set to its own thread id (tid) in the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function before entering, and will set <code class="docutils literal notranslate"><span class="pre">turn</span></code> to the other thread’s id in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function when it is done using the critical section, as shown in <a class="reference internal" href="#listing-sync-turn"><span class="std std-numref">Listing 33.3</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-turn">
-<div class="code-block-caption"><span class="caption-number">Listing 38.3 </span><span class="caption-text">Lock implementation for two threads using turns; C++-like definition.</span><a class="headerlink" href="#listing-sync-turn" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.3 </span><span class="caption-text">Lock implementation for two threads using turns; C++-like definition.</span><a class="headerlink" href="#listing-sync-turn" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock_s</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">turn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span>
@@ -1003,7 +1015,7 @@ Third, we can’t have different locks protecting different shared data objects 
 <dl class="simple myst">
 <dt>Mutual exclusion</dt><dd><p>The value of <code class="docutils literal notranslate"><span class="pre">turn</span></code> can only be 0 or 1 at any instant in time, and only the thread whose id matches <code class="docutils literal notranslate"><span class="pre">turn</span></code> is allowed entry to the critical section. So mutual exclusion is satisfied.</p>
 </dd>
-<dt>Progress</dt><dd><p>This requirement has two parts. The first part says that we can’t delay the decision of which thread next gets to enter the critical section forever. That part is fine — we decide on the next thread in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function by flipping the <code class="docutils literal notranslate"><span class="pre">turn</span></code> variable. The second part of the progress requirement says that threads in their <em>remainder</em> code can’t delay threads that want to use the critical section, and here lies the problem. This solution requires a strict alternation of threads in the critical section. In <a class="reference internal" href="#listing-sync-turn"><span class="std std-numref">Listing 38.3</span></a> we initialized <code class="docutils literal notranslate"><span class="pre">turn</span></code> so that T0 must go first, but T0 and T1 could have different tasks and run at different relative speeds. If T1 reaches its critical section first, it is still blocked until T0 goes through its critical section and flips <code class="docutils literal notranslate"><span class="pre">turn</span></code> to 1. Similarly, if one thread has less work to do, and needs fewer trips through the critical section, it could leave the other thread waiting indefinitely for another turn.</p>
+<dt>Progress</dt><dd><p>This requirement has two parts. The first part says that we can’t delay the decision of which thread next gets to enter the critical section forever. That part is fine — we decide on the next thread in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function by flipping the <code class="docutils literal notranslate"><span class="pre">turn</span></code> variable. The second part of the progress requirement says that threads in their <em>remainder</em> code can’t delay threads that want to use the critical section, and here lies the problem. This solution requires a strict alternation of threads in the critical section. In <a class="reference internal" href="#listing-sync-turn"><span class="std std-numref">Listing 33.3</span></a> we initialized <code class="docutils literal notranslate"><span class="pre">turn</span></code> so that T0 must go first, but T0 and T1 could have different tasks and run at different relative speeds. If T1 reaches its critical section first, it is still blocked until T0 goes through its critical section and flips <code class="docutils literal notranslate"><span class="pre">turn</span></code> to 1. Similarly, if one thread has less work to do, and needs fewer trips through the critical section, it could leave the other thread waiting indefinitely for another turn.</p>
 </dd>
 <dt>Bounded waiting</dt><dd><p>Strangely, this does satisfy bounded waiting, since there is a bound on the number of times other threads can use the critical section after a thread has started the entry protocol (i.e., after a thread has invoked the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function). Threads take turns, so T0 can use the critical section at most once after T1 calls the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function and before T1 gains entry. It is irrelevant though because we don’t have Progress.</p>
 </dd>
@@ -1013,10 +1025,10 @@ Third, we can’t have different locks protecting different shared data objects 
 A simpler solution that can generalize to more than 2 threads, built on the same ideas of combining turns with expressions of interest, was published by Gary L. Peterson in 1981 <span id="id2">[<a class="reference internal" href="../misc/bib.html#id6" title="Gary L. Peterson. Myths about the mutual exclusion problem. Information Processing Letters, 12:115-116, 1981.">Pet81</a>]</span>.</p>
 </section>
 <section id="lock-implementation-attempt-3-peterson-s-algorithm">
-<span id="cont-sync-locks-peterson-soln"></span><h3><span class="section-number">38.2.3. </span>Lock Implementation Attempt #3 - Peterson’s Algorithm<a class="headerlink" href="#lock-implementation-attempt-3-peterson-s-algorithm" title="Permalink to this headline">#</a></h3>
-<p>The code for Peterson’s Algorithm is shown in <a class="reference internal" href="#listing-sync-lock-peterson"><span class="std std-numref">Listing 38.4</span></a>. We have added an array of boolean flags, <code class="docutils literal notranslate"><span class="pre">interested</span></code> where each thread can indicate its interest in entering its critical section, and initially both flags are set to <code class="docutils literal notranslate"><span class="pre">false</span></code>. Each thread will only write to its own <code class="docutils literal notranslate"><span class="pre">interested</span></code> flag, and read from the other thread’s <code class="docutils literal notranslate"><span class="pre">interested</span></code> flag. To gain entry to its critical section, a thread first sets its <code class="docutils literal notranslate"><span class="pre">interested</span></code> flag to <code class="docutils literal notranslate"><span class="pre">true</span></code> so that the other thread can see that it wants to enter. Then, it will politely set the turn to the other thread, and busy wait until it sees that either the other thread is not interested, or the other thread has given back the turn. To leave the critical section, a thread simply sets its <code class="docutils literal notranslate"><span class="pre">interested</span></code> flag to false.</p>
+<span id="cont-sync-locks-peterson-soln"></span><h3><span class="section-number">33.2.3. </span>Lock Implementation Attempt #3 - Peterson’s Algorithm<a class="headerlink" href="#lock-implementation-attempt-3-peterson-s-algorithm" title="Permalink to this headline">#</a></h3>
+<p>The code for Peterson’s Algorithm is shown in <a class="reference internal" href="#listing-sync-lock-peterson"><span class="std std-numref">Listing 33.4</span></a>. We have added an array of boolean flags, <code class="docutils literal notranslate"><span class="pre">interested</span></code> where each thread can indicate its interest in entering its critical section, and initially both flags are set to <code class="docutils literal notranslate"><span class="pre">false</span></code>. Each thread will only write to its own <code class="docutils literal notranslate"><span class="pre">interested</span></code> flag, and read from the other thread’s <code class="docutils literal notranslate"><span class="pre">interested</span></code> flag. To gain entry to its critical section, a thread first sets its <code class="docutils literal notranslate"><span class="pre">interested</span></code> flag to <code class="docutils literal notranslate"><span class="pre">true</span></code> so that the other thread can see that it wants to enter. Then, it will politely set the turn to the other thread, and busy wait until it sees that either the other thread is not interested, or the other thread has given back the turn. To leave the critical section, a thread simply sets its <code class="docutils literal notranslate"><span class="pre">interested</span></code> flag to false.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-lock-peterson">
-<div class="code-block-caption"><span class="caption-number">Listing 38.4 </span><span class="caption-text">Lock implementation for two threads using Peterson’s Algorithm; C++-like definition.</span><a class="headerlink" href="#listing-sync-lock-peterson" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.4 </span><span class="caption-text">Lock implementation for two threads using Peterson’s Algorithm; C++-like definition.</span><a class="headerlink" href="#listing-sync-lock-peterson" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock_s</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">turn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">interested</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nb">false</span><span class="p">;</span><span class="w"> </span><span class="nb">false</span><span class="p">};</span><span class="w"></span>
@@ -1052,18 +1064,18 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 <p>We have made an informal argument that Peterson’s Algorithm satisfies the requirements. You should be skeptical of such arguments, because the history of synchronization teaches us that informal correctness arguments about concurrency are often wrong. The interested reader can find formal proofs of the correctness of Peterson’s algorithm <span id="id3">[<a class="reference internal" href="../misc/bib.html#id7" title="Fred B. Schneider. On Concurrent Programming. Springer New York NY, 1997. doi:10.1007/978-1-4612-1830-2.">Sch97</a>]</span>, or you can take our word for it.</p>
 </section>
 <section id="discussion">
-<h3><span class="section-number">38.2.4. </span>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">33.2.4. </span>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h3>
 <p>Over the years, <em>many</em> other algorithms were developed to solve the critical section problem, relying only on ordinary machine instructions. However, simpler solutions exist if we take advantage of special <em>atomic</em> machine instructions that are provided by all modern processor architectures. In addition, modern CPUs may re-order instructions on-the-fly during execution, and allow threads running on different CPUs to observe the effects of memory operations in different orders (this is called a <em>relaxed memory consistency model</em> but it can cause a lot of stress for programmers!). To make the solutions in this section work on modern hardware, additional instructions called <em>fences</em> have to be added to ensure correctness. We might as well use atomic instructions in the first place.</p>
 </section>
 </section>
 <section id="atomic-instructions-for-synchronization">
-<h2><span class="section-number">38.3. </span>Atomic Instructions for Synchronization<a class="headerlink" href="#atomic-instructions-for-synchronization" title="Permalink to this headline">#</a></h2>
-<p>Recall that we ran into trouble with our first lock implementation in  <a class="reference internal" href="#cont-sync-locks-flag-soln"><span class="std std-numref">Section 38.2.1</span></a>, because threads could have their execution interrupted and interleaved with another thread also running the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function between testing the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag and setting it to true. In this section we will look briefly at the semantics of some atomic machine instructions that can help us solve this problem.</p>
+<h2><span class="section-number">33.3. </span>Atomic Instructions for Synchronization<a class="headerlink" href="#atomic-instructions-for-synchronization" title="Permalink to this headline">#</a></h2>
+<p>Recall that we ran into trouble with our first lock implementation in  <a class="reference internal" href="#cont-sync-locks-flag-soln"><span class="std std-numref">Section 33.2.1</span></a>, because threads could have their execution interrupted and interleaved with another thread also running the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function between testing the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag and setting it to true. In this section we will look briefly at the semantics of some atomic machine instructions that can help us solve this problem.</p>
 <section id="test-and-set-tas">
-<h3><span class="section-number">38.3.1. </span>Test-and-Set (TAS)<a class="headerlink" href="#test-and-set-tas" title="Permalink to this headline">#</a></h3>
-<p>Some CPU architectures provide an atomic <code class="docutils literal notranslate"><span class="pre">test-and-set</span></code> instruction with the behavior shown in <a class="reference internal" href="#listing-sync-test-and-set"><span class="std std-numref">Listing 38.5</span></a>. Keep in mind that this code is just to show the effect of the test-and-set instruction — it is really a single operation that executes atomically.</p>
+<h3><span class="section-number">33.3.1. </span>Test-and-Set (TAS)<a class="headerlink" href="#test-and-set-tas" title="Permalink to this headline">#</a></h3>
+<p>Some CPU architectures provide an atomic <code class="docutils literal notranslate"><span class="pre">test-and-set</span></code> instruction with the behavior shown in <a class="reference internal" href="#listing-sync-test-and-set"><span class="std std-numref">Listing 33.5</span></a>. Keep in mind that this code is just to show the effect of the test-and-set instruction — it is really a single operation that executes atomically.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-test-and-set">
-<div class="code-block-caption"><span class="caption-number">Listing 38.5 </span><span class="caption-text">Semantics of the test-and-set atomic instruction.</span><a class="headerlink" href="#listing-sync-test-and-set" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.5 </span><span class="caption-text">Semantics of the test-and-set atomic instruction.</span><a class="headerlink" href="#listing-sync-test-and-set" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">test</span><span class="o">-</span><span class="n">and</span><span class="o">-</span><span class="n">set</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">)</span><span class="w"> </span>
 <span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">old</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">;</span><span class="w"></span>
@@ -1074,9 +1086,9 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 </pre></div>
 </div>
 </div>
-<p>Notice that the value stored at <code class="docutils literal notranslate"><span class="pre">location</span></code> is always true after executing <code class="docutils literal notranslate"><span class="pre">test-and-set</span></code> — either it was already true at the start, or it was initially false, the test succeeded, and it was set to true. By examining the old value, we can tell which case occurred. Actual implementations may make the test implicit and just unconditionally set <code class="docutils literal notranslate"><span class="pre">*location</span> <span class="pre">=</span> <span class="pre">true</span></code>, as shown in <a class="reference internal" href="#listing-sync-test-and-set-opt"><span class="std std-numref">Listing 38.6</span></a>:</p>
+<p>Notice that the value stored at <code class="docutils literal notranslate"><span class="pre">location</span></code> is always true after executing <code class="docutils literal notranslate"><span class="pre">test-and-set</span></code> — either it was already true at the start, or it was initially false, the test succeeded, and it was set to true. By examining the old value, we can tell which case occurred. Actual implementations may make the test implicit and just unconditionally set <code class="docutils literal notranslate"><span class="pre">*location</span> <span class="pre">=</span> <span class="pre">true</span></code>, as shown in <a class="reference internal" href="#listing-sync-test-and-set-opt"><span class="std std-numref">Listing 33.6</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-test-and-set-opt">
-<div class="code-block-caption"><span class="caption-number">Listing 38.6 </span><span class="caption-text">Semantics of the test-and-set atomic instruction, alternate implementation.</span><a class="headerlink" href="#listing-sync-test-and-set-opt" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.6 </span><span class="caption-text">Semantics of the test-and-set atomic instruction, alternate implementation.</span><a class="headerlink" href="#listing-sync-test-and-set-opt" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">test</span><span class="o">-</span><span class="n">and</span><span class="o">-</span><span class="n">set</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">)</span><span class="w"> </span>
 <span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">old</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">;</span><span class="w"></span>
@@ -1088,7 +1100,7 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 </div>
 <p>Armed with a test-and-set instruction, implementing a lock is very easy.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-locktas">
-<div class="code-block-caption"><span class="caption-number">Listing 38.7 </span><span class="caption-text">Lock implementation using test-and-set; C++-like definition.</span><a class="headerlink" href="#listing-sync-locktas" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.7 </span><span class="caption-text">Lock implementation using test-and-set; C++-like definition.</span><a class="headerlink" href="#listing-sync-locktas" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">locked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span>
@@ -1106,10 +1118,10 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 <p>In the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> function, a thread will atomically check the state of the <code class="docutils literal notranslate"><span class="pre">locked</span></code> variable and set it to <code class="docutils literal notranslate"><span class="pre">true</span></code>. If the critical section is already in use by another thread, then <code class="docutils literal notranslate"><span class="pre">locked</span></code> will be <code class="docutils literal notranslate"><span class="pre">true</span></code> already, <code class="docutils literal notranslate"><span class="pre">test-and-set</span></code> will return <code class="docutils literal notranslate"><span class="pre">true</span></code> and the thread will stay in the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop and try again. Eventually, the other thread will leave the critical section and call <code class="docutils literal notranslate"><span class="pre">release()</span></code>, setting <code class="docutils literal notranslate"><span class="pre">locked</span></code> to false. The next test-and-set will return <code class="docutils literal notranslate"><span class="pre">false</span></code> as the old value of <code class="docutils literal notranslate"><span class="pre">locked</span></code> (and will set <code class="docutils literal notranslate"><span class="pre">locked</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>), and the thread will leave the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop and enter the critical section. But what if <code class="docutils literal notranslate"><span class="pre">locked</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code> and two threads try to enter the critical section at the same time? Because test-and-set is atomic, one of the thread’s will execute the instruction first and succeed in setting <code class="docutils literal notranslate"><span class="pre">locked</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>, while the other thread will fail and be forced to retry. Thus, the mutual exclusion requirement is met.</p>
 </section>
 <section id="compare-and-swap-cas">
-<h3><span class="section-number">38.3.2. </span>Compare-and-Swap (CAS)<a class="headerlink" href="#compare-and-swap-cas" title="Permalink to this headline">#</a></h3>
-<p>Another common atomic instruction is compare-and-swap, or CAS, which has the semantics shown in <a class="reference internal" href="#listing-sync-cas"><span class="std std-numref">Listing 38.8</span></a>.</p>
+<h3><span class="section-number">33.3.2. </span>Compare-and-Swap (CAS)<a class="headerlink" href="#compare-and-swap-cas" title="Permalink to this headline">#</a></h3>
+<p>Another common atomic instruction is compare-and-swap, or CAS, which has the semantics shown in <a class="reference internal" href="#listing-sync-cas"><span class="std std-numref">Listing 33.8</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-cas">
-<div class="code-block-caption"><span class="caption-number">Listing 38.8 </span><span class="caption-text">Semantics of the compare-and-swap instruction.</span><a class="headerlink" href="#listing-sync-cas" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.8 </span><span class="caption-text">Semantics of the compare-and-swap instruction.</span><a class="headerlink" href="#listing-sync-cas" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">compare</span><span class="o">-</span><span class="n">and</span><span class="o">-</span><span class="n">swap</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">expected</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">newval</span><span class="p">)</span><span class="w"> </span>
 <span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">location</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">expected</span><span class="p">)</span><span class="w"> </span>
@@ -1123,7 +1135,7 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 </div>
 <p>We can also implement locks using the compare-and-swap atomic operation.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-lockcas">
-<div class="code-block-caption"><span class="caption-number">Listing 38.9 </span><span class="caption-text">Lock implementation using compare-and-swap; C++-like definition.</span><a class="headerlink" href="#listing-sync-lockcas" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.9 </span><span class="caption-text">Lock implementation using compare-and-swap; C++-like definition.</span><a class="headerlink" href="#listing-sync-lockcas" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">locked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span>
@@ -1141,26 +1153,26 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 <p>This is essentially the same as the version using test-and-set. A thread wanting to enter the critical section atomically compares the current value of <code class="docutils literal notranslate"><span class="pre">locked</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code>. As long as the critical section is unavailable, this comparison will fail, compare-and-swap returns false, and the thread has to stay in the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop trying again.</p>
 </section>
 <section id="are-the-requirements-met">
-<h3><span class="section-number">38.3.3. </span>Are the Requirements Met?<a class="headerlink" href="#are-the-requirements-met" title="Permalink to this headline">#</a></h3>
-<p>We have already argued that these spinlocks using atomic test-and-set or compare-and-swap meet the Mutual Exclusion requirement. It should be clear that the Progress requirement is also met, since some thread can successfully enter the critical section as soon as the lock is released, and no <em>remainder</em> code can have any influence over this, since the value of the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag is only accessed inside the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> and <code class="docutils literal notranslate"><span class="pre">release()</span></code> functions. But what about Bounded Waiting? Unfortunately, an “unlucky” thread might always try its test-and-set at an instant when the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag has been set to <code class="docutils literal notranslate"><span class="pre">true</span></code> by another thread, continually retrying while other threads enter and leave the critical section an unlimited number of times, so we don’t have Bounded Waiting with these lock implementations. We show this unfortunate possibility in <a class="reference internal" href="#fig-sync-locks-unlucky"><span class="std std-numref">Fig. 38.1</span></a>.</p>
+<h3><span class="section-number">33.3.3. </span>Are the Requirements Met?<a class="headerlink" href="#are-the-requirements-met" title="Permalink to this headline">#</a></h3>
+<p>We have already argued that these spinlocks using atomic test-and-set or compare-and-swap meet the Mutual Exclusion requirement. It should be clear that the Progress requirement is also met, since some thread can successfully enter the critical section as soon as the lock is released, and no <em>remainder</em> code can have any influence over this, since the value of the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag is only accessed inside the <code class="docutils literal notranslate"><span class="pre">acquire()</span></code> and <code class="docutils literal notranslate"><span class="pre">release()</span></code> functions. But what about Bounded Waiting? Unfortunately, an “unlucky” thread might always try its test-and-set at an instant when the <code class="docutils literal notranslate"><span class="pre">locked</span></code> flag has been set to <code class="docutils literal notranslate"><span class="pre">true</span></code> by another thread, continually retrying while other threads enter and leave the critical section an unlimited number of times, so we don’t have Bounded Waiting with these lock implementations. We show this unfortunate possibility in <a class="reference internal" href="#fig-sync-locks-unlucky"><span class="std std-numref">Fig. 33.1</span></a>.</p>
 <figure class="align-default" id="fig-sync-locks-unlucky">
 <a class="reference internal image-reference" href="../_images/unlucky_tas.drawio.png"><img alt="../_images/unlucky_tas.drawio.png" src="../_images/unlucky_tas.drawio.png" style="width: 95%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 38.1 </span><span class="caption-text">Starvation is possible with simple test-and-set spinlocks.</span><a class="headerlink" href="#fig-sync-locks-unlucky" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 33.1 </span><span class="caption-text">Starvation is possible with simple test-and-set spinlocks.</span><a class="headerlink" href="#fig-sync-locks-unlucky" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Although we have illustrated the issue using test-and-set, exactly the same problem can arise when spinlocks are implemented using compare-and-swap.</p>
 </section>
 <section id="atomic-instructions-and-portability">
-<h3><span class="section-number">38.3.4. </span>Atomic Instructions and Portability<a class="headerlink" href="#atomic-instructions-and-portability" title="Permalink to this headline">#</a></h3>
-<p>Different processor architectures provide different atomic instructions, making our lock implementations non-portable. However, the machine-dependent code can be hidden by library implementations. We also simplified the implementations that we showed you in <a class="reference internal" href="#listing-sync-locktas"><span class="std std-numref">Listing 38.7</span></a> and <a class="reference internal" href="#listing-sync-lockcas"><span class="std std-numref">Listing 38.9</span></a> by ignoring the need for fences in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function. And, we ignored the fact that C compilers can optimize accesses to plain variables, like <code class="docutils literal notranslate"><span class="pre">locked</span></code>, in ways that break correctness in the face of multi-threading.</p>
-<p>It wasn’t until C11/C++11 that the C programming language got a memory consistency model and standard, language-level support for atomic operations. Now, it is possible to write portable versions of the lock functions, with the C compiler translating the atomic operations into the correct machine instructions for the target architecture. We show a portable C11 implementation of a spinlock using test-and-set in <a class="reference internal" href="#listing-sync-spinlock"><span class="std std-numref">Listing 38.10</span></a>.</p>
+<h3><span class="section-number">33.3.4. </span>Atomic Instructions and Portability<a class="headerlink" href="#atomic-instructions-and-portability" title="Permalink to this headline">#</a></h3>
+<p>Different processor architectures provide different atomic instructions, making our lock implementations non-portable. However, the machine-dependent code can be hidden by library implementations. We also simplified the implementations that we showed you in <a class="reference internal" href="#listing-sync-locktas"><span class="std std-numref">Listing 33.7</span></a> and <a class="reference internal" href="#listing-sync-lockcas"><span class="std std-numref">Listing 33.9</span></a> by ignoring the need for fences in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function. And, we ignored the fact that C compilers can optimize accesses to plain variables, like <code class="docutils literal notranslate"><span class="pre">locked</span></code>, in ways that break correctness in the face of multi-threading.</p>
+<p>It wasn’t until C11/C++11 that the C programming language got a memory consistency model and standard, language-level support for atomic operations. Now, it is possible to write portable versions of the lock functions, with the C compiler translating the atomic operations into the correct machine instructions for the target architecture. We show a portable C11 implementation of a spinlock using test-and-set in <a class="reference internal" href="#listing-sync-spinlock"><span class="std std-numref">Listing 33.10</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>There are also atomic versions of simple arithmetic instructions, like add, which we would prefer to use for a simple operation like incrementing the shared counter. Most critical sections in real code are much more complex (we will see a few examples soon).</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="listing-sync-spinlock">
-<div class="code-block-caption"><span class="caption-number">Listing 38.10 </span><span class="caption-text">spinlock.h - Basic spinlock using C11 atomics.</span><a class="headerlink" href="#listing-sync-spinlock" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.10 </span><span class="caption-text">spinlock.h - Basic spinlock using C11 atomics.</span><a class="headerlink" href="#listing-sync-spinlock" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#include &lt;stdatomic.h&gt;</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="n">typedef</span> <span class="n">struct</span> <span class="n">spinlock_s</span> <span class="p">{</span>
@@ -1183,9 +1195,9 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 </pre></div>
 </div>
 </div>
-<p>We argued earlier that a test-and-set spinlock ensures mutual exclusion and progress. Now, let’s see it in action by replacing the pthread_mutex in our shared counter example program with this spinlock implementatioin. The code is shown in <a class="reference internal" href="#listing-sync-counter-spin"><span class="std std-numref">Listing 38.11</span></a>.</p>
+<p>We argued earlier that a test-and-set spinlock ensures mutual exclusion and progress. Now, let’s see it in action by replacing the pthread_mutex in our shared counter example program with this spinlock implementatioin. The code is shown in <a class="reference internal" href="#listing-sync-counter-spin"><span class="std std-numref">Listing 33.11</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-counter-spin">
-<div class="code-block-caption"><span class="caption-number">Listing 38.11 </span><span class="caption-text">counter_spinlock.c - shared counter example using test-and-set spinlock to protect access to counter variable.</span><a class="headerlink" href="#listing-sync-counter-spin" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.11 </span><span class="caption-text">counter_spinlock.c - shared counter example using test-and-set spinlock to protect access to counter variable.</span><a class="headerlink" href="#listing-sync-counter-spin" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#include &lt;pthread.h&gt;</span>
 <span class="linenos"> 2</span><span class="c1">#include &lt;stdlib.h&gt;</span>
 <span class="linenos"> 3</span><span class="c1">#include &lt;sys/types.h&gt;</span>
@@ -1274,7 +1286,7 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 <p>Next, we turn our attention to the final requirement, bounded waiting. This can also be expressed as a fairness requirement—every thread should have an equal chance to acquire a lock and enter its critical section.</p>
 </section>
 <section id="ticket-locks">
-<span id="cont-sync-locks-ticket"></span><h3><span class="section-number">38.3.5. </span>Ticket Locks<a class="headerlink" href="#ticket-locks" title="Permalink to this headline">#</a></h3>
+<span id="cont-sync-locks-ticket"></span><h3><span class="section-number">33.3.5. </span>Ticket Locks<a class="headerlink" href="#ticket-locks" title="Permalink to this headline">#</a></h3>
 <aside class="sidebar">
 <p class="sidebar-title">How unfair are plain spinlocks? </p>
 <p>It turns out they can be quite unfair indeed. When ticket locks were introduced to the Linux kernel, the patch description included this motivation for them:</p>
@@ -1283,9 +1295,9 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 </div></blockquote>
 <p style='text-align: right;'> ---Nick Piggin, <a href='https://lkml.org/lkml/2007/11/1/125'>[LKML 2007]</a></p>
 </aside>
-<p>Mellor-Crummey and Scott introduced <em>ticket locks</em> as a simple way to achieve bounded waiting using an atomic fetch-and-add (FAA) machine instruction <span id="id4">[<a class="reference internal" href="../misc/bib.html#id8" title="John M. Mellor-Crummey and Michael L. Scott. Algorithms for scalable synchronization on shared-memory multiprocessors. ACM Trans. Comput. Syst., 9(1):21–65, feb 1991. URL: https://doi.org/10.1145/103727.103729, doi:10.1145/103727.103729.">MCS91</a>]</span>. (The fetch-and-add instruction has the semantics shown in <a class="reference internal" href="#listing-sync-faa"><span class="std std-numref">Listing 38.12</span></a>.) They observed that ticket locks could be viewed as an optimization of Lamport’s classic Bakery Algorithm <span id="id5">[<a class="reference internal" href="../misc/bib.html#id9" title="Leslie Lamport. A new solution of dijkstra's concurrent programming problem. Commun. ACM, 17(8):453–455, aug 1974. URL: https://doi.org/10.1145/361082.361093, doi:10.1145/361082.361093.">Lam74</a>]</span>. To understand how ticket locks work, imagine a bakery with a ticket dispenser and a display behind the counter showing the ticket number of the next customer to be served. Customers take a ticket when they come into the bakery, and wait until the display shows their number. Customers are served in the order they claim their tickets, so we can guarantee no starvation.</p>
+<p>Mellor-Crummey and Scott introduced <em>ticket locks</em> as a simple way to achieve bounded waiting using an atomic fetch-and-add (FAA) machine instruction <span id="id4">[<a class="reference internal" href="../misc/bib.html#id8" title="John M. Mellor-Crummey and Michael L. Scott. Algorithms for scalable synchronization on shared-memory multiprocessors. ACM Trans. Comput. Syst., 9(1):21–65, feb 1991. URL: https://doi.org/10.1145/103727.103729, doi:10.1145/103727.103729.">MCS91</a>]</span>. (The fetch-and-add instruction has the semantics shown in <a class="reference internal" href="#listing-sync-faa"><span class="std std-numref">Listing 33.12</span></a>.) They observed that ticket locks could be viewed as an optimization of Lamport’s classic Bakery Algorithm <span id="id5">[<a class="reference internal" href="../misc/bib.html#id9" title="Leslie Lamport. A new solution of dijkstra's concurrent programming problem. Commun. ACM, 17(8):453–455, aug 1974. URL: https://doi.org/10.1145/361082.361093, doi:10.1145/361082.361093.">Lam74</a>]</span>. To understand how ticket locks work, imagine a bakery with a ticket dispenser and a display behind the counter showing the ticket number of the next customer to be served. Customers take a ticket when they come into the bakery, and wait until the display shows their number. Customers are served in the order they claim their tickets, so we can guarantee no starvation.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-faa">
-<div class="code-block-caption"><span class="caption-number">Listing 38.12 </span><span class="caption-text">Semantics of the fetch-and-add atomic instruction; atomically increments the contents of a memory location by a specified value, returning the previous contents of the memory location.</span><a class="headerlink" href="#listing-sync-faa" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.12 </span><span class="caption-text">Semantics of the fetch-and-add atomic instruction; atomically increments the contents of a memory location by a specified value, returning the previous contents of the memory location.</span><a class="headerlink" href="#listing-sync-faa" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">fetch_and_add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">location</span><span class="p">;</span><span class="w"></span>
@@ -1295,9 +1307,9 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 </pre></div>
 </div>
 </div>
-<p>To use this idea in a lock data type, we need two counters, <code class="docutils literal notranslate"><span class="pre">next_ticket</span></code> and <code class="docutils literal notranslate"><span class="pre">now_serving</span></code>. To acquire the lock, a thread first gets a ticket and increments the <code class="docutils literal notranslate"><span class="pre">next_ticket</span></code> variable, using the atomic fetch-and-add instruction. Because fetch-and-add is an indivisible machine instruction, each thread is guaranteed a unique ticket number. To wait for its turn, a thread simply spins testing to see if the <code class="docutils literal notranslate"><span class="pre">now_serving</span></code> variable matches its ticket. When that happens, the thread breaks out of the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop, and enters its critical section. To release the lock, a thread simply increments the <code class="docutils literal notranslate"><span class="pre">now_serving</span></code> variable, which will allow exactly one thread (the one holding the next ticket number) to acquire the lock next. We show an example of this implementation in <a class="reference internal" href="#listing-sync-ticketlock"><span class="std std-numref">Listing 38.13</span></a>. Note that we do not need to use the fetch-and-add atomic instruction to increment <code class="docutils literal notranslate"><span class="pre">now_serving</span></code> in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function, because only the thread that acquired the lock can release it, and we don’t care about the previous value. On any real processor, however, we do need to worry about instruction reordering so we would need a memory <em>fence</em> in the <code class="docutils literal notranslate"><span class="pre">release</span></code> function.</p>
+<p>To use this idea in a lock data type, we need two counters, <code class="docutils literal notranslate"><span class="pre">next_ticket</span></code> and <code class="docutils literal notranslate"><span class="pre">now_serving</span></code>. To acquire the lock, a thread first gets a ticket and increments the <code class="docutils literal notranslate"><span class="pre">next_ticket</span></code> variable, using the atomic fetch-and-add instruction. Because fetch-and-add is an indivisible machine instruction, each thread is guaranteed a unique ticket number. To wait for its turn, a thread simply spins testing to see if the <code class="docutils literal notranslate"><span class="pre">now_serving</span></code> variable matches its ticket. When that happens, the thread breaks out of the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop, and enters its critical section. To release the lock, a thread simply increments the <code class="docutils literal notranslate"><span class="pre">now_serving</span></code> variable, which will allow exactly one thread (the one holding the next ticket number) to acquire the lock next. We show an example of this implementation in <a class="reference internal" href="#listing-sync-ticketlock"><span class="std std-numref">Listing 33.13</span></a>. Note that we do not need to use the fetch-and-add atomic instruction to increment <code class="docutils literal notranslate"><span class="pre">now_serving</span></code> in the <code class="docutils literal notranslate"><span class="pre">release()</span></code> function, because only the thread that acquired the lock can release it, and we don’t care about the previous value. On any real processor, however, we do need to worry about instruction reordering so we would need a memory <em>fence</em> in the <code class="docutils literal notranslate"><span class="pre">release</span></code> function.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-ticketlock">
-<div class="code-block-caption"><span class="caption-number">Listing 38.13 </span><span class="caption-text">Ticket lock implementation; C++-like definition.</span><a class="headerlink" href="#listing-sync-ticketlock" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.13 </span><span class="caption-text">Ticket lock implementation; C++-like definition.</span><a class="headerlink" href="#listing-sync-ticketlock" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lock</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">next_ticket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">now_serving</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
@@ -1314,9 +1326,9 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 </pre></div>
 </div>
 </div>
-<p>In <a class="reference internal" href="#listing-sync-ticketlock-c11"><span class="std std-numref">Listing 38.14</span></a>, we show a portable, C11 implementation of a ticket lock.</p>
+<p>In <a class="reference internal" href="#listing-sync-ticketlock-c11"><span class="std std-numref">Listing 33.14</span></a>, we show a portable, C11 implementation of a ticket lock.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-ticketlock-c11">
-<div class="code-block-caption"><span class="caption-number">Listing 38.14 </span><span class="caption-text">C11 implementation of a ticket lock</span><a class="headerlink" href="#listing-sync-ticketlock-c11" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.14 </span><span class="caption-text">C11 implementation of a ticket lock</span><a class="headerlink" href="#listing-sync-ticketlock-c11" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#include &lt;stdatomic.h&gt;</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="n">typedef</span> <span class="n">struct</span> <span class="n">ticketlock_s</span> <span class="p">{</span>
@@ -1342,9 +1354,9 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 </pre></div>
 </div>
 </div>
-<p>Now, let’s see the ticket lock in action by replacing the previous spinlock in our shared counter example program with this ticketlock implementatioin. The code is shown in <a class="reference internal" href="#listing-sync-counter-ticket"><span class="std std-numref">Listing 38.15</span></a>.</p>
+<p>Now, let’s see the ticket lock in action by replacing the previous spinlock in our shared counter example program with this ticketlock implementatioin. The code is shown in <a class="reference internal" href="#listing-sync-counter-ticket"><span class="std std-numref">Listing 33.15</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-counter-ticket">
-<div class="code-block-caption"><span class="caption-number">Listing 38.15 </span><span class="caption-text">counter_ticketlock.c - shared counter example using ticket lock to protect access to counter variable.</span><a class="headerlink" href="#listing-sync-counter-ticket" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.15 </span><span class="caption-text">counter_ticketlock.c - shared counter example using ticket lock to protect access to counter variable.</span><a class="headerlink" href="#listing-sync-counter-ticket" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#include &lt;pthread.h&gt;</span>
 <span class="linenos"> 2</span><span class="c1">#include &lt;stdlib.h&gt;</span>
 <span class="linenos"> 3</span><span class="c1">#include &lt;sys/types.h&gt;</span>
@@ -1431,10 +1443,10 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 </div>
 </section>
 <section id="comparing-lock-implementations">
-<h3><span class="section-number">38.3.6. </span>Comparing Lock Implementations<a class="headerlink" href="#comparing-lock-implementations" title="Permalink to this headline">#</a></h3>
-<p>Test-and-set spinlocks, ticket locks, or the mutex from the pthreads library (<code class="docutils literal notranslate"><span class="pre">pthread_mutex_t</span></code>) can all provide mutual exclusion and ensure progress, but ticket locks can guarantee fairness, unlike test-and-set spinlocks. On the other hand, you can see that more work is required to acquire and release a ticket lock. To see how these implementations stack up, we have a very simple test program that creates some number of threads and has each thread count the number of times it can acquire and release the lock in a fixed amount of time. The parent thread sets a global flag to allow the children to start counting after all the threads have been created, sleeps for some amount of time, and then sets another global flag to tell the children to stop. Once all the child threads are done, the parent reports on the total number of iterations completed by all children, and the difference between the most and least productive thread. This program for the test-and-set spinlock is shown in <a class="reference internal" href="#listing-sync-check-spinlock-fairness"><span class="std std-numref">Listing 38.16</span></a>; we also have versions that replace the spinlock with a ticket lock, and with a pthread mutex.</p>
+<h3><span class="section-number">33.3.6. </span>Comparing Lock Implementations<a class="headerlink" href="#comparing-lock-implementations" title="Permalink to this headline">#</a></h3>
+<p>Test-and-set spinlocks, ticket locks, or the mutex from the pthreads library (<code class="docutils literal notranslate"><span class="pre">pthread_mutex_t</span></code>) can all provide mutual exclusion and ensure progress, but ticket locks can guarantee fairness, unlike test-and-set spinlocks. On the other hand, you can see that more work is required to acquire and release a ticket lock. To see how these implementations stack up, we have a very simple test program that creates some number of threads and has each thread count the number of times it can acquire and release the lock in a fixed amount of time. The parent thread sets a global flag to allow the children to start counting after all the threads have been created, sleeps for some amount of time, and then sets another global flag to tell the children to stop. Once all the child threads are done, the parent reports on the total number of iterations completed by all children, and the difference between the most and least productive thread. This program for the test-and-set spinlock is shown in <a class="reference internal" href="#listing-sync-check-spinlock-fairness"><span class="std std-numref">Listing 33.16</span></a>; we also have versions that replace the spinlock with a ticket lock, and with a pthread mutex.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-check-spinlock-fairness">
-<div class="code-block-caption"><span class="caption-number">Listing 38.16 </span><span class="caption-text">check_spinlock_fairness.c - Sample program to show fairness and efficiency of test-and-set spinlock implementation.</span><a class="headerlink" href="#listing-sync-check-spinlock-fairness" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33.16 </span><span class="caption-text">check_spinlock_fairness.c - Sample program to show fairness and efficiency of test-and-set spinlock implementation.</span><a class="headerlink" href="#listing-sync-check-spinlock-fairness" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>#include &lt;pthread.h&gt;
 <span class="linenos"> 2</span>#include &lt;stdlib.h&gt;
 <span class="linenos"> 3</span>#include &lt;sys/types.h&gt;
@@ -1561,7 +1573,7 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
 </section>
 </section>
 <section id="sleep-and-wakeup">
-<span id="cont-sync-locks-sleep-wakeup"></span><h2><span class="section-number">38.4. </span>Sleep and Wakeup<a class="headerlink" href="#sleep-and-wakeup" title="Permalink to this headline">#</a></h2>
+<span id="cont-sync-locks-sleep-wakeup"></span><h2><span class="section-number">33.4. </span>Sleep and Wakeup<a class="headerlink" href="#sleep-and-wakeup" title="Permalink to this headline">#</a></h2>
 <p>We can build better spinlocks that are more efficient than the simple implementations we have shown and still satisfy the bounded waiting requirement, but we can’t get away from the fundamental problem of busy waiting. On a uniprocessor, busy waiting wastes precious CPU time. If a lock is not available the first time a thread tries to acquire it, the lock can’t possibly become available until the thread holding the lock gets a chance to run. So, the waiting thread will spin through its timeslice until the scheduler preempts it and switches to another thread. On a multiprocessor, it might be acceptable to spin while waiting for a lock if critical sections are short, since the lock could be released by a thread running on another CPU. Even on a multiprocessor, however, spinning can waste a lot of CPU time when critical sections are long, or when many threads are competing to acquire the lock. But what alternative do we have? One option is for the waiting thread to voluntarily yield the remainder of its timeslice when it can’t acquire a lock (e.g., via the <code class="docutils literal notranslate"><span class="pre">sched_yield()</span></code> system call). This helps, but can still have unnecessary overhead if the thread holding the lock is blocked (e.g., waiting for terminal input). In such cases, the scheduler will keep switching back to the thread trying to acquire the lock, which will keep yielding, until eventually the lock holder can run and release the lock. What we really want is a way to block a thread that is trying to acquire a lock until there is a chance that the lock is available, and then unblock a waiting thread when the lock is released. To that end, we introduce the following operations:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sleep(wait_queue)</span></code>: blocks the calling thread; thread is added to <code class="docutils literal notranslate"><span class="pre">wait_queue</span></code> and another thread is selected to run.</p></li>
@@ -1610,13 +1622,13 @@ is granted entry, because <span class="math notranslate nohighlight">\(T_j\)</sp
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">37. </span>The Critical Section Problem</p>
+            <p class="prev-next-title"><span class="section-number">32. </span>The Critical Section Problem</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="ordering.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">39. </span>Ordering Thread Events</p>
+        <p class="prev-next-title"><span class="section-number">34. </span>Ordering Thread Events</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -4,68 +4,65 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search &#8212; Introduction to Operating Systems</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>28. Implementation &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" />
-  <script src="searchindex.js" defer></script>
-  
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="28.1. Disk Layout:Tracking Used Space" href="dl_track_used.html" />
+    <link rel="prev" title="27. File System Layout" href="disklayout.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
 
     <!-- Google Analytics -->
     
-
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
 <!-- Checkboxes to toggle the left sidebar -->
@@ -94,19 +91,19 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="bd-sidebar noprint" id="site-navigation">
     <div class="bd-sidebar__content">
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+    <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
       
       
-      <img src="_static/logo.png" class="logo" alt="logo">
+      <img src="../_static/logo.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Introduction to Operating Systems</h1>
       
     </a>
-</div><form class="bd-search d-flex align-items-center" action="#" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -114,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="intro/pref.html">
+                <a class="reference internal" href="../intro/pref.html">
                     Preface
                 </a>
             </li>
@@ -126,27 +123,27 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="intro/intro.html">
+  <a class="reference internal" href="../intro/intro.html">
    1. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="intro/purpose.html">
+  <a class="reference internal" href="../intro/purpose.html">
    2. Purpose of operating systems
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="intro/structure.html">
+  <a class="reference internal" href="../intro/structure.html">
    3. Operating System Structure &amp; Unix/Linux
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="intro/abstractions.html">
+  <a class="reference internal" href="../intro/abstractions.html">
    4. Operating System Abstractions
   </a>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="intro/tools.html">
+  <a class="reference internal" href="../intro/tools.html">
    5. What you should know
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -156,37 +153,37 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="intro/tools-c.html">
+    <a class="reference internal" href="../intro/tools-c.html">
      5.1. The C Programming Language
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="intro/tools-shell.html">
+    <a class="reference internal" href="../intro/tools-shell.html">
      5.2. Shell
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="intro/tools-editors.html">
+    <a class="reference internal" href="../intro/tools-editors.html">
      5.3. Editors
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="intro/tools-make.html">
+    <a class="reference internal" href="../intro/tools-make.html">
      5.4. Make
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="intro/tools-testing.html">
+    <a class="reference internal" href="../intro/tools-testing.html">
      5.5. Testing
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="intro/tools-git.html">
+    <a class="reference internal" href="../intro/tools-git.html">
      5.6. Git Basics
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="intro/tools-gdb.html">
+    <a class="reference internal" href="../intro/tools-gdb.html">
      5.7. GDB
     </a>
    </li>
@@ -200,27 +197,27 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="scheduling/intro.html">
+  <a class="reference internal" href="../scheduling/intro.html">
    6. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="scheduling/process.html">
+  <a class="reference internal" href="../scheduling/process.html">
    7. The Process: A virtual Computer
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="scheduling/virtual.html">
+  <a class="reference internal" href="../scheduling/virtual.html">
    8. Virtualizing the CPU
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="scheduling/threads.html">
+  <a class="reference internal" href="../scheduling/threads.html">
    9. The Thread: A Virtual CPU
   </a>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="scheduling/scheduling.html">
+  <a class="reference internal" href="../scheduling/scheduling.html">
    10. Scheduling
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
@@ -230,29 +227,29 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="scheduling/sch-goals.html">
+    <a class="reference internal" href="../scheduling/sch-goals.html">
      10.1. Scheduling Goals
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="scheduling/sch-simple.html">
+    <a class="reference internal" href="../scheduling/sch-simple.html">
      10.2. Simple Examples of Scheduling Policies
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="scheduling/sch-prio.html">
+    <a class="reference internal" href="../scheduling/sch-prio.html">
      10.3. Scheduling with Priorities
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="scheduling/sch-real.html">
+    <a class="reference internal" href="../scheduling/sch-real.html">
      10.4. Scheduling in the real world
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="scheduling/review.html">
+  <a class="reference internal" href="../scheduling/review.html">
    11. Review Questions
   </a>
  </li>
@@ -264,62 +261,62 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="mm/intro.html">
+  <a class="reference internal" href="../mm/intro.html">
    12. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mm/phys-and-seg.html">
+  <a class="reference internal" href="../mm/phys-and-seg.html">
    13. Memory management before paged virtual memory
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mm/virt-paging.html">
+  <a class="reference internal" href="../mm/virt-paging.html">
    14. Paging
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mm/page-tables.html">
+  <a class="reference internal" href="../mm/page-tables.html">
    15. Page Tables
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mm/reclamation.html">
+  <a class="reference internal" href="../mm/reclamation.html">
    16. Memory reclaiming algorithms.
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mm/page-size.html">
+  <a class="reference internal" href="../mm/page-size.html">
    17. Page Sizes
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mm/misc.html">
+  <a class="reference internal" href="../mm/misc.html">
    18. Other topics
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mm/buffer-cache.html">
+  <a class="reference internal" href="../mm/buffer-cache.html">
    19. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mm/pagefaults.html">
+  <a class="reference internal" href="../mm/pagefaults.html">
    20. Memory Management Page Faults
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mm/realworld.html">
+  <a class="reference internal" href="../mm/realworld.html">
    21. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mm/concl.html">
+  <a class="reference internal" href="../mm/concl.html">
    22. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mm/review.html">
+  <a class="reference internal" href="../mm/review.html">
    23. Review
   </a>
  </li>
@@ -329,71 +326,71 @@ const thebe_selector_output = ".output, .cell_output"
   File Systems
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="fs/intro.html">
+  <a class="reference internal" href="intro.html">
    24. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="fs/interface.html">
+  <a class="reference internal" href="interface.html">
    25. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="fs/diskhw.html">
+  <a class="reference internal" href="diskhw.html">
    26. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="fs/disklayout.html">
+  <a class="reference internal" href="disklayout.html">
    27. File System Layout
   </a>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="fs/impl.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
    28. Implementation
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="fs/dl_track_used.html">
+    <a class="reference internal" href="dl_track_used.html">
      28.1. Disk Layout:Tracking Used Space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="fs/dl_track_free.html">
+    <a class="reference internal" href="dl_track_free.html">
      28.2. Disk Layout:Tracking Free Space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="fs/dl_name.html">
+    <a class="reference internal" href="dl_name.html">
      28.3. Disk Layout:Implementing Name Space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="fs/dl_failures.html">
+    <a class="reference internal" href="dl_failures.html">
      28.4. Disk Layout:Dealing with Failures
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="fs/dl_ex_exx.html">
+    <a class="reference internal" href="dl_ex_exx.html">
      28.5. Disk Layout:Examples of Real World File Systems
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="fs/kernelimp.html">
+    <a class="reference internal" href="kernelimp.html">
      28.6. Kernel implementation
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="fs/review.html">
+  <a class="reference internal" href="review.html">
    29. Review
   </a>
  </li>
@@ -405,52 +402,52 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="sync/sync.html">
+  <a class="reference internal" href="../sync/sync.html">
    30. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sync/sharing.html">
+  <a class="reference internal" href="../sync/sharing.html">
    31. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sync/criticalsection.html">
+  <a class="reference internal" href="../sync/criticalsection.html">
    32. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sync/locks.html">
+  <a class="reference internal" href="../sync/locks.html">
    33. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sync/ordering.html">
+  <a class="reference internal" href="../sync/ordering.html">
    34. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sync/concurrency_bugs.html">
+  <a class="reference internal" href="../sync/concurrency_bugs.html">
    35. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sync/readmostly.html">
+  <a class="reference internal" href="../sync/readmostly.html">
    36. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sync/hardware_challenges.html">
+  <a class="reference internal" href="../sync/hardware_challenges.html">
    37. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sync/linux_locking.html">
+  <a class="reference internal" href="../sync/linux_locking.html">
    38. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sync/review.html">
+  <a class="reference internal" href="../sync/review.html">
    39. Review
   </a>
  </li>
@@ -462,22 +459,22 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="devices/devices.html">
+  <a class="reference internal" href="../devices/devices.html">
    40. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="devices/disk2.html">
+  <a class="reference internal" href="../devices/disk2.html">
    41. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="virt/virt.html">
+  <a class="reference internal" href="../virt/virt.html">
    42. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="sec/sec.html">
+  <a class="reference internal" href="../sec/sec.html">
    43. Security
   </a>
  </li>
@@ -489,12 +486,12 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="misc/howto.html">
+  <a class="reference internal" href="../misc/howto.html">
    44. How to read this book
   </a>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="contributing/intro.html">
+  <a class="reference internal" href="../contributing/intro.html">
    45. Contributing
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -504,34 +501,34 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="contributing/examples.html">
+    <a class="reference internal" href="../contributing/examples.html">
      45.1. Examples
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="contributing/credit.html">
+    <a class="reference internal" href="../contributing/credit.html">
      45.2. Contributors
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="contributing/Contributing.html">
+    <a class="reference internal" href="../contributing/Contributing.html">
      45.3. Contributing
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="contributing/resources.html">
+    <a class="reference internal" href="../contributing/resources.html">
      45.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="contributing/fix.html">
+    <a class="reference internal" href="../contributing/fix.html">
      45.7. Out of date
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="misc/bib.html">
+  <a class="reference internal" href="../misc/bib.html">
    46. Bibliography
   </a>
  </li>
@@ -586,6 +583,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/fs/impl.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -625,7 +651,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fsearch.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Ffs/impl.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -638,6 +664,69 @@ title="Open an issue"
   </span>
 <span class="headerbtn__text-container">open issue</span>
 </a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/fs/impl.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/fs/impl.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
 
       </li>
       
@@ -656,7 +745,7 @@ title="Open an issue"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1></h1>
+                <h1>Implementation</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -668,36 +757,33 @@ title="Open an issue"
                 
               <div>
                 
-  <h1 id="search-documentation">Search</h1>
-  
-  <noscript>
-  <div class="admonition warning">
-  <p>
-    Please activate JavaScript to enable the search
-    functionality.
-  </p>
-  </div>
-  </noscript>
-  
-  
-  <p>
-    Searching for multiple words only shows matches that contain
-    all words.
-  </p>
-  
-  
-  <form action="" method="get">
-    <input type="text" name="q" aria-labelledby="search-documentation" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-    <input type="submit" value="search" />
-    <span id="search-progress" style="padding-left: 10px"></span>
-  </form>
-  
-  
-  
-  <div id="search-results">
-  
-  </div>
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="implementation">
+<span id="cont-fs-impl"></span><h1><span class="section-number">28. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h1>
+<p>After describing how you get to the file system <a class="reference internal" href="disklayout.html#cont-fs-layout"><span class="std std-ref">on disk</span></a>, the next four chapters describe key file system design issues, namely how to: 1)<a class="reference internal" href="dl_track_used.html#fs-dl-track-used"><span class="std std-ref">keep track of the blocks used in a file</span></a>, 2)<a class="reference internal" href="dl_track_free.html#fs-dl-track-free"><span class="std std-ref">keep track of the free blocks</span></a>, 3) <a class="reference internal" href="dl_name.html#fs-dl-name"><span class="std std-ref">maintain the name space</span></a>, and 4) <a class="reference internal" href="dl_failures.html#fs-dl-failures"><span class="std std-ref">deal with failures</span></a>.</p>
+<p>The final two chapters <a class="reference internal" href="dl_ex_exx.html#fs-dl-ex-exx"><span class="std std-ref">provide examples of real file systems</span></a> and <a class="reference internal" href="kernelimp.html#cont-fs-kernel"><span class="std std-ref">discuss what runs in the kernel, and the VFS layer unix file systems have</span></a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./fs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
@@ -706,6 +792,20 @@ title="Open an issue"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="disklayout.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">27. </span>File System Layout</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="dl_track_used.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">28.1. </span>Disk Layout:Tracking Used Space</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>
@@ -727,7 +827,7 @@ title="Open an issue"
     </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
 
   </body>
