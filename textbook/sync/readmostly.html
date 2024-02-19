@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>35. Read-Dominated Workloads &#8212; Introduction to Operating Systems</title>
+    <title>30. Read-Dominated Workloads &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="36. Challenges of Modern Hardware" href="hardware_challenges.html" />
-    <link rel="prev" title="34. Common Concurrency Bugs" href="concurrency_bugs.html" />
+    <link rel="next" title="31. Challenges of Modern Hardware" href="hardware_challenges.html" />
+    <link rel="prev" title="29. Common Concurrency Bugs" href="concurrency_bugs.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -270,54 +270,66 @@ const thebe_selector_output = ".output, .cell_output"
    13. Memory management before paged virtual memory
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/virt-paging.html">
-   14. Paging
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mm/pagvm.html">
+   14. Paged Virtual memory
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/page-tables.html">
-   15. Page Tables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/reclamation.html">
-   16. Memory reclaiming algorithms.
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/page-size.html">
-   17. Page Sizes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/misc.html">
-   18. Other topics
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/vmabs.html">
+     14.1. Basic Memory Management functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/virt-paging.html">
+     14.2. Paging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/page-tables.html">
+     14.3. Page Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/reclamation.html">
+     14.4. Memory reclaiming algorithms.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/page-size.html">
+     14.5. Page Sizes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/pagefaults.html">
+     14.6. Memory Management Page Faults
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   19. Buffer Cache
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/pagefaults.html">
-   20. Memory Management Page Faults
+   15. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   21. Memory management in the real world
+   16. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   22. Conclusion
+   17. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/review.html">
-   23. Review
+   18. Review
   </a>
  </li>
 </ul>
@@ -329,69 +341,69 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/intro.html">
-   24. Introduction
+   19. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/interface.html">
-   25. File System Abstraction
+   20. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/diskhw.html">
-   26. A bit about Disks
+   21. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../fs/impl.html">
-   27. Implementation
+   22. Implementation
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../fs/disklayout.html">
-     27.1. File System Layout
+     22.1. File System Layout
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../fs/dl_track_used.html">
-     27.2. Disk Layout:Tracking Used Space
+     22.2. Disk Layout:Tracking Used Space
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../fs/dl_track_free.html">
-     27.3. Disk Layout:Tracking Free Space
+     22.3. Disk Layout:Tracking Free Space
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../fs/dl_name.html">
-     27.4. Disk Layout:Implementing Name Space
+     22.4. Disk Layout:Implementing Name Space
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../fs/dl_failures.html">
-     27.5. Disk Layout:Dealing with Failures
+     22.5. Disk Layout:Dealing with Failures
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../fs/dl_ex_exx.html">
-     27.6. Disk Layout:Examples of Real World File Systems
+     22.6. Disk Layout:Examples of Real World File Systems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../fs/kernelimp.html">
-     27.7. Kernel implementation
+     22.7. Kernel implementation
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fs/review.html">
-   28. Review
+   23. Review
   </a>
  </li>
 </ul>
@@ -403,52 +415,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="sync.html">
-   29. Introduction to Concurrency, Synchronization and Deadlock
+   24. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="sharing.html">
-   30. Cooperating Processes and Inter-process Communication
+   25. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="criticalsection.html">
-   31. The Critical Section Problem
+   26. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="locks.html">
-   32. Implementing Locks
+   27. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ordering.html">
-   33. Ordering Thread Events
+   28. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concurrency_bugs.html">
-   34. Common Concurrency Bugs
+   29. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   35. Read-Dominated Workloads
+   30. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hardware_challenges.html">
-   36. Challenges of Modern Hardware
+   31. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linux_locking.html">
-   37. Locking in the Linux Kernel
+   32. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   38. Review
+   33. Review
   </a>
  </li>
 </ul>
@@ -460,22 +472,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   39. Input and Output
+   34. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   40. More on Disks
+   35. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   41. Virtualization
+   36. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   42. Security
+   37. Security
   </a>
  </li>
 </ul>
@@ -487,49 +499,49 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   43. How to read this book
+   38. How to read this book
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../contributing/intro.html">
-   44. Contributing
+   39. Contributing
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/examples.html">
-     44.1. Examples
+     39.1. Examples
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/credit.html">
-     44.2. Contributors
+     39.2. Contributors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/Contributing.html">
-     44.3. Contributing
+     39.3. Contributing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/resources.html">
-     44.6. Resources to look at
+     39.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/fix.html">
-     44.7. Out of date
+     39.7. Out of date
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   45. Bibliography
+   40. Bibliography
   </a>
  </li>
 </ul>
@@ -757,37 +769,37 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#reader-writer-locks">
-   35.1. Reader-Writer Locks
+   30.1. Reader-Writer Locks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#performance-of-reader-writer-locks">
-   35.2. Performance of Reader/Writer Locks
+   30.2. Performance of Reader/Writer Locks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#read-copy-update">
-   35.3. Read-Copy Update
+   30.3. Read-Copy Update
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#why-rcu">
-     35.3.1. Why RCU?
+     30.3.1. Why RCU?
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-read-side">
-     35.3.2. The read-side
+     30.3.2. The read-side
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-write-side">
-     35.3.3. The write-side
+     30.3.3. The write-side
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#handling-read-reclaim-races">
-     35.3.4. Handling read-reclaim races
+     30.3.4. Handling read-reclaim races
     </a>
    </li>
   </ul>
@@ -813,37 +825,37 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#reader-writer-locks">
-   35.1. Reader-Writer Locks
+   30.1. Reader-Writer Locks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#performance-of-reader-writer-locks">
-   35.2. Performance of Reader/Writer Locks
+   30.2. Performance of Reader/Writer Locks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#read-copy-update">
-   35.3. Read-Copy Update
+   30.3. Read-Copy Update
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#why-rcu">
-     35.3.1. Why RCU?
+     30.3.1. Why RCU?
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-read-side">
-     35.3.2. The read-side
+     30.3.2. The read-side
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-write-side">
-     35.3.3. The write-side
+     30.3.3. The write-side
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#handling-read-reclaim-races">
-     35.3.4. Handling read-reclaim races
+     30.3.4. Handling read-reclaim races
     </a>
    </li>
   </ul>
@@ -861,13 +873,13 @@ title="Print to PDF"
   <div class="cell tag_remove-input docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="read-dominated-workloads">
-<span id="cont-sync-readmostly"></span><h1><span class="section-number">35. </span>Read-Dominated Workloads<a class="headerlink" href="#read-dominated-workloads" title="Permalink to this headline">#</a></h1>
+<span id="cont-sync-readmostly"></span><h1><span class="section-number">30. </span>Read-Dominated Workloads<a class="headerlink" href="#read-dominated-workloads" title="Permalink to this headline">#</a></h1>
 <p>There are many scenarios in operating systems and other concurrent software where certain data structures are frequently read, but rarely updated. For example, the OS caches network routing information, but route updates are infrequent compared to route lookups in the cache. Since read-only accesses cannot conflict with each other, we would like to allow “readers” to execute concurrently with each other (sharing access to the data structure), while “writers” must not be allowed to conflict with either readers or other writers. We will look at two ways to solve this problem: classical reader-writer locks (rw_locks), and read-copy-update (RCU).</p>
 <section id="reader-writer-locks">
-<span id="cont-sync-readmostly-rw-locks"></span><h2><span class="section-number">35.1. </span>Reader-Writer Locks<a class="headerlink" href="#reader-writer-locks" title="Permalink to this headline">#</a></h2>
-<p>Courtois et al. first described the reader-writer problem and two solutions using semaphores for mutual exclusion in 1971 <span id="id1">[<a class="reference internal" href="../misc/bib.html#id17" title="P. J. Courtois, F. Heymans, and D. L. Parnas. Concurrent control with “readers” and “writers”. Commun. ACM, 14(10):667–668, oct 1971. URL: https://doi.org/10.1145/362759.362813, doi:10.1145/362759.362813.">CHP71</a>]</span>. In the first version of the problem, readers have priority over writers: a reader thread should never be prevented from accessing the resource unless a writer has already been granted exclusive use of the resource. We show the solution for this reader-priority version in <a class="reference internal" href="#listing-sync-readmostly-readerpri"><span class="std std-numref">Listing 35.1</span></a> using POSIX semaphores. Note that since the semaphores are used only for mutual exclusion, we could replace them with <code class="docutils literal notranslate"><span class="pre">pthread_mutex_t</span></code> or any of our spinlock implementations without making any other changes. We represent access to some shared database with the <code class="docutils literal notranslate"><span class="pre">read_db()</span></code> and <code class="docutils literal notranslate"><span class="pre">write_db()</span></code> functions.</p>
+<span id="cont-sync-readmostly-rw-locks"></span><h2><span class="section-number">30.1. </span>Reader-Writer Locks<a class="headerlink" href="#reader-writer-locks" title="Permalink to this headline">#</a></h2>
+<p>Courtois et al. first described the reader-writer problem and two solutions using semaphores for mutual exclusion in 1971 <span id="id1">[<a class="reference internal" href="../misc/bib.html#id17" title="P. J. Courtois, F. Heymans, and D. L. Parnas. Concurrent control with “readers” and “writers”. Commun. ACM, 14(10):667–668, oct 1971. URL: https://doi.org/10.1145/362759.362813, doi:10.1145/362759.362813.">CHP71</a>]</span>. In the first version of the problem, readers have priority over writers: a reader thread should never be prevented from accessing the resource unless a writer has already been granted exclusive use of the resource. We show the solution for this reader-priority version in <a class="reference internal" href="#listing-sync-readmostly-readerpri"><span class="std std-numref">Listing 30.1</span></a> using POSIX semaphores. Note that since the semaphores are used only for mutual exclusion, we could replace them with <code class="docutils literal notranslate"><span class="pre">pthread_mutex_t</span></code> or any of our spinlock implementations without making any other changes. We represent access to some shared database with the <code class="docutils literal notranslate"><span class="pre">read_db()</span></code> and <code class="docutils literal notranslate"><span class="pre">write_db()</span></code> functions.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-readmostly-readerpri">
-<div class="code-block-caption"><span class="caption-number">Listing 35.1 </span><span class="caption-text">Reader/writer solution using semaphores; readers have priority over writers.</span><a class="headerlink" href="#listing-sync-readmostly-readerpri" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 30.1 </span><span class="caption-text">Reader/writer solution using semaphores; readers have priority over writers.</span><a class="headerlink" href="#listing-sync-readmostly-readerpri" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">static</span> <span class="n">void</span> <span class="n">read_db</span><span class="p">();</span>
 <span class="linenos"> 2</span><span class="n">static</span> <span class="n">void</span> <span class="n">write_db</span><span class="p">();</span>
 <span class="linenos"> 3</span>
@@ -908,9 +920,9 @@ title="Print to PDF"
 </div>
 <p>The writer code (lines 11-13) is very simple. We introduce a <code class="docutils literal notranslate"><span class="pre">mutex</span></code> semaphore (line 4) to protect access to the shared database. The <code class="docutils literal notranslate"><span class="pre">wait</span></code> on <code class="docutils literal notranslate"><span class="pre">mutex</span></code> at line 10 ensures that only one writer can be accessing the database at any time; when the writer is done, it <code class="docutils literal notranslate"><span class="pre">post</span></code>s a notice to <code class="docutils literal notranslate"><span class="pre">mutex</span></code> that the database is now available again (line 12). The reader code needs to do a little more work, however, because we want to allow multiple readers. First, we want to keep track of the number of readers currently accessing the database, so we introduce a <code class="docutils literal notranslate"><span class="pre">reader_count</span></code> variable (line 6), and since this variable will be updated by every reader thread, we also add a <code class="docutils literal notranslate"><span class="pre">counter_mutex</span></code> semaphore (line 5) to protect sections of code that depend on the <code class="docutils literal notranslate"><span class="pre">reader_count</span></code>. Each reader thread begins by <code class="docutils literal notranslate"><span class="pre">wait</span></code>ing for the <code class="docutils literal notranslate"><span class="pre">counter_mutex</span></code>, then increments <code class="docutils literal notranslate"><span class="pre">reader_count</span></code> to add itself to the count of current readers (lines 18-19). Only the first reader thread needs to synchronize with writer threads (lines 20-23)—once a reader has successfully <code class="docutils literal notranslate"><span class="pre">wait</span></code>ed for the <code class="docutils literal notranslate"><span class="pre">mutex</span></code>, writers will be locked out until all the readers are done. Notice also that the first reader does not <code class="docutils literal notranslate"><span class="pre">post</span></code> to the <code class="docutils literal notranslate"><span class="pre">counter_mutex</span></code> until <em>after</em> it has obtained permission to access the database (line 24). This ensures that other reader threads must line up <code class="docutils literal notranslate"><span class="pre">wait</span></code>ing for the <code class="docutils literal notranslate"><span class="pre">counter_mutex</span></code> as long as a writer is accessing the database; once the first reader obtains access to the database, the other readers only need to increment the <code class="docutils literal notranslate"><span class="pre">reader_count</span></code>. When a reader finishes using the database, it must again <code class="docutils literal notranslate"><span class="pre">wait</span></code> for the <code class="docutils literal notranslate"><span class="pre">counter_mutex</span></code> to subtract itself from the count of current readers (lines 28-29). When the <code class="docutils literal notranslate"><span class="pre">reader_count</span></code> falls to zero, it means that the last reader thread is done using the database, and this last thread must <code class="docutils literal notranslate"><span class="pre">post</span></code> a signal to the <code class="docutils literal notranslate"><span class="pre">mutex</span></code> to indicate that the database is available again (lines 30-33). If any writers are waiting, one will now be allowed to proceed; otherwise the database remains available until either a reader or writer threads requests access.</p>
 <p>The reader code illustrates the <em>lightswitch pattern</em> in concurrent programming: the analogy is that the first person into a dark room turns on the light (acquires the resource), and the last one to leave turns it off (releases the resource).</p>
-<p>We can encapsulate the <em>entry</em> sections of code (line 10 for writers; lines 18-24 for readers) and the <em>exit</em> sections of code (line 12 for writers; lines 28-34 for readers) into acquire and release functions for reader/writer locks. This code is shown in <a class="reference internal" href="#listing-sync-readmostly-rwlock"><span class="std std-numref">Listing 35.2</span></a>:</p>
+<p>We can encapsulate the <em>entry</em> sections of code (line 10 for writers; lines 18-24 for readers) and the <em>exit</em> sections of code (line 12 for writers; lines 28-34 for readers) into acquire and release functions for reader/writer locks. This code is shown in <a class="reference internal" href="#listing-sync-readmostly-rwlock"><span class="std std-numref">Listing 30.2</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-readmostly-rwlock">
-<div class="code-block-caption"><span class="caption-number">Listing 35.2 </span><span class="caption-text">C source code for reader/writer locks using semaphores.</span><a class="headerlink" href="#listing-sync-readmostly-rwlock" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 30.2 </span><span class="caption-text">C source code for reader/writer locks using semaphores.</span><a class="headerlink" href="#listing-sync-readmostly-rwlock" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#include &lt;semaphore.h&gt;</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="n">typedef</span> <span class="n">struct</span> <span class="n">rwlock_s</span> <span class="p">{</span>
@@ -963,12 +975,12 @@ title="Print to PDF"
 <p>In this implementation of rwlocks, intensive read activity could starve writer threads. An alternative is to give writers priority: as soon as a writer thread requests access to the shared data, no new reader threads are allowed access until the writer is done using the data. The writer must still wait for existing reader threads to finish and release the data, but writers will not starve. If write activity is intense enough to worry about starving readers, then rwlocks are probably not a good choice anyway.</p>
 </section>
 <section id="performance-of-reader-writer-locks">
-<h2><span class="section-number">35.2. </span>Performance of Reader/Writer Locks<a class="headerlink" href="#performance-of-reader-writer-locks" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">30.2. </span>Performance of Reader/Writer Locks<a class="headerlink" href="#performance-of-reader-writer-locks" title="Permalink to this headline">#</a></h2>
 <p>To be added.</p>
 <p>Takeaway: The reader side of reader/writer locks is expensive, since an internal lock must be acquired and released on <em>every</em> <code class="docutils literal notranslate"><span class="pre">rwlock_acquire_read</span></code> and <code class="docutils literal notranslate"><span class="pre">rwlock_release_read</span></code> to modify the <code class="docutils literal notranslate"><span class="pre">reader_count</span></code> and check if the current thread is either the first (on acquire) or last (on release) reader. For short read-side critical sections, the overhead of rwlocks can overwhelm the benefit of allowing readers to access the shared data structure concurrently with each other.</p>
 </section>
 <section id="read-copy-update">
-<span id="cont-sync-readmostly-rcu"></span><h2><span class="section-number">35.3. </span>Read-Copy Update<a class="headerlink" href="#read-copy-update" title="Permalink to this headline">#</a></h2>
+<span id="cont-sync-readmostly-rcu"></span><h2><span class="section-number">30.3. </span>Read-Copy Update<a class="headerlink" href="#read-copy-update" title="Permalink to this headline">#</a></h2>
 <p><em>Read-Copy Update</em> (RCU) is an alternative reader/writer synchronization mechanism designed for read-mostly data structures. Readers use no locks at all, thereby addressing the read-side overhead of rwlocks. Writers only need to synchronize with other writers, typically by using ordinary locks. Thus, RCU lets multiple readers access data concurrently with one writer. The key property we need to ensure is that readers always see a consistent version of the data, either before a writer performs an update, or after the update is complete. To achieve this, writers must create new versions of the data atomically, for example, by making a copy of a node in a data structure that they want to update, performing the update on the copy, and atomically replacing the old copy with the new copy into the data structure. Concurrent readers can continue to access the old version of the data; new readers will see the update. Of course, the old version must be deleted at some point, but only after we are able to guarantee that no reader can be accessing it.</p>
 <p>Unlike with reader/writer locks, RCU readers can read stale data and may see inconsistencies (for example, an RCU reader counting the number of items in a linked list might return a total that would not be possible under reader/writer locking). However, there are many situations where this staleness and inconsistency doesn’t matter. Paul McKenney uses the example of the network routing table in one of his <a class="reference external" href="https://lwn.net/Articles/263130/">RCU LWN article</a>:</p>
 <blockquote>
@@ -977,67 +989,67 @@ title="Print to PDF"
 <p>Although RCU readers use no locking, we still need to reason about reader accesses to shared data, to determine when it is safe for a writer to reclaim memory. Thus, we refer to the sections of code where readers are accessing a shared data structure as a <em>read-side critical section</em>, and we impose some restrictions on what threads are allowed to do in a read-side critical section.</p>
 <p>We will present RCU with reference to the Linux kernel implementation. An excellent resource for further reading on this topic can be found in the [Linux kernel documentation of RCU]<code class="docutils literal notranslate"><span class="pre">https://www.kernel.org/doc/html/latest/RCU/whatisRCU.html</span></code>.</p>
 <section id="why-rcu">
-<h3><span class="section-number">35.3.1. </span>Why RCU?<a class="headerlink" href="#why-rcu" title="Permalink to this headline">#</a></h3>
-<p>Before we dive into RCU and how it works in more detail, we will motivate the RCU approach using the example of a concurrent hash table, as depicted in <a class="reference internal" href="#fig-sync-readmostly-rcu-hashtable"><span class="std std-numref">Fig. 35.1</span></a>. Such data structures are widely used in operating systems, for example to build caches of network routing information or file system metadata, and to locate data structures like the thread structure given a key like the thread identifier. To look up a key in the hashtable, a hash function selects a bucket (i.e., an entry in an array). Collisions are handled by chaining, so once we have found the right bucket, we will need to search the linked list of items that hash to the same bucket. Since the hashtable can be accessed by multiple threads concurrently searching for items, inserting new items, or deleting items, we will need some synchronization. Rather than a single lock on the entire hashtable, we can increase concurrency by using a separate lock for each bucket in the hashtable. Because each bucket has its own lock, we can simplify the scenario by just thinking about concurrent operations on a linked list; operations that hash to different buckets will not conflict with each other.</p>
+<h3><span class="section-number">30.3.1. </span>Why RCU?<a class="headerlink" href="#why-rcu" title="Permalink to this headline">#</a></h3>
+<p>Before we dive into RCU and how it works in more detail, we will motivate the RCU approach using the example of a concurrent hash table, as depicted in <a class="reference internal" href="#fig-sync-readmostly-rcu-hashtable"><span class="std std-numref">Fig. 30.1</span></a>. Such data structures are widely used in operating systems, for example to build caches of network routing information or file system metadata, and to locate data structures like the thread structure given a key like the thread identifier. To look up a key in the hashtable, a hash function selects a bucket (i.e., an entry in an array). Collisions are handled by chaining, so once we have found the right bucket, we will need to search the linked list of items that hash to the same bucket. Since the hashtable can be accessed by multiple threads concurrently searching for items, inserting new items, or deleting items, we will need some synchronization. Rather than a single lock on the entire hashtable, we can increase concurrency by using a separate lock for each bucket in the hashtable. Because each bucket has its own lock, we can simplify the scenario by just thinking about concurrent operations on a linked list; operations that hash to different buckets will not conflict with each other.</p>
 <figure class="align-default" id="fig-sync-readmostly-rcu-hashtable">
 <a class="reference internal image-reference" href="../_images/hashtable.drawio.png"><img alt="../_images/hashtable.drawio.png" src="../_images/hashtable.drawio.png" style="width: 30%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35.1 </span><span class="caption-text">Concurrent hashtable with per-bucket locking.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-hashtable" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30.1 </span><span class="caption-text">Concurrent hashtable with per-bucket locking.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-hashtable" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>For read-mostly workloads, where searches are much more frequent than insertions, deletions, or updates, we might want to use a rwlock on the hash buckets, but these have a lot of overhead for readers. Even ignoring the cost of the locks themselves, forcing all readers to wait so that a writer can have exclusive access may leave us with lots of “dead time” as depicted in <a class="reference internal" href="#fig-sync-readmostly-rcu-rwstall"><span class="std std-numref">Fig. 35.2</span></a>.</p>
+<p>For read-mostly workloads, where searches are much more frequent than insertions, deletions, or updates, we might want to use a rwlock on the hash buckets, but these have a lot of overhead for readers. Even ignoring the cost of the locks themselves, forcing all readers to wait so that a writer can have exclusive access may leave us with lots of “dead time” as depicted in <a class="reference internal" href="#fig-sync-readmostly-rcu-rwstall"><span class="std std-numref">Fig. 30.2</span></a>.</p>
 <figure class="align-default" id="fig-sync-readmostly-rcu-rwstall">
 <a class="reference internal image-reference" href="../_images/readerstall.drawio.png"><img alt="../_images/readerstall.drawio.png" src="../_images/readerstall.drawio.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35.2 </span><span class="caption-text">A single writer can block many readers with rwlocks.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-rwstall" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30.2 </span><span class="caption-text">A single writer can block many readers with rwlocks.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-rwstall" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Ideally, readers would never have to wait for writers, so that this wasted time could be eliminated, as depicted in <a class="reference internal" href="#fig-sync-readmostly-rcu-rwnostall"><span class="std std-numref">Fig. 35.3</span></a>.</p>
+<p>Ideally, readers would never have to wait for writers, so that this wasted time could be eliminated, as depicted in <a class="reference internal" href="#fig-sync-readmostly-rcu-rwnostall"><span class="std std-numref">Fig. 30.3</span></a>.</p>
 <figure class="align-default" id="fig-sync-readmostly-rcu-rwnostall">
 <a class="reference internal image-reference" href="../_images/readernostall.drawio.png"><img alt="../_images/readernostall.drawio.png" src="../_images/readernostall.drawio.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35.3 </span><span class="caption-text">A writer does not wait for readers to finish, and does not block readers.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-rwnostall" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30.3 </span><span class="caption-text">A writer does not wait for readers to finish, and does not block readers.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-rwnostall" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="concurrency_bugs.html#cont-sync-concurrency-bugs-break-mutex"><span class="std std-numref">Section 34.3.4</span></a>, we mentioned non-blocking synchronization as a way to break the mutual exclusion condition, and noted that there were non-blocking implementations of linked lists. We could certainly use a non-blocking linked list in our concurrent hash table, which would eliminate the stalls in <a class="reference internal" href="#fig-sync-readmostly-rcu-rwstall"><span class="std std-numref">Fig. 35.2</span></a>, but this still introduces more overhead than we would like, even if the workload is entirely read-only. To see why, consider what happens if there is a concurrent lookup and delete operation on a linked list. We show this scenario in <a class="reference internal" href="#fig-sync-readmostly-rcu-linkedlist-nbs"><span class="std std-numref">Fig. 35.4</span></a>.</p>
+<p>In <a class="reference internal" href="concurrency_bugs.html#cont-sync-concurrency-bugs-break-mutex"><span class="std std-numref">Section 29.3.4</span></a>, we mentioned non-blocking synchronization as a way to break the mutual exclusion condition, and noted that there were non-blocking implementations of linked lists. We could certainly use a non-blocking linked list in our concurrent hash table, which would eliminate the stalls in <a class="reference internal" href="#fig-sync-readmostly-rcu-rwstall"><span class="std std-numref">Fig. 30.2</span></a>, but this still introduces more overhead than we would like, even if the workload is entirely read-only. To see why, consider what happens if there is a concurrent lookup and delete operation on a linked list. We show this scenario in <a class="reference internal" href="#fig-sync-readmostly-rcu-linkedlist-nbs"><span class="std std-numref">Fig. 30.4</span></a>.</p>
 <figure class="align-default" id="fig-sync-readmostly-rcu-linkedlist-nbs">
 <a class="reference internal image-reference" href="../_images/linkedlist_nbs.drawio.png"><img alt="../_images/linkedlist_nbs.drawio.png" src="../_images/linkedlist_nbs.drawio.png" style="width: 75%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35.4 </span><span class="caption-text">Concurrent read and removal of an element in a linked list.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-linkedlist-nbs" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30.4 </span><span class="caption-text">Concurrent read and removal of an element in a linked list.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-linkedlist-nbs" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Here, a reader thread T1 is traversing the linked list and has obtained a pointer to node N (e.g., by reading the previous node’s <code class="docutils literal notranslate"><span class="pre">next</span></code> field). T1 still needs to read several fields from node N (e.g., the key, to see if it is the one it is searching for, and the value if the key matches, or the next pointer to continue the search if the key does not match). At some point after T1 has a pointer to N, a writer thread T2 deletes N from the linked list. Removal from the list can be done atomically by changing the previous node’s <code class="docutils literal notranslate"><span class="pre">next</span></code> field to point to the node that follows N (shown by the dotted line in the figure). However, T2 cannot reclaim the memory used by node N until it can guarantee that T1 no longer holds a pointer to it.</p>
-<p><em>Reference counting</em> is the common solution to guarantee the continued existence of a node as long as a thread needs it. Each node includes an integer reference count, and each thread must atomically increment the reference count when it gets a pointer to the node, and atomically decrement the reference count when it is done with the node. A node that is removed from the linked list can be reclaimed when the removing thread holds the last reference to it. Thus, as T1 traverses the list, it must perform two atomic operations on <em>every</em> node that it visits just to guarantee that the node doesn’t disappear out from under it (see <a class="reference internal" href="#fig-sync-readmostly-rcu-linkedlist-nbs-refcount"><span class="std std-numref">Fig. 35.5</span></a>). Worse, all reader threads need to atomically change the reference counts, even if there aren’t any writers operating concurrently!
+<p><em>Reference counting</em> is the common solution to guarantee the continued existence of a node as long as a thread needs it. Each node includes an integer reference count, and each thread must atomically increment the reference count when it gets a pointer to the node, and atomically decrement the reference count when it is done with the node. A node that is removed from the linked list can be reclaimed when the removing thread holds the last reference to it. Thus, as T1 traverses the list, it must perform two atomic operations on <em>every</em> node that it visits just to guarantee that the node doesn’t disappear out from under it (see <a class="reference internal" href="#fig-sync-readmostly-rcu-linkedlist-nbs-refcount"><span class="std std-numref">Fig. 30.5</span></a>). Worse, all reader threads need to atomically change the reference counts, even if there aren’t any writers operating concurrently!
 Atomic arithmetic operations are much more expensive than an ordinary addition or subtraction operation because they must modify memory (not a CPU register), and they limit the ability to hide the cost of memory access by re-ordering other instructions. As a result, reference counting can have a surprisingly high overhead.</p>
 <figure class="align-default" id="fig-sync-readmostly-rcu-linkedlist-nbs-refcount">
 <a class="reference internal image-reference" href="../_images/linkedlist_nbs_refcount.drawio.png"><img alt="../_images/linkedlist_nbs_refcount.drawio.png" src="../_images/linkedlist_nbs_refcount.drawio.png" style="width: 75%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35.5 </span><span class="caption-text">Concurrent read and removal of an element in a linked list with reference counting.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-linkedlist-nbs-refcount" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30.5 </span><span class="caption-text">Concurrent read and removal of an element in a linked list with reference counting.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-linkedlist-nbs-refcount" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>RCU has the same problem of deferred deletion, but it avoids the use of reference counting, so that no extra work is imposed on readers. The tradeoff is that writers need to do more work, but this is reasonable since we are expecting a read-mostly workload.</p>
 </section>
 <section id="the-read-side">
-<h3><span class="section-number">35.3.2. </span>The read-side<a class="headerlink" href="#the-read-side" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">30.3.2. </span>The read-side<a class="headerlink" href="#the-read-side" title="Permalink to this headline">#</a></h3>
 <p>The Linux RCU API requires programmers to mark the boundaries of a read-side critical section with <code class="docutils literal notranslate"><span class="pre">rcu_read_lock()</span></code> and <code class="docutils literal notranslate"><span class="pre">rcu_read_unlock()</span></code> calls. Reader threads are not allowed to block in an RCU read-side critical section, and are not allowed to use any pointer to rcu-protected shared data outside of a read-side critical section. In spite of the names, these API calls do not actually lock anything. In a non-preemptible kernel build environment, they are simply empty macros that do nothing at all. For a pre-emptible kernel, the <code class="docutils literal notranslate"><span class="pre">rcu_read_lock()</span></code> call simply needs to disable preemption, while the <code class="docutils literal notranslate"><span class="pre">rcu_read_unlock()</span></code> call re-enables it. This ensures that readers can complete their critical sections without losing the CPU to any interfering threads. Even in a non-preemptible kernel, marking the boundaries of read-side critical sections with an API call is useful, as it helps programmers to reason about their code and avoid violating the requirements of read-side critical sections.</p>
 </section>
 <section id="the-write-side">
-<h3><span class="section-number">35.3.3. </span>The write-side<a class="headerlink" href="#the-write-side" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">30.3.3. </span>The write-side<a class="headerlink" href="#the-write-side" title="Permalink to this headline">#</a></h3>
 <p>RCU writers can use any mechanism to synchronize with other writers, but typically an ordinary mutual exclusion lock is used, because updates are expected to be relatively infrequent and so contention on the writer lock is expected to be low. Writers carry out their updates in two phases:</p>
 <ol class="simple">
 <li><p>The <em>removal phase</em> may atomically remove items from a data structure. These removals may occur due to either updates or deletions from the data structure. In the case of an update, the removed item is replaced with a reference to a new version of the item. Note that the removal phase may also insert completely new items to the data structure, without removing anything, in which case the second phase is not needed.</p></li>
 <li><p>The <em>reclamation phase</em> frees the memory used by the removed items.</p></li>
 </ol>
-<p>The removal phase runs concurrently with readers, so readers that are active in a read-side critical section during this phase might still be using the removed items. To avoid use-after-free bugs in the readers, a writer must wait for a <em>grace period</em> between the removal and reclamation phases, after which there is a guarantee that all readers that were active during the removal phase no longer hold references to these items. Any readers that start after the removal phase can’t possibly obtain a reference to the removed items, so we don’t need to consider them. We show an example of this split update approach in <a class="reference internal" href="#fig-sync-readmostly-rcu-splitupdate"><span class="std std-numref">Fig. 35.6</span></a>. Readers that are still active in their read-side critical section at the end of the removal phase are depicted with cross-hatches. The writer must wait until all of these pre-existing readers have left their read-side critical sections and can no longer make any references to the removed data. After this grace period, the writer can reclaim the memory allocated for the removed item. Readers that enter their read-side critical section during the grace period, or during the reclamation phase, do not need to be waited for.</p>
+<p>The removal phase runs concurrently with readers, so readers that are active in a read-side critical section during this phase might still be using the removed items. To avoid use-after-free bugs in the readers, a writer must wait for a <em>grace period</em> between the removal and reclamation phases, after which there is a guarantee that all readers that were active during the removal phase no longer hold references to these items. Any readers that start after the removal phase can’t possibly obtain a reference to the removed items, so we don’t need to consider them. We show an example of this split update approach in <a class="reference internal" href="#fig-sync-readmostly-rcu-splitupdate"><span class="std std-numref">Fig. 30.6</span></a>. Readers that are still active in their read-side critical section at the end of the removal phase are depicted with cross-hatches. The writer must wait until all of these pre-existing readers have left their read-side critical sections and can no longer make any references to the removed data. After this grace period, the writer can reclaim the memory allocated for the removed item. Readers that enter their read-side critical section during the grace period, or during the reclamation phase, do not need to be waited for.</p>
 <figure class="align-default" id="fig-sync-readmostly-rcu-splitupdate">
 <a class="reference internal image-reference" href="../_images/splitupdate.drawio.png"><img alt="../_images/splitupdate.drawio.png" src="../_images/splitupdate.drawio.png" style="width: 75%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35.6 </span><span class="caption-text">Updates are split into removal and reclamation phases, separated by a grace period.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-splitupdate" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30.6 </span><span class="caption-text">Updates are split into removal and reclamation phases, separated by a grace period.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-splitupdate" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>An example of the writer side for an RCU-protected data structure is shown in <a class="reference internal" href="#listing-sync-readmostly-rcu-updater"><span class="std std-numref">Listing 35.3</span></a>. In this example, we have a global pointer to shared <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">foo</span></code>, which consists of three fields. We also have a spinlock <code class="docutils literal notranslate"><span class="pre">foo_mutex</span></code> for writers, to ensure there is at most one update happening at any time. The writer thread calls <code class="docutils literal notranslate"><span class="pre">foo_update_a</span></code> to update the <code class="docutils literal notranslate"><span class="pre">a</span></code> field with a new value, <code class="docutils literal notranslate"><span class="pre">new_a</span></code>. In this function, we first allocate memory for a new copy of the structure (line 16, <code class="docutils literal notranslate"><span class="pre">kmalloc</span></code> is just the kernel version of the C library <code class="docutils literal notranslate"><span class="pre">malloc</span></code> function), then (under the protection of the writer lock) we make a copy of the current structure, update the <code class="docutils literal notranslate"><span class="pre">a</span></code> field, and make the new version of the structure visible to other threads by setting the global <code class="docutils literal notranslate"><span class="pre">shared_foo</span></code> pointer to the new copy (lines 17-21). At this point, the removal phase of the update is complete and we can release the writer lock (line 22). The writer must wait for a grace period before it can free the memory allocated to the old copy of the structure, which it does by calling the Linux <code class="docutils literal notranslate"><span class="pre">synchronize_rcu()</span></code> function (line 25). Finally, the memory is freed (line 28) and the function returns.</p>
+<p>An example of the writer side for an RCU-protected data structure is shown in <a class="reference internal" href="#listing-sync-readmostly-rcu-updater"><span class="std std-numref">Listing 30.3</span></a>. In this example, we have a global pointer to shared <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">foo</span></code>, which consists of three fields. We also have a spinlock <code class="docutils literal notranslate"><span class="pre">foo_mutex</span></code> for writers, to ensure there is at most one update happening at any time. The writer thread calls <code class="docutils literal notranslate"><span class="pre">foo_update_a</span></code> to update the <code class="docutils literal notranslate"><span class="pre">a</span></code> field with a new value, <code class="docutils literal notranslate"><span class="pre">new_a</span></code>. In this function, we first allocate memory for a new copy of the structure (line 16, <code class="docutils literal notranslate"><span class="pre">kmalloc</span></code> is just the kernel version of the C library <code class="docutils literal notranslate"><span class="pre">malloc</span></code> function), then (under the protection of the writer lock) we make a copy of the current structure, update the <code class="docutils literal notranslate"><span class="pre">a</span></code> field, and make the new version of the structure visible to other threads by setting the global <code class="docutils literal notranslate"><span class="pre">shared_foo</span></code> pointer to the new copy (lines 17-21). At this point, the removal phase of the update is complete and we can release the writer lock (line 22). The writer must wait for a grace period before it can free the memory allocated to the old copy of the structure, which it does by calling the Linux <code class="docutils literal notranslate"><span class="pre">synchronize_rcu()</span></code> function (line 25). Finally, the memory is freed (line 28) and the function returns.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-readmostly-rcu-updater">
-<div class="code-block-caption"><span class="caption-number">Listing 35.3 </span><span class="caption-text">RCU update of a shared, global data structure.</span><a class="headerlink" href="#listing-sync-readmostly-rcu-updater" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 30.3 </span><span class="caption-text">RCU update of a shared, global data structure.</span><a class="headerlink" href="#listing-sync-readmostly-rcu-updater" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">struct</span><span class="w"> </span><span class="nc">foo</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"></span>
 <span class="linenos"> 3</span><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
@@ -1070,21 +1082,21 @@ Atomic arithmetic operations are much more expensive than an ordinary addition o
 </pre></div>
 </div>
 </div>
-<p>The code in <a class="reference internal" href="#listing-sync-readmostly-rcu-updater"><span class="std std-numref">Listing 35.3</span></a> is a simplified example. It assumes that instructions cannot be re-ordered by either the compiler or the CPU at runtime; the full Linux RCU API includes operations to enforce the required ordering when reading or writing rcu-protected pointers. Now, let’s look at what happens in the <code class="docutils literal notranslate"><span class="pre">synchronize_rcu()</span></code> function to ensure there are no dangerous read-reclaim races.</p>
+<p>The code in <a class="reference internal" href="#listing-sync-readmostly-rcu-updater"><span class="std std-numref">Listing 30.3</span></a> is a simplified example. It assumes that instructions cannot be re-ordered by either the compiler or the CPU at runtime; the full Linux RCU API includes operations to enforce the required ordering when reading or writing rcu-protected pointers. Now, let’s look at what happens in the <code class="docutils literal notranslate"><span class="pre">synchronize_rcu()</span></code> function to ensure there are no dangerous read-reclaim races.</p>
 </section>
 <section id="handling-read-reclaim-races">
-<h3><span class="section-number">35.3.4. </span>Handling read-reclaim races<a class="headerlink" href="#handling-read-reclaim-races" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">30.3.4. </span>Handling read-reclaim races<a class="headerlink" href="#handling-read-reclaim-races" title="Permalink to this headline">#</a></h3>
 <p>The challenge in handling read-reclaim races lies in detecting when a grace period has elapsed. We cannot use actual time to define a grace period, since we do not know how long readers will stay in a read-side critical section. We also don’t want the readers to do any extra work to help detect grace periods, as happens with reference counting, or at least keep the reader overhead to a bare minimum.</p>
-<p>RCU uses <em>quiescent state based reclamation</em> (QSBR) <span id="id2">[<a class="reference internal" href="../misc/bib.html#id18" title="Thomas E. Hart, Paul E. McKenney, Angela Demke Brown, and Jonathan Walpole. Performance of memory reclamation for lockless synchronization. J. Parallel Distrib. Comput., 67(12):1270–1285, dec 2007. URL: https://doi.org/10.1016/j.jpdc.2007.04.010, doi:10.1016/j.jpdc.2007.04.010.">HMBW07</a>]</span> to detect grace periods and determine when it is safe to reclaim a removed item. We define a <em>quiescent state</em> for a thread T as a state in which T holds no references to rcu-protected shared data. We can then define a <em>grace period</em> as an interval in which every thread has entered at least one quiescent state, as shown in <a class="reference internal" href="#fig-sync-readmostly-rcu-qsbr"><span class="std std-numref">Fig. 35.7</span></a>. Essentially, this means that we do not need to be concerned with tracking <em>every</em> reference to shared data from <em>every</em> thread—we just need to track quiescent states.</p>
+<p>RCU uses <em>quiescent state based reclamation</em> (QSBR) <span id="id2">[<a class="reference internal" href="../misc/bib.html#id18" title="Thomas E. Hart, Paul E. McKenney, Angela Demke Brown, and Jonathan Walpole. Performance of memory reclamation for lockless synchronization. J. Parallel Distrib. Comput., 67(12):1270–1285, dec 2007. URL: https://doi.org/10.1016/j.jpdc.2007.04.010, doi:10.1016/j.jpdc.2007.04.010.">HMBW07</a>]</span> to detect grace periods and determine when it is safe to reclaim a removed item. We define a <em>quiescent state</em> for a thread T as a state in which T holds no references to rcu-protected shared data. We can then define a <em>grace period</em> as an interval in which every thread has entered at least one quiescent state, as shown in <a class="reference internal" href="#fig-sync-readmostly-rcu-qsbr"><span class="std std-numref">Fig. 30.7</span></a>. Essentially, this means that we do not need to be concerned with tracking <em>every</em> reference to shared data from <em>every</em> thread—we just need to track quiescent states.</p>
 <figure class="align-default" id="fig-sync-readmostly-rcu-qsbr">
 <a class="reference internal image-reference" href="../_images/qsbr.drawio.png"><img alt="../_images/qsbr.drawio.png" src="../_images/qsbr.drawio.png" style="width: 75%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35.7 </span><span class="caption-text">Illustration of quiescent state based reclamation. Grace periods occur when every thread has gone through a quiescent state.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-qsbr" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30.7 </span><span class="caption-text">Illustration of quiescent state based reclamation. Grace periods occur when every thread has gone through a quiescent state.</span><a class="headerlink" href="#fig-sync-readmostly-rcu-qsbr" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>But how can we know that a thread is in a quiescent state if we are not keeping track of its references to shared data? Recall that reader threads are not allowed to use any pointer to rcu-protected data outside of a read-side critical section. So, whenever a reader thread is not in a read-side critical section, it is in a quiescent state. Recall also that readers in a read-side critical section cannot block or be preempted. These properties are a great help in detecting grace periods in an operating system kernel. First, any thread that is not running on a CPU at the end of a writer’s removal phase must already be in a quiescent state and we don’t need to consider them any further. Second, for all threads that are running on a CPU at the end of the writer’s removal phase, they must be in a quiescent state when a context switch occurs (i.e., context switches, whether due to blocking or preemption, are not allowed in a read-side critical section). Thus, the <code class="docutils literal notranslate"><span class="pre">synchronize_rcu()</span></code> function only needs to wait until all other CPUs perform a context switch to be sure that a grace period has elapsed. Conceptually, this can be done by having the writer thread run some code in the <code class="docutils literal notranslate"><span class="pre">synchronize_rcu()</span></code> function on every CPU. If the writer is able to run on every CPU, then a context switch must have occurred on every CPU, and every reader thread has entered at least one quiescent state. A sketch of the code for this “toy” implementation is shown in <a class="reference internal" href="#listing-sync-readmostly-synchronize-rcu"><span class="std std-numref">Listing 35.4</span></a>.</p>
+<p>But how can we know that a thread is in a quiescent state if we are not keeping track of its references to shared data? Recall that reader threads are not allowed to use any pointer to rcu-protected data outside of a read-side critical section. So, whenever a reader thread is not in a read-side critical section, it is in a quiescent state. Recall also that readers in a read-side critical section cannot block or be preempted. These properties are a great help in detecting grace periods in an operating system kernel. First, any thread that is not running on a CPU at the end of a writer’s removal phase must already be in a quiescent state and we don’t need to consider them any further. Second, for all threads that are running on a CPU at the end of the writer’s removal phase, they must be in a quiescent state when a context switch occurs (i.e., context switches, whether due to blocking or preemption, are not allowed in a read-side critical section). Thus, the <code class="docutils literal notranslate"><span class="pre">synchronize_rcu()</span></code> function only needs to wait until all other CPUs perform a context switch to be sure that a grace period has elapsed. Conceptually, this can be done by having the writer thread run some code in the <code class="docutils literal notranslate"><span class="pre">synchronize_rcu()</span></code> function on every CPU. If the writer is able to run on every CPU, then a context switch must have occurred on every CPU, and every reader thread has entered at least one quiescent state. A sketch of the code for this “toy” implementation is shown in <a class="reference internal" href="#listing-sync-readmostly-synchronize-rcu"><span class="std std-numref">Listing 30.4</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="listing-sync-readmostly-synchronize-rcu">
-<div class="code-block-caption"><span class="caption-number">Listing 35.4 </span><span class="caption-text">Toy implementation of function to wait for a grace period.</span><a class="headerlink" href="#listing-sync-readmostly-synchronize-rcu" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 30.4 </span><span class="caption-text">Toy implementation of function to wait for a grace period.</span><a class="headerlink" href="#listing-sync-readmostly-synchronize-rcu" title="Permalink to this code">#</a></div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kt">void</span><span class="w"> </span><span class="nf">synchronize_rcu</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
 <span class="linenos">2</span><span class="p">{</span><span class="w"></span>
 <span class="linenos">3</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">cpu</span><span class="p">;</span><span class="w"></span>
@@ -1096,17 +1108,17 @@ Atomic arithmetic operations are much more expensive than an ordinary addition o
 </div>
 </div>
 <p>Of course, there are many details of a robust, scalable, RCU implementation that we have glossed over in this quick introduction. Interested readers are encouraged to refer to the Linux kernel documentation and source code.</p>
-<p>The use of RCU in Linux has been growing steadily, as shown in <a class="reference internal" href="#fig-sync-readmostly-rcu-usage"><span class="std std-numref">Fig. 35.8</span></a>, however, it is not a suitable replacement for every synchronization need. Uses of the lock APIs in Linux still far outnumber RCU (see <a class="reference internal" href="#fig-sync-readmostly-rcu-usage-vs-locks"><span class="std std-numref">Fig. 35.9</span></a>).</p>
+<p>The use of RCU in Linux has been growing steadily, as shown in <a class="reference internal" href="#fig-sync-readmostly-rcu-usage"><span class="std std-numref">Fig. 30.8</span></a>, however, it is not a suitable replacement for every synchronization need. Uses of the lock APIs in Linux still far outnumber RCU (see <a class="reference internal" href="#fig-sync-readmostly-rcu-usage-vs-locks"><span class="std std-numref">Fig. 30.9</span></a>).</p>
 <figure class="align-default" id="fig-sync-readmostly-rcu-usage">
 <a class="reference internal image-reference" href="../_images/linux-RCU.png"><img alt="../_images/linux-RCU.png" src="../_images/linux-RCU.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35.8 </span><span class="caption-text">Growth of RCU usage in the Linux kernel (from <a class="reference external" href="http://www.rdrop.com/~paulmck/RCU/linuxusage.html">http://www.rdrop.com/~paulmck/RCU/linuxusage.html</a>, April 25, 2023)</span><a class="headerlink" href="#fig-sync-readmostly-rcu-usage" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30.8 </span><span class="caption-text">Growth of RCU usage in the Linux kernel (from <a class="reference external" href="http://www.rdrop.com/~paulmck/RCU/linuxusage.html">http://www.rdrop.com/~paulmck/RCU/linuxusage.html</a>, April 25, 2023)</span><a class="headerlink" href="#fig-sync-readmostly-rcu-usage" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-sync-readmostly-rcu-usage-vs-locks">
 <a class="reference internal image-reference" href="../_images/linux-RCUlock.png"><img alt="../_images/linux-RCUlock.png" src="../_images/linux-RCUlock.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35.9 </span><span class="caption-text">Linux RCU and lock usage (from <a class="reference external" href="http://www.rdrop.com/~paulmck/RCU/linuxusage.html">http://www.rdrop.com/~paulmck/RCU/linuxusage.html</a>, April 25, 2023)</span><a class="headerlink" href="#fig-sync-readmostly-rcu-usage-vs-locks" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30.9 </span><span class="caption-text">Linux RCU and lock usage (from <a class="reference external" href="http://www.rdrop.com/~paulmck/RCU/linuxusage.html">http://www.rdrop.com/~paulmck/RCU/linuxusage.html</a>, April 25, 2023)</span><a class="headerlink" href="#fig-sync-readmostly-rcu-usage-vs-locks" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1150,13 +1162,13 @@ Atomic arithmetic operations are much more expensive than an ordinary addition o
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">34. </span>Common Concurrency Bugs</p>
+            <p class="prev-next-title"><span class="section-number">29. </span>Common Concurrency Bugs</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="hardware_challenges.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">36. </span>Challenges of Modern Hardware</p>
+        <p class="prev-next-title"><span class="section-number">31. </span>Challenges of Modern Hardware</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>27.2. Disk Layout:Tracking Used Space &#8212; Introduction to Operating Systems</title>
+    <title>22.2. Disk Layout:Tracking Used Space &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="27.3. Disk Layout:Tracking Free Space" href="dl_track_free.html" />
-    <link rel="prev" title="27.1. File System Layout" href="disklayout.html" />
+    <link rel="next" title="22.3. Disk Layout:Tracking Free Space" href="dl_track_free.html" />
+    <link rel="prev" title="22.1. File System Layout" href="disklayout.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -272,54 +272,66 @@ const thebe_selector_output = ".output, .cell_output"
    13. Memory management before paged virtual memory
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/virt-paging.html">
-   14. Paging
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mm/pagvm.html">
+   14. Paged Virtual memory
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/page-tables.html">
-   15. Page Tables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/reclamation.html">
-   16. Memory reclaiming algorithms.
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/page-size.html">
-   17. Page Sizes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/misc.html">
-   18. Other topics
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/vmabs.html">
+     14.1. Basic Memory Management functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/virt-paging.html">
+     14.2. Paging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/page-tables.html">
+     14.3. Page Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/reclamation.html">
+     14.4. Memory reclaiming algorithms.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/page-size.html">
+     14.5. Page Sizes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/pagefaults.html">
+     14.6. Memory Management Page Faults
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   19. Buffer Cache
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/pagefaults.html">
-   20. Memory Management Page Faults
+   15. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   21. Memory management in the real world
+   16. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   22. Conclusion
+   17. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/review.html">
-   23. Review
+   18. Review
   </a>
  </li>
 </ul>
@@ -331,69 +343,69 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   24. Introduction
+   19. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="interface.html">
-   25. File System Abstraction
+   20. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="diskhw.html">
-   26. A bit about Disks
+   21. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="impl.html">
-   27. Implementation
+   22. Implementation
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="disklayout.html">
-     27.1. File System Layout
+     22.1. File System Layout
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     27.2. Disk Layout:Tracking Used Space
+     22.2. Disk Layout:Tracking Used Space
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="dl_track_free.html">
-     27.3. Disk Layout:Tracking Free Space
+     22.3. Disk Layout:Tracking Free Space
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="dl_name.html">
-     27.4. Disk Layout:Implementing Name Space
+     22.4. Disk Layout:Implementing Name Space
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="dl_failures.html">
-     27.5. Disk Layout:Dealing with Failures
+     22.5. Disk Layout:Dealing with Failures
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="dl_ex_exx.html">
-     27.6. Disk Layout:Examples of Real World File Systems
+     22.6. Disk Layout:Examples of Real World File Systems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="kernelimp.html">
-     27.7. Kernel implementation
+     22.7. Kernel implementation
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   28. Review
+   23. Review
   </a>
  </li>
 </ul>
@@ -405,52 +417,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   29. Introduction to Concurrency, Synchronization and Deadlock
+   24. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   30. Cooperating Processes and Inter-process Communication
+   25. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/criticalsection.html">
-   31. The Critical Section Problem
+   26. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locks.html">
-   32. Implementing Locks
+   27. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/ordering.html">
-   33. Ordering Thread Events
+   28. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   34. Common Concurrency Bugs
+   29. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/readmostly.html">
-   35. Read-Dominated Workloads
+   30. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   36. Challenges of Modern Hardware
+   31. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   37. Locking in the Linux Kernel
+   32. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   38. Review
+   33. Review
   </a>
  </li>
 </ul>
@@ -462,22 +474,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   39. Input and Output
+   34. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   40. More on Disks
+   35. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   41. Virtualization
+   36. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   42. Security
+   37. Security
   </a>
  </li>
 </ul>
@@ -489,49 +501,49 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   43. How to read this book
+   38. How to read this book
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../contributing/intro.html">
-   44. Contributing
+   39. Contributing
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/examples.html">
-     44.1. Examples
+     39.1. Examples
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/credit.html">
-     44.2. Contributors
+     39.2. Contributors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/Contributing.html">
-     44.3. Contributing
+     39.3. Contributing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/resources.html">
-     44.6. Resources to look at
+     39.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/fix.html">
-     44.7. Out of date
+     39.7. Out of date
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   45. Bibliography
+   40. Bibliography
   </a>
  </li>
 </ul>
@@ -759,22 +771,22 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#contiguous">
-   27.2.1. Contiguous
+   22.2.1. Contiguous
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linked-list">
-   27.2.2. Linked list
+   22.2.2. Linked list
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#inode">
-   27.2.3. Inode
+   22.2.3. Inode
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#extents">
-   27.2.4. Extents
+   22.2.4. Extents
   </a>
  </li>
 </ul>
@@ -798,22 +810,22 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#contiguous">
-   27.2.1. Contiguous
+   22.2.1. Contiguous
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linked-list">
-   27.2.2. Linked list
+   22.2.2. Linked list
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#inode">
-   27.2.3. Inode
+   22.2.3. Inode
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#extents">
-   27.2.4. Extents
+   22.2.4. Extents
   </a>
  </li>
 </ul>
@@ -827,19 +839,19 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="disk-layout-tracking-used-space">
-<span id="fs-dl-track-used"></span><h1><span class="section-number">27.2. </span>Disk Layout:Tracking Used Space<a class="headerlink" href="#disk-layout-tracking-used-space" title="Permalink to this headline">#</a></h1>
+<span id="fs-dl-track-used"></span><h1><span class="section-number">22.2. </span>Disk Layout:Tracking Used Space<a class="headerlink" href="#disk-layout-tracking-used-space" title="Permalink to this headline">#</a></h1>
 <p>The main job of the file system is to use the blocks on the disk to store persistent data for users in files, and to support the organization of those files into directories. Clearly, we will need a way for the file system to keep track of which blocks are being used for each file. In this Chapter, we will explore several options for this important design decision.</p>
 <p>Note that in many (most? all?) file systems, directory objects (which hold file system metadata about the files in that directory) are stored exactly like files. Part of the information the file system keeps about each object is a type field, which allows the file system to distinguish file objects from directory objects. While the content of file objects is only understood by the applications that use them (above the file system), the content of directory objects is understood and managed by the file system itself. Everything we say here about techniques for keeping track of the blocks used by files also applies to the task of tracking blocks used by directories.</p>
 <section id="contiguous">
-<span id="fs-dl-track-used-contig"></span><h2><span class="section-number">27.2.1. </span>Contiguous<a class="headerlink" href="#contiguous" title="Permalink to this headline">#</a></h2>
-<p>The simplest organization of a file system is to just have each file or directory occupy a contiguous set of blocks on the disk.  For example, <a class="reference internal" href="#fs-cd-rom"><span class="std std-numref">Fig. 27.3</span></a> shows a structure similar to early versions of the ISO-9660 file system for CD-ROM disks. Objects on disk are either files or
+<span id="fs-dl-track-used-contig"></span><h2><span class="section-number">22.2.1. </span>Contiguous<a class="headerlink" href="#contiguous" title="Permalink to this headline">#</a></h2>
+<p>The simplest organization of a file system is to just have each file or directory occupy a contiguous set of blocks on the disk.  For example, <a class="reference internal" href="#fs-cd-rom"><span class="std std-numref">Fig. 22.3</span></a> shows a structure similar to early versions of the ISO-9660 file system for CD-ROM disks. Objects on disk are either files or
 directories, each composed of one or more 2048-byte <em>blocks</em>; all
 pointers in the file system are in terms of <em>block numbers</em>, with blocks
-numbered from block 0 at the beginning of the disk or partition. Note that the <code class="docutils literal notranslate"><span class="pre">len</span></code> field in <a class="reference internal" href="#fs-cd-rom"><span class="std std-numref">Fig. 27.3</span></a> gives the file length in <em>bytes</em>, not blocks, but space in the file system must be allocated in block-sized chunks. The number of blocks used by the file can be calculated as the ceiling of the file size divided by the block size, i.e., <span class="math notranslate nohighlight">\(\lceil len / 2048 \rceil\)</span> in this example.</p>
+numbered from block 0 at the beginning of the disk or partition. Note that the <code class="docutils literal notranslate"><span class="pre">len</span></code> field in <a class="reference internal" href="#fs-cd-rom"><span class="std std-numref">Fig. 22.3</span></a> gives the file length in <em>bytes</em>, not blocks, but space in the file system must be allocated in block-sized chunks. The number of blocks used by the file can be calculated as the ceiling of the file size divided by the block size, i.e., <span class="math notranslate nohighlight">\(\lceil len / 2048 \rceil\)</span> in this example.</p>
 <figure class="align-default" id="fs-cd-rom">
 <a class="reference internal image-reference" href="../_images/filesys-cdrom.png"><img alt="../_images/filesys-cdrom.png" src="../_images/filesys-cdrom.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 27.3 </span><span class="caption-text">Simpliﬁed ISO-9660 (CDROM) ﬁle layout for tree in <a class="reference internal" href="interface.html#fs-tree-logical"><span class="std std-numref">Fig. 25.1</span></a>, 2 KB blocks</span><a class="headerlink" href="#fs-cd-rom" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 22.3 </span><span class="caption-text">Simpliﬁed ISO-9660 (CDROM) ﬁle layout for tree in <a class="reference internal" href="interface.html#fs-tree-logical"><span class="std std-numref">Fig. 20.1</span></a>, 2 KB blocks</span><a class="headerlink" href="#fs-cd-rom" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The advantages of this approach are:</p>
@@ -854,16 +866,16 @@ numbered from block 0 at the beginning of the disk or partition. Note that the <
 </ul>
 </section>
 <section id="linked-list">
-<span id="fs-dl-track-used-ll"></span><h2><span class="section-number">27.2.2. </span>Linked list<a class="headerlink" href="#linked-list" title="Permalink to this headline">#</a></h2>
-<p>Another approach to keep track of the blocks used in a file is to maintain a linked list as shown in <a class="reference internal" href="#fig-filesys-linked"><span class="std std-numref">Fig. 27.4</span></a>. This approach doesn’t have the external fragmentation challenge of contiguous files, because any available block can be used to add more data to any file by simply adding the block to the list.</p>
-<p>The top part of <a class="reference internal" href="#fig-filesys-linked"><span class="std std-numref">Fig. 27.4</span></a> uses internal pointers in a block, where each block stores slightly less than a full block of data to make room for the pointer metadata.  This approach might seem attractive, however, it is not practical for several reasons. First, to read the block containing data at a particular offset in a file, one has to read blocks sequentially through the entire linked list up to the required block. Second, mixing file data with file system metadata in the same block would add complexity to operating system features like memory-mapped files. We won’t be in a position to explain why this is the case until we cover memory management, however. Finally, because the amount of data stored in a block is no longer a power of 2, calculating the block that contains a given offset will require integer division operations, rather than cheaper right-shift operations.</p>
+<span id="fs-dl-track-used-ll"></span><h2><span class="section-number">22.2.2. </span>Linked list<a class="headerlink" href="#linked-list" title="Permalink to this headline">#</a></h2>
+<p>Another approach to keep track of the blocks used in a file is to maintain a linked list as shown in <a class="reference internal" href="#fig-filesys-linked"><span class="std std-numref">Fig. 22.4</span></a>. This approach doesn’t have the external fragmentation challenge of contiguous files, because any available block can be used to add more data to any file by simply adding the block to the list.</p>
+<p>The top part of <a class="reference internal" href="#fig-filesys-linked"><span class="std std-numref">Fig. 22.4</span></a> uses internal pointers in a block, where each block stores slightly less than a full block of data to make room for the pointer metadata.  This approach might seem attractive, however, it is not practical for several reasons. First, to read the block containing data at a particular offset in a file, one has to read blocks sequentially through the entire linked list up to the required block. Second, mixing file data with file system metadata in the same block would add complexity to operating system features like memory-mapped files. We won’t be in a position to explain why this is the case until we cover memory management, however. Finally, because the amount of data stored in a block is no longer a power of 2, calculating the block that contains a given offset will require integer division operations, rather than cheaper right-shift operations.</p>
 <figure class="align-default" id="fig-filesys-linked">
 <a class="reference internal image-reference" href="../_images/filesys-linked.png"><img alt="../_images/filesys-linked.png" src="../_images/filesys-linked.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 27.4 </span><span class="caption-text">Linked list organization with in-object pointers (typical for in-memory structures) and external pointers, as used in MS-DOS File Allocation Table.</span><a class="headerlink" href="#fig-filesys-linked" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 22.4 </span><span class="caption-text">Linked list organization with in-object pointers (typical for in-memory structures) and external pointers, as used in MS-DOS File Allocation Table.</span><a class="headerlink" href="#fig-filesys-linked" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>An alternative (shown in the bottom of <a class="reference internal" href="#fig-filesys-linked"><span class="std std-numref">Fig. 27.4</span></a>) would store the pointers of the linked list in a separate array from the disk blocks themselves.  This is used in the MS-DOS (or FAT, File Allocation
+<p>An alternative (shown in the bottom of <a class="reference internal" href="#fig-filesys-linked"><span class="std std-numref">Fig. 22.4</span></a>) would store the pointers of the linked list in a separate array from the disk blocks themselves.  This is used in the MS-DOS (or FAT, File Allocation
 Table) file system. Block numbers are kept in a separate array,
 with an entry corresponding to each disk block, in what is called the
 File Allocation Table.</p>
@@ -877,11 +889,11 @@ frequently used they may be cached in memory; random access to a file, however, 
 list.</p>
 </section>
 <section id="inode">
-<h2><span class="section-number">27.2.3. </span>Inode<a class="headerlink" href="#inode" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">22.2.3. </span>Inode<a class="headerlink" href="#inode" title="Permalink to this headline">#</a></h2>
 <p>File systems derived from the original Unix file system use a per-file structure called an inode to not only keep track of attributes, but also block locations. The inode uses an asymmetric tree, or actually a series of
 trees of increasing height with the root of each tree stored in the
 inode.</p>
-<p>As seen in <a class="reference internal" href="#filesys-inode"><span class="std std-numref">Fig. 27.5</span></a> the inode contains N <em>direct</em> block
+<p>As seen in <a class="reference internal" href="#filesys-inode"><span class="std std-numref">Fig. 22.5</span></a> the inode contains N <em>direct</em> block
 pointers (12 in ext2/ext3), so that files of N blocks or less need no
 indirect blocks. A single <em>indirect pointer</em> specifies an <em>indirect
 block</em>, holding pointers to blocks <span class="math notranslate nohighlight">\(N, N+1, ... N+N_1-1\)</span> where <span class="math notranslate nohighlight">\(N_1\)</span> is
@@ -898,7 +910,7 @@ than the <span class="math notranslate nohighlight">\(O(N)\)</span> overhead of 
 <figure class="align-default" id="filesys-inode">
 <a class="reference internal image-reference" href="../_images/filesys-inode.png"><img alt="../_images/filesys-inode.png" src="../_images/filesys-inode.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 27.5 </span><span class="caption-text">Inode-type file organization as found in many Unix file systems (e.g.
+<p><span class="caption-number">Fig. 22.5 </span><span class="caption-text">Inode-type file organization as found in many Unix file systems (e.g.
 Linux ext2, ext3)</span><a class="headerlink" href="#filesys-inode" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
@@ -907,12 +919,12 @@ without excessive storage space or performance overhead.</p>
 <figure class="align-right" id="fig-fs-ext2layout">
 <a class="reference internal image-reference" href="../_images/files-pointers.png"><img alt="../_images/files-pointers.png" src="../_images/files-pointers.png" style="width: 200pt;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 27.6 </span><span class="caption-text">File structure—pointers</span><a class="headerlink" href="#fig-fs-ext2layout" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 22.6 </span><span class="caption-text">File structure—pointers</span><a class="headerlink" href="#fig-fs-ext2layout" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="extents">
-<h2><span class="section-number">27.2.4. </span>Extents<a class="headerlink" href="#extents" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">22.2.4. </span>Extents<a class="headerlink" href="#extents" title="Permalink to this headline">#</a></h2>
 <p>The ext2 and MS-DOS file systems use separate pointers to every data
 block in a file, located in inodes and indirect blocks in the case of
 ext2, and in the File Allocation Table in MS-DOS. However, a well-designed file system will attempt to allocate blocks to files sequentially to avoid disk seeks —if the
@@ -921,14 +933,14 @@ will be 101, the third 102, etc.</p>
 <figure class="align-left" id="fig-filesys-extent">
 <a class="reference internal image-reference" href="../_images/files-extent.png"><img alt="../_images/files-extent.png" src="../_images/files-extent.png" style="width: 200pt;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 27.7 </span><span class="caption-text">File structure— extents</span><a class="headerlink" href="#fig-filesys-extent" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 22.7 </span><span class="caption-text">File structure— extents</span><a class="headerlink" href="#fig-filesys-extent" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We can take advantage of this to greatly compress the information needed
 to identify the blocks in a file - rather than having separate pointers
 to blocks 100,101,…120 we just need to identify the starting block
-(100) and the length (21 blocks). This is shown in <a class="reference internal" href="#fig-fs-ext2layout"><span class="std std-numref">Fig. 27.6</span></a>, where five data blocks are identified
-by direct pointers in an inode. In <a class="reference internal" href="#fig-filesys-extent"><span class="std std-numref">Fig. 27.7</span></a>, the same five data
+(100) and the length (21 blocks). This is shown in <a class="reference internal" href="#fig-fs-ext2layout"><span class="std std-numref">Fig. 22.6</span></a>, where five data blocks are identified
+by direct pointers in an inode. In <a class="reference internal" href="#fig-filesys-extent"><span class="std std-numref">Fig. 22.7</span></a>, the same five data
 blocks are identified by a single extent. Why would we want to compress
 the information needed to organize the blocks in a file? Mostly for
 performance—although the code is more complicated, it will require
@@ -974,13 +986,13 @@ structure.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">27.1. </span>File System Layout</p>
+            <p class="prev-next-title"><span class="section-number">22.1. </span>File System Layout</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="dl_track_free.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">27.3. </span>Disk Layout:Tracking Free Space</p>
+        <p class="prev-next-title"><span class="section-number">22.3. </span>Disk Layout:Tracking Free Space</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

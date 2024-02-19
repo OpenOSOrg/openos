@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>25. File System Abstraction &#8212; Introduction to Operating Systems</title>
+    <title>20. File System Abstraction &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="26. A bit about Disks" href="diskhw.html" />
-    <link rel="prev" title="24. Introduction" href="intro.html" />
+    <link rel="next" title="21. A bit about Disks" href="diskhw.html" />
+    <link rel="prev" title="19. Introduction" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -270,54 +270,66 @@ const thebe_selector_output = ".output, .cell_output"
    13. Memory management before paged virtual memory
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/virt-paging.html">
-   14. Paging
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mm/pagvm.html">
+   14. Paged Virtual memory
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/page-tables.html">
-   15. Page Tables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/reclamation.html">
-   16. Memory reclaiming algorithms.
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/page-size.html">
-   17. Page Sizes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/misc.html">
-   18. Other topics
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/vmabs.html">
+     14.1. Basic Memory Management functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/virt-paging.html">
+     14.2. Paging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/page-tables.html">
+     14.3. Page Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/reclamation.html">
+     14.4. Memory reclaiming algorithms.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/page-size.html">
+     14.5. Page Sizes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mm/pagefaults.html">
+     14.6. Memory Management Page Faults
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/buffer-cache.html">
-   19. Buffer Cache
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mm/pagefaults.html">
-   20. Memory Management Page Faults
+   15. Buffer Cache
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/realworld.html">
-   21. Memory management in the real world
+   16. Memory management in the real world
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/concl.html">
-   22. Conclusion
+   17. Conclusion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mm/review.html">
-   23. Review
+   18. Review
   </a>
  </li>
 </ul>
@@ -329,69 +341,69 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   24. Introduction
+   19. Introduction
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   25. File System Abstraction
+   20. File System Abstraction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="diskhw.html">
-   26. A bit about Disks
+   21. A bit about Disks
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="impl.html">
-   27. Implementation
+   22. Implementation
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="disklayout.html">
-     27.1. File System Layout
+     22.1. File System Layout
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="dl_track_used.html">
-     27.2. Disk Layout:Tracking Used Space
+     22.2. Disk Layout:Tracking Used Space
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="dl_track_free.html">
-     27.3. Disk Layout:Tracking Free Space
+     22.3. Disk Layout:Tracking Free Space
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="dl_name.html">
-     27.4. Disk Layout:Implementing Name Space
+     22.4. Disk Layout:Implementing Name Space
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="dl_failures.html">
-     27.5. Disk Layout:Dealing with Failures
+     22.5. Disk Layout:Dealing with Failures
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="dl_ex_exx.html">
-     27.6. Disk Layout:Examples of Real World File Systems
+     22.6. Disk Layout:Examples of Real World File Systems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="kernelimp.html">
-     27.7. Kernel implementation
+     22.7. Kernel implementation
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   28. Review
+   23. Review
   </a>
  </li>
 </ul>
@@ -403,52 +415,52 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sync.html">
-   29. Introduction to Concurrency, Synchronization and Deadlock
+   24. Introduction to Concurrency, Synchronization and Deadlock
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/sharing.html">
-   30. Cooperating Processes and Inter-process Communication
+   25. Cooperating Processes and Inter-process Communication
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/criticalsection.html">
-   31. The Critical Section Problem
+   26. The Critical Section Problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/locks.html">
-   32. Implementing Locks
+   27. Implementing Locks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/ordering.html">
-   33. Ordering Thread Events
+   28. Ordering Thread Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   34. Common Concurrency Bugs
+   29. Common Concurrency Bugs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/readmostly.html">
-   35. Read-Dominated Workloads
+   30. Read-Dominated Workloads
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/hardware_challenges.html">
-   36. Challenges of Modern Hardware
+   31. Challenges of Modern Hardware
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/linux_locking.html">
-   37. Locking in the Linux Kernel
+   32. Locking in the Linux Kernel
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   38. Review
+   33. Review
   </a>
  </li>
 </ul>
@@ -460,22 +472,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   39. Input and Output
+   34. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   40. More on Disks
+   35. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   41. Virtualization
+   36. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   42. Security
+   37. Security
   </a>
  </li>
 </ul>
@@ -487,49 +499,49 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   43. How to read this book
+   38. How to read this book
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../contributing/intro.html">
-   44. Contributing
+   39. Contributing
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/examples.html">
-     44.1. Examples
+     39.1. Examples
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/credit.html">
-     44.2. Contributors
+     39.2. Contributors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/Contributing.html">
-     44.3. Contributing
+     39.3. Contributing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/resources.html">
-     44.6. Resources to look at
+     39.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/fix.html">
-     44.7. Out of date
+     39.7. Out of date
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   45. Bibliography
+   40. Bibliography
   </a>
  </li>
 </ul>
@@ -757,58 +769,58 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#naming">
-   25.1. Naming
+   20.1. Naming
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#objects">
-   25.2. Objects
+   20.2. Objects
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#files">
-     25.2.1. Files
+     20.2.1. Files
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#directory">
-     25.2.2. Directory
+     20.2.2. Directory
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#symbolic-links">
-     25.2.3. Symbolic links
+     20.2.3. Symbolic links
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#file-system-operations">
-   25.3. File System Operations:
+   20.3. File System Operations:
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#open-close">
-     25.3.1. Open/close
+     20.3.1. Open/close
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#read-write-operations">
-       25.3.1.1. Read/Write operations
+       20.3.1.1. Read/Write operations
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#naming-and-directories">
-     25.3.2. Naming and Directories
+     20.3.2. Naming and Directories
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#some-examples">
-   25.4. Some examples
+   20.4. Some examples
   </a>
  </li>
 </ul>
@@ -832,58 +844,58 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#naming">
-   25.1. Naming
+   20.1. Naming
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#objects">
-   25.2. Objects
+   20.2. Objects
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#files">
-     25.2.1. Files
+     20.2.1. Files
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#directory">
-     25.2.2. Directory
+     20.2.2. Directory
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#symbolic-links">
-     25.2.3. Symbolic links
+     20.2.3. Symbolic links
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#file-system-operations">
-   25.3. File System Operations:
+   20.3. File System Operations:
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#open-close">
-     25.3.1. Open/close
+     20.3.1. Open/close
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#read-write-operations">
-       25.3.1.1. Read/Write operations
+       20.3.1.1. Read/Write operations
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#naming-and-directories">
-     25.3.2. Naming and Directories
+     20.3.2. Naming and Directories
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#some-examples">
-   25.4. Some examples
+   20.4. Some examples
   </a>
  </li>
 </ul>
@@ -899,7 +911,7 @@ title="Print to PDF"
   <div class="cell tag_remove-input tag_hide-output docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="file-system-abstraction">
-<span id="cont-fs-interface"></span><h1><span class="section-number">25. </span>File System Abstraction<a class="headerlink" href="#file-system-abstraction" title="Permalink to this headline">#</a></h1>
+<span id="cont-fs-interface"></span><h1><span class="section-number">20. </span>File System Abstraction<a class="headerlink" href="#file-system-abstraction" title="Permalink to this headline">#</a></h1>
 <p>From a user perspective, file systems support:</p>
 <ul class="simple">
 <li><p>a <em>name space</em>, the set of names that identify objects;</p></li>
@@ -908,9 +920,9 @@ title="Print to PDF"
 </ul>
 <p>We first describe how naming works in a Unix file system, then some of the core objects and how they are identified, and then the operations a process can perform on those objects.</p>
 <section id="naming">
-<h2><span class="section-number">25.1. </span>Naming<a class="headerlink" href="#naming" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">20.1. </span>Naming<a class="headerlink" href="#naming" title="Permalink to this headline">#</a></h2>
 <p>Most file systems today support a
-tree-structured namespace<a class="footnote-reference brackets" href="#hier" id="id1">1</a>, as shown in <a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 25.1</span></a>.
+tree-structured namespace<a class="footnote-reference brackets" href="#hier" id="id1">1</a>, as shown in <a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 20.1</span></a>.
 This tree is constructed via the use of
 <em>directories</em>, or objects in the namespace which map strings to further
 file system objects. A full filename thus specifies a <em>path</em> from the
@@ -920,12 +932,12 @@ documentation.)</p>
 <figure class="align-default" id="fs-tree-logical">
 <a class="reference internal image-reference" href="../_images/filesys-tree.png"><img alt="../_images/filesys-tree.png" src="../_images/filesys-tree.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 25.1 </span><span class="caption-text">Logical view: hierarchical file system name space</span><a class="headerlink" href="#fs-tree-logical" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 20.1 </span><span class="caption-text">Logical view: hierarchical file system name space</span><a class="headerlink" href="#fs-tree-logical" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Each process has an associated <em>current directory</em>, which may be changed via the <code class="docutils literal notranslate"><span class="pre">chdir</span></code> system call. File names beginning with ‘<code class="docutils literal notranslate"><span class="pre">/</span></code>’ are termed <em>absolute</em> names, and are interpreted relative to the root of the naming tree, while <em>relative</em> names are
 interpreted beginning at the current directory. Thus in the file system in
-<a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 25.1</span></a>, if the current directory were <code class="docutils literal notranslate"><span class="pre">/home</span></code>,
+<a class="reference internal" href="#fs-tree-logical"><span class="std std-numref">Fig. 20.1</span></a>, if the current directory were <code class="docutils literal notranslate"><span class="pre">/home</span></code>,
 the the paths <code class="docutils literal notranslate"><span class="pre">pjd/.profile</span></code> and <code class="docutils literal notranslate"><span class="pre">/home/pjd/.profile</span></code> refer to the same
 file, and <code class="docutils literal notranslate"><span class="pre">../bin/cat</span></code> and <code class="docutils literal notranslate"><span class="pre">/bin/cat</span></code> refer to the same file.</p>
 <p>Each directory also contains two special files <code class="docutils literal notranslate"><span class="pre">.</span></code> and <code class="docutils literal notranslate"><span class="pre">..</span></code>, where <code class="docutils literal notranslate"><span class="pre">d/..</span></code>  identifies the parent directory of <code class="docutils literal notranslate"><span class="pre">d</span></code>, and <code class="docutils literal notranslate"><span class="pre">d/.</span></code> identifies <code class="docutils literal notranslate"><span class="pre">d</span></code>
@@ -954,7 +966,7 @@ top-level directory on the mounted ext4 files system then search for “foo”.<
 Unix systems see the <code class="docutils literal notranslate"><span class="pre">path_resolution(7)</span></code> man page, i.e. type <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">path_resolution</span></code>.</p>
 </section>
 <section id="objects">
-<h2><span class="section-number">25.2. </span>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">20.2. </span>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">#</a></h2>
 <aside class="sidebar">
 <p class="sidebar-title">So, why is it called an inode? Dennis Ritchie, who was one of the authors of UNIX, gave this enlightened answer to the Linux kernel mailing list in 2002:</p>
 <blockquote>
@@ -962,9 +974,9 @@ Unix systems see the <code class="docutils literal notranslate"><span class="pre
 </div></blockquote>
 <p style='text-align: right;'> ---Dennis Ritchie, <a href='https://lkml.indiana.edu/hypermail/linux/kernel/0207.2/1182.html'>[LKML 2002]</a></p>
 </aside>
-<p>Once you use a pathname to find an object in the file system, you need to find out what kind of an object you have found.  Each file is identified in the file system by a unique <strong>inode number</strong> that references an <strong>inode</strong> data structure that maintains all kinds of information, or <em>meta-data</em> about the file (try <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">inode</span></code> for more information).   While the inode itself is internal to the file system, and contains additional information, generic information can be obtained for any file as described <a class="reference internal" href="#cont-fs-calls-naming"><span class="std std-ref">below</span></a>.  One of the fields in an inode identifies the type of object that the inode refers to. The types of objects that can be referenced by inode are shown in <a class="reference internal" href="#file-types"><span class="std std-numref">Table 25.1</span></a>.</p>
+<p>Once you use a pathname to find an object in the file system, you need to find out what kind of an object you have found.  Each file is identified in the file system by a unique <strong>inode number</strong> that references an <strong>inode</strong> data structure that maintains all kinds of information, or <em>meta-data</em> about the file (try <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">inode</span></code> for more information).   While the inode itself is internal to the file system, and contains additional information, generic information can be obtained for any file as described <a class="reference internal" href="#cont-fs-calls-naming"><span class="std std-ref">below</span></a>.  One of the fields in an inode identifies the type of object that the inode refers to. The types of objects that can be referenced by inode are shown in <a class="reference internal" href="#file-types"><span class="std std-numref">Table 20.1</span></a>.</p>
 <table class="colwidths-given table" id="file-types">
-<caption><span class="caption-number">Table 25.1 </span><span class="caption-text">Types of objects in a file system. </span><a class="headerlink" href="#file-types" title="Permalink to this table">#</a></caption>
+<caption><span class="caption-number">Table 20.1 </span><span class="caption-text">Types of objects in a file system. </span><a class="headerlink" href="#file-types" title="Permalink to this table">#</a></caption>
 <colgroup>
 <col style="width: 29%" />
 <col style="width: 24%" />
@@ -1009,7 +1021,7 @@ Unix systems see the <code class="docutils literal notranslate"><span class="pre
 </table>
 <p>The last four are special files that you can connect into a file system.  The first three are core objects for all file systems.</p>
 <section id="files">
-<h3><span class="section-number">25.2.1. </span>Files<a class="headerlink" href="#files" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">20.2.1. </span>Files<a class="headerlink" href="#files" title="Permalink to this headline">#</a></h3>
 <p>In keeping with the idea that everything is a file, Unix made all files just a sequence of 8-bit bytes<a class="footnote-reference brackets" href="#eff" id="id2">2</a><a class="footnote-reference brackets" href="#simple" id="id3">3</a>. Any
 structure to the file (such as a JPEG image, an executable program, or a
 database) is the responsibility of applications which read and write the
@@ -1032,13 +1044,13 @@ end).</p>
 <figure class="align-default" id="fs-tree-imp">
 <a class="reference internal image-reference" href="../_images/filesys-tree2.png"><img alt="../_images/filesys-tree2.png" src="../_images/filesys-tree2.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 25.2 </span><span class="caption-text">Implementation view: hierarchical file system name space. Gray blocks are directories that contain entries with strings and corresponding inode numbers that identify the files.</span><a class="headerlink" href="#fs-tree-imp" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 20.2 </span><span class="caption-text">Implementation view: hierarchical file system name space. Gray blocks are directories that contain entries with strings and corresponding inode numbers that identify the files.</span><a class="headerlink" href="#fs-tree-imp" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="directory">
-<span id="cont-fs-interface-dir"></span><h3><span class="section-number">25.2.2. </span>Directory<a class="headerlink" href="#directory" title="Permalink to this headline">#</a></h3>
-<p>As shown in <a class="reference internal" href="#fs-tree-imp"><span class="std std-numref">Fig. 25.2</span></a>, a directory contains entries with strings that identify objects contained in the directory, and for each the inode numbers that can then be used to find out more information about the corresponding object.   The same inode can be referenced by multiple directories, with potentially different names. Each directory entry that maps a name to an inode number is called a <em>hard link</em> to the inode, and another field in the inode structure records the number of hard links to that inode.  For example, the entry named <code class="docutils literal notranslate"><span class="pre">..</span></code> in any directory is a hard link to the parent directory. To illustrate this point, let’s create a directory named <code class="docutils literal notranslate"><span class="pre">foo</span></code> in the <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> directory and see how the link count for <code class="docutils literal notranslate"><span class="pre">foo</span></code> changes when we create a subdirectory <code class="docutils literal notranslate"><span class="pre">bar</span></code> inside foo.</p>
+<span id="cont-fs-interface-dir"></span><h3><span class="section-number">20.2.2. </span>Directory<a class="headerlink" href="#directory" title="Permalink to this headline">#</a></h3>
+<p>As shown in <a class="reference internal" href="#fs-tree-imp"><span class="std std-numref">Fig. 20.2</span></a>, a directory contains entries with strings that identify objects contained in the directory, and for each the inode numbers that can then be used to find out more information about the corresponding object.   The same inode can be referenced by multiple directories, with potentially different names. Each directory entry that maps a name to an inode number is called a <em>hard link</em> to the inode, and another field in the inode structure records the number of hard links to that inode.  For example, the entry named <code class="docutils literal notranslate"><span class="pre">..</span></code> in any directory is a hard link to the parent directory. To illustrate this point, let’s create a directory named <code class="docutils literal notranslate"><span class="pre">foo</span></code> in the <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> directory and see how the link count for <code class="docutils literal notranslate"><span class="pre">foo</span></code> changes when we create a subdirectory <code class="docutils literal notranslate"><span class="pre">bar</span></code> inside foo.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
@@ -1049,7 +1061,7 @@ end).</p>
 <p>The link count in an inode ensures that the object the inode refers to (file or directory) will not be deleted as long as there is at least one hard link to the inode. When you issue a delete command for a filename (e.g., ‘rm somefile’), the file system removes the entry for the filename from a directory and decrements the link count on the inode that entry referred to. Only when the last hard link is removed will the file object really be freed.</p>
 </section>
 <section id="symbolic-links">
-<h3><span class="section-number">25.2.3. </span>Symbolic links<a class="headerlink" href="#symbolic-links" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">20.2.3. </span>Symbolic links<a class="headerlink" href="#symbolic-links" title="Permalink to this headline">#</a></h3>
 <p>The third file system object is a
 <em>symbolic link</em>. This holds a text string which is interpreted as a
 “pointer” to another location in the file system. When the kernel is
@@ -1095,13 +1107,13 @@ symbolic link may be traversed in a single path translation:</p>
 </section>
 </section>
 <section id="file-system-operations">
-<h2><span class="section-number">25.3. </span>File System Operations:<a class="headerlink" href="#file-system-operations" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">20.3. </span>File System Operations:<a class="headerlink" href="#file-system-operations" title="Permalink to this headline">#</a></h2>
 <p>There are several common types of file operations supported by Linux
 (and with slight differences, Windows). They can be classified into
 three main categories: open/close, read/write, and naming and
 directories.</p>
 <section id="open-close">
-<h3><span class="section-number">25.3.1. </span>Open/close<a class="headerlink" href="#open-close" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">20.3.1. </span>Open/close<a class="headerlink" href="#open-close" title="Permalink to this headline">#</a></h3>
 <p>In order to access a file in Linux (or most operating
 systems) you first need to open the file, passing the file name and
 other parameters and receiving a <em>handle</em> (called a <em>file descriptor</em> in
@@ -1122,7 +1134,7 @@ allocated for it.</p></li>
 access files, but instead use higher-level frameworks, ranging from Unix
 Standard I/O to high-level application frameworks.</p>
 <section id="read-write-operations">
-<span id="cont-fs-interface-operations"></span><h4><span class="section-number">25.3.1.1. </span>Read/Write operations<a class="headerlink" href="#read-write-operations" title="Permalink to this headline">#</a></h4>
+<span id="cont-fs-interface-operations"></span><h4><span class="section-number">20.3.1.1. </span>Read/Write operations<a class="headerlink" href="#read-write-operations" title="Permalink to this headline">#</a></h4>
 <p>To get a file with data in it, you need to write it; to use that data you need to read it. To enable files to be accessed as a <em>stream</em> just like from a terminal or pipe, UNIX uses the concept of a <em>current position</em>
 associated with a file descriptor. When you read 100 bytes (i.e. bytes 0
 to 99) from a file, this pointer advances by 100 bytes, so that the next
@@ -1159,7 +1171,7 @@ file, or a pipe from or to another program.</p>
 </section>
 </section>
 <section id="naming-and-directories">
-<span id="cont-fs-calls-naming"></span><h3><span class="section-number">25.3.2. </span>Naming and Directories<a class="headerlink" href="#naming-and-directories" title="Permalink to this headline">#</a></h3>
+<span id="cont-fs-calls-naming"></span><h3><span class="section-number">20.3.2. </span>Naming and Directories<a class="headerlink" href="#naming-and-directories" title="Permalink to this headline">#</a></h3>
 <p>In Unix there is a difference between a name
 (a directory entry) and the object (file or directory) that the name
 points to. The naming and directories operations are:</p>
@@ -1196,10 +1208,10 @@ in the same directory) or creating a new entry and deleting the old one
 </section>
 </section>
 <section id="some-examples">
-<h2><span class="section-number">25.4. </span>Some examples<a class="headerlink" href="#some-examples" title="Permalink to this headline">#</a></h2>
-<p>Consider the following program in <a class="reference internal" href="#filecopy-listing"><span class="std std-numref">Listing 25.1</span></a>, which copies one file to another.  After opening the input file (line 26) we stat the input file to get the permissions (i.e., the mode), create a file with that mode (line 37), and then go into a loop reading data from the input file into a buffer, and then writing the buffer to the output file.</p>
+<h2><span class="section-number">20.4. </span>Some examples<a class="headerlink" href="#some-examples" title="Permalink to this headline">#</a></h2>
+<p>Consider the following program in <a class="reference internal" href="#filecopy-listing"><span class="std std-numref">Listing 20.1</span></a>, which copies one file to another.  After opening the input file (line 26) we stat the input file to get the permissions (i.e., the mode), create a file with that mode (line 37), and then go into a loop reading data from the input file into a buffer, and then writing the buffer to the output file.</p>
 <div class="literal-block-wrapper docutils container" id="filecopy-listing">
-<div class="code-block-caption"><span class="caption-number">Listing 25.1 </span><span class="caption-text">fcopy2.c - An example program that copies one file to another using the file system interface.</span><a class="headerlink" href="#filecopy-listing" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 20.1 </span><span class="caption-text">fcopy2.c - An example program that copies one file to another using the file system interface.</span><a class="headerlink" href="#filecopy-listing" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="o">//</span> <span class="n">simple</span> <span class="n">program</span> <span class="n">to</span> <span class="n">copy</span> <span class="n">a</span> <span class="n">file</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="c1">#include &lt;sys/types.h&gt;</span>
@@ -1358,13 +1370,13 @@ deleted.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">24. </span>Introduction</p>
+            <p class="prev-next-title"><span class="section-number">19. </span>Introduction</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="diskhw.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">26. </span>A bit about Disks</p>
+        <p class="prev-next-title"><span class="section-number">21. </span>A bit about Disks</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
