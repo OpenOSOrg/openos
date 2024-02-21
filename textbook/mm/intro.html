@@ -282,7 +282,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="vmabs.html">
-     14.1. Basic Memory Management functions
+     14.1. Abstracting a useful interface for memory management.
     </a>
    </li>
    <li class="toctree-l2">
@@ -768,55 +768,38 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#basic-memory-management-functions">
-   12.1. Basic Memory Management functions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#library-calls">
-     12.1.1. Library calls
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#system-calls">
-     12.1.2. system calls
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#physical-memory-no-virtual-memory">
-   12.2. Physical Memory/No Virtual Memory
+   12.1. Physical Memory/No Virtual Memory
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#virtual-memory">
-   12.3. Virtual Memory
+   12.2. Virtual Memory
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#segmented-virtual-memory">
-     12.3.1. Segmented Virtual Memory
+     12.2.1. Segmented Virtual Memory
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#paged-virtual-memory">
-     12.3.2. Paged Virtual Memory
+     12.2.2. Paged Virtual Memory
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#the-virtual-address-space">
-       12.3.2.1. The virtual address space
+       12.2.2.1. The virtual address space
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#pros">
-       12.3.2.2. Pros
+       12.2.2.2. Pros
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#cons">
-       12.3.2.3. Cons
+       12.2.2.3. Cons
       </a>
      </li>
     </ul>
@@ -843,55 +826,38 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#basic-memory-management-functions">
-   12.1. Basic Memory Management functions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#library-calls">
-     12.1.1. Library calls
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#system-calls">
-     12.1.2. system calls
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#physical-memory-no-virtual-memory">
-   12.2. Physical Memory/No Virtual Memory
+   12.1. Physical Memory/No Virtual Memory
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#virtual-memory">
-   12.3. Virtual Memory
+   12.2. Virtual Memory
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#segmented-virtual-memory">
-     12.3.1. Segmented Virtual Memory
+     12.2.1. Segmented Virtual Memory
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#paged-virtual-memory">
-     12.3.2. Paged Virtual Memory
+     12.2.2. Paged Virtual Memory
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#the-virtual-address-space">
-       12.3.2.1. The virtual address space
+       12.2.2.1. The virtual address space
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#pros">
-       12.3.2.2. Pros
+       12.2.2.2. Pros
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#cons">
-       12.3.2.3. Cons
+       12.2.2.3. Cons
       </a>
      </li>
     </ul>
@@ -1043,46 +1009,27 @@ physical memory into virtual memory and the pros/cons of it.</p>
 <p>A virtual address space includes 2 basic types of regions: anonymous and file-backed.  An anonymous virtual memory region is one that is not backed up by any file.  These include the stacks, heaps and other dynamically and statically allocated regions of a program.  A file-backed virtual memory region is one that is backed up by a file.  These include the text and initialized data sections of a program.
 Much more on this later.</p>
 <p>Today, most computers support paged virtual memory, but before we get into that, we will look at the motives that lead to today’s memory management by first discussing systems without any virtual memory and and then discussing with segmented virtual memory.</p>
-<section id="basic-memory-management-functions">
-<h2><span class="section-number">12.1. </span>Basic Memory Management functions<a class="headerlink" href="#basic-memory-management-functions" title="Permalink to this headline">#</a></h2>
-<p>The memory management functions provided to user programs can be divided into 2 categories: library calls and system calls.</p>
-<section id="library-calls">
-<h3><span class="section-number">12.1.1. </span>Library calls<a class="headerlink" href="#library-calls" title="Permalink to this headline">#</a></h3>
-<p>The most basic memory management library functions to allocate and free virtual memory are malloc() and free() respectively.</p>
-<p>1.) malloc(): The malloc library function use is “address=malloc(size)” where you pass the number of bytes you want to allocate in size and malloc returns the virtual address of the memory allocated into address.</p>
-<p>2.) free(): The free library function use is “status=free(address)” where address is the virtual address malloc() returned to the user and status is simply an indication of success or failure.</p>
-</section>
-<section id="system-calls">
-<h3><span class="section-number">12.1.2. </span>system calls<a class="headerlink" href="#system-calls" title="Permalink to this headline">#</a></h3>
-<p>The memory management system calls are sbrk(), brk(), mmap(), munmap() and mprotect().</p>
-<p>1.) sbrk(): The sbrk() system call is used to expand and contract the end of the program’s data section. The use is prev=sbrk(size)” where size is the positive or negative number of bytes to expand or extract the end of the data section and prev is the end of the data section before the call.</p>
-<p>2.) brk(): The brk() system call is used to explicitly set the end of the program’s data section. The use is “status=brk(address)” where address is where to set the end of the data section and status is the success/failure of the call.</p>
-<p>3.) mmap(): The mmap() system call is used to allocate anonymous memory in page sized increments into a contiguous set of virtual pages or map the contents of a file segment into a set virtual pages. The use is “address=mmap(arguments, …)” where the arguments instruct whether to allocate anonymous memory or map a file section and address is the page aligned virtual address of the newly allocated memory.</p>
-<p>4.) munmap(): The munmap() system call is used free anonymous memory allocated via mmap() or unmap the contents of a file segment that was mapped via mmap(). The use is “status=munmap(address, size)” where address is the page aligned virtual address to be unmapped, size is the size of memory to be unmapped and status is the success of the call.</p>
-<p>5.) mprotect(): The mprotect() system call is used to set the protection for a range of valid virtual pages. The use is “status=mprotect(address, size, protection)” where address is the base address and size is the location and size of the virtual region that gets the new protection.</p>
-</section>
-</section>
 <section id="physical-memory-no-virtual-memory">
-<h2><span class="section-number">12.2. </span>Physical Memory/No Virtual Memory<a class="headerlink" href="#physical-memory-no-virtual-memory" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">12.1. </span>Physical Memory/No Virtual Memory<a class="headerlink" href="#physical-memory-no-virtual-memory" title="Permalink to this headline">#</a></h2>
 <p>On a system without virtual memory there is one physical address space and programs are loaded into physical memory, allocate physical memory as needed and directly access those physical memory locations or addresses.  If more than one program is running at the same time they are simply loaded into a different physical address and allocate different physical addresses.  This means every program must either know the physical address that it is running or it must be relocated when it is loaded.</p>
 </section>
 <section id="virtual-memory">
-<h2><span class="section-number">12.3. </span>Virtual Memory<a class="headerlink" href="#virtual-memory" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">12.2. </span>Virtual Memory<a class="headerlink" href="#virtual-memory" title="Permalink to this headline">#</a></h2>
 <p>What is most desirable and usable is a virtual memory model where every program would run in a process that has a unique but identical virtual address space.  A virtual address space would ideally start at address zero and extend up to some very large address.  Since every process appears to have the same virtual address space programs can be loaded at the same virtual address and therefore do not need to to be relocated.  There are 2 basic virtual memory models: Segmented Virtual Memory and Paged Virtual Memory.</p>
 <section id="segmented-virtual-memory">
-<h3><span class="section-number">12.3.1. </span>Segmented Virtual Memory<a class="headerlink" href="#segmented-virtual-memory" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">12.2.1. </span>Segmented Virtual Memory<a class="headerlink" href="#segmented-virtual-memory" title="Permalink to this headline">#</a></h3>
 <p>A simple segmented virtual address space starts at location zero and extend up to some upper limit. Its implemented in hardware using base and offset registers.  Every memory reference is virtual and is translated to a physical address in hardware by adding the base register to the virtual address and qualified by insuring the result is less than the offset register.</p>
 </section>
 <section id="paged-virtual-memory">
-<h3><span class="section-number">12.3.2. </span>Paged Virtual Memory<a class="headerlink" href="#paged-virtual-memory" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">12.2.2. </span>Paged Virtual Memory<a class="headerlink" href="#paged-virtual-memory" title="Permalink to this headline">#</a></h3>
 <p>A paged virtual memory model splits both the virtual address space and physical memory into fixed size pieces knows as virtual pages and physical page frames respectively.  The mapping of virtual pages to physical page frames is accomplished via an array of page frame numbers known as a page table.  There is one page table entry for each virtual page and only then pages that are being used contain valid page table entries and therefore map physical page frames.</p>
 <section id="the-virtual-address-space">
-<h4><span class="section-number">12.3.2.1. </span>The virtual address space<a class="headerlink" href="#the-virtual-address-space" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">12.2.2.1. </span>The virtual address space<a class="headerlink" href="#the-virtual-address-space" title="Permalink to this headline">#</a></h4>
 <p>The virtual address space of every process is typically very large and fixed in size, for example the virtual address space for every process running on an x86_64 system is 2^48 or 258TB.  By default the entire virtual address space is not accessible to programs running in it.  The only portions or regions that are accessible are those that the program requested via system calls(mmap and sbrk) and the kernel granted access to.  So the virtual address space is sparsely populated with valid regions and those are either anonymous regions or file-backed regions.  Anonymous regions are any region that is not backed by a file, for example; stacks, heaps, BSS, malloc()’d and sbrk()’d regions.   File-backed regions are sections of a file that are mapped into the virtual address space.  Once the valid regions have been created physical memory pages are mapped into the virtual pages on demand therefore those regions are sparsely populated with physical memory.</p>
 <p>Paged virtual memory aka paging introduces the possibility of several additional highly desirable features or pros to the memory management system but also introduces several additional challenges or cons.</p>
 </section>
 <section id="pros">
-<h4><span class="section-number">12.3.2.2. </span>Pros<a class="headerlink" href="#pros" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">12.2.2.2. </span>Pros<a class="headerlink" href="#pros" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>Several huge virtual address spaces can be much larger than physical memory via over-committing physical memory.</p></li>
 <li><p>Total isolation of each virtual address space from all others.</p></li>
@@ -1092,7 +1039,7 @@ Much more on this later.</p>
 </ul>
 </section>
 <section id="cons">
-<h4><span class="section-number">12.3.2.3. </span>Cons<a class="headerlink" href="#cons" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">12.2.2.3. </span>Cons<a class="headerlink" href="#cons" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>Over-committing physical memory requires sophisticated page reclaim logic.</p></li>
 <li><p>Supporting multiple page sizes on different architectures complicates an already complex memory management system.</p></li>
