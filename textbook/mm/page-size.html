@@ -745,12 +745,65 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#small-page-sizes">
+   14.5.1. Small page sizes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pros">
+     14.5.1.1. Pros:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cons">
+     14.5.1.2. Cons:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#large-page-sizes">
+   14.5.2. Large page sizes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     14.5.2.1. Pros:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     14.5.2.2. Cons:
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -762,6 +815,48 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#small-page-sizes">
+   14.5.1. Small page sizes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pros">
+     14.5.1.1. Pros:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cons">
+     14.5.1.2. Cons:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#large-page-sizes">
+   14.5.2. Large page sizes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     14.5.2.1. Pros:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     14.5.2.2. Cons:
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -777,6 +872,50 @@ systems can use multiple page sizes at the same time.</p>
 <p>A smaller page size reduces the internal fragmentation, on the average 1/2 of the last page of a memory region will be unused or wasted.  Half of a 4KB page is only 2KB but half of a 1GB page is 512MB!  Smaller page sizes also make for a more compact virtual address space since pages must be aligned on their size boundaries.  When the virtual address space is more compact both text and data regions can be smaller and closer together allowing for more efficient relative addressing instructions to be used.  This typically results in fewer memory references because the distance between instructions and data is smaller and fit within an instruction.  This is especially true for smaller programs.</p>
 <p>A larger page size allows for fewer page structures for a given amount of memory that the memory management system has to manage.  This means that fewer page structures will be on various linked lists, etc. which typically results in needing to hold spin locks for shorter periods of time when walking these linked lists.  A larger page size also results in significantly more text and data being mapped in translation caches.  A cache that has 128 entries can only map 512KB with a 4KB page size where it can map 128GB with a 1GB page size.  This alone will practically eliminate translation cache misses once a process is running.</p>
 <p>Selecting a page size is a trade-off and there is really no one-size fits all optimally.  The Intel x86_64 processor supports 3 page sizes; 4KB, 2MB and 1GB.  Most operating systems that will run on this architecture can be built and booted to run any of these page sizes.  In addition, the x86_64 can use all 3 pages sizes at the same time within a single address space.  Regions of memory that are fairly small(measured in KB) like a stack or heap might use a 4KB page size.  Regions of memory that are larger(measured in MB) like a large program text or shared library text might use a 2MB page size.  Finally regions of memory that are huge like a data base cache or huge shared mapped files might use a 1GB page size.</p>
+<figure class="align-default" id="fig-pagesize">
+<a class="reference internal image-reference" href="../_images/pagesize.png"><img alt="../_images/pagesize.png" src="../_images/pagesize.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14.21 </span><span class="caption-text">X86_64 page sizes</span><a class="headerlink" href="#fig-pagesize" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="small-page-sizes">
+<h2><span class="section-number">14.5.1. </span>Small page sizes<a class="headerlink" href="#small-page-sizes" title="Permalink to this headline">#</a></h2>
+<section id="pros">
+<h3><span class="section-number">14.5.1.1. </span>Pros:<a class="headerlink" href="#pros" title="Permalink to this headline">#</a></h3>
+<ol class="simple">
+<li><p>Less internal fragmentation</p></li>
+<li><p>Better fit for various data structures, code sections</p></li>
+<li><p>Less unused program memory</p></li>
+</ol>
+</section>
+<section id="cons">
+<h3><span class="section-number">14.5.1.2. </span>Cons:<a class="headerlink" href="#cons" title="Permalink to this headline">#</a></h3>
+<ol class="simple">
+<li><p>Programs need many pages, larger page tables</p></li>
+<li><p>More TLB misses</p></li>
+<li><p>Higher memory management overhead</p></li>
+</ol>
+</section>
+</section>
+<section id="large-page-sizes">
+<h2><span class="section-number">14.5.2. </span>Large page sizes<a class="headerlink" href="#large-page-sizes" title="Permalink to this headline">#</a></h2>
+<section id="id1">
+<h3><span class="section-number">14.5.2.1. </span>Pros:<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<ol class="simple">
+<li><p>Smaller page tables</p></li>
+<li><p>fewer TLB misses</p></li>
+<li><p>Lower memory management overhead</p></li>
+</ol>
+</section>
+<section id="id2">
+<h3><span class="section-number">14.5.2.2. </span>Cons:<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<ol class="simple">
+<li><p>More internal fragmentation</p></li>
+<li><p>More unused program memory</p></li>
+<li><p>Worse fit for various data structures, code sections</p></li>
+</ol>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

@@ -962,14 +962,14 @@ more thorough description of the Linux memory layout can be found <a class="refe
 <figure class="align-default" id="fig-vm-fig100">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic100.png"><img alt="../_images/virt-mem-pic100.png" src="../_images/virt-mem-pic100.png" style="width: 25%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 14.21 </span><span class="caption-text">Top 1GB is the Kernel address space and bottom 3GB is the user address space.</span><a class="headerlink" href="#fig-vm-fig100" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 14.22 </span><span class="caption-text">Top 1GB is the Kernel address space and bottom 3GB is the user address space.</span><a class="headerlink" href="#fig-vm-fig100" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In earlier chapters we saw how simple operating systems may use separate
 portions of the address space for programs and for the operating system.
 The same approach is often used in dividing up the virtual address space
 in more complex operating systems, as seen in the 32-bit Linux memory
-map in <a class="reference internal" href="#fig-vm-fig100"><span class="std std-numref">Fig. 14.21</span></a>. In recent Linux versions running on 32-bit
+map in <a class="reference internal" href="#fig-vm-fig100"><span class="std std-numref">Fig. 14.22</span></a>. In recent Linux versions running on 32-bit
 Intel-compatible CPUs, the kernel “owns” the top 1GB, from virtual
 address 0xC0000000 to 0xFFFFFFFF, and all kernel code, data structures,
 and temporary mappings go in this range.</p>
@@ -1043,7 +1043,7 @@ data.</p>
 <figure class="align-default" id="vm-pic101">
 <a class="reference internal image-reference" href="../_images/virt-mem-pic101.png"><img alt="../_images/virt-mem-pic101.png" src="../_images/virt-mem-pic101.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 14.22 </span><span class="caption-text">Relationship of executable file header to memory map
+<p><span class="caption-number">Fig. 14.23 </span><span class="caption-text">Relationship of executable file header to memory map
 structure</span><a class="headerlink" href="#vm-pic101" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
@@ -1179,13 +1179,17 @@ again. In fact, if the child process only executes a few lines of code
 and then calls <span class="xref myst">exec</span>{.uri}, it may only modify a handful of pages
 before its virtual address space is destroyed and replaced with a new
 one.</p>
-<div class="highlight-gsidebarN notranslate"><div class="highlight"><pre><span></span>12 Copy-on-write is in fact a widely-used strategy in computer systems.
-It is effectively a &quot;lazy&quot; copy, doing only the minimal amount of work
+<p>Copy-on-write is in fact a widely-used strategy in computer systems.
+It is effectively a “lazy” copy, doing only the minimal amount of work
 needed and reducing both the cost of copying and the total space
 consumed. Similar copy-on-write mechanisms can be seen in file systems,
-storage devices, and some programming language runtime systems.
-</pre></div>
-</div>
+storage devices, and some programming language runtime systems.</p>
+<figure class="align-default" id="vm-cow">
+<a class="reference internal image-reference" href="../_images/COW.png"><img alt="../_images/COW.png" src="../_images/COW.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14.24 </span><span class="caption-text">Copy On Write after fork()</span><a class="headerlink" href="#vm-cow" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Linux uses a technique called <em>copy-on-write</em> to eliminate the need to
 copy most of this memory. When a child process is created in the
 <span class="xref myst">fork</span>{.uri} system call, its address space shares not only the
