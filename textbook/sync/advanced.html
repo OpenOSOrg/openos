@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>5.2. Shell &#8212; Introduction to Operating Systems</title>
+    <title>27. Advanced Synchronization &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5.3. Editors" href="tools-editors.html" />
-    <link rel="prev" title="5.1. The C Programming Language" href="tools-c.html" />
+    <link rel="next" title="27.1. Read-Dominated Workloads" href="readmostly.html" />
+    <link rel="prev" title="26. Common Concurrency Bugs" href="concurrency_bugs.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="pref.html">
+                <a class="reference internal" href="../intro/pref.html">
                     Preface
                 </a>
             </li>
@@ -121,69 +121,69 @@ const thebe_selector_output = ".output, .cell_output"
   Getting started
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
+  <a class="reference internal" href="../intro/intro.html">
    1. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="purpose.html">
+  <a class="reference internal" href="../intro/purpose.html">
    2. Purpose of operating systems
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="structure.html">
+  <a class="reference internal" href="../intro/structure.html">
    3. Operating System Structure &amp; Unix/Linux
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="abstractions.html">
+  <a class="reference internal" href="../intro/abstractions.html">
    4. Operating System Abstractions
   </a>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="tools.html">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/tools.html">
    5. What you should know
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="tools-c.html">
+    <a class="reference internal" href="../intro/tools-c.html">
      5.1. The C Programming Language
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/tools-shell.html">
      5.2. Shell
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="tools-editors.html">
+    <a class="reference internal" href="../intro/tools-editors.html">
      5.3. Editors
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="tools-make.html">
+    <a class="reference internal" href="../intro/tools-make.html">
      5.4. Make
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="tools-testing.html">
+    <a class="reference internal" href="../intro/tools-testing.html">
      5.5. Testing
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="tools-git.html">
+    <a class="reference internal" href="../intro/tools-git.html">
      5.6. Git Basics
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="tools-gdb.html">
+    <a class="reference internal" href="../intro/tools-gdb.html">
      5.7. GDB
     </a>
    </li>
@@ -412,14 +412,14 @@ const thebe_selector_output = ".output, .cell_output"
   Concurrency
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../sync/sync.html">
+  <a class="reference internal" href="sync.html">
    24. Introduction
   </a>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../sync/basic.html">
+  <a class="reference internal" href="basic.html">
    25. Basic Synchronization
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
@@ -429,61 +429,61 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../sync/sharing.html">
+    <a class="reference internal" href="sharing.html">
      25.1. Cooperating Processes and Inter-process Communication
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../sync/criticalsection.html">
+    <a class="reference internal" href="criticalsection.html">
      25.2. The Critical Section Problem
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../sync/locks.html">
+    <a class="reference internal" href="locks.html">
      25.3. Implementing Locks
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../sync/ordering.html">
+    <a class="reference internal" href="ordering.html">
      25.4. Ordering Thread Events
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../sync/concurrency_bugs.html">
+  <a class="reference internal" href="concurrency_bugs.html">
    26. Common Concurrency Bugs
   </a>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../sync/advanced.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
    27. Advanced Synchronization
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../sync/readmostly.html">
+    <a class="reference internal" href="readmostly.html">
      27.1. Read-Dominated Workloads
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../sync/hardware_challenges.html">
+    <a class="reference internal" href="hardware_challenges.html">
      27.2. Challenges of Modern Hardware
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../sync/linux_locking.html">
+    <a class="reference internal" href="linux_locking.html">
      27.3. Locking in the Linux Kernel
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../sync/review.html">
+  <a class="reference internal" href="review.html">
    28. Review
   </a>
  </li>
@@ -627,7 +627,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/intro/tools-shell.ipynb&branch=main"
+        <a href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https%3A//github.com/OpenOSOrg/openos&urlpath=lab/tree/openos/content/sync/advanced.ipynb&branch=main"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -687,7 +687,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fintro/tools-shell.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/OpenOSOrg/openos/issues/new?title=Issue%20on%20page%20%2Fsync/advanced.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -704,7 +704,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/intro/tools-shell.ipynb"
+        <a href="https://github.com/OpenOSOrg/openos/edit/main/content/sync/advanced.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -732,7 +732,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/intro/tools-shell.ipynb"
+        <a href="../_sources/sync/advanced.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -781,7 +781,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Shell</h1>
+                <h1>Advanced Synchronization</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -793,53 +793,12 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="cell tag_remove-input docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="advanced-synchronization">
+<span id="cont-sync-advanced"></span><h1><span class="section-number">27. </span>Advanced Synchronization<a class="headerlink" href="#advanced-synchronization" title="Permalink to this headline">#</a></h1>
+<p>Many data structures are read-mostly, and the following chapter <a class="reference internal" href="readmostly.html#cont-sync-readmostly"><span class="std std-ref">discusses</span></a> synchronization primitives optimized for accessing these data structures. We then discuss some of the challenges introduced by <a class="reference internal" href="hardware_challenges.html#cont-sync-hardware-challenge"><span class="std std-ref">modern hardware</span></a>, and synchronization in the <a class="reference internal" href="linux_locking.html#cont-sync-linux-locking"><span class="std std-ref">Linux kernel</span></a>.</p>
+<div class="toctree-wrapper compound">
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="shell">
-<span id="cont-gs-tools-shell"></span><h1><span class="section-number">5.2. </span>Shell<a class="headerlink" href="#shell" title="Permalink to this headline">#</a></h1>
-<p>The shell provides an enormously powerful text based interface for programmers to interact with the Unix operating system.  We already discussed the shell when describing the key <a class="reference internal" href="abstractions.html#cont-gs-abstractions"><span class="std std-ref">abstractions</span></a> of Unix, so you know key unix commands, redirection, pipes, process tree, etc…
-One very useful feature we have not touched on yet is shell scripts.  A shell script is a file that contains the same commands that you could type directly into a shell, and it is frequently used by developers to automate tasks.   As a simple example consider the shell script  shown in <a class="reference internal" href="#run-tests"><span class="std std-numref">Listing 5.1</span></a> that automates running a set of tests passed to the script, where it reports how many tests succeeded, prints out the failures, including tests that took more than a timeout to run.</p>
-<div class="literal-block-wrapper docutils container" id="run-tests">
-<div class="code-block-caption"><span class="caption-number">Listing 5.1 </span><span class="caption-text">A simple shell script that runs a bunch of test programs.</span><a class="headerlink" href="#run-tests" title="Permalink to this code">#</a></div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="ch">#!/bin/bash</span>
-<span class="linenos"> 2</span><span class="nv">TIMEOUT_SECONDS</span><span class="o">=</span><span class="m">5</span>
-<span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="nv">all_tests</span><span class="o">=</span><span class="nv">$@</span>
-<span class="linenos"> 5</span><span class="nv">test_count</span><span class="o">=</span><span class="nv">$#</span>
-<span class="linenos"> 6</span><span class="nv">fail_count</span><span class="o">=</span><span class="m">0</span>
-<span class="linenos"> 7</span>
-<span class="linenos"> 8</span><span class="k">for</span> test_file <span class="k">in</span> <span class="nv">$all_tests</span>
-<span class="linenos"> 9</span><span class="k">do</span>
-<span class="linenos">10</span>	<span class="nb">echo</span> <span class="s2">&quot;===== </span><span class="si">${</span><span class="nv">test_file</span><span class="si">}</span><span class="s2"> =====&quot;</span>
-<span class="linenos">11</span>	rm -f testfs <span class="c1"># Tidy up from previous tests</span>
-<span class="linenos">12</span>	timeout <span class="si">${</span><span class="nv">TIMEOUT_SECONDS</span><span class="si">}</span> <span class="si">${</span><span class="nv">test_file</span><span class="si">}</span>
-<span class="linenos">13</span>	<span class="nv">rc</span><span class="o">=</span><span class="nv">$?</span>
-<span class="linenos">14</span>	<span class="k">if</span> <span class="o">[</span> <span class="si">${</span><span class="nv">rc</span><span class="si">}</span> -eq <span class="m">0</span> <span class="o">]</span>
-<span class="linenos">15</span>	<span class="k">then</span>
-<span class="linenos">16</span>		<span class="nb">echo</span> <span class="s2">&quot;PASS&quot;</span>
-<span class="linenos">17</span>	<span class="k">elif</span> <span class="o">[</span> <span class="si">${</span><span class="nv">rc</span><span class="si">}</span> -eq <span class="m">124</span> <span class="o">]</span>
-<span class="linenos">18</span>	<span class="k">then</span>
-<span class="linenos">19</span>		<span class="nb">echo</span> <span class="s2">&quot;FAIL (</span><span class="si">${</span><span class="nv">TIMEOUT_SECONDS</span><span class="si">}</span><span class="s2"> second timeout)&quot;</span>
-<span class="linenos">20</span>		<span class="nv">fail_count</span><span class="o">=</span><span class="k">$((</span>fail_count <span class="o">+</span> <span class="m">1</span><span class="k">))</span>
-<span class="linenos">21</span>	<span class="k">else</span>
-<span class="linenos">22</span>		<span class="nb">echo</span> <span class="s2">&quot;FAIL (rc = </span><span class="si">${</span><span class="nv">rc</span><span class="si">}</span><span class="s2">)&quot;</span>
-<span class="linenos">23</span>		<span class="nv">fail_count</span><span class="o">=</span><span class="k">$((</span>fail_count <span class="o">+</span> <span class="m">1</span><span class="k">))</span>
-<span class="linenos">24</span>	<span class="k">fi</span>
-<span class="linenos">25</span><span class="k">done</span>
-<span class="linenos">26</span>
-<span class="linenos">27</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">fail_count</span><span class="si">}</span><span class="s2"> out of </span><span class="si">${</span><span class="nv">test_count</span><span class="si">}</span><span class="s2"> tests failed.&quot;</span>
-</pre></div>
-</div>
-</div>
-<p>The first line in the file tells the OS to run this using the bash shell.  Line 3 gets the list of tests to run.  For each test, in  it prints the name of the test, runs the test (line 10) with a timeout value specified on line 1.  Lines 12-21 prints out for each test if the program ran correctly, and if not accumulates the number of failed tests.</p>
-<p>This is just a simple example of the kind of automation you can do with shell scripts.  For more detail on all the special variables… please run “man bash” and search for “PARAMETERS”. There are many wonderful tutorials (e.g., <a class="reference external" href="https://linuxconfig.org/bash-scripting-tutorial-for-beginners">this one</a>) and cheat sheets online.  Also, for more information about terminals and shells, this information is covered in much more detail in this <a class="reference external" href="https://jappavoo.github.io/UndertheCovers/textbook/unix/intro.html#operating-systems-and-unix">companion book</a>.</p>
 </section>
-
-
-<script type="application/vnd.jupyter.widget-state+json">
-{"state": {"74a8e62706424875a01754cab9acf87e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9ec241d955a043c5b67a8648e3ccb9d0": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_74a8e62706424875a01754cab9acf87e", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ [[ -d lec3 ]] && rm -rf mydir\r\n$     [[ -a myinfo ]] && rm myinfo\r\n$ "}]}}, "eb710d9fcfe94bd39e1b5b9ef0497e28": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_ecb2bfab129946349bbec8a56a5b4327", "msg_id": "", "outputs": [{"name": "stdout", "output_type": "stream", "text": "$ ls \nOS-L01.css          intro.ipynb        structure.ipynb      tools-make.ipynb\r\nOS-L01.ipynb        other.ipynb        tools-c.ipynb        tools-shell.ipynb\r\nabstractions.ipynb  peter-other.ipynb  tools-editors.ipynb  tools-testing.ipynb\r\ncommon.ipynb        pref.ipynb         tools-gdb.ipynb      tools.ipynb\r\nhistory.ipynb       purpose.ipynb      tools-git.ipynb\r\n$ "}]}}, "ecb2bfab129946349bbec8a56a5b4327": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": "1px solid black", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "100%", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": "scroll", "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
-</script>
-
 
     <script type="text/x-thebe-config">
     {
@@ -854,7 +813,7 @@ One very useful feature we have not touched on yet is shell scripts.  A shell sc
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./intro"
+            path: "./sync"
         },
         predefinedOutput: true
     }
@@ -868,17 +827,17 @@ One very useful feature we have not touched on yet is shell scripts.  A shell sc
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="tools-c.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="concurrency_bugs.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">5.1. </span>The C Programming Language</p>
+            <p class="prev-next-title"><span class="section-number">26. </span>Common Concurrency Bugs</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="tools-editors.html" title="next page">
+    <a class='right-next' id="next-link" href="readmostly.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5.3. </span>Editors</p>
+        <p class="prev-next-title"><span class="section-number">27.1. </span>Read-Dominated Workloads</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

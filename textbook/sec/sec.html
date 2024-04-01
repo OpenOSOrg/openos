@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>37. Security &#8212; Introduction to Operating Systems</title>
+    <title>32. Security &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="38. How to read this book" href="../misc/howto.html" />
-    <link rel="prev" title="36. Virtualization" href="../virt/virt.html" />
+    <link rel="next" title="33. How to read this book" href="../misc/howto.html" />
+    <link rel="prev" title="31. Virtualization" href="../virt/virt.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -418,49 +418,73 @@ const thebe_selector_output = ".output, .cell_output"
    24. Introduction
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/sharing.html">
-   25. Cooperating Processes and Inter-process Communication
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sync/basic.html">
+   25. Basic Synchronization
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/criticalsection.html">
-   26. The Critical Section Problem
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/locks.html">
-   27. Implementing Locks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/ordering.html">
-   28. Ordering Thread Events
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/sharing.html">
+     25.1. Cooperating Processes and Inter-process Communication
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/criticalsection.html">
+     25.2. The Critical Section Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/locks.html">
+     25.3. Implementing Locks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/ordering.html">
+     25.4. Ordering Thread Events
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   29. Common Concurrency Bugs
+   26. Common Concurrency Bugs
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/readmostly.html">
-   30. Read-Dominated Workloads
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sync/advanced.html">
+   27. Advanced Synchronization
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/hardware_challenges.html">
-   31. Challenges of Modern Hardware
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/linux_locking.html">
-   32. Locking in the Linux Kernel
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/readmostly.html">
+     27.1. Read-Dominated Workloads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/hardware_challenges.html">
+     27.2. Challenges of Modern Hardware
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/linux_locking.html">
+     27.3. Locking in the Linux Kernel
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   33. Review
+   28. Review
   </a>
  </li>
 </ul>
@@ -472,22 +496,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   34. Input and Output
+   29. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   35. More on Disks
+   30. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   36. Virtualization
+   31. Virtualization
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   37. Security
+   32. Security
   </a>
  </li>
 </ul>
@@ -499,49 +523,49 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   38. How to read this book
+   33. How to read this book
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../contributing/intro.html">
-   39. Contributing
+   34. Contributing
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/examples.html">
-     39.1. Examples
+     34.1. Examples
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/credit.html">
-     39.2. Contributors
+     34.2. Contributors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/Contributing.html">
-     39.3. Contributing
+     34.3. Contributing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/resources.html">
-     39.6. Resources to look at
+     34.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/fix.html">
-     39.7. Out of date
+     34.7. Out of date
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   40. Bibliography
+   35. Bibliography
   </a>
  </li>
 </ul>
@@ -769,66 +793,66 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#protection">
-   37.1. Protection
+   32.1. Protection
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#identity-and-authentication">
-     37.1.1. Identity and Authentication
+     32.1.1. Identity and Authentication
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#checking-passwords">
-     37.1.2. Checking passwords
+     32.1.2. Checking passwords
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#centralized-authentication-ldap-and-kerberos">
-     37.1.3. Centralized authentication - LDAP and Kerberos
+     32.1.3. Centralized authentication - LDAP and Kerberos
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#unix-access-control">
-   37.2. Unix Access Control
+   32.2. Unix Access Control
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#limitations-of-unix-permissions">
-     37.2.1. Limitations of Unix permissions
+     32.2.1. Limitations of Unix permissions
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#access-control-lists">
-     37.2.2. Access Control Lists
+     32.2.2. Access Control Lists
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#access-control-list-examples">
-     37.2.3. Access Control List Examples
+     32.2.3. Access Control List Examples
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#other-privileged-operations">
-     37.2.4. Other Privileged Operations
+     32.2.4. Other Privileged Operations
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#selinux">
-   37.3. SELinux
+   32.3. SELinux
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#control-of-information-flow">
-     37.3.1. Control of Information Flow
+     32.3.1. Control of Information Flow
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#review-questions">
-       37.3.1.1. Review Questions
+       32.3.1.1. Review Questions
       </a>
      </li>
     </ul>
@@ -837,17 +861,17 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#attacks-stack-overflow">
-   37.4. Attacks — Stack Overflow
+   32.4. Attacks — Stack Overflow
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#security-sql-injection">
-     37.4.1. Security - SQL Injection
+     32.4.1. Security - SQL Injection
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#ssl-and-connection-security">
-     37.4.2. SSL and Connection Security
+     32.4.2. SSL and Connection Security
     </a>
    </li>
   </ul>
@@ -873,66 +897,66 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#protection">
-   37.1. Protection
+   32.1. Protection
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#identity-and-authentication">
-     37.1.1. Identity and Authentication
+     32.1.1. Identity and Authentication
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#checking-passwords">
-     37.1.2. Checking passwords
+     32.1.2. Checking passwords
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#centralized-authentication-ldap-and-kerberos">
-     37.1.3. Centralized authentication - LDAP and Kerberos
+     32.1.3. Centralized authentication - LDAP and Kerberos
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#unix-access-control">
-   37.2. Unix Access Control
+   32.2. Unix Access Control
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#limitations-of-unix-permissions">
-     37.2.1. Limitations of Unix permissions
+     32.2.1. Limitations of Unix permissions
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#access-control-lists">
-     37.2.2. Access Control Lists
+     32.2.2. Access Control Lists
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#access-control-list-examples">
-     37.2.3. Access Control List Examples
+     32.2.3. Access Control List Examples
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#other-privileged-operations">
-     37.2.4. Other Privileged Operations
+     32.2.4. Other Privileged Operations
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#selinux">
-   37.3. SELinux
+   32.3. SELinux
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#control-of-information-flow">
-     37.3.1. Control of Information Flow
+     32.3.1. Control of Information Flow
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#review-questions">
-       37.3.1.1. Review Questions
+       32.3.1.1. Review Questions
       </a>
      </li>
     </ul>
@@ -941,17 +965,17 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#attacks-stack-overflow">
-   37.4. Attacks — Stack Overflow
+   32.4. Attacks — Stack Overflow
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#security-sql-injection">
-     37.4.1. Security - SQL Injection
+     32.4.1. Security - SQL Injection
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#ssl-and-connection-security">
-     37.4.2. SSL and Connection Security
+     32.4.2. SSL and Connection Security
     </a>
    </li>
   </ul>
@@ -967,7 +991,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="security">
-<h1><span class="section-number">37. </span>Security<a class="headerlink" href="#security" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">32. </span>Security<a class="headerlink" href="#security" title="Permalink to this headline">#</a></h1>
 <p>The term computer security covers a number of areas and goals. Most of
 them fall under the following categories:</p>
 <ul class="simple">
@@ -992,7 +1016,7 @@ which enable computer security, and which reduce the risks from security
 flaws in application software; the field of computing security is much
 larger, however<a class="footnote-reference brackets" href="#id10" id="id1">1</a>.</p>
 <section id="protection">
-<h2><span class="section-number">37.1. </span>Protection<a class="headerlink" href="#protection" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">32.1. </span>Protection<a class="headerlink" href="#protection" title="Permalink to this headline">#</a></h2>
 <p>Much of security involves protection: deciding whether or not to allow
 an operation based on a series of rules. The purpose of protection is to
 ensure the security goals described above, by applying these rules to
@@ -1017,7 +1041,7 @@ mechanisms is to express and enforce policies which determine whether a
 particular combination of an actor performing an action on an object is
 to be allowed or denied.</p>
 <section id="identity-and-authentication">
-<h3><span class="section-number">37.1.1. </span>Identity and Authentication<a class="headerlink" href="#identity-and-authentication" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">32.1.1. </span>Identity and Authentication<a class="headerlink" href="#identity-and-authentication" title="Permalink to this headline">#</a></h3>
 <p>In a Unix-like operating system, the actual actors are processes, which
 perform actions by issuing system calls. However specifying rules based
 on the processes themselves—e.g. process 10 may access file
@@ -1068,7 +1092,7 @@ of authentication; however this class focuses on passwords as they are
 the most widely used.</p>
 </section>
 <section id="checking-passwords">
-<h3><span class="section-number">37.1.2. </span>Checking passwords<a class="headerlink" href="#checking-passwords" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">32.1.2. </span>Checking passwords<a class="headerlink" href="#checking-passwords" title="Permalink to this headline">#</a></h3>
 <p>Securely storing and checking passwords is difficult, and various
 methods have been used over the years. The primary alternatives are as
 follows.</p>
@@ -1121,7 +1145,7 @@ plain-text password files. (this is done in Linux— <code class="docutils liter
 contains username and UID information, and is publicly readable, while
 <code class="docutils literal notranslate"><span class="pre">/etc/shadow</span></code> contains password hashes and is protected.</p>
 <div class="literal-block-wrapper docutils container" id="shadowpw">
-<div class="code-block-caption"><span class="caption-number">Listing 37.1 </span><span class="caption-text">Password and shadow password files in Linux</span><a class="headerlink" href="#shadowpw" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 32.1 </span><span class="caption-text">Password and shadow password files in Linux</span><a class="headerlink" href="#shadowpw" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pjd@cs5600-vbox:~$ ls -l /etc/shadow /etc/passwd
 -rw-r--r-- 1 root root   1061 Aug 24  2013 /etc/passwd
 -rw-r----- 1 root shadow  867 Aug 24  2013 /etc/shadow
@@ -1147,7 +1171,7 @@ and (if the server never repeats challenges) is unable to replay
 previous responses.</p>
 </section>
 <section id="centralized-authentication-ldap-and-kerberos">
-<h3><span class="section-number">37.1.3. </span>Centralized authentication - LDAP and Kerberos<a class="headerlink" href="#centralized-authentication-ldap-and-kerberos" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">32.1.3. </span>Centralized authentication - LDAP and Kerberos<a class="headerlink" href="#centralized-authentication-ldap-and-kerberos" title="Permalink to this headline">#</a></h3>
 <p>Modern computer systems frequently use centralized password
 administration: for instance, when you log in to a CCIS workstation your
 password is not checked locally, but rather against a central
@@ -1156,9 +1180,9 @@ Kerberos, frequently used as part of Microsoft’s Active Directory
 service. LDAP (lightweight directory access protocol) is a
 general-purpose directory protocol that can store information about
 people, machines, and just about anything else that a computer might
-want to name; an example entry is shown in <a class="reference internal" href="#fig-ldap"><span class="std std-numref">Listing 37.2</span></a>.</p>
+want to name; an example entry is shown in <a class="reference internal" href="#fig-ldap"><span class="std std-numref">Listing 32.2</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="fig-ldap">
-<div class="code-block-caption"><span class="caption-number">Listing 37.2 </span><span class="caption-text">Typical CCIS LDAP entry</span><a class="headerlink" href="#fig-ldap" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 32.2 </span><span class="caption-text">Typical CCIS LDAP entry</span><a class="headerlink" href="#fig-ldap" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># pjd, people, ccs.neu.edu</span>
           <span class="n">dn</span><span class="p">:</span> <span class="n">uid</span><span class="o">=</span><span class="n">pjd</span><span class="p">,</span><span class="n">ou</span><span class="o">=</span><span class="n">people</span><span class="p">,</span><span class="n">dc</span><span class="o">=</span><span class="n">ccs</span><span class="p">,</span><span class="n">dc</span><span class="o">=</span><span class="n">neu</span><span class="p">,</span><span class="n">dc</span><span class="o">=</span><span class="n">edu</span>
           <span class="n">displayName</span><span class="p">:</span> <span class="n">Peter</span> <span class="n">J</span><span class="o">.</span> <span class="n">Desnoyers</span>
@@ -1191,14 +1215,14 @@ without having to request additional passwords from the user.</p>
 </section>
 </section>
 <section id="unix-access-control">
-<h2><span class="section-number">37.2. </span>Unix Access Control<a class="headerlink" href="#unix-access-control" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">32.2. </span>Unix Access Control<a class="headerlink" href="#unix-access-control" title="Permalink to this headline">#</a></h2>
 <p>Basic security in an operating system is performed by access control:
 the process of determining whether each OS action will be allowed, based
 on the actor (determined by information like a user ID), the specific
 object (e.g. a file), and object permissions. The desired operation can
 be described by an access control matrix, such as this one or four users, 3 files and 1 directory:</p>
 <table class="table" id="fig-sec-simple">
-<caption><span class="caption-number">Table 37.1 </span><span class="caption-text">Simple access matrix (again)</span><a class="headerlink" href="#fig-sec-simple" title="Permalink to this table">#</a></caption>
+<caption><span class="caption-number">Table 32.1 </span><span class="caption-text">Simple access matrix (again)</span><a class="headerlink" href="#fig-sec-simple" title="Permalink to this table">#</a></caption>
 <colgroup>
 <col style="width: 20%" />
 <col style="width: 20%" />
@@ -1259,7 +1283,7 @@ modify are encoded as read, execute, and write permissions)</p>
 <p>Users may belong to more than one group: as an example, user pjd belongs
 to groups faculty, cs5600 and sssl, as shown here by the id command:</p>
 <div class="literal-block-wrapper docutils container" id="id19">
-<div class="code-block-caption"><span class="caption-number">Listing 37.3 </span><span class="caption-text">Id command output</span><a class="headerlink" href="#id19" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 32.3 </span><span class="caption-text">Id command output</span><a class="headerlink" href="#id19" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pjd@login:~$ id pjd
 uid=11415(pjd) gid=65100(faculty) groups=1254(cs5600),1294(sssl),65100(faculty)
 </pre></div>
@@ -1268,18 +1292,18 @@ uid=11415(pjd) gid=65100(faculty) groups=1254(cs5600),1294(sssl),65100(faculty)
 <p>Files and directories have an owner and a group, and three sets of
 permissions: one for the file owner, one for members of its group, and
 one for world, with the permissions typically encoded in a single
-string, as shown in <a class="reference internal" href="#fig-sec-lsdashl"><span class="std std-numref">Fig. 37.1</span></a>.</p>
+string, as shown in <a class="reference internal" href="#fig-sec-lsdashl"><span class="std std-numref">Fig. 32.1</span></a>.</p>
 <figure class="align-default" id="fig-sec-lsdashl">
 <a class="reference internal image-reference" href="../_images/security-fig1.png"><img alt="../_images/security-fig1.png" src="../_images/security-fig1.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 37.1 </span><span class="caption-text">Interpreting file ownership and permissions</span><a class="headerlink" href="#fig-sec-lsdashl" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 32.1 </span><span class="caption-text">Interpreting file ownership and permissions</span><a class="headerlink" href="#fig-sec-lsdashl" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Finally, (a) only the owner of a file may change its permissions, and
 (b) each user may belong to some number of groups. (typically up to 32)</p>
 <p>Permissions are interpreted as follows:</p>
 <div class="literal-block-wrapper docutils container" id="id20">
-<div class="code-block-caption"><span class="caption-number">Listing 37.4 </span><span class="caption-text">File access algorithm</span><a class="headerlink" href="#id20" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 32.4 </span><span class="caption-text">File access algorithm</span><a class="headerlink" href="#id20" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">check</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
       <span class="k">if</span> <span class="n">process</span><span class="o">.</span><span class="n">uid</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">uid</span><span class="p">:</span>
          <span class="k">if</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">file</span><span class="o">.</span><span class="n">perm</span><span class="o">.</span><span class="n">owner</span>
@@ -1297,7 +1321,7 @@ string, as shown in <a class="reference internal" href="#fig-sec-lsdashl"><span 
 </div>
 <p>As an example, the access control matrix from earlier:</p>
 <table class="table" id="fig-sec-simple2">
-<caption><span class="caption-number">Table 37.2 </span><span class="caption-text">Simple access matrix (again)</span><a class="headerlink" href="#fig-sec-simple2" title="Permalink to this table">#</a></caption>
+<caption><span class="caption-number">Table 32.2 </span><span class="caption-text">Simple access matrix (again)</span><a class="headerlink" href="#fig-sec-simple2" title="Permalink to this table">#</a></caption>
 <colgroup>
 <col style="width: 20%" />
 <col style="width: 20%" />
@@ -1354,7 +1378,7 @@ string, as shown in <a class="reference internal" href="#fig-sec-lsdashl"><span 
 </pre></div>
 </div>
 <section id="limitations-of-unix-permissions">
-<h3><span class="section-number">37.2.1. </span>Limitations of Unix permissions<a class="headerlink" href="#limitations-of-unix-permissions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">32.2.1. </span>Limitations of Unix permissions<a class="headerlink" href="#limitations-of-unix-permissions" title="Permalink to this headline">#</a></h3>
 <p>However if we make minor changes to this access control list:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>       file1   file2   dir1   file3
 </pre></div>
@@ -1377,7 +1401,7 @@ Unix permissions for a single file can only hold 3 combinations (owner,
 group, and world).</p>
 </section>
 <section id="access-control-lists">
-<h3><span class="section-number">37.2.2. </span>Access Control Lists<a class="headerlink" href="#access-control-lists" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">32.2.2. </span>Access Control Lists<a class="headerlink" href="#access-control-lists" title="Permalink to this headline">#</a></h3>
 <p>Access Control Lists (ACLs) are explicit rules granting or denying
 access to users, and are more powerful than simple permissions. The idea
 is straightforward: an ACL is a list of rules, where each rule specifies
@@ -1400,7 +1424,7 @@ permissions:</p>
 </div>
 </section>
 <section id="access-control-list-examples">
-<h3><span class="section-number">37.2.3. </span>Access Control List Examples<a class="headerlink" href="#access-control-list-examples" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">32.2.3. </span>Access Control List Examples<a class="headerlink" href="#access-control-list-examples" title="Permalink to this headline">#</a></h3>
 <p>This example uses OSX access control lists; however, Linux and Windows
 have similar mechanisms. We start with three user IDs: <code class="docutils literal notranslate"><span class="pre">pjd</span></code>, <code class="docutils literal notranslate"><span class="pre">guest</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">joe</span></code>.</p>
@@ -1443,7 +1467,7 @@ cat: file.2: Permission denied
 </div>
 </section>
 <section id="other-privileged-operations">
-<h3><span class="section-number">37.2.4. </span>Other Privileged Operations<a class="headerlink" href="#other-privileged-operations" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">32.2.4. </span>Other Privileged Operations<a class="headerlink" href="#other-privileged-operations" title="Permalink to this headline">#</a></h3>
 <p>Most Linux security checking is handled by a combination of the
 following rules:</p>
 <ul class="simple">
@@ -1488,7 +1512,7 @@ as user ID root.</p>
 </section>
 </section>
 <section id="selinux">
-<h2><span class="section-number">37.3. </span>SELinux<a class="headerlink" href="#selinux" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">32.3. </span>SELinux<a class="headerlink" href="#selinux" title="Permalink to this headline">#</a></h2>
 <p>An alternate security mechanism available in Linux is called SELinux, or
 Security-Enhanced Linux. This is an enhancement to the normal Linux
 security model, which allows for exceptions to normal Linux rules. As an
@@ -1530,7 +1554,7 @@ rules; if you are interested in finding out more there are a number of
 tutorials on the Internet, including
 <a class="reference external" href="http://www.centos.org/docs/5/html/Deployment_Guide-en-US/ch-selinux.html">http://www.centos.org/docs/5/html/Deployment_Guide-en-US/ch-selinux.html</a></p>
 <section id="control-of-information-flow">
-<h3><span class="section-number">37.3.1. </span>Control of Information Flow<a class="headerlink" href="#control-of-information-flow" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">32.3.1. </span>Control of Information Flow<a class="headerlink" href="#control-of-information-flow" title="Permalink to this headline">#</a></h3>
 <p>File access control is (somewhat) straightforward for an operating
 system to provide, as it represents a simple decision. If access is
 allowed, then the requested operation proceeds without interference; if
@@ -1567,19 +1591,19 @@ information each user may access; thus an instructor may see all grades,
 while a student may only see aggregate information (e.g. averages) about
 other students’ grades.</p>
 <section id="review-questions">
-<h4><span class="section-number">37.3.1.1. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">32.3.1.1. </span>Review Questions<a class="headerlink" href="#review-questions" title="Permalink to this headline">#</a></h4>
 </section>
 </section>
 </section>
 <section id="attacks-stack-overflow">
-<h2><span class="section-number">37.4. </span>Attacks — Stack Overflow<a class="headerlink" href="#attacks-stack-overflow" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">32.4. </span>Attacks — Stack Overflow<a class="headerlink" href="#attacks-stack-overflow" title="Permalink to this headline">#</a></h2>
 <figure class="align-default" id="fig-sec-worm">
 <a class="reference internal image-reference" href="../_images/security-fig2.png"><img alt="../_images/security-fig2.png" src="../_images/security-fig2.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 37.2 </span><span class="caption-text">Stack frame and buffer overflow</span><a class="headerlink" href="#fig-sec-worm" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 32.2 </span><span class="caption-text">Stack frame and buffer overflow</span><a class="headerlink" href="#fig-sec-worm" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="#fig-sec-worm"><span class="std std-numref">Fig. 37.2</span></a> you can see a fragment of code that was
+<p>In <a class="reference internal" href="#fig-sec-worm"><span class="std std-numref">Fig. 32.2</span></a> you can see a fragment of code that was
 attacked (among others) by the first piece of Internet malware, the 1988
 Morris worm. The target program (<code class="docutils literal notranslate"><span class="pre">fingerd</span></code>) was run with a network
 connection for its standard input, and used the <code class="docutils literal notranslate"><span class="pre">gets</span></code> function to read
@@ -1609,7 +1633,7 @@ as more sophisticated attacks have been developed to counter these
 techniques, as long as there is an initial application bug to give
 access to the stack. <a class="footnote-reference brackets" href="#id17" id="id8">8</a></p>
 <section id="security-sql-injection">
-<h3><span class="section-number">37.4.1. </span>Security - SQL Injection<a class="headerlink" href="#security-sql-injection" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">32.4.1. </span>Security - SQL Injection<a class="headerlink" href="#security-sql-injection" title="Permalink to this headline">#</a></h3>
 <p><img alt="Image by Randall Munroe, from Xkcd: http://xkcd.com/327/, licensedunder creative commons non-commercial license 2.5" src="../_images/security-xkcd.png" />{#fig:security:xkcd width=”80%”}</p>
 <p>What happened to Bobby’s school’s student database? Let’s assume they
 used code like this Visual Basic fragment, adapted from an example on an
@@ -1633,7 +1657,7 @@ to the Students table, the DROP TABLE command will be executed, removing
 the entire table.</p>
 </section>
 <section id="ssl-and-connection-security">
-<h3><span class="section-number">37.4.2. </span>SSL and Connection Security<a class="headerlink" href="#ssl-and-connection-security" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">32.4.2. </span>SSL and Connection Security<a class="headerlink" href="#ssl-and-connection-security" title="Permalink to this headline">#</a></h3>
 <p>Secure Sockets Layer (SSL) allows two systems to establish a connection
 that cannot be intercepted, even by an adversary who observes every
 packet sent by both systems. Most importantly, it does not require any
@@ -1751,13 +1775,13 @@ communicate the private key.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">36. </span>Virtualization</p>
+            <p class="prev-next-title"><span class="section-number">31. </span>Virtualization</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../misc/howto.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">38. </span>How to read this book</p>
+        <p class="prev-next-title"><span class="section-number">33. </span>How to read this book</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

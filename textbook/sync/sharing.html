@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>25. Cooperating Processes and Inter-process Communication &#8212; Introduction to Operating Systems</title>
+    <title>25.1. Cooperating Processes and Inter-process Communication &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="26. The Critical Section Problem" href="criticalsection.html" />
-    <link rel="prev" title="24. Introduction" href="sync.html" />
+    <link rel="next" title="25.2. The Critical Section Problem" href="criticalsection.html" />
+    <link rel="prev" title="25. Basic Synchronization" href="basic.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -418,49 +418,73 @@ const thebe_selector_output = ".output, .cell_output"
    24. Introduction
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   25. Cooperating Processes and Inter-process Communication
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="basic.html">
+   25. Basic Synchronization
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="criticalsection.html">
-   26. The Critical Section Problem
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="locks.html">
-   27. Implementing Locks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ordering.html">
-   28. Ordering Thread Events
-  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     25.1. Cooperating Processes and Inter-process Communication
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="criticalsection.html">
+     25.2. The Critical Section Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="locks.html">
+     25.3. Implementing Locks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ordering.html">
+     25.4. Ordering Thread Events
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concurrency_bugs.html">
-   29. Common Concurrency Bugs
+   26. Common Concurrency Bugs
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="readmostly.html">
-   30. Read-Dominated Workloads
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="advanced.html">
+   27. Advanced Synchronization
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="hardware_challenges.html">
-   31. Challenges of Modern Hardware
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="linux_locking.html">
-   32. Locking in the Linux Kernel
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="readmostly.html">
+     27.1. Read-Dominated Workloads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hardware_challenges.html">
+     27.2. Challenges of Modern Hardware
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linux_locking.html">
+     27.3. Locking in the Linux Kernel
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="review.html">
-   33. Review
+   28. Review
   </a>
  </li>
 </ul>
@@ -472,22 +496,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   34. Input and Output
+   29. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   35. More on Disks
+   30. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   36. Virtualization
+   31. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   37. Security
+   32. Security
   </a>
  </li>
 </ul>
@@ -499,49 +523,49 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   38. How to read this book
+   33. How to read this book
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../contributing/intro.html">
-   39. Contributing
+   34. Contributing
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/examples.html">
-     39.1. Examples
+     34.1. Examples
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/credit.html">
-     39.2. Contributors
+     34.2. Contributors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/Contributing.html">
-     39.3. Contributing
+     34.3. Contributing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/resources.html">
-     39.6. Resources to look at
+     34.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/fix.html">
-     39.7. Out of date
+     34.7. Out of date
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   40. Bibliography
+   35. Bibliography
   </a>
  </li>
 </ul>
@@ -769,22 +793,22 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#shared-memory">
-   25.1. Shared Memory
+   25.1.1. Shared Memory
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#multi-threaded-processes">
-   25.2. Multi-threaded Processes
+   25.1.2. Multi-threaded Processes
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#issues-with-concurrent-execution">
-   25.3. Issues with Concurrent Execution
+   25.1.3. Issues with Concurrent Execution
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#race-conditions">
-   25.4. Race Conditions
+   25.1.4. Race Conditions
   </a>
  </li>
 </ul>
@@ -808,22 +832,22 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#shared-memory">
-   25.1. Shared Memory
+   25.1.1. Shared Memory
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#multi-threaded-processes">
-   25.2. Multi-threaded Processes
+   25.1.2. Multi-threaded Processes
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#issues-with-concurrent-execution">
-   25.3. Issues with Concurrent Execution
+   25.1.3. Issues with Concurrent Execution
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#race-conditions">
-   25.4. Race Conditions
+   25.1.4. Race Conditions
   </a>
  </li>
 </ul>
@@ -839,7 +863,7 @@ title="Print to PDF"
   <div class="cell tag_remove-input docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="cooperating-processes-and-inter-process-communication">
-<span id="cont-sync-sharing"></span><h1><span class="section-number">25. </span>Cooperating Processes and Inter-process Communication<a class="headerlink" href="#cooperating-processes-and-inter-process-communication" title="Permalink to this headline">#</a></h1>
+<span id="cont-sync-sharing"></span><h1><span class="section-number">25.1. </span>Cooperating Processes and Inter-process Communication<a class="headerlink" href="#cooperating-processes-and-inter-process-communication" title="Permalink to this headline">#</a></h1>
 <p>The process abstraction is designed to give the illusion that a program executes on its own
 private, isolated (virtual) machine. The OS scheduling mechanism hides the fact that the
 physical CPU is, in fact, shared by multiple processes. From the perspective of any given
@@ -860,7 +884,7 @@ cooperate if they are completely isolated from each other? The short answer is, 
 </dd>
 </dl>
 <section id="shared-memory">
-<h2><span class="section-number">25.1. </span>Shared Memory<a class="headerlink" href="#shared-memory" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">25.1.1. </span>Shared Memory<a class="headerlink" href="#shared-memory" title="Permalink to this headline">#</a></h2>
 <p>To support more efficient, fine-grained inter-process communication, the operating system also provides system calls to let processes explicitly share a portion of their virtual address space. This allows processes to exchange information simply by reading or writing variables that are allocated in the shared part of the address space. There are actually two ways to do this on Unix systems. The first comes from UNIX System V:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">segment_id</span> <span class="pre">=</span> <span class="pre">shmget(key,</span> <span class="pre">size,</span> <span class="pre">shmflg)</span></code> : return the identifier of the System V shared memory segment associated with the value of the argument <code class="docutils literal notranslate"><span class="pre">key</span></code>; may be used either to obtain the identifier of a previously created shared memory segment (when <code class="docutils literal notranslate"><span class="pre">shmflg</span></code> is zero and <code class="docutils literal notranslate"><span class="pre">key</span></code> does not have the value <code class="docutils literal notranslate"><span class="pre">IPC_PRIVATE</span></code>), or to create a new shared memory segment.</p></li>
@@ -875,12 +899,12 @@ cooperate if they are completely isolated from each other? The short answer is, 
 <p>The shared memory segments are implemented in the operating system using the virtual memory mechanisms. Each process that shares the memory segment has its page tables pointing to the same underlying physical pages, so that any load or store access to a virtual address in the shared segment will be translated to the same physical location in the machine memory.</p>
 </section>
 <section id="multi-threaded-processes">
-<span id="cont-sync-sharing-shared-mem"></span><h2><span class="section-number">25.2. </span>Multi-threaded Processes<a class="headerlink" href="#multi-threaded-processes" title="Permalink to this headline">#</a></h2>
+<span id="cont-sync-sharing-shared-mem"></span><h2><span class="section-number">25.1.2. </span>Multi-threaded Processes<a class="headerlink" href="#multi-threaded-processes" title="Permalink to this headline">#</a></h2>
 <p>Recall from <a class="reference internal" href="../scheduling/threads.html#cont-vp-threads"><span class="std std-numref">Section 9</span></a> that a process can have multiple <em>threads</em>, and that all threads in a process share the same virtual address space. This means that multi-threaded processes do not need to do any extra work to communicate using shared memory. The operating system itself is multi-threaded: every user-level process has at least one thread in the kernel, and other threads carry out asynchronous operating system activities, such as writing dirty file system blocks back to the disk. All of these kernel threads share the same operating system code and data structures. We will see later how user-level communication through pipes is implemented in the operating system by threads writing to, and reading from, a shared buffer of memory. In our discussion of concurrency and synchronization, we will use examples in multi-threaded user-level processes, since they can be presented as simple, stand-alone programs. Keep in mind that everything we say about multi-threaded processes also applies to the implementation of the operating system.</p>
 <p>Since each thread is an independent execution entity, they need to have their own execution state. This includes a per-thread execution stack to hold local variables. In contrast, global variables and heap-allocated variables are shared by all threads in a process. Note that although each thread has its own execution stack, these are still all part of the same virtual address space, and threads in the same process are not protected from each other by the operating system. Thus, it is possible for a buggy thread to accidentally scribble on another thread’s stack space, leading to bizarre behavior.</p>
 </section>
 <section id="issues-with-concurrent-execution">
-<span id="cont-sync-sharing-issues"></span><h2><span class="section-number">25.3. </span>Issues with Concurrent Execution<a class="headerlink" href="#issues-with-concurrent-execution" title="Permalink to this headline">#</a></h2>
+<span id="cont-sync-sharing-issues"></span><h2><span class="section-number">25.1.3. </span>Issues with Concurrent Execution<a class="headerlink" href="#issues-with-concurrent-execution" title="Permalink to this headline">#</a></h2>
 <p>Regardless of whether we are using multiple processes, or a single multi-threaded process, whether we are implementing user-level programs or the operating system, we need a way to coordinate multiple concurrent activities.</p>
 <aside class="sidebar">
 <p><em>Concurrency</em> in computer systems means that the execution of multiple (i.e., two or more) tasks <em>overlaps in time</em>. The context switch mechanism gives us concurrent execution of multiple processes, even on a single physical CPU. <em>Parallelism</em> means that multiple tasks are executing <em>at the same time</em>. Parallelism requires multiple physical CPUs.</p>
@@ -1111,7 +1135,7 @@ $150 to the account we have a final balance of $50. Context switches are unpredi
 </div>
 </section>
 <section id="race-conditions">
-<h2><span class="section-number">25.4. </span>Race Conditions<a class="headerlink" href="#race-conditions" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">25.1.4. </span>Race Conditions<a class="headerlink" href="#race-conditions" title="Permalink to this headline">#</a></h2>
 <p>The unpredictable and undesirable outcomes that we have seen in the previous examples arise because of <strong>race conditions</strong>.  A race condition occurs whenever two or more threads access a shared resource (like the terminal device, or the variable that stores the bank account balance), and the outcome depends on the order in which the accesses occur. Clearly, this implies that at least one of the accesses must be a write operation, since the outcome of concurrent read operations is not dependent on the order they occur. Logically, the threads are racing with each other to use the resource, and we don’t know which one will come first. Sometimes, the result of the race will be the one we want, and sometimes things can go horribly wrong. Race condition bugs are extremely tricky to diagnose and fix, since the program might produce the correct results millions of times before failing.</p>
 <p>Race conditions happen even on a single CPU because asynchronous events occur arbitrarily during thread execution. For example, the network controller raises an interrupt upon arrival of a network packet, which causes the current thread to be suspended while the interrupt handler runs. Or a timer interrupt occurs and the OS scheduler switches the CPU from the current thread to another thread. With multiple CPUs, threads running in parallel on different CPUs can read and write the same memory location. Multi-threaded programs must be designed so that they can execute correctly in the face of such asynchrony.</p>
 <p>In our simple example programs, we added extra code to make it more likely for the negative consequences of race conditions to manifest. Without those added operations, the code executed by each thread is short enough to complete in a single time slice, and the threads are less likely to interfere with each other. However, the race condition is still there, lurking in our code.</p>
@@ -1258,17 +1282,17 @@ $150 to the account we have a final balance of $50. Context switches are unpredi
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="sync.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="basic.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">24. </span>Introduction</p>
+            <p class="prev-next-title"><span class="section-number">25. </span>Basic Synchronization</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="criticalsection.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">26. </span>The Critical Section Problem</p>
+        <p class="prev-next-title"><span class="section-number">25.2. </span>The Critical Section Problem</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

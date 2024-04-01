@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>39.2. Contributors &#8212; Introduction to Operating Systems</title>
+    <title>34.2. Contributors &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="39.3. Contributing" href="Contributing.html" />
-    <link rel="prev" title="39.1. Examples" href="examples.html" />
+    <link rel="next" title="34.3. Contributing" href="Contributing.html" />
+    <link rel="prev" title="34.1. Examples" href="examples.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -418,49 +418,73 @@ const thebe_selector_output = ".output, .cell_output"
    24. Introduction
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/sharing.html">
-   25. Cooperating Processes and Inter-process Communication
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sync/basic.html">
+   25. Basic Synchronization
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/criticalsection.html">
-   26. The Critical Section Problem
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/locks.html">
-   27. Implementing Locks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/ordering.html">
-   28. Ordering Thread Events
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/sharing.html">
+     25.1. Cooperating Processes and Inter-process Communication
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/criticalsection.html">
+     25.2. The Critical Section Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/locks.html">
+     25.3. Implementing Locks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/ordering.html">
+     25.4. Ordering Thread Events
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   29. Common Concurrency Bugs
+   26. Common Concurrency Bugs
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/readmostly.html">
-   30. Read-Dominated Workloads
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sync/advanced.html">
+   27. Advanced Synchronization
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/hardware_challenges.html">
-   31. Challenges of Modern Hardware
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/linux_locking.html">
-   32. Locking in the Linux Kernel
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/readmostly.html">
+     27.1. Read-Dominated Workloads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/hardware_challenges.html">
+     27.2. Challenges of Modern Hardware
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/linux_locking.html">
+     27.3. Locking in the Linux Kernel
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   33. Review
+   28. Review
   </a>
  </li>
 </ul>
@@ -472,22 +496,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   34. Input and Output
+   29. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   35. More on Disks
+   30. More on Disks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../virt/virt.html">
-   36. Virtualization
+   31. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   37. Security
+   32. Security
   </a>
  </li>
 </ul>
@@ -499,49 +523,49 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   38. How to read this book
+   33. How to read this book
   </a>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="intro.html">
-   39. Contributing
+   34. Contributing
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="examples.html">
-     39.1. Examples
+     34.1. Examples
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     39.2. Contributors
+     34.2. Contributors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Contributing.html">
-     39.3. Contributing
+     34.3. Contributing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="resources.html">
-     39.6. Resources to look at
+     34.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="fix.html">
-     39.7. Out of date
+     34.7. Out of date
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   40. Bibliography
+   35. Bibliography
   </a>
  </li>
 </ul>
@@ -770,7 +794,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="contributors">
-<span id="cont-contr-contributors"></span><h1><span class="section-number">39.2. </span>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">#</a></h1>
+<span id="cont-contr-contributors"></span><h1><span class="section-number">34.2. </span>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">#</a></h1>
 <p>We hope that many will contribute to this over time, and the github <a class="reference external" href="https://github.com/OpenOSOrg/openos/graphs/contributors">community</a> page should show recent ones. A major way to contribute is to submit issues (<a class="reference internal" href="../misc/howto.html#misc-howto-issue"><span class="std std-ref">see here</span></a>) when you see a problem. Major contributors and editors for parts of the book are:</p>
 <ul class="simple">
 <li><p>Orran Krieger: Overall Editor of this version</p></li>
@@ -814,13 +838,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">39.1. </span>Examples</p>
+            <p class="prev-next-title"><span class="section-number">34.1. </span>Examples</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Contributing.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">39.3. </span>Contributing</p>
+        <p class="prev-next-title"><span class="section-number">34.3. </span>Contributing</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

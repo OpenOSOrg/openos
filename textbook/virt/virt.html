@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>36. Virtualization &#8212; Introduction to Operating Systems</title>
+    <title>31. Virtualization &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="37. Security" href="../sec/sec.html" />
-    <link rel="prev" title="35. More on Disks" href="../devices/disk2.html" />
+    <link rel="next" title="32. Security" href="../sec/sec.html" />
+    <link rel="prev" title="30. More on Disks" href="../devices/disk2.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -420,49 +420,73 @@ const thebe_selector_output = ".output, .cell_output"
    24. Introduction
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/sharing.html">
-   25. Cooperating Processes and Inter-process Communication
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sync/basic.html">
+   25. Basic Synchronization
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/criticalsection.html">
-   26. The Critical Section Problem
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/locks.html">
-   27. Implementing Locks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/ordering.html">
-   28. Ordering Thread Events
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/sharing.html">
+     25.1. Cooperating Processes and Inter-process Communication
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/criticalsection.html">
+     25.2. The Critical Section Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/locks.html">
+     25.3. Implementing Locks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/ordering.html">
+     25.4. Ordering Thread Events
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/concurrency_bugs.html">
-   29. Common Concurrency Bugs
+   26. Common Concurrency Bugs
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/readmostly.html">
-   30. Read-Dominated Workloads
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sync/advanced.html">
+   27. Advanced Synchronization
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/hardware_challenges.html">
-   31. Challenges of Modern Hardware
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../sync/linux_locking.html">
-   32. Locking in the Linux Kernel
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/readmostly.html">
+     27.1. Read-Dominated Workloads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/hardware_challenges.html">
+     27.2. Challenges of Modern Hardware
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sync/linux_locking.html">
+     27.3. Locking in the Linux Kernel
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sync/review.html">
-   33. Review
+   28. Review
   </a>
  </li>
 </ul>
@@ -474,22 +498,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/devices.html">
-   34. Input and Output
+   29. Input and Output
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../devices/disk2.html">
-   35. More on Disks
+   30. More on Disks
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   36. Virtualization
+   31. Virtualization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../sec/sec.html">
-   37. Security
+   32. Security
   </a>
  </li>
 </ul>
@@ -501,49 +525,49 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/howto.html">
-   38. How to read this book
+   33. How to read this book
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../contributing/intro.html">
-   39. Contributing
+   34. Contributing
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/examples.html">
-     39.1. Examples
+     34.1. Examples
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/credit.html">
-     39.2. Contributors
+     34.2. Contributors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/Contributing.html">
-     39.3. Contributing
+     34.3. Contributing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/resources.html">
-     39.6. Resources to look at
+     34.6. Resources to look at
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../contributing/fix.html">
-     39.7. Out of date
+     34.7. Out of date
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../misc/bib.html">
-   40. Bibliography
+   35. Bibliography
   </a>
  </li>
 </ul>
@@ -771,54 +795,54 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#implementing-hardware-virtualization">
-   36.1. Implementing Hardware Virtualization
+   31.1. Implementing Hardware Virtualization
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#software-emulation">
-     36.1.1. Software emulation
+     31.1.1. Software emulation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#emulation-plus-binary-translation">
-     36.1.2. Emulation plus binary translation
+     31.1.2. Emulation plus binary translation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#trap-and-emulate">
-     36.1.3. Trap and Emulate
+     31.1.3. Trap and Emulate
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#virtualized-memory">
-   36.2. Virtualized memory
+   31.2. Virtualized memory
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#virtualized-i-o-devices">
-   36.3. Virtualized I/O Devices
+   31.3. Virtualized I/O Devices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hosted-and-bare-metal-hypervisors">
-   36.4. Hosted and “bare-metal” hypervisors
+   31.4. Hosted and “bare-metal” hypervisors
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#non-virtualizable-cpus">
-   36.5. Non-Virtualizable CPUs
+   31.5. Non-Virtualizable CPUs
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paravirtualized-i-o-devices">
-   36.6. Paravirtualized I/O Devices
+   31.6. Paravirtualized I/O Devices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linux-containers-and-docker">
-   36.7. Linux Containers and Docker
+   31.7. Linux Containers and Docker
   </a>
  </li>
 </ul>
@@ -842,54 +866,54 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#implementing-hardware-virtualization">
-   36.1. Implementing Hardware Virtualization
+   31.1. Implementing Hardware Virtualization
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#software-emulation">
-     36.1.1. Software emulation
+     31.1.1. Software emulation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#emulation-plus-binary-translation">
-     36.1.2. Emulation plus binary translation
+     31.1.2. Emulation plus binary translation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#trap-and-emulate">
-     36.1.3. Trap and Emulate
+     31.1.3. Trap and Emulate
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#virtualized-memory">
-   36.2. Virtualized memory
+   31.2. Virtualized memory
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#virtualized-i-o-devices">
-   36.3. Virtualized I/O Devices
+   31.3. Virtualized I/O Devices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hosted-and-bare-metal-hypervisors">
-   36.4. Hosted and “bare-metal” hypervisors
+   31.4. Hosted and “bare-metal” hypervisors
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#non-virtualizable-cpus">
-   36.5. Non-Virtualizable CPUs
+   31.5. Non-Virtualizable CPUs
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#paravirtualized-i-o-devices">
-   36.6. Paravirtualized I/O Devices
+   31.6. Paravirtualized I/O Devices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linux-containers-and-docker">
-   36.7. Linux Containers and Docker
+   31.7. Linux Containers and Docker
   </a>
  </li>
 </ul>
@@ -903,7 +927,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="virtualization">
-<span id="cont-virt"></span><h1><span class="section-number">36. </span>Virtualization<a class="headerlink" href="#virtualization" title="Permalink to this headline">#</a></h1>
+<span id="cont-virt"></span><h1><span class="section-number">31. </span>Virtualization<a class="headerlink" href="#virtualization" title="Permalink to this headline">#</a></h1>
 <p>Topics covered in this chapter include:</p>
 <ul class="simple">
 <li><p>Applications of virtualization, including server consolidation</p></li>
@@ -930,12 +954,12 @@ and must take place over (possibly emulated) networks.</p>
 runs in unprivileged mode, performing I/O and memory management
 operations by issuing system calls to the OS kernel, an operating system
 runs in supervisor mode and uses special instructions and other hardware
-mechanisms to perform its operations. In a virtual machine, as shown in <a class="reference internal" href="#fig-vma-0"><span class="std std-numref">Fig. 36.1</span></a>, these mechanisms are performed by the
+mechanisms to perform its operations. In a virtual machine, as shown in <a class="reference internal" href="#fig-vma-0"><span class="std std-numref">Fig. 31.1</span></a>, these mechanisms are performed by the
 <em>hypervisor</em> <a class="footnote-reference brackets" href="#id9" id="id1">1</a> which sits “underneath” the operating system.</p>
 <figure class="align-default" id="fig-vma-0">
 <a class="reference internal image-reference" href="../_images/virt-mach-architecture.png"><img alt="../_images/virt-mach-architecture.png" src="../_images/virt-mach-architecture.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 36.1 </span><span class="caption-text">Virtual machine architecture</span><a class="headerlink" href="#fig-vma-0" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 31.1 </span><span class="caption-text">Virtual machine architecture</span><a class="headerlink" href="#fig-vma-0" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Running multiple operating system instances on the same physical
@@ -993,7 +1017,7 @@ the security-critical code which validates user inputs) means fewer bugs
 and thus fewer opportunities for security exploits; experience to date
 seems to support this theory.</p>
 <section id="implementing-hardware-virtualization">
-<h2><span class="section-number">36.1. </span>Implementing Hardware Virtualization<a class="headerlink" href="#implementing-hardware-virtualization" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">31.1. </span>Implementing Hardware Virtualization<a class="headerlink" href="#implementing-hardware-virtualization" title="Permalink to this headline">#</a></h2>
 <p>If you are used to running VirtualBox or VMware on your laptop, it may
 seem like it’s just another program, maybe using more memory and CPU
 than most. But it isn’t. To understand why, consider trying to run Linux
@@ -1039,7 +1063,7 @@ both complexity and performance:</p>
 <li><p>Paravirtualization.</p></li>
 </ul>
 <section id="software-emulation">
-<h3><span class="section-number">36.1.1. </span>Software emulation<a class="headerlink" href="#software-emulation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">31.1.1. </span>Software emulation<a class="headerlink" href="#software-emulation" title="Permalink to this headline">#</a></h3>
 <p>The most straightforward way to run a virtual machine is to emulate it
 entirely in software: in other words, to write a program that behaves
 exactly like the CPU, memory, and I/O devices of the real machine. The
@@ -1087,7 +1111,7 @@ slow. It can be hundreds of times slower than native execution, making
 it unsuited for all but a few applications.</p>
 </section>
 <section id="emulation-plus-binary-translation">
-<h3><span class="section-number">36.1.2. </span>Emulation plus binary translation<a class="headerlink" href="#emulation-plus-binary-translation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">31.1.2. </span>Emulation plus binary translation<a class="headerlink" href="#emulation-plus-binary-translation" title="Permalink to this headline">#</a></h3>
 <aside class="sidebar">
 <p>Other software systems which use binary translation techniques include:</p>
 <p><strong>JVMs:</strong> Almost all Java implementations use JIT compiling for
@@ -1140,7 +1164,7 @@ memory accesses can be reduced to a few instructions which check that an
 access falls within this typical range.</p>
 </section>
 <section id="trap-and-emulate">
-<h3><span class="section-number">36.1.3. </span>Trap and Emulate<a class="headerlink" href="#trap-and-emulate" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">31.1.3. </span>Trap and Emulate<a class="headerlink" href="#trap-and-emulate" title="Permalink to this headline">#</a></h3>
 <p>Even with binary translation, software emulation is still slow—even
 the best binary translation systems incur a slowdown of 3x to 10x
 compared to running directly on the same hardware. This is much better
@@ -1178,10 +1202,10 @@ itself.</p>
 <figure class="align-default" id="fig-vma-3">
 <a class="reference internal image-reference" href="../_images/virtual-mach-3.png"><img alt="../_images/virtual-mach-3.png" src="../_images/virtual-mach-3.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 36.2 </span><span class="caption-text">Trap-and-emulate virtualization</span><a class="headerlink" href="#fig-vma-3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 31.2 </span><span class="caption-text">Trap-and-emulate virtualization</span><a class="headerlink" href="#fig-vma-3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p><a class="reference internal" href="#fig-vma-3"><span class="std std-numref">Fig. 36.2</span></a> shows a representation of this trap-and-emulate
+<p><a class="reference internal" href="#fig-vma-3"><span class="std std-numref">Fig. 31.2</span></a> shows a representation of this trap-and-emulate
 process. It allows almost all instructions to run directly, at native
 hardware speed, while the specific instructions which need to be
 executed in privileged mode (a tiny fraction of all instructions) are
@@ -1222,7 +1246,7 @@ exception handler.</p>
 </section>
 </section>
 <section id="virtualized-memory">
-<h2><span class="section-number">36.2. </span>Virtualized memory<a class="headerlink" href="#virtualized-memory" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">31.2. </span>Virtualized memory<a class="headerlink" href="#virtualized-memory" title="Permalink to this headline">#</a></h2>
 <p>In a full software emulation, guest virtual addresses were translated
 into accesses to “fake” physical memory, e.g. the <code class="docutils literal notranslate"><span class="pre">memory[ ]</span></code> array in
 the example code. However, with trap-and-emulate virtualization, guest
@@ -1261,7 +1285,7 @@ the hypervisor page fault handler uses the following logic:</p>
 </div>
 </section>
 <section id="virtualized-i-o-devices">
-<h2><span class="section-number">36.3. </span>Virtualized I/O Devices<a class="headerlink" href="#virtualized-i-o-devices" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">31.3. </span>Virtualized I/O Devices<a class="headerlink" href="#virtualized-i-o-devices" title="Permalink to this headline">#</a></h2>
 <p>Memory-mapped I/O devices are straightforward to emulate in a
 trap-and-emulate system. When the guest OS maps the physical memory
 addresses of emulated device registers, the hypervisor leaves the
@@ -1271,8 +1295,8 @@ handler handles faults on these pages specially, calling code that
 emulates reading from or writing to the emulated I/O device.</p>
 </section>
 <section id="hosted-and-bare-metal-hypervisors">
-<h2><span class="section-number">36.4. </span>Hosted and “bare-metal” hypervisors<a class="headerlink" href="#hosted-and-bare-metal-hypervisors" title="Permalink to this headline">#</a></h2>
-<p>In <a class="reference internal" href="#fig-vma-5"><span class="std std-numref">Fig. 36.3</span></a> you can see how this works together. Exceptions
+<h2><span class="section-number">31.4. </span>Hosted and “bare-metal” hypervisors<a class="headerlink" href="#hosted-and-bare-metal-hypervisors" title="Permalink to this headline">#</a></h2>
+<p>In <a class="reference internal" href="#fig-vma-5"><span class="std std-numref">Fig. 31.3</span></a> you can see how this works together. Exceptions
 from user applications (page faults, system calls, etc.) are handled by
 the hypervisor, which in most cases passes them to the guest OS.
 Interrupts from I/O devices are passed to drivers in the hypervisor,
@@ -1281,7 +1305,7 @@ send an interrupt to a guest OS.</p>
 <figure class="align-default" id="fig-vma-5">
 <a class="reference internal image-reference" href="../_images/virt-mach-fig5.png"><img alt="../_images/virt-mach-fig5.png" src="../_images/virt-mach-fig5.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 36.3 </span><span class="caption-text">Type 1 Hypervisor — no host OS.</span><a class="headerlink" href="#fig-vma-5" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 31.3 </span><span class="caption-text">Type 1 Hypervisor — no host OS.</span><a class="headerlink" href="#fig-vma-5" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>This image describes server systems (like VMware ESX), where the machine
@@ -1304,7 +1328,7 @@ interfaces, rather than requiring its own drivers for any hardware it
 uses <a class="footnote-reference brackets" href="#id14" id="id6">6</a>.</p>
 </section>
 <section id="non-virtualizable-cpus">
-<h2><span class="section-number">36.5. </span>Non-Virtualizable CPUs<a class="headerlink" href="#non-virtualizable-cpus" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">31.5. </span>Non-Virtualizable CPUs<a class="headerlink" href="#non-virtualizable-cpus" title="Permalink to this headline">#</a></h2>
 <p>There is a minor problem with the classic trap-and-emulate
 virtualization mechanism as described above: it doesn’t work. Or rather,
 it doesn’t work on the machines you want it to work on.</p>
@@ -1319,10 +1343,10 @@ an exception.</p>
 <figure class="align-default" id="fig-virtmach-eflags">
 <a class="reference internal image-reference" href="../_images/eflags-register.png"><img alt="../_images/eflags-register.png" src="../_images/eflags-register.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 36.4 </span><span class="caption-text">Sensitive state in the Intel architecture EFLAGS register</span><a class="headerlink" href="#fig-virtmach-eflags" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 31.4 </span><span class="caption-text">Sensitive state in the Intel architecture EFLAGS register</span><a class="headerlink" href="#fig-virtmach-eflags" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As an example, the EFLAGS register as shown in <a class="reference internal" href="#fig-virtmach-eflags"><span class="std std-numref">Fig. 36.4</span></a>
+<p>As an example, the EFLAGS register as shown in <a class="reference internal" href="#fig-virtmach-eflags"><span class="std std-numref">Fig. 31.4</span></a>
 contains some commonly-used flags such
 as carry (CF) and zero (ZF) which it inherited from the 16-bit 8086, as
 well as system flags such as interrupt enable and “IO privilege level”,
@@ -1401,7 +1425,7 @@ performance<a class="footnote-reference brackets" href="#id15" id="id7">7</a>, s
 features.</p>
 </section>
 <section id="paravirtualized-i-o-devices">
-<h2><span class="section-number">36.6. </span>Paravirtualized I/O Devices<a class="headerlink" href="#paravirtualized-i-o-devices" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">31.6. </span>Paravirtualized I/O Devices<a class="headerlink" href="#paravirtualized-i-o-devices" title="Permalink to this headline">#</a></h2>
 <p>It is common for hypervisors to have optional drivers (VMware Tools,
 VirtualBox Guest Additions, etc.) which can be loaded in the guest to
 improve performance. These typically include paravirtualized drivers for
@@ -1416,7 +1440,7 @@ writers don’t typically anticipate the need to support plugging in a
 different type of CPU.</p>
 </section>
 <section id="linux-containers-and-docker">
-<span id="virt-containers"></span><h2><span class="section-number">36.7. </span>Linux Containers and Docker<a class="headerlink" href="#linux-containers-and-docker" title="Permalink to this headline">#</a></h2>
+<span id="virt-containers"></span><h2><span class="section-number">31.7. </span>Linux Containers and Docker<a class="headerlink" href="#linux-containers-and-docker" title="Permalink to this headline">#</a></h2>
 <p>Running different applications within separate virtual machines provides
 a number of benefits when compared to running them all on the same
 unvirtualized operating system:</p>
@@ -1574,13 +1598,13 @@ systems.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">35. </span>More on Disks</p>
+            <p class="prev-next-title"><span class="section-number">30. </span>More on Disks</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../sec/sec.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">37. </span>Security</p>
+        <p class="prev-next-title"><span class="section-number">32. </span>Security</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
