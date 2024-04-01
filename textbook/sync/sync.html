@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>24. Introduction to Concurrency, Synchronization and Deadlock &#8212; Introduction to Operating Systems</title>
+    <title>24. Introduction &#8212; Introduction to Operating Systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -415,7 +415,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   24. Introduction to Concurrency, Synchronization and Deadlock
+   24. Introduction
   </a>
  </li>
  <li class="toctree-l1">
@@ -757,7 +757,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Introduction to Concurrency, Synchronization and Deadlock</h1>
+                <h1>Introduction</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -773,28 +773,9 @@ title="Print to PDF"
 <p class="admonition-title">Warning</p>
 <p>This portion of the book is under construction, not ready to be read</p>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="introduction-to-concurrency-synchronization-and-deadlock">
-<span id="cont-conc-intro"></span><h1><span class="section-number">24. </span>Introduction to Concurrency, Synchronization and Deadlock<a class="headerlink" href="#introduction-to-concurrency-synchronization-and-deadlock" title="Permalink to this headline">#</a></h1>
-<p>One of the key responsibilities of an operating system is that of synchronization—handling concurrent events in a reasonable way, and providing mechanisms for user applications to do so as well.</p>
-<ol class="simple">
-<li><p><a class="reference internal" href="sharing.html#cont-sync-sharing"><span class="std std-ref">interprocess communication and need to share</span></a></p>
-<ul class="simple">
-<li><p>system calls to enable: shared memory region, shmat, (reference back pipes)</p></li>
-<li><p>short statement we have parallel hardware, lots of cores…</p></li>
-<li><p>leads to threads from the perspective of we want work on same data…</p></li>
-</ul>
-</li>
-<li><p>locking</p></li>
-<li><p>deadlock</p></li>
-<li><p>challenge modern hardware</p>
-<ul class="simple">
-<li><p>NUMA, caches…</p></li>
-<li><p>sequential consistency, processor consistency… C++11 memory model (possible part 4)</p></li>
-<li><p>scalability, lock granularity</p></li>
-</ul>
-</li>
-<li><p>locking in linux</p></li>
-</ol>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<span id="cont-conc-intro"></span><h1><span class="section-number">24. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
+<p>One of the key responsibilities of an operating system is that of synchronization—handling concurrent events in a reasonable way, and providing mechanisms for user applications to do so as well.  Synchronization occurs for multi-threaded applications and when processes share memory.  We <a class="reference internal" href="sharing.html#cont-sync-sharing"><span class="std std-ref">first</span></a> discuss mechanisms in unix to share memory and provide simple motivating examples for synchronization.  We then discuss the idea of a <a class="reference internal" href="criticalsection.html#cont-sync-criticalsection"><span class="std std-ref">critical section and locking</span></a>, and <a class="reference internal" href="locks.html#cont-sync-locks"><span class="std std-ref">then</span></a> review different implementations of locks.  The following <a class="reference internal" href="ordering.html#cont-sync-ordering"><span class="std std-ref">chapter</span></a> discusses some of the challenges of ordering thread events and introduces a key OS primitive, semaphores, to enable thread to block rather than spin.  We then discuss common <a class="reference internal" href="concurrency_bugs.html#cont-sync-concurrency-bugs"><span class="std std-ref">concurrency bugs</span></a> and introduce the concept of deadlock, where no progress is made. Many data structures are read-mostly, and the following chapter <a class="reference internal" href="readmostly.html#cont-sync-readmostly"><span class="std std-ref">discusses</span></a> synchronization primitives optimized for accessing these data structures. We then discuss some of the challenges introduced by <a class="reference internal" href="hardware_challenges.html#cont-sync-hardware-challenge"><span class="std std-ref">modern hardware</span></a>, and synchronization in the <a class="reference internal" href="linux_locking.html#cont-sync-linux-locking"><span class="std std-ref">Linux kernel</span></a>.</p>
 </section>
 
     <script type="text/x-thebe-config">
