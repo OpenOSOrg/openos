@@ -11,7 +11,7 @@ all: check
 
 # You might find it useful to write test programs and get them working against the installed pthreads
 # to do so, set TSTMYPTHREADS to a value other than 1
-TSTMYPTHREADS=1
+TSTMYPTHREADS=0
 ifeq ($(TSTMYPTHREADS),1)
   mythread=threads.o
 else
