@@ -23,7 +23,8 @@ main()
   set_reg(&buf, JBL_PC, (unsigned long int)foo);
 
   // what is the problem with this?  Why does this work in this case
-  // 
+  // what will the PC be on the return from foo?
+  // how do you pass arguments
 
   longjmp(buf, 1);
   return 0;
