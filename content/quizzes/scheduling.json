@@ -77,7 +77,7 @@
                 "feedback": "Correct! A forked process' virtual address space is an exact copy to its parent's."
             },
             {
-                "answer": "Processes cannot communicate with eachother because of their separate address spaces",
+                "answer": "Processes cannot communicate with each other because of their separate address spaces",
                 "correct": false,
                 "feedback": "Incorrect. Process can communicate through pipes and file descriptors."
             }
