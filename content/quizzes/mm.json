@@ -112,7 +112,7 @@
                 "feedback": "Correct! External fragmentation refers to the situation where free memory blocks are scattered throughout the system, making it difficult to allocate contiguous blocks of memory for new processes or data."
             },
             {
-                "answer": "Internal fragmentation occurs when allocated memory blocks are smaller than the requested size",
+                "answer": "Internal fragmentation occurs when allocated memory blocks are larger than the requested size",
                 "correct": true,
                 "feedback": "Correct! Internal fragmentation occurs when allocated memory blocks are larger than what is required, resulting in wasted memory space within each block."
             },
